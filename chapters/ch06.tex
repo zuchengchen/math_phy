@@ -1,0 +1,550 @@
+% 第六章：保角映射
+
+\chapter{保角映射}
+
+\begin{wulibj}[本章导读]
+保角映射是复变函数几何理论的核心内容。它揭示了解析函数\index{解析函数}的几何本质——将角度保持不变。本章我们将学习保角映射的概念、分式线性变换以及一些常见的保角映射，这些内容在流体力学、电磁学和弹性力学中有广泛应用。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{保角映射的概念}
+
+\subsection{解析函数\index{解析函数}的几何意义}
+
+设 $w = f(z)$ 是区域 $D$ 内的解析函数\index{解析函数}，$z_0 \in D$，$f'(z_0) \neq 0$。
+
+考虑 $z$ 平面上通过 $z_0$ 的曲线 $C$：$z = z(t)$，$z(t_0) = z_0$。其在 $w$ 平面上的像曲线为 $w = f(z(t))$。
+
+切向量：
+\begin{itemize}
+    \item $C$ 在 $z_0$ 处的切向量：$z'(t_0)$
+    \item 像曲线在 $w_0 = f(z_0)$ 处的切向量：$w'(t_0) = f'(z_0)z'(t_0)$
+\end{itemize}
+
+\subsection{保角性的证明}
+
+\begin{dingli}{}{保角映射}
+设 $w = f(z)$ 在 $z_0$ 处解析且 $f'(z_0) \neq 0$。则：
+\begin{enumerate}
+    \item \textbf{伸缩率}：像曲线与原曲线长度之比为 $|f'(z_0)|$
+    \item \textbf{旋转角}：像曲线的切线相对于原曲线旋转了 $\arg f'(z_0)$
+    \item \textbf{保角性}：通过 $z_0$ 的任意两条曲线的夹角在映射后保持不变
+\end{enumerate}
+
+\begin{proof}
+设两条曲线 $C_1$ 和 $C_2$ 在 $z_0$ 处相交，切向量分别为 $z_1'(t_0)$ 和 $z_2'(t_0)$。
+
+像曲线的切向量分别为 $w_1'(t_0) = f'(z_0)z_1'(t_0)$ 和 $w_2'(t_0) = f'(z_0)z_2'(t_0)$。
+
+设 $C_1$ 和 $C_2$ 的夹角为 $\alpha$，则
+\begin{equation}
+    \cos\alpha = \frac{\mathrm{Re}(z_1' \overline{z_2'})}{|z_1'||z_2'|}
+\end{equation}
+
+像曲线的夹角 $\beta$：
+\begin{equation}
+    \cos\beta = \frac{\mathrm{Re}(w_1' \overline{w_2'})}{|w_1'||w_2'|} = \frac{\mathrm{Re}(f'(z_0)z_1' \cdot \overline{f'(z_0)z_2'})}{|f'(z_0)||z_1'| \cdot |f'(z_0)||z_2'|}
+\end{equation}
+
+由于 $\overline{f'(z_0)z_2'} = \overline{f'(z_0)}\overline{z_2'}$，有
+\begin{equation}
+    \cos\beta = \frac{|f'(z_0)|^2 \mathrm{Re}(z_1'\overline{z_2'})}{|f'(z_0)|^2|z_1'||z_2'|} = \cos\alpha
+\end{equation}
+
+所以 $\beta = \alpha$，夹角保持不变。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % z平面
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (3, 0);
+        \draw[->, gray] (0, -0.5) -- (0, 3);
+        \node at (3.2, 0) {$x$};
+        \node at (0, 3.2) {$y$};
+        
+        % 曲线
+        \draw[blue, thick] plot[smooth] coordinates {(0.5, 1) (1.5, 1.5) (2.5, 1)};
+        \draw[red, thick] plot[smooth] coordinates {(1.5, 0.5) (1.5, 1.5) (1.2, 2.5)};
+        
+        % 点和角度
+        \fill (1.5, 1.5) circle (2pt) node[right] {$z_0$};
+        \draw[green!60!black, thick] (1.5, 1.5) -- (2.0, 1.6);
+        \draw[green!60!black, thick] (1.5, 1.5) -- (1.4, 2.0);
+        \draw[green!60!black] (1.5, 1.5) ++(10:0.5) arc (10:70:0.5);
+        \node[green!60!black] at (1.8, 1.9) {$\alpha$};
+        
+        \node at (1.5, -0.5) {$z$ 平面};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (3.5, 1.5) -- (4.5, 1.5) node[midway, above] {$w = f(z)$};
+    
+    % w平面
+    \begin{scope}[xshift=5.5cm]
+        \draw[->, gray] (-0.5, 0) -- (3, 0);
+        \draw[->, gray] (0, -0.5) -- (0, 3);
+        \node at (3.2, 0) {$u$};
+        \node at (0, 3.2) {$v$};
+        
+        % 曲线
+        \draw[blue, thick] plot[smooth] coordinates {(0.3, 0.8) (1.3, 1.8) (2.3, 1.2)};
+        \draw[red, thick] plot[smooth] coordinates {(1.0, 1.2) (1.3, 1.8) (1.0, 2.8)};
+        
+        % 点和角度
+        \fill (1.3, 1.8) circle (2pt) node[right] {$w_0$};
+        \draw[green!60!black, thick] (1.3, 1.8) -- (1.8, 2.0);
+        \draw[green!60!black, thick] (1.3, 1.8) -- (1.2, 2.3);
+        \draw[green!60!black] (1.3, 1.8) ++(15:0.5) arc (15:75:0.5);
+        \node[green!60!black] at (1.6, 2.2) {$\alpha$};
+        
+        \node at (1.5, -0.5) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{保角映射：夹角保持不变}
+\label{fig:conformal-mapping}
+\end{figure}
+
+\end{dingli}
+
+\subsection{保角映射的定义}
+
+\begin{dingliyi}{}{保角映射}
+设 $w = f(z)$ 将区域 $D$ 映射到区域 $G$。若 $f(z)$ 在 $D$ 内解析且 $f'(z) \neq 0$，则称此映射为\textbf{保角映射}或\textbf{共形映射}。
+
+\begin{tishi}
+保角映射保持：
+\begin{itemize}
+    \item 角度的大小和方向
+    \item 无穷小图形的相似性
+\end{itemize}
+但不保持距离和面积！
+\end{tishi}
+
+\end{dingliyi}
+
+% ========== 第二节 ==========
+\section{分式线性变换}
+
+\subsection{分式线性变换的定义}
+
+\begin{dingliyi}{}{分式线性变换}
+形如
+\begin{equation}
+    w = \frac{az + b}{cz + d}, \quad ad - bc \neq 0
+\end{equation}
+的变换称为\textbf{分式线性变换}或\textbf{莫比乌斯变换}。
+
+分式线性变换可以分解为三种基本变换：
+\begin{enumerate}
+    \item 平移：$w = z + b$
+    \item 旋转与伸缩：$w = az$
+    \item 反演：$w = 1/z$
+\end{enumerate}
+\end{dingliyi}
+
+\subsection{分式线性变换的性质}
+
+\begin{zhongyao}[保圆性]
+分式线性变换将圆周映射为圆周（直线视为通过无穷远点的圆周）。
+\end{zhongyao}
+
+\begin{proof}
+只对反演 $w = 1/z$ 证明（其他变换显然保圆）。
+
+圆周（或直线）的一般方程为 $A|z|^2 + Bx + Cy + D = 0$。
+
+令 $z = x + \mathrm{i}y = \frac{1}{w} = \frac{\bar{w}}{|w|^2}$，则
+\begin{equation}
+    x = \frac{u}{u^2 + v^2}, \quad y = \frac{v}{u^2 + v^2}, \quad |z|^2 = \frac{1}{u^2 + v^2}
+\end{equation}
+
+代入圆周方程：
+\begin{equation}
+    \frac{A}{u^2 + v^2} + \frac{Bu}{u^2 + v^2} + \frac{Cv}{u^2 + v^2} + D = 0
+\end{equation}
+
+整理得 $D(u^2 + v^2) + Bu + Cv + A = 0$，仍是圆周（或直线）。
+\end{proof}
+
+\begin{dingli}{}{保对称性}
+若点 $z_1$ 和 $z_2$ 关于圆周 $C$ 对称，则在分式线性变换下，它们的像 $w_1$ 和 $w_2$ 关于像圆周 $C'$ 对称。
+\end{dingli}
+
+\begin{dingliyi}{}{对称点}
+点 $z_1$ 和 $z_2$ 关于圆周 $|z - z_0| = R$ 对称，当且仅当
+\begin{equation}
+    (z_1 - z_0)\overline{(z_2 - z_0)} = R^2
+\end{equation}
+或等价地
+\begin{equation}
+    z_2 - z_0 = \frac{R^2}{\overline{z_1 - z_0}}
+\end{equation}
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 圆周
+    \draw[blue, thick] (2, 2) circle (1.5);
+    \fill[blue!10, opacity=0.3] (2, 2) circle (1.5);
+    
+    % 圆心
+    \fill[red] (2, 2) circle (2pt) node[above right] {$z_0$};
+    
+    % 对称点
+    \fill[green!60!black] (2.5, 2.3) circle (2pt) node[right] {$z_1$};
+    \fill[green!60!black] (1.0, 1.6) circle (2pt) node[left] {$z_2$};
+    
+    % 连线和半径
+    \draw[dashed] (2, 2) -- (2.5, 2.3);
+    \draw[dashed] (2, 2) -- (1.0, 1.6);
+    
+    % 标注
+    \node at (2, -0.5) {$z_1$ 与 $z_2$ 关于圆周对称};
+\end{tikzpicture}
+\caption{关于圆周的对称点}
+\label{fig:symmetric-points}
+\end{figure}
+
+\subsection{确定分式线性变换}
+
+\begin{dingli}{}{三点确定分式线性变换}
+将三个不同点 $z_1, z_2, z_3$ 映射到三个不同点 $w_1, w_2, w_3$ 的分式线性变换是唯一的，可由
+\begin{equation}
+    \frac{w - w_1}{w - w_2} : \frac{w_3 - w_1}{w_3 - w_2} = \frac{z - z_1}{z - z_2} : \frac{z_3 - z_1}{z_3 - z_2}
+\end{equation}
+确定。这称为\textbf{交比不变式}。
+\end{dingli}
+
+\begin{lizi}{}{}
+求将 $z_1 = 0$, $z_2 = 1$, $z_3 = \infty$ 映射到 $w_1 = -1$, $w_2 = 0$, $w_3 = 1$ 的分式线性变换。
+
+\begin{jie}
+    由交比不变式，当 $z_3 = \infty$ 时，$\frac{z_3 - z_1}{z_3 - z_2} = 1$。所以
+    \begin{equation}
+        \frac{w - (-1)}{w - 0} : \frac{1 - (-1)}{1 - 0} = \frac{z - 0}{z - 1} : 1
+    \end{equation}
+    
+    即
+    \begin{equation}
+        \frac{w + 1}{w} \cdot \frac{1}{2} = \frac{z}{z - 1}
+    \end{equation}
+    
+    整理得
+    \begin{equation}
+        w = \frac{z}{z - 1} \cdot \frac{z - 1}{1 - z} \cdot 2 - 1 = \frac{z - 1}{2z - 1}
+    \end{equation}
+    
+    更直接地，解方程 $\frac{w + 1}{2w} = \frac{z}{z - 1}$：
+    \begin{equation}
+        (w + 1)(z - 1) = 2wz \implies wz - w + z - 1 = 2wz \implies w(-z - 1) = 1 - z
+    \end{equation}
+    
+    所以 $w = \frac{z - 1}{z + 1}$。
+\end{jie}
+\end{lizi}
+
+\subsection{将上半平面映射到单位圆}
+
+\begin{zhongyao}[上半平面到单位圆的映射]
+将上半平面 $\mathrm{Im}(z) > 0$ 映射到单位圆 $|w| < 1$ 的分式线性变换为
+\[
+    w = \mathrm{e}^{\mathrm{i}\theta}\frac{z - z_0}{z - \overline{z_0}}
+\]
+其中 $z_0$ 是上半平面内任意一点，$\theta$ 是实数。
+\end{zhongyao}
+
+\begin{proof}
+设 $z_0$ 在上半平面。要使 $z_0$ 映射到原点，取 $w = k\frac{z - z_0}{z - \overline{z_0}}$（$k$ 待定）。
+
+对于实轴上的点 $z = x$：
+\begin{equation}
+    |w| = |k|\left|\frac{x - z_0}{x - \overline{z_0}}\right| = |k|\frac{|x - z_0|}{|x - \overline{z_0}|}
+\end{equation}
+
+由于 $z_0$ 在上半平面，$\overline{z_0}$ 在下半平面，$\overline{x - z_0} = x - \overline{z_0}$，所以
+\begin{equation}
+    |x - \overline{z_0}| = |\overline{x - z_0}| = |x - z_0|
+\end{equation}
+
+因此 $|w| = |k|$。要使实轴映射到单位圆周，取 $|k| = 1$，即 $k = \mathrm{e}^{\mathrm{i}\theta}$。
+\end{proof}
+
+% ========== 第三节 ==========
+\section{常见保角映射}
+
+\subsection{幂函数 $w = z^n$}
+
+\begin{dingli}{}{幂函数映射}
+$w = z^n$（$n \geq 2$）将：
+\begin{itemize}
+    \item 角形域 $0 < \arg z < \alpha$ 映射到 $0 < \arg w < n\alpha$
+    \item 特别地，将角形域 $0 < \arg z < \frac{\pi}{n}$ 映射到上半平面
+\end{itemize}
+\end{dingli}
+
+\begin{proof}
+设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，则 $w = z^n = r^n\mathrm{e}^{\mathrm{i}n\theta}$。
+
+\begin{itemize}
+    \item 当 $z$ 在角形域 $0 < \arg z = \theta < \alpha$ 内时，$w$ 的辐角 $\arg w = n\theta$ 满足 $0 < \arg w < n\alpha$。
+    \item 特别地，若 $0 < \theta < \frac{\pi}{n}$，则 $0 < n\theta < \pi$，即 $w$ 在上半平面。
+\end{itemize}
+
+注意：$w = z^n$ 是 $n$ 对 $1$ 的映射，角形域 $0 < \arg z < \frac{2\pi}{n}$ 被映射到整个 $w$ 平面（去掉原点和正实轴）。
+\end{proof}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % z平面
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (3.5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+        
+        % 角形域
+        \fill[blue!20, opacity=0.5] (0, 0) -- (3, 0) -- (30:3) -- cycle;
+        \draw[blue, thick] (0, 0) -- (3, 0);
+        \draw[blue, thick] (0, 0) -- (30:3);
+        
+        \draw[blue] (0.8, 0) arc (0:30:0.8);
+        \node[blue] at (0.6, 0.3) {$\alpha$};
+        
+        \node at (1.5, -0.8) {$z$ 平面};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (4, 1.2) -- (5, 1.2) node[midway, above] {$w = z^n$};
+    
+    % w平面
+    \begin{scope}[xshift=6cm]
+        \draw[->, gray] (-0.5, 0) -- (3.5, 0) node[right] {$u$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$v$};
+        
+        % 角形域
+        \fill[blue!20, opacity=0.5] (0, 0) -- (3, 0) -- (90:3) -- cycle;
+        \draw[blue, thick] (0, 0) -- (3, 0);
+        \draw[blue, thick] (0, 0) -- (90:3);
+        
+        \draw[blue] (0.8, 0) arc (0:90:0.8);
+        \node[blue] at (0.6, 0.6) {$n\alpha$};
+        
+        \node at (1.5, -0.8) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{幂函数将角形域扩大 $n$ 倍}
+\label{fig:power-mapping}
+\end{figure}
+
+\begin{jinshi}
+$w = z^n$ 在 $z = 0$ 处不保角！$z = 0$ 是 $n-1$ 阶支点。
+\end{jinshi}
+
+\subsection{指数函数 $w = \mathrm{e}^z$}
+
+\begin{dingli}{}{指数函数映射}
+$w = \mathrm{e}^z$ 将：
+\begin{itemize}
+    \item 水平带形域 $0 < \mathrm{Im}(z) < \pi$ 映射到上半平面
+    \item 垂直线 $\mathrm{Re}(z) = c$ 映射到圆周 $|w| = \mathrm{e}^c$
+    \item 水平线 $\mathrm{Im}(z) = \theta_0$ 映射到射线 $\arg w = \theta_0$
+\end{itemize}
+\end{dingli}
+
+\begin{proof}
+设 $z = x + \mathrm{i}y$，则 $w = \mathrm{e}^z = \mathrm{e}^x\mathrm{e}^{\mathrm{i}y}$。
+
+\begin{itemize}
+    \item $|w| = \mathrm{e}^x$，$\arg w = y$。
+    \item 当 $0 < y < \pi$ 时，$0 < \arg w < \pi$，即上半平面。
+    \item 当 $x = c$ 为常数时，$|w| = \mathrm{e}^c$ 为常数，即圆周。
+    \item 当 $y = \theta_0$ 为常数时，$\arg w = \theta_0$ 为常数，即射线。
+\end{itemize}
+\end{proof}
+
+\subsection{儒可夫斯基变换}
+
+\begin{dingliyi}{}{儒可夫斯基变换}
+变换
+\begin{equation}
+    w = \frac{1}{2}\left(z + \frac{1}{z}\right)
+\end{equation}
+称为\textbf{儒可夫斯基变换}。
+\end{dingliyi}
+
+\begin{dingli}{}{儒可夫斯基变换的性质}
+\begin{enumerate}
+    \item 将单位圆 $|z| = 1$ 映射到线段 $[-1, 1]$
+    \item 将圆周 $|z| = r$（$r \neq 1$）映射到椭圆
+    \item 将射线 $\arg z = \theta$ 映射到双曲线
+\end{enumerate}
+\end{dingli}
+
+\begin{proof}
+设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，则
+\begin{equation}
+    w = \frac{1}{2}\left(z + \frac{1}{z}\right) = \frac{1}{2}\left(r\mathrm{e}^{\mathrm{i}\theta} + \frac{1}{r}\mathrm{e}^{-\mathrm{i}\theta}\right) = \frac{1}{2}\left(r + \frac{1}{r}\right)\cos\theta + \mathrm{i}\frac{1}{2}\left(r - \frac{1}{r}\right)\sin\theta
+\end{equation}
+
+设 $w = u + \mathrm{i}v$，则
+\begin{align}
+    u &= \frac{1}{2}\left(r + \frac{1}{r}\right)\cos\theta \\
+    v &= \frac{1}{2}\left(r - \frac{1}{r}\right)\sin\theta
+\end{align}
+
+\textbf{（1）单位圆}：当 $r = 1$ 时，$v = 0$，$u = \cos\theta \in [-1, 1]$，故映射到线段 $[-1, 1]$。
+
+\textbf{（2）椭圆}：当 $r = r_0 > 0$ 为常数且 $r_0 \neq 1$ 时，
+\begin{equation}
+    \frac{u^2}{\left[\frac{1}{2}(r_0 + 1/r_0)\right]^2} + \frac{v^2}{\left[\frac{1}{2}(r_0 - 1/r_0)\right]^2} = \cos^2\theta + \sin^2\theta = 1
+\end{equation}
+这是以原点为中心、长轴在 $u$ 轴上的椭圆。
+
+\textbf{（3）双曲线}：当 $\theta = \theta_0$ 为常数且 $\theta_0 \neq 0, \pi$ 时，
+\begin{equation}
+    \frac{u^2}{\cos^2\theta_0} - \frac{v^2}{\sin^2\theta_0} = \frac{1}{4}\left[\left(r + \frac{1}{r}\right)^2 - \left(r - \frac{1}{r}\right)^2\right] = 1
+\end{equation}
+这是以原点为中心、焦点在 $u$ 轴上的双曲线。
+\end{proof}
+\begin{wulibj}[应用：机翼绕流]
+儒可夫斯基变换是飞机机翼设计的理论基础。通过将圆变换为机翼形状，可以把绕圆柱的简单流动问题转化为绕机翼的复杂流动问题。这在空气动力学中具有重要意义。
+\end{wulibj}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % z平面：圆
+    \begin{scope}
+        \draw[->, gray] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -2.5) -- (0, 2.5) node[above] {$y$};
+        \draw[blue, thick] (0, 0) circle (1.5);
+        \fill[blue!20, opacity=0.5] (0, 0) circle (1.5);
+        \node at (0, -3) {$z$ 平面：圆};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (3, 0) -- (4.5, 0) node[midway, above] {$w = \frac{z + 1/z}{2}$};
+    
+    % w平面：机翼形状
+    \begin{scope}[xshift=6.5cm]
+        \draw[->, gray] (-2.5, 0) -- (2.5, 0) node[right] {$u$};
+        \draw[->, gray] (0, -2, 0) -- (0, 2) node[above] {$v$};
+        
+        % 机翼轮廓（简化）
+        \draw[red, thick] plot[smooth] coordinates {
+            (-1.5, 0) (-1, 0.3) (0, 0.5) (1, 0.3) (1.5, 0)
+            (1, -0.2) (0, -0.3) (-1, -0.2) (-1.5, 0)
+        };
+        \fill[red!20, opacity=0.5] plot[smooth] coordinates {
+            (-1.5, 0) (-1, 0.3) (0, 0.5) (1, 0.3) (1.5, 0)
+            (1, -0.2) (0, -0.3) (-1, -0.2) (-1.5, 0)
+        };
+        \node at (0, -2.5) {$w$ 平面：机翼形状};
+    \end{scope}
+\end{tikzpicture}
+\caption{儒可夫斯基变换：从圆到机翼}
+\label{fig:zhukovsky}
+\end{figure}
+
+\subsection{施瓦茨-克里斯托费尔变换}
+
+对于多边形区域的映射，需要用更一般的施瓦茨-克里斯托费尔变换。
+
+\begin{dingliyi}{}{施瓦茨-克里斯托费尔变换}
+将上半平面映射到多边形的变换具有形式
+\begin{equation}
+    w = A\int_0^z (z - x_1)^{\alpha_1 - 1}(z - x_2)^{\alpha_2 - 1}\cdots(z - x_n)^{\alpha_n - 1}\,\mathrm{d}z + B
+\end{equation}
+其中 $x_1, \ldots, x_n$ 是实轴上对应多边形顶点的点，$\alpha_k\pi$ 是多边形第 $k$ 个内角。
+\end{dingliyi}
+
+% ========== 第四节 ==========
+\section{保角映射的应用}
+
+\subsection{拉普拉斯方程的边值问题}
+
+保角映射的一个重要应用是求解二维拉普拉斯方程。关键原理是：在保角映射下，拉普拉斯方程保持不变。
+
+\begin{dingli}{}{调和函数的不变性}
+设 $w = f(z)$ 是保角映射，$\phi(u, v)$ 是调和函数，则 $\phi \circ f$ 也是调和函数。
+\end{dingli}
+
+\begin{proof}
+设 $w = u(x, y) + \mathrm{i}v(x, y)$ 是解析函数\index{解析函数}。由 C-R 条件：
+\begin{equation}
+    u_x = v_y, \quad u_y = -v_x
+\end{equation}
+
+可以证明：
+\begin{equation}
+    \frac{\partial^2\phi}{\partial x^2} + \frac{\partial^2\phi}{\partial y^2} = |f'(z)|^2\left(\frac{\partial^2\phi}{\partial u^2} + \frac{\partial^2\phi}{\partial v^2}\right)
+\end{equation}
+
+若 $\phi_{uu} + \phi_{vv} = 0$，则 $\phi_{xx} + \phi_{yy} = 0$。
+\end{proof}
+
+\begin{wulibj}[应用：静电场与稳定温度场]
+二维静电场的电势和稳定温度场的温度都满足拉普拉斯方程。通过保角映射，可以把复杂边界的问题变换为简单边界的问题求解。
+\end{wulibj}
+
+\subsection{黎曼映射定理}
+
+\begin{dingli}{}{黎曼映射定理}
+任意单连通区域（除去整个复平面和整个复平面挖去一点）都可以保角映射到单位圆内部。
+\end{dingli}
+
+\begin{tishi}
+黎曼映射定理保证了保角映射的存在性，但没有给出具体的变换公式。实际应用中，需要根据具体问题构造适当的变换。
+\end{tishi}
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{核心概念}
+
+\begin{enumerate}
+    \item \textbf{保角映射}：保持角度不变的解析映射
+    \item \textbf{分式线性变换}：$w = \frac{az+b}{cz+d}$，保圆性、保对称性
+    \item \textbf{常见保角映射}：幂函数、指数函数、儒可夫斯基变换
+\end{enumerate}
+
+\subsection{关键结论}
+
+\begin{itemize}
+    \item 解析函数\index{解析函数}在导数非零处保角
+    \item 分式线性变换将圆周映射为圆周
+    \item 三点唯一确定分式线性变换
+    \item 调和函数在保角映射下保持调和性
+\end{itemize}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 证明：分式线性变换可以分解为平移、旋转伸缩和反演的组合。
+    
+    \item 求将 $z_1 = 1$, $z_2 = \mathrm{i}$, $z_3 = -1$ 映射到 $w_1 = 0$, $w_2 = 1$, $w_3 = \infty$ 的分式线性变换。
+    
+    \item 证明：分式线性变换保持交比不变。
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 求将上半平面 $\mathrm{Im}(z) > 0$ 映射到圆 $|w - 1| < 1$ 的保角映射。
+    
+    \item 求将角形域 $0 < \arg z < \frac{\pi}{4}$ 映射到上半平面的保角映射。
+    
+    \item 设 $w = \frac{z - \mathrm{i}}{z + \mathrm{i}}$，问此变换将上半平面映射为什么区域？
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 求将带形域 $0 < \mathrm{Im}(z) < \pi$ 映射到单位圆 $|w| < 1$ 的保角映射。
+    
+    \item 利用保角映射求解：在半无限条形区域 $x > 0$, $0 < y < \pi$ 内，边界 $y = 0$ 和 $y = \pi$ 上温度为 $0$，边界 $x = 0$ 上温度为 $1$，求稳定温度分布。
+\end{enumerate}

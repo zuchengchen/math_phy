@@ -1,0 +1,373 @@
+% 第十二章：积分变换法
+
+\chapter{积分变换法}
+
+\begin{wulibj}[本章导读]
+积分变换法是求解数学物理方程的另一重要方法。通过对自变量进行积分变换，可以将偏微分方程降维，转化为常微分方程或代数方程，大大简化求解过程。本章主要介绍傅里叶变换\index{傅里叶变换}法和拉普拉斯变换\index{拉普拉斯变换}法在数理方程中的应用。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{傅里叶变换\index{傅里叶变换}法}
+
+\subsection{基本原理}
+
+傅里叶变换\index{傅里叶变换}可以将偏导数转化为代数运算：
+\begin{equation}
+    \mathcal{F}\left[\frac{\partial u}{\partial x}\right] = i\omega\hat{u}(\omega), \quad \mathcal{F}\left[\frac{\partial^2 u}{\partial x^2}\right] = -\omega^2\hat{u}(\omega)
+\end{equation}
+
+这特别适合处理\textbf{无界区域}的问题。
+
+\subsection{一维热传导方程的傅里叶变换\index{傅里叶变换}解}
+
+考虑无限长细杆的热传导问题：
+\begin{equation}
+    \begin{cases}
+        \dfrac{\partial u}{\partial t} = a^2\dfrac{\partial^2 u}{\partial x^2}, & x \in \mathbb{R}, \; t > 0 \\
+        u(x, 0) = \varphi(x), & x \in \mathbb{R}
+    \end{cases}
+\end{equation}
+
+\textbf{求解步骤}：
+
+\textbf{第一步}：对 $x$ 作傅里叶变换\index{傅里叶变换}
+
+设 $\hat{u}(\omega, t) = \mathcal{F}[u(x, t)]$，方程变为：
+\begin{equation}
+    \frac{\partial \hat{u}}{\partial t} = -a^2\omega^2\hat{u}
+\end{equation}
+
+初始条件：
+\begin{equation}
+    \hat{u}(\omega, 0) = \hat{\varphi}(\omega)
+\end{equation}
+
+\textbf{第二步}：求解常微分方程
+
+\begin{equation}
+    \hat{u}(\omega, t) = \hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}
+\end{equation}
+
+\textbf{第三步}：求傅里叶逆变换
+
+利用卷积定理：
+\begin{equation}
+    u(x, t) = \varphi(x) * \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}]
+\end{equation}
+
+需要计算 $\mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}]$。
+
+利用高斯函数的傅里叶变换\index{傅里叶变换}：
+\begin{equation}
+    \mathcal{F}[\mathrm{e}^{-\alpha x^2}] = \sqrt{\frac{\pi}{\alpha}}\mathrm{e}^{-\omega^2/(4\alpha)}
+\end{equation}
+
+令 $\alpha = \frac{1}{4a^2t}$，得
+\begin{equation}
+    \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}] = \frac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/(4a^2t)}
+\end{equation}
+
+\begin{zhongyao}[泊松积分公式]
+一维热传导方程初值问题的解为
+\[
+    u(x, t) = \frac{1}{2a\sqrt{\pi t}}\int_{-\infty}^{+\infty} \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi
+\]
+\end{zhongyao}
+
+\begin{lizi}{}{}
+求解：
+\begin{equation}
+    \begin{cases}
+        u_t = u_{xx}, \quad x \in \mathbb{R}, \; t > 0 \\
+        u(x, 0) = \mathrm{e}^{-x^2}
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    由泊松积分公式：
+    \begin{equation}
+        u(x, t) = \frac{1}{2\sqrt{\pi t}}\int_{-\infty}^{+\infty} \mathrm{e}^{-\xi^2}\mathrm{e}^{-(x-\xi)^2/(4t)}\,\mathrm{d}\xi
+    \end{equation}
+    
+    另一种方法：先作傅里叶变换\index{傅里叶变换}。
+    \begin{equation}
+        \hat{\varphi}(\omega) = \mathcal{F}[\mathrm{e}^{-x^2}] = \sqrt{\pi}\mathrm{e}^{-\omega^2/4}
+    \end{equation}
+    
+    所以
+    \begin{equation}
+        \hat{u}(\omega, t) = \sqrt{\pi}\mathrm{e}^{-\omega^2/4}\mathrm{e}^{-\omega^2 t} = \sqrt{\pi}\mathrm{e}^{-\omega^2(1/4+t)}
+    \end{equation}
+    
+    逆变换：
+    \begin{equation}
+        u(x, t) = \sqrt{\frac{\pi}{1/4+t}}\mathrm{e}^{-x^2/(4t+1)} = \frac{1}{\sqrt{4t+1}}\mathrm{e}^{-x^2/(4t+1)}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\subsection{波动方程的傅里叶变换\index{傅里叶变换}解}
+
+对于一维波动方程初值问题：
+\begin{equation}
+    \begin{cases}
+        u_{tt} = a^2u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
+        u(x, 0) = \varphi(x), \quad u_t(x, 0) = \psi(x)
+    \end{cases}
+\end{equation}
+
+对 $x$ 作傅里叶变换\index{傅里叶变换}：
+\begin{equation}
+    \frac{\partial^2 \hat{u}}{\partial t^2} + a^2\omega^2\hat{u} = 0
+\end{equation}
+
+解为
+\begin{equation}
+    \hat{u}(\omega, t) = \hat{\varphi}(\omega)\cos a\omega t + \frac{\hat{\psi}(\omega)}{a\omega}\sin a\omega t
+\end{equation}
+
+利用傅里叶逆变换可回到达朗贝尔公式。
+
+% ========== 第二节 ==========
+\section{拉普拉斯变换\index{拉普拉斯变换}法}
+
+\subsection{基本原理}
+
+拉普拉斯变换\index{拉普拉斯变换}特别适合处理\textbf{半无界问题}和\textbf{初值问题}：
+\begin{equation}
+    \mathcal{L}\left[\frac{\partial u}{\partial t}\right] = s\tilde{u}(x, s) - u(x, 0)
+\end{equation}
+
+\subsection{半无界热传导问题}
+
+考虑半无界细杆的热传导问题：
+\begin{equation}
+    \begin{cases}
+        u_t = a^2u_{xx}, & x > 0, \; t > 0 \\
+        u(x, 0) = 0 \\
+        u(0, t) = f(t), \quad u(+\infty, t) \text{ 有界}
+    \end{cases}
+\end{equation}
+
+\textbf{求解步骤}：
+
+\textbf{第一步}：对 $t$ 作拉普拉斯变换\index{拉普拉斯变换}
+
+设 $\tilde{u}(x, s) = \mathcal{L}[u(x, t)]$，方程变为：
+\begin{equation}
+    s\tilde{u} = a^2\frac{\partial^2 \tilde{u}}{\partial x^2}
+\end{equation}
+
+边界条件：
+\begin{equation}
+    \tilde{u}(0, s) = \tilde{f}(s), \quad \tilde{u}(+\infty, s) \text{ 有界}
+\end{equation}
+
+\textbf{第二步}：求解常微分方程
+
+\begin{equation}
+    \tilde{u}(x, s) = A\mathrm{e}^{\sqrt{s}x/a} + B\mathrm{e}^{-\sqrt{s}x/a}
+\end{equation}
+
+由有界性条件，$A = 0$。
+
+由 $\tilde{u}(0, s) = \tilde{f}(s)$ 得 $B = \tilde{f}(s)$。
+
+所以
+\begin{equation}
+    \tilde{u}(x, s) = \tilde{f}(s)\mathrm{e}^{-\sqrt{s}x/a}
+\end{equation}
+
+\textbf{第三步}：求拉普拉斯逆变换
+
+利用卷积定理：
+\begin{equation}
+    u(x, t) = f(t) * \mathcal{L}^{-1}[\mathrm{e}^{-\sqrt{s}x/a}]
+\end{equation}
+
+已知
+\begin{equation}
+    \mathcal{L}^{-1}[\mathrm{e}^{-\sqrt{s}x/a}] = \frac{x}{2a\sqrt{\pi t^3}}\mathrm{e}^{-x^2/(4a^2t)}
+\end{equation}
+
+所以
+\begin{equation}
+    \boxed{u(x, t) = \int_0^t f(\tau)\frac{x}{2a\sqrt{\pi(t-\tau)^3}}\mathrm{e}^{-x^2/[4a^2(t-\tau)]}\,\mathrm{d}\tau}
+\end{equation}
+
+\begin{lizi}{}{}
+求解：
+\begin{equation}
+    \begin{cases}
+        u_t = u_{xx}, & x > 0, \; t > 0 \\
+        u(x, 0) = 0 \\
+        u(0, t) = T_0 \quad \text{（常数）}
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    $\tilde{f}(s) = T_0/s$。
+    
+    \begin{equation}
+        \tilde{u}(x, s) = \frac{T_0}{s}\mathrm{e}^{-\sqrt{s}x}
+    \end{equation}
+    
+    利用积分性质 $\mathcal{L}^{-1}[\frac{1}{s}F(s)] = \int_0^t f(\tau)\,\mathrm{d}\tau$：
+    \begin{equation}
+        u(x, t) = T_0\int_0^t \frac{x}{2\sqrt{\pi\tau^3}}\mathrm{e}^{-x^2/(4\tau)}\,\mathrm{d}\tau
+    \end{equation}
+    
+    令 $\eta = x/(2\sqrt{\tau})$，可化为
+    \begin{equation}
+        u(x, t) = T_0\operatorname{erfc}\left(\frac{x}{2\sqrt{t}}\right) = T_0\left[1 - \operatorname{erf}\left(\frac{x}{2\sqrt{t}}\right)\right]
+    \end{equation}
+    
+    其中 $\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x \mathrm{e}^{-\eta^2}\,\mathrm{d}\eta$ 是误差函数。
+\end{jie}
+\end{lizi}
+
+\subsection{拉普拉斯变换\index{拉普拉斯变换}解常微分方程}
+
+拉普拉斯变换\index{拉普拉斯变换}也可用于求解常微分方程初值问题，这在分离变量后处理时间方程时很有用。
+
+\begin{lizi}{}{}
+求解：
+\begin{equation}
+    y'' + \omega^2 y = f(t), \quad y(0) = y'(0) = 0
+\end{equation}
+
+\begin{jie}
+    作拉普拉斯变换\index{拉普拉斯变换}：
+    \begin{equation}
+        (s^2 + \omega^2)\tilde{y}(s) = \tilde{f}(s)
+    \end{equation}
+    
+    所以
+    \begin{equation}
+        \tilde{y}(s) = \frac{\tilde{f}(s)}{s^2 + \omega^2}
+    \end{equation}
+    
+    逆变换：
+    \begin{equation}
+        y(t) = \frac{1}{\omega}\int_0^t f(\tau)\sin\omega(t-\tau)\,\mathrm{d}\tau
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+% ========== 第三节 ==========
+\section{积分变换法与分离变量法\index{分离变量法}的比较}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{方法} & \textbf{适用问题} & \textbf{特点} \\
+\midrule
+傅里叶变换\index{傅里叶变换} & 无界区域问题 & 自动满足无穷远条件 \\
+拉普拉斯变换\index{拉普拉斯变换} & 半无界、初值问题 & 自动处理初始条件 \\
+分离变量法\index{分离变量法} & 有界区域问题 & 得到无穷级数解 \\
+\bottomrule
+\end{tabular}
+\caption{三种方法的比较}
+\end{table}
+
+\begin{jinshi}[方法选择]
+\begin{itemize}
+    \item 无界区域 $\Rightarrow$ 傅里叶变换\index{傅里叶变换}
+    \item 半无界区域 $\Rightarrow$ 拉普拉斯变换\index{拉普拉斯变换}（对时间变量）
+    \item 有界区域 $\Rightarrow$ 分离变量法\index{分离变量法}
+    \item 非齐次方程 $\Rightarrow$ 积分变换法（更方便）
+\end{itemize}
+\end{jinshi}
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{傅里叶变换\index{傅里叶变换}法}
+
+适用：无界区域问题
+
+核心步骤：
+\begin{enumerate}
+    \item 对空间变量作傅里叶变换\index{傅里叶变换}
+    \item 求解关于变换变量的常微分方程
+    \item 作傅里叶逆变换
+\end{enumerate}
+
+结果：泊松积分公式（热传导）、达朗贝尔公式（波动）
+
+\subsection{拉普拉斯变换\index{拉普拉斯变换}法}
+
+适用：半无界问题、初值问题
+
+核心步骤：
+\begin{enumerate}
+    \item 对时间变量作拉普拉斯变换\index{拉普拉斯变换}
+    \item 求解关于空间变量的常微分方程
+    \item 作拉普拉斯逆变换
+\end{enumerate}
+
+常用技巧：
+\begin{itemize}
+    \item 卷积定理
+    \item 积分性质
+    \item 查表法
+\end{itemize}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 用傅里叶变换\index{傅里叶变换}法求解：
+    \begin{equation}
+        \begin{cases}
+            u_t = u_{xx}, \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = \begin{cases}
+                1, & |x| < 1 \\
+                0, & |x| > 1
+            \end{cases}
+        \end{cases}
+    \end{equation}
+    
+    \item 用拉普拉斯变换\index{拉普拉斯变换}法求解：
+    \begin{equation}
+        \begin{cases}
+            u_t = u_{xx}, \quad x > 0, \; t > 0 \\
+            u(x, 0) = 0 \\
+            u(0, t) = \sin\omega t
+        \end{cases}
+    \end{equation}
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 用傅里叶变换\index{傅里叶变换}法求解一维波动方程初值问题，验证结果与达朗贝尔公式一致。
+    
+    \item 求解半无界弦的振动问题：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = a^2u_{xx}, \quad x > 0, \; t > 0 \\
+            u(x, 0) = 0, \quad u_t(x, 0) = 0 \\
+            u(0, t) = f(t)
+        \end{cases}
+    \end{equation}
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 用积分变换法求解二维拉普拉斯方程在上半平面的狄利克雷问题：
+    \begin{equation}
+        \begin{cases}
+            u_{xx} + u_{yy} = 0, \quad y > 0 \\
+            u(x, 0) = f(x)
+        \end{cases}
+    \end{equation}
+    结果应为泊松积分公式：
+    \begin{equation}
+        u(x, y) = \frac{y}{\pi}\int_{-\infty}^{+\infty} \frac{f(\xi)}{(x-\xi)^2 + y^2}\,\mathrm{d}\xi
+    \end{equation}
+\end{enumerate}

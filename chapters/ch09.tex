@@ -1,0 +1,514 @@
+% 第九章：数学物理方程的导出与分类
+
+\chapter{数学物理方程的导出与分类}
+
+\begin{wulibj}[本章导读]
+数学物理方程是描述物理规律的数学语言。本章我们将从物理定律出发，推导出三类典型方程：波动方程、热传导方程和拉普拉斯方程，并学习它们的分类方法。理解方程的物理背景对于掌握求解方法至关重要。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{典型方程的导出}
+
+\subsection{弦振动方程（波动方程）}
+
+\textbf{物理背景}：考虑一根均匀柔软的弦在平面内作横向小振动。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 弦
+    \draw[blue, thick] plot[smooth, domain=0:6] (\x, {0.3*sin(3*\x r)});
+    
+    % 微元
+    \draw[red, very thick] plot[smooth, domain=1.5:2.5] (\x, {0.3*sin(3*\x r)});
+    
+    % 张力
+    \draw[->, green!60!black, thick] (1.5, {0.3*sin(4.5 r)}) -- (0.8, {0.3*sin(4.5 r)+0.8});
+    \draw[->, green!60!black, thick] (2.5, {0.3*sin(7.5 r)}) -- (3.2, {0.3*sin(7.5 r)+0.6});
+    
+    \node[green!60!black] at (0.5, 1.2) {$T_1$};
+    \node[green!60!black] at (3.5, 1) {$T_2$};
+    
+    % 坐标轴
+    \draw[->, gray] (0, -0.5) -- (7, -0.5) node[right] {$x$};
+    \draw[->, gray] (0, -0.5) -- (0, 1.5) node[above] {$u$};
+    
+    % 微元标注
+    \draw[<->, gray] (1.5, -0.8) -- (2.5, -0.8) node[midway, below] {$\mathrm{d}x$};
+    
+    \node at (3, -1.5) {弦的横向振动};
+\end{tikzpicture}
+\caption{弦振动模型}
+\label{fig:string-vibration}
+\end{figure}
+
+\textbf{假设}：
+\begin{enumerate}
+    \item 弦是柔软的，只有张力作用
+    \item 振动是微小的，$\frac{\partial u}{\partial x} \ll 1$
+    \item 弦的重量忽略不计
+\end{enumerate}
+
+\textbf{推导}：
+
+取弦上一小段 $[x, x+\mathrm{d}x]$，长度约为 $\mathrm{d}x$（因为振动小）。
+
+设张力为 $T$，密度为 $\rho$。
+
+$T$ 在 $x$ 方向分量：
+\begin{equation}
+    T\cos\theta_1 - T\cos\theta_2 \approx T - T = 0
+\end{equation}
+
+$T$ 在 $u$ 方向分量：
+\begin{equation}
+    T\sin\theta_2 - T\sin\theta_1 \approx T\left(\tan\theta_2 - \tan\theta_1\right) = T\left(\frac{\partial u}{\partial x}\Big|_{x+\mathrm{d}x} - \frac{\partial u}{\partial x}\Big|_x\right) = T\frac{\partial^2 u}{\partial x^2}\mathrm{d}x
+\end{equation}
+
+由牛顿第二定律：
+\begin{equation}
+    \rho\mathrm{d}x \cdot \frac{\partial^2 u}{\partial t^2} = T\frac{\partial^2 u}{\partial x^2}\mathrm{d}x
+\end{equation}
+
+\begin{zhongyao}[一维波动方程]
+\[
+    \frac{\partial^2 u}{\partial t^2} = a^2\frac{\partial^2 u}{\partial x^2}, \quad a^2 = \frac{T}{\rho}
+\]
+\end{zhongyao}
+\begin{wulibj}[物理意义]
+$a = \sqrt{T/\rho}$ 是波在弦上传播的速度。张力越大、线密度越小，波速越快。
+\end{wulibj}
+
+\subsection{热传导方程}
+
+\textbf{物理背景}：热量从高温区向低温区传导。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % 区域
+    \fill[red!30] (0, 0) rectangle (1, 3);
+    \fill[orange!30] (1, 0) rectangle (2, 3);
+    \fill[yellow!30] (2, 0) rectangle (3, 3);
+    \fill[green!30] (3, 0) rectangle (4, 3);
+    \fill[blue!30] (4, 0) rectangle (5, 3);
+    
+    \draw[thick] (0, 0) rectangle (5, 3);
+    
+    % 热流箭头
+    \foreach \x in {0.5, 1.5, 2.5, 3.5, 4.5} {
+        \draw[->, red, thick] (\x, 1.5) -- (\x+0.6, 1.5);
+    }
+    
+    % 温度标注
+    \node at (0.5, -0.5) {高温};
+    \node at (4.5, -0.5) {低温};
+    
+    \node at (2.5, 4) {温度分布 $u(x, t)$};
+    \draw[->, gray] (0, 3.3) -- (5.5, 3.3) node[right] {$x$};
+    
+    \node at (2.5, -1.5) {热传导过程};
+\end{tikzpicture}
+\caption{热传导模型}
+\label{fig:heat-conduction}
+\end{figure}
+
+\textbf{傅里叶热传导定律}：热流密度与温度梯度成正比
+\begin{equation}
+    \boldsymbol{q} = -k\nabla u
+\end{equation}
+其中 $k$ 是热导率，负号表示热量从高温流向低温。
+
+\textbf{推导}：
+
+考虑一维情形，取小段 $[x, x+\mathrm{d}x]$。
+
+流入的热量：
+\begin{equation}
+    Q_{\text{in}} = q(x)A\mathrm{d}t = -kA\frac{\partial u}{\partial x}\Big|_x\mathrm{d}t
+\end{equation}
+
+流出的热量：
+\begin{equation}
+    Q_{\text{out}} = -kA\frac{\partial u}{\partial x}\Big|_{x+\mathrm{d}x}\mathrm{d}t
+\end{equation}
+
+净热量：
+\begin{equation}
+    Q = Q_{\text{in}} - Q_{\text{out}} = kA\left(\frac{\partial u}{\partial x}\Big|_{x+\mathrm{d}x} - \frac{\partial u}{\partial x}\Big|_x\right)\mathrm{d}t = kA\frac{\partial^2 u}{\partial x^2}\mathrm{d}x\mathrm{d}t
+\end{equation}
+
+由能量守恒，净热量等于温度升高所需热量：
+\begin{equation}
+    c\rho A\mathrm{d}x \cdot \frac{\partial u}{\partial t}\mathrm{d}t = kA\frac{\partial^2 u}{\partial x^2}\mathrm{d}x\mathrm{d}t
+\end{equation}
+
+\begin{zhongyao}[一维热传导方程]
+\[
+    \frac{\partial u}{\partial t} = a^2\frac{\partial^2 u}{\partial x^2}, \quad a^2 = \frac{k}{c\rho}
+\]
+\end{zhongyao}
+
+其中 $c$ 是比热容，$\rho$ 是密度。
+
+\begin{wulibj}[物理意义]
+$a^2 = k/(c\rho)$ 称为热扩散率，反映了热量在材料中扩散的快慢。
+\end{wulibj}
+
+\subsection{拉普拉斯方程与泊松方程}
+
+\textbf{物理背景}：稳定状态下的势分布。
+
+\begin{itemize}
+    \item 静电场：电势 $\phi$ 满足 $\nabla^2\phi = -\rho/\varepsilon_0$（泊松方程）
+    \item 稳定温度场：温度 $u$ 满足 $\nabla^2 u = 0$（拉普拉斯方程）
+    \item 不可压缩无旋流动：速度势 $\phi$ 满足 $\nabla^2\phi = 0$
+\end{itemize}
+
+\textbf{推导}（以静电场为例）：
+
+由高斯定律：
+\begin{equation}
+    \nabla \cdot \boldsymbol{E} = \frac{\rho}{\varepsilon_0}
+\end{equation}
+
+电场与电势的关系：
+\begin{equation}
+    \boldsymbol{E} = -\nabla\phi
+\end{equation}
+
+代入得\textbf{泊松方程}：
+\begin{equation}
+    \boxed{\nabla^2\phi = -\frac{\rho}{\varepsilon_0}}
+\end{equation}
+
+当 $\rho = 0$（无电荷区域），得到\textbf{拉普拉斯方程}：
+\begin{equation}
+    \boxed{\nabla^2 u = 0}
+\end{equation}
+
+% ========== 第二节 ==========
+\section{定解条件}
+
+偏微分方程本身描述了普遍规律，要确定具体解还需要定解条件。
+
+\subsection{初始条件}
+
+\begin{dingliyi}{}{初始条件}
+描述系统初始状态的条件。对于含有时间导数的方程，需要指定初始时刻的状态。
+\end{dingliyi}
+
+\begin{itemize}
+    \item \textbf{波动方程}（含二阶时间导数）：需要两个初始条件
+    \begin{equation}
+        u(x, 0) = \varphi(x), \quad \frac{\partial u}{\partial t}(x, 0) = \psi(x)
+    \end{equation}
+    分别表示初始位移和初始速度。
+    
+    \item \textbf{热传导方程}（含一阶时间导数）：需要一个初始条件
+    \begin{equation}
+        u(x, 0) = \varphi(x)
+    \end{equation}
+    表示初始温度分布。
+    
+    \item \textbf{拉普拉斯方程}（不含时间）：无初始条件。
+\end{itemize}
+
+\subsection{边界条件}
+
+\begin{dingliyi}{}{边界条件}
+描述边界上物理状态的条件。
+\end{dingliyi}
+
+\textbf{第一类边界条件（Dirichlet 条件）}：直接给出边界上的函数值
+\begin{equation}
+    u|_{\partial\Omega} = g(\boldsymbol{x}, t)
+\end{equation}
+
+例如：弦的端点固定，$u(0, t) = u(l, t) = 0$。
+
+\textbf{第二类边界条件（Neumann 条件）}：给出边界上的法向导数
+\begin{equation}
+    \frac{\partial u}{\partial n}\Big|_{\partial\Omega} = g(\boldsymbol{x}, t)
+\end{equation}
+
+例如：绝热边界，$\frac{\partial u}{\partial n} = 0$。
+
+\textbf{第三类边界条件（Robin 条件）}：混合形式
+\begin{equation}
+    \left(\alpha u + \beta\frac{\partial u}{\partial n}\right)\Big|_{\partial\Omega} = g(\boldsymbol{x}, t)
+\end{equation}
+
+例如：牛顿冷却定律，$-k\frac{\partial u}{\partial n} = h(u - u_{\infty})$。
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{类型} & \textbf{形式} & \textbf{物理意义} & \textbf{例子} \\
+\midrule
+第一类 & $u|_{\Gamma} = g$ & 边界值已知 & 固定端点 \\
+第二类 & $\frac{\partial u}{\partial n}|_{\Gamma} = g$ & 边界通量已知 & 绝热边界 \\
+第三类 & $\alpha u + \beta\frac{\partial u}{\partial n} = g$ & 混合条件 & 对流边界 \\
+\bottomrule
+\end{tabular}
+\caption{边界条件分类}
+\label{tab:boundary-conditions}
+\end{table}
+
+% ========== 第三节 ==========
+\section{二阶线性偏微分方程的分类}
+
+\subsection{一般形式}
+
+考虑两个自变量的二阶线性偏微分方程：
+\begin{equation}
+    A\frac{\partial^2 u}{\partial x^2} + 2B\frac{\partial^2 u}{\partial x\partial y} + C\frac{\partial^2 u}{\partial y^2} + D\frac{\partial u}{\partial x} + E\frac{\partial u}{\partial y} + Fu = G
+\end{equation}
+其中 $A, B, C, D, E, F, G$ 是 $x, y$ 的函数。
+
+\subsection{判别式与分类}
+
+\begin{dingliyi}{}{判别式}
+\begin{equation}
+    \Delta = B^2 - AC
+\end{equation}
+\end{dingliyi}
+
+\begin{dingli}{}{方程分类}
+\begin{itemize}
+    \item $\Delta > 0$：\textbf{双曲型}（如波动方程）
+    \item $\Delta = 0$：\textbf{抛物型}（如热传导方程）
+    \end{itemize}
+\end{dingli}
+
+\begin{proof}
+二阶线性偏微分方程的标准形式为
+\begin{equation}
+    A\frac{\partial^2 u}{\partial x^2} + 2B\frac{\partial^2 u}{\partial x \partial y} + C\frac{\partial^2 u}{\partial y^2} + \text{低阶项} = 0
+\end{equation}
+特征方程为 $A(\mathrm{d}y)^2 - 2B\,\mathrm{d}x\,\mathrm{d}y + C(\mathrm{d}x)^2 = 0$，其判别式为 $\Delta = B^2 - AC$。
+
+当 $\Delta > 0$ 时，有两族实特征线（双曲型）；$\Delta = 0$ 时，有一族实特征线（抛物型）；$\Delta < 0$ 时，无实特征线（椭圆型）。
+\end{proof}
+
+\subsection{典型方程的分类}
+
+\begin{lizi}{}{}
+对波动方程 $\frac{\partial^2 u}{\partial t^2} = a^2\frac{\partial^2 u}{\partial x^2}$ 进行分类。
+
+\begin{jie}
+    改写为标准形式：
+    \begin{equation}
+        a^2\frac{\partial^2 u}{\partial x^2} - \frac{\partial^2 u}{\partial t^2} = 0
+    \end{equation}
+    
+    对应 $A = a^2$，$B = 0$，$C = -1$。
+    
+    判别式：$\Delta = 0 - a^2 \cdot (-1) = a^2 > 0$。
+    
+    所以波动方程是\textbf{双曲型}方程。
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+对热传导方程 $\frac{\partial u}{\partial t} = a^2\frac{\partial^2 u}{\partial x^2}$ 进行分类。
+
+\begin{jie}
+    引入新变量 $v = \frac{\partial u}{\partial t}$，方程变为
+    \begin{equation}
+        a^2\frac{\partial^2 u}{\partial x^2} - v = 0
+    \end{equation}
+    
+    更直接地，把 $t$ 看作第二个自变量，只含一阶时间导数。
+    
+    对应 $A = a^2$，$B = 0$，$C = 0$。
+    
+    判别式：$\Delta = 0 - a^2 \cdot 0 = 0$。
+    
+    所以热传导方程是\textbf{抛物型}方程。
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+对拉普拉斯方程 $\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0$ 进行分类。
+
+\begin{jie}
+    对应 $A = 1$，$B = 0$，$C = 1$。
+    
+    判别式：$\Delta = 0 - 1 \cdot 1 = -1 < 0$。
+    
+    所以拉普拉斯方程是\textbf{椭圆型}方程。
+\end{jie}
+\end{lizi}
+
+\subsection{特征线}
+
+\begin{dingliyi}{}{特征方程}
+方程
+\begin{equation}
+    A\left(\frac{\mathrm{d}y}{\mathrm{d}x}\right)^2 - 2B\frac{\mathrm{d}y}{\mathrm{d}x} + C = 0
+\end{equation}
+称为原偏微分方程的\textbf{特征方程}，其解称为\textbf{特征线}。
+\end{dingliyi}
+
+特征线的性质：
+\begin{itemize}
+    \item 双曲型方程：有两族实特征线
+    \item 抛物型方程：有一族实特征线
+    \item 椭圆型方程：无实特征线
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % 双曲型
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$t$};
+        
+        \draw[blue, thick] (0, 0) -- (2.5, 2.5);
+        \draw[blue, thick] (0, 1) -- (1.5, 2.5);
+        \draw[red, thick] (2.5, 0) -- (0, 2.5);
+        \draw[red, thick] (2.5, 1) -- (1, 2.5);
+        
+        \node at (1.25, -1) {双曲型};
+        \node[blue] at (2.2, 1.5) {$x+at=C_1$};
+        \node[red] at (0.3, 1.5) {$x-at=C_2$};
+    \end{scope}
+    
+    % 抛物型
+    \begin{scope}[xshift=5cm]
+        \draw[->, gray] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$t$};
+        
+        \draw[blue, thick] (0, 0) -- (0, 2.5);
+        \draw[blue, thick] (1, 0) -- (1, 2.5);
+        \draw[blue, thick] (2, 0) -- (2, 2.5);
+        
+        \node at (1.25, -1) {抛物型};
+        \node[blue] at (2.5, 1.5) {$t=C$};
+    \end{scope}
+    
+    % 椭圆型
+    \begin{scope}[xshift=10cm]
+        \draw[->, gray] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+        
+        \draw[blue, thick] (1.25, 1.25) circle (1);
+        \draw[blue, thick] (1.25, 1.25) circle (0.5);
+        
+        \node at (1.25, -1) {椭圆型};
+        \node[blue] at (2.8, 1.5) {无实特征线};
+    \end{scope}
+\end{tikzpicture}
+\caption{三类方程的特征线}
+\label{fig:characteristics}
+\end{figure}
+
+% ========== 第四节 ==========
+\section{定解问题的适定性}
+
+\begin{dingliyi}{}{适定性}
+一个定解问题称为\textbf{适定的}，如果满足：
+\begin{enumerate}
+    \item \textbf{存在性}：解存在
+    \item \textbf{唯一性}：解唯一
+    \item \textbf{稳定性}：解连续依赖于定解条件
+\end{enumerate}
+\end{dingliyi}
+
+\begin{tishi}
+不是所有定解问题都是适定的。例如，拉普拉斯方程的柯西问题通常是不适定的——初始条件的小扰动会导致解的剧烈变化。
+\end{tishi}
+
+\begin{dingli}{}{三类典型方程的适定性}
+\begin{itemize}
+    \item \textbf{波动方程}：柯西问题和混合问题都是适定的
+    \item \textbf{热传导方程}：初值问题和混合问题都是适定的，但反向热传导问题不适定
+    \end{itemize}
+\end{dingli}
+
+\begin{proof}
+这是一个归纳性的结论，其证明需要后续章节的具体方法：
+
+\textbf{波动方程}：达朗贝尔公式给出了解的存在性和唯一性，解对初始条件的连续依赖性可通过公式直接验证。
+
+\textbf{热传导方程}：分离变量法和积分变换法可证明解的存在唯一性。但反向热传导（已知终值求初值）是不适定的，因为解对终值不连续依赖。
+
+\textbf{拉普拉斯方程}：格林函数法和分离变量法可证明边值问题的适定性。但柯西问题（给定边界曲线和边界值）是不适定的，这是因为调和函数的解析开拓问题。
+\end{proof}
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{三类典型方程}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{方程} & \textbf{类型} & \textbf{物理背景} & \textbf{特点} \\
+\midrule
+波动方程 & 双曲型 & 振动、波动 & 有两条特征线 \\
+热传导方程 & 抛物型 & 热传导、扩散 & 不可逆过程 \\
+拉普拉斯方程 & 椭圆型 & 稳定场 & 无实特征线 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{定解条件}
+
+\begin{itemize}
+    \item 初始条件：描述初始状态
+    \item 边界条件：第一类（Dirichlet）、第二类（Neumann）、第三类（Robin）
+\end{itemize}
+
+\subsection{分类依据}
+
+判别式 $\Delta = B^2 - AC$：
+\begin{itemize}
+    \item $\Delta > 0$：双曲型
+    \item $\Delta = 0$：抛物型
+    \item $\Delta < 0$：椭圆型
+\end{itemize}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 从物理定律出发，推导二维波动方程
+    \begin{equation}
+        \frac{\partial^2 u}{\partial t^2} = a^2\left(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}\right)
+    \end{equation}
+    
+    \item 推导三维热传导方程
+    \begin{equation}
+        \frac{\partial u}{\partial t} = a^2\nabla^2 u
+    \end{equation}
+    
+    \item 判断下列方程的类型：
+    \begin{enumerate}
+        \item $\frac{\partial^2 u}{\partial x^2} + 2\frac{\partial^2 u}{\partial x\partial y} + \frac{\partial^2 u}{\partial y^2} = 0$
+        \item $x\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0$（分区域讨论）
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 考虑长为 $l$ 的均匀细杆，一端固定，另一端受弹性支撑。写出定解问题。
+    
+    \item 考虑半径为 $R$ 的圆形薄膜的振动，写出定解问题（使用极坐标）。
+    
+    \item 设杆的侧面与周围介质有热交换（牛顿冷却定律），推导杆的温度分布方程。
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 证明：对于椭圆型方程，如果给定柯西条件（边界上的函数值和法向导数），问题通常是不适定的。
+    
+    \item 研究方程 $\frac{\partial^2 u}{\partial x^2} + y\frac{\partial^2 u}{\partial y^2} = 0$ 的类型，并讨论在不同区域的特征线。
+\end{enumerate}

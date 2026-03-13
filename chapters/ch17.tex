@@ -1,0 +1,244 @@
+% 第十七章：其他特殊函数简介
+
+\chapter{其他特殊函数简介}
+
+\begin{wulibj}[本章导读]
+除了勒让德函数和贝塞尔函数\index{贝塞尔函数}外，数学物理中还有许多其他重要的特殊函数。本章简要介绍厄米函数、拉盖尔函数、合流超几何函数等，它们在量子力学中有重要应用。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{厄米函数}
+
+\subsection{厄米方程}
+
+\begin{equation}
+    \frac{\mathrm{d}^2 y}{\mathrm{d}x^2} - 2x\frac{\mathrm{d}y}{\mathrm{d}x} + \lambda y = 0
+\end{equation}
+
+要求 $x \to \pm\infty$ 时解有界，需要 $\lambda = 2n$，$n = 0, 1, 2, \ldots$。
+
+\subsection{厄米多项式}
+
+\begin{zhongyao}[厄米多项式]
+\[
+    H_n(x) = (-1)^n\mathrm{e}^{x^2}\frac{\mathrm{d}^n}{\mathrm{d}x^n}\mathrm{e}^{-x^2}
+\]
+\end{zhongyao}
+
+前几个厄米多项式：
+\begin{align}
+    H_0(x) &= 1 \\
+    H_1(x) &= 2x \\
+    H_2(x) &= 4x^2 - 2 \\
+    H_3(x) &= 8x^3 - 12x
+\end{align}
+
+\subsection{性质}
+
+\begin{dingli}{}{正交性}
+\begin{equation}
+    \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2}H_m(x)H_n(x)\,\mathrm{d}x = 2^n n!\sqrt{\pi}\delta_{mn}
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+利用母函数。设 $G(x,t) = \mathrm{e}^{2xt-t^2}$，则
+\begin{equation}
+    \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2} G(x,t)G(x,s)\,\mathrm{d}x = \sum_{m,n} \frac{t^m s^n}{m!n!} \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2} H_m(x)H_n(x)\,\mathrm{d}x
+\end{equation}
+另一方面：
+\begin{equation}
+    \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2} G(x,t)G(x,s)\,\mathrm{d}x = \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2 + 2x(t+s) - t^2 - s^2}\,\mathrm{d}x = \sqrt{\pi}\mathrm{e}^{2ts}
+\end{equation}
+展开 $\mathrm{e}^{2ts} = \sum_{n=0}^{\infty} \frac{(2ts)^n}{n!}$，比较 $t^m s^n$ 的系数，得正交性。
+\end{proof}
+\begin{dingli}{}{母函数}
+\begin{equation}
+    \mathrm{e}^{2xt - t^2} = \sum_{n=0}^{\infty} H_n(x)\frac{t^n}{n!}
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+设 $G(x,t) = \mathrm{e}^{2xt-t^2}$，对 $t$ 求导：
+\begin{equation}
+    \frac{\partial G}{\partial t} = 2(x-t)G
+\end{equation}
+设 $G = \sum_{n=0}^{\infty} H_n(x)\frac{t^n}{n!}$，代入得：
+\begin{equation}
+    \sum_{n=0}^{\infty} H_n(x)\frac{t^{n-1}}{(n-1)!} = 2x\sum_{n=0}^{\infty} H_n(x)\frac{t^n}{n!} - 2\sum_{n=0}^{\infty} H_n(x)\frac{t^{n+1}}{n!}
+\end{equation}
+比较 $t^n$ 的系数，得递推关系 $H_{n+1}(x) = 2xH_n(x) - 2nH_{n-1}(x)$，这正是厄米多项式的递推公式。
+
+由初始条件 $H_0(x) = 1$，可验证展开式正确。
+\end{proof}
+\subsection{应用}
+
+厄米多项式是量子力学一维谐振子的能量本征函数：
+\begin{equation}
+    \psi_n(x) = \left(\frac{1}{\sqrt{\pi}2^n n!}\right)^{1/2}\mathrm{e}^{-x^2/2}H_n(x)
+\end{equation}
+
+% ========== 第二节 ==========
+\section{拉盖尔函数}
+
+\subsection{拉盖尔方程}
+
+\begin{equation}
+    x\frac{\mathrm{d}^2 y}{\mathrm{d}x^2} + (1-x)\frac{\mathrm{d}y}{\mathrm{d}x} + ny = 0
+\end{equation}
+
+\subsection{拉盖尔多项式}
+
+\begin{zhongyao}[拉盖尔多项式]
+\[
+    L_n(x) = \mathrm{e}^x\frac{\mathrm{d}^n}{\mathrm{d}x^n}(x^n\mathrm{e}^{-x})
+\]
+\end{zhongyao}
+
+前几个拉盖尔多项式：
+\begin{align}
+    L_0(x) &= 1 \\
+    L_1(x) &= 1 - x \\
+    L_2(x) &= \frac{1}{2}(x^2 - 4x + 2)
+\end{align}
+
+\subsection{连带拉盖尔多项式}
+
+\begin{equation}
+    L_n^k(x) = \frac{\mathrm{d}^k}{\mathrm{d}x^k}L_{n+k}(x)
+\end{equation}
+
+\subsection{应用}
+
+拉盖尔多项式用于描述氢原子径向波函数：
+\begin{equation}
+    R_{nl}(r) \propto \mathrm{e}^{-r/(na_0)}\left(\frac{r}{a_0}\right)^l L_{n-l-1}^{2l+1}\left(\frac{2r}{na_0}\right)
+\end{equation}
+
+% ========== 第三节 ==========
+\section{超几何函数}
+
+\subsection{超几何方程}
+
+\begin{equation}
+    x(1-x)\frac{\mathrm{d}^2 y}{\mathrm{d}x^2} + [c - (a+b+1)x]\frac{\mathrm{d}y}{\mathrm{d}x} - aby = 0
+\end{equation}
+
+\subsection{超几何函数}
+
+\begin{dingliyi}{}{超几何函数}
+\begin{equation}
+    \boxed{F(a, b; c; x) = {}_2F_1(a, b; c; x) = \sum_{n=0}^{\infty} \frac{(a)_n(b)_n}{(c)_n}\frac{x^n}{n!}}
+\end{equation}
+其中 $(a)_n = a(a+1)\cdots(a+n-1)$ 是 Pochhammer 符号。
+\end{dingliyi}
+
+\subsection{特殊情形}
+
+许多特殊函数是超几何函数的特例：
+\begin{itemize}
+    \item $(1-x)^{-a} = F(a, 1; 1; x)$
+    \item $\ln(1+x) = xF(1, 1; 2; -x)$
+    \item $\arcsin x = xF\left(\frac{1}{2}, \frac{1}{2}; \frac{3}{2}; x^2\right)$
+    \item $P_l(x) = F\left(-l, l+1; 1; \frac{1-x}{2}\right)$
+\end{itemize}
+
+% ========== 第四节 ==========
+\section{合流超几何函数}
+
+\subsection{合流超几何方程}
+
+\begin{equation}
+    x\frac{\mathrm{d}^2 y}{\mathrm{d}x^2} + (c-x)\frac{\mathrm{d}y}{\mathrm{d}x} - ay = 0
+\end{equation}
+
+\subsection{合流超几何函数}
+
+\begin{equation}
+    M(a, c, x) = {}_1F_1(a; c; x) = \sum_{n=0}^{\infty} \frac{(a)_n}{(c)_n}\frac{x^n}{n!}
+\end{equation}
+
+\subsection{与其他特殊函数的关系}
+
+\begin{itemize}
+    \item 厄米函数：$H_{2n}(x) = (-1)^n 2^{2n}n!M(-n, \frac{1}{2}, x^2)$
+    \item 拉盖尔函数：$L_n(x) = M(-n, 1, x)$
+    \item 贝塞尔函数\index{贝塞尔函数}（某些关系）
+\end{itemize}
+
+% ========== 第五节 ==========
+\section{Γ函数}
+
+\subsection{定义}
+
+\begin{zhongyao}[Γ 函数]
+\[
+    \Gamma(z) = \int_0^{+\infty} t^{z-1}\mathrm{e}^{-t}\,\mathrm{d}t, \quad \mathrm{Re}(z) > 0
+\]
+\end{zhongyao}
+
+\subsection{性质}
+
+\begin{dingli}{}{基本性质}
+\begin{align}
+    \Gamma(z+1) &= z\Gamma(z) \\
+    \Gamma(n+1) &= n! \quad (n \in \mathbb{N}) \\
+    \Gamma\left(\frac{1}{2}\right) &= \sqrt{\pi} \\
+    \Gamma(z)\Gamma(1-z) &= \frac{\pi}{\sin\pi z}
+\end{align}
+\end{dingli}
+
+\begin{proof}[$\Gamma(1/2) = \sqrt{\pi}$ 的证明]
+\begin{equation}
+    \Gamma\left(\frac{1}{2}\right) = \int_0^{+\infty} t^{-1/2}\mathrm{e}^{-t}\,\mathrm{d}t = 2\int_0^{+\infty} \mathrm{e}^{-u^2}\,\mathrm{d}u = \sqrt{\pi}
+\end{equation}
+最后一个积分是高斯积分。
+\end{proof}
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{函数} & \textbf{方程} & \textbf{应用} \\
+\midrule
+厄米多项式 $H_n$ & $y'' - 2xy' + 2ny = 0$ & 谐振子 \\
+拉盖尔多项式 $L_n$ & $xy'' + (1-x)y' + ny = 0$ & 氢原子 \\
+超几何函数 $F$ & 超几何方程 & 多种问题 \\
+合流超几何 $M$ & 合流超几何方程 & 量子力学 \\
+Γ 函数 & 积分定义 & 阶乘推广 \\
+\bottomrule
+\end{tabular}
+\caption{特殊函数总结}
+\end{table}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 计算 $H_2(x)$ 和 $H_3(x)$。
+    
+    \item 验证 $L_1(x) = 1 - x$ 满足拉盖尔方程。
+    
+    \item 计算 $\Gamma(5)$ 和 $\Gamma(7/2)$。
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 证明厄米多项式的正交性。
+    
+    \item 利用 Γ 函数的性质证明 $\Gamma(1/2) = \sqrt{\pi}$。
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 研究超几何函数与勒让德多项式\index{勒让德多项式}的关系。
+    
+    \item 在量子力学教材中查找氢原子波函数的推导过程，理解拉盖尔多项式的作用。
+\end{enumerate}

@@ -1,0 +1,878 @@
+% 第二章：复变函数
+
+\chapter{复变函数}
+
+\begin{wulibj}[本章导读]
+复变函数是把实变函数的定义域从实数扩展到复数\index{复数}后的自然推广。但这个``自然推广''却带来了全新的结构：解析函数\index{解析函数}。解析函数\index{解析函数}具有许多令人惊奇的性质，比如：一个解析函数\index{解析函数}在一点知道它的值，就知道了整个区域内的值！本章我们将学习复变函数的基本概念、极限、连续、导数和解析性。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{复变函数的概念}
+
+\subsection{从实变函数到复变函数}
+
+在高等数学中，我们学习了实变函数 $y = f(x)$，其中 $x, y$ 都是实数。现在，让我们把定义域和值域都扩展到复数\index{复数}。
+
+\begin{dingliyi}{}{复变函数}
+设 $D$ 是复平面上的一个点集。若对于 $D$ 中的每一个点 $z$，按照某种规则，都有一个或多个复数\index{复数} $w$ 与之对应，则称 $w$ 是 $z$ 的\textbf{复变函数}，记作
+\begin{equation}
+    w = f(z)
+\end{equation}
+若每个 $z$ 只对应一个 $w$，称为\textbf{单值函数}；若对应多个 $w$，称为\textbf{多值函数}。
+\end{dingliyi}
+
+\begin{zhu}{}{}
+在本书中，如无特别说明，``函数''均指单值函数。多值函数会在后续章节专门讨论（如对数函数、根式函数）。
+\end{zhu}
+
+\subsection{实部与虚部的分离}
+
+设 $z = x + \mathrm{i}y$，$w = u + \mathrm{i}v$。复变函数 $w = f(z)$ 可以写成
+\begin{equation}
+    w = f(z) = u(x, y) + \mathrm{i}v(x, y)
+\end{equation}
+其中 $u(x, y)$ 和 $v(x, y)$ 都是二元实函数，分别称为 $f(z)$ 的\textbf{实部}和\textbf{虚部}。
+
+\begin{lizi}{}{}
+设 $f(z) = z^2$，求其实部和虚部。
+\begin{jie}
+    设 $z = x + \mathrm{i}y$，则
+    \begin{align}
+        f(z) &= (x + \mathrm{i}y)^2 \\
+             &= x^2 + 2\mathrm{i}xy + \mathrm{i}^2 y^2 \\
+             &= x^2 - y^2 + \mathrm{i} \cdot 2xy
+    \end{align}
+    所以实部 $u(x, y) = x^2 - y^2$，虚部 $v(x, y) = 2xy$。
+\end{jie}
+\end{lizi}
+
+\subsection{复变函数的几何意义}
+
+复变函数 $w = f(z)$ 可以看作从 $z$ 平面（定义域）到 $w$ 平面（值域）的\textbf{映射}。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % z 平面
+    \begin{scope}
+        \draw[->, thick] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+        \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$y$};
+        \node at (0, -3) {$z$ 平面};
+        
+        % 单位圆
+        \draw[blue, thick] (0, 0) circle (1);
+        \node[blue] at (1.5, 1.2) {$|z|=1$};
+        
+        % 点
+        \fill[red] (1, 0) circle (2pt) node[below right] {$1$};
+        \fill[red] (0, 1) circle (2pt) node[above right] {$\mathrm{i}$};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick, green!60!black] (3, 0) -- (4, 0) node[midway, above] {$w=z^2$};
+    
+    % w 平面
+    \begin{scope}[xshift=7cm]
+        \draw[->, thick] (-2.5, 0) -- (2.5, 0) node[right] {$u$};
+        \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$v$};
+        \node at (0, -3) {$w$ 平面};
+        
+        % 映射后的单位圆（变成单位圆）
+        \draw[blue, thick] (0, 0) circle (1);
+        \node[blue] at (1.8, 1) {$|w|=1$};
+        
+        % 点
+        \fill[red] (1, 0) circle (2pt) node[below right] {$1$};
+        \fill[red] (-1, 0) circle (2pt) node[below left] {$-1$};
+    \end{scope}
+\end{tikzpicture}
+\caption{映射 $w = z^2$ 将 $z$ 平面上的单位圆映射到 $w$ 平面}
+\label{fig:mapping}
+\end{figure}
+
+\begin{tishi}[映射的视角]
+用``映射''的视角看待复变函数，在后续学习保角映射时会非常重要。我们不仅关心函数在某点的值，还关心函数如何``变形''整个区域。
+\end{tishi}
+
+% ========== 第二节 ==========
+\section{复变函数的极限与连续}
+
+\subsection{极限的概念}
+
+\begin{dingliyi}{}{极限}
+设函数 $f(z)$ 在点 $z_0$ 的某个去心邻域内有定义。若存在复数\index{复数} $A$，使得对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $0 < |z - z_0| < \delta$ 时，有 $|f(z) - A| < \varepsilon$，则称 $A$ 是 $f(z)$ 当 $z \to z_0$ 时的\textbf{极限}，记作
+\begin{equation}
+    \lim_{z \to z_0} f(z) = A
+\end{equation}
+\end{dingliyi}
+
+\begin{zhu}{}{}
+定义中 $z \to z_0$ 的方式是任意的——可以从任何方向、沿任何路径趋近。这是复变函数极限与实变函数极限的重要区别！
+\end{zhu}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % z 平面
+    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$};
+    \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
+    
+    % z_0 点
+    \fill[blue] (2, 1.5) circle (2pt) node[above right] {$z_0$};
+    
+    % delta 邻域
+    \draw[blue, dashed] (2, 1.5) circle (0.8);
+    \node[blue] at (3.2, 1.5) {$\delta$};
+    
+    % 不同路径趋近
+    \draw[->, thick, red] (1, 0.5) to[out=60, in=210] (2, 1.5);
+    \draw[->, thick, green!60!black] (3, 2.5) to[out=240, in=60] (2, 1.5);
+    \draw[->, thick, orange] (1, 2.5) to[out=-30, in=120] (2, 1.5);
+    
+    \node at (2, -0.8) {$z$ 可以沿任意路径趋近 $z_0$};
+\end{tikzpicture}
+\caption{复变函数极限：沿任意路径趋近}
+\label{fig:limit-paths}
+\end{figure}
+
+\subsection{极限的等价条件}
+
+\begin{dingli}{}{极限的实部虚部表示}\label{thm:limit-real-imag}
+设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z_0 = x_0 + \mathrm{i}y_0$，$A = a + \mathrm{i}b$。则
+\begin{equation}
+    \lim_{z \to z_0} f(z) = A \quad \Longleftrightarrow \quad 
+    \begin{cases}
+        \lim\limits_{(x,y) \to (x_0,y_0)} u(x, y) = a \\
+        \lim\limits_{(x,y) \to (x_0,y_0)} v(x, y) = b
+    \end{cases}
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+设 $\lim_{z \to z_0} f(z) = A$。对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $0 < |z - z_0| < \delta$ 时，
+\begin{equation}
+    |f(z) - A| = \sqrt{(u - a)^2 + (v - b)^2} < \varepsilon
+\end{equation}
+由于 $\sqrt{(u-a)^2} \leq \sqrt{(u-a)^2 + (v-b)^2}$，所以 $|u - a| < \varepsilon$。同理 $|v - b| < \varepsilon$。
+
+反之亦然。详细的证明留给读者。
+\end{proof}
+
+\subsection{连续性}
+
+\begin{dingliyi}{}{连续}
+设函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若
+\begin{equation}
+    \lim_{z \to z_0} f(z) = f(z_0)
+\end{equation}
+则称 $f(z)$ 在点 $z_0$ \textbf{连续}。若 $f(z)$ 在区域 $D$ 内每一点都连续，则称 $f(z)$ 在 $D$ 内\textbf{连续}。
+\end{dingliyi}
+
+\begin{dingli}{}{连续的等价条件}
+函数 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在 $z_0 = x_0 + \mathrm{i}y_0$ 处连续，当且仅当 $u(x, y)$ 和 $v(x, y)$ 都在 $(x_0, y_0)$ 处连续。
+\end{dingli}
+
+\begin{proof}
+由极限的实部虚部表示，$f(z)$ 在 $z_0$ 连续等价于
+\begin{equation}
+    \lim_{z \to z_0} f(z) = f(z_0) = u(x_0, y_0) + \mathrm{i}v(x_0, y_0)
+\end{equation}
+由定理\ref{thm:limit-real-imag}（极限的实部虚部表示），这等价于
+\begin{equation}
+    \lim_{(x,y) \to (x_0,y_0)} u(x, y) = u(x_0, y_0), \quad
+    \lim_{(x,y) \to (x_0,y_0)} v(x, y) = v(x_0, y_0)
+\end{equation}
+这正是 $u$ 和 $v$ 在 $(x_0, y_0)$ 连续的定义。
+\end{proof}
+
+\subsection{连续函数的性质}
+
+\begin{dingli}{}{连续函数的基本性质}
+设 $f(z)$ 和 $g(z)$ 在点 $z_0$ 连续，则：
+\begin{enumerate}
+    \item $f(z) \pm g(z)$ 在 $z_0$ 连续
+    \item $f(z) \cdot g(z)$ 在 $z_0$ 连续
+    \item 若 $g(z_0) \neq 0$，则 $\frac{f(z)}{g(z)}$ 在 $z_0$ 连续
+    \item 若 $f(z)$ 在 $z_0$ 连续，$g(w)$ 在 $w_0 = f(z_0)$ 连续，则 $g(f(z))$ 在 $z_0$ 连续
+\end{enumerate}
+\end{dingli}
+\begin{proof}
+设 $f(z) = u_1 + \mathrm{i}v_1$，$g(z) = u_2 + \mathrm{i}v_2$，其中 $u_1, v_1, u_2, v_2$ 都连续。
+
+\textbf{（1）和差连续}：由连续的等价条件，只需证明 $u_1 \pm u_2$ 和 $v_1 \pm v_2$ 连续。这是二元连续函数的性质，显然成立。
+
+\textbf{（2）乘积连续}：
+\begin{equation}
+    f(z) \cdot g(z) = (u_1 u_2 - v_1 v_2) + \mathrm{i}(u_1 v_2 + v_1 u_2)
+\end{equation}
+由二元连续函数的乘积连续，$u_1 u_2$、$v_1 v_2$、$u_1 v_2$、$v_1 u_2$ 都连续，故乘积连续。
+
+\textbf{（3）商连续}：只需证明 $\frac{1}{g(z)}$ 连续。设 $g(z_0) \neq 0$，则
+\begin{equation}
+    \frac{1}{g(z)} = \frac{\overline{g(z)}}{|g(z)|^2} = \frac{u_2 - \mathrm{i}v_2}{u_2^2 + v_2^2}
+\end{equation}
+由连续性，$u_2^2 + v_2^2$ 在 $z_0$ 处不为零，故分母连续且不为零，商连续。
+
+\textbf{（4）复合函数连续}：由极限的复合性质可得。
+\end{proof}
+
+\begin{lizi}{}{}
+讨论函数 $f(z) = \frac{z}{z - \mathrm{i}}$ 的连续性。
+
+\begin{jie}
+    函数在 $z \neq \mathrm{i}$ 时有定义。
+    
+    由连续函数的性质，$z$ 和 $z - \mathrm{i}$ 都在整个复平面上连续，所以 $\frac{z}{z - \mathrm{i}}$ 在 $z \neq \mathrm{i}$ 处连续。
+    
+    在 $z = \mathrm{i}$ 处，函数无定义，当然不连续。
+\end{jie}
+\end{lizi}
+
+% ========== 第三节 ==========
+\section{导数与解析性}
+
+\subsection{复变函数的导数}
+
+\begin{dingliyi}{}{导数}
+设函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若极限
+\begin{equation}
+    \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z}
+\end{equation}
+存在且有限，则称 $f(z)$ 在点 $z_0$ \textbf{可导}，此极限称为 $f(z)$ 在 $z_0$ 的\textbf{导数}，记作 $f'(z_0)$ 或 $\frac{\mathrm{d}f}{\mathrm{d}z}\big|_{z=z_0}$。
+\end{dingliyi}
+
+\begin{jinshi}[关键区别：$\Delta z$ 可从任意方向趋近]
+在实变函数中，$\Delta x$ 只能沿实轴正方向或负方向趋近于 $0$。但在复变函数中，$\Delta z = \Delta x + \mathrm{i}\Delta y$ 可以从任意方向趋近于 $0$！
+
+这导致复变函数可导的条件比实变函数\textbf{严格得多}。
+\end{jinshi}
+
+\begin{lizi}{}{}
+用定义求 $f(z) = z^2$ 的导数。
+
+\begin{jie}
+    \begin{align}
+        f'(z) &= \lim_{\Delta z \to 0} \frac{(z + \Delta z)^2 - z^2}{\Delta z} \\
+              &= \lim_{\Delta z \to 0} \frac{z^2 + 2z\Delta z + (\Delta z)^2 - z^2}{\Delta z} \\
+              &= \lim_{\Delta z \to 0} \frac{2z\Delta z + (\Delta z)^2}{\Delta z} \\
+              &= \lim_{\Delta z \to 0} (2z + \Delta z) = 2z
+    \end{align}
+    所以 $f'(z) = 2z$。
+\end{jie}
+\end{lizi}
+
+\subsection{一个不可导的例子}
+
+\begin{lizi}{}{}
+证明 $f(z) = \bar{z}$ 在任意点都不可导。
+
+\begin{jie}
+    设 $\Delta z = \Delta x + \mathrm{i}\Delta y$，则
+    \begin{equation}
+        \frac{f(z + \Delta z) - f(z)}{\Delta z} = \frac{\overline{z + \Delta z} - \bar{z}}{\Delta z} = \frac{\overline{\Delta z}}{\Delta z} = \frac{\Delta x - \mathrm{i}\Delta y}{\Delta x + \mathrm{i}\Delta y}
+    \end{equation}
+    
+    若 $\Delta z$ 沿实轴趋近（$\Delta y = 0$），则
+    \begin{equation}
+        \lim_{\Delta x \to 0} \frac{\Delta x}{\Delta x} = 1
+    \end{equation}
+    
+    若 $\Delta z$ 沿虚轴趋近（$\Delta x = 0$），则
+    \begin{equation}
+        \lim_{\Delta y \to 0} \frac{-\mathrm{i}\Delta y}{\mathrm{i}\Delta y} = -1
+    \end{equation}
+    
+    沿不同路径极限不同，所以 $f(z) = \bar{z}$ 不可导。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[为什么 $\bar{z}$ 不可导？]
+从几何上看，$w = \bar{z}$ 是关于实轴的镜像反射。这种变换``翻转''了复平面的方向，因此不能用一个统一的``变化率''来描述。
+\end{tishi}
+
+\subsection{解析函数\index{解析函数}}
+
+\begin{dingliyi}{}{解析函数}
+\begin{itemize}
+    \item 若函数 $f(z)$ 在点 $z_0$ 及其某个邻域内可导，则称 $f(z)$ 在 $z_0$ \textbf{解析}（或\textbf{全纯}）。
+    \item 若函数 $f(z)$ 在区域 $D$ 内每一点都解析，则称 $f(z)$ 在 $D$ 内\textbf{解析函数\index{解析函数}}。
+    \item 若函数 $f(z)$ 在点 $z_0$ 不解析，则称 $z_0$ 为 $f(z)$ 的\textbf{奇点}。
+\end{itemize}
+\end{dingliyi}
+
+\begin{zhu}{}{}
+``可导''和``解析''的区别：
+\begin{itemize}
+    \item 可导：只在一点有意义。
+    \item 解析：在一个邻域内都有意义。
+\end{itemize}
+对于复变函数，如果函数在一点可导，则一定在该点解析（这是一个深奥的结论，将在第四章证明）。
+\end{zhu}
+
+\subsection{求导法则}
+
+复变函数的求导法则与实变函数类似：
+
+\begin{dingli}{}{基本求导法则}
+设 $f(z)$ 和 $g(z)$ 都可导，则：
+\begin{align}
+    [f(z) \pm g(z)]' &= f'(z) \pm g'(z) \\
+    [f(z) \cdot g(z)]' &= f'(z)g(z) + f(z)g'(z) \\
+    \left[\frac{f(z)}{g(z)}\right]' &= \frac{f'(z)g(z) - f(z)g'(z)}{[g(z)]^2}, \quad g(z) \neq 0 \\
+    [f(g(z))]' &= f'(g(z)) \cdot g'(z) \quad \text{（链式法则）}
+\end{align}
+\end{dingli}
+
+\begin{proof}
+这些法则的证明与实变函数完全类似，我们以乘积法则为例：
+
+设 $h(z) = f(z) \cdot g(z)$，则
+\begin{align}
+    h'(z) &= \lim_{\Delta z \to 0} \frac{f(z+\Delta z)g(z+\Delta z) - f(z)g(z)}{\Delta z} \\
+           &= \lim_{\Delta z \to 0} \frac{f(z+\Delta z)g(z+\Delta z) - f(z)g(z+\Delta z) + f(z)g(z+\Delta z) - f(z)g(z)}{\Delta z} \\
+           &= \lim_{\Delta z \to 0} \left[ g(z+\Delta z)\frac{f(z+\Delta z) - f(z)}{\Delta z} + f(z)\frac{g(z+\Delta z) - g(z)}{\Delta z} \right] \\
+           &= g(z)f'(z) + f(z)g'(z)
+\end{align}
+其中用到 $g(z)$ 可导则连续，故 $\lim_{\Delta z \to 0} g(z+\Delta z) = g(z)$。
+
+其他法则类似可证，读者可自行尝试。
+\end{proof}
+基本初等函数的导数：
+\begin{align}
+    (c)' &= 0 \quad (c \text{ 为常数}) \\
+    (z^n)' &= nz^{n-1} \quad (n \in \mathbb{Z}) \\
+    (\mathrm{e}^z)' &= \mathrm{e}^z \\
+    (\sin z)' &= \cos z \\
+    (\cos z)' &= -\sin z
+\end{align}
+
+% ========== 第四节 ==========
+\section{柯西--黎曼条件}
+
+前面我们看到，复变函数可导的条件比实变函数严格得多。现在我们要回答：一个复变函数在什么条件下可导？答案就是著名的\textbf{柯西--黎曼条件}。
+
+\subsection{柯西--黎曼条件的导出}
+
+设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z = x + \mathrm{i}y$。考虑导数的定义：
+\begin{equation}
+    f'(z) = \lim_{\Delta z \to 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}
+\end{equation}
+
+关键观察：$\Delta z \to 0$ 可以沿不同路径。我们选择两条特殊路径：
+
+\textbf{路径一}：沿实轴方向，$\Delta z = \Delta x$（即 $\Delta y = 0$）。
+\begin{align}
+    f'(z) &= \lim_{\Delta x \to 0} \frac{u(x+\Delta x, y) - u(x,y) + \mathrm{i}[v(x+\Delta x, y) - v(x,y)]}{\Delta x} \\
+          &= \frac{\partial u}{\partial x} + \mathrm{i}\frac{\partial v}{\partial x}
+\end{align}
+
+\textbf{路径二}：沿虚轴方向，$\Delta z = \mathrm{i}\Delta y$（即 $\Delta x = 0$）。
+\begin{align}
+    f'(z) &= \lim_{\Delta y \to 0} \frac{u(x, y+\Delta y) - u(x,y) + \mathrm{i}[v(x, y+\Delta y) - v(x,y)]}{\mathrm{i}\Delta y} \\
+          &= \frac{1}{\mathrm{i}}\left(\frac{\partial u}{\partial y} + \mathrm{i}\frac{\partial v}{\partial y}\right) = \frac{\partial v}{\partial y} - \mathrm{i}\frac{\partial u}{\partial y}
+\end{align}
+
+如果 $f(z)$ 可导，两个结果必须相等：
+\begin{equation}
+    \frac{\partial u}{\partial x} + \mathrm{i}\frac{\partial v}{\partial x} = \frac{\partial v}{\partial y} - \mathrm{i}\frac{\partial u}{\partial y}
+\end{equation}
+
+比较实部和虚部，得到：
+
+\begin{zhongyao}[柯西--黎曼条件]
+设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在点 $z = x + \mathrm{i}y$ 可导，则 $u$ 和 $v$ 满足
+\[
+    \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+\]
+这称为\keyword{柯西--黎曼条件}（简称 C-R 条件）。
+\end{zhongyao}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+    % 坐标轴
+    \draw[->, thick, gray] (-0.5, 0) -- (4, 0) node[right] {$x$};
+    \draw[->, thick, gray] (0, -0.5) -- (0, 3.5) node[above] {$y$};
+    
+    % 点 z_0
+    \coordinate (z0) at (2, 1.5);
+    \fill[red] (z0) circle (2.5pt) node[above right] {$z_0$};
+    
+    % x方向导数
+    \draw[->, very thick, blue] (z0) -- ++(1.2, 0) node[right] {$u_x + \mathrm{i}v_x$};
+    \node[blue, below] at (2.6, 1.5) {$\partial x$ 方向};
+    
+    % y方向导数
+    \draw[->, very thick, green!60!black] (z0) -- ++(0, 1.2) node[above] {$u_y + \mathrm{i}v_y$};
+    \node[green!60!black, left] at (2, 2.1) {$\partial y$ 方向};
+    
+    % C-R 条件的几何解释
+    \node[align=center] at (2, -1) {C-R 条件：两个方向的导数相等};
+\end{tikzpicture}
+\caption{柯西--黎曼条件的几何解释}
+\label{fig:cr-geometry}
+\end{figure}
+
+\subsection{C-R 条件的充分性}
+
+\begin{dingli}{}{可导的充分条件}
+设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在点 $z_0 = x_0 + \mathrm{i}y_0$ 的邻域内有定义，且 $u_x, u_y, v_x, v_y$ 都在 $(x_0, y_0)$ 处连续并满足 C-R 条件，则 $f(z)$ 在 $z_0$ 可导，且
+\begin{equation}
+    f'(z_0) = u_x(x_0, y_0) + \mathrm{i}v_x(x_0, y_0) = v_y(x_0, y_0) - \mathrm{i}u_y(x_0, y_0)
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+利用二元函数的全微分公式。设 $\Delta z = \Delta x + \mathrm{i}\Delta y$，则
+\begin{align}
+    \Delta f &= f(z_0 + \Delta z) - f(z_0) \\
+             &= [u(x_0+\Delta x, y_0+\Delta y) - u(x_0, y_0)] + \mathrm{i}[v(x_0+\Delta x, y_0+\Delta y) - v(x_0, y_0)]
+\end{align}
+
+由全微分公式（$u_x, u_y, v_x, v_y$ 连续）：
+\begin{align}
+    \Delta u &= u_x \Delta x + u_y \Delta y + o(|\Delta z|) \\
+    \Delta v &= v_x \Delta x + v_y \Delta y + o(|\Delta z|)
+\end{align}
+
+代入 C-R 条件 $u_x = v_y$，$u_y = -v_x$：
+\begin{align}
+    \Delta f &= (u_x \Delta x + u_y \Delta y) + \mathrm{i}(v_x \Delta x + v_y \Delta y) + o(|\Delta z|) \\
+             &= (u_x \Delta x - v_x \Delta y) + \mathrm{i}(v_x \Delta x + u_x \Delta y) + o(|\Delta z|) \\
+             &= u_x(\Delta x + \mathrm{i}\Delta y) + \mathrm{i}v_x(\Delta x + \mathrm{i}\Delta y) + o(|\Delta z|) \\
+             &= (u_x + \mathrm{i}v_x)\Delta z + o(|\Delta z|)
+\end{align}
+
+因此
+\begin{equation}
+    \frac{\Delta f}{\Delta z} = u_x + \mathrm{i}v_x + \frac{o(|\Delta z|)}{\Delta z} \to u_x + \mathrm{i}v_x \quad (\Delta z \to 0)
+\end{equation}
+证毕。
+\end{proof}
+
+\subsection{C-R 条件的应用}
+
+\begin{lizi}{}{}
+验证 $f(z) = z^2 = (x^2 - y^2) + \mathrm{i}(2xy)$ 满足 C-R 条件。
+
+\begin{jie}
+    实部 $u = x^2 - y^2$，虚部 $v = 2xy$。
+    
+    计算偏导数：
+    \begin{align}
+        \frac{\partial u}{\partial x} &= 2x, \quad \frac{\partial u}{\partial y} = -2y \\
+        \frac{\partial v}{\partial x} &= 2y, \quad \frac{\partial v}{\partial y} = 2x
+    \end{align}
+    
+    验证 C-R 条件：
+    \begin{enumerate}
+        \item $\frac{\partial u}{\partial x} = 2x = \frac{\partial v}{\partial y}$ \checkmark
+        \item $\frac{\partial u}{\partial y} = -2y = -\frac{\partial v}{\partial x}$ \checkmark
+    \end{enumerate}
+    
+    C-R 条件满足。由于偏导数连续，所以 $f(z) = z^2$ 在整个复平面上解析。
+    
+    导数为
+    \begin{equation}
+        f'(z) = \frac{\partial u}{\partial x} + \mathrm{i}\frac{\partial v}{\partial x} = 2x + \mathrm{i} \cdot 2y = 2z
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+验证 $f(z) = \bar{z} = x - \mathrm{i}y$ 不满足 C-R 条件。
+
+\begin{jie}
+    实部 $u = x$，虚部 $v = -y$。
+    
+    偏导数：
+    \begin{align}
+        \frac{\partial u}{\partial x} &= 1, \quad \frac{\partial u}{\partial y} = 0 \\
+        \frac{\partial v}{\partial x} &= 0, \quad \frac{\partial v}{\partial y} = -1
+    \end{align}
+    
+    C-R 条件：
+    \begin{enumerate}
+        \item $\frac{\partial u}{\partial x} = 1 \neq -1 = \frac{\partial v}{\partial y}$ \ding{55}
+        \item $\frac{\partial u}{\partial y} = 0 = -0 = -\frac{\partial v}{\partial x}$ \checkmark
+    \end{enumerate}
+    
+    第一个条件不满足，所以 $f(z) = \bar{z}$ 在任意点都不可导。
+\end{jie}
+\end{lizi}
+
+% ========== 第五节 ==========
+\section{解析函数\index{解析函数}的几何意义：保角映射}
+
+\subsection{导数的几何意义}
+
+设 $w = f(z)$ 在点 $z_0$ 解析，且 $f'(z_0) \neq 0$。我们来研究映射 $w = f(z)$ 在点 $z_0$ 附近的行为。
+
+设 $z$ 沿曲线 $C$ 趋近 $z_0$，对应的像点 $w$ 沿曲线 $C'$ 趋近 $w_0 = f(z_0)$。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % z 平面
+    \begin{scope}
+        \draw[->, thick] (-1, 0) -- (4, 0) node[right] {$x$};
+        \draw[->, thick] (0, -1) -- (0, 3) node[above] {$y$};
+        
+        % 曲线 C
+        \draw[blue, thick, domain=0:90] plot ({1 + 1.5*cos(\x)}, {1 + 1.5*sin(\x)});
+        \node[blue] at (0.5, 2.5) {$C$};
+        
+        % 点 z_0
+        \fill[red] (2.5, 1) circle (2pt) node[below] {$z_0$};
+        
+        % 切线方向
+        \draw[->, thick, green!60!black] (2.5, 1) -- (3.3, 1.5) node[above] {$\varphi$};
+        
+        \node at (1.5, -1.5) {$z$ 平面};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (5, 1) -- (6, 1) node[midway, above] {$w=f(z)$};
+    
+    % w 平面
+    \begin{scope}[xshift=8cm]
+        \draw[->, thick] (-1, 0) -- (4, 0) node[right] {$u$};
+        \draw[->, thick] (0, -1) -- (0, 3) node[above] {$v$};
+        
+        % 曲线 C'
+        \draw[blue, thick, domain=20:100] plot ({1 + 1.2*cos(\x)}, {1 + 1.2*sin(\x)});
+        \node[blue] at (0.3, 2) {$C'$};
+        
+        % 点 w_0
+        \fill[red] (1.13, 1.18) circle (2pt) node[below left] {$w_0$};
+        
+        % 切线方向
+        \draw[->, thick, green!60!black] (1.13, 1.18) -- (1.8, 2) node[above] {$\Phi$};
+        
+        \node at (1.5, -1.5) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{保角映射：曲线的切线方向被旋转}
+\label{fig:conformal}
+\end{figure}
+
+设曲线 $C$ 在 $z_0$ 处的切线与实轴正向的夹角为 $\varphi$，曲线 $C'$ 在 $w_0$ 处的切线与实轴正向的夹角为 $\Phi$。
+
+可以证明：
+\begin{equation}
+    \Phi = \varphi + \arg f'(z_0)
+\end{equation}
+
+\textbf{几何意义}：映射 $w = f(z)$ 把曲线 $C$ 在 $z_0$ 处的切线方向旋转了 $\arg f'(z_0)$ 角。
+
+\subsection{保角性}
+
+\begin{dingliyi}{}{保角映射}
+若映射 $w = f(z)$ 在点 $z_0$ 处满足：
+\begin{enumerate}
+    \item 保持角度大小不变
+    \item 保持角度方向（顺时针/逆时针）不变
+\end{enumerate}
+则称该映射在 $z_0$ 处是\textbf{保角的}。
+\end{dingliyi}
+
+\begin{dingli}{}{保角映射的判定}
+设 $f(z)$ 在点 $z_0$ 解析且 $f'(z_0) \neq 0$，则 $w = f(z)$ 在 $z_0$ 处是保角映射。
+\end{dingli}
+
+\begin{proof}
+设 $C_1$ 和 $C_2$ 是过 $z_0$ 的两条曲线，它们在 $z_0$ 处的切线夹角为 $\alpha$。
+
+映射后，两条曲线变为 $C_1'$ 和 $C_2'$，它们在 $w_0 = f(z_0)$ 处的切线都旋转了 $\arg f'(z_0)$ 角。因此，像曲线的夹角仍为 $\alpha$，且方向不变。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % z 平面
+    \begin{scope}
+        \draw[->, thick] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
+        
+        % 两条曲线
+        \draw[blue, thick] (0.5, 0.5) -- (2, 2);
+        \draw[red, thick] (2, 0.5) -- (0.5, 2);
+        
+        \fill[black] (1.25, 1.25) circle (2pt);
+        
+        % 角度
+        \draw[green!60!black, thick] (1.25, 1.25) ++(45:0.5) arc (45:135:0.5);
+        \node[green!60!black] at (1.25, 2) {$\alpha$};
+        
+        \node at (1.25, -0.8) {映射前};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (4, 1.25) -- (5, 1.25);
+    
+    % w 平面
+    \begin{scope}[xshift=7cm]
+        \draw[->, thick] (-0.5, 0) -- (3, 0) node[right] {$u$};
+        \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$v$};
+        
+        % 两条曲线（旋转后）
+        \draw[blue, thick] (0.3, 0.8) -- (1.8, 2.3);
+        \draw[red, thick] (2.2, 1.2) -- (0.7, 2.2);
+        
+        \fill[black] (1.2, 1.7) circle (2pt);
+        
+        % 角度（相同）
+        \draw[green!60!black, thick] (1.2, 1.7) ++(50:0.5) arc (50:130:0.5);
+        \node[green!60!black] at (1.2, 2.4) {$\alpha$};
+        
+        \node at (1.25, -0.8) {映射后};
+    \end{scope}
+\end{tikzpicture}
+\caption{保角映射保持曲线夹角不变}
+\label{fig:angle-preserve}
+\end{figure}
+
+% ========== 第六节 ==========
+\section{初等解析函数\index{解析函数}}
+
+\subsection{指数函数}
+
+\begin{zhongyao}[复指数函数]
+对于 $z = x + \mathrm{i}y$，定义\keyword{复指数函数}
+\[
+    \mathrm{e}^z = \mathrm{e}^x(\cos y + \mathrm{i}\sin y)
+\]
+\end{zhongyao}
+
+\begin{dingli}{}{指数函数的性质}
+\begin{enumerate}
+    \item $\mathrm{e}^z \neq 0$ 对所有 $z \in \mathbb{C}$ 成立
+    \item $\mathrm{e}^{z_1 + z_2} = \mathrm{e}^{z_1} \cdot \mathrm{e}^{z_2}$
+    \item $(\mathrm{e}^z)' = \mathrm{e}^z$
+    \item $\mathrm{e}^{z + 2\pi\mathrm{i}} = \mathrm{e}^z$（周期性，周期为 $2\pi\mathrm{i}$）
+\end{enumerate}
+\end{dingli}
+
+\begin{proof}
+我们证明第4条性质。设 $z = x + \mathrm{i}y$，则
+\begin{align}
+    \mathrm{e}^{z + 2\pi\mathrm{i}} &= \mathrm{e}^{x + \mathrm{i}(y + 2\pi)} \\
+    &= \mathrm{e}^x[\cos(y + 2\pi) + \mathrm{i}\sin(y + 2\pi)] \\
+    &= \mathrm{e}^x(\cos y + \mathrm{i}\sin y) = \mathrm{e}^z
+\end{align}
+\end{proof}
+
+\begin{zhu}{}{}
+复指数函数与实指数函数的一个重要区别：复指数函数是周期函数！这意味着 $\mathrm{e}^z = 1$ 有无穷多个解：$z = 2k\pi\mathrm{i}$（$k \in \mathbb{Z}$）。
+\end{zhu}
+
+\subsection{对数函数}
+
+\begin{dingliyi}{}{复对数函数}
+设 $z \neq 0$，满足 $\mathrm{e}^w = z$ 的 $w$ 称为 $z$ 的\textbf{对数}，记作 $\ln z$。
+
+设 $z = r\mathrm{e}^{\mathrm{i}\theta}$（$r > 0$），$w = u + \mathrm{i}v$。由 $\mathrm{e}^w = z$ 得
+\begin{equation}
+    \mathrm{e}^u \cdot \mathrm{e}^{\mathrm{i}v} = r\mathrm{e}^{\mathrm{i}\theta}
+\end{equation}
+比较得 $u = \ln r$，$v = \theta + 2k\pi$。所以
+\begin{equation}
+    \ln z = \ln|z| + \mathrm{i}(\arg z + 2k\pi), \quad k \in \mathbb{Z}
+\end{equation}
+
+\textbf{对数是多值函数！}取 $k = 0$ 得到\textbf{主值}：
+\begin{equation}
+    \operatorname{Ln} z = \ln|z| + \mathrm{i}\operatorname{Arg} z
+\end{equation}
+\end{dingliyi}
+
+\begin{lizi}{}{}
+计算 $\ln(1 + \mathrm{i})$。
+
+\begin{jie}
+    $|1 + \mathrm{i}| = \sqrt{2}$，$\operatorname{Arg}(1 + \mathrm{i}) = \frac{\pi}{4}$。
+    
+    所以
+    \begin{equation}
+        \ln(1 + \mathrm{i}) = \ln\sqrt{2} + \mathrm{i}\left(\frac{\pi}{4} + 2k\pi\right), \quad k \in \mathbb{Z}
+    \end{equation}
+    
+    主值为 $\operatorname{Ln}(1 + \mathrm{i}) = \frac{1}{2}\ln 2 + \mathrm{i}\frac{\pi}{4}$。
+\end{jie}
+\end{lizi}
+
+\subsection{三角函数}
+
+\begin{dingliyi}{}{复三角函数}
+\begin{align}
+    \sin z &= \frac{\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}} \\
+    \cos z &= \frac{\mathrm{e}^{\mathrm{i}z} + \mathrm{e}^{-\mathrm{i}z}}{2}
+\end{align}
+\end{dingliyi}
+
+\begin{zhu}{}{}
+复三角函数与实三角函数的重要区别：
+\begin{enumerate}
+    \item $|\sin z|$ 和 $|\cos z|$ 可以大于 $1$。
+    \item 例如，$\cos(\mathrm{i}y) = \cosh y$（双曲余弦），当 $y \to \infty$ 时趋向无穷。
+\end{enumerate}
+\end{zhu}
+
+% ========== 第七节 ==========
+\section{解析函数\index{解析函数}的物理意义：平面静电场}
+
+解析函数\index{解析函数}不仅是数学对象，还有深刻的物理意义。在二维势场问题中，解析函数\index{解析函数}天然出现。
+
+\subsection{平面静电场的复势}
+
+考虑二维静电场（电场强度 $\vec{E}$ 只依赖于两个坐标）。设电势为 $\phi(x, y)$，则
+\begin{equation}
+    \vec{E} = -\nabla\phi = -\left(\frac{\partial \phi}{\partial x}\hat{i} + \frac{\partial \phi}{\partial y}\hat{j}\right)
+\end{equation}
+
+在无源区域，电场满足 $\nabla \cdot \vec{E} = 0$，即
+\begin{equation}
+    \frac{\partial E_x}{\partial x} + \frac{\partial E_y}{\partial y} = 0
+\end{equation}
+
+这启示我们引入一个\textbf{电通量函数} $\psi(x, y)$，满足
+\begin{equation}
+    E_x = -\frac{\partial \phi}{\partial x} = \frac{\partial \psi}{\partial y}, \quad E_y = -\frac{\partial \phi}{\partial y} = -\frac{\partial \psi}{\partial x}
+\end{equation}
+
+这正是 C-R 条件！因此，复函数
+\begin{equation}
+    w(z) = \phi(x, y) + \mathrm{i}\psi(x, y)
+\end{equation}
+是一个解析函数\index{解析函数}，称为\textbf{复势}。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 坐标轴
+    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$};
+    \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
+    
+    % 等势线（实线）
+    \draw[blue, thick] (0, 0) circle (1);
+    \draw[blue, thick] (0, 0) circle (2);
+    \node[blue] at (2.5, 1.5) {$\phi = \text{const}$};
+    
+    % 电场线（虚线）
+    \draw[red, thick, dashed] (0, 0) -- (3, 0);
+    \draw[red, thick, dashed] (0, 0) -- (0, 2.5);
+    \draw[red, thick, dashed] (0, 0) -- (2.1, 2.1);
+    \node[red] at (1.5, 2.2) {$\psi = \text{const}$};
+    
+    \node at (2, -0.8) {点电荷产生的电场};
+\end{tikzpicture}
+\caption{等势线与电场线正交}
+\label{fig:electric-field}
+\end{figure}
+
+\subsection{等势线与电场线的正交性}
+
+\begin{dingli}{}{等势线与电场线正交}
+解析函数\index{解析函数} $w = \phi + \mathrm{i}\psi$ 的实部 $\phi$ 的等值线（等势线）与虚部 $\psi$ 的等值线（电场线）相互正交。
+\end{dingli}
+
+\begin{proof}
+电场线方程为 $\psi(x, y) = c_2$，法向量 $\nabla\psi = (\psi_x, \psi_y)$。
+
+由 C-R 条件 $\phi_x = \psi_y$，$\phi_y = -\psi_x$，得
+\begin{equation}
+    \nabla\phi \cdot \nabla\psi = \phi_x\psi_x + \phi_y\psi_y = \psi_y\psi_x + (-\psi_x)\psi_y = 0
+\end{equation}
+两个法向量垂直，所以曲线正交。
+\end{proof}
+
+\begin{wulibj}[物理意义]
+\begin{itemize}
+    \item \textbf{等势线} $\phi = c_1$：电势相等的点连成的曲线。
+    \item \textbf{电场线} $\psi = c_2$：电场的方向，也是电通量守恒的曲线。
+    \item 两者正交是电磁学中的基本结论，解析函数\index{解析函数}理论为此提供了优美的数学框架。
+\end{itemize}
+\end{wulibj}
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{核心概念}
+
+\begin{enumerate}
+    \item \textbf{复变函数}：$w = f(z) = u(x,y) + \mathrm{i}v(x,y)$
+    \item \textbf{解析函数\index{解析函数}}：在区域内每一点都可导的函数
+    \item \textbf{C-R 条件}：$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$，$\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$
+    \item \textbf{保角映射}：保持角度大小和方向的映射
+\end{enumerate}
+
+\subsection{重要公式}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{内容} & \textbf{公式} \\
+\midrule
+导数定义 & $f'(z) = \lim_{\Delta z \to 0} \frac{f(z+\Delta z) - f(z)}{\Delta z}$ \\
+C-R 条件 & $u_x = v_y$，$u_y = -v_x$ \\
+导数公式 & $f' = u_x + \mathrm{i}v_x = v_y - \mathrm{i}u_y$ \\
+指数函数 & $\mathrm{e}^z = \mathrm{e}^x(\cos y + \mathrm{i}\sin y)$ \\
+对数函数 & $\ln z = \ln|z| + \mathrm{i}(\arg z + 2k\pi)$ \\
+三角函数 & $\sin z = \frac{\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}}$ \\
+\bottomrule
+\end{tabular}
+\caption{本章核心公式}
+\end{table}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 将下列函数写成 $u(x, y) + \mathrm{i}v(x, y)$ 的形式：
+    \begin{enumerate}
+        \item $f(z) = z^3$
+        \item $f(z) = \frac{1}{z}$
+        \item $f(z) = \mathrm{e}^z$
+    \end{enumerate}
+    
+    \item 验证下列函数是否满足 C-R 条件，若是，求其导数：
+    \begin{enumerate}
+        \item $f(z) = z^2 - z$
+        \item $f(z) = xy + \mathrm{i}(x^2 + y^2)$
+        \item $f(z) = \mathrm{e}^{2z}$
+    \end{enumerate}
+    
+    \item 计算：
+    \begin{enumerate}
+        \item $\mathrm{e}^{\mathrm{i}\pi}$
+        \item $\ln(-1)$
+        \item $\sin(\mathrm{i})$
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 设 $f(z)$ 解析，证明 $|f(z)|^2 = u^2 + v^2$ 的偏导数满足：
+    \begin{equation}
+        \frac{\partial^2 |f|^2}{\partial x^2} + \frac{\partial^2 |f|^2}{\partial y^2} = 4|f'(z)|^2
+    \end{equation}
+    
+    \item 证明：若 $f(z)$ 在区域 $D$ 内解析且 $f'(z) = 0$，则 $f(z)$ 在 $D$ 内为常数。
+    
+    \item 设 $f(z) = u + \mathrm{i}v$ 解析，证明 $u$ 和 $v$ 都满足拉普拉斯方程：
+    \begin{equation}
+        \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0
+    \end{equation}
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 设 $f(z)$ 在区域 $D$ 内解析，且 $|f(z)|$ 在 $D$ 内为常数。证明 $f(z)$ 在 $D$ 内为常数。
+    
+    \item 研究映射 $w = z + 1/z$ 的保角性质，讨论单位圆内部的像。
+\end{enumerate}

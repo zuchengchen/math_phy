@@ -1,0 +1,77 @@
+% 附录D：特殊函数公式
+
+\chapter{特殊函数公式}
+
+\section{勒让德多项式}
+
+\textbf{罗德里格斯公式}：
+\begin{zhongyao}[勒让德多项式罗德里格斯公式]
+\[
+    P_l(x) = \frac{1}{2^l l!}\frac{\mathrm{d}^l}{\mathrm{d}x^l}(x^2-1)^l
+\]
+\end{zhongyao}
+
+\textbf{前几项}：
+\begin{align}
+    P_0 &= 1, \quad P_1 = x, \quad P_2 = \frac{1}{2}(3x^2-1) \\
+    P_3 &= \frac{1}{2}(5x^3-3x), \quad P_4 = \frac{1}{8}(35x^4-30x^2+3)
+\end{align}
+
+\textbf{递推公式}：
+\begin{equation}
+    (l+1)P_{l+1}(x) = (2l+1)xP_l(x) - lP_{l-1}(x)
+\end{equation}
+
+\textbf{正交性}：
+\begin{equation}
+    \int_{-1}^{1} P_m(x)P_n(x)\,\mathrm{d}x = \frac{2}{2n+1}\delta_{mn}
+\end{equation}
+
+\section{贝塞尔函数}
+
+\textbf{级数定义}：
+\begin{equation}
+    J_m(x) = \sum_{k=0}^{\infty} \frac{(-1)^k}{k!\Gamma(m+k+1)}\left(\frac{x}{2}\right)^{m+2k}
+\end{equation}
+
+\textbf{递推公式}：
+\begin{align}
+    \frac{\mathrm{d}}{\mathrm{d}x}[x^m J_m] &= x^m J_{m-1} \\
+    \frac{\mathrm{d}}{\mathrm{d}x}[x^{-m} J_m] &= -x^{-m} J_{m+1}
+\end{align}
+
+\textbf{正交性}：
+\begin{equation}
+    \int_0^a rJ_m(\mu_n r/a)J_m(\mu_{n'} r/a)\,\mathrm{d}r = \frac{a^2}{2}[J_{m+1}(\mu_n)]^2\delta_{nn'}
+\end{equation}
+其中 $\mu_n$ 是 $J_m(x)$ 的第 $n$ 个正零点。
+
+\textbf{$J_0(x)$ 和 $J_1(x)$ 的零点}：
+\begin{table}[htbp]
+\centering
+\begin{tabular}{cccc}
+\toprule
+函数 & 第1零点 & 第2零点 & 第3零点 \\
+\midrule
+$J_0$ & 2.405 & 5.520 & 8.654 \\
+$J_1$ & 3.832 & 7.016 & 10.174 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Γ 函数}
+
+\textbf{定义}：
+\begin{zhongyao}[Γ函数定义]
+\[
+    \Gamma(z) = \int_0^{+\infty} t^{z-1}\mathrm{e}^{-t}\,\mathrm{d}t, \quad \mathrm{Re}(z) > 0
+\]
+\end{zhongyao}
+
+\textbf{性质}：
+\begin{align}
+    \Gamma(z+1) &= z\Gamma(z) \\
+    \Gamma(n+1) &= n! \\
+    \Gamma(1/2) &= \sqrt{\pi} \\
+    \Gamma(z)\Gamma(1-z) &= \frac{\pi}{\sin\pi z}
+\end{align}

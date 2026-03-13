@@ -1,0 +1,378 @@
+% ========== 页面设置 ==========
+\usepackage[top=2.5cm, bottom=2.5cm, left=3cm, right=3cm, headheight=14.5pt]{geometry}
+
+% ========== 数学宏包 ==========
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{bm}           % 粗体数学符号
+\usepackage{physics}      % 物理学常用符号
+
+% ========== 图形宏包 ==========
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, calc, positioning, decorations.markings, decorations.pathmorphing, patterns}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ========== 表格宏包 ==========
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% ========== 其他宏包 ==========
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,      % 内部链接（目录、引用）
+    urlcolor=blue!80!black,       % 外部URL
+    citecolor=green!50!black      % 文献引用
+}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{pifont}           % 特殊符号(如\ding)
+\usepackage{makeidx}          % 索引
+\makeindex
+
+% ========== 颜色系统 ==========
+% 设计原则：主色调（蓝）+ 辅助色（青绿、紫、棕）+ 警示色（红）
+
+% --- 主色调：深蓝 ---
+\definecolor{theoremblue}{RGB}{25, 84, 140}       % 定理、标题（沉稳深蓝）
+\definecolor{mainblue}{RGB}{25, 84, 140}           % 别名，用于标题
+
+% --- 辅助色 ---
+\definecolor{defteal}{RGB}{0, 128, 128}            % 定义（青绿色，区别于蓝但协调）
+\definecolor{examplepurple}{RGB}{106, 90, 140}     % 例题（柔和薰衣紫）
+\definecolor{notebrown}{RGB}{160, 100, 60}         % 注、思考题（温暖琥珀棕）
+\definecolor{hintteal}{RGB}{70, 150, 150}          % 提示框（清新青色）
+\definecolor{physicsbrown}{RGB}{139, 90, 43}       % 物理背景框（深琥珀）
+
+% --- 警示色 ---
+\definecolor{alertred}{RGB}{180, 50, 50}          % 警告、易错点
+
+% --- 公式与高亮 ---
+\definecolor{formulabg}{RGB}{255, 252, 245}        % 公式框背景（暖白）
+\definecolor{formulaframe}{RGB}{180, 140, 80}      % 公式框边框（金色）
+\definecolor{keyblue}{RGB}{30, 100, 180}           % 关键词蓝色
+\definecolor{importantred}{RGB}{200, 50, 50}       % 重要内容红色
+
+% ========== 定理环境（使用 newtcbtheorem，标题独立色块）==========
+
+% 定理环境（蓝色）
+\newtcbtheorem[number within=section]{dingli}{定理}{
+  enhanced,
+  colback=theoremblue!5!white,
+  colframe=theoremblue,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=theoremblue,
+    colframe=theoremblue,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.8em,
+  after skip=0.8em
+}{dingli}
+
+% 定义环境（青绿色）
+\newtcbtheorem[number within=section]{dingliyi}{定义}{
+  enhanced,
+  colback=defteal!5!white,
+  colframe=defteal,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=defteal,
+    colframe=defteal,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.8em,
+  after skip=0.8em
+}{dingliyi}
+
+% 引理环境（蓝色）
+\newtcbtheorem[number within=section]{yinli}{引理}{
+  enhanced,
+  colback=theoremblue!5!white,
+  colframe=theoremblue,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=theoremblue,
+    colframe=theoremblue,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.8em,
+  after skip=0.8em
+}{yinli}
+
+% 推论环境（蓝色）
+\newtcbtheorem[number within=section]{tuilun}{推论}{
+  enhanced,
+  colback=theoremblue!5!white,
+  colframe=theoremblue,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=theoremblue,
+    colframe=theoremblue,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.8em,
+  after skip=0.8em
+}{tuilun}
+
+% 例题环境（紫色）
+\newtcbtheorem[number within=section]{lizi}{例题}{
+  enhanced,
+  colback=examplepurple!5!white,
+  colframe=examplepurple,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=examplepurple,
+    colframe=examplepurple,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.8em,
+  after skip=0.8em
+}{lizi}
+
+% 注环境（琥珀棕色）
+\newtcbtheorem[number within=section]{zhu}{注}{
+  enhanced,
+  colback=notebrown!5!white,
+  colframe=notebrown,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=notebrown,
+    colframe=notebrown,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.6em,
+  after skip=0.6em
+}{zhu}
+
+% 思考题环境（琥珀棕色）
+\newtcbtheorem[number within=section]{sikao}{思考题}{
+  enhanced,
+  colback=notebrown!5!white,
+  colframe=notebrown,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1pt,
+  arc=2pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=notebrown,
+    colframe=notebrown,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable,
+  before skip=0.6em,
+  after skip=0.6em
+}{sikao}
+
+
+
+% 证明环境（灰色边框，区别于定理）
+% 重新定义 proof 环境，带有浅色背景
+\renewenvironment{proof}{
+  \begin{tcolorbox}[
+    enhanced,
+    colback=gray!5!white,
+    colframe=gray!60!black,
+    boxrule=0pt,
+    leftrule=2pt,
+    arc=0pt,
+    left=8pt, right=6pt, top=4pt, bottom=4pt,
+    breakable,
+    before skip=0.5em,
+    after skip=0.5em
+  ]
+  \textbf{证明：}\par\vspace{2pt}
+}{
+  \par\vspace{2pt}\hfill$\blacksquare$
+  \end{tcolorbox}
+}
+
+
+
+% ========== 彩色公式框 ==========
+% 重要公式框（金色边框）
+\newtcolorbox{zhongyao}[1][]{
+  enhanced,
+  colback=formulabg,
+  colframe=formulaframe,
+  coltitle=white,
+  fonttitle=\bfseries,
+  boxrule=1.5pt,
+  arc=3pt,
+  title=#1,
+  attach boxed title to top center={yshift=-2mm},
+  boxed title style={
+    colback=formulaframe!85!black,
+    colframe=formulaframe!85!black,
+    boxrule=0pt,
+    arc=2pt
+  },
+  before upper={\centering},
+  after upper={\par},
+  breakable
+}
+
+% 关键词高亮命令
+\newcommand{\keyword}[1]{\textcolor{keyblue}{\textbf{#1}}}
+\newcommand{\important}[1]{\textcolor{importantred}{\textbf{#1}}}
+\newcommand{\formulaf}[1]{\boxed{\textcolor{theoremblue}{#1}}}
+
+% 解答环境（用于例题解答）
+% 带有紫色左边框和浅色背景，清晰区分解答内容
+\newtcolorbox{jie}{
+  enhanced,
+  colback=examplepurple!3!white,
+  colframe=examplepurple,
+  boxrule=0pt,
+  leftrule=3pt,
+  arc=0pt,
+  left=10pt, right=6pt, top=4pt, bottom=4pt,
+  before upper={\textcolor{examplepurple}{\textbf{解：}}\par\vspace{2pt}},
+  after upper={\par\vspace{2pt}\hfill\textcolor{examplepurple!60}{$\square$}},
+  breakable,
+  before skip=0.3em,
+  after skip=0.5em
+}
+
+% ========== 自定义环境 ==========
+% 警示框：常见错误（警示红）
+\newtcolorbox{jinshi}[1][]{
+  enhanced,
+  colback=alertred!5!white,
+  colframe=alertred,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=#1,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=alertred!85!black,
+    colframe=alertred!85!black,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable
+}
+
+% 提示框（清新青色）
+\newtcolorbox{tishi}[1][]{
+  enhanced,
+  colback=hintteal!5!white,
+  colframe=hintteal,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=#1,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=hintteal!85!black,
+    colframe=hintteal!85!black,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable
+}
+
+% 物理背景框（深琥珀）
+\newtcolorbox{wulibj}[1][]{
+  enhanced,
+  colback=physicsbrown!5!white,
+  colframe=physicsbrown,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title=#1,
+  attach boxed title to top left={yshift=-2mm, xshift=5mm},
+  boxed title style={
+    colback=physicsbrown!85!black,
+    colframe=physicsbrown!85!black,
+    boxrule=0pt,
+    arc=2pt
+  },
+  breakable
+}
+
+% ========== 标题格式 ==========
+% 章节标题样式
+\titleformat{\chapter}[block]
+  {\centering\Huge\bfseries\color{theoremblue}}
+  {第\chinese{chapter}章}
+  {1em}
+  {}
+% 调整章节间距：左边距、标题上方、标题下方
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+
+
+\titleformat{\section}[block]
+  {\Large\bfseries\color{theoremblue!80!black}}
+  {\thesection}
+  {0.8em}
+  {}
+
+
+\titleformat{\subsection}[block]
+  {\large\bfseries\color{mainblue!80!black}}
+  {\thesubsection}
+  {0.6em}
+  {}
+
+
+% ========== 页眉页脚 ==========
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE, RO]{\small 数学物理方法}
+\fancyhead[RE, LO]{\small \leftmark}
+\fancyfoot[CE, CO]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+

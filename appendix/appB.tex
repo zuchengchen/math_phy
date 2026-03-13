@@ -1,0 +1,48 @@
+% 附录B：傅里叶变换表
+
+\chapter{傅里叶变换表}
+
+\section{定义}
+\begin{zhongyao}[傅里叶变换定义]
+\begin{align}
+\mathcal{F}[f(t)] &= \hat{f}(\omega) = \int_{-\infty}^{+\infty} f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,\mathrm{d}t \\
+\mathcal{F}^{-1}[\hat{f}(\omega)] &= f(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega t}\,\mathrm{d}\omega
+\end{align}
+\end{zhongyao}
+
+\section{常用傅里叶变换对}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+$f(t)$ & $\hat{f}(\omega)$ \\
+\midrule
+$\mathrm{e}^{-a|t|}$ & $\dfrac{2a}{a^2+\omega^2}$ \\[8pt]
+$\mathrm{e}^{-at^2}$ & $\sqrt{\dfrac{\pi}{a}}\mathrm{e}^{-\omega^2/(4a)}$ \\[8pt]
+$\mathrm{e}^{-at}H(t)$ & $\dfrac{1}{a+\mathrm{i}\omega}$ \\[8pt]
+$\delta(t)$ & $1$ \\[4pt]
+$1$ & $2\pi\delta(\omega)$ \\[4pt]
+$\cos\omega_0 t$ & $\pi[\delta(\omega-\omega_0) + \delta(\omega+\omega_0)]$ \\
+$\sin\omega_0 t$ & $-\mathrm{i}\pi[\delta(\omega-\omega_0) - \delta(\omega+\omega_0)]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{基本性质}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{性质} & \textbf{公式} \\
+\midrule
+线性性 & $\mathcal{F}[af + bg] = a\hat{f} + b\hat{g}$ \\
+时移 & $\mathcal{F}[f(t-t_0)] = \mathrm{e}^{-\mathrm{i}\omega t_0}\hat{f}(\omega)$ \\
+频移 & $\mathcal{F}[f(t)\mathrm{e}^{\mathrm{i}\omega_0 t}] = \hat{f}(\omega-\omega_0)$ \\
+微分 & $\mathcal{F}[f'(t)] = \mathrm{i}\omega\hat{f}(\omega)$ \\
+卷积 & $\mathcal{F}[f * g] = \hat{f}(\omega)\hat{g}(\omega)$ \\
+帕塞瓦尔 & $\int |f|^2\,\mathrm{d}t = \frac{1}{2\pi}\int |\hat{f}|^2\,\mathrm{d}\omega$ \\
+\bottomrule
+\end{tabular}
+\end{table}

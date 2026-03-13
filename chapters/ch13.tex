@@ -1,0 +1,303 @@
+% 第十三章：格林函数\index{格林函数}法
+
+\chapter{格林函数\index{格林函数}法}
+
+\begin{wulibj}[本章导读]
+格林函数\index{格林函数}法是求解数学物理方程的一种强大而优美的方法。它源于物理学中的``叠加原理''：任何源产生的场可以看作点源产生的场的叠加。本章我们将学习格林函数\index{格林函数}的物理意义、数学推导以及它在求解各类边值问题中的应用。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{格林函数\index{格林函数}的概念与物理意义}
+
+\subsection{从点电荷到一般电荷分布}
+
+在静电学中，我们知道：
+\begin{itemize}
+    \item 点电荷 $q$ 在 $\boldsymbol{r}'$ 处产生的电势：$\phi(\boldsymbol{r}) = \frac{q}{4\pi\varepsilon_0|\boldsymbol{r} - \boldsymbol{r}'|}$
+    \item 连续分布电荷产生的电势：$\phi(\boldsymbol{r}) = \frac{1}{4\pi\varepsilon_0}\int \frac{\rho(\boldsymbol{r}')}{|\boldsymbol{r} - \boldsymbol{r}'|}\,\mathrm{d}V'$
+\end{itemize}
+
+这就是格林函数\index{格林函数}思想的物理原型：先求出点源的响应，再通过积分（叠加）得到一般源分布的响应。
+
+
+
+\subsection{$\delta$ 函数与格林函数\index{格林函数}}
+
+点源在数学上用\textbf{$\delta$函数}表示。对于拉普拉斯方程，格林函数\index{格林函数}满足：
+\begin{equation}
+    \nabla^2 G(\boldsymbol{r}, \boldsymbol{r}') = -\delta(\boldsymbol{r} - \boldsymbol{r}')
+\end{equation}
+
+\begin{tishi}
+$\delta$ 函数是一种广义函数，严格来说不是普通函数。它在积分号下有明确定义：
+\begin{equation}
+    \int_{-\infty}^{+\infty} f(x)\delta(x - a)\,\mathrm{d}x = f(a)
+\end{equation}
+\end{tishi}
+
+% ========== 第二节 ==========
+\section{拉普拉斯方程的格林函数\index{格林函数}}
+
+\subsection{三维情形}
+
+\begin{zhongyao}[三维拉普拉斯方程的基本解]
+在三维无界空间中，格林函数为
+\[
+    G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|}
+\]
+\end{zhongyao}
+
+\begin{proof}
+设 $\boldsymbol{R} = \boldsymbol{r} - \boldsymbol{r}'$，$R = |\boldsymbol{R}|$。
+
+在 $R \neq 0$ 处，$\nabla^2\frac{1}{R} = 0$（验证：球坐标系下 $\nabla^2 f(R) = \frac{1}{R^2}\frac{\mathrm{d}}{\mathrm{d}R}\left(R^2\frac{\mathrm{d}f}{\mathrm{d}R}\right)$）。
+
+在 $R = 0$ 处有奇点。利用高斯定理：
+\begin{equation}
+    \int_V \nabla^2\frac{1}{R}\,\mathrm{d}V = \oint_S \nabla\frac{1}{R} \cdot \mathrm{d}\boldsymbol{S} = \oint_S \left(-\frac{1}{R^2}\right)R^2\,\mathrm{d}\Omega = -4\pi
+\end{equation}
+
+所以
+\begin{equation}
+    \nabla^2\frac{1}{R} = -4\pi\delta(\boldsymbol{R}) = -4\pi\delta(\boldsymbol{r} - \boldsymbol{r}')
+\end{equation}
+\end{proof}
+
+\subsection{二维情形}
+
+\begin{zhongyao}[二维拉普拉斯方程的基本解]
+在二维无界空间中，格林函数为
+\[
+    G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{2\pi}\ln\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} = -\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|
+\]
+\end{zhongyao}
+
+\subsection{格林公式与格林函数\index{格林函数}表示}
+
+\begin{dingli}{}{格林公式}
+对于区域 $\Omega$ 内的函数 $u$ 和 $v$：
+\begin{equation}
+    \int_\Omega (u\nabla^2 v - v\nabla^2 u)\,\mathrm{d}V = \oint_{\partial\Omega}\left(u\frac{\partial v}{\partial n} - v\frac{\partial u}{\partial n}\right)\,\mathrm{d}S
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由高斯散度定理：
+\begin{equation}
+    \int_\Omega \nabla \cdot \boldsymbol{F}\,\mathrm{d}V = \oint_{\partial\Omega} \boldsymbol{F} \cdot \boldsymbol{n}\,\mathrm{d}S
+\end{equation}
+取 $\boldsymbol{F} = u\nabla v$，得
+\begin{equation}
+    \int_\Omega \nabla \cdot (u\nabla v)\,\mathrm{d}V = \oint_{\partial\Omega} u\frac{\partial v}{\partial n}\,\mathrm{d}S
+\end{equation}
+展开散度：$\nabla \cdot (u\nabla v) = \nabla u \cdot \nabla v + u\nabla^2 v$，故
+\begin{equation}
+    \int_\Omega u\nabla^2 v\,\mathrm{d}V = \oint_{\partial\Omega} u\frac{\partial v}{\partial n}\,\mathrm{d}S - \int_\Omega \nabla u \cdot \nabla v\,\mathrm{d}V
+\end{equation}
+交换 $u$ 和 $v$ 的位置，类似得到
+\begin{equation}
+    \int_\Omega v\nabla^2 u\,\mathrm{d}V = \oint_{\partial\Omega} v\frac{\partial u}{\partial n}\,\mathrm{d}S - \int_\Omega \nabla v \cdot \nabla u\,\mathrm{d}V
+\end{equation}
+两式相减即得格林公式。
+\end{proof}
+取 $v = G(\boldsymbol{r}, \boldsymbol{r}')$，利用格林公式可以证明：
+
+\begin{dingli}{}{狄利克雷问题的解}
+设 $u$ 在 $\Omega$ 内调和，在边界上给定 $u|_{\partial\Omega} = f$。则
+\begin{equation}
+    \boxed{u(\boldsymbol{r}') = -\frac{1}{4\pi}\oint_{\partial\Omega} f(\boldsymbol{r})\frac{\partial G}{\partial n}\,\mathrm{d}S}
+\end{equation}
+其中 $G$ 满足 $G|_{\partial\Omega} = 0$。
+\end{dingli}
+
+\begin{wulibj}[物理意义]
+边界上的电势分布 $f$ 通过格林函数\index{格林函数}的影响，产生区域内的电势分布。格林函数\index{格林函数}起到了``传递''边界信息的作用。
+\end{wulibj}
+
+% ========== 第三节 ==========
+\section{简单区域的格林函数\index{格林函数}}
+
+\subsection{上半空间}
+
+对于上半空间 $z > 0$，边界条件为 $G|_{z=0} = 0$。
+
+使用\textbf{镜像法}：在 $(x', y', -z')$ 处放一个负电荷。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 边界
+    \draw[thick] (-3, 0) -- (3, 0);
+    \fill[gray!30] (-3, -2) rectangle (3, 0);
+    
+    % 上半空间
+    \fill[blue!10] (-3, 0) rectangle (3, 3);
+    
+    % 点源
+    \fill[red] (0, 1.5) circle (3pt) node[right] {$(x', y', z')$};
+    
+    % 镜像
+    \fill[blue] (0, -1.5) circle (3pt) node[right] {镜像电荷 $-1$};
+    
+    % 边界点
+    \fill (2, 0) circle (2pt) node[above] {边界 $z=0$};
+    
+    \node at (0, 3.3) {上半空间};
+    \node at (0, -1.8) {$z < 0$};
+\end{tikzpicture}
+\caption{上半空间的镜像法}
+\label{fig:mirror-half-space}
+\end{figure}
+
+格林函数\index{格林函数}：
+\begin{equation}
+    \boxed{G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi}\left[\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} - \frac{1}{|\boldsymbol{r} - \boldsymbol{r}''|}\right]}
+\end{equation}
+其中 $\boldsymbol{r}'' = (x', y', -z')$ 为镜像点。
+
+\subsection{球内区域}
+
+对于球 $r < R$，边界条件为 $G|_{r=R} = 0$。
+
+镜像电荷位置：$r_{\text{镜像}} = \frac{R^2}{r'}$，电荷量为 $-\frac{R}{r'}$。
+
+格林函数\index{格林函数}：
+\begin{equation}
+    \boxed{G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi}\left[\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} - \frac{R/r'}{|\boldsymbol{r} - \frac{R^2}{r'^2}\boldsymbol{r}'|}\right]}
+\end{equation}
+
+\begin{lizi}{}{}
+求上半空间 $z > 0$ 内拉普拉斯方程的解，边界条件 $u(x, y, 0) = f(x, y)$。
+
+\begin{jie}
+    由狄利克雷问题的解：
+    \begin{equation}
+        u(x', y', z') = -\frac{1}{4\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f(x, y)\frac{\partial G}{\partial z}\Big|_{z=0}\,\mathrm{d}x\,\mathrm{d}y
+    \end{equation}
+    
+    计算 $\frac{\partial G}{\partial z}|_{z=0}$：
+    \begin{equation}
+        \frac{\partial G}{\partial z}\Big|_{z=0} = -\frac{z'}{2\pi[(x-x')^2 + (y-y')^2 + z'^2]^{3/2}}
+    \end{equation}
+    
+    所以
+    \begin{equation}
+        \boxed{u(x', y', z') = \frac{z'}{2\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \frac{f(x, y)}{[(x-x')^2 + (y-y')^2 + z'^2]^{3/2}}\,\mathrm{d}x\,\mathrm{d}y}
+    \end{equation}
+    
+    这就是\textbf{上半空间的泊松积分公式}。
+\end{jie}
+\end{lizi}
+
+% ========== 第四节 ==========
+\section{波动方程与热传导方程的格林函数\index{格林函数}}
+
+\subsection{波动方程的格林函数\index{格林函数}}
+
+对于三维波动方程的初值问题：
+\begin{equation}
+    \begin{cases}
+        u_{tt} = a^2\nabla^2 u \\
+        u(\boldsymbol{r}, 0) = 0, \quad u_t(\boldsymbol{r}, 0) = \psi(\boldsymbol{r})
+    \end{cases}
+\end{equation}
+
+格林函数\index{格林函数}（推迟势）：
+\begin{equation}
+    G(\boldsymbol{r}, t; \boldsymbol{r}', t') = \frac{\delta(t - t' - |\boldsymbol{r} - \boldsymbol{r}'|/a)}{4\pi a^2|\boldsymbol{r} - \boldsymbol{r}'|}
+\end{equation}
+
+解为：
+\begin{equation}
+    u(\boldsymbol{r}, t) = \frac{1}{4\pi a^2}\int_{|\boldsymbol{r} - \boldsymbol{r}'| \leq at} \frac{\psi(\boldsymbol{r}')}{|\boldsymbol{r} - \boldsymbol{r}'|}\,\mathrm{d}V'
+\end{equation}
+
+\begin{wulibj}[因果性]
+波动方程的格林函数\index{格林函数}只依赖于时间差 $t - t'$，体现了因果性——只有 $t' < t$ 的源才能影响 $t$ 时刻的场。
+\end{wulibj}
+
+\subsection{热传导方程的格林函数\index{格林函数}}
+
+对于三维热传导方程的初值问题：
+\begin{equation}
+    \begin{cases}
+        u_t = a^2\nabla^2 u \\
+        u(\boldsymbol{r}, 0) = \varphi(\boldsymbol{r})
+    \end{cases}
+\end{equation}
+
+\begin{zhongyao}[热传导方程的格林函数]
+\[
+    G(\boldsymbol{r}, t; \boldsymbol{r}', 0) = \frac{1}{(4\pi a^2 t)^{3/2}}\exp\left[-\frac{|\boldsymbol{r} - \boldsymbol{r}'|^2}{4a^2 t}\right]
+\]
+\end{zhongyao}
+
+解为：
+\begin{equation}
+    u(\boldsymbol{r}, t) = \int_{\mathbb{R}^3} \varphi(\boldsymbol{r}')G(\boldsymbol{r}, t; \boldsymbol{r}', 0)\,\mathrm{d}V'
+\end{equation}
+
+这与傅里叶变换\index{傅里叶变换}法得到的泊松积分公式一致。
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{格林函数\index{格林函数}的定义}
+
+格林函数\index{格林函数} $G(\boldsymbol{r}, \boldsymbol{r}')$ 是单位点源产生的场，满足：
+\begin{equation}
+    LG(\boldsymbol{r}, \boldsymbol{r}') = -\delta(\boldsymbol{r} - \boldsymbol{r}')
+\end{equation}
+其中 $L$ 是微分算子。
+
+\subsection{基本结果}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{方程} & \textbf{格林函数\index{格林函数}（无界）} \\
+\midrule
+三维拉普拉斯方程 & $G = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|}$ \\
+二维拉普拉斯方程 & $G = -\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|$ \\
+热传导方程 & $G = \frac{1}{(4\pi a^2 t)^{3/2}}\mathrm{e}^{-|\boldsymbol{r} - \boldsymbol{r}'|^2/(4a^2 t)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{求格林函数\index{格林函数}的方法}
+
+\begin{enumerate}
+    \item \textbf{镜像法}：适用于有简单几何对称性的区域
+    \item \textbf{分离变量法\index{分离变量法}}：适用于规则区域
+    \item \textbf{傅里叶变换\index{傅里叶变换}法}：适用于无界或半无界区域
+\end{enumerate}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 验证 $G = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|}$ 满足 $\nabla^2 G = -\delta(\boldsymbol{r} - \boldsymbol{r}')$。
+    
+    \item 证明二维拉普拉斯方程的基本解是 $G = -\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|$。
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 用镜像法求球外区域 $r > R$ 的格林函数\index{格林函数}，边界条件 $G|_{r=R} = 0$。
+    
+    \item 求半无界区域 $x > 0$ 内拉普拉斯方程的格林函数\index{格林函数}，边界条件 $G|_{x=0} = 0$。
+    
+    \item 用格林函数\index{格林函数}法求解上半空间 $z > 0$ 的狄利克雷问题，边界条件 $u(x, y, 0) = 1$。
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 推导矩形区域 $0 < x < a$，$0 < y < b$ 内拉普拉斯方程的格林函数\index{格林函数}。
+    
+    \item 研究格林函数\index{格林函数}在量子力学散射理论中的应用（提示：与散射振幅的关系）。
+\end{enumerate}

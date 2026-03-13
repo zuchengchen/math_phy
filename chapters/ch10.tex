@@ -1,0 +1,391 @@
+% 第十章：行波法
+
+\chapter{行波法}
+
+\begin{wulibj}[本章导读]
+行波法是求解波动方程初值问题的直接方法。它利用波动方程的特征线，将偏微分方程转化为常微分方程，从而得到解的显式表达式——达朗贝尔公式。这种方法不仅给出了解的具体形式，还清晰地揭示了波的传播特性。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{达朗贝尔公式}
+
+\subsection{一维波动方程的初值问题}
+
+考虑无限长弦的自由振动：
+\begin{equation}
+    \begin{cases}
+        \dfrac{\partial^2 u}{\partial t^2} = a^2\dfrac{\partial^2 u}{\partial x^2}, & x \in \mathbb{R}, \; t > 0 \\
+        u(x, 0) = \varphi(x), & x \in \mathbb{R} \\
+        \dfrac{\partial u}{\partial t}(x, 0) = \psi(x), & x \in \mathbb{R}
+    \end{cases}
+\end{equation}
+
+\subsection{特征坐标变换}
+
+关键思想：引入特征坐标，将方程化简。
+
+特征线方程：$\frac{\mathrm{d}x}{\mathrm{d}t} = \pm a$，即 $x \mp at = C$。
+
+令
+\begin{equation}
+    \xi = x - at, \quad \eta = x + at
+\end{equation}
+
+则
+\begin{align}
+    \frac{\partial u}{\partial x} &= \frac{\partial u}{\partial\xi}\frac{\partial\xi}{\partial x} + \frac{\partial u}{\partial\eta}\frac{\partial\eta}{\partial x} = \frac{\partial u}{\partial\xi} + \frac{\partial u}{\partial\eta} \\
+    \frac{\partial^2 u}{\partial x^2} &= \frac{\partial^2 u}{\partial\xi^2} + 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}
+\end{align}
+
+类似地
+\begin{equation}
+    \frac{\partial^2 u}{\partial t^2} = a^2\left(\frac{\partial^2 u}{\partial\xi^2} - 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}\right)
+\end{equation}
+
+代入波动方程：
+\begin{equation}
+    a^2\left(\frac{\partial^2 u}{\partial\xi^2} - 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}\right) = a^2\left(\frac{\partial^2 u}{\partial\xi^2} + 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}\right)
+\end{equation}
+
+化简得
+\begin{equation}
+    \frac{\partial^2 u}{\partial\xi\partial\eta} = 0
+\end{equation}
+
+\subsection{通解与达朗贝尔公式}
+
+\begin{dingli}{}{波动方程的通解}
+一维波动方程 $\frac{\partial^2 u}{\partial t^2} = a^2\frac{\partial^2 u}{\partial x^2}$ 的通解为
+\begin{equation}
+    u(x, t) = f(x - at) + g(x + at)
+\end{equation}
+其中 $f$ 和 $g$ 是任意二次可微函数。
+
+\begin{proof}
+由 $\frac{\partial^2 u}{\partial\xi\partial\eta} = 0$，先对 $\xi$ 积分：
+\begin{equation}
+    \frac{\partial u}{\partial\eta} = h(\eta)
+\end{equation}
+再对 $\eta$ 积分：
+\begin{equation}
+    u = \int h(\eta)\,\mathrm{d}\eta + f(\xi) = g(\eta) + f(\xi) = g(x + at) + f(x - at)
+\end{equation}
+\end{proof}
+
+\begin{tishi}[物理意义]
+\begin{itemize}
+    \item $f(x - at)$：向右传播的波（右行波），波形 $f$ 以速度 $a$ 向右移动
+    \item $g(x + at)$：向左传播的波（左行波），波形 $g$ 以速度 $a$ 向左移动
+\end{itemize}
+波动方程的解是左右行波的叠加！
+\end{tishi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 右行波
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$u$};
+        
+        \draw[blue, thick, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-1)^2)});
+        \draw[red, thick, dashed, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-3)^2)});
+        
+        \draw[->, thick] (2, 1.5) -- (3, 1.5) node[midway, above] {$a$};
+        
+        \node[blue] at (1, -0.5) {$t=0$};
+        \node[red] at (3, -0.5) {$t=t_1$};
+        \node at (2.5, 2.3) {右行波 $f(x-at)$};
+    \end{scope}
+    
+    % 左行波
+    \begin{scope}[xshift=7cm]
+        \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$u$};
+        
+        \draw[blue, thick, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-3.5)^2)});
+        \draw[red, thick, dashed, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-1.5)^2)});
+        
+        \draw[->, thick] (3, 1.5) -- (2, 1.5) node[midway, above] {$a$};
+        
+        \node[blue] at (3.5, -0.5) {$t=0$};
+        \node[red] at (1.5, -0.5) {$t=t_1$};
+        \node at (2.5, 2.3) {左行波 $g(x+at)$};
+    \end{scope}
+\end{tikzpicture}
+\caption{行波传播示意图}
+\label{fig:traveling-waves}
+\end{figure}
+
+利用初始条件确定 $f$ 和 $g$：
+\begin{align}
+    u(x, 0) &= f(x) + g(x) = \varphi(x) \\
+    \frac{\partial u}{\partial t}(x, 0) &= -af'(x) + ag'(x) = \psi(x)
+\end{align}
+
+从第一式：$f(x) + g(x) = \varphi(x)$。
+
+对第二式积分：
+\begin{equation}
+    -af(x) + ag(x) = \int_0^x \psi(s)\,\mathrm{d}s + C
+\end{equation}
+
+解得
+\begin{align}
+    f(x) &= \frac{1}{2}\varphi(x) - \frac{1}{2a}\int_0^x \psi(s)\,\mathrm{d}s - \frac{C}{2a} \\
+    g(x) &= \frac{1}{2}\varphi(x) + \frac{1}{2a}\int_0^x \psi(s)\,\mathrm{d}s + \frac{C}{2a}
+\end{align}
+
+代入通解，常数 $C$ 被消去：
+
+\end{dingli}
+
+\begin{zhongyao}[达朗贝尔公式]
+一维波动方程初值问题的解为
+\[
+    u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(s)\,\mathrm{d}s
+\]
+\end{zhongyao}
+
+\begin{wulibj}[达朗贝尔公式的物理意义]
+初始位移 $\varphi(x)$ 分裂成两半，分别向左右传播。初始速度 $\psi(x)$ 的影响区域是 $[x-at, x+at]$，表示速度对点 $(x, t)$ 的影响来自特征线内的所有点。
+\end{wulibj}
+
+% ========== 第二节 ==========
+\section{依赖区间与影响区域}
+
+\subsection{依赖区间}
+
+\begin{dingliyi}{}{依赖区间}
+点 $(x_0, t_0)$ 的\textbf{依赖区间}是 $x$ 轴上的区间 $[x_0 - at_0, x_0 + at_0]$，即过该点的两条特征线与 $x$ 轴的交点之间的区域。
+\end{dingliyi}
+
+由达朗贝尔公式，$u(x_0, t_0)$ 完全由 $\varphi$ 和 $\psi$ 在依赖区间上的值决定。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 坐标轴
+    \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
+    \draw[->, gray] (0, -0.3) -- (0, 3.5) node[above] {$t$};
+    
+    % 特征线
+    \draw[blue, thick] (1, 0) -- (3, 2);
+    \draw[blue, thick] (4, 0) -- (2, 2);
+    
+    % 点
+    \fill[red] (3, 2) circle (2pt) node[above right] {$(x_0, t_0)$};
+    
+    % 依赖区间
+    \draw[green!60!black, thick] (1, 0) -- (4, 0);
+    \fill[green!60!black, opacity=0.3] (1, 0) -- (3, 2) -- (4, 0) -- cycle;
+    
+    \fill (1, 0) circle (2pt) node[below] {$x_0-at_0$};
+    \fill (4, 0) circle (2pt) node[below] {$x_0+at_0$};
+    
+    \node[green!60!black] at (2.5, 0.8) {依赖区间};
+\end{tikzpicture}
+\caption{依赖区间}
+\label{fig:domain-of-dependence}
+\end{figure}
+
+\subsection{影响区域}
+
+\begin{dingliyi}{}{影响区域}
+初始时刻区间 $[x_1, x_2]$ 上的初始条件所影响的 $(x, t)$ 区域，称为\textbf{影响区域}。
+\end{dingliyi}
+
+初始时刻区间 $[x_1, x_2]$ 的影响区域是由过 $x_1$ 的右行特征线和过 $x_2$ 的左行特征线围成的三角形区域。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 坐标轴
+    \draw[->, gray] (-0.5, 0) -- (6, 0) node[right] {$x$};
+    \draw[->, gray] (0, -0.3) -- (0, 3.5) node[above] {$t$};
+    
+    % 初始区间
+    \draw[green!60!black, thick] (1, 0) -- (3, 0);
+    \fill[green!60!black, opacity=0.3] (1, 0) -- (1, 0.1) -- (3, 0.1) -- (3, 0) -- cycle;
+    
+    % 特征线
+    \draw[blue, thick] (1, 0) -- (4, 3);
+    \draw[blue, thick] (3, 0) -- (0, 3);
+    
+    % 影响区域
+    \fill[red, opacity=0.2] (1, 0) -- (4, 3) -- (0, 3) -- (3, 0) -- cycle;
+    
+    \fill (1, 0) circle (2pt) node[below] {$x_1$};
+    \fill (3, 0) circle (2pt) node[below] {$x_2$};
+    
+    \node[red] at (2, 1.5) {影响区域};
+\end{tikzpicture}
+\caption{影响区域}
+\label{fig:range-of-influence}
+\end{figure}
+
+\subsection{波的有限传播速度}
+
+达朗贝尔公式揭示了波的一个重要性质：\textbf{有限传播速度}。
+
+\begin{dingli}{}{惠更斯原理（波的有限传播速度）}
+初始扰动只能在有限时间内传播有限距离。在时刻 $t$，初始时刻位于 $x_0$ 的扰动只能影响到 $|x - x_0| \leq at$ 的区域。
+\end{dingli}
+
+\begin{proof}
+由达朗贝尔公式
+\begin{equation}
+    u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(\xi)\,\mathrm{d}\xi
+\end{equation}
+解在点 $(x, t)$ 的值只依赖于初始数据在区间 $[x-at, x+at]$ 上的值。
+
+因此，初始时刻位于 $x_0$ 的扰动（即 $\varphi(x_0)$ 和 $\psi(x_0)$），只有在 $x_0 \in [x-at, x+at]$ 时才能影响 $u(x, t)$。等价地，
+\begin{equation}
+    x - at \leq x_0 \leq x + at \quad \Longleftrightarrow \quad |x - x_0| \leq at
+\end{equation}
+这就是惠更斯原理的数学表述。
+\end{proof}
+
+% ========== 第三节 ==========
+\section{半无界弦的振动}
+
+\subsection{延拓法}
+
+对于半无界问题 $x > 0$，边界条件 $u(0, t) = 0$（固定端），可以用\textbf{奇延拓}方法求解。
+
+\textbf{思路}：将半无界问题延拓为全无界问题，使边界条件自动满足。
+
+对于 $u(0, t) = 0$，将初始条件作奇延拓：
+\begin{equation}
+    \tilde{\varphi}(x) = \begin{cases}
+        \varphi(x), & x \geq 0 \\
+        -\varphi(-x), & x < 0
+    \end{cases}, \quad
+    \tilde{\psi}(x) = \begin{cases}
+        \psi(x), & x \geq 0 \\
+        -\psi(-x), & x < 0
+    \end{cases}
+\end{equation}
+
+然后用达朗贝尔公式求解。
+
+\begin{lizi}{}{}
+求解半无界弦振动问题：
+\begin{equation}
+    \begin{cases}
+        \dfrac{\partial^2 u}{\partial t^2} = a^2\dfrac{\partial^2 u}{\partial x^2}, & x > 0, \; t > 0 \\
+        u(x, 0) = \varphi(x), & x > 0 \\
+        \dfrac{\partial u}{\partial t}(x, 0) = 0, & x > 0 \\
+        u(0, t) = 0, & t > 0
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    将初始条件作奇延拓：$\tilde{\varphi}(x) = \varphi(x)$（$x \geq 0$），$\tilde{\varphi}(x) = -\varphi(-x)$（$x < 0$）。
+    
+    由达朗贝尔公式：
+    \begin{equation}
+        u(x, t) = \frac{1}{2}[\tilde{\varphi}(x-at) + \tilde{\varphi}(x+at)]
+    \end{equation}
+    
+    当 $x > at$ 时：
+    \begin{equation}
+        u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)]
+    \end{equation}
+    
+    当 $0 < x < at$ 时：
+    \begin{equation}
+        u(x, t) = \frac{1}{2}[-\varphi(at-x) + \varphi(x+at)]
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\subsection{反射波}
+
+固定端的边界条件导致波的\textbf{反射}。入射波到达端点后，反射为一个相位相反的波。
+
+\begin{wulibj}[波的反射]
+\begin{itemize}
+    \item 固定端（$u = 0$）：反射波与入射波相位相反
+    \item 自由端（$\frac{\partial u}{\partial x} = 0$）：反射波与入射波相位相同
+\end{itemize}
+\end{wulibj}
+
+% ========== 第四节 ==========
+\section{有界弦的振动}
+
+对于有限长弦，需要考虑端点的多次反射。这类问题通常用分离变量法\index{分离变量法}求解更方便（下一章介绍）。
+
+但也可以用行波叠加的思想理解：有界弦的振动可以看作初始波在两端点间来回反射叠加的结果。
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{核心内容}
+
+\begin{enumerate}
+    \item \textbf{达朗贝尔公式}：$u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at}\psi(s)\,\mathrm{d}s$
+    \item \textbf{通解形式}：$u = f(x-at) + g(x+at)$（左、右行波叠加）
+    \item \textbf{特征线}：$x \mp at = C$
+\end{enumerate}
+
+\subsection{关键概念}
+
+\begin{itemize}
+    \item 依赖区间：$(x, t)$ 处的解依赖于初始条件在 $[x-at, x+at]$ 上的值
+    \item 影响区域：初始扰动影响的时空区域
+    \item 有限传播速度：波以速度 $a$ 传播
+\end{itemize}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 用达朗贝尔公式求解：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = 4u_{xx} \\
+            u(x, 0) = \sin x, \quad u_t(x, 0) = 0
+        \end{cases}
+    \end{equation}
+    
+    \item 验证 $u(x, t) = f(x-at) + g(x+at)$ 满足波动方程。
+    
+    \item 设初始位移 $\varphi(x)$ 只在 $[a, b]$ 内非零，求 $u(x, t)$ 非零的时空区域。
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 求解半无界问题：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = a^2 u_{xx}, & x > 0, \; t > 0 \\
+            u(x, 0) = \mathrm{e}^{-x}, \quad u_t(x, 0) = 0 \\
+            u_x(0, t) = 0 \quad \text{（自由端）}
+        \end{cases}
+    \end{equation}
+    
+    \item 设弦在 $t = 0$ 时静止，初始位移为三角形脉冲：
+    \begin{equation}
+        \varphi(x) = \begin{cases}
+            x, & 0 \leq x \leq 1 \\
+            2-x, & 1 < x \leq 2 \\
+            0, & \text{其他}
+        \end{cases}
+    \end{equation}
+    求 $u(x, t)$ 并画出 $t = 0, \frac{1}{a}, \frac{2}{a}, \frac{3}{a}$ 时的波形。
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 推导三维波动方程初值问题的解（泊松公式或基尔霍夫公式）：
+    \begin{equation}
+        u(\boldsymbol{x}, t) = \frac{1}{4\pi a}\frac{\partial}{\partial t}\left[\frac{1}{t}\int_{|\boldsymbol{y}|=at} \varphi(\boldsymbol{x}+\boldsymbol{y})\,\mathrm{d}S\right] + \frac{1}{4\pi at}\int_{|\boldsymbol{y}|=at} \psi(\boldsymbol{x}+\boldsymbol{y})\,\mathrm{d}S
+    \end{equation}
+    
+    \item 比较一维、二维、三维波动方程解的性质差异（如惠更斯原理的强弱形式）。
+\end{enumerate}

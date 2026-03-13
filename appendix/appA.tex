@@ -1,0 +1,39 @@
+% 附录A：常用公式表
+
+\chapter{常用公式表}
+
+\begin{zhongyao}[欧拉公式]
+\begin{align}
+    \mathrm{e}^{\mathrm{i}\theta} &= \cos\theta + \mathrm{i}\sin\theta \\
+    \cos\theta &= \frac{\mathrm{e}^{\mathrm{i}\theta} + \mathrm{e}^{-\mathrm{i}\theta}}{2} \\
+    \sin\theta &= \frac{\mathrm{e}^{\mathrm{i}\theta} - \mathrm{e}^{-\mathrm{i}\theta}}{2\mathrm{i}}
+\end{align}
+\end{zhongyao}
+
+\section{柯西-黎曼条件}
+\begin{zhongyao}[柯西-黎曼条件]
+\[
+    \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+\]
+\end{zhongyao}
+
+\section{常用积分}
+\begin{align}
+    \oint_{|z|=R} \frac{\mathrm{d}z}{z - a} &= \begin{cases} 2\pi\mathrm{i}, & |a| < R \\ 0, & |a| > R \end{cases} \\
+    \int_0^{+\infty} \frac{\sin x}{x}\,\mathrm{d}x &= \frac{\pi}{2} \\
+    \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2}\,\mathrm{d}x &= \sqrt{\pi}
+\end{align}
+
+\section{三类方程的典型解}
+
+\textbf{波动方程}（达朗贝尔公式）：
+\begin{zhongyao}[达朗贝尔公式]
+\[
+    u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(s)\,\mathrm{d}s
+\]
+\end{zhongyao}
+
+\textbf{热传导方程}（泊松公式）：
+\begin{equation}
+    u(x, t) = \frac{1}{2a\sqrt{\pi t}}\int_{-\infty}^{+\infty} \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi
+\end{equation}

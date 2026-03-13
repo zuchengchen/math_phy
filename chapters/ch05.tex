@@ -1,0 +1,513 @@
+% 第五章：留数理论
+
+\chapter{留数理论}
+
+\begin{wulibj}[本章导读]
+留数理论是复变函数论中最具实用价值的部分。它将复积分问题转化为代数问题，使得许多困难的实积分变得轻而易举。本章我们将学习留数的定义与计算、留数定理\index{留数定理}，以及它在计算实积分中的神奇应用。
+\end{wulibj}
+
+% ========== 第一节 ==========
+\section{留数的定义与计算}
+
+\subsection{留数的定义}
+
+\begin{dingliyi}{}{留数}
+设 $z_0$ 是 $f(z)$ 的孤立奇点，$f(z)$ 在 $0 < |z - z_0| < R$ 内的洛朗展开为
+\begin{equation}
+    f(z) = \cdots + \frac{c_{-2}}{(z - z_0)^2} + \frac{c_{-1}}{z - z_0} + c_0 + c_1(z - z_0) + \cdots
+\end{equation}
+称 $c_{-1}$ 为 $f(z)$ 在 $z_0$ 处的\textbf{留数}，记作
+\begin{equation}
+    \operatorname{Res}[f(z), z_0] = c_{-1}
+\end{equation}
+\end{dingliyi}
+
+\begin{dingli}{}{留数的积分表示}
+\begin{equation}
+    \operatorname{Res}[f(z), z_0] = \frac{1}{2\pi\mathrm{i}}\oint_C f(z)\,\mathrm{d}z
+\end{equation}
+其中 $C$ 是绕 $z_0$ 的充分小的简单闭曲线。
+\end{dingli}
+
+\begin{proof}
+在洛朗展开式两边沿 $C$ 积分：
+\begin{equation}
+    \oint_C f(z)\,\mathrm{d}z = \sum_{n=-\infty}^{\infty} c_n \oint_C (z - z_0)^n\,\mathrm{d}z
+\end{equation}
+
+对于 $n \neq -1$，$(z - z_0)^n$ 有原函数，积分为零。
+
+对于 $n = -1$，$\oint_C \frac{1}{z - z_0}\,\mathrm{d}z = 2\pi\mathrm{i}$。
+
+所以 $\oint_C f(z)\,\mathrm{d}z = c_{-1} \cdot 2\pi\mathrm{i}$。
+\end{proof}
+
+\subsection{留数的计算方法}
+
+\begin{dingli}{}{可去奇点的留数}
+若 $z_0$ 是可去奇点，则 $\operatorname{Res}[f(z), z_0] = 0$。
+\end{dingli}
+
+\begin{proof}
+若 $z_0$ 是可去奇点，则 $f(z)$ 在 $z_0$ 处有界，洛朗展开式的主要部分为零：
+\begin{equation}
+    f(z) = c_0 + c_1(z - z_0) + c_2(z - z_0)^2 + \cdots
+\end{equation}
+没有 $(z - z_0)^{-1}$ 项，故 $c_{-1} = 0$，即 $\operatorname{Res}[f(z), z_0] = 0$。
+\end{proof}
+\begin{dingli}{}{一阶极点的留数}
+若 $z_0$ 是 $f(z)$ 的一阶极点，则
+\begin{equation}
+    \operatorname{Res}[f(z), z_0] = \lim_{z \to z_0} (z - z_0)f(z)
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+若 $z_0$ 是一阶极点，则 $f(z)$ 的洛朗展开式为
+\begin{equation}
+    f(z) = \frac{c_{-1}}{z - z_0} + c_0 + c_1(z - z_0) + \cdots
+\end{equation}
+两边乘以 $(z - z_0)$：
+\begin{equation}
+    (z - z_0)f(z) = c_{-1} + c_0(z - z_0) + c_1(z - z_0)^2 + \cdots
+\end{equation}
+令 $z \to z_0$，得 $\lim_{z \to z_0} (z - z_0)f(z) = c_{-1} = \operatorname{Res}[f(z), z_0]$。
+\end{proof}
+\begin{lizi}{}{}
+求 $f(z) = \frac{z}{z^2 - 1}$ 在 $z = 1$ 处的留数。
+
+\begin{jie}
+    $z = 1$ 是一阶极点。
+    \begin{equation}
+        \operatorname{Res}[f(z), 1] = \lim_{z \to 1} (z - 1) \cdot \frac{z}{z^2 - 1} = \lim_{z \to 1} \frac{z}{z + 1} = \frac{1}{2}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\begin{dingli}{}{一阶极点留数的另一公式}
+若 $f(z) = \frac{P(z)}{Q(z)}$，其中 $P(z_0) \neq 0$，$Q(z_0) = 0$，$Q'(z_0) \neq 0$，则
+\begin{equation}
+    \operatorname{Res}[f(z), z_0] = \frac{P(z_0)}{Q'(z_0)}
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+$z_0$ 是 $f(z) = \frac{P(z)}{Q(z)}$ 的一阶极点。由洛必达法则：
+\begin{equation}
+    \operatorname{Res}[f(z), z_0] = \lim_{z \to z_0} (z - z_0)\frac{P(z)}{Q(z)} = \lim_{z \to z_0} \frac{P(z)}{\frac{Q(z)}{z - z_0}} = \frac{P(z_0)}{Q'(z_0)}
+\end{equation}
+\end{proof}
+
+\begin{dingli}{}{高阶极点的留数}
+若 $z_0$ 是 $f(z)$ 的 $m$ 阶极点，则
+\begin{equation}
+    \operatorname{Res}[f(z), z_0] = \frac{1}{(m-1)!}\lim_{z \to z_0} \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}}\left[(z - z_0)^m f(z)\right]
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+若 $z_0$ 是 $m$ 阶极点，则 $f(z)$ 的洛朗展开式为
+\begin{equation}
+    f(z) = \frac{c_{-m}}{(z - z_0)^m} + \cdots + \frac{c_{-1}}{z - z_0} + c_0 + c_1(z - z_0) + \cdots
+\end{equation}
+两边乘以 $(z - z_0)^m$：
+\begin{equation}
+    (z - z_0)^m f(z) = c_{-m} + c_{-m+1}(z - z_0) + \cdots + c_{-1}(z - z_0)^{m-1} + c_0(z - z_0)^m + \cdots
+\end{equation}
+对 $z$ 求 $m-1$ 阶导数：
+\begin{equation}
+    \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}}\left[(z - z_0)^m f(z)\right] = (m-1)!\, c_{-1} + \text{含 }(z - z_0)\text{ 的项}
+\end{equation}
+令 $z \to z_0$，得 $(m-1)!\, c_{-1}$，故 $c_{-1} = \frac{1}{(m-1)!}\lim_{z \to z_0} \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}}\left[(z - z_0)^m f(z)\right]$。
+\end{proof}
+\begin{lizi}{}{}
+求 $f(z) = \frac{1}{(z-1)^3}$ 在 $z = 1$ 处的留数。
+
+\begin{jie}
+    $z = 1$ 是三阶极点。
+    \begin{equation}
+        \operatorname{Res}[f(z), 1] = \frac{1}{2!}\lim_{z \to 1} \frac{\mathrm{d}^2}{\mathrm{d}z^2}[(z-1)^3 \cdot \frac{1}{(z-1)^3}] = \frac{1}{2}\frac{\mathrm{d}^2}{\mathrm{d}z^2}(1) = 0
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+求 $f(z) = \frac{\cos z}{z^3}$ 在 $z = 0$ 处的留数。
+
+\begin{jie}
+    方法一：用公式。
+    
+    $z = 0$ 是三阶极点。
+    \begin{equation}
+        \operatorname{Res}[f(z), 0] = \frac{1}{2!}\lim_{z \to 0} \frac{\mathrm{d}^2}{\mathrm{d}z^2}\cos z = \frac{1}{2}(-\cos 0) = -\frac{1}{2}
+    \end{equation}
+    
+    方法二：洛朗展开。
+    \begin{equation}
+        \frac{\cos z}{z^3} = \frac{1}{z^3}\left(1 - \frac{z^2}{2!} + \frac{z^4}{4!} - \cdots\right) = \frac{1}{z^3} - \frac{1}{2z} + \frac{z}{24} - \cdots
+    \end{equation}
+    所以 $\operatorname{Res}[f(z), 0] = -\frac{1}{2}$。
+\end{jie}
+\end{lizi}
+
+% ========== 第二节 ==========
+\section{留数定理\index{留数定理}}
+
+\subsection{留数定理\index{留数定理}}
+
+\begin{zhongyao}[留数定理]
+设 $f(z)$ 在简单闭曲线 $C$ 所围区域 $D$ 内除有限个奇点 $z_1, z_2, \ldots, z_n$ 外解析，在 $\bar{D} = D \cup C$ 上连续，则
+\[
+    \oint_C f(z)\,\mathrm{d}z = 2\pi\mathrm{i}\sum_{k=1}^{n}\operatorname{Res}[f(z), z_k]
+\]
+\end{zhongyao}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 区域边界
+    \draw[blue, thick, ->] plot[smooth cycle] coordinates {(0,0) (3,0) (3.5,1.5) (2,2.5) (0.5,2) (-0.5,1)};
+    \node[blue] at (3.8, 1) {$C$};
+    
+    % 奇点
+    \fill[red] (1, 1) circle (2pt) node[above] {$z_1$};
+    \fill[red] (2, 0.5) circle (2pt) node[right] {$z_2$};
+    \fill[red] (1.5, 1.8) circle (2pt) node[above] {$z_3$};
+    
+    % 小圆
+    \draw[gray, dashed] (1, 1) circle (0.3);
+    \draw[gray, dashed] (2, 0.5) circle (0.3);
+    \draw[gray, dashed] (1.5, 1.8) circle (0.3);
+    
+    \node at (1.5, -0.5) {$\displaystyle\oint_C = 2\pi\mathrm{i}\sum_{k}\operatorname{Res}_{z_k}$};
+\end{tikzpicture}
+\caption{留数定理\index{留数定理}：闭路积分等于内部奇点留数之和}
+\label{fig:residue-thm}
+\end{figure}
+
+\begin{proof}
+以每个奇点 $z_k$ 为圆心作小圆 $C_k$，使其互不相交且都在 $D$ 内。由多连通区域的柯西积分定理\index{柯西积分定理}：
+\begin{equation}
+    \oint_C f(z)\,\mathrm{d}z = \sum_{k=1}^{n}\oint_{C_k} f(z)\,\mathrm{d}z
+\end{equation}
+
+而 $\oint_{C_k} f(z)\,\mathrm{d}z = 2\pi\mathrm{i}\operatorname{Res}[f(z), z_k]$。证毕。
+\end{proof}
+
+\begin{tishi}[留数定理的意义]
+留数定理\index{留数定理}把闭路积分问题转化为求留数的代数问题。这是复变函数论中最实用的定理之一！
+\end{tishi}
+
+\subsection{留数定理\index{留数定理}的应用}
+
+\begin{lizi}{}{}
+计算 $\displaystyle\oint_{|z|=2} \frac{z+1}{z^2 - 1}\,\mathrm{d}z$。
+
+\begin{jie}
+    奇点：$z = \pm 1$，都在 $|z| = 2$ 内。
+    
+    计算留数：
+    \begin{align}
+        \operatorname{Res}[f(z), 1] &= \lim_{z \to 1} (z-1)\frac{z+1}{(z-1)(z+1)} = \lim_{z \to 1}\frac{z+1}{z+1} = 1 \\
+        \operatorname{Res}[f(z), -1] &= \lim_{z \to -1} (z+1)\frac{z+1}{(z-1)(z+1)} = \lim_{z \to -1}\frac{z+1}{z-1} = 0
+    \end{align}
+    
+    由留数定理\index{留数定理}：
+    \begin{equation}
+        \oint_{|z|=2} \frac{z+1}{z^2 - 1}\,\mathrm{d}z = 2\pi\mathrm{i}(1 + 0) = 2\pi\mathrm{i}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+计算 $\displaystyle\oint_{|z|=1} \frac{\mathrm{e}^z}{z(z-2)}\,\mathrm{d}z$。
+
+\begin{jie}
+    奇点：$z = 0$（在 $|z| = 1$ 内），$z = 2$（在 $|z| = 1$ 外）。
+    
+    计算留数：
+    \begin{equation}
+        \operatorname{Res}[f(z), 0] = \lim_{z \to 0} z \cdot \frac{\mathrm{e}^z}{z(z-2)} = \lim_{z \to 0} \frac{\mathrm{e}^z}{z-2} = -\frac{1}{2}
+    \end{equation}
+    
+    由留数定理\index{留数定理}：
+    \begin{equation}
+        \oint_{|z|=1} \frac{\mathrm{e}^z}{z(z-2)}\,\mathrm{d}z = 2\pi\mathrm{i} \cdot \left(-\frac{1}{2}\right) = -\pi\mathrm{i}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+% ========== 第三节 ==========
+\section{留数在实积分中的应用}
+
+留数定理\index{留数定理}是计算某些困难实积分的有力工具。基本思想是：构造适当的复函数和积分路径，把实积分转化为复积分，再用留数定理\index{留数定理}计算。
+
+\subsection{三角函数积分}
+
+考虑形如 $\int_0^{2\pi} R(\cos\theta, \sin\theta)\,\mathrm{d}\theta$ 的积分，其中 $R$ 是有理函数。
+
+\textbf{方法}：令 $z = \mathrm{e}^{\mathrm{i}\theta}$，则
+\begin{equation}
+    \cos\theta = \frac{z + z^{-1}}{2}, \quad \sin\theta = \frac{z - z^{-1}}{2\mathrm{i}}, \quad \mathrm{d}\theta = \frac{\mathrm{d}z}{\mathrm{i}z}
+\end{equation}
+
+当 $\theta$ 从 $0$ 到 $2\pi$ 时，$z$ 沿单位圆逆时针一周。
+
+\begin{lizi}{}{}
+计算 $I = \int_0^{2\pi} \frac{1}{1 + a\cos\theta}\,\mathrm{d}\theta$（$|a| < 1$）。
+
+\begin{jie}
+    令 $z = \mathrm{e}^{\mathrm{i}\theta}$：
+    \begin{equation}
+        I = \oint_{|z|=1} \frac{1}{1 + \frac{a}{2}(z + z^{-1})} \cdot \frac{\mathrm{d}z}{\mathrm{i}z} = \oint_{|z|=1} \frac{2\,\mathrm{d}z}{\mathrm{i}(2z + az^2 + a)}
+    \end{equation}
+    
+    整理：
+    \begin{equation}
+        I = \frac{2}{\mathrm{i}a}\oint_{|z|=1} \frac{\mathrm{d}z}{z^2 + \frac{2}{a}z + 1}
+    \end{equation}
+    
+    被积函数 $f(z) = \frac{1}{z^2 + \frac{2}{a}z + 1}$ 的极点为方程 $z^2 + \frac{2}{a}z + 1 = 0$ 的根：
+    \begin{equation}
+        z = \frac{-\frac{2}{a} \pm \sqrt{\frac{4}{a^2} - 4}}{2} = \frac{-1 \pm \sqrt{1 - a^2}}{a}
+    \end{equation}
+    
+    记 $z_1 = \frac{-1 + \sqrt{1-a^2}}{a}$，$z_2 = \frac{-1 - \sqrt{1-a^2}}{a}$。
+    
+    由于 $|z_1 z_2| = 1$ 且 $|a| < 1$，可以验证 $|z_1| < 1$，$|z_2| > 1$。
+    
+    计算留数：
+    \begin{equation}
+        \operatorname{Res}[f(z), z_1] = \frac{1}{2z_1 + \frac{2}{a}} = \frac{a}{2(-1 + \sqrt{1-a^2} + 1)} = \frac{a}{2\sqrt{1-a^2}}
+    \end{equation}
+    
+    由留数定理\index{留数定理}：
+    \begin{equation}
+        I = \frac{2}{\mathrm{i}a} \cdot 2\pi\mathrm{i} \cdot \frac{a}{2\sqrt{1-a^2}} = \frac{2\pi}{\sqrt{1-a^2}}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\subsection{无穷积分}
+
+考虑形如 $\int_{-\infty}^{+\infty} R(x)\,\mathrm{d}x$ 的积分，其中 $R(x)$ 是有理函数，分母次数比分子的次数高至少 $2$。
+
+\textbf{方法}：考虑积分 $\oint_C R(z)\,\mathrm{d}z$，其中 $C$ 由实轴上的线段 $[-R, R]$ 和上半平面的大半圆组成。当 $R \to \infty$ 时，半圆上的积分趋于零。
+
+\begin{lizi}{}{}
+计算 $I = \int_{-\infty}^{+\infty} \frac{1}{x^2 + a^2}\,\mathrm{d}x$（$a > 0$）。
+
+\begin{jie}
+    考虑 $f(z) = \frac{1}{z^2 + a^2}$。
+    
+    在上半平面的极点：$z = a\mathrm{i}$（一阶极点）。
+    
+    留数：
+    \begin{equation}
+        \operatorname{Res}[f(z), a\mathrm{i}] = \lim_{z \to a\mathrm{i}} \frac{z - a\mathrm{i}}{z^2 + a^2} = \lim_{z \to a\mathrm{i}} \frac{1}{z + a\mathrm{i}} = \frac{1}{2a\mathrm{i}}
+    \end{equation}
+    
+    由留数定理\index{留数定理}：
+    \begin{equation}
+        I = 2\pi\mathrm{i} \cdot \frac{1}{2a\mathrm{i}} = \frac{\pi}{a}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\subsection{涉及三角函数的无穷积分}
+
+考虑形如 $\int_{-\infty}^{+\infty} R(x)\mathrm{e}^{\mathrm{i}ax}\,\mathrm{d}x$ 的积分（$a > 0$）。
+
+\textbf{方法}：利用约当引理，证明上半大半圆上的积分趋于零。
+
+\begin{dingli}{}{约当引理}
+设 $f(z)$ 在上半平面（除有限个点外）连续，当 $|z| \to \infty$ 时 $f(z) \to 0$。则对任意 $a > 0$，
+\begin{equation}
+    \lim_{R \to \infty} \int_{C_R} f(z)\mathrm{e}^{\mathrm{i}az}\,\mathrm{d}z = 0
+\end{equation}
+其中 $C_R$ 是上半平面以原点为圆心、$R$ 为半径的半圆。
+\end{dingli}
+
+\begin{lizi}{}{}
+计算 $I = \int_0^{+\infty} \frac{\cos x}{x^2 + 1}\,\mathrm{d}x$。
+
+\begin{jie}
+    考虑 $I = \frac{1}{2}\int_{-\infty}^{+\infty} \frac{\cos x}{x^2 + 1}\,\mathrm{d}x$。
+    
+    更一般地，考虑 $\int_{-\infty}^{+\infty} \frac{\mathrm{e}^{\mathrm{i}x}}{x^2 + 1}\,\mathrm{d}x$。
+    
+    $f(z) = \frac{\mathrm{e}^{\mathrm{i}z}}{z^2 + 1}$ 在上半平面的极点：$z = \mathrm{i}$。
+    
+    留数：
+    \begin{equation}
+        \operatorname{Res}[f(z), \mathrm{i}] = \frac{\mathrm{e}^{\mathrm{i}\cdot\mathrm{i}}}{2\mathrm{i}} = \frac{\mathrm{e}^{-1}}{2\mathrm{i}}
+    \end{equation}
+    
+    由留数定理\index{留数定理}：
+    \begin{equation}
+        \int_{-\infty}^{+\infty} \frac{\mathrm{e}^{\mathrm{i}x}}{x^2 + 1}\,\mathrm{d}x = 2\pi\mathrm{i} \cdot \frac{\mathrm{e}^{-1}}{2\mathrm{i}} = \frac{\pi}{\mathrm{e}}
+    \end{equation}
+    
+    取实部：
+    \begin{equation}
+        \int_{-\infty}^{+\infty} \frac{\cos x}{x^2 + 1}\,\mathrm{d}x = \frac{\pi}{\mathrm{e}}
+    \end{equation}
+    
+    所以 $I = \frac{\pi}{2\mathrm{e}}$。
+\end{jie}
+\end{lizi}
+
+% ========== 第四节 ==========
+\section{辐角原理与鲁歇定理}
+
+\subsection{对数留数}
+
+\begin{dingliyi}{}{对数留数}
+设 $f(z)$ 在简单闭曲线 $C$ 上不为零，在 $C$ 内部有有限个零点和极点。称
+\begin{equation}
+    \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f'(z)}{f(z)}\,\mathrm{d}z
+\end{equation}
+为 $f(z)$ 关于 $C$ 的\textbf{对数留数}。
+\end{dingliyi}
+
+\subsection{辐角原理}
+
+\begin{dingli}{}{辐角原理}
+设 $f(z)$ 在简单闭曲线 $C$ 上解析且不为零，在 $C$ 内部有 $N$ 个零点（计重数）和 $P$ 个极点（计重数），则
+\begin{equation}
+    \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f'(z)}{f(z)}\,\mathrm{d}z = N - P
+\end{equation}
+或等价地
+\begin{equation}
+    \oint_C \mathrm{d}(\arg f(z)) = 2\pi(N - P)
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+设 $z_0$ 是 $f(z)$ 的 $m$ 阶零点，则 $f(z) = (z - z_0)^m g(z)$，$g(z_0) \neq 0$。
+\begin{equation}
+    \frac{f'(z)}{f(z)} = \frac{m}{z - z_0} + \frac{g'(z)}{g(z)}
+\end{equation}
+所以 $\operatorname{Res}\left[\frac{f'}{f}, z_0\right] = m$（零点的阶数）。
+
+类似地，若 $z_0$ 是 $m$ 阶极点，则 $\operatorname{Res}\left[\frac{f'}{f}, z_0\right] = -m$。
+
+由留数定理\index{留数定理}即得结论。
+\end{proof}
+
+\begin{tishi}[几何意义]
+辐角原理说明：当 $z$ 沿 $C$ 绕一周时，$w = f(z)$ 绕原点的圈数等于 $N - P$。
+\end{tishi}
+
+\subsection{鲁歇定理}
+
+\begin{dingli}{}{鲁歇定理}
+设 $f(z)$ 和 $g(z)$ 在简单闭曲线 $C$ 上及其内部解析，且在 $C$ 上有 $|f(z)| > |g(z)|$。则 $f(z)$ 和 $f(z) + g(z)$ 在 $C$ 内部有相同个数的零点。
+\end{dingli}
+
+\begin{proof}
+在 $C$ 上，$|f(z)| > |g(z)| \geq 0$，所以 $f(z) \neq 0$。
+
+又 $|f(z) + g(z)| \geq |f(z)| - |g(z)| > 0$，所以 $f(z) + g(z) \neq 0$。
+
+由辐角原理，$f(z) + g(z)$ 在 $C$ 内的零点数为
+\begin{equation}
+    N = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f'(z) + g'(z)}{f(z) + g(z)}\,\mathrm{d}z
+\end{equation}
+
+考虑函数 $h_t(z) = f(z) + tg(z)$（$0 \leq t \leq 1$）。在 $C$ 上，
+\begin{equation}
+    |h_t(z)| \geq |f(z)| - t|g(z)| \geq |f(z)| - |g(z)| > 0
+\end{equation}
+
+所以 $h_t(z)$ 在 $C$ 上不为零，$N(t)$ 连续。但 $N(t)$ 是整数，所以 $N(t)$ 是常数。
+
+$N(0) = f(z)$ 的零点数，$N(1) = f(z) + g(z)$ 的零点数。两者相等。
+\end{proof}
+
+\begin{lizi}{}{}
+证明方程 $z^8 - 5z^5 - 2z + 1 = 0$ 在单位圆内有 $5$ 个根。
+
+\begin{jie}
+    取 $f(z) = -5z^5$，$g(z) = z^8 - 2z + 1$。
+    
+    在 $|z| = 1$ 上：$|f(z)| = 5$，$|g(z)| \leq |z|^8 + 2|z| + 1 = 4 < 5$。
+    
+    由鲁歇定理，$f(z) + g(z) = z^8 - 5z^5 - 2z + 1$ 与 $f(z) = -5z^5$ 在单位圆内有相同的零点数。
+    
+    $-5z^5 = 0$ 在单位圆内有 $5$ 重零点 $z = 0$，所以原方程在单位圆内有 $5$ 个根。
+\end{jie}
+\end{lizi}
+
+% ========== 本章小结 ==========
+\section{本章小结}
+
+\subsection{核心公式}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{内容} & \textbf{公式} \\
+\midrule
+留数定义 & $\operatorname{Res}[f(z), z_0] = c_{-1}$ \\
+一阶极点留数 & $\operatorname{Res}[f(z), z_0] = \lim_{z \to z_0}(z - z_0)f(z)$ \\
+留数定理\index{留数定理} & $\oint_C f(z)\,\mathrm{d}z = 2\pi\mathrm{i}\sum\operatorname{Res}$ \\
+辐角原理 & $\frac{1}{2\pi\mathrm{i}}\oint_C \frac{f'}{f}\,\mathrm{d}z = N - P$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{应用类型}
+
+\begin{enumerate}
+    \item 三角函数积分：$z = \mathrm{e}^{\mathrm{i}\theta}$ 变换
+    \item 无穷积分：上半平面闭路
+    \item 涉及三角函数的无穷积分：约当引理
+    \item 零点个数：鲁歇定理
+\end{enumerate}
+
+% ========== 习题 ==========
+\section{习题}
+
+\textbf{基础题}
+
+\begin{enumerate}
+    \item 求下列函数在指定点的留数：
+    \begin{enumerate}
+        \item $f(z) = \frac{z}{z^2 + 1}$，$z = \mathrm{i}$
+        \item $f(z) = \frac{1}{(z-1)^3}$，$z = 1$
+        \item $f(z) = \frac{\mathrm{e}^z}{z(z-1)}$，$z = 0, 1$
+    \end{enumerate}
+    
+    \item 用留数定理\index{留数定理}计算：
+    \begin{enumerate}
+        \item $\displaystyle\oint_{|z|=2} \frac{z}{z^2 - 1}\,\mathrm{d}z$
+        \item $\displaystyle\oint_{|z|=1} \frac{\sin z}{z}\,\mathrm{d}z$
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{综合题}
+
+\begin{enumerate}[resume]
+    \item 计算下列实积分：
+    \begin{enumerate}
+        \item $\displaystyle\int_0^{2\pi} \frac{1}{2 + \cos\theta}\,\mathrm{d}\theta$
+        \item $\displaystyle\int_{-\infty}^{+\infty} \frac{x^2}{x^4 + 1}\,\mathrm{d}x$
+        \item $\displaystyle\int_0^{+\infty} \frac{x\sin x}{x^2 + 1}\,\mathrm{d}x$
+    \end{enumerate}
+    
+    \item 用鲁歇定理证明：方程 $z^5 - z + 1 = 0$ 在单位圆内有 $1$ 个根。
+\end{enumerate}
+
+\textbf{挑战题}
+
+\begin{enumerate}[resume]
+    \item 计算积分 $\displaystyle\int_0^{+\infty} \frac{x^{a-1}}{1 + x}\,\mathrm{d}x$（$0 < a < 1$）。
+    
+    \item 设 $f(z)$ 在 $|z| \leq R$ 上解析，$|f(z)| \leq M$ 在 $|z| = R$ 上成立。证明：
+    \begin{equation}
+        |f^{(n)}(0)| \leq \frac{n!M}{R^n}
+    \end{equation}
+    （柯西不等式）
+\end{enumerate}

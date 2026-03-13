@@ -1,0 +1,51 @@
+% 附录C：拉普拉斯变换表
+
+\chapter{拉普拉斯变换表}
+
+\section{定义}
+\begin{zhongyao}[拉普拉斯变换定义]
+\[
+    \mathcal{L}[f(t)] = \tilde{f}(s) = \int_0^{+\infty} f(t)\mathrm{e}^{-st}\,\mathrm{d}t, \quad \mathrm{Re}(s) > \sigma_0
+\]
+\end{zhongyao}
+
+\section{常用拉普拉斯变换对}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+$f(t)$ & $\tilde{f}(s)$ \\
+\midrule
+$1$ & $\dfrac{1}{s}$ \\[6pt]
+$t^n$ & $\dfrac{n!}{s^{n+1}}$ \\[6pt]
+$\mathrm{e}^{at}$ & $\dfrac{1}{s-a}$ \\[6pt]
+$\sin at$ & $\dfrac{a}{s^2+a^2}$ \\[6pt]
+$\cos at$ & $\dfrac{s}{s^2+a^2}$ \\[6pt]
+$\sinh at$ & $\dfrac{a}{s^2-a^2}$ \\[6pt]
+$\cosh at$ & $\dfrac{s}{s^2-a^2}$ \\[6pt]
+$t^n\mathrm{e}^{at}$ & $\dfrac{n!}{(s-a)^{n+1}}$ \\[6pt]
+$\mathrm{e}^{-at}\sin bt$ & $\dfrac{b}{(s+a)^2+b^2}$ \\[6pt]
+$\mathrm{e}^{-at}\cos bt$ & $\dfrac{s+a}{(s+a)^2+b^2}$ \\[6pt]
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{基本性质}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{性质} & \textbf{公式} \\
+\midrule
+线性性 & $\mathcal{L}[af + bg] = a\tilde{f} + b\tilde{g}$ \\
+时移 & $\mathcal{L}[f(t-\tau)H(t-\tau)] = \mathrm{e}^{-s\tau}\tilde{f}(s)$ \\
+微分 & $\mathcal{L}[f'(t)] = s\tilde{f}(s) - f(0)$ \\
+积分 & $\mathcal{L}\left[\int_0^t f(\tau)\,\mathrm{d}\tau\right] = \dfrac{\tilde{f}(s)}{s}$ \\[8pt]
+卷积 & $\mathcal{L}[f * g] = \tilde{f}(s)\tilde{g}(s)$ \\
+初值 & $f(0^+) = \lim\limits_{s\to\infty} s\tilde{f}(s)$ \\
+终值 & $\lim\limits_{t\to\infty} f(t) = \lim\limits_{s\to 0} s\tilde{f}(s)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
