@@ -10,7 +10,7 @@
 % ========== 图形宏包 ==========
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta, calc, positioning, decorations.markings, decorations.pathmorphing, patterns}
+\usetikzlibrary{arrows.meta, calc, positioning, decorations.markings, decorations.pathmorphing, patterns, shapes.geometric}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
@@ -280,8 +280,7 @@
   leftrule=3pt,
   arc=0pt,
   left=10pt, right=6pt, top=4pt, bottom=4pt,
-  before upper={\textcolor{examplepurple}{\textbf{解：}}\par\vspace{2pt}},
-  after upper={\par\vspace{2pt}\hfill\textcolor{examplepurple!60}{$\square$}},
+  before upper={\textcolor{examplepurple}{\bfseries 解：}\par\vspace{2pt}},
   breakable,
   before skip=0.3em,
   after skip=0.5em
@@ -321,6 +320,7 @@
     boxrule=0pt,
     arc=2pt
   },
+  before upper={\setlength{\parindent}{2em}},
   breakable
 }
 
@@ -339,6 +339,20 @@
     boxrule=0pt,
     arc=2pt
   },
+  breakable
+}
+
+% 名言框（用于历史引言和名人语录）
+% 简洁引号式：无背景框 + 引号包裹 + 楷体深蓝灰
+\newtcolorbox{mingyan}[1][]{
+  enhanced,
+  colback=white,
+  colframe=white,
+  boxrule=0pt,
+  arc=0pt,
+  left=0pt, right=0pt, top=4pt, bottom=4pt,
+  before upper={``\kaishu\color{gray!60!blue}},
+  after upper={''},
   breakable
 }
 

@@ -71,6 +71,7 @@
     u = \int h(\eta)\,\mathrm{d}\eta + f(\xi) = g(\eta) + f(\xi) = g(x + at) + f(x - at)
 \end{equation}
 \end{proof}
+\end{dingli}
 
 \begin{tishi}[物理意义]
 \begin{itemize}
@@ -117,6 +118,7 @@
 \label{fig:traveling-waves}
 \end{figure}
 
+\begin{dingli}{}{达朗贝尔公式}
 利用初始条件确定 $f$ 和 $g$：
 \begin{align}
     u(x, 0) &= f(x) + g(x) = \varphi(x) \\
@@ -136,20 +138,42 @@
     g(x) &= \frac{1}{2}\varphi(x) + \frac{1}{2a}\int_0^x \psi(s)\,\mathrm{d}s + \frac{C}{2a}
 \end{align}
 
-代入通解，常数 $C$ 被消去：
-
-\end{dingli}
-
-\begin{zhongyao}[达朗贝尔公式]
-一维波动方程初值问题的解为
+代入通解，常数 $C$ 被消去，得一维波动方程初值问题的解：
 \[
     u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(s)\,\mathrm{d}s
 \]
-\end{zhongyao}
+\end{dingli}
 
 \begin{wulibj}[达朗贝尔公式的物理意义]
 初始位移 $\varphi(x)$ 分裂成两半，分别向左右传播。初始速度 $\psi(x)$ 的影响区域是 $[x-at, x+at]$，表示速度对点 $(x, t)$ 的影响来自特征线内的所有点。
 \end{wulibj}
+
+\begin{lizi}{}{}
+求解无限长弦的振动问题：
+\begin{equation}
+    \begin{cases}
+        u_{tt} = a^2 u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
+        u(x, 0) = \mathrm{e}^{-x^2}, & x \in \mathbb{R} \\
+        u_t(x, 0) = 0, & x \in \mathbb{R}
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    这是典型的达朗贝尔公式应用。这里 $\varphi(x) = \mathrm{e}^{-x^2}$，$\psi(x) = 0$。
+
+    代入达朗贝尔公式：
+    \begin{equation}
+        u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(s)\,\mathrm{d}s
+    \end{equation}
+
+    由于 $\psi(x) = 0$，积分项为零：
+    \begin{equation}
+        u(x, t) = \frac{1}{2}\left[\mathrm{e}^{-(x-at)^2} + \mathrm{e}^{-(x+at)^2}\right]
+    \end{equation}
+
+    \textbf{物理意义}：初始时刻的高斯脉冲分裂成两个相同的脉冲，分别以速度 $a$ 向左右传播。每个脉冲的振幅是原来的一半。
+\end{jie}
+\end{lizi}
 
 % ========== 第二节 ==========
 \section{依赖区间与影响区域}
@@ -245,6 +269,30 @@
 \end{equation}
 这就是惠更斯原理的数学表述。
 \end{proof}
+
+\begin{lizi}{}{}
+设初始位移 $\varphi(x)$ 仅在区间 $[2, 4]$ 内非零，初始速度 $\psi(x) = 0$。求 $t = 1$ 时波动到达的区域（设波速 $a = 1$）。
+
+\begin{jie}
+    由影响区域的定义，初始扰动在 $[x_1, x_2] = [2, 4]$ 内的影响区域是由过 $x_1 = 2$ 的右行特征线和过 $x_2 = 4$ 的左行特征线围成的区域。
+
+    特征线方程：$x - at = C$（右行），$x + at = C'$（左行）。
+
+    过 $x_1 = 2$ 的右行特征线：$x - t = 2$，即 $x = t + 2$。
+    
+    过 $x_2 = 4$ 的左行特征线：$x + t = 4$，即 $x = 4 - t$。
+
+    当 $t = 1$ 时：
+    \begin{itemize}
+        \item 右行特征线到达 $x = 3$
+        \item 左行特征线到达 $x = 3$
+    \end{itemize}
+    
+    因此，$t = 1$ 时波动到达的区域是 $x \in [1, 5]$。
+
+    \textbf{验证}：由达朗贝尔公式，$u(x, 1) = \frac{1}{2}[\varphi(x-1) + \varphi(x+1)]$。要使 $u(x, 1) \neq 0$，需要 $x-1 \in [2, 4]$ 或 $x+1 \in [2, 4]$，即 $x \in [1, 5]$。
+\end{jie}
+\end{lizi}
 
 % ========== 第三节 ==========
 \section{半无界弦的振动}

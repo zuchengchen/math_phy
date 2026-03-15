@@ -6,6 +6,26 @@
 除了前面介绍的主要方法外，数学物理方程还有许多其他求解方法。本章简要介绍变分法、摄动法和数值方法的基本思想，为后续学习和研究打下基础。
 \end{wulibj}
 
+\begin{wulibj}[物理背景]
+本章介绍的三种方法在物理学中各有其独特地位：
+
+\textbf{1. 变分法}：源于最小作用量原理——这是物理学最深刻的原理之一。从牛顿力学到量子场论，物理系统的运动方程都可以从作用量泛函的极值导出。费曼曾说："大自然似乎总是选择使作用量取极值的路径。"
+
+\textbf{应用实例}：
+\begin{itemize}
+    \item 经典力学：最小作用量原理给出拉格朗日方程
+    \item 量子力学：变分法是近似求解基态能量的重要方法
+    \item 弹性力学：最小势能原理
+    \item 电磁学：汤姆逊定理（带电导体的能量最小）
+\end{itemize}
+
+\textbf{2. 摄动法}：处理含小参数的问题，在几乎所有物理分支中都有应用。从行星运动的微扰、量子力学中的能级修正，到流体力学中的边界层理论，摄动法提供了从精确解出发系统逼近的方法。
+
+\textbf{3. 数值方法}：现代计算物理的基石。绝大多数实际问题无法求得解析解，数值方法使我们能够模拟从原子到星系的各类物理过程。有限元方法、有限差分法等已成为工程师和物理学家的日常工具。
+
+\textbf{本章目标}：了解这些方法的基本思想，知道它们各自的适用范围，为深入学习奠定基础。
+\end{wulibj}
+
 % ========== 第一节 ==========
 
 \subsection{变分原理}
@@ -13,8 +33,8 @@
 许多物理问题可以表述为某个泛函的极值问题。例如：
 \begin{itemize}
     \item 力学中的最小作用量原理
-    \item 光学中的费马原理
-    \item 静电学中的汤姆逊原理
+    \item 光学中的费马\index{费马@费马（Fermat）}（Fermat）原理
+    \item 静电学中的汤姆逊\index{汤姆逊@汤姆逊（Thomson）}（Thomson）原理
 \end{itemize}
 
 \begin{dingliyi}{}{泛函}
@@ -28,12 +48,12 @@
     J[y] = \int_a^b F(x, y, y')\,\mathrm{d}x
 \end{equation}
 
-\begin{zhongyao}[欧拉-拉格朗日方程]
+\begin{dingli}{}{欧拉-拉格朗日方程}
 使泛函 $J[y]$ 取极值的函数 $y(x)$ 满足
 \[
     \frac{\partial F}{\partial y} - \frac{\mathrm{d}}{\mathrm{d}x}\frac{\partial F}{\partial y'} = 0
 \]
-\end{zhongyao}
+\end{dingli}
 
 \begin{proof}
 设 $y(x)$ 是极值函数，考虑变分 $y + \varepsilon\eta(x)$，其中 $\eta(a) = \eta(b) = 0$。
@@ -86,6 +106,41 @@
 \subsection{里茨方法}
 
 变分法可以用于数值求解：选择一组基函数 $\{\phi_n\}$，设近似解 $u \approx \sum_{n=1}^N c_n\phi_n$，代入泛函 $J[u]$，对系数 $c_n$ 求极值，得到线性方程组。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 坐标轴
+    \draw[->, gray] (-0.3, 0) -- (5.5, 0) node[right] {$x$};
+    \draw[->, gray] (0, -0.3) -- (0, 3.5) node[above] {$y$};
+    
+    % 边界点
+    \fill (0.5, 0.8) circle (2pt);
+    \fill (5, 2.5) circle (2pt);
+    \node[below] at (0.5, 0.7) {$a$};
+    \node[below] at (5, 2.4) {$b$};
+    
+    % 极值函数（实线）
+    \draw[blue, thick, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.38*(\x-0.5) - 0.03*(\x-2.75)^2});
+    
+    % 其他函数（虚线）
+    \draw[red, dashed, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.48*(\x-0.5) - 0.02*(\x-2.75)^2});
+    \draw[red, dashed, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.30*(\x-0.5) + 0.05*(\x-2.75)^2});
+    \draw[red, dashed, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.38*(\x-0.5) + 0.08*sin((\x-0.5)*60)});
+    
+    % 标注
+    \node[blue, right] at (5.1, 2.2) {$y(x)$（极值）};
+    \node[red, right] at (5.1, 2.9) {$y + \varepsilon\eta$};
+    
+    % 变分示意
+    \draw[<->, green!60!black, thick] (3, 1.95) -- (3, 2.35);
+    \node[green!60!black, right] at (3.1, 2.15) {$\delta y$};
+    
+    \node at (2.75, -0.8) {泛函极值示意图};
+\end{tikzpicture}
+\caption{变分法示意：在函数空间中寻找使泛函取极值的函数}
+\label{fig:variational}
+\end{figure}
 
 % ========== 第二节 ==========
 \section{摄动法}
@@ -146,6 +201,36 @@
 
 对于长期项（随时间增长的项），可以使用多尺度方法：引入多个时间尺度 $T_0 = t$，$T_1 = \varepsilon t$，$T_2 = \varepsilon^2 t$，$\ldots$。
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    % 坐标轴
+    \draw[->, gray] (-0.3, 0) -- (6.5, 0) node[right] {$x$};
+    \draw[->, gray] (0, -1.5) -- (0, 2.5) node[above] {$y$};
+    
+    % 基本解 y0 = cos(x)
+    \draw[blue, thick, domain=0:6, samples=80] plot (\x, {cos(\x r)});
+    \node[blue, right] at (6.1, 0.8) {$y_0(x)$};
+    
+    % 摄动解 epsilon = 0.2
+    \draw[red, dashed, thick, domain=0:6, samples=80] plot (\x, {cos(\x r) + 0.2*(0.5 - 0.33*cos(\x r) - 0.17*cos(2*\x r))});
+    \node[red, right] at (6.1, 0.3) {$y_0 + \varepsilon y_1$};
+    
+    % 摄动解 epsilon = 0.4
+    \draw[orange, dotted, thick, domain=0:6, samples=80] plot (\x, {cos(\x r) + 0.4*(0.5 - 0.33*cos(\x r) - 0.17*cos(2*\x r))});
+    \node[orange, right] at (6.1, -0.2) {$\varepsilon = 0.4$};
+    
+    % 标注
+    \node at (3, -2) {摄动法示意：小参数对解的影响};
+    
+    % epsilon 标注
+    \draw[<->, green!60!black, thick] (2, -0.42) -- (2, -0.02);
+    \node[green!60!black, left] at (1.9, -0.22) {\small $\varepsilon y_1$};
+\end{tikzpicture}
+\caption{摄动法示意：随着小参数 $\varepsilon$ 增大，解偏离基解 $y_0$}
+\label{fig:perturbation}
+\end{figure}
+
 % ========== 第三节 ==========
 \section{数值方法简介}
 
@@ -204,6 +289,54 @@
     \item 施加边界条件
     \item 求解线性方程组
 \end{enumerate}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % 不规则区域边界
+    \draw[thick, blue] (0, 0) -- (5, 0) -- (5.5, 2) -- (4, 3.5) -- (1.5, 3) -- (0, 1.5) -- cycle;
+    
+    % 三角形单元网格
+    % 底层
+    \draw[gray, thin] (0, 0) -- (2, 0) -- (1, 1) -- cycle;
+    \draw[gray, thin] (2, 0) -- (3.5, 0) -- (2.5, 1) -- cycle;
+    \draw[gray, thin] (3.5, 0) -- (5, 0) -- (4, 1) -- cycle;
+    
+    % 中下层
+    \draw[gray, thin] (1, 1) -- (2, 0) -- (2.5, 1) -- cycle;
+    \draw[gray, thin] (2.5, 1) -- (3.5, 0) -- (4, 1) -- cycle;
+    \draw[gray, thin] (1, 1) -- (2.5, 1) -- (2, 2) -- cycle;
+    \draw[gray, thin] (2.5, 1) -- (4, 1) -- (3, 2) -- cycle;
+    
+    % 中层
+    \draw[gray, thin] (0, 1.5) -- (1, 1) -- (2, 2) -- cycle;
+    \draw[gray, thin] (2, 2) -- (2.5, 1) -- (3, 2) -- cycle;
+    \draw[gray, thin] (3, 2) -- (4, 1) -- (4.5, 2) -- cycle;
+    
+    % 中上层
+    \draw[gray, thin] (1.5, 3) -- (2, 2) -- (3, 2.5) -- cycle;
+    \draw[gray, thin] (3, 2.5) -- (3, 2) -- (4, 2.5) -- cycle;
+    \draw[gray, thin] (4, 2.5) -- (4.5, 2) -- (5.5, 2) -- cycle;
+    
+    % 顶层
+    \draw[gray, thin] (1.5, 3) -- (3, 2.5) -- (4, 3.5) -- cycle;
+    \draw[gray, thin] (3, 2.5) -- (4, 2.5) -- (4, 3.5) -- cycle;
+    \draw[gray, thin] (4, 2.5) -- (5.5, 2) -- (4, 3.5) -- cycle;
+    
+    % 节点
+    \foreach \x/\y in {0/0, 2/0, 3.5/0, 5/0, 1/1, 2.5/1, 4/1, 0/1.5, 2/2, 3/2, 4.5/2, 5.5/2, 1.5/3, 3/2.5, 4/2.5, 4/3.5} {
+        \fill (\x, \y) circle (1.5pt);
+    }
+    
+    % 标注一个单元
+    \draw[red, thick] (2.5, 1) -- (3.5, 0) -- (4, 1) -- cycle;
+    \node[red] at (3.3, 0.5) {\small $e_k$};
+    
+    \node at (2.75, -0.8) {三角形单元剖分};
+\end{tikzpicture}
+\caption{有限元网格示意：将区域划分为三角形单元}
+\label{fig:fem-mesh}
+\end{figure}
 
 \subsection{有限体积法}
 

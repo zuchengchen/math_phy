@@ -69,6 +69,40 @@
 
 利用初始条件确定系数。
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8, 
+    box/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=0.8cm, align=center, fill=blue!10},
+    arrow/.style={->, thick, >=stealth}]
+    
+    % 节点
+    \node[box] (step1) at (0, 0) {设 $u = X(x)T(t)$};
+    \node[box] (step2) at (0, -1.5) {代入方程};
+    \node[box] (step3) at (-3, -3) {空间方程\\$X'' + \lambda X = 0$};
+    \node[box] (step4) at (3, -3) {时间方程\\$T'' + \lambda a^2 T = 0$};
+    \node[box, fill=orange!20] (step5) at (-3, -4.8) {本征值问题\\边界条件};
+    \node[box, fill=green!20] (step6) at (3, -4.8) {求解 $T_n(t)$};
+    \node[box, fill=red!20] (step7) at (0, -6.3) {叠加 $u = \sum X_n T_n$};
+    \node[box] (step8) at (0, -7.8) {确定系数};
+    
+    % 箭头
+    \draw[arrow] (step1) -- (step2);
+    \draw[arrow] (step2) -- node[left] {$-\lambda$} (step3);
+    \draw[arrow] (step2) -- node[right] {$-\lambda$} (step4);
+    \draw[arrow] (step3) -- (step5);
+    \draw[arrow] (step4) -- (step6);
+    \draw[arrow] (step5) -- (step7);
+    \draw[arrow] (step6) -- (step7);
+    \draw[arrow] (step7) -- (step8);
+    
+    % 标注
+    \node[gray] at (5, -3) {$\lambda_n$, $X_n$};
+    \node[gray] at (5, -4.8) {$T_n(t)$};
+\end{tikzpicture}
+\caption{分离变量法求解流程}
+\label{fig:separation-flowchart}
+\end{figure}
+
 % ========== 第二节 ==========
 \section{本征值问题}
 
@@ -87,12 +121,12 @@
 
 \subsection{三类边界条件下的本征值问题}
 
-\begin{zhongyao}[第一类边界条件的本征值问题]
+\begin{dingli}{}{第一类边界条件的本征值问题}
 本征值和本征函数为
 \[
     \lambda_n = \left(\frac{n\pi}{l}\right)^2, \quad X_n(x) = \sin\frac{n\pi x}{l}, \quad n = 1, 2, 3, \ldots
 \]
-\end{zhongyao}
+\end{dingli}
 
 \begin{proof}
 分三种情况讨论：
@@ -125,6 +159,37 @@
 
 所以 $\mu_n = \frac{n\pi}{l}$，$\lambda_n = \left(\frac{n\pi}{l}\right)^2$，$X_n(x) = \sin\frac{n\pi x}{l}$。
 \end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % 坐标轴
+    \draw[->, gray] (-0.3, 0) -- (5, 0) node[right] {$x$};
+    \draw[->, gray] (0, -1.5) -- (0, 1.8) node[above] {$X_n$};
+    
+    % 刻度
+    \node[below] at (0, 0) {$0$};
+    \node[below] at (3.14, 0) {$l$};
+    
+    % n=1
+    \draw[blue, thick, domain=0:3.14, samples=50] plot (\x, {sin(\x r)});
+    \node[blue] at (0.8, 1.2) {$n=1$};
+    
+    % n=2
+    \draw[red, thick, dashed, domain=0:3.14, samples=50] plot (\x, {0.7*sin(2*\x r)});
+    \node[red] at (1.5, 0.9) {$n=2$};
+    
+    % n=3
+    \draw[green!60!black, thick, dotted, domain=0:3.14, samples=50] plot (\x, {0.5*sin(3*\x r)});
+    \node[green!60!black] at (2.2, 0.6) {$n=3$};
+    
+    % 节点标记
+    \fill (0, 0) circle (2pt);
+    \fill (3.14, 0) circle (2pt);
+\end{tikzpicture}
+\caption{第一类边界条件下的本征函数 $X_n(x) = \sin\frac{n\pi x}{l}$}
+\label{fig:eigenfunctions-dirichlet}
+\end{figure}
 
 \begin{dingli}{}{第二类边界条件的本征值问题}
 对于
@@ -236,6 +301,41 @@
     c_n = \frac{\displaystyle\int_0^l f(x)X_n(x)\,\mathrm{d}x}{\displaystyle\int_0^l X_n^2(x)\,\mathrm{d}x}
 \end{equation}
 \end{dingli}
+
+\begin{proof}
+完备性的证明需要用到\textbf{施图姆-刘维尔理论\index{施图姆-刘维尔理论}}，这里给出证明思路。
+
+\textbf{第一步：构造格林函数}。
+
+本征值问题等价于积分方程：
+\begin{equation}
+    X(x) = \lambda\int_0^l G(x, \xi)X(\xi)\,\mathrm{d}\xi
+\end{equation}
+其中 $G(x, \xi)$ 是格林函数\index{格林函数}，具有对称性 $G(x, \xi) = G(\xi, x)$。
+
+\textbf{第二步：对称核积分算子的谱}。
+
+对称核积分算子 $T[f] = \int_0^l G(x, \xi)f(\xi)\,\mathrm{d}\xi$ 是\textbf{紧算子}（compact operator）。由希尔伯特-施密特定理：
+\begin{enumerate}
+    \item 算子 $T$ 有可数个实本征值 $\{\mu_n\}$，且 $\mu_n \to 0$
+    \item 对应的本征函数 $\{X_n\}$ 构成 $L^2[0, l]$ 的正交归一基
+\end{enumerate}
+
+\textbf{第三步：完备性的意义}。
+
+``完备''意味着：对任意 $f \in L^2[0, l]$，部分和
+\begin{equation}
+    S_N(x) = \sum_{n=1}^{N} c_n X_n(x)
+\end{equation}
+在均方意义下收敛于 $f$：
+\begin{equation}
+    \lim_{N \to \infty} \int_0^l |f(x) - S_N(x)|^2\,\mathrm{d}x = 0
+\end{equation}
+
+\begin{jinshi}
+完备性保证的是\textbf{均方收敛}，而非逐点收敛。对于连续函数，傅里叶级数\index{傅里叶级数}在连续点收敛于函数值，在间断点收敛于左右极限的平均值。
+\end{jinshi}
+\end{proof}
 
 % ========== 第三节 ==========
 \section{一维波动方程的分离变量解}
@@ -404,15 +504,45 @@
 \end{equation}
 
 其中
-\begin{zhongyao}[热传导方程的分离变量解]
+\begin{dingli}{}{热传导方程的分离变量解}
 \[
     u(x, t) = \sum_{n=1}^{\infty} c_n\mathrm{e}^{-\left(\frac{n\pi a}{l}\right)^2 t}\sin\frac{n\pi x}{l}
 \]
-\end{zhongyao}
+\end{dingli}
 
 \begin{tishi}[衰减特性]
 热传导方程的解随时间指数衰减，高频成分衰减更快。这反映了热传导的\textbf{平滑化效应}——随着时间推移，温度分布趋于均匀。
 \end{tishi}
+
+\begin{lizi}{}{}
+求解有界杆的热传导问题：
+\begin{equation}
+    \begin{cases}
+        u_t = a^2 u_{xx}, \quad 0 < x < \pi, \; t > 0 \\
+        u(0, t) = u(\pi, t) = 0 \\
+        u(x, 0) = \sin x
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    设解的形式为 $u(x, t) = \sum_{n=1}^{\infty} c_n\mathrm{e}^{-(na)^2 t}\sin(nx)$。
+
+    由初始条件：
+    \begin{equation}
+        u(x, 0) = \sum_{n=1}^{\infty} c_n\sin(nx) = \sin x
+    \end{equation}
+
+    显然 $c_1 = 1$，$c_n = 0$（$n \geq 2$）。
+
+    解为
+    \begin{equation}
+        u(x, t) = \mathrm{e}^{-a^2 t}\sin x
+    \end{equation}
+
+    \textbf{物理意义}：初始温度分布 $\sin x$ 按指数规律衰减，衰减速率由系数 $a^2$ 决定。当 $t \to \infty$ 时，$u \to 0$，杆趋于均匀温度。
+\end{jie}
+\end{lizi}
+
 \subsection{非齐次边界条件的处理}
 
 对于非齐次边界条件，采用\textbf{边界齐次化}方法。
@@ -467,6 +597,35 @@ $Y$ 方程的解：
 \begin{equation}
     A_n = \frac{2}{a\sinh\frac{n\pi b}{a}}\int_0^a f(x)\sin\frac{n\pi x}{a}\,\mathrm{d}x
 \end{equation}
+
+\begin{lizi}{}{}
+求解矩形区域上的拉普拉斯方程：
+\begin{equation}
+    \begin{cases}
+        u_{xx} + u_{yy} = 0, \quad 0 < x < \pi, \; 0 < y < \pi \\
+        u(0, y) = u(\pi, y) = 0 \\
+        u(x, 0) = 0, \quad u(x, \pi) = \sin x
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    设 $u(x, y) = \sum_{n=1}^{\infty} A_n\sinh(ny)\sin(nx)$。
+
+    由边界条件 $u(x, \pi) = \sin x$：
+    \begin{equation}
+        \sum_{n=1}^{\infty} A_n\sinh(n\pi)\sin(nx) = \sin x
+    \end{equation}
+
+    比较系数：$A_1\sinh\pi = 1$，$A_n = 0$（$n \geq 2$）。
+
+    所以 $A_1 = \frac{1}{\sinh\pi}$，解为
+    \begin{equation}
+        u(x, y) = \frac{\sinh y}{\sinh\pi}\sin x
+    \end{equation}
+
+    \textbf{验证}：在 $y = \pi$ 边上，$u(x, \pi) = \sin x$，满足边界条件。
+\end{jie}
+\end{lizi}
 
 \subsection{圆域问题}
 
@@ -567,6 +726,42 @@ $R$ 方程是欧拉方程，解为：
 \end{equation}
 
 用积分因子法求解。
+
+\begin{lizi}{}{}
+求解非齐次热传导方程：
+\begin{equation}
+    \begin{cases}
+        u_t = u_{xx} + \sin x, \quad 0 < x < \pi, \; t > 0 \\
+        u(0, t) = u(\pi, t) = 0 \\
+        u(x, 0) = 0
+    \end{cases}
+\end{equation}
+
+\begin{jie}
+    用固有函数展开法。设
+    \begin{equation}
+        u(x, t) = \sum_{n=1}^{\infty} T_n(t)\sin(nx)
+    \end{equation}
+
+    将非齐次项 $\sin x$ 展开：只有 $n = 1$ 项，$f_1(t) = 1$。
+
+    代入方程，$T_n(t)$ 满足：
+    \begin{equation}
+        T_n'(t) + n^2 T_n(t) = \begin{cases} 1, & n = 1 \\ 0, & n \geq 2 \end{cases}
+    \end{equation}
+
+    对于 $n = 1$：$T_1' + T_1 = 1$，解得 $T_1(t) = 1 - \mathrm{e}^{-t}$（由初值 $T_1(0) = 0$）。
+
+    对于 $n \geq 2$：$T_n' + n^2 T_n = 0$，由 $T_n(0) = 0$ 得 $T_n(t) = 0$。
+
+    解为
+    \begin{equation}
+        u(x, t) = (1 - \mathrm{e}^{-t})\sin x
+    \end{equation}
+
+    \textbf{稳态}：当 $t \to \infty$ 时，$u \to \sin x$，这是方程 $u_{xx} + \sin x = 0$ 在齐次边界条件下的稳态解。
+\end{jie}
+\end{lizi}
 
 % ========== 本章小结 ==========
 \section{本章小结}

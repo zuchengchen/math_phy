@@ -3,10 +3,186 @@
 \chapter{复变函数}
 
 \begin{wulibj}[本章导读]
-复变函数是把实变函数的定义域从实数扩展到复数\index{复数}后的自然推广。但这个``自然推广''却带来了全新的结构：解析函数\index{解析函数}。解析函数\index{解析函数}具有许多令人惊奇的性质，比如：一个解析函数\index{解析函数}在一点知道它的值，就知道了整个区域内的值！本章我们将学习复变函数的基本概念、极限、连续、导数和解析性。
+复变函数是把实变函数的定义域从实数扩展到复数\index{复数}后的自然推广。但这个``自然推广''却带来了全新的结构：解析函数\index{解析函数}。解析函数\index{解析函数}具有许多令人惊奇的性质，比如：一个解析函数\index{解析函数}在一点知道它的值，就知道了整个区域内的值！本章我们将先学习复平面上的点集与区域概念，然后讨论复变函数的基本概念、极限、连续、导数和解析性。
 \end{wulibj}
 
 % ========== 第一节 ==========
+\section{区域与连通性}
+
+在高等数学中，我们学习过函数的定义域：比如 $f(x) = \sqrt{x}$ 的定义域是 $x \geq 0$，$g(x) = 1/x$ 在 $x = 0$ 处无定义。当时我们用不等式来描述这些区域。
+
+但是，当定义域从实数轴（一维）扩展到复平面（二维）后，情况变得复杂多了。复平面上的一个点 $(x, y)$ 需要两个坐标来确定，区域的形状也更加多样——可能是圆盘、环形、带洞的区域等等。
+
+于是问题来了：我们如何精确地描述一个区域？什么叫``在区域内''？什么叫``边界上''？什么叫``连通''？这些概念在讨论复变函数的积分路径、解析性、柯西积分定理时都会用到。例如，柯西积分定理要求区域是``单连通''的——你知道这意味着什么吗？
+
+所以，在本节我们要建立一套精确的语言，为后续学习打好基础。虽然这些定义看起来有些抽象，但它们都是为解决实际问题而自然引入的。
+
+\subsection{点的邻域}
+
+\begin{dingliyi}{}{邻域}
+设 $z_0$ 是复平面上的一个点，$\varepsilon > 0$ 是正数。点集
+\begin{equation}
+    U(z_0, \varepsilon) = \{z \in \mathbb{C} : |z - z_0| < \varepsilon\}
+\end{equation}
+称为点 $z_0$ 的\textbf{$\varepsilon$ 邻域}，即以 $z_0$ 为圆心、$\varepsilon$ 为半径的开圆盘。
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 圆
+    \draw[blue, thick, fill=blue!10] (2, 1) circle (1);
+    
+    % 圆心
+    \fill[red] (2, 1) circle (2pt) node[above right] {$z_0$};
+    
+    % 半径
+    \draw[<->, thick] (2, 1) -- (3, 1) node[midway, above] {$\varepsilon$};
+    
+    % 任意点
+    \fill[green!60!black] (2.5, 1.7) circle (1.5pt) node[right] {$z$};
+    
+    % 坐标轴
+    \draw[->, gray] (-0.5, 0) -- (4.5, 0) node[right] {$x$};
+    \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+\end{tikzpicture}
+\caption{点 $z_0$ 的 $\varepsilon$ 邻域}
+\label{fig:neighborhood}
+\end{figure}
+
+\subsection{内点、外点、边界点}
+
+\begin{dingliyi}{}{内点、外点、边界点}
+设 $E$ 是复平面上的一个点集，$z_0$ 是一个点。
+\begin{itemize}
+    \item 若存在 $\varepsilon > 0$，使得 $U(z_0, \varepsilon) \subset E$，则称 $z_0$ 是 $E$ 的\textbf{内点}。
+    \item 若存在 $\varepsilon > 0$，使得 $U(z_0, \varepsilon) \cap E = \emptyset$，则称 $z_0$ 是 $E$ 的\textbf{外点}。
+    \item 若 $z_0$ 既不是 $E$ 的内点也不是外点，即 $z_0$ 的任意邻域内既有 $E$ 中的点又有不在 $E$ 中的点，则称 $z_0$ 是 $E$ 的\textbf{边界点}。
+\end{itemize}
+\end{dingliyi}
+
+\begin{lizi}{}{}
+    设 $E = \{z : |z| < 1\}$ 是单位开圆盘。判断以下点的类型：
+    \begin{enumerate}
+        \item $z_1 = 0$
+        \item $z_2 = 1$
+        \item $z_3 = 2$
+    \end{enumerate}
+    \begin{jie}
+        \begin{enumerate}
+            \item $z_1 = 0$：内点。因为存在邻域 $U(0, 0.5) \subset E$，完全在 $E$ 内。
+            \item $z_2 = 1$：边界点。任意邻域 $U(1, \varepsilon)$ 内既有 $E$ 中的点（如 $1 - \varepsilon/2$），又有 $E$ 外的点（如 $1 + \varepsilon/2$）。
+            \item $z_3 = 2$：外点。存在邻域 $U(2, 0.5)$ 与 $E$ 不相交。
+        \end{enumerate}
+    \end{jie}
+\end{lizi}
+
+\subsection{开集与闭集}
+
+\begin{dingliyi}{}{开集与闭集}
+\begin{itemize}
+    \item 若点集 $E$ 中的每个点都是内点，则称 $E$ 是\textbf{开集}。
+    \item 若点集 $E$ 的补集 $\mathbb{C} \setminus E$ 是开集，则称 $E$ 是\textbf{闭集}。
+    \item 点集 $E$ 的所有边界点构成的集合称为 $E$ 的\textbf{边界}，记作 $\partial E$。
+\end{itemize}
+\end{dingliyi}
+
+\begin{zhu}{}{}
+``开''和``闭''不是互斥的。例如，空集 $\emptyset$ 和全空间 $\mathbb{C}$ 既开又闭。
+\end{zhu}
+
+\subsection{区域}
+
+\begin{dingliyi}{}{区域}
+若点集 $D$ 满足：
+\begin{enumerate}
+    \item $D$ 是开集；
+    \item $D$ 是连通的，即 $D$ 中任意两点都可以用一条完全在 $D$ 内的曲线连接。
+\end{enumerate}
+则称 $D$ 是一个\textbf{区域}。
+
+区域 $D$ 连同它的边界 $\partial D$ 构成的集合称为\textbf{闭区域}，记作 $\bar{D} = D \cup \partial D$。
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 左图：区域
+    \begin{scope}
+        \draw[blue, thick, fill=blue!20] (0, 0) circle (1.5);
+        \draw[blue, thick, fill=blue!20] (2.5, 0) circle (1);
+        % 连接部分
+        \draw[blue, thick, fill=blue!20] (0, 0) -- (2.5, 0);
+        
+        \node at (1.25, -2.5) {(a) 区域（连通开集）};
+    \end{scope}
+    
+    % 右图：非区域
+    \begin{scope}[xshift=7cm]
+        \draw[blue, thick, fill=blue!20] (0, 0) circle (1.5);
+        \draw[blue, thick, fill=blue!20] (3, 0) circle (1);
+        % 不连接
+        
+        \node at (1.5, -2.5) {(b) 非区域（不连通）};
+    \end{scope}
+\end{tikzpicture}
+\caption{区域与非区域的区别}
+\label{fig:region}
+\end{figure}
+
+\subsection{单连通与多连通区域}
+
+\begin{dingliyi}{}{单连通区域}
+若区域 $D$ 内任意一条简单闭曲线的内部仍在 $D$ 内，则称 $D$ 是\textbf{单连通区域}。否则称为\textbf{多连通区域}。
+
+直观地说，单连通区域是``没有洞''的区域。
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % 单连通
+    \begin{scope}
+        \draw[blue, thick, fill=blue!20] (0, 0) ellipse (1.5 and 1);
+        \node at (0, -2) {(a) 单连通区域};
+        
+        % 闭曲线
+        \draw[red, thick, dashed] (0, 0) circle (0.5);
+        \node[red] at (0, 0.8) {\small 闭曲线};
+    \end{scope}
+    
+    % 多连通
+    \begin{scope}[xshift=5cm]
+        \draw[blue, thick, fill=blue!20] (0, 0) ellipse (1.5 and 1);
+        \draw[white, thick, fill=white] (0, 0) circle (0.4);
+        \draw[blue, thick] (0, 0) circle (0.4);
+        \node at (0, -2) {(b) 多连通区域（有洞）};
+        
+        % 闭曲线
+        \draw[red, thick, dashed] (0, 0) circle (0.25);
+    \end{scope}
+    
+    % 环形区域
+    \begin{scope}[xshift=10cm]
+        \draw[blue, thick, fill=blue!20] (0, 0) circle (1.5);
+        \draw[white, thick, fill=white] (0, 0) circle (0.5);
+        \draw[blue, thick] (0, 0) circle (0.5);
+        \node at (0, -2) {(c) 环形区域（多连通）};
+    \end{scope}
+\end{tikzpicture}
+\caption{单连通与多连通区域}
+\label{fig:simply-connected}
+\end{figure}
+
+\begin{zhu}{}{}
+单连通与多连通的区别在研究柯西积分定理\index{柯西积分定理}时非常重要。简单来说：
+\begin{itemize}
+    \item 在单连通区域内，闭路积分可以``收缩''为一点。
+    \item 在多连通区域内，围绕``洞''的闭路积分可能不为零。
+\end{itemize}
+\end{zhu}
+
+% ========== 第二节 ==========
 \section{复变函数的概念}
 
 \subsection{从实变函数到复变函数}
@@ -94,7 +270,7 @@
 用``映射''的视角看待复变函数，在后续学习保角映射时会非常重要。我们不仅关心函数在某点的值，还关心函数如何``变形''整个区域。
 \end{tishi}
 
-% ========== 第二节 ==========
+% ========== 第三节 ==========
 \section{复变函数的极限与连续}
 
 \subsection{极限的概念}
@@ -228,7 +404,7 @@
 \end{jie}
 \end{lizi}
 
-% ========== 第三节 ==========
+% ========== 第四节 ==========
 \section{导数与解析性}
 
 \subsection{复变函数的导数}
@@ -346,10 +522,14 @@
     (\cos z)' &= -\sin z
 \end{align}
 
-% ========== 第四节 ==========
-\section{柯西--黎曼条件}
+% ========== 第五节 ==========
+\section{柯西\index{柯西@柯西（Cauchy）}（Cauchy）--黎曼\index{黎曼@黎曼（Riemann）}（Riemann）条件}
 
-前面我们看到，复变函数可导的条件比实变函数严格得多。现在我们要回答：一个复变函数在什么条件下可导？答案就是著名的\textbf{柯西--黎曼条件}。
+前面我们看到，复变函数可导的条件比实变函数严格得多。一个函数 $f(z) = \bar{z}$ 看起来很简单，却在任意点都不可导！这让我们不禁要问：复变函数可导的条件到底是什么？
+
+用定义判断可导需要计算极限，每次都要重新推导，太麻烦了。我们希望找到一个更实用的判别方法——最好能直接从函数的实部和虚部判断它是否可导，而不需要每次都回到极限定义。
+
+这个判别方法就是著名的\textbf{柯西--黎曼条件}。它的思想很朴素：如果 $\Delta z$ 可以沿任意方向趋近零，那么沿不同方向趋近的结果必须相等！我们选取两个特殊方向来推导条件。
 
 \subsection{柯西--黎曼条件的导出}
 
@@ -501,7 +681,7 @@
 \end{jie}
 \end{lizi}
 
-% ========== 第五节 ==========
+% ========== 第六节 ==========
 \section{解析函数\index{解析函数}的几何意义：保角映射}
 
 \subsection{导数的几何意义}
@@ -632,7 +812,7 @@
 \label{fig:angle-preserve}
 \end{figure}
 
-% ========== 第六节 ==========
+% ========== 第七节 ==========
 \section{初等解析函数\index{解析函数}}
 
 \subsection{指数函数}
@@ -718,7 +898,7 @@
 \end{enumerate}
 \end{zhu}
 
-% ========== 第七节 ==========
+% ========== 第八节 ==========
 \section{解析函数\index{解析函数}的物理意义：平面静电场}
 
 解析函数\index{解析函数}不仅是数学对象，还有深刻的物理意义。在二维势场问题中，解析函数\index{解析函数}天然出现。

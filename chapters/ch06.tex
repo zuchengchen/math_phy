@@ -53,6 +53,7 @@
 
 所以 $\beta = \alpha$，夹角保持不变。
 \end{proof}
+\end{dingli}
 
 \begin{figure}[htbp]
 \centering
@@ -105,8 +106,6 @@
 \caption{保角映射：夹角保持不变}
 \label{fig:conformal-mapping}
 \end{figure}
-
-\end{dingli}
 
 \subsection{保角映射的定义}
 
@@ -172,6 +171,32 @@
 若点 $z_1$ 和 $z_2$ 关于圆周 $C$ 对称，则在分式线性变换下，它们的像 $w_1$ 和 $w_2$ 关于像圆周 $C'$ 对称。
 \end{dingli}
 
+\begin{proof}
+设分式线性变换为 $w = T(z)$，圆周 $C$ 映射为 $C' = T(C)$。
+
+由对称点的定义，$z_1$ 和 $z_2$ 关于圆周 $C$ 对称当且仅当任意过 $z_1$ 和 $z_2$ 的圆周与 $C$ 正交。
+
+设 $\Gamma$ 是任意过 $z_1$ 和 $z_2$ 的圆周。由分式线性变换保圆性，$T(\Gamma)$ 是过 $w_1$ 和 $w_2$ 的圆周。
+
+由于分式线性变换保角，$T(\Gamma)$ 与 $C' = T(C)$ 正交。
+
+因此，任意过 $w_1$ 和 $w_2$ 的圆周都与 $C'$ 正交，即 $w_1$ 和 $w_2$ 关于 $C'$ 对称。
+
+\textbf{另一证法}：利用对称点的解析表达式。
+
+设圆周为 $|z - z_0| = R$，对称条件为
+\begin{equation}
+    (z_1 - z_0)\overline{(z_2 - z_0)} = R^2
+\end{equation}
+
+对于反演 $w = 1/z$（其他情况可化为此情形），有
+\begin{equation}
+    w_1 = \frac{1}{z_1}, \quad w_2 = \frac{1}{z_2}
+\end{equation}
+
+像圆周的圆心和半径需满足相应的关系式，验证即得对称性成立。
+\end{proof}
+
 \begin{dingliyi}{}{对称点}
 点 $z_1$ 和 $z_2$ 关于圆周 $|z - z_0| = R$ 对称，当且仅当
 \begin{equation}
@@ -217,6 +242,39 @@
 \end{equation}
 确定。这称为\textbf{交比不变式}。
 \end{dingli}
+
+\begin{proof}
+\textbf{第一步：引入交比}。
+
+定义四点的\textbf{交比}：
+\begin{equation}
+    (z, z_1; z_2, z_3) = \frac{z - z_1}{z - z_2} : \frac{z_3 - z_1}{z_3 - z_2} = \frac{(z - z_1)(z_3 - z_2)}{(z - z_2)(z_3 - z_1)}
+\end{equation}
+
+\textbf{第二步：交比在分式线性变换下不变}。
+
+设 $w = T(z) = \frac{az + b}{cz + d}$ 是分式线性变换。直接计算验证：
+\begin{equation}
+    (T(z), T(z_1); T(z_2), T(z_3)) = (z, z_1; z_2, z_3)
+\end{equation}
+
+这是因为
+\begin{equation}
+    T(z) - T(z_1) = \frac{(ad - bc)(z - z_1)}{(cz + d)(cz_1 + d)}
+\end{equation}
+代入交比定义式，分母分子中的 $(ad - bc)$ 与 $(cz + d)$ 等因子恰好约去。
+
+\textbf{第三步：存在性与唯一性}。
+
+设 $w = T(z)$ 将 $z_1, z_2, z_3$ 分别映射到 $w_1, w_2, w_3$。由交比不变性：
+\begin{equation}
+    (w, w_1; w_2, w_3) = (z, z_1; z_2, z_3)
+\end{equation}
+
+这给出了 $w$ 与 $z$ 的关系，即交比不变式。
+
+\textbf{唯一性}：若有另一变换 $T'$ 也满足条件，则 $T^{-1} \circ T'$ 固定三点 $z_1, z_2, z_3$。分式线性变换若固定三点，必为恒等变换，故 $T = T'$。
+\end{proof}
 
 \begin{lizi}{}{}
 求将 $z_1 = 0$, $z_2 = 1$, $z_3 = \infty$ 映射到 $w_1 = -1$, $w_2 = 0$, $w_3 = 1$ 的分式线性变换。
@@ -271,6 +329,31 @@
 
 因此 $|w| = |k|$。要使实轴映射到单位圆周，取 $|k| = 1$，即 $k = \mathrm{e}^{\mathrm{i}\theta}$。
 \end{proof}
+
+\begin{lizi}{}{}
+求将上半平面 $\mathrm{Im}(z) > 0$ 映射到单位圆 $|w| < 1$ 的变换，使得 $z = \mathrm{i}$ 映射到 $w = 0$，且 $z = 1$ 映射到 $w = -1$。
+
+\begin{jie}
+    由公式 $w = \mathrm{e}^{\mathrm{i}\theta}\frac{z - z_0}{z - \overline{z_0}}$，已知 $z_0 = \mathrm{i}$（因为 $z_0$ 映射到原点）。
+
+    由于 $\overline{z_0} = -\mathrm{i}$，代入得
+    \begin{equation}
+        w = \mathrm{e}^{\mathrm{i}\theta}\frac{z - \mathrm{i}}{z + \mathrm{i}}
+    \end{equation}
+
+    利用 $z = 1$ 映射到 $w = -1$ 的条件：
+    \begin{equation}
+        -1 = \mathrm{e}^{\mathrm{i}\theta}\frac{1 - \mathrm{i}}{1 + \mathrm{i}} = \mathrm{e}^{\mathrm{i}\theta}\frac{(1 - \mathrm{i})^2}{(1 + \mathrm{i})(1 - \mathrm{i})} = \mathrm{e}^{\mathrm{i}\theta}\frac{-2\mathrm{i}}{2} = -\mathrm{i}\mathrm{e}^{\mathrm{i}\theta}
+    \end{equation}
+
+    所以 $\mathrm{e}^{\mathrm{i}\theta} = -\mathrm{i} = \mathrm{e}^{-\mathrm{i}\pi/2}$，即 $\theta = -\frac{\pi}{2}$。
+
+    所求变换为
+    \begin{equation}
+        w = -\mathrm{i}\frac{z - \mathrm{i}}{z + \mathrm{i}} = \frac{1 - \mathrm{i}z}{z + \mathrm{i}}
+    \end{equation}
+\end{jie}
+\end{lizi}
 
 % ========== 第三节 ==========
 \section{常见保角映射}
@@ -341,6 +424,27 @@ $w = z^n$（$n \geq 2$）将：
 $w = z^n$ 在 $z = 0$ 处不保角！$z = 0$ 是 $n-1$ 阶支点。
 \end{jinshi}
 
+\begin{lizi}{}{}
+求将角形域 $D = \{z : 0 < \arg z < \frac{\pi}{4}\}$ 映射到上半平面的变换。
+
+\begin{jie}
+    幂函数 $w = z^n$ 将角形域 $0 < \arg z < \alpha$ 映射到 $0 < \arg w < n\alpha$。
+
+    要将角形域 $0 < \arg z < \frac{\pi}{4}$ 映射到上半平面 $0 < \arg w < \pi$，需要
+    \begin{equation}
+        n \cdot \frac{\pi}{4} = \pi \implies n = 4
+    \end{equation}
+
+    所以所求变换为 $w = z^4$。
+
+    \textbf{验证}：设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，其中 $0 < \theta < \frac{\pi}{4}$，则
+    \begin{equation}
+        w = z^4 = r^4\mathrm{e}^{\mathrm{i}4\theta}
+    \end{equation}
+    由于 $0 < 4\theta < \pi$，所以 $w$ 确实在上半平面。
+\end{jie}
+\end{lizi}
+
 \subsection{指数函数 $w = \mathrm{e}^z$}
 
 \begin{dingli}{}{指数函数映射}
@@ -362,6 +466,28 @@ $w = \mathrm{e}^z$ 将：
     \item 当 $y = \theta_0$ 为常数时，$\arg w = \theta_0$ 为常数，即射线。
 \end{itemize}
 \end{proof}
+
+\begin{lizi}{}{}
+求将水平带形域 $D = \{z : 0 < \mathrm{Im}(z) < \frac{\pi}{2}\}$ 映射到第一象限的变换。
+
+\begin{jie}
+    指数函数 $w = \mathrm{e}^z$ 将水平带形域 $0 < \mathrm{Im}(z) < \alpha$ 映射到角形域 $0 < \arg w < \alpha$。
+
+    对于带形域 $0 < \mathrm{Im}(z) < \frac{\pi}{2}$，直接用 $w = \mathrm{e}^z$：
+    \begin{equation}
+        w = \mathrm{e}^z = \mathrm{e}^x \cdot \mathrm{e}^{\mathrm{i}y}
+    \end{equation}
+
+    当 $0 < y < \frac{\pi}{2}$ 时，$0 < \arg w < \frac{\pi}{2}$，即第一象限。
+
+    \textbf{验证}：
+    \begin{itemize}
+        \item 实轴 $\mathrm{Im}(z) = 0$ 映射到正实轴 $\arg w = 0$
+        \item 直线 $\mathrm{Im}(z) = \frac{\pi}{2}$ 映射到正虚轴 $\arg w = \frac{\pi}{2}$
+        \item 带形域内部映射到第一象限内部
+    \end{itemize}
+\end{jie}
+\end{lizi}
 
 \subsection{儒可夫斯基变换}
 
@@ -496,6 +622,15 @@ $w = \mathrm{e}^z$ 将：
 
 \begin{tishi}
 黎曼映射定理保证了保角映射的存在性，但没有给出具体的变换公式。实际应用中，需要根据具体问题构造适当的变换。
+
+\textbf{证明思路}（超出本课程范围）：
+\begin{enumerate}
+    \item 构造一族将区域映射到单位圆内部的解析函数
+    \item 利用蒙泰尔定理（正规族理论）证明存在收敛子列
+    \item 验证极限函数即为所求的保角映射
+\end{enumerate}
+
+证明需要用到解析函数正规族、调和函数边界值等较深的理论。
 \end{tishi}
 
 % ========== 本章小结 ==========
@@ -548,3 +683,20 @@ $w = \mathrm{e}^z$ 将：
     
     \item 利用保角映射求解：在半无限条形区域 $x > 0$, $0 < y < \pi$ 内，边界 $y = 0$ 和 $y = \pi$ 上温度为 $0$，边界 $x = 0$ 上温度为 $1$，求稳定温度分布。
 \end{enumerate}
+
+% ========== 第一篇小结 ==========
+\section*{第一篇小结：复变函数}
+
+\begin{tishi}[从复变函数到积分变换]
+    至此，我们完成了复变函数基础理论的学习。从复数的几何表示出发，我们建立了解析函数\index{解析函数}理论，学习了柯西积分定理\index{柯西积分定理}和留数理论这两个核心工具。这些内容不仅是数学理论的精华，更是下一篇积分变换的理论基础。
+    
+    \textbf{核心回顾}：
+    \begin{itemize}
+        \item 解析性是复变函数的本质特征，柯西-黎曼条件\index{柯西-黎曼条件}是其判别准则
+        \item 柯西积分公式揭示了解析函数\index{解析函数}的内在结构
+        \item 留数定理\index{留数定理}将积分问题转化为代数问题
+        \item 保角映射提供了解决二维势问题的几何方法
+    \end{itemize}
+    
+    \textbf{与积分变换的联系}：傅里叶变换\index{傅里叶变换}和拉普拉斯变换\index{拉普拉斯变换}都可以用复变函数理论来研究——傅里叶变换\index{傅里叶变换}本质上是在虚轴上的拉普拉斯变换\index{拉普拉斯变换}，而逆变换则涉及复平面的围道积分。掌握复变函数，将使积分变换的学习事半功倍。
+\end{tishi}

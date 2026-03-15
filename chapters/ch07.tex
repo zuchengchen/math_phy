@@ -87,6 +87,18 @@
 
 当周期 $2L \to \infty$ 时，周期函数变成非周期函数，离散谱变成连续谱。
 
+这个极限过程有非常直观的物理意义，让我们先理解一下：
+
+\begin{tishi}[物理直观：从离散谱到连续谱]
+设想一个周期信号，比如一个不断重复的脉冲。当我们用傅里叶级数展开它时，得到的是一系列离散的频率成分：$\omega = \frac{\pi}{L}, \frac{2\pi}{L}, \frac{3\pi}{L}, \ldots$。相邻频率的间隔是 $\Delta\omega = \frac{\pi}{L}$。
+
+现在，让周期 $L$ 变大。信号还是重复，但两次重复之间的间隔变长了。结果是什么？频率谱变密了！因为 $\Delta\omega = \frac{\pi}{L}$ 变小了。
+
+当 $L \to \infty$ 时，信号变成了真正的非周期信号（只出现一次）。频率间隔趋于零，离散的谱线变成了一条连续的曲线。原来每个整数 $n$ 对应的系数 $c_n$，现在变成了连续变量 $\omega$ 对应的函数 $\hat{f}(\omega)$。
+
+这就是傅里叶变换的物理本质：\textbf{非周期信号具有连续的频率谱}。
+\end{tishi}
+
 令 $\omega_n = n\pi/L$，$\Delta\omega = \pi/L$，则
 \begin{equation}
     f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}\omega_n x} = \frac{1}{2\pi}\sum_{n=-\infty}^{\infty} \hat{f}(\omega_n)\mathrm{e}^{\mathrm{i}\omega_n x}\Delta\omega
@@ -112,9 +124,41 @@
 傅里叶变换\index{傅里叶变换}将信号从\textbf{时域}（$x$ 空间）转换到\textbf{频域}（$\omega$ 空间）。$\hat{f}(\omega)$ 表示信号中频率为 $\omega$ 的成分的强度。
 \end{tishi}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % 时域信号
+    \begin{scope}[shift={(-4,0)}]
+        \draw[->, gray] (-0.3, 0) -- (3.5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$f(x)$};
+        \draw[blue, thick, domain=0:3.2, samples=100] plot (\x, {0.8*exp(-(\x-1.5)*(\x-1.5)/0.5)*cos(deg(4*\x))});
+        \node at (1.5, -1) {时域信号};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick, red] (0, 0.7) -- (1.5, 0.7);
+    \node[red, above] at (0.75, 0.7) {$\mathcal{F}$};
+    
+    % 频域信号
+    \begin{scope}[shift={(3,0)}]
+        \draw[->, gray] (-0.3, 0) -- (3.5, 0) node[right] {$\omega$};
+        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$\hat{f}(\omega)$};
+        \draw[green!60!black, thick, domain=0:3.2, samples=100] plot (\x, {1.2*exp(-(\x-1.2)*(\x-1.2)/0.3)});
+        \node at (1.5, -1) {频域信号};
+    \end{scope}
+    
+    % 逆变换
+    \draw[->, very thick, blue] (4.5, 0.7) -- (3, 0.7);
+    \node[blue, below] at (3.75, 0.5) {$\mathcal{F}^{-1}$};
+\end{tikzpicture}
+\caption{傅里叶变换的时域-频域转换}
+\label{fig:fourier-transform-domain}
+\end{figure}
+
 \subsection{傅里叶变换\index{傅里叶变换}的存在条件}
 
-\begin{dingli}{}{狄利克雷条件}
+\begin{dingli}{}{狄利克雷（Dirichlet）条件}
+\index{狄利克雷@狄利克雷（Dirichlet）}
 若 $f(x)$ 满足：
 \begin{enumerate}
     \item 在任意有限区间上至多有有限个第一类间断点

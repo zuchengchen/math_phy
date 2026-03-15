@@ -4,7 +4,33 @@
 
 \begin{wulibj}[本章导读]
 积分变换法是求解数学物理方程的另一重要方法。通过对自变量进行积分变换，可以将偏微分方程降维，转化为常微分方程或代数方程，大大简化求解过程。本章主要介绍傅里叶变换\index{傅里叶变换}法和拉普拉斯变换\index{拉普拉斯变换}法在数理方程中的应用。
+
+积分变换法的核心思想是：通过变换将复杂问题简化，求解后再通过逆变换回到原问题的解。
 \end{wulibj}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85, every node/.style={font=\small}]
+    % 流程框
+    \node[draw, rounded corners, fill=blue!10, minimum width=3cm, minimum height=1cm] (pde) at (0, 0) {偏微分方程};
+    \node[draw, rounded corners, fill=green!10, minimum width=3cm, minimum height=1cm] (ode) at (5, 0) {常微分方程};
+    \node[draw, rounded corners, fill=orange!10, minimum width=3cm, minimum height=1cm] (solve) at (10, 0) {代数方程};
+    
+    % 箭头
+    \draw[->, thick] (pde) -- (ode) node[midway, above] {积分变换};
+    \draw[->, thick] (ode) -- (solve) node[midway, above] {再变换};
+    
+    % 返回箭头
+    \draw[->, thick] (solve.south) -- ++(0, -1) -| (pde.south) node[pos=0.25, below] {逆变换};
+    
+    % 标注
+    \node[below=0.3cm of pde] {复杂};
+    \node[below=0.3cm of ode] {较简单};
+    \node[below=0.3cm of solve] {最简单};
+\end{tikzpicture}
+\caption{积分变换法的基本思想}
+\label{fig:integral-transform-concept}
+\end{figure}
 
 % ========== 第一节 ==========
 \section{傅里叶变换\index{傅里叶变换}法}
@@ -17,6 +43,35 @@
 \end{equation}
 
 这特别适合处理\textbf{无界区域}的问题。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8, every node/.style={font=\small}]
+    % 左边：空间域
+    \begin{scope}[shift={(-4,0)}]
+        \draw[->, gray] (-2, 0) -- (2, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 2.5) node[above] {$u(x,t)$};
+        \draw[blue, thick, domain=-1.8:1.8, samples=100] plot (\x, {1.5*exp(-\x*\x)});
+        \node[below] at (0, -1) {空间域（实空间）};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, thick, red] (-1.5, 1) -- (1.5, 1) node[midway, above] {$\mathcal{F}$};
+    \draw[->, thick, red] (1.5, 0.5) -- (-1.5, 0.5) node[midway, below] {$\mathcal{F}^{-1}$};
+    
+    % 右边：频域
+    \begin{scope}[shift={(4,0)}]
+        \draw[->, gray] (-2, 0) -- (2, 0) node[right] {$\omega$};
+        \draw[->, gray] (0, -0.5) -- (0, 2.5) node[above] {$\hat{u}(\omega,t)$};
+        \draw[blue, thick, domain=-1.8:1.8, samples=100] plot (\x, {1.2*exp(-\x*\x)});
+        \node[below] at (0, -1) {频域（变换空间）};
+    \end{scope}
+\end{tikzpicture}
+\caption{傅里叶变换：从空间域到频域}
+\label{fig:fourier-transform-domains}
+\end{figure}
+
+图 \ref{fig:fourier-transform-domains} 展示了傅里叶变换的本质：将函数从空间域（实空间）变换到频域（变换空间）。在频域中，微分运算变成乘法运算，大大简化了方程。
 
 \subsection{一维热传导方程的傅里叶变换\index{傅里叶变换}解}
 
@@ -67,12 +122,50 @@
     \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}] = \frac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/(4a^2t)}
 \end{equation}
 
-\begin{zhongyao}[泊松积分公式]
+\begin{dingli}{}{泊松积分公式}
 一维热传导方程初值问题的解为
 \[
     u(x, t) = \frac{1}{2a\sqrt{\pi t}}\int_{-\infty}^{+\infty} \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi
 \]
-\end{zhongyao}
+\end{dingli}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.75]
+    % 泊松核 K(x,t) = exp(-x^2/(4t)) / sqrt(4*pi*t)
+    % t=0.1, 0.5, 1.0, 2.0
+    \draw[->, gray] (-5, 0) -- (5, 0) node[right] {$x$};
+    \draw[->, gray] (0, 0) -- (0, 4) node[above] {$K(x,t)$};
+    
+    % t=0.1 (highest, narrowest)
+    \draw[blue, thick, domain=-2:2, samples=100] plot (\x, {3*exp(-\x*\x/0.4)});
+    \node[blue] at (2.5, 2.5) {\small $t=0.1$};
+    
+    % t=0.5
+    \draw[red, thick, domain=-3:3, samples=100] plot (\x, {1.5*exp(-\x*\x/2)});
+    \node[red] at (3.2, 1.2) {\small $t=0.5$};
+    
+    % t=1.0
+    \draw[green!60!black, thick, domain=-4:4, samples=100] plot (\x, {1*exp(-\x*\x/4)});
+    \node[green!60!black] at (3.8, 0.6) {\small $t=1.0$};
+    
+    % t=2.0
+    \draw[orange, thick, domain=-4.5:4.5, samples=100] plot (\x, {0.7*exp(-\x*\x/8)});
+    \node[orange] at (4.2, 0.35) {\small $t=2.0$};
+    
+    % 标注
+    \node at (0, -1) {\small 泊松核 $K(x,t) = \dfrac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/(4a^2t)}$};
+\end{tikzpicture}
+\caption{泊松核在不同时刻的形状（扩散过程）}
+\label{fig:poisson-kernel}
+\end{figure}
+
+从图 \ref{fig:poisson-kernel} 可以看出泊松核的性质：
+\begin{itemize}
+    \item 当 $t \to 0^+$ 时，泊松核趋于 Dirac $\delta$ 函数（初始条件的影响）
+    \item 当 $t$ 增大时，核函数变宽变矮（热量扩散到更大范围）
+    \item 核函数的积分恒为 1（热量守恒）
+\end{itemize}
 
 \begin{lizi}{}{}
 求解：
@@ -222,9 +315,52 @@
         u(x, t) = T_0\operatorname{erfc}\left(\frac{x}{2\sqrt{t}}\right) = T_0\left[1 - \operatorname{erf}\left(\frac{x}{2\sqrt{t}}\right)\right]
     \end{equation}
     
-    其中 $\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x \mathrm{e}^{-\eta^2}\,\mathrm{d}\eta$ 是误差函数。
+    其中 $\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x \mathrm{e}^{-\eta^2}\,\mathrm{d}\eta$ 是误差函数\index{误差函数}。
 \end{jie}
 \end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 坐标轴
+    \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
+    \draw[->, gray] (0, -0.2) -- (0, 3.5) node[above] {$u(x,t)/T_0$};
+    
+    % 温度分布曲线（示意图）
+    % t=0.01: 快速下降
+    \draw[blue, thick, smooth] plot coordinates {(0,3) (0.3,2.8) (0.6,2) (1,0.8) (1.5,0.2) (2,0.05) (2.5,0)};
+    \node[blue] at (1.5, 2.5) {\small $t=0.01$};
+    
+    % t=0.1: 较慢下降
+    \draw[red, thick, smooth] plot coordinates {(0,3) (0.5,2.7) (1,2) (1.5,1.2) (2,0.6) (2.5,0.3) (3,0.1) (3.5,0)};
+    \node[red] at (2.8, 1.8) {\small $t=0.1$};
+    
+    % t=0.5: 更慢下降
+    \draw[green!60!black, thick, smooth] plot coordinates {(0,3) (0.7,2.6) (1.5,1.8) (2,1.2) (2.5,0.8) (3,0.5) (3.5,0.3) (4,0.15) (4.5,0)};
+    \node[green!60!black] at (3.5, 1.2) {\small $t=0.5$};
+    
+    % t=1.0: 最慢下降
+    \draw[orange, thick, smooth] plot coordinates {(0,3) (1,2.4) (1.5,1.8) (2,1.3) (2.5,0.9) (3,0.65) (3.5,0.45) (4,0.3) (4.5,0.2)};
+    \node[orange] at (4, 0.7) {\small $t=1.0$};
+    
+    % 边界条件标注
+    \draw[dashed] (0, 1) -- (5, 1);
+    \node[left] at (0, 1) {$1$};
+    \node[left] at (0, 0) {$0$};
+    
+    % 说明
+    \node at (2.5, -0.8) {\small 半无界热传导问题的解：$u(x,t) = T_0 \cdot \mathrm{erfc}\!\left(\dfrac{x}{2\sqrt{t}}\right)$};
+\end{tikzpicture}
+\caption{半无界热传导问题的温度分布随时间的演化}
+\label{fig:semi-infinite-heat}
+\end{figure}
+
+图 \ref{fig:semi-infinite-heat} 展示了半无界细杆的温度分布随时间的演化：
+\begin{itemize}
+    \item 边界 $x=0$ 处保持恒温 $T_0$
+    \item 热量逐渐向 $x>0$ 区域扩散
+    \item 时间越长，温度前沿传播越远
+\end{itemize}
 
 \subsection{拉普拉斯变换\index{拉普拉斯变换}解常微分方程}
 
@@ -339,6 +475,43 @@
             u(0, t) = \sin\omega t
         \end{cases}
     \end{equation}
+    
+    \item 用傅里叶变换\index{傅里叶变换}法求解热传导方程，设初值为高斯型分布：
+    \begin{equation}
+        \begin{cases}
+            u_t = a^2 u_{xx}, \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = A\mathrm{e}^{-x^2/\sigma^2}
+        \end{cases}
+    \end{equation}
+    其中 $A$ 和 $\sigma$ 为正常数。讨论解随时间的演化特征。
+    
+    \item 用拉普拉斯变换\index{拉普拉斯变换}法求解半无界热传导问题：
+    \begin{equation}
+        \begin{cases}
+            u_t = a^2 u_{xx}, \quad x > 0, \; t > 0 \\
+            u(x, 0) = u_0 \\
+            u(0, t) = 0
+        \end{cases}
+    \end{equation}
+    并解释解的物理意义。
+    
+    \item 用傅里叶变换\index{傅里叶变换}法求解：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = a^2 u_{xx}, \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = 0, \quad u_t(x, 0) = \delta(x)
+        \end{cases}
+    \end{equation}
+    验证结果与达朗贝尔公式\index{达朗贝尔公式}一致。
+    
+    \item 用拉普拉斯变换\index{拉普拉斯变换}法求解半无界杆的热传导问题：
+    \begin{equation}
+        \begin{cases}
+            u_t = a^2 u_{xx}, \quad x > 0, \; t > 0 \\
+            u(x, 0) = 0 \\
+            u_x(0, t) = g(t), \quad \lim_{x\to+\infty} u(x, t) < \infty
+        \end{cases}
+    \end{equation}
 \end{enumerate}
 
 \textbf{综合题}
@@ -354,6 +527,42 @@
             u(0, t) = f(t)
         \end{cases}
     \end{equation}
+    
+    \item 用傅里叶变换\index{傅里叶变换}法求解一维波动方程初值问题：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = a^2 u_{xx}, \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = \varphi(x), \quad u_t(x, 0) = \psi(x)
+        \end{cases}
+    \end{equation}
+    其中 $\varphi(x)$ 和 $\psi(x)$ 有紧支集。
+    
+    \item 用拉普拉斯变换\index{拉普拉斯变换}法求解非齐次热传导方程的半无界问题：
+    \begin{equation}
+        \begin{cases}
+            u_t = a^2 u_{xx} + f(x,t), \quad x > 0, \; t > 0 \\
+            u(x, 0) = 0 \\
+            u(0, t) = 0, \quad \lim_{x\to+\infty} u(x, t) < \infty
+        \end{cases}
+    \end{equation}
+    
+    \item 求解非齐次波动方程的初值问题：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = a^2 u_{xx} + h(x,t), \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = 0, \quad u_t(x, 0) = 0
+        \end{cases}
+    \end{equation}
+    试用傅里叶变换\index{傅里叶变换}法求解，并与推迟势\index{推迟势}公式比较。
+    
+    \item 用积分变换法求解含源热传导方程：
+    \begin{equation}
+        \begin{cases}
+            u_t = a^2 u_{xx} + Q_0\delta(x), \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = 0
+        \end{cases}
+    \end{equation}
+    解释解的物理意义。
 \end{enumerate}
 
 \textbf{挑战题}
@@ -370,4 +579,32 @@
     \begin{equation}
         u(x, y) = \frac{y}{\pi}\int_{-\infty}^{+\infty} \frac{f(\xi)}{(x-\xi)^2 + y^2}\,\mathrm{d}\xi
     \end{equation}
+    
+    \item 用傅里叶变换\index{傅里叶变换}法求解三维波动方程的初值问题：
+    \begin{equation}
+        \begin{cases}
+            u_{tt} = a^2 \Delta u, \quad \mathbf{r} \in \mathbb{R}^3, \; t > 0 \\
+            u(\mathbf{r}, 0) = \varphi(\mathbf{r}), \quad u_t(\mathbf{r}, 0) = \psi(\mathbf{r})
+        \end{cases}
+    \end{equation}
+    导出三维波动方程的泊松公式\index{泊松公式}。
+    
+    \item 用拉普拉斯变换\index{拉普拉斯变换}法求解具有第三类边界条件的热传导问题：
+    \begin{equation}
+        \begin{cases}
+            u_t = a^2 u_{xx}, \quad x > 0, \; t > 0 \\
+            u(x, 0) = f(x) \\
+            u_x(0, t) - hu(0, t) = 0, \quad h > 0
+        \end{cases}
+    \end{equation}
+    讨论边界条件参数 $h$ 对解的影响。
+    
+    \item 考虑对流扩散方程的初值问题：
+    \begin{equation}
+        \begin{cases}
+            u_t + v u_x = D u_{xx}, \quad x \in \mathbb{R}, \; t > 0 \\
+            u(x, 0) = \varphi(x)
+        \end{cases}
+    \end{equation}
+    其中 $v > 0$ 为对流速度，$D > 0$ 为扩散系数。用傅里叶变换\index{傅里叶变换}法求解，分析对流项与扩散项对解的影响。
 \end{enumerate}

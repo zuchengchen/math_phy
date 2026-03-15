@@ -1,4 +1,4 @@
-% 第十六章：贝塞尔函数\index{贝塞尔函数}
+% 第十六章：贝塞尔\index{贝塞尔@贝塞尔（Bessel）}（Bessel）函数\index{贝塞尔函数}
 
 \chapter{贝塞尔函数\index{贝塞尔函数}}
 
@@ -40,11 +40,11 @@ $r$ 方向（设 $x = kr$）：
 
 \subsection{第一类贝塞尔函数\index{贝塞尔函数} $J_m(x)$}
 
-\begin{zhongyao}[第一类贝塞尔函数]
+\begin{dingliyi}{}{第一类贝塞尔函数}
 \[
     J_m(x) = \sum_{k=0}^{\infty} \frac{(-1)^k}{k!\Gamma(m+k+1)}\left(\frac{x}{2}\right)^{m+2k}
 \]
-\end{zhongyao}
+\end{dingliyi}
 
 前几项：
 \begin{align}
@@ -56,15 +56,26 @@ $r$ 方向（设 $x = kr$）：
 \centering
 \begin{tikzpicture}[scale=0.7]
     \draw[->, gray] (-0.5, 0) -- (10, 0) node[right] {$x$};
-    \draw[->, gray] (0, -1) -- (0, 1.2) node[above] {$J_m(x)$};
+    \draw[->, gray] (0, -0.8) -- (0, 1.2) node[above] {$J_m(x)$};
     
-    % J_0
-    \draw[blue, thick, domain=0:9.5, samples=100] plot (\x, {cos(deg(\x))});
-    \node[blue] at (9, 0.7) {$J_0$};
+    % J_0 - 使用实际贝塞尔函数近似（基于已知零点和振幅衰减特性）
+    % J_0 的零点：2.405, 5.520, 8.654
+    \draw[blue, thick] plot[smooth] coordinates {
+        (0, 1) (0.5, 0.94) (1, 0.77) (1.5, 0.51) (2, 0.22) (2.405, 0)
+        (2.8, -0.18) (3.2, -0.32) (3.6, -0.39) (4, -0.40) (4.4, -0.37) (4.8, -0.29) (5.2, -0.18) (5.520, 0)
+        (6, 0.13) (6.5, 0.20) (7, 0.23) (7.5, 0.22) (8, 0.17) (8.5, 0.10) (8.654, 0)
+        (9, -0.06) (9.5, -0.10)
+    };
+    \node[blue] at (9.3, 0.5) {$J_0$};
     
-    % J_1
-    \draw[red, thick, domain=0:9.5, samples=100] plot (\x, {sin(deg(\x))});
-    \node[red] at (9, -0.3) {$J_1$};
+    % J_1 - 使用实际贝塞尔函数近似
+    % J_1 的零点：3.832, 7.016
+    \draw[red, thick] plot[smooth] coordinates {
+        (0, 0) (0.5, 0.24) (1, 0.44) (1.5, 0.56) (2, 0.58) (2.5, 0.50) (3, 0.34) (3.5, 0.14) (3.832, 0)
+        (4.2, -0.11) (4.6, -0.19) (5, -0.24) (5.4, -0.26) (5.8, -0.24) (6.2, -0.20) (6.6, -0.13) (7.016, 0)
+        (7.4, 0.09) (7.8, 0.14) (8.2, 0.16) (8.6, 0.15) (9, 0.12) (9.5, 0.08)
+    };
+    \node[red] at (9.3, -0.4) {$J_1$};
     
     % 零点标记
     \foreach \x in {2.405, 5.520, 8.654} {
@@ -73,15 +84,50 @@ $r$ 方向（设 $x = kr$）：
     \foreach \x in {3.832, 7.016} {
         \fill[red] (\x, 0) circle (2pt);
     }
+    
+    % 刻度
+    \node[below] at (0, 0) {\small $0$};
+    \foreach \x in {2,4,6,8} {
+        \node[below] at (\x, 0) {\small $\x$};
+    }
 \end{tikzpicture}
 \caption{贝塞尔函数\index{贝塞尔函数} $J_0(x)$ 和 $J_1(x)$}
 \label{fig:bessel-functions}
 \end{figure}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 柱坐标示意
+    \draw[gray, dashed] (0,0) ellipse (2 and 0.6);
+    \draw[gray, dashed] (0,2) ellipse (2 and 0.6);
+    
+    % z轴
+    \draw[->, gray] (0, -0.5) -- (0, 2.8) node[above] {$z$};
+    
+    % 点
+    \fill[blue] (1.5, 1) circle (3pt);
+    \node[blue, right] at (1.6, 1) {$(r,\varphi,z)$};
+    
+    % r
+    \draw[red, thick] (0, 1) -- (1.5, 1);
+    \node[red, below] at (0.75, 1) {$r$};
+    
+    % phi角
+    \draw[green!60!black, thick] (0.6, 1) arc (0:30:0.6);
+    \node[green!60!black] at (0.9, 1.2) {$\varphi$};
+    
+    % 圆周
+    \draw[blue, dashed] (0, 1) ellipse (1.5 and 0.45);
+\end{tikzpicture}
+\caption{柱坐标系示意}
+\label{fig:cylindrical-coords}
+\end{figure}
+
 \subsection{第二类贝塞尔函数\index{贝塞尔函数} $Y_m(x)$}
 
 \begin{dingliyi}{}{第二类贝塞尔函数}
-贝塞尔方程的另一个线性无关解是\textbf{第二类贝塞尔函数\index{贝塞尔函数}}（诺伊曼函数）：
+贝塞尔方程的另一个线性无关解是\textbf{第二类贝塞尔函数\index{贝塞尔函数}}（诺伊曼\index{诺伊曼@诺伊曼（Neumann）}（Neumann）函数）：
 \begin{equation}
     Y_m(x) = \frac{J_m(x)\cos m\pi - J_{-m}(x)}{\sin m\pi}
 \end{equation}
@@ -170,12 +216,12 @@ $m$ & $\mu_{m,1}$ & $\mu_{m,2}$ & $\mu_{m,3}$ \\
 
 \subsection{正交性}
 
-\begin{zhongyao}[贝塞尔函数的正交性]
+\begin{dingli}{}{贝塞尔函数的正交性}
 设 $\mu_{m,n}$ 是 $J_m(x)$ 的第 $n$ 个零点，则
 \[
     \int_0^1 xJ_m(\mu_{m,n}x)J_m(\mu_{m,n'}x)\,\mathrm{d}x = \frac{1}{2}[J_{m+1}(\mu_{m,n})]^2\delta_{nn'}
 \]
-\end{zhongyao}
+\end{dingli}
 
 更一般地，对于零点或边界条件导出的本征值：
 \begin{equation}
@@ -259,6 +305,79 @@ $K_m(x)$ 在 $x \to \infty$ 时指数衰减，$x \to 0$ 时发散。
             \cos\omega_{m,n}t \\
             \sin\omega_{m,n}t
         \end{pmatrix}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+% ========== 本节例题 ==========
+\begin{lizi}{}{}
+将函数 $f(r) = 1$（$0 \leq r \leq a$）展开为零阶贝塞尔函数级数。
+
+\begin{jie}
+    设
+    \begin{equation}
+        f(r) = \sum_{n=1}^{\infty} c_n J_0\left(\frac{\mu_{0,n}r}{a}\right)
+    \end{equation}
+    其中 $\mu_{0,n}$ 是 $J_0(x)$ 的第 $n$ 个正零点。
+    
+    系数公式：
+    \begin{equation}
+        c_n = \frac{2}{a^2 J_1^2(\mu_{0,n})}\int_0^a r \cdot 1 \cdot J_0\left(\frac{\mu_{0,n}r}{a}\right)\,\mathrm{d}r
+    \end{equation}
+    
+    计算积分：令 $x = \mu_{0,n}r/a$，则 $\mathrm{d}r = a\,\mathrm{d}x/\mu_{0,n}$：
+    \begin{equation}
+        \int_0^a r J_0\left(\frac{\mu_{0,n}r}{a}\right)\,\mathrm{d}r = \frac{a^2}{\mu_{0,n}^2}\int_0^{\mu_{0,n}} x J_0(x)\,\mathrm{d}x
+    \end{equation}
+    
+    利用递推公式 $\frac{\mathrm{d}}{\mathrm{d}x}[x J_1(x)] = x J_0(x)$：
+    \begin{equation}
+        \int_0^{\mu_{0,n}} x J_0(x)\,\mathrm{d}x = [x J_1(x)]_0^{\mu_{0,n}} = \mu_{0,n} J_1(\mu_{0,n})
+    \end{equation}
+    
+    所以
+    \begin{equation}
+        c_n = \frac{2}{a^2 J_1^2(\mu_{0,n})} \cdot \frac{a^2 \mu_{0,n} J_1(\mu_{0,n})}{\mu_{0,n}^2} = \frac{2}{\mu_{0,n} J_1(\mu_{0,n})}
+    \end{equation}
+    
+    最终展开：
+    \begin{equation}
+        \boxed{1 = 2\sum_{n=1}^{\infty} \frac{J_0(\mu_{0,n}r/a)}{\mu_{0,n} J_1(\mu_{0,n})}, \quad 0 \leq r \leq a}
+    \end{equation}
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+求圆柱形区域 $r < a$，$0 < z < L$ 内拉普拉斯方程的解，边界条件：$u(a, \varphi, z) = 0$，$u(r, \varphi, 0) = 0$，$u(r, \varphi, L) = f(r)\sin 3\varphi$。
+
+\begin{jie}
+    分离变量 $u(r, \varphi, z) = R(r)\Phi(\varphi)Z(z)$。
+    
+    \textbf{角度方向}：由 $\Phi'' + m^2\Phi = 0$ 和边界条件中的 $\sin 3\varphi$，知 $m = 3$。
+    
+    \textbf{径向方向}：$R$ 满足 $m = 3$ 阶贝塞尔方程，边界条件 $R(a) = 0$。
+    \begin{equation}
+        R(r) = J_3(kr), \quad k = \mu_{3,n}/a
+    \end{equation}
+    
+    \textbf{$z$ 方向}：$Z'' - k^2 Z = 0$，边界条件 $Z(0) = 0$，$Z(L) = f(r)$（需由系数确定）。
+    \begin{equation}
+        Z(z) = A\sinh(kz)
+    \end{equation}
+    
+    一般解：
+    \begin{equation}
+        u(r, \varphi, z) = \sum_{n=1}^{\infty} A_n J_3\left(\frac{\mu_{3,n}r}{a}\right)\sinh\left(\frac{\mu_{3,n}z}{a}\right)\sin 3\varphi
+    \end{equation}
+    
+    由边界条件 $u(r, \varphi, L) = f(r)\sin 3\varphi$：
+    \begin{equation}
+        \sum_{n=1}^{\infty} A_n J_3\left(\frac{\mu_{3,n}r}{a}\right)\sinh\left(\frac{\mu_{3,n}L}{a}\right) = f(r)
+    \end{equation}
+    
+    利用贝塞尔函数的正交性确定 $A_n$：
+    \begin{equation}
+        A_n = \frac{2}{a^2 J_4^2(\mu_{3,n})\sinh(\mu_{3,n}L/a)}\int_0^a r f(r) J_3\left(\frac{\mu_{3,n}r}{a}\right)\,\mathrm{d}r
     \end{equation}
 \end{jie}
 \end{lizi}

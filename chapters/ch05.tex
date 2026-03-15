@@ -6,6 +6,20 @@
 留数理论是复变函数论中最具实用价值的部分。它将复积分问题转化为代数问题，使得许多困难的实积分变得轻而易举。本章我们将学习留数的定义与计算、留数定理\index{留数定理}，以及它在计算实积分中的神奇应用。
 \end{wulibj}
 
+\begin{wulibj}[物理背景]
+留数理论在物理学中有广泛的应用：
+
+\textbf{1. 电路分析}：在交流电路的复阻抗分析中，电路的频率响应可通过留数计算。电路的谐振频率对应传递函数的极点，而留数则决定了谐振的强度。
+
+\textbf{2. 量子力学}：散射理论中，共振态的能量和宽度可通过格林函数的极点和留数确定。S矩阵的极点结构反映了粒子的束缚态和共振态。
+
+\textbf{3. 流体力学}：在机翼理论中，利用留数可以计算作用在机翼上的升力（茹科夫斯基升力公式）。
+
+\textbf{4. 信号处理}：傅里叶变换和拉普拉斯变换的逆变换涉及复平面上的积分，留数定理是计算这些逆变换的重要工具。
+
+\textbf{核心思想}：留数定理将绕奇点的积分转化为代数运算——这体现了数学中``化繁为简''的最高境界。
+\end{wulibj}
+
 % ========== 第一节 ==========
 \section{留数的定义与计算}
 
@@ -55,6 +69,32 @@
 \end{equation}
 没有 $(z - z_0)^{-1}$ 项，故 $c_{-1} = 0$，即 $\operatorname{Res}[f(z), z_0] = 0$。
 \end{proof}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 坐标轴
+    \draw[->, gray] (-1.5, 0) -- (3, 0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0, -1.5) -- (0, 2) node[above] {$\operatorname{Im}z$};
+    
+    % 极点
+    \fill[red] (1, 0.5) circle (3pt);
+    \node[red, above right] at (1, 0.5) {$z_0$};
+    
+    % 小围道
+    \draw[blue, thick, ->] (1, 0.5) circle (0.8);
+    \node[blue] at (2.3, 1) {$C_\epsilon$};
+    
+    % 标注
+    \draw[<->, gray] (0, 0) -- (1, 0.5);
+    \node[gray, below] at (0.5, 0.2) {$\epsilon$};
+    
+    % 公式
+    \node at (1, -1.2) {$\displaystyle\oint_{C_\epsilon} f(z)\,\mathrm{d}z = 2\pi\mathrm{i}\operatorname{Res}[f,z_0]$};
+\end{tikzpicture}
+\caption{极点附近的小围道}
+\label{fig:pole-contour}
+\end{figure}
+
 \begin{dingli}{}{一阶极点的留数}
 若 $z_0$ 是 $f(z)$ 的一阶极点，则
 \begin{equation}
@@ -294,6 +334,36 @@ $z_0$ 是 $f(z) = \frac{P(z)}{Q(z)}$ 的一阶极点。由洛必达法则：
 
 \textbf{方法}：考虑积分 $\oint_C R(z)\,\mathrm{d}z$，其中 $C$ 由实轴上的线段 $[-R, R]$ 和上半平面的大半圆组成。当 $R \to \infty$ 时，半圆上的积分趋于零。
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % 坐标轴
+    \draw[->, gray] (-3, 0) -- (3, 0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0, -0.5) -- (0, 2.5) node[above] {$\operatorname{Im}z$};
+    
+    % 实轴积分路径
+    \draw[blue, very thick, ->] (-2.5, 0) -- (2.5, 0);
+    \node[blue, below] at (-1.5, 0) {$[-R, R]$};
+    
+    % 上半大半圆
+    \draw[red, very thick, ->] (2.5, 0) arc (0:180:2.5);
+    \node[red, above] at (0, 2.2) {$C_R$};
+    
+    % 极点
+    \fill[green!60!black] (0, 1.2) circle (3pt);
+    \node[green!60!black, right] at (0.2, 1.2) {极点 $z_k$};
+    
+    % R 标注
+    \draw[<->, gray] (0, 0) -- (2.5, 0);
+    \node[below] at (1.25, 0) {$R$};
+    
+    % 积分方向
+    \node at (-2.8, 0.5) {$\oint$};
+\end{tikzpicture}
+\caption{上半平面的积分围道}
+\label{fig:contour-upper-half}
+\end{figure}
+
 \begin{lizi}{}{}
 计算 $I = \int_{-\infty}^{+\infty} \frac{1}{x^2 + a^2}\,\mathrm{d}x$（$a > 0$）。
 
@@ -327,6 +397,69 @@ $z_0$ 是 $f(z) = \frac{P(z)}{Q(z)}$ 的一阶极点。由洛必达法则：
 \end{equation}
 其中 $C_R$ 是上半平面以原点为圆心、$R$ 为半径的半圆。
 \end{dingli}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % 坐标轴
+    \draw[->, gray] (-3, 0) -- (3, 0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0, -0.5) -- (0, 2.5) node[above] {$\operatorname{Im}z$};
+    
+    % 上半大半圆
+    \draw[blue, very thick, ->] (2.5, 0) arc (0:180:2.5);
+    \node[blue, above] at (0, 2.3) {$C_R$};
+    
+    % 极点
+    \fill[red] (0.5, 1) circle (3pt);
+    \fill[red] (-1, 0.8) circle (3pt);
+    \node[red, right] at (0.7, 1) {$z_k$};
+    
+    % R 标注
+    \draw[<->, gray] (0, 0) -- (2.5, 0);
+    \node[below] at (1.25, 0) {$R$};
+    
+    % 实轴
+    \draw[green!60!black, thick] (-2.5, 0) -- (2.5, 0);
+    
+    % 积分方向箭头
+    \draw[->, thick] (-2.5, 0.3) -- (-1.5, 0.3);
+    \draw[->, thick] (1.5, 0.3) -- (2.5, 0.3);
+\end{tikzpicture}
+\caption{约当引理的积分围道}
+\label{fig:jordan-contour}
+\end{figure}
+
+\begin{proof}
+设 $z = R\mathrm{e}^{\mathrm{i}\theta}$，$\theta \in [0, \pi]$，则 $\mathrm{d}z = R\mathrm{i}\mathrm{e}^{\mathrm{i}\theta}\,\mathrm{d}\theta$。
+
+指数函数的模：
+\begin{equation}
+    \left|\mathrm{e}^{\mathrm{i}az}\right| = \left|\mathrm{e}^{\mathrm{i}aR\mathrm{e}^{\mathrm{i}\theta}}\right| = \left|\mathrm{e}^{\mathrm{i}aR(\cos\theta + \mathrm{i}\sin\theta)}\right| = \mathrm{e}^{-aR\sin\theta}
+\end{equation}
+
+由于 $\theta \in [0, \pi]$，有 $\sin\theta \geq 0$，所以 $\mathrm{e}^{-aR\sin\theta} \leq 1$。
+
+积分的估计：
+\begin{equation}
+    \left|\int_{C_R} f(z)\mathrm{e}^{\mathrm{i}az}\,\mathrm{d}z\right| \leq \int_0^\pi \left|f(R\mathrm{e}^{\mathrm{i}\theta})\right| \mathrm{e}^{-aR\sin\theta} R\,\mathrm{d}\theta
+\end{equation}
+
+由条件 $f(z) \to 0$（当 $|z| \to \infty$），对任意 $\epsilon > 0$，存在 $R_0$ 使得 $R > R_0$ 时 $|f(R\mathrm{e}^{\mathrm{i}\theta})| < \epsilon$。
+
+关键估计：利用不等式 $\sin\theta \geq \frac{2\theta}{\pi}$（$\theta \in [0, \pi/2]$），有
+\begin{equation}
+    \int_0^{\pi/2} \mathrm{e}^{-aR\sin\theta}\,\mathrm{d}\theta \leq \int_0^{\pi/2} \mathrm{e}^{-aR\cdot 2\theta/\pi}\,\mathrm{d}\theta = \frac{\pi}{2aR}\left(1 - \mathrm{e}^{-aR}\right) < \frac{\pi}{2aR}
+\end{equation}
+
+由对称性，$\int_{\pi/2}^\pi \mathrm{e}^{-aR\sin\theta}\,\mathrm{d}\theta < \frac{\pi}{2aR}$。
+
+综合得：
+\begin{equation}
+    \left|\int_{C_R} f(z)\mathrm{e}^{\mathrm{i}az}\,\mathrm{d}z\right| < \epsilon \cdot R \cdot \frac{\pi}{aR} = \frac{\pi\epsilon}{a} \to 0
+\end{equation}
+
+因此 $\displaystyle\lim_{R \to \infty} \int_{C_R} f(z)\mathrm{e}^{\mathrm{i}az}\,\mathrm{d}z = 0$。
+\end{proof}
 
 \begin{lizi}{}{}
 计算 $I = \int_0^{+\infty} \frac{\cos x}{x^2 + 1}\,\mathrm{d}x$。

@@ -9,6 +9,27 @@
     x &= r\cos\varphi, \quad y = r\sin\varphi, \quad z = z
 \end{align}
 
+\textbf{逆关系}：
+\begin{align}
+    r &= \sqrt{x^2 + y^2}, \quad \varphi = \arctan\frac{y}{x}, \quad z = z
+\end{align}
+
+\textbf{体积元}：
+\begin{equation}
+    \mathrm{d}V = r\,\mathrm{d}r\,\mathrm{d}\varphi\,\mathrm{d}z
+\end{equation}
+
+\textbf{面积元}：
+\begin{align}
+    \mathrm{d}S_r &= r\,\mathrm{d}\varphi\,\mathrm{d}z \quad \text{（$r=$常数面上）} \\
+    \mathrm{d}S_z &= r\,\mathrm{d}r\,\mathrm{d}\varphi \quad \text{（$z=$常数面上）}
+\end{align}
+
+\textbf{线元}：
+\begin{equation}
+    \mathrm{d}l^2 = \mathrm{d}r^2 + r^2\mathrm{d}\varphi^2 + \mathrm{d}z^2
+\end{equation}
+
 \textbf{拉普拉斯算子}：
 \begin{zhongyao}[柱坐标系拉普拉斯算子]
 \[
@@ -24,6 +45,30 @@
     y &= r\sin\theta\sin\varphi \\
     z &= r\cos\theta
 \end{align}
+
+\textbf{逆关系}：
+\begin{align}
+    r &= \sqrt{x^2 + y^2 + z^2} \\
+    \theta &= \arccos\frac{z}{\sqrt{x^2+y^2+z^2}} \\
+    \varphi &= \arctan\frac{y}{x}
+\end{align}
+
+\textbf{体积元}：
+\begin{equation}
+    \mathrm{d}V = r^2\sin\theta\,\mathrm{d}r\,\mathrm{d}\theta\,\mathrm{d}\varphi
+\end{equation}
+
+\textbf{面积元}：
+\begin{align}
+    \mathrm{d}S_r &= r^2\sin\theta\,\mathrm{d}\theta\,\mathrm{d}\varphi \quad \text{（$r=$常数面上）} \\
+    \mathrm{d}S_\theta &= r\sin\theta\,\mathrm{d}r\,\mathrm{d}\varphi \quad \text{（$\theta=$常数面上）} \\
+    \mathrm{d}S_\varphi &= r\,\mathrm{d}r\,\mathrm{d}\theta \quad \text{（$\varphi=$常数面上）}
+\end{align}
+
+\textbf{线元}：
+\begin{equation}
+    \mathrm{d}l^2 = \mathrm{d}r^2 + r^2\mathrm{d}\theta^2 + r^2\sin^2\theta\,\mathrm{d}\varphi^2
+\end{equation}
 
 \textbf{拉普拉斯算子}：
 \begin{zhongyao}[球坐标系拉普拉斯算子]
@@ -44,11 +89,24 @@
 \subsection{柱坐标系}
 \begin{align}
     \nabla f &= \frac{\partial f}{\partial r}\boldsymbol{e}_r + \frac{1}{r}\frac{\partial f}{\partial\varphi}\boldsymbol{e}_\varphi + \frac{\partial f}{\partial z}\boldsymbol{e}_z \\
-    \nabla \cdot \boldsymbol{F} &= \frac{1}{r}\frac{\partial}{\partial r}(rF_r) + \frac{1}{r}\frac{\partial F_\varphi}{\partial\varphi} + \frac{\partial F_z}{\partial z}
+    \nabla \cdot \boldsymbol{F} &= \frac{1}{r}\frac{\partial}{\partial r}(rF_r) + \frac{1}{r}\frac{\partial F_\varphi}{\partial\varphi} + \frac{\partial F_z}{\partial z} \\
+    \nabla \times \boldsymbol{F} &= \left(\frac{1}{r}\frac{\partial F_z}{\partial\varphi} - \frac{\partial F_\varphi}{\partial z}\right)\boldsymbol{e}_r + \left(\frac{\partial F_r}{\partial z} - \frac{\partial F_z}{\partial r}\right)\boldsymbol{e}_\varphi + \frac{1}{r}\left[\frac{\partial}{\partial r}(rF_\varphi) - \frac{\partial F_r}{\partial\varphi}\right]\boldsymbol{e}_z
 \end{align}
 
 \subsection{球坐标系}
 \begin{align}
     \nabla f &= \frac{\partial f}{\partial r}\boldsymbol{e}_r + \frac{1}{r}\frac{\partial f}{\partial\theta}\boldsymbol{e}_\theta + \frac{1}{r\sin\theta}\frac{\partial f}{\partial\varphi}\boldsymbol{e}_\varphi \\
-    \nabla \cdot \boldsymbol{F} &= \frac{1}{r^2}\frac{\partial}{\partial r}(r^2F_r) + \frac{1}{r\sin\theta}\frac{\partial}{\partial\theta}(\sin\theta F_\theta) + \frac{1}{r\sin\theta}\frac{\partial F_\varphi}{\partial\varphi}
+    \nabla \cdot \boldsymbol{F} &= \frac{1}{r^2}\frac{\partial}{\partial r}(r^2F_r) + \frac{1}{r\sin\theta}\frac{\partial}{\partial\theta}(\sin\theta F_\theta) + \frac{1}{r\sin\theta}\frac{\partial F_\varphi}{\partial\varphi} \\
+    \nabla \times \boldsymbol{F} &= \frac{1}{r\sin\theta}\left[\frac{\partial}{\partial\theta}(\sin\theta F_\varphi) - \frac{\partial F_\theta}{\partial\varphi}\right]\boldsymbol{e}_r \\
+    &\quad + \frac{1}{r}\left[\frac{1}{\sin\theta}\frac{\partial F_r}{\partial\varphi} - \frac{\partial}{\partial r}(rF_\varphi)\right]\boldsymbol{e}_\theta \\
+    &\quad + \frac{1}{r}\left[\frac{\partial}{\partial r}(rF_\theta) - \frac{\partial F_r}{\partial\theta}\right]\boldsymbol{e}_\varphi
+\end{align}
+
+\section{矢量恒等式}
+\begin{align}
+    \nabla \times (\nabla f) &= 0 \\
+    \nabla \cdot (\nabla \times \boldsymbol{F}) &= 0 \\
+    \nabla \times (\nabla \times \boldsymbol{F}) &= \nabla(\nabla \cdot \boldsymbol{F}) - \nabla^2 \boldsymbol{F} \\
+    \nabla \cdot (f\boldsymbol{F}) &= f\nabla \cdot \boldsymbol{F} + \boldsymbol{F} \cdot \nabla f \\
+    \nabla \times (f\boldsymbol{F}) &= f\nabla \times \boldsymbol{F} + \nabla f \times \boldsymbol{F}
 \end{align}

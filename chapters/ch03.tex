@@ -96,9 +96,12 @@
 \subsection{定理的陈述}
 
 设 $f(z)$ 在\keyword{单连通区域} $D$ 内解析，$C$ 是 $D$ 内任意一条简单闭曲线，则
-\begin{zhongyao}[柯西积分定理]
-    $\oint_C f(z)\,\mathrm{d}z = 0$
-\end{zhongyao}
+\begin{dingli}{}{柯西积分定理}
+设 $f(z)$ 在单连通区域 $D$ 内解析，$C$ 是 $D$ 内任意一条简单闭曲线，则
+\[
+    \oint_C f(z)\,\mathrm{d}z = 0
+\]
+\end{dingli}
 
 \begin{figure}[htbp]
 \centering
@@ -160,6 +163,7 @@
 \end{proof}
 
 \begin{dingli}{}{牛顿--莱布尼茨公式}
+\index{牛顿@牛顿（Newton）}\index{莱布尼茨@莱布尼茨（Leibniz）}
 设 $f(z)$ 在单连通区域 $D$ 内解析，$F(z)$ 是 $f(z)$ 的原函数，则
 \begin{equation}
     \int_{z_1}^{z_2} f(z)\,\mathrm{d}z = F(z_2) - F(z_1)
@@ -240,12 +244,12 @@
 
 \subsection{公式的推导}
 
-\begin{zhongyao}[柯西积分公式]
+\begin{dingli}{}{柯西积分公式}
 设 $f(z)$ 在简单闭曲线 $C$ 所围区域 $D$ 内解析，在 $\bar{D} = D \cup C$ 上连续，$z_0$ 是 $D$ 内任意一点，则
 \[
     f(z_0) = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z
 \]
-\end{zhongyao}
+\end{dingli}
 
 \begin{proof}
 考虑积分 $\displaystyle\oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z$。
@@ -279,6 +283,25 @@
 柯西积分公式表明：解析函数\index{解析函数}在一点的值等于它在该点周围边界上的``平均值''（加权积分）。这说明解析函数\index{解析函数}的值由边界值完全确定，体现了解析函数\index{解析函数}的``刚性''。
 \end{wulibj}
 
+\begin{tishi}[深入理解：解析函数的``刚性'']
+柯西积分公式揭示了解析函数\index{解析函数}的一个惊人性质——让我们来仔细品味一下。
+
+公式告诉我们：只要知道了解析函数\index{解析函数} $f(z)$ 在边界 $C$ 上的值，就能唯一确定它在整个区域内部的值！
+
+这和实变函数完全不同。对于实函数 $y = f(x)$，知道 $f(0) = 1$，你无法确定 $f(0.5)$ 是多少——可能有无数种函数通过 $(0, 1)$ 这个点。但解析函数\index{解析函数}不同：知道了边界上的值，内部就完全确定了。
+
+这就是所谓的``刚性''：解析函数\index{解析函数}就像一块刚性的板，你不能随意弯曲它——一旦固定了边界，整块板就固定了。
+
+更进一步，高阶导数公式告诉我们：解析函数\index{解析函数}在某点的各阶导数也都由边界值决定！这意味着：
+\begin{enumerate}
+    \item 解析函数\index{解析函数}在一点知道它的值，就知道了它所有导数的值，从而知道了它在整个邻域内的值（泰勒展开）。
+    \item 解析函数\index{解析函数}不可能只在某个小区域为零——如果它在一段弧上为零，就必须在整个区域内为零。
+    \item 解析函数\index{解析函数}不可能有``局部极值''——最大模原理说 $|f(z)|$ 的最大值只能在边界上达到。
+\end{enumerate}
+
+这些性质都源于一个核心：解析函数\index{解析函数}是一个高度``约束''的对象，它的各个部分紧密联系，牵一发而动全身。
+\end{tishi}
+
 \subsection{柯西积分公式的应用}
 
 \begin{lizi}{}{}
@@ -296,12 +319,12 @@
 
 \subsection{高阶导数公式}
 
-\begin{zhongyao}[高阶导数公式]
+\begin{dingli}{}{高阶导数公式}
 在柯西积分公式的条件下，$f(z)$ 在 $D$ 内有\keyword{任意阶导数}，且
 \[
     f^{(n)}(z_0) = \frac{n!}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{(z - z_0)^{n+1}}\,\mathrm{d}z
 \]
-\end{zhongyao}
+\end{dingli}
 
 \begin{proof}
 对柯西积分公式两边对 $z_0$ 求导。形式地，
@@ -356,13 +379,13 @@
 \end{proof}
 
 \begin{tishi}[柯西积分定理的逆定理]
-莫雷拉定理是柯西积分定理\index{柯西积分定理}的逆定理。两者结合，我们得到：
+    莫雷拉\index{莫雷拉@莫雷拉（Morera）}（Morera）定理是柯西积分定理\index{柯西积分定理}的逆定理。两者结合，我们得到：
 \begin{equation}
     f \text{ 解析} \quad \Longleftrightarrow \quad \oint_C f(z)\,\mathrm{d}z = 0 \text{（对任意闭曲线）}
 \end{equation}
 \end{tishi}
 
-\subsection{刘维尔定理}
+\subsection{刘维尔\index{刘维尔@刘维尔（Liouville）}（Liouville）定理}
 
 \begin{dingli}{}{刘维尔定理}
 在整个复平面上解析且有界的函数必为常数。
@@ -396,12 +419,42 @@
 设 $f(z)$ 在区域 $D$ 内解析且不恒为常数，则 $|f(z)|$ 在 $D$ 内不可能达到最大值。
 \end{dingli}
 
+\begin{proof}
+用反证法。设 $|f(z)|$ 在 $D$ 内某点 $z_0$ 达到最大值 $M = |f(z_0)|$。
+
+由于 $f(z)$ 在 $z_0$ 解析，存在幂级数展开：
+\begin{equation}
+    f(z) = \sum_{n=0}^{\infty} a_n(z - z_0)^n
+\end{equation}
+
+若 $a_n = 0$ 对所有 $n \geq 1$ 成立，则 $f(z) \equiv a_0$ 为常数，与条件矛盾。
+
+设 $k$ 是使 $a_k \neq 0$ 的最小正整数，则
+\begin{equation}
+    f(z) = a_0 + a_k(z - z_0)^k + O((z - z_0)^{k+1})
+\end{equation}
+
+取 $z = z_0 + r\mathrm{e}^{\mathrm{i}\theta}$（$r$ 充分小），有
+\begin{equation}
+    |f(z)|^2 = |a_0 + a_k r^k \mathrm{e}^{\mathrm{i}k\theta} + O(r^{k+1})|^2
+\end{equation}
+
+选择 $\theta$ 使 $a_k \mathrm{e}^{\mathrm{i}k\theta}$ 与 $a_0$ 同相位，则
+\begin{equation}
+    |f(z)| \geq |a_0| + |a_k|r^k - O(r^{k+1}) = M + |a_k|r^k + o(r^k) > M
+\end{equation}
+
+当 $r$ 充分小时，这与 $|f(z_0)| = M$ 是最大值矛盾。
+
+因此 $|f(z)|$ 不能在 $D$ 内达到最大值。
+\end{proof}
+
 \begin{zhu}{}{}
 最大模原理说明：解析函数\index{解析函数}的模的最大值只能在边界上达到。这是解析函数\index{解析函数}``刚性''的又一体现。
 \end{zhu}
 
 % ========== 第五节 ==========
-\section{应用：静电场的格林函数\index{格林函数}}
+\section{应用：静电场的格林\index{格林@格林（Green）}（Green）函数\index{格林函数}}
 
 \subsection{二维静电场}
 
