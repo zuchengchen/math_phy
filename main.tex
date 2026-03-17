@@ -33,7 +33,7 @@
         % 底部色块
         \shade[top color=primaryblue, bottom color=primaryblue!70!black] 
             (current page.south west) rectangle 
-            ([yshift=4cm]current page.south east);
+            ([yshift=3.4cm]current page.south east);
         
         % 顶部装饰线
         \draw[accentgold, line width=2pt] 
@@ -41,14 +41,14 @@
             ([yshift=-1cm]current page.north east);
         
         % 波形装饰
-        \begin{scope}[shift={([yshift=5.5cm]current page.south)}, opacity=0.45]
+        \begin{scope}[shift={([yshift=4.2cm]current page.south)}, opacity=0.55]
             \draw[primaryblue!60, line width=2pt, domain=0:21, samples=200]
                 plot (\x, {sin(2*\x r) + 0.4*sin(6*\x r)});
         \end{scope}
         
         % 复平面装饰（右上）
         \begin{scope}[shift={([xshift=-2.5cm, yshift=-2.5cm]current page.north east)}, 
-                      opacity=0.35, scale=0.6]
+                      opacity=0.5, scale=0.6]
             \draw[->, thick, primaryblue] (-2, 0) -- (2.5, 0) node[right] {$\mathrm{Re}$};
             \draw[->, thick, primaryblue] (0, -2) -- (0, 2.5) node[above] {$\mathrm{Im}$};
             \draw[primaryblue, thick] (0, 0) circle (1.5);
@@ -56,12 +56,12 @@
         \end{scope}
         
         % 高斯积分（左下）
-        \node[anchor=south west, opacity=0.35, text=primaryblue] 
-            at ([xshift=1cm, yshift=4.5cm]current page.south west)
+        \node[anchor=south west, opacity=0.45, text=primaryblue] 
+            at ([xshift=1.4cm, yshift=3.65cm]current page.south west)
             {$\displaystyle\int_{-\infty}^{+\infty} e^{-x^2}\,\mathrm{d}x = \sqrt{\pi}$};
     \end{tikzpicture}
     
-    \vspace*{0.8cm}
+    \vspace*{0.15cm}
     
     % ========== 学校名称 ==========
     \begin{center}
@@ -75,14 +75,14 @@
     % ========== 书名区域 ==========
     \begin{center}
         % 主标题
-        {\fontsize{48pt}{56pt}\selectfont\bfseries\color{primaryblue} 数学物理方法\par}
+        {\fontsize{50pt}{58pt}\selectfont\bfseries\color{primaryblue} 数学物理方法\par}
         
-        \vspace{0.3cm}
+        \vspace{0.2cm}
         
         % 英文副标题
-        {\fontsize{13pt}{16pt}\selectfont\color{accentgold}\scshape Mathematical Methods for Physics\par}
+        {\fontsize{12pt}{15pt}\selectfont\itshape\color{accentgold!85!black} Mathematical Methods for Physics\par}
         
-        \vspace{0.4cm}
+        \vspace{0.3cm}
         
         % 装饰线
         {\color{accentgold}
@@ -91,17 +91,17 @@
             \rule{0.15\textwidth}{1pt}
         \par}
         
-        \vspace{0.4cm}
+        \vspace{0.35cm}
         
         % 副标题
         {\fontsize{20pt}{24pt}\selectfont\color{primaryblue!75} 课程讲义\par}
         
-        \vspace{0.5cm}
+        \vspace{0.4cm}
         
         % 中心公式框
         \begin{tcolorbox}[
             enhanced,
-            width=0.55\textwidth,
+            width=0.5\textwidth,
             colback=warmwhite,
             colframe=accentgold,
             boxrule=1pt,
@@ -112,12 +112,7 @@
             $\displaystyle \frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u$
         \end{tcolorbox}
         
-        \vspace{0.3cm}
-        
-        % 版本号
-        {\fontsize{10pt}{12pt}\selectfont\color{accentgold!80!black} \textbf{Version 0.1}\par}
-        
-        \vspace{0.5cm}
+        \vspace{0.45cm}
         
         % 作者
         {\fontsize{16pt}{20pt}\selectfont\color{primaryblue}\bfseries 陈祖成\par}
@@ -150,15 +145,15 @@
     \end{center}
     
     
-    \vspace{0.8cm}
+    \vfill
     % ========== 底部信息 ==========
     \begin{tikzpicture}[remember picture, overlay]
         \node[anchor=center, white, font=\fontsize{13pt}{16pt}\selectfont\bfseries] 
-            at ([yshift=2.8cm]current page.south) {物理与电子科学学院};
+            at ([yshift=2.45cm]current page.south) {物理与电子科学学院};
         \node[anchor=center, white!80, font=\fontsize{10pt}{12pt}\selectfont] 
-            at ([yshift=2.1cm]current page.south) {School of Physics and Electronics};
+            at ([yshift=1.8cm]current page.south) {School of Physics and Electronics};
         \node[anchor=center, accentgold, font=\fontsize{11pt}{13pt}\selectfont] 
-            at ([yshift=1.3cm]current page.south) {\today};
+            at ([yshift=1.15cm]current page.south) {\today};
     \end{tikzpicture}
     
 \end{titlepage}
@@ -179,7 +174,7 @@
 
 % 目录后的空白页
 \newpage
-\thispagestyle{empty}
+%\thispagestyle{empty}
 \null
 \newpage
 
