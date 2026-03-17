@@ -1,0 +1,546 @@
+% 第四章：复变函数的级数表示（详细提纲）
+
+\chapter{复变函数的级数表示}
+
+\begin{wulibj}[本章定位]
+这一章的任务，不只是教学生把几个熟悉函数展开成级数，更重要的是让学生真正理解：解析函数在局部究竟有什么样的结构，为什么复变函数比实变函数``刚性''更强，以及这种局部结构为什么会自然导向下一章的留数理论。
+
+从内容主线看，本章可以概括为：
+\[
+    \text{柯西积分公式} \Longrightarrow \text{泰勒展开} \Longrightarrow \text{零点与局部结构} \Longrightarrow \text{洛朗展开} \Longrightarrow \text{奇点分类} \Longrightarrow \text{留数伏笔}
+\]
+
+因此，本章不宜把大量篇幅花在高等数学中已经系统讲过的实数项级数回顾上，而应当把重点放在``复变函数为什么能展开''、``展开式告诉了我们什么''、``如何从展开式读出奇点信息''这三件事情上。
+\end{wulibj}
+
+\begin{tishi}[写作总原则]
+\begin{enumerate}
+    \item 预备知识只讲后文真正要用到的部分，不重复铺陈高等数学中的一般级数理论。
+    \item 每节都要让学生看到``为什么学这一节''，不能只是罗列定义和公式。
+    \item 要始终把本章和上一章的柯西积分公式、下一章的留数理论联系起来。
+    \item 例题应尽量围绕``展开式如何读出局部信息''这个主线来选，不宜堆砌机械求展开。
+\end{enumerate}
+\end{tishi}
+
+\section{第一节\quad 幂级数与复数项级数预备}
+
+\begin{wulibj}[本节要解决的问题]
+在正式讨论解析函数的泰勒展开之前，学生需要先明白一件事：所谓``把函数写成级数''，本质上是把函数写成幂级数。而幂级数与一般数项级数不同，它的收敛域有很强的几何结构，圆内的性质也远比一般级数好。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握复数列、复数项级数收敛的最基本判据。
+    \item 让学生理解幂级数的定义、收敛半径、收敛圆和边界行为。
+    \item 让学生接受一个关键事实：幂级数在收敛圆内可以逐项求导、逐项积分，因此天然适合描述解析函数。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 复数列与复数项级数的收敛
+    \item 幂级数的定义与基本例子
+    \item 收敛圆与收敛半径
+    \item 圆内的一致收敛与逐项运算
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 复数列收敛等价于实部、虚部分别收敛。
+    \item 复数项级数绝对收敛时，性质最好，这和后面的幂级数理论直接相关。
+    \item 对幂级数 $\sum_{n=0}^{\infty} c_n (z-z_0)^n$，收敛域总是一个圆盘，而不是随意形状的区域。
+    \item 收敛半径只控制圆内与圆外；边界点的收敛情况必须逐点分析。
+    \item 在任意闭圆盘 $|z-z_0| \leq r < R$ 上，幂级数具有良好的收敛性，因此能逐项求导与积分。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{}{幂级数}
+形如
+\[
+    \sum_{n=0}^{\infty} c_n (z-z_0)^n
+\]
+的级数称为以 $z_0$ 为中心的幂级数。
+\end{dingliyi}
+
+\begin{dingli}{}{收敛半径定理}
+对任意幂级数，存在唯一的 $R \in [0, +\infty]$，使得：
+\begin{itemize}
+    \item 当 $|z-z_0| < R$ 时，级数绝对收敛；
+    \item 当 $|z-z_0| > R$ 时，级数发散。
+\end{itemize}
+\end{dingli}
+
+\begin{dingli}{}{幂级数的逐项求导与逐项积分}
+幂级数在其收敛圆内定义的和函数是解析的，并且可以逐项求导、逐项积分，且收敛半径不变。
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{}{收敛半径的计算}
+求 $\sum_{n=0}^{\infty} \dfrac{z^n}{n!}$ 与 $\sum_{n=0}^{\infty} n! z^n$ 的收敛半径，并解释为什么一个在整个复平面都收敛，另一个只在 $z=0$ 收敛。
+\end{lizi}
+
+\begin{lizi}{}{边界行为的对比}
+比较 $\sum_{n=0}^{\infty} z^n$ 与 $\sum_{n=1}^{\infty} \dfrac{z^n}{n}$ 在收敛圆边界上的表现，说明``同样的收敛半径，不同的边界行为''。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 复平面中的收敛圆：圆内收敛，圆外发散，边界待定。
+    \item 以 $z_0$ 为中心的同心圆图，帮助学生建立``收敛半径是几何量''的直观。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``收敛半径''误解成``边界也全部收敛''。
+    \item 不要把一般数项级数的经验机械套用到幂级数上；幂级数的特殊性恰恰在于它有圆形收敛域。
+    \item 不要只会算 $R$，却不知道 $R$ 的意义是``后面所有局部展开都只在这个范围内有效''。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求若干幂级数的收敛半径。
+    \item 综合题：比较几个不同幂级数在边界点 $z=1$、$z=-1$、$z=\mathrm{i}$ 的收敛性。
+    \item 挑战题：证明幂级数逐项求导后收敛半径不变。
+\end{itemize}
+
+\section{第二节\quad 解析函数的泰勒展开}
+
+\begin{wulibj}[本节要解决的问题]
+学生在高等数学中已经见过泰勒展开，但在那里，泰勒展开更像是一种近似工具；到了复变函数中，它的地位完全不同。这里最关键的问题是：为什么一个解析函数一定可以在解析点附近展开成幂级数？这件事并不是经验，而是柯西积分公式推出来的深刻结论。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生知道泰勒展开不是孤立公式，而是柯西积分公式的直接推论。
+    \item 让学生掌握泰勒系数公式及其几何意义。
+    \item 让学生理解收敛半径由最近奇点决定。
+    \item 让学生初步感受复分析中``局部信息决定整体行为''的刚性。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从柯西积分公式出发推导泰勒展开
+    \item 泰勒系数公式
+    \item 常见解析函数的展开
+    \item 收敛半径与最近奇点
+    \item 泰勒展开的唯一性及其意义
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 若 $f(z)$ 在 $|z-z_0|<R$ 内解析，则
+    \[
+        f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n.
+    \]
+    \item 系数不是凭空规定的，而是由函数在 $z_0$ 的各阶导数唯一确定。
+    \item 展开式的有效范围不是无限大的，而是直到碰到最近奇点为止。
+    \item 解析函数的泰勒展开具有唯一性，这意味着解析函数的局部信息非常强。
+\end{itemize}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{}{泰勒展开定理}
+设 $f(z)$ 在圆盘 $|z-z_0|<R$ 内解析，则对任意 $|z-z_0|<R$，有
+\[
+    f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n.
+\]
+\end{dingli}
+
+\begin{dingli}{}{泰勒展开的唯一性}
+若同一个解析函数在同一点附近有两个幂级数展开，则这两个展开的对应系数必相同。
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{}{经典函数的展开}
+求 $\mathrm{e}^z$、$\sin z$、$\cos z$、$\dfrac{1}{1-z}$ 在 $z=0$ 附近的泰勒展开，并指出各自的收敛半径。
+\end{lizi}
+
+\begin{lizi}{}{非零中心的展开}
+求 $\dfrac{1}{z+1}$ 在 $z=0$ 和 $z=2$ 附近的展开，比较两种展开的形式与适用范围。
+\end{lizi}
+
+\begin{lizi}{}{最近奇点决定收敛半径}
+求 $\dfrac{1}{1+z^2}$ 在 $z=0$ 附近的泰勒展开，并说明为什么收敛半径等于 $1$。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 以展开点为圆心，最近奇点落在边界上的几何示意图。
+    \item 泰勒展开有效圆盘与函数奇点分布的关系图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``函数有各阶导数''与``函数等于自己的泰勒级数''混为一谈；在复变函数中，这一结论成立，是因为函数解析。
+    \item 不要把收敛半径误认为由公式形式直接看出；本质上它由最近奇点的位置决定。
+    \item 不要把``在一点展开''理解成``全平面都成立''；展开总有其适用范围。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求常见初等函数在 $z=0$ 处的展开。
+    \item 综合题：在指定中心附近展开有理函数，并写出收敛域。
+    \item 挑战题：由柯西积分公式推导泰勒展开定理。
+\end{itemize}
+
+\section{第三节\quad 零点与解析函数的局部结构}
+
+\begin{wulibj}[本节要解决的问题]
+学生学完泰勒展开后，很容易停留在``会展开''的层面。但真正重要的是：展开式能揭示函数在一点附近的结构。尤其是当函数在某点取零时，泰勒展开的最低非零项会告诉我们这个零点有多``厚''，这就是零点的阶数。这个概念会直接通向后面的极点与留数。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握零点及其阶数的定义。
+    \item 让学生理解解析函数在零点附近的标准分解形式。
+    \item 让学生知道零点是孤立的，并明白这说明了解析函数局部结构的整齐性。
+    \item 让学生建立``零点与极点互相对应''的意识，为第五章铺路。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 零点与零点阶数
+    \item 零点附近的分解形式
+    \item 零点的孤立性
+    \item 零点与 $1/f(z)$ 的极点
+\end{enumerate}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{}{零点与零点阶数}
+若 $f(z_0)=0$，则称 $z_0$ 是 $f(z)$ 的零点。若存在正整数 $m$，使得
+\[
+    f(z) = (z-z_0)^m \varphi(z), \qquad \varphi(z_0) \neq 0,
+\]
+则称 $z_0$ 是 $m$ 阶零点。
+\end{dingliyi}
+
+\begin{dingli}{}{零点附近的标准形式}
+若 $z_0$ 是解析函数 $f(z)$ 的 $m$ 阶零点，则
+\[
+    f(z) = (z-z_0)^m \varphi(z),
+\]
+其中 $\varphi(z)$ 在 $z_0$ 附近解析且 $\varphi(z_0)\neq 0$。
+\end{dingli}
+
+\begin{dingli}{}{零点的孤立性}
+若 $f(z)$ 在区域内解析且不恒等于零，则它的零点都是孤立的。
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 零点阶数由泰勒展开中第一个非零项决定。
+    \item ``零点是孤立的''并不是显然事实，而是解析函数刚性的体现。
+    \item 如果 $f$ 在 $z_0$ 有 $m$ 阶零点，那么 $1/f$ 在 $z_0$ 有 $m$ 阶极点，这为后文极点理论作了自然铺垫。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{}{判断零点阶数}
+判断 $z=0$ 分别是 $\sin z$、$1-\cos z$、$z-\sin z$ 的几阶零点。
+\end{lizi}
+
+\begin{lizi}{}{从零点到极点}
+设 $f(z)$ 在 $z_0$ 有二阶零点，讨论 $\dfrac{1}{f(z)}$ 在 $z_0$ 的奇点类型与阶数。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 用函数曲线的类比示意不同阶零点对应的``接触程度''。
+    \item 用局部分解 $f(z)=(z-z_0)^m\varphi(z)$ 的结构图说明``零的来源''。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``某点函数值为零''和``某点是一阶零点''混为一谈。
+    \item 不要忽略 $\varphi(z_0)\neq 0$ 这个条件；没有它，阶数就还没有确定。
+    \item 不要把零点理论看成旁枝末节；它和后面的极点理论是同一套局部结构思想的两面。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：由泰勒展开判断零点阶数。
+    \item 综合题：已知 $f$ 在某点零点阶数，判断若干由 $f$ 构造出的函数在该点的性质。
+    \item 挑战题：证明非常值解析函数的零点必孤立。
+\end{itemize}
+
+\section{第四节\quad 洛朗展开}
+
+\begin{wulibj}[本节要解决的问题]
+泰勒展开很好，但它有一个前提：展开中心附近必须解析。可是一旦中心点本身就是奇点，或者区域中间挖了一个洞，泰勒展开就不够用了。此时我们需要允许出现负幂项，这就得到洛朗展开。它是研究奇点的真正工具。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生明白洛朗展开出现的动机。
+    \item 让学生掌握洛朗级数的定义、正则部分与主部。
+    \item 让学生理解洛朗展开对应的是圆环域，而不是圆盘。
+    \item 让学生学会几种常见的实际展开技巧。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 为什么泰勒展开不够
+    \item 洛朗级数的定义
+    \item 洛朗展开定理
+    \item 正则部分与主部
+    \item 不同圆环上的不同展开式
+    \item 常见展开技巧
+\end{enumerate}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{}{洛朗级数}
+形如
+\[
+    \sum_{n=-\infty}^{\infty} c_n (z-z_0)^n
+\]
+的级数称为关于点 $z_0$ 的洛朗级数。
+\end{dingliyi}
+
+\begin{dingli}{}{洛朗展开定理}
+若 $f(z)$ 在圆环
+\[
+    r < |z-z_0| < R
+\]
+内解析，则它在该圆环内可唯一展开为洛朗级数
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n.
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 洛朗展开不是泰勒展开的简单修补，而是针对``有洞区域''和``奇点附近''的自然理论。
+    \item 负幂项刻画的是函数在奇点附近的奇异部分。
+    \item 同一个函数围绕同一点，在不同圆环中可能得到不同的展开式。
+    \item 洛朗展开的唯一性使得主部成为函数奇点的可靠指纹。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{}{不同圆环上的不同展开}
+将 $\dfrac{1}{(z-1)(z-2)}$ 分别在 $|z|<1$、$1<|z|<2$、$|z|>2$ 中展开。
+\end{lizi}
+
+\begin{lizi}{}{主部的出现}
+将 $\dfrac{1}{z(1-z)}$ 在 $0<|z|<1$ 与 $|z|>1$ 中展开，比较两种展开的负幂项结构。
+\end{lizi}
+
+\begin{lizi}{}{几何级数法展开}
+将 $\dfrac{1}{z+1}$ 在 $z=0$ 附近和 $z=\infty$ 附近分别写成适当形式的级数。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 以 $z_0$ 为中心的同心圆环图，说明不同区域对应不同展开。
+    \item 将正则部分与主部分在图上用不同颜色标出，帮助学生建立结构感。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要写出展开式却不标明适用区域；洛朗展开离开区域就没有意义。
+    \item 不要把同一个代数式只当成一种展开；不同区域常常对应不同级数。
+    \item 不要忘记负幂项恰恰是后面判断奇点和计算留数的关键信息。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：对简单有理函数做洛朗展开。
+    \item 综合题：同一函数在两个不同圆环内分别展开并比较。
+    \item 挑战题：用柯西积分公式推导洛朗展开定理。
+\end{itemize}
+
+\section{第五节\quad 孤立奇点及其分类}
+
+\begin{wulibj}[本节要解决的问题]
+学习洛朗展开的真正目的，不是为了多掌握一种展开技术，而是为了读懂奇点。一个函数在奇点附近究竟是``可补上''、``像若干个倒幂那样发散''，还是``行为极端复杂''，都可以通过洛朗展开一眼看出来。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握孤立奇点、可去奇点、极点、本性奇点的定义。
+    \item 让学生学会通过洛朗主部判别奇点类型。
+    \item 让学生掌握若干常用判别法，如有界性判别、极限判别、乘幂判别。
+    \item 让学生建立``奇点分类就是局部结构分类''的观点。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 孤立奇点的定义
+    \item 可去奇点
+    \item 极点与极点阶数
+    \item 本性奇点
+    \item 用洛朗主部统一分类
+    \item 常用判别流程总结
+\end{enumerate}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{}{孤立奇点}
+若 $f(z)$ 在某去心邻域
+\[
+    0<|z-z_0|<R
+\]
+内解析，而在 $z_0$ 处不解析，则称 $z_0$ 是 $f(z)$ 的孤立奇点。
+\end{dingliyi}
+
+\begin{dingliyi}{}{可去奇点、极点、本性奇点}
+设 $f(z)$ 在 $z_0$ 附近的洛朗展开为
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n.
+\]
+\begin{itemize}
+    \item 若所有负幂项系数都为零，则 $z_0$ 是可去奇点。
+    \item 若只有有限个负幂项，且最高负幂为 $(z-z_0)^{-m}$，则 $z_0$ 是 $m$ 阶极点。
+    \item 若有无限多个负幂项，则 $z_0$ 是本性奇点。
+\end{itemize}
+\end{dingliyi}
+
+\begin{dingli}{}{可去奇点判别}
+若 $f(z)$ 在去心邻域内解析且在 $z_0$ 附近有界，则 $z_0$ 是可去奇点。
+\end{dingli}
+
+\begin{dingli}{}{极点判别}
+若存在正整数 $m$，使 $(z-z_0)^m f(z)$ 在 $z_0$ 附近解析且在 $z_0$ 处不为零，则 $z_0$ 是 $m$ 阶极点。
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 奇点分类的本质是看洛朗主部的结构。
+    \item 可去奇点意味着函数只是``表面上出问题''，补上一个值即可恢复解析。
+    \item 极点意味着发散有明确阶数，是最规则的一类非可去奇点。
+    \item 本性奇点意味着负幂项无穷无尽，局部行为最复杂。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{}{可去奇点}
+判断 $\dfrac{\sin z}{z}$ 在 $z=0$ 的奇点类型，并说明如何补定义使其解析。
+\end{lizi}
+
+\begin{lizi}{}{极点与阶数}
+判断 $\dfrac{1}{(z-1)^3}$ 在 $z=1$ 的奇点类型，并说明为什么它是三阶极点。
+\end{lizi}
+
+\begin{lizi}{}{本性奇点}
+判断 $\mathrm{e}^{1/z}$ 与 $\sin(1/z)$ 在 $z=0$ 的奇点类型，并从展开式解释原因。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 三类奇点对应的局部行为示意图：可去、有限阶发散、无限复杂振荡。
+    \item 用主部结构对照表的形式可视化奇点分类。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要只看函数值趋不趋于无穷来判断奇点；可去奇点和本性奇点都不能这样简单处理。
+    \item 不要把``有负幂项''与``本性奇点''混淆；有限个负幂项对应的是极点。
+    \item 不要脱离展开式空谈分类；洛朗展开是最统一、最可靠的判断工具。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：判断给定函数在指定点的奇点类型。
+    \item 综合题：通过变形或展开判断极点阶数。
+    \item 挑战题：证明有界解析函数的孤立奇点一定可去。
+\end{itemize}
+
+\section{第六节\quad 级数表示的应用与向留数理论过渡}
+
+\begin{wulibj}[本节要解决的问题]
+如果前五节只停留在``会展开、会分类''，学生仍然会觉得这章像工具箱。本节的任务是收口：让学生看到级数表示到底能做什么，以及为什么下一章的留数理论几乎是从本章自然长出来的。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 用若干典型问题说明泰勒与洛朗展开的实际用途。
+    \item 让学生意识到 $(z-z_0)^{-1}$ 项的特殊地位。
+    \item 为下一章正式引入留数做好概念铺垫。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 用展开求极限与局部近似
+    \item 用展开判断主导项
+    \item 为什么 $(z-z_0)^{-1}$ 项最特别
+    \item 从洛朗系数走向留数
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 泰勒展开可以把局部极限和近似计算问题变得透明。
+    \item 洛朗展开中的主部能直接读出奇点附近的主导行为。
+    \item 在围道积分中，绝大多数幂次项的贡献都会消失，只有 $(z-z_0)^{-1}$ 项留下来，这正是留数出现的根源。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{}{用泰勒展开求极限}
+计算
+\[
+    \lim_{z \to 0}\left(\frac{1}{z}-\frac{1}{\mathrm{e}^z-1}\right),
+\]
+并说明为什么展开法比直接变形更清楚。
+\end{lizi}
+
+\begin{lizi}{}{读取主导行为}
+利用洛朗展开说明 $\dfrac{\cos z}{z^3}$ 在 $z=0$ 附近的主导项，并指出哪一项对下一章最关键。
+\end{lizi}
+
+\begin{lizi}{}{留数伏笔}
+将 $f(z)$ 在 $z_0$ 附近展开成
+\[
+    \cdots + \frac{c_{-2}}{(z-z_0)^2} + \frac{c_{-1}}{z-z_0} + c_0 + c_1 (z-z_0) + \cdots
+\]
+说明为什么围绕 $z_0$ 的小圆积分最终只与 $c_{-1}$ 有关。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 小圆围道上各幂次项积分行为的示意图。
+    \item 洛朗展开中各项在积分时的``筛选''效果示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把展开仅当作计算技巧；它首先是一种结构语言。
+    \item 不要把留数看成下一章突然出现的新概念；它已经在洛朗展开中埋下了伏笔。
+    \item 不要忽略展开的适用区域，尤其是在用展开处理极限或积分时。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：用泰勒展开求若干极限。
+    \item 综合题：由洛朗展开读出主部和 $(z-z_0)^{-1}$ 项系数。
+    \item 挑战题：证明 $\oint_{|z-z_0|=\rho} (z-z_0)^n\,\mathrm{d}z$ 在 $n\neq -1$ 时为零，而在 $n=-1$ 时为 $2\pi \mathrm{i}$。
+\end{itemize}
+
+\section{本章小结与写作建议}
+
+\begin{tishi}[本章的知识骨架]
+\begin{enumerate}
+    \item 幂级数告诉我们：解析函数有可能被局部级数表示。
+    \item 泰勒展开告诉我们：在解析点附近，函数确实可以被幂级数唯一表示。
+    \item 零点理论告诉我们：展开式能读出函数在零点附近的局部结构。
+    \item 洛朗展开告诉我们：在奇点附近，也可以用级数表示，只不过要允许负幂项。
+    \item 奇点分类告诉我们：洛朗主部就是奇点的身份证。
+    \item 留数伏笔告诉我们：主部中的 $(z-z_0)^{-1}$ 项将在下一章成为核心主角。
+\end{enumerate}
+\end{tishi}
+
+\begin{tishi}[正式写作时的篇幅建议]
+\begin{enumerate}
+    \item 第一节宜短而扎实，不要把大量篇幅消耗在实数项级数复习上。
+    \item 第二节、第四节、第五节应作为本章主体，篇幅可以相对充分。
+    \item 第三节``零点''建议保留，但不必写成过长的大节；它的任务是承上启下。
+    \item 第六节应以收口和过渡为主，不宜再加入与主线关系较弱的新专题。
+\end{enumerate}
+\end{tishi}
+
+\begin{sikao}{}{}
+如果把第四章看成第五章的准备，那么学生学完本章后，至少应该能回答下面三个问题：
+\begin{enumerate}
+    \item 为什么解析函数一定能在解析点附近写成泰勒级数？
+    \item 为什么研究奇点时要把泰勒展开推广为洛朗展开？
+    \item 为什么洛朗展开里的 $(z-z_0)^{-1}$ 项会在围道积分中显得格外重要？
+\end{enumerate}
+\end{sikao}

@@ -3,3754 +3,1501 @@
 \chapter{复变函数的级数表示}
 
 \begin{wulibj}[本章导读]
-\textbf{这一章我们要学什么？}
+上一章我们已经学过柯西积分定理和柯西积分公式。那些结果看起来像是在研究积分，其实真正厉害的地方在于：它们把解析函数的局部结构几乎全部锁死了。
 
-在高等数学中，大家已经学过泰勒展开——把一个光滑函数展开成无穷级数：
+在高等数学里，大家已经见过泰勒展开。那时它更像一种近似工具：把函数在某点附近写成多项式加余项，用来求极限、作近似、估计误差。但在复变函数里，情况更强得多。对解析函数来说，泰勒展开不再只是``一个可能的技巧''，而是函数局部结构的真实写照。
+
+本章要回答下面几个问题：
+\begin{enumerate}
+    \item 为什么解析函数一定能写成幂级数？
+    \item 这个幂级数在哪个范围内有效？
+    \item 如果函数在某点为零，展开式能告诉我们什么？
+    \item 如果函数在某点不解析，泰勒展开失效了怎么办？
+    \item 为什么洛朗展开中的 $\dfrac{1}{z-z_0}$ 项在下一章会变得特别重要？
+\end{enumerate}
+
+本章的主线可以概括为
 \[
-    \mathrm{e}^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
+    \text{幂级数} \Longrightarrow \text{泰勒展开} \Longrightarrow \text{零点} \Longrightarrow \text{洛朗展开} \Longrightarrow \text{奇点分类} \Longrightarrow \text{留数伏笔}.
 \]
-这个展开式在 $x = 0$ 附近成立，而且越靠近 $0$，用前几项逼近就越精确。
 
-现在问题来了：\textbf{复变函数能做同样的事情吗？}
-
-答案是肯定的！而且复变函数的级数展开比实函数更加神奇：
-\begin{itemize}
-    \item \textbf{泰勒级数}：解析函数在解析点附近可以展开成幂级数，而且这个展开是\textbf{唯一}的——这导致了一个惊人的结论：``解析函数由它在一点附近的值完全决定''。实函数可没有这么强的性质！
-    \item \textbf{洛朗级数}：当函数在某个点有奇点（比如 $\frac{1}{z}$ 在 $z = 0$），泰勒展开就不灵了。但洛朗展开可以处理这种情况——它允许出现负幂项。
-    \item \textbf{奇点分类}：通过洛朗展开，我们可以精确地给奇点分类——可去奇点、极点、本性奇点，每种奇点都有独特的性质。
-\end{itemize}
-
-\textbf{学习建议}：本章内容与高等数学中的级数部分有很强的联系。如果你对实数项级数比较熟悉，学起来会轻松很多。如果有些遗忘，也没关系——我们会在第一节先回顾实数序列和级数的基本概念。
+请大家带着一个意识来学这一章：我们不是为了多记几个展开公式，而是在学习如何通过``局部级数表示''读懂函数。
 \end{wulibj}
 
-% ========== 第一节 ==========
-\section{级数预备知识}
-
-\begin{tishi}[学习建议]
-\textbf{为什么要先回顾实数序列和级数？}
-
-复变函数的级数理论是建立在实数级数理论基础之上的。好消息是：大部分概念、定理和方法都可以直接推广到复数域！
-
-具体来说：
+\begin{tishi}[与前后章节的联系]
 \begin{itemize}
-    \item 复数列的极限 $\Longleftrightarrow$ 实部、虚部分别收敛
-    \item 复数项级数收敛 $\Longleftrightarrow$ 实部、虚部级数都收敛
-    \item 比值判别法、根值判别法在复数域完全适用
-\end{itemize}
-
-如果你对实数序列和级数比较熟悉，可以跳过本节的第\ref{subsec:real-sequence}、\ref{subsec:real-series}小节，直接从第\ref{subsec:complex-sequence}小节开始阅读。如果有些概念记不太清了，建议耐心地把预备知识看一看——磨刀不误砍柴工！
-\end{tishi}
-
-% ---------- 实数序列 ----------
-\subsection{实数序列}
-\label{subsec:real-sequence}
-
-\subsubsection{序列的概念}
-
-在正式讨论序列之前，让我们先看一个简单的例子。
-
-\begin{lizi}{}{}
-    观察以下数列：
-    \[
-        1,\ \frac{1}{2},\ \frac{1}{3},\ \frac{1}{4},\ \frac{1}{5},\ \ldots
-    \]
-    这个数列的第 $n$ 项是什么？当 $n$ 越来越大时，第 $n$ 项的值会如何变化？
-    
-    \begin{jie}
-        第 $n$ 项是 $\dfrac{1}{n}$。当 $n$ 越来越大时，$\dfrac{1}{n}$ 越来越接近 $0$。我们说这个数列``趋向于'' $0$。
-    \end{jie}
-\end{lizi}
-
-\begin{dingliyi}{}{序列}
-一个\textbf{序列}（或数列）是按一定顺序排列的一列数，记作
-\begin{equation}
-    a_1,\ a_2,\ a_3,\ \ldots,\ a_n,\ \ldots
-\end{equation}
-简记为 $\{a_n\}$，其中 $a_n$ 称为序列的\textbf{第 $n$ 项}或\textbf{通项}。
-\end{dingliyi}
-
-序列本质上是定义在正整数集上的函数：$a_n = f(n)$，$n = 1, 2, 3, \ldots$
-
-\subsubsection{序列极限的直观理解}
-
-在刚才的例子中，我们看到 $\frac{1}{n}$ 随着 $n$ 增大而越来越接近 $0$。这种``越来越接近''的感觉，正是极限概念的源头。
-
-但是，``越来越接近''这个说法太模糊了。请看下面这个序列：
-
-\begin{lizi}{}{}
-    观察序列：$0,\ 1,\ 0,\ 1,\ 0,\ 1,\ \ldots$
-    
-    \begin{jie}
-        这个序列在 $0$ 和 $1$ 之间来回振荡。它经常很接近 $0$，也经常很接近 $1$，但我们不能说它``趋向于''某个数。
-        
-        这说明：光说``越来越接近''是不够的，我们需要更精确的说法。
-    \end{jie}
-\end{lizi}
-
-那么，什么才叫``真正地趋向于某个数''呢？
-
-\textbf{关键想法}：不管你要求的误差有多小，只要 $n$ 足够大，$a_n$ 和 $a$ 的距离就能小于这个误差。
-
-但在给出正式定义之前，让我们先看一个反例，理解为什么光说``越来越接近''是不够的。
-
-\begin{lizi}{}{}
-    观察序列：$0,\ 1,\ 0,\ 1,\ 0,\ 1,\ \ldots$
-    
-    \begin{jie}
-        这个序列在 $0$ 和 $1$ 之间来回振荡。它经常很接近 $0$，也经常很接近 $1$，
-        但我们不能说它``趋向于''某个数。
-        
-        这说明：光说``越来越接近''是不够的！必须要求``最终一直保持接近''，
-        而不是``时近时远''。
-    \end{jie}
-\end{lizi}
-
-\textbf{正确的感觉应该是}：不管你要求的误差有多小，只要 $n$ 足够大，$a_n$ 和 $a$ 的距离就能小于这个误差，而且从那以后\textbf{一直}保持在这个范围内。
-
-这就是``要多接近有多接近''——把这句话翻译成数学语言，就得到下面的严格定义。
-
-\begin{dingliyi}{}{序列极限（直观描述）}
-如果当 $n$ 越来越大时，$a_n$ 越来越接近某个固定的数 $a$，而且可以``要多接近有多接近''，我们就说序列 $\{a_n\}$ 的\textbf{极限}是 $a$，记作
-\begin{equation}
-    \lim_{n \to \infty} a_n = a \quad \text{或} \quad a_n \to a \quad (n \to \infty)
-\end{equation}
-这时也称序列 $\{a_n\}$ \textbf{收敛}于 $a$。如果不存在这样的数 $a$，则称序列\textbf{发散}。
-\end{dingliyi}
-
-\subsubsection{序列极限的严格定义}
-
-``越来越接近''只是一个直观说法，不够精确。我们需要用数学语言把这个意思说清楚。
-
-\textbf{核心问题}：怎么用数学语言描述``要多接近有多接近''？
-
-\textbf{思路}：
-\begin{enumerate}
-    \item ``接近程度''用距离 $|a_n - a|$ 来衡量
-    \item ``要多接近''意味着：你给出一个允许的误差 $\varepsilon$（epsilon，读作``艾普西龙''）
-    \item ``有多接近''意味着：我能找到一个位置 $N$，从那之后所有的项都满足要求
-\end{enumerate}
-
-\begin{dingliyi}{}{序列极限（epsilon-N 定义）}
-设 $\{a_n\}$ 是一个序列，$a$ 是一个实数。如果对于任意 $\varepsilon > 0$，存在正整数 $N$，使得当 $n > N$ 时，有
-\begin{equation}
-    |a_n - a| < \varepsilon
-\end{equation}
-则称序列 $\{a_n\}$ 的极限是 $a$，记作 $\lim_{n \to \infty} a_n = a$。
-\end{dingliyi}
-
-\textbf{怎么理解这个定义？}
-
-想象一场对话：
-\begin{quote}
-    \textbf{挑战者}：你能让序列的项和极限的距离小于 $0.1$ 吗？\\
-    \textbf{回答者}：能！从第 $N_1$ 项开始，距离都小于 $0.1$。\\[3pt]
-    \textbf{挑战者}：那小于 $0.01$ 呢？\\
-    \textbf{回答者}：能！从第 $N_2$ 项开始，距离都小于 $0.01$。\\[3pt]
-    \textbf{挑战者}：那小于 $0.001$ 呢？小于 $0.0001$ 呢？小于任意小的数 $\varepsilon$ 呢？\\
-    \textbf{回答者}：都能！不管你给多小的 $\varepsilon$，我都能找到对应的 $N$！
-\end{quote}
-
-如果回答者能应对所有挑战，序列就收敛。这就叫``要多接近有多接近''。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.9]
-    % 坐标轴
-    \draw[->, gray] (-0.5, 0) -- (8, 0) node[right] {$n$};
-    \draw[->, gray] (0, -0.5) -- (0, 4) node[above] {$a_n$};
-    
-    % 极限值
-    \draw[dashed, blue, thick] (-0.3, 1) -- (7.5, 1) node[right] {$a$（极限）};
-    
-    % epsilon 带
-    \fill[blue!10, opacity=0.5] (-0.3, 0.5) rectangle (7.5, 1.5);
-    \draw[dashed, blue] (-0.3, 1.5) -- (7.5, 1.5) node[right] {$a + \varepsilon$};
-    \draw[dashed, blue] (-0.3, 0.5) -- (7.5, 0.5) node[right] {$a - \varepsilon$};
-    
-    % 序列点
-    \foreach \n/\y in {1/3.2, 2/2.4, 3/1.9, 4/1.6, 5/1.4, 6/1.25, 7/1.15} {
-        \fill[red] (\n, \y) circle (2pt);
-    }
-    
-    % N 标记
-    \draw[thick, green!60!black] (4, -0.3) -- (4, 3.5);
-    \node[green!60!black, below] at (4, -0.3) {$N$};
-    
-    % 标注
-    \node[above] at (2, 3.2) {\small 前 $N$ 项：可能不在带内};
-    \node[above right] at (5.5, 1.5) {\small $n > N$：都在带内};
-    
-    % epsilon 标注
-    \draw[<->, thick, blue] (7.8, 0.5) -- (7.8, 1.5);
-    \node[blue, right] at (7.9, 1) {$2\varepsilon$};
-\end{tikzpicture}
-\caption{$\varepsilon$-$N$ 定义的直观理解：从某项开始，所有点都落入 $\varepsilon$ 带内}
-\label{fig:epsilon-n}
-\end{figure}
-
-\begin{tishi}[如何理解 $\varepsilon$-$N$ 定义]
-\begin{itemize}
-    \item $\varepsilon$ 代表``误差容忍度''——你允许序列的项与极限值有多大的偏差。
-    \item $N$ 代表``从哪里开始满足要求''——前 $N$ 项可以不满足要求，但从第 $N+1$ 项开始必须满足。
-    \item ``对于任意 $\varepsilon > 0$''意思是无论你要求多精确，我都能满足。
-    \item ``存在 $N$''意思是总有一个起点，从那里开始序列就``足够接近''极限了。
-    \item \textbf{注意}：$N$ 依赖于 $\varepsilon$，$\varepsilon$ 越小，需要的 $N$ 通常越大。
+    \item 和上一章的联系：泰勒展开与洛朗展开都不是空降出来的，它们来自柯西积分公式。
+    \item 和下一章的联系：洛朗展开中 $(z-z_0)^{-1}$ 的系数，就是下一章留数理论的核心对象。
+    \item 和后面辐角原理的联系：零点与极点的个数，最终都会通过局部展开来理解。
 \end{itemize}
 \end{tishi}
 
-\begin{lizi}{}{}
-    用 $\varepsilon$-$N$ 定义证明：$\displaystyle\lim_{n \to \infty} \frac{1}{n} = 0$。
-    
-    \begin{jie}
-        \textbf{怎么想}：我们要找到一个 $N$，使得当 $n > N$ 时，
-        $\left|\frac{1}{n} - 0\right| < \varepsilon$。
-        
-        这等价于 $\frac{1}{n} < \varepsilon$，即 $n > \frac{1}{\varepsilon}$。
-        
-        所以，只要取 $N$ 为 $\frac{1}{\varepsilon}$ 的整数部分就行了！
-        
-        \textbf{正式证明}：
-        对于任意 $\varepsilon > 0$，要使
-        \[
-            \left| \frac{1}{n} - 0 \right| < \varepsilon
-        \]
-        即 $\dfrac{1}{n} < \varepsilon$，只需 $n > \dfrac{1}{\varepsilon}$。
-        
-        因此，取 $N = \left\lfloor \dfrac{1}{\varepsilon} \right\rfloor$（即 $\dfrac{1}{\varepsilon}$ 的整数部分），则当 $n > N$ 时，必有
-        \[
-            \left| \frac{1}{n} - 0 \right| < \varepsilon
-        \]
-        由定义，$\displaystyle\lim_{n \to \infty} \frac{1}{n} = 0$。
-    \end{jie}
-\end{lizi}
+\section{幂级数与复数项级数预备}
 
-\begin{lizi}{}{}
-    用 $\varepsilon$-$N$ 定义证明：$\displaystyle\lim_{n \to \infty} \frac{n}{n+1} = 1$。
-    
-    \begin{jie}
-        \textbf{怎么想}：先简化 $|a_n - 1|$，看看它实际上等于什么。
-        \[
-            \left| \frac{n}{n+1} - 1 \right| = \left| \frac{-1}{n+1} \right| = \frac{1}{n+1}
-        \]
-        要让它小于 $\varepsilon$，只需 $\frac{1}{n+1} < \varepsilon$，即 $n > \frac{1}{\varepsilon} - 1$。
-        
-        \textbf{正式证明}：
-        对于任意 $\varepsilon > 0$，要使
-        \[
-            \left| \frac{n}{n+1} - 1 \right| = \left| \frac{-1}{n+1} \right| = \frac{1}{n+1} < \varepsilon
-        \]
-        只需 $n + 1 > \dfrac{1}{\varepsilon}$，即 $n > \dfrac{1}{\varepsilon} - 1$。
-        
-        取 $N = \max\left\{1, \left\lfloor \dfrac{1}{\varepsilon} \right\rfloor\right\}$，则当 $n > N$ 时，必有
-        \[
-            \left| \frac{n}{n+1} - 1 \right| < \varepsilon
-        \]
-        由定义，$\displaystyle\lim_{n \to \infty} \frac{n}{n+1} = 1$。
-    \end{jie}
-\end{lizi}
+\begin{wulibj}[为什么先讲这一节]
+要把函数写成级数，首先得知道这种级数本身有什么性质。这里真正需要的预备并不多：复数项级数怎么判断收敛，幂级数的收敛区域是什么形状，为什么它在圆内可以逐项求导、逐项积分。把这几件事弄清楚，后面学泰勒展开时就不会觉得它只是一个漂亮公式。
+\end{wulibj}
 
-\subsubsection{序列极限的性质}
+\subsection{复数项级数的收敛}
 
-极限有哪些基本性质呢？我们来看看。
-
-\begin{dingli}{}{极限的唯一性}
-如果序列 $\{a_n\}$ 收敛，则它的极限唯一。
-\end{dingli}
-
-\begin{tishi}[证明思路]
-要证明极限唯一，我们用反证法：假设有两个不同的极限 $a$ 和 $b$。
-
-关键观察：当 $n$ 充分大时，$a_n$ 同时接近 $a$ 和 $b$。如果 $a \neq b$，这怎么可能呢？
-
-具体做法：
-\begin{enumerate}
-    \item 设 $a \neq b$，那么 $|a - b| > 0$
-    \item 当 $n$ 很大时，$|a_n - a|$ 和 $|a_n - b|$ 都可以很小
-    \item 但 $|a - b| \leq |a_n - a| + |a_n - b|$（三角不等式）
-    \item 右边可以任意小，左边是正数，矛盾！
-\end{enumerate}
-\end{tishi}
-
-\begin{proof}
-设 $\lim_{n \to \infty} a_n = a$ 且 $\lim_{n \to \infty} a_n = b$。我们要证明 $a = b$。
-
-对于任意 $\varepsilon > 0$，存在 $N_1$ 使得当 $n > N_1$ 时，$|a_n - a| < \varepsilon/2$；存在 $N_2$ 使得当 $n > N_2$ 时，$|a_n - b| < \varepsilon/2$。
-
-取 $N = \max\{N_1, N_2\}$，则当 $n > N$ 时，
+在实数范围内，级数 $\sum a_n$ 是否收敛，取决于部分和
 \[
-    |a - b| = |a - a_n + a_n - b| \leq |a_n - a| + |a_n - b| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon
+    s_N = \sum_{n=0}^{N} a_n
 \]
-由于 $\varepsilon$ 是任意正数，要使上式成立，必有 $|a - b| = 0$，即 $a = b$。
-\end{proof}
+是否有极限。复数项级数完全一样。
 
-\begin{dingli}{}{极限的运算法则}
-设 $\lim_{n \to \infty} a_n = a$，$\lim_{n \to \infty} b_n = b$，则
-\begin{enumerate}
-    \item $\displaystyle\lim_{n \to \infty} (a_n + b_n) = a + b$
-    \item $\displaystyle\lim_{n \to \infty} (a_n - b_n) = a - b$
-    \item $\displaystyle\lim_{n \to \infty} (a_n \cdot b_n) = a \cdot b$
-    \item 若 $b \neq 0$，则 $\displaystyle\lim_{n \to \infty} \frac{a_n}{b_n} = \frac{a}{b}$
-\end{enumerate}
-\end{dingli}
-
-\begin{tishi}[证明思路——为什么这些运算法则成立？]
-直观上，如果 $a_n \approx a$，$b_n \approx b$，那么：
-\begin{itemize}
-    \item $a_n + b_n \approx a + b$（和的极限等于极限的和）
-    \item $a_n \cdot b_n \approx a \cdot b$（积的极限等于极限的积）
-\end{itemize}
-
-但严格证明需要用 $\varepsilon$-$N$ 语言。关键技巧：
-\begin{enumerate}
-    \item \textbf{和的极限}：用三角不等式 $|(a_n+b_n)-(a+b)| \leq |a_n-a| + |b_n-b|$
-    \item \textbf{积的极限}：关键变形 $|a_n b_n - ab| = |a_n b_n - a_n b + a_n b - ab|$，这叫``加一项减一项''技巧
-    \item \textbf{商的极限}：转化为积的极限，$\frac{a_n}{b_n} = a_n \cdot \frac{1}{b_n}$
-\end{enumerate}
-\end{tishi}
-
-\begin{proof}
-我们依次证明各条结论。
-
-\textbf{(1) 和的极限}：核心是三角不等式 $|(a_n+b_n)-(a+b)| \leq |a_n-a| + |b_n-b|$。
-
-由于 $a_n \to a$，当 $n$ 充分大时 $|a_n-a|$ 可任意小；同理 $|b_n-b|$ 也可任意小。
-因此它们的和也可任意小，即 $a_n + b_n \to a + b$。
-
-\textbf{(2) 差的极限}：与(1)类似，$|(a_n-b_n)-(a-b)| \leq |a_n-a| + |b_n-b|$。
-
-\textbf{(3) 积的极限}：关键变形是``加一项减一项''：
+\begin{dingliyi}{}{复数项级数的收敛}
+设 $\{a_n\}$ 是一列复数。若部分和序列
 \[
-    |a_n b_n - ab| = |a_n b_n - a_n b + a_n b - ab| 
-    \leq |a_n||b_n - b| + |b||a_n - a|
+    s_N = \sum_{n=0}^{N} a_n
 \]
-由于 $\{a_n\}$ 收敛，它有界，设 $|a_n| \leq M$。
-再由 $a_n \to a$ 和 $b_n \to b$，右端两项都可任意小。
-
-\textbf{(4) 商的极限}：转化为积的极限，$\frac{a_n}{b_n} = a_n \cdot \frac{1}{b_n}$。
-关键是证明 $\frac{1}{b_n} \to \frac{1}{b}$（当 $b \neq 0$ 时）：
+当 $N \to \infty$ 时收敛于某个复数 $s$，则称级数
 \[
-    \left|\frac{1}{b_n} - \frac{1}{b}\right| = \frac{|b_n - b|}{|b_n||b|}
+    \sum_{n=0}^{\infty} a_n
 \]
-由于 $b_n \to b \neq 0$，当 $n$ 充分大时 $|b_n| > |b|/2$，分母有下界；
-分子 $|b_n - b|$ 可任意小，故整体可任意小。
-
-证毕。
-\end{proof}
-
-这些运算法则告诉我们：极限运算可以和四则运算交换顺序。
-
-\begin{lizi}{}{}
-    求 $\displaystyle\lim_{n \to \infty} \frac{2n + 1}{3n - 2}$。
-    
-    \begin{jie}
-        将分子分母同时除以 $n$：
-        \[
-            \lim_{n \to \infty} \frac{2n + 1}{3n - 2} = \lim_{n \to \infty} \frac{2 + \frac{1}{n}}{3 - \frac{2}{n}} = \frac{2 + 0}{3 - 0} = \frac{2}{3}
-        \]
-        这里用到了 $\displaystyle\lim_{n \to \infty} \frac{1}{n} = 0$ 和极限的除法法则。
-    \end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-    求 $\displaystyle\lim_{n \to \infty} \frac{n^2 + 2n}{n^2 - 1}$。
-    
-    \begin{jie}
-        将分子分母同时除以 $n^2$：
-        \[
-            \lim_{n \to \infty} \frac{n^2 + 2n}{n^2 - 1} = \lim_{n \to \infty} \frac{1 + \frac{2}{n}}{1 - \frac{1}{n^2}} = \frac{1 + 0}{1 - 0} = 1
-        \]
-    \end{jie}
-\end{lizi}
-
-\begin{tishi}[分式序列极限的技巧]
-对于形如 $\dfrac{a_n}{b_n}$ 的分式序列，其中 $a_n$ 和 $b_n$ 都是多项式或多项式之比，常用的技巧是将分子分母同除以最高次项，然后利用 $\lim_{n \to \infty} \frac{1}{n^k} = 0$（$k > 0$）求极限。
-\end{tishi}
-
-% ---------- 实数项级数 ----------
-\subsection{实数项级数}
-\label{subsec:real-series}
-
-\subsubsection{级数的概念}
-
-序列讨论的是一列数的``终点''，而级数讨论的是一列数的``累加''。
-
-\textbf{一个启发性的问题}：
-
-芝诺悖论中说：阿基里斯要追上乌龟，必须先走到乌龟的起点，但这时乌龟又往前爬了一点；然后再追到乌龟的新位置，乌龟又往前爬了一点…… 这样看来，阿基里斯永远追不上乌龟？
-
-用数学语言来说：$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots$ 等于多少？
-
-直觉告诉我们，这个和应该是 $2$（阿基里斯确实能追上乌龟）。但无穷多个数相加，怎么定义它的``和''呢？
-
-\textbf{关键想法}：用部分和的极限来定义！
-
-\begin{dingliyi}{}{级数与部分和}
-设 $\{a_n\}$ 是一个序列，表达式
-\begin{equation}
-    a_1 + a_2 + a_3 + \cdots = \sum_{n=1}^{\infty} a_n
-\end{equation}
-称为\textbf{级数}，其中 $a_n$ 称为级数的\textbf{第 $n$ 项}或\textbf{通项}。
-
-级数的\textbf{部分和}定义为
-\begin{equation}
-    S_n = \sum_{k=1}^{n} a_k = a_1 + a_2 + \cdots + a_n
-\end{equation}
+\textbf{收敛}，其和为 $s$，记作
+\[
+    \sum_{n=0}^{\infty} a_n = s.
+\]
 \end{dingliyi}
 
-\begin{dingliyi}{}{级数收敛与发散}
-如果部分和序列 $\{S_n\}$ 收敛，即 $\lim_{n \to \infty} S_n = S$ 存在，则称级数 $\sum_{n=1}^{\infty} a_n$ \textbf{收敛}，$S$ 称为级数的\textbf{和}，记作
-\begin{equation}
-    \sum_{n=1}^{\infty} a_n = S
-\end{equation}
-如果 $\{S_n\}$ 发散，则称级数\textbf{发散}。
+\begin{dingliyi}{}{绝对收敛}
+若级数
+\[
+    \sum_{n=0}^{\infty} |a_n|
+\]
+收敛，则称复数项级数
+\[
+    \sum_{n=0}^{\infty} a_n
+\]
+\textbf{绝对收敛}。
 \end{dingliyi}
 
-\begin{tishi}[级数与序列的关系]
-\begin{itemize}
-    \item 序列 $\{a_n\}$ 是一列数，我们关心它的``极限''。
-    \item 级数 $\sum a_n$ 是一列数的``累加''，我们关心部分和序列 $\{S_n\}$ 的极限。
-    \item 级数收敛 $\Longleftrightarrow$ 部分和序列收敛。
-\end{itemize}
-\end{tishi}
-
-\subsubsection{最重要的级数：几何级数}
-
-在所有级数中，几何级数是最重要、最基本的。它将反复出现在本章的各个角落，甚至可以说：\textbf{理解了几何级数，就理解了级数理论的一半}。
-
-\begin{dingliyi}{}{几何级数}
-形如
-\begin{equation}
-    \sum_{n=0}^{\infty} r^n = 1 + r + r^2 + r^3 + \cdots
-\end{equation}
-的级数称为\textbf{几何级数}（或等比级数），其中 $r$ 称为\textbf{公比}。
-\end{dingliyi}
-
-\textbf{几何级数的部分和怎么求？}
-
-部分和是 $S_n = 1 + r + r^2 + \cdots + r^n$。直接相加？每一项都在变，太麻烦了。
-
-\textbf{观察}：这个求和有个特点——相邻两项的比值相同（都是 $r$）。
-
-\textbf{技巧}：既然每项都是前一项乘以 $r$，那我把整个式子乘以 $r$，大部分项就会``对齐''！
-\begin{align}
-    S_n &= 1 + r + r^2 + \cdots + r^n \\
-    rS_n &= \phantom{1 + {}} r + r^2 + r^3 + \cdots + r^{n+1}
-\end{align}
-
-看到了吗？下式比上式少了一个``1''，多了一个``$r^{n+1}$''。
-
-相减，中间那些项全消掉了：
-\[
-    S_n - rS_n = 1 - r^{n+1}
-\]
-
-所以
-\[
-    S_n = \frac{1 - r^{n+1}}{1 - r} \quad \text{（当 $r \neq 1$）}
-\]
-
-\textbf{现在关键问题来了}：当 $n \to \infty$ 时，$S_n$ 趋向什么？
-
-这取决于 $r^{n+1}$ 的行为：
-\begin{itemize}
-    \item 如果 $|r| < 1$，则 $r^{n+1} \to 0$，所以 $S_n \to \frac{1}{1-r}$
-    \item 如果 $|r| \geq 1$，则 $r^{n+1}$ 不趋于 $0$，级数发散
-\end{itemize}
-
-\begin{dingli}{}{几何级数的收敛性}
-几何级数 $\sum_{n=0}^{\infty} r^n$ 当 $|r| < 1$ 时收敛，当 $|r| \geq 1$ 时发散。当收敛时，其和为
-\begin{equation}
-    \boxed{\sum_{n=0}^{\infty} r^n = \frac{1}{1-r}, \quad |r| < 1}
-\end{equation}
+\begin{dingli}{}{复数项级数的绝对收敛}
+若级数 $\sum_{n=0}^{\infty} |a_n|$ 收敛，则复数项级数 $\sum_{n=0}^{\infty} a_n$ 收敛。
 \end{dingli}
 
 \begin{proof}
-当 $|r| < 1$ 时，$\lim_{n \to \infty} r^{n+1} = 0$，所以
+把 $a_n$ 写成
 \[
-    \lim_{n \to \infty} S_n = \lim_{n \to \infty} \frac{1 - r^{n+1}}{1 - r} = \frac{1 - 0}{1 - r} = \frac{1}{1 - r}
+    a_n = \alpha_n + \mathrm{i}\beta_n,
 \]
-当 $|r| \geq 1$ 时，通项 $r^n$ 不趋于 $0$，级数发散（见下文收敛必要条件）。
-\end{proof}
-
-\begin{jinshi}[几何级数的条件 $|r| < 1$]
-几何级数收敛的充要条件是 $|r| < 1$。这个条件非常重要，请务必记住！
-\begin{itemize}
-    \item $r = 0.5$：$1 + 0.5 + 0.25 + 0.125 + \cdots = 2$（收敛）
-    \item $r = 1$：$1 + 1 + 1 + \cdots$（发散，部分和趋向无穷）
-    \item $r = 2$：$1 + 2 + 4 + 8 + \cdots$（发散，部分和趋向无穷）
-    \item $r = -1$：$1 - 1 + 1 - 1 + \cdots$（发散，部分和在 $0$ 和 $1$ 之间振荡）
-\end{itemize}
-\end{jinshi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.85]
-    % 坐标轴
-    \draw[->, gray] (-0.5, 0) -- (7, 0) node[right] {$n$};
-    \draw[->, gray] (0, -0.3) -- (0, 4.5) node[above] {$S_n$};
-    
-    % 极限值
-    \draw[dashed, blue, thick] (-0.3, 2) -- (6.5, 2) node[right] {$\frac{1}{1-r} = 2$};
-    
-    % 部分和点 (r=0.5)
-    \foreach \n/\s in {0/1, 1/1.5, 2/1.75, 3/1.875, 4/1.9375, 5/1.96875} {
-        \fill[red] (\n, \s) circle (2.5pt);
-    }
-    
-    % 连线
-    \draw[red, thick] (0, 1) -- (1, 1.5) -- (2, 1.75) -- (3, 1.875) -- (4, 1.9375) -- (5, 1.96875);
-    
-    % 标注
-    \node[red, above left] at (0, 1) {$S_0 = 1$};
-    \node[red, above] at (2, 1.75) {$S_2 = 1.75$};
-    \node[red, right] at (5, 1.96875) {$S_5 \approx 1.97$};
-    
-    % 标题
-    \node at (3, 5.2) {$r = 0.5$ 时，部分和 $S_n$ 趋于极限 $2$};
-    
-    % 网格参考线
-    \draw[gray, very thin, dashed] (-0.3, 1) -- (6.5, 1);
-    \draw[gray, very thin, dashed] (-0.3, 1.5) -- (6.5, 1.5);
-\end{tikzpicture}
-\caption{几何级数 $\sum_{n=0}^{\infty} (0.5)^n$ 的部分和逐渐趋于极限 $2$}
-\label{fig:geometric-series}
-\end{figure}
-
-\begin{lizi}{}{}
-    求级数 $\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^n}$ 的和。
-    
-    \begin{jie}
-        $\displaystyle\sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots$
-        
-        这是首项为 $\dfrac{1}{2}$、公比为 $r = \dfrac{1}{2}$ 的几何级数（从 $n=1$ 开始）。利用几何级数公式：
-        \[
-            \sum_{n=1}^{\infty} \frac{1}{2^n} = \frac{1}{2} \sum_{n=0}^{\infty} \left(\frac{1}{2}\right)^n = \frac{1}{2} \cdot \frac{1}{1 - \frac{1}{2}} = \frac{1}{2} \cdot 2 = 1
-        \]
-        
-        或者直接套用从 $n=1$ 开始的几何级数公式：
-        \[
-            \sum_{n=1}^{\infty} r^n = \frac{r}{1-r}, \quad |r| < 1
-        \]
-        代入 $r = \dfrac{1}{2}$ 得 $\dfrac{\frac{1}{2}}{1 - \frac{1}{2}} = 1$。
-    \end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-    将循环小数 $0.\overline{3} = 0.333\ldots$ 表示为分数。
-    
-    \begin{jie}
-        $0.333\ldots = \dfrac{3}{10} + \dfrac{3}{100} + \dfrac{3}{1000} + \cdots$
-        
-        这是一个首项为 $\dfrac{3}{10}$、公比为 $r = \dfrac{1}{10}$ 的几何级数：
-        \[
-            0.333\ldots = \frac{3}{10} \sum_{n=0}^{\infty} \left(\frac{1}{10}\right)^n = \frac{3}{10} \cdot \frac{1}{1 - \frac{1}{10}} = \frac{3}{10} \cdot \frac{10}{9} = \frac{1}{3}
-        \]
-    \end{jie}
-\end{lizi}
-
-\subsubsection{级数收敛的必要条件}
-
-一个级数要收敛，它的通项必须满足什么条件？
-
-\begin{dingli}{}{级数收敛的必要条件}
-若级数 $\displaystyle\sum_{n=1}^{\infty} a_n$ 收敛，则 $\displaystyle\lim_{n \to \infty} a_n = 0$。
-\end{dingli}
-
-\begin{proof}
-设 $S_n = \sum_{k=1}^{n} a_k$ 是部分和，$S = \lim_{n \to \infty} S_n$。注意到
+其中 $\alpha_n,\beta_n$ 为实数。由
 \[
-    a_n = S_n - S_{n-1}
+    |\alpha_n| \le |a_n|,\qquad |\beta_n| \le |a_n|
 \]
-取极限得
+知，若 $\sum |a_n|$ 收敛，则实数项级数 $\sum |\alpha_n|$ 和 $\sum |\beta_n|$ 都收敛，因此 $\sum \alpha_n$ 与 $\sum \beta_n$ 分别收敛。于是
 \[
-    \lim_{n \to \infty} a_n = \lim_{n \to \infty} (S_n - S_{n-1}) = S - S = 0
-\]
-\end{proof}
-
-\begin{jinshi}[必要条件 $\neq$ 充分条件]
-$\lim_{n \to \infty} a_n = 0$ 只是级数收敛的\textbf{必要条件}，不是充分条件！
-
-最著名的反例是\textbf{调和级数}：
-\[
-    \sum_{n=1}^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots
-\]
-虽然通项 $\dfrac{1}{n} \to 0$，但这个级数发散！
-\end{jinshi}
-
-\subsubsection{绝对收敛与条件收敛}
-
-\begin{dingliyi}{}{复数项级数的绝对收敛与条件收敛}
-\begin{itemize}
-    \item 若 $\displaystyle\sum_{n=1}^{\infty} |a_n|$ 收敛，则称 $\displaystyle\sum_{n=1}^{\infty} a_n$ \textbf{绝对收敛}。
-    \item 若 $\displaystyle\sum_{n=1}^{\infty} a_n$ 收敛但 $\displaystyle\sum_{n=1}^{\infty} |a_n|$ 发散，则称 $\displaystyle\sum_{n=1}^{\infty} a_n$ \textbf{条件收敛}。
-\end{itemize}
-\end{dingliyi}
-
-\begin{tishi}[为什么要区分绝对收敛和条件收敛？]
-    表面上看，这只是``收敛速度快慢''的区别。但实际上有本质不同：
-    
-    \textbf{绝对收敛}：级数是``稳定''的，可以放心重排、相乘、交换积分和求和。
-    
-    \textbf{条件收敛}：级数是``脆弱''的，改变求和顺序可能改变和的值！
-    
-    \textbf{例子}：$1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots = \ln 2$，
-    但重新排列项的顺序，可以使和变成任意数（黎曼重排定理）。
-    
-    这是因为条件收敛依赖于``正负项相互抵消''，一旦顺序改变，抵消方式就变了。
-    
-    \textbf{物理意义}：在物理中，级数常表示能量的叠加。绝对收敛意味着``总能量 = 各部分能量之和''，与叠加顺序无关，这符合物理直觉。条件收敛则可能导致``改变叠加顺序，总能量改变''，这在物理上是荒谬的。
-    
-    \textbf{一句话}：绝对收敛 $\Rightarrow$ 和客观存在；条件收敛 $\Rightarrow$ 和依赖于计算方式。
-\end{tishi}
-
-\begin{dingli}{}{绝对收敛蕴含收敛}
-若级数 $\sum a_n$ 绝对收敛，则它收敛。
-\end{dingli}
-
-\begin{proof}
-设 $\sum |a_n|$ 收敛。我们要证明 $\sum a_n$ 收敛。
-
-\textbf{方法一：利用柯西准则}。
-
-由 $\sum |a_n|$ 收敛，根据柯西收敛准则，对于任意 $\varepsilon > 0$，存在 $N$ 使得当 $n > m > N$ 时，
-\[
-    \sum_{k=m+1}^{n} |a_k| < \varepsilon
-\]
-
-对于 $\sum a_n$，由三角不等式，
-\[
-    \left|\sum_{k=m+1}^{n} a_k\right| \leq \sum_{k=m+1}^{n} |a_k| < \varepsilon
-\]
-
-由柯西收敛准则，$\sum a_n$ 收敛。
-
-\textbf{方法二：利用正负部分解}。
-
-定义
-\[
-    a_n^+ = \begin{cases} a_n, & a_n \geq 0 \\ 0, & a_n < 0 \end{cases}, \quad
-    a_n^- = \begin{cases} 0, & a_n \geq 0 \\ -a_n, & a_n < 0 \end{cases}
-\]
-
-则 $a_n = a_n^+ - a_n^-$，且 $|a_n| = a_n^+ + a_n^-$。
-
-由于 $0 \leq a_n^+ \leq |a_n|$ 且 $0 \leq a_n^- \leq |a_n|$，由比较判别法，$\sum a_n^+$ 和 $\sum a_n^-$ 都收敛。
-
-因此
-\[
-    \sum a_n = \sum (a_n^+ - a_n^-) = \sum a_n^+ - \sum a_n^-
+    \sum a_n = \sum \alpha_n + \mathrm{i}\sum \beta_n
 \]
 收敛。
-
-\textbf{注}：方法二不仅证明了收敛，还给出了求和公式：$\sum a_n = \sum a_n^+ - \sum a_n^-$。
 \end{proof}
-
-\begin{lizi}{}{}
-    判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots$ 的收敛类型。
-    
-    \begin{jie}
-        这个级数是收敛的（可用莱布尼茨判别法证明）。
-        
-        但 $\displaystyle\sum_{n=1}^{\infty} \left|\frac{(-1)^{n+1}}{n}\right| = \sum_{n=1}^{\infty} \frac{1}{n}$ 是调和级数，发散。
-        
-        所以这是\textbf{条件收敛}的级数。其和为 $\ln 2$。
-    \end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-    判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^2} = 1 - \frac{1}{4} + \frac{1}{9} - \frac{1}{16} + \cdots$ 的收敛类型。
-    
-    \begin{jie}
-        $\displaystyle\sum_{n=1}^{\infty} \left|\frac{(-1)^{n+1}}{n^2}\right| = \sum_{n=1}^{\infty} \frac{1}{n^2}$，这是著名的 Basel 级数，收敛于 $\dfrac{\pi^2}{6}$。
-        
-        所以这个级数\textbf{绝对收敛}。
-    \end{jie}
-\end{lizi}
-
-\subsubsection{收敛判别法}
-
-如何判断一个级数是否收敛？以下是几个常用的判别法。
-
-\begin{dingli}{}{比值判别法（达朗贝尔判别法）}
-设 $\displaystyle\lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| = \rho$，则
-\begin{itemize}
-    \item 若 $\rho < 1$，级数 $\sum a_n$ 绝对收敛；
-    \item 若 $\rho > 1$，级数 $\sum a_n$ 发散；
-    \item 若 $\rho = 1$，判别法失效，需要其他方法。
-\end{itemize}
-\end{dingli}
-
-\begin{tishi}[比值判别法的直觉——为什么它能判断收敛性？]
-关键想法：\textbf{和几何级数比较}。
-
-如果 $\lim |a_{n+1}/a_n| = \rho < 1$，这意味着当 $n$ 充分大时：
-\[
-    |a_{n+1}| \approx \rho |a_n|
-\]
-
-这很像几何级数 $|a_n| \approx |a_N| \cdot \rho^{n-N}$ 的行为。既然 $\sum \rho^n$ 收敛，那 $\sum |a_n|$ 也应该收敛！
-
-反过来，如果 $\rho > 1$，则 $|a_n|$ 越来越大，不可能趋于 $0$，所以级数发散。
-\end{tishi}
-
-\begin{proof}
-\textbf{核心想法}：与几何级数比较。
-
-\textbf{情况一：$\rho < 1$。}
-
-取 $r$ 使得 $\rho < r < 1$（例如 $r = (1+\rho)/2$）。
-
-由极限定义，当 $n$ 充分大时，$|a_{n+1}/a_n| < r$，即 $|a_{n+1}| < r|a_n|$。
-
-这很像 $|a_n| \approx |a_N| \cdot r^{n-N}$ 的行为。由于 $\sum r^n$ 收敛（$r < 1$），
-由比较判别法，$\sum |a_n|$ 也收敛。
-
-\textbf{情况二：$\rho > 1$。}
-
-当 $n$ 充分大时，$|a_{n+1}| > |a_n|$，即 $|a_n|$ 单调递增，不可能趋于 $0$，故级数发散。
-
-\textbf{情况三：$\rho = 1$。}
-
-以 $p$-级数 $\sum \frac{1}{n^p}$ 为例：$\lim \frac{n^p}{(n+1)^p} = 1$，但收敛性取决于 $p$。
-故判别法失效。
-\end{proof}
-
-\begin{dingli}{}{根值判别法（柯西判别法）}
-设 $\displaystyle\lim_{n \to \infty} \sqrt[n]{|a_n|} = \rho$，则
-\begin{itemize}
-    \item 若 $\rho < 1$，级数 $\sum a_n$ 绝对收敛；
-    \item 若 $\rho > 1$，级数 $\sum a_n$ 发散；
-    \item 若 $\rho = 1$，判别法失效，需要其他方法。
-\end{itemize}
-\end{dingli}
-
-\begin{proof}
-\textbf{情况一：$\rho < 1$。}
-
-取 $\varepsilon > 0$ 使得 $\rho + \varepsilon < 1$。
-
-由极限定义，存在 $N$ 使得当 $n \geq N$ 时，
-\[
-    \sqrt[n]{|a_n|} < \rho + \varepsilon =: r < 1
-\]
-
-即 $|a_n| < r^n$ 对 $n \geq N$ 成立。
-
-几何级数 $\sum_{n=N}^{\infty} r^n$ 收敛（因为 $r < 1$），由比较判别法，$\sum_{n=N}^{\infty}|a_n|$ 收敛，故 $\sum a_n$ 绝对收敛。
-
-\textbf{情况二：$\rho > 1$。}
-
-取 $\varepsilon > 0$ 使得 $\rho - \varepsilon > 1$。
-
-由极限定义，存在 $N$ 使得当 $n \geq N$ 时，
-\[
-    \sqrt[n]{|a_n|} > \rho - \varepsilon > 1
-\]
-
-即 $|a_n| > 1$ 对 $n \geq N$ 成立。
-
-所以 $\lim_{n \to \infty} a_n \neq 0$，级数 $\sum a_n$ 发散。
-
-\textbf{情况三：$\rho = 1$。}
-
-同样以 $p$-级数为例。由 Stirling 公式或直接计算，
-\[
-    \lim_{n \to \infty}\sqrt[n]{\frac{1}{n^p}} = \lim_{n \to \infty}\frac{1}{n^{p/n}} = 1
-\]
-
-但 $p$-级数在 $p > 1$ 和 $p \leq 1$ 时收敛性不同，故 $\rho = 1$ 时判别法失效。
-\end{proof}
-
-\begin{dingli}{}{比较判别法}
-若 $|a_n| \leq b_n$ 且 $\sum b_n$ 收敛，则 $\sum a_n$ 绝对收敛。
-
-若 $|a_n| \geq b_n \geq 0$ 且 $\sum b_n$ 发散，则 $\sum a_n$ 发散。
-\end{dingli}
-
-\begin{proof}
-\textbf{第一部分：收敛性。}
-
-设 $|a_n| \leq b_n$ 且 $\sum b_n$ 收敛。
-
-由柯西收敛准则，对于任意 $\varepsilon > 0$，存在 $N$ 使得当 $n > m > N$ 时，
-\[
-    \sum_{k=m+1}^{n} b_k < \varepsilon
-\]
-
-由于 $|a_k| \leq b_k$，有
-\[
-    \sum_{k=m+1}^{n} |a_k| \leq \sum_{k=m+1}^{n} b_k < \varepsilon
-\]
-
-由柯西收敛准则，$\sum |a_n|$ 收敛，即 $\sum a_n$ 绝对收敛。
-
-\textbf{第二部分：发散性。}
-
-设 $|a_n| \geq b_n \geq 0$ 且 $\sum b_n$ 发散。
-
-假设 $\sum |a_n|$ 收敛。由于 $0 \leq b_n \leq |a_n|$，由第一部分的结论（逆否命题），$\sum b_n$ 应该收敛，矛盾。
-
-因此 $\sum |a_n|$ 发散，从而 $\sum a_n$ 发散。
-
-\textbf{注}：比较判别法是判断级数收敛性最基本的方法，比值判别法和根值判别法本质上都是与几何级数比较。
-\end{proof}
-
-\begin{lizi}{}{}
-    判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{n}{2^n}$ 的收敛性。
-    
-    \begin{jie}
-        用比值判别法：
-        \[
-            \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| = \lim_{n \to \infty} \frac{(n+1)/2^{n+1}}{n/2^n} = \lim_{n \to \infty} \frac{n+1}{2n} = \frac{1}{2} < 1
-        \]
-        所以级数绝对收敛。
-    \end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-    判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{n!}{n^n}$ 的收敛性。
-    
-    \begin{jie}
-        用比值判别法：
-        \begin{align*}
-            \lim_{n \to \infty} \frac{a_{n+1}}{a_n}
-            &= \lim_{n \to \infty} \frac{(n+1)!/(n+1)^{n+1}}{n!/n^n} \\
-            &= \lim_{n \to \infty} \frac{(n+1) \cdot n^n}{(n+1)^{n+1}} \\
-            &= \lim_{n \to \infty} \left(\frac{n}{n+1}\right)^n
-        \end{align*}
-        
-        注意到 $\left(\dfrac{n}{n+1}\right)^n = \left(1 - \dfrac{1}{n+1}\right)^n$，令 $m = n+1$：
-        \begin{align*}
-            \lim_{n \to \infty} \left(\frac{n}{n+1}\right)^n
-            &= \lim_{m \to \infty} \left(1 - \frac{1}{m}\right)^{m-1} \\
-            &= \lim_{m \to \infty} \frac{\left(1 - \frac{1}{m}\right)^m}{1 - \frac{1}{m}} \\
-            &= \frac{e^{-1}}{1} = \frac{1}{e} < 1
-        \end{align*}
-
-        \textbf{为什么 $\left(1 - \frac{1}{m}\right)^m \to e^{-1}$？}
-
-        这是重要极限 $\lim_{m \to \infty}\left(1 + \frac{1}{m}\right)^m = e$ 的变形。令 $t = -m$：
-        \[
-            \left(1 - \frac{1}{m}\right)^m = \left(1 + \frac{1}{t}\right)^{-t} = \left[\left(1 + \frac{1}{t}\right)^t\right]^{-1} \xrightarrow{t \to -\infty} e^{-1} = \frac{1}{e}
-        \]
-        或者直接用 $\lim_{x \to \infty}\left(1 + \frac{a}{x}\right)^x = e^a$ 这个更一般的结论（取 $a = -1$）。
-
-        所以级数收敛。
-    \end{jie}
-\end{lizi}
-
-\begin{tishi}[实数项级数预备知识小结]
-\begin{enumerate}
-    \item \textbf{序列}是按顺序排列的一列数；\textbf{级数}是序列的累加。
-    \item 序列收敛 $\Longleftrightarrow$ 极限存在；级数收敛 $\Longleftrightarrow$ 部分和序列收敛。
-    \item \textbf{几何级数}是最重要的基础级数：$\displaystyle\sum_{n=0}^{\infty} r^n = \frac{1}{1-r}$（$|r| < 1$）。
-    \item 级数收敛的必要条件：通项趋于 $0$（但不是充分条件！）。
-    \item \textbf{绝对收敛}的级数一定收敛；比值判别法和根值判别法是常用的判别工具。
-\end{enumerate}
-掌握了这些实数项级数的预备知识，我们就可以开始学习复数项级数了。
-\end{tishi}
-
-% ---------- 复数列的极限 ----------
-\subsection{复数\index{复数}列的极限}
-\label{subsec:complex-sequence}
-
-\begin{tishi}[从实数列到复数列——有什么不同？]
-前面我们学习了实数列的极限。现在把同样的概念推广到复数列。
-
-\textbf{好消息}：定义形式完全相同！
-
-对比一下：
-\begin{center}
-\begin{tabular}{ll}
-\toprule
-\textbf{实数列极限} & \textbf{复数列极限} \\
-\midrule
-$a_n \to a$ 当 $n \to \infty$ & $z_n \to z$ 当 $n \to \infty$ \\
-$|a_n - a| < \varepsilon$（数轴上距离） & $|z_n - z| < \varepsilon$（复平面上距离） \\
-$\varepsilon$-$N$ 定义 & 完全相同的形式！ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{关键区别}：实数在数轴上，复数在复平面上。$|a_n - a|$ 是数轴上两点的距离，$|z_n - z|$ 是复平面上两点的距离。
-
-\textbf{这导致一个重要结论}：
-\[
-    z_n = x_n + \mathrm{i} y_n \to z = x + \mathrm{i} y \quad \Longleftrightarrow \quad x_n \to x \text{ 且 } y_n \to y
-\]
-复数列收敛等价于实部、虚部分别收敛！
-\end{tishi}
-
-\begin{dingliyi}{}{复数列极限}
-设 $\{z_n\}$ 是一个复数\index{复数}列，$z$ 是一个复数\index{复数}。若对于任意 $\varepsilon > 0$，存在正整数 $N$，使得当 $n > N$ 时，$|z_n - z| < \varepsilon$，则称 $\{z_n\}$ 收敛于 $z$，记作
-\begin{equation}
-    \lim_{n \to \infty} z_n = z \quad \text{或} \quad z_n \to z \quad (n \to \infty)
-\end{equation}
-\end{dingliyi}
-
-\textbf{几何意义}：$|z_n - z| < \varepsilon$ 表示 $z_n$ 落在以 $z$ 为圆心、$\varepsilon$ 为半径的圆内。极限的定义意味着：不管这个圆多小，只要 $n$ 足够大，$z_n$ 就会落入圆内。
-
-\begin{dingli}{}{收敛的等价条件}
-设 $z_n = x_n + \mathrm{i}y_n$，$z = x + \mathrm{i}y$。则
-\begin{equation}
-    \lim_{n \to \infty} z_n = z \quad \Longleftrightarrow \quad \lim_{n \to \infty} x_n = x \text{ 且 } \lim_{n \to \infty} y_n = y
-\end{equation}
-\end{dingli}
-
-\begin{tishi}[为什么这个等价条件成立？]
-关键观察：$|z_n - z|$ 和 $(x_n - x)^2 + (y_n - y)^2$ 密切相关：
-\[
-    |z_n - z| = \sqrt{(x_n - x)^2 + (y_n - y)^2}
-\]
-
-如果 $|z_n - z| \to 0$，那么平方根内的两项都必须趋于 $0$，即 $x_n \to x$ 且 $y_n \to y$。
-
-反过来，如果 $x_n \to x$ 且 $y_n \to y$，那么 $\sqrt{(x_n - x)^2 + (y_n - y)^2} \to 0$，即 $|z_n - z| \to 0$。
-\end{tishi}
-
-\begin{proof}
-由极限定义：
-\begin{equation}
-    \lim_{n \to \infty} z_n = z \quad \Longleftrightarrow \quad |z_n - z| \to 0
-\end{equation}
-而 $|z_n - z| = \sqrt{(x_n - x)^2 + (y_n - y)^2}$，所以
-\begin{equation}
-    |z_n - z| \to 0 \quad \Longleftrightarrow \quad x_n \to x \text{ 且 } y_n \to y
-\end{equation}
-证毕。
-\end{proof}
-
-\begin{tishi}[复数列极限的计算方法——两种策略]
-求复数列的极限，通常有两种方法：
-
-\textbf{方法一：分解为实部和虚部}
-
-这是最常用的方法！步骤是：
-\begin{enumerate}
-    \item 写出 $z_n = x_n + \mathrm{i} y_n$，分离实部和虚部
-    \item 分别求 $\lim x_n$ 和 $\lim y_n$
-    \item 组合得到 $\lim z_n = \lim x_n + \mathrm{i} \lim y_n$
-\end{enumerate}
-
-\textbf{方法二：直接估计模}
-
-有时可以直接证明 $|z_n - z| \to 0$。这适用于：
-\begin{itemize}
-    \item $z_n$ 有指数形式 $z_n = r_n \mathrm{e}^{\mathrm{i}\theta_n}$
-    \item $z_n$ 由乘除运算组成，模容易计算
-\end{itemize}
-
-\textbf{经验法则}：先试方法一，如果实部虚部不好分离，再试方法二。
-\end{tishi}
-
-\begin{lizi}{}{}
-求 $\displaystyle\lim_{n \to \infty} \left(\frac{1}{n} + \frac{\mathrm{i}n}{n+1}\right)$。
-
-\begin{jie}
-    设 $z_n = \frac{1}{n} + \mathrm{i}\frac{n}{n+1}$，则
-    \begin{align}
-        x_n &= \frac{1}{n} \to 0 \\
-        y_n &= \frac{n}{n+1} = \frac{1}{1 + \frac{1}{n}} \to 1
-    \end{align}
-    
-    由收敛的等价条件，
-    \begin{equation}
-        \lim_{n \to \infty} z_n = 0 + \mathrm{i} \cdot 1 = \mathrm{i}
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求 $\displaystyle\lim_{n \to \infty} \frac{n + \mathrm{i}}{n - \mathrm{i}}$。
-
-\begin{jie}
-    方法一：分解为实部和虚部。
-    \begin{equation}
-        \frac{n + \mathrm{i}}{n - \mathrm{i}} = \frac{(n + \mathrm{i})(n + \mathrm{i})}{(n - \mathrm{i})(n + \mathrm{i})} = \frac{n^2 - 1 + 2n\mathrm{i}}{n^2 + 1} = \frac{n^2 - 1}{n^2 + 1} + \mathrm{i}\frac{2n}{n^2 + 1}
-    \end{equation}
-    
-    实部：$\frac{n^2 - 1}{n^2 + 1} = \frac{1 - \frac{1}{n^2}}{1 + \frac{1}{n^2}} \to 1$
-    
-    虚部：$\frac{2n}{n^2 + 1} = \frac{2/n}{1 + \frac{1}{n^2}} \to 0$
-    
-    所以 $\lim_{n \to \infty} \frac{n + \mathrm{i}}{n - \mathrm{i}} = 1$。
-    
-    方法二：直接利用模和辐角。
-    \begin{equation}
-        \left|\frac{n + \mathrm{i}}{n - \mathrm{i}}\right| = \frac{|n + \mathrm{i}|}{|n - \mathrm{i}|} = \frac{\sqrt{n^2 + 1}}{\sqrt{n^2 + 1}} = 1
-    \end{equation}
-    当 $n \to \infty$ 时，$n + \mathrm{i}$ 和 $n - \mathrm{i}$ 都趋于实轴正方向，其辐角都趋于 $0$，所以比值趋于 $1$。
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-证明：若 $|z| < 1$，则 $\displaystyle\lim_{n \to \infty} z^n = 0$。
-
-\begin{jie}
-    设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，其中 $r = |z| < 1$。则
-    \begin{equation}
-        z^n = r^n \mathrm{e}^{\mathrm{i}n\theta}
-    \end{equation}
-    
-    模：$|z^n| = r^n \to 0$（因为 $r < 1$）。
-    
-    由极限定义，对于任意 $\varepsilon > 0$，取 $N = \lfloor \frac{\ln \varepsilon}{\ln r} \rfloor$，则当 $n > N$ 时，$|z^n| < \varepsilon$。
-    
-    所以 $\lim_{n \to \infty} z^n = 0$。
-\end{jie}
-\end{lizi}
-
-\begin{jinshi}[复数列极限的常见错误]
-\begin{enumerate}
-    \item \textbf{忽略辐角的影响}：$\displaystyle\lim_{n \to \infty} \mathrm{i}^n$ 不存在！因为 $\mathrm{i}^n$ 在 $1, \mathrm{i}, -1, -\mathrm{i}$ 之间循环。
-    \item \textbf{混淆模的极限与序列的极限}：$|z_n| \to 0$ 蕴含 $z_n \to 0$，但 $|z_n| \to 1$ 不能推出 $z_n$ 收敛。
-\end{enumerate}
-\end{jinshi}
-
-\subsection{复数\index{复数}项级数}
-
-\begin{tishi}[从实数项级数到复数项级数]
-和复数列一样，复数项级数的定义与实数项级数完全类似：
-
-\begin{center}
-\begin{tabular}{ll}
-\toprule
-\textbf{实数项级数} & \textbf{复数项级数} \\
-\midrule
-$\sum a_n$，$a_n$ 是实数 & $\sum z_n$，$z_n$ 是复数 \\
-部分和 $S_n = a_1 + \cdots + a_n$ & 部分和 $S_n = z_1 + \cdots + z_n$ \\
-收敛 $\Longleftrightarrow$ $S_n$ 收敛 & 完全相同！ \\
-绝对收敛 $\Longleftrightarrow$ $\sum |a_n|$ 收敛 & 完全相同！ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{最重要的结论}：
-\[
-    \sum z_n \text{ 收敛} \quad \Longleftrightarrow \quad \sum x_n \text{ 和 } \sum y_n \text{ 都收敛}
-\]
-其中 $z_n = x_n + \mathrm{i} y_n$。
-
-这意味着：判断复数项级数的收敛性，可以转化为判断两个实数项级数的收敛性！
-\end{tishi}
-
-\begin{dingliyi}{}{级数收敛}
-设 $\{z_n\}$ 是复数\index{复数}列，称 $\sum_{n=1}^{\infty} z_n = z_1 + z_2 + \cdots$ 为\textbf{复数\index{复数}项级数}。若部分和序列 $S_n = \sum_{k=1}^{n} z_k$ 收敛，则称级数\textbf{收敛}，否则称\textbf{发散}。
-\end{dingliyi}
-
-\begin{dingli}{}{收敛的必要条件}
-若级数 $\sum_{n=1}^{\infty} z_n$ 收敛，则 $\lim_{n \to \infty} z_n = 0$。
-\end{dingli}
-
-\begin{tishi}[为什么通项必须趋于零？]
-这和实数项级数的道理完全一样。
-
-设 $S_n = z_1 + z_2 + \cdots + z_n$ 是部分和，$S = \lim_{n \to \infty} S_n$ 是级数的和。
-
-注意到 $z_n = S_n - S_{n-1}$（第 $n$ 项等于前 $n$ 项和减去前 $n-1$ 项和）。
-
-取极限：
-\[
-    \lim_{n \to \infty} z_n = \lim_{n \to \infty} (S_n - S_{n-1}) = S - S = 0
-\]
-
-所以，通项趋于零是级数收敛的\textbf{必要条件}。
-
-\textbf{注意}：这不是充分条件！调和级数 $\sum \frac{1}{n}$ 就是最著名的反例。
-\end{tishi}
-
-\begin{proof}
-设级数 $\sum_{n=1}^{\infty} z_n$ 收敛于 $S$，即部分和序列 $S_n = \sum_{k=1}^{n} z_k$ 收敛于 $S$。
-
-注意到
-\begin{equation}
-    z_n = S_n - S_{n-1}
-\end{equation}
-（第 $n$ 项等于前 $n$ 项之和减去前 $n-1$ 项之和，这里规定 $S_0 = 0$）。
-
-取极限得
-\begin{equation}
-    \lim_{n \to \infty} z_n = \lim_{n \to \infty} (S_n - S_{n-1}) = S - S = 0
-\end{equation}
-
-因此 $\lim_{n \to \infty} z_n = 0$。证毕。
-\end{proof}
-
-\begin{dingliyi}{}{绝对收敛与条件收敛}
-\begin{itemize}
-    \item 若 $\displaystyle\sum_{n=1}^{\infty} |z_n|$ 收敛，则称 $\displaystyle\sum_{n=1}^{\infty} z_n$ \textbf{绝对收敛}。
-    \item 若 $\displaystyle\sum_{n=1}^{\infty} z_n$ 收敛但 $\displaystyle\sum_{n=1}^{\infty} |z_n|$ 发散，则称 $\displaystyle\sum_{n=1}^{\infty} z_n$ \textbf{条件收敛}。
-\end{itemize}
-\end{dingliyi}
-
-\begin{tishi}[为什么要区分绝对收敛和条件收敛？]
-表面上看，这两个定义只是``收敛速度快慢''的区别。但实际上，它们有本质的不同：
-
-\textbf{绝对收敛的级数是``稳定''的}：无论怎样改变求和顺序，和都不变。你可以放心地重排、相乘、交换积分和求和顺序。
-
-\textbf{条件收敛的级数是``脆弱''的}：改变求和顺序，和可能会变！例如，交错调和级数 $1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots = \ln 2$，但如果重新排列项的顺序，可以使其和变成任意你想要的数（黎曼重排定理）。这是因为条件收敛依赖于``正负项相互抵消''，一旦顺序改变，抵消的方式就变了。
-
-\textbf{物理意义}：在物理中，级数常表示能量的叠加。绝对收敛意味着``总能量 = 各部分能量之和''，与叠加顺序无关，这符合物理直觉。条件收敛则可能导致``改变叠加顺序，总能量改变''，这在物理上是荒谬的。
-
-\textbf{一句话总结}：绝对收敛 $\Rightarrow$ 和是客观存在的；条件收敛 $\Rightarrow$ 和依赖于计算方式，需要小心对待。
-\end{tishi}
 
 \begin{zhu}{}{}
-绝对收敛的级数一定收敛。绝对收敛保证级数可以任意重排、相乘。
+这里有一个很重要的教学点：在复分析里，我们往往优先追求绝对收敛。因为一旦绝对收敛，很多交换求和顺序、逐项积分、逐项求导的操作就更容易成立。
 \end{zhu}
 
-\begin{tishi}[复数项级数的收敛判定——三大方法]
-判断复数项级数 $\sum z_n$ 收敛性，有以下常用方法：
-
-\textbf{方法一：分解法}（最基本）
-
-设 $z_n = x_n + \mathrm{i}y_n$，则
+\begin{lizi}{}{}
+判断级数
 \[
-    \sum z_n \text{ 收敛} \quad \Longleftrightarrow \quad \sum x_n \text{ 收敛且 } \sum y_n \text{ 收敛}
+    \sum_{n=1}^{\infty} \frac{1+\mathrm{i}}{2^n}
 \]
+是否收敛。
 
-这把问题转化为判断两个实数项级数的收敛性。
-
-\textbf{方法二：绝对收敛判别法}
-
-如果 $\sum |z_n|$ 收敛，则 $\sum z_n$ 一定收敛。
-
-要判断 $\sum |z_n|$ 是否收敛，可以用比值判别法或根值判别法——\textbf{这些判别法对复数项级数完全适用！}
-
-\textbf{方法三：比值/根值判别法}
-
-直接对 $\sum z_n$ 应用比值或根值判别法：
+\begin{jie}
+由
 \[
-    \rho = \lim_{n \to \infty} \left|\frac{z_{n+1}}{z_n}\right|
+    \left|\frac{1+\mathrm{i}}{2^n}\right| = \frac{|1+\mathrm{i}|}{2^n} = \frac{\sqrt{2}}{2^n}
 \]
-如果 $\rho < 1$，则级数绝对收敛；如果 $\rho > 1$，则级数发散。
-
-\textbf{为什么比值判别法在复数域仍然有效？}
-
-因为关键在于 $\lim |z_{n+1}/z_n|$，这和 $z_n$ 是实数还是复数无关——我们只关心模的比值！
-\end{tishi}
-
-\begin{lizi}{}{}
-判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{\mathrm{i}^n}{n}$ 的收敛性。
-
-\begin{jie}
-    方法一：分解为实部和虚部。
-    
-    由于 $\mathrm{i}^n$ 以 $4$ 为周期：$\mathrm{i}, -1, -\mathrm{i}, 1, \mathrm{i}, -1, \ldots$
-    
-    实部级数：$\displaystyle\sum_{n=1}^{\infty} \Re\left(\frac{\mathrm{i}^n}{n}\right) = 0 - \frac{1}{2} + 0 + \frac{1}{4} + 0 - \frac{1}{6} + \cdots = -\frac{1}{2} + \frac{1}{4} - \frac{1}{6} + \cdots$
-    
-    这是收敛的交错级数（可提取公因子 $-\frac{1}{2}$ 后验证）。
-    
-    虚部级数：$\displaystyle\sum_{n=1}^{\infty} \Im\left(\frac{\mathrm{i}^n}{n}\right) = 1 + 0 - \frac{1}{3} + 0 + \frac{1}{5} + \cdots = 1 - \frac{1}{3} + \frac{1}{5} - \cdots$
-    
-    这也是收敛的交错级数。
-    
-    所以原级数收敛。
-    
-    方法二：判断绝对收敛性。
-    \begin{equation}
-        \sum_{n=1}^{\infty} \left|\frac{\mathrm{i}^n}{n}\right| = \sum_{n=1}^{\infty} \frac{1}{n}
-    \end{equation}
-    这是调和级数，发散。所以原级数不是绝对收敛的。
-    
-    综上，级数 $\displaystyle\sum_{n=1}^{\infty} \frac{\mathrm{i}^n}{n}$ 条件收敛。
+可知
+\[
+    \sum_{n=1}^{\infty} \left|\frac{1+\mathrm{i}}{2^n}\right|
+    = \sqrt{2}\sum_{n=1}^{\infty} \frac{1}{2^n}
+\]
+是收敛的几何级数，所以原级数绝对收敛，从而收敛。
 \end{jie}
 \end{lizi}
 
-\begin{lizi}{}{}
-判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{(1+\mathrm{i})^n}{n!}$ 的收敛性并求和。
+\subsection{幂级数与收敛半径}
 
-\begin{jie}
-    用比值判别法：
-    \begin{equation}
-        \lim_{n \to \infty} \left|\frac{a_{n+1}}{a_n}\right| = \lim_{n \to \infty} \frac{|1+\mathrm{i}|^n \cdot n!}{(n+1)! \cdot |1+\mathrm{i}|^{n-1}} = \lim_{n \to \infty} \frac{|1+\mathrm{i}|}{n+1} = 0 < 1
-    \end{equation}
-    
-    所以级数绝对收敛。
-    
-    求和：利用指数函数的泰勒展开
-    \begin{equation}
-        \mathrm{e}^z = \sum_{n=0}^{\infty} \frac{z^n}{n!}
-    \end{equation}
-    
-    令 $z = 1 + \mathrm{i}$，注意从 $n=0$ 开始：
-    \begin{equation}
-        \sum_{n=0}^{\infty} \frac{(1+\mathrm{i})^n}{n!} = \mathrm{e}^{1+\mathrm{i}} = \mathrm{e} \cdot \mathrm{e}^{\mathrm{i}} = \mathrm{e}(\cos 1 + \mathrm{i}\sin 1)
-    \end{equation}
-    
-    因此
-    \begin{equation}
-        \sum_{n=1}^{\infty} \frac{(1+\mathrm{i})^n}{n!} = \mathrm{e}(\cos 1 + \mathrm{i}\sin 1) - 1
-    \end{equation}
-\end{jie}
-\end{lizi}
+接下来我们要研究本章的主角。
 
-\begin{lizi}{}{}
-判断级数 $\displaystyle\sum_{n=1}^{\infty} \frac{z^n}{n}$ 在 $|z| = 1$ 上的收敛性。
-
-\begin{jie}
-    当 $|z| < 1$ 时，级数绝对收敛（比值判别法，$\rho = |z| < 1$）。
-    
-    当 $|z| > 1$ 时，通项 $z^n/n$ 不趋于零，级数发散。
-    
-    当 $|z| = 1$ 时，设 $z = \mathrm{e}^{\mathrm{i}\theta}$（$\theta \in [0, 2\pi)$）：
-    \begin{equation}
-        \sum_{n=1}^{\infty} \frac{\mathrm{e}^{\mathrm{i}n\theta}}{n} = \sum_{n=1}^{\infty} \frac{\cos(n\theta)}{n} + \mathrm{i}\sum_{n=1}^{\infty} \frac{\sin(n\theta)}{n}
-    \end{equation}
-    
-    \begin{itemize}
-        \item 若 $z = 1$（$\theta = 0$）：级数为 $\sum \frac{1}{n}$，发散。
-        \item 若 $z = -1$（$\theta = \pi$）：级数为 $\sum \frac{(-1)^n}{n}$，条件收敛。
-        \item 若 $z \neq \pm 1$（$\theta \neq 0, \pi$）：两个三角级数都收敛（可用狄利克雷判别法）。
-    \end{itemize}
-    
-    总结：级数在 $|z| = 1$ 上除 $z = 1$ 外都收敛。
-\end{jie}
-\end{lizi}
-
-\begin{tishi}[本节小结]
-\textbf{一、核心知识点}
-
+\begin{tishi}[本节默认调用的前修知识]
+为了不把本章重新写成一遍高等数学中的级数专题，下面我们会直接使用三个已经学过的标准工具：
 \begin{enumerate}
-    \item \textbf{序列极限}：$a_n \to a$ 当且仅当 $\forall \varepsilon > 0$，$\exists N$，$n > N \Rightarrow |a_n - a| < \varepsilon$
-    \item \textbf{级数收敛}：级数 $\sum a_n$ 收敛 $\Longleftrightarrow$ 部分和序列 $S_n$ 收敛
-    \item \textbf{复数列}：$z_n \to z$ $\Longleftrightarrow$ $\Re(z_n) \to \Re(z)$ 且 $\Im(z_n) \to \Im(z)$
-    \item \textbf{复数项级数}：$\sum z_n$ 收敛 $\Longleftrightarrow$ $\sum \Re(z_n)$ 和 $\sum \Im(z_n)$ 都收敛
-    \item \textbf{判别法}：比值判别法 $\lim |z_{n+1}/z_n| < 1$、根值判别法 $\lim \sqrt[n]{|z_n|} < 1$
+    \item 几何级数的求和公式；
+    \item 比值判别法；
+    \item 在一致收敛条件下，可以逐项积分、逐项求导。
 \end{enumerate}
 
-\textbf{二、关键定理}
-
-\begin{itemize}
-    \item 几何级数：$\displaystyle\sum_{n=0}^{\infty} r^n = \frac{1}{1-r}$（$|r| < 1$）
-    \item 绝对收敛蕴含收敛：若 $\sum |z_n|$ 收敛，则 $\sum z_n$ 收敛
-    \item 复数项级数收敛的必要条件：$\sum z_n$ 收敛 $\Rightarrow$ $z_n \to 0$
-\end{itemize}
-
-\textbf{三、知识结构图}
+其中前两条大家通常比较熟悉；第三条如果你现在还不够熟，不必紧张，只要先抓住它的含义：\textbf{在一个较小的闭圆盘上，幂级数收敛得足够好，所以它的运算规则和有限多项式很像。}
 \end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    node distance=1.2cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.2cm, minimum height=0.8cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 第一层：序列
-    \node[box, fill=blue!15] (seq) {序列 $\{a_n\}$};
-    \node[box, fill=blue!15, right=2cm of seq] (cseq) {复数列 $\{z_n\}$};
-    
-    % 第二层：极限
-    \node[box, fill=green!15, below=of seq] (slim) {序列极限\\$a_n \to a$};
-    \node[box, fill=green!15, below=of cseq] (clim) {复数列极限\\$z_n \to z$};
-    
-    % 第三层：级数
-    \node[box, fill=orange!15, below=of slim] (series) {级数 $\sum a_n$};
-    \node[box, fill=orange!15, below=of clim] (cseries) {复数项级数\\$\sum z_n$};
-    
-    % 第四层：收敛判别
-    \node[box, fill=red!15, below=of series] (conv) {收敛判别法};
-    
-    % 箭头
-    \draw[arrow] (seq) -- node[left, font=\scriptsize] {极限存在} (slim);
-    \draw[arrow] (cseq) -- node[right, font=\scriptsize] {实部虚部分别收敛} (clim);
-    \draw[arrow] (slim) -- node[left, font=\scriptsize] {累加} (series);
-    \draw[arrow] (clim) -- node[right, font=\scriptsize] {累加} (cseries);
-    \draw[arrow] (series) -- (conv);
-    \draw[arrow] (cseries) -- (conv);
-    
-    % 横向联系
-    \draw[arrow, dashed, blue] (seq) -- node[above, font=\scriptsize] {推广} (cseq);
-    \draw[arrow, dashed, blue] (slim) -- (clim);
-    \draw[arrow, dashed, blue] (series) -- (cseries);
-    
-    % 判别法内容
-    \node[below=0.5cm of conv, font=\small, text width=8cm, align=center] {
-        比值判别法：$\lim |z_{n+1}/z_n| < 1$ \quad 
-        根值判别法：$\lim \sqrt[n]{|z_n|} < 1$
-    };
-\end{tikzpicture}
-\caption{级数预备知识结构图}
-\label{fig:ch04-sec1-summary}
-\end{figure}
-
-% ========== 第二节 ==========
-\section{幂级数}
-
-\begin{tishi}[从一般级数到幂级数]
-前面我们讨论了一般的复数项级数 $\sum z_n$，其中 $z_n$ 可以是任何复数序列。
-
-现在考虑一种特殊的级数——\textbf{幂级数}，它的通项有特定的形式：
-\[
-    c_n (z - z_0)^n
-\]
-
-这意味着级数的每一项都是 $(z - z_0)$ 的某次幂乘以一个常数系数。
-
-\textbf{为什么要研究幂级数？}
-
-因为在后面我们会看到：\textbf{任何解析函数都可以展开成幂级数}！这是解析函数最重要的性质之一。
-
-例如，大家熟知的指数函数：
-\[
-    \mathrm{e}^z = 1 + z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots
-\]
-这就是一个幂级数！
-\end{tishi}
-
-\subsection{幂级数的定义}
 
 \begin{dingliyi}{}{幂级数}
 形如
-\begin{equation}
-    \sum_{n=0}^{\infty} c_n(z - z_0)^n = c_0 + c_1(z - z_0) + c_2(z - z_0)^2 + \cdots
-\end{equation}
-的级数称为\textbf{幂级数}，其中 $c_n$ 是复常数，称为系数。
+\[
+    \sum_{n=0}^{\infty} c_n (z-z_0)^n
+\]
+的级数称为以 $z_0$ 为中心的\textbf{幂级数}。其中 $c_n$ 称为级数的系数，$z_0$ 称为展开中心。
 \end{dingliyi}
 
-\textbf{几个重要的幂级数例子}：
+幂级数和一般数项级数最重要的区别在于：它的收敛区域具有非常整齐的几何结构。
 
-\begin{lizi}{}{}
-以下都是幂级数：
+\begin{dingli}{}{收敛半径定理}
+对任意幂级数
+\[
+    \sum_{n=0}^{\infty} c_n (z-z_0)^n,
+\]
+存在唯一的数 $R \in [0,+\infty]$，使得：
 \begin{enumerate}
-    \item $\displaystyle\sum_{n=0}^{\infty} \frac{z^n}{n!} = 1 + z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots$（指数函数）
-    
-    \item $\displaystyle\sum_{n=0}^{\infty} z^n = 1 + z + z^2 + z^3 + \cdots$（几何级数）
-    
-    \item $\displaystyle\sum_{n=0}^{\infty} \frac{z^n}{n^2}$（系数是 $\frac{1}{n^2}$）
+    \item 当 $|z-z_0| < R$ 时，级数绝对收敛；
+    \item 当 $|z-z_0| > R$ 时，级数发散。
 \end{enumerate}
-\end{lizi}
-
-\textbf{关键问题}：幂级数在哪些 $z$ 处收敛？
-
-这个问题比看起来更微妙。我们来仔细分析。
-
-\subsection{收敛圆与收敛半径}
-
-\textbf{一个观察}：幂级数的收敛域有什么特点？
-
-让我们用几何级数 $\sum_{n=0}^{\infty} z^n$ 做实验：
-\begin{itemize}
-    \item 当 $z = 0.5$ 时，$|z| < 1$，级数收敛
-    \item 当 $z = 0.9$ 时，$|z| < 1$，级数收敛
-    \item 当 $z = 1$ 时，$|z| = 1$，级数发散（部分和趋向无穷）
-    \item 当 $z = 1.5$ 时，$|z| > 1$，级数发散
-\end{itemize}
-
-看起来，收敛的 $z$ 满足 $|z| < 1$，即 $z$ 落在以原点为圆心、半径为 $1$ 的圆内！
-
-这不是巧合。\textbf{阿贝尔定理}告诉我们：幂级数的收敛域总是一个圆盘！
-
-\begin{dingli}{}{阿贝尔（Abel）定理}
-\index{阿贝尔@阿贝尔（Abel）}
-设幂级数 $\sum_{n=0}^{\infty} c_n z^n$ 在点 $z_1 \neq 0$ 处收敛，则对于任意满足 $|z| < |z_1|$ 的 $z$，级数绝对收敛。
+这个 $R$ 称为该幂级数的\textbf{收敛半径}。
 \end{dingli}
 
-\begin{tishi}[阿贝尔定理的直观理解]
-如果级数在 $z_1$ 处收敛，那么在所有离原点更近的点（即 $|z| < |z_1|$）处，级数都绝对收敛。
-
-这就像一个``感染效应''：一旦某个点被``感染''（收敛），那么离原点更近的所有点都会被``感染''！
-
-反过来，如果级数在 $z_2$ 处发散，那么在所有离原点更远的点（即 $|z| > |z_2|$）处，级数都发散。
-\end{tishi}
-
 \begin{proof}
-设 $|z| < |z_1|$。由于 $\sum_{n=0}^{\infty} c_n z_1^n$ 收敛，其一般项趋于零，故存在 $M > 0$ 使得 $|c_n z_1^n| \leq M$ 对所有 $n$ 成立。
+这里只证核心思想。假设幂级数在某点 $z_1 \ne z_0$ 处收敛，即
+\[
+    \sum_{n=0}^{\infty} c_n (z_1-z_0)^n
+\]
+收敛。由于收敛级数的通项必趋于零，存在常数 $M>0$，使得
+\[
+    |c_n (z_1-z_0)^n| \le M
+\]
+对一切 $n$ 都成立。
 
-对于任意 $z$ 满足 $|z| < |z_1|$，有
-\begin{equation}
-    |c_n z^n| = |c_n z_1^n| \cdot \left|\frac{z}{z_1}\right|^n \leq M \left|\frac{z}{z_1}\right|^n
-\end{equation}
-令 $q = |z/z_1| < 1$，则几何级数 $\sum_{n=0}^{\infty} M q^n$ 收敛。由比较判别法，$\sum_{n=0}^{\infty} |c_n z^n|$ 收敛，即原级数绝对收敛。
+现在取任意满足 $|z-z_0| < |z_1-z_0|$ 的点 $z$，则
+\[
+    |c_n(z-z_0)^n|
+    = |c_n(z_1-z_0)^n| \left|\frac{z-z_0}{z_1-z_0}\right|^n
+    \le M q^n,
+\]
+其中
+\[
+    q=\left|\frac{z-z_0}{z_1-z_0}\right|<1.
+\]
+于是由几何级数比较判别法，$\sum |c_n(z-z_0)^n|$ 收敛，所以原级数在 $z$ 处绝对收敛。
+
+这说明：一旦某个点收敛，比它离中心更近的点全都绝对收敛。类似地，一旦某点发散，比它离中心更远的点也都发散。于是收敛区域必定是一个以 $z_0$ 为中心的圆盘。
 \end{proof}
-\begin{dingliyi}{}{收敛半径}
-对于任意幂级数 $\sum_{n=0}^{\infty} c_n(z - z_0)^n$，存在唯一的数 $R \geq 0$（可以是 $+\infty$），使得：
-\begin{itemize}
-    \item 当 $|z - z_0| < R$ 时，级数绝对收敛；
-    \item 当 $|z - z_0| > R$ 时，级数发散。
-\end{itemize}
-$R$ 称为\textbf{收敛半径}，$|z - z_0| = R$ 称为\textbf{收敛圆}。
-\end{dingliyi}
 
-\begin{tishi}[收敛半径的三种情况]
-\begin{enumerate}
-    \item \textbf{$R = 0$}：级数只在 $z = z_0$ 处收敛。
-    
-    例如：$\sum_{n=0}^{\infty} n! z^n$，比值 $\frac{(n+1)!}{n!} = n+1 \to \infty$，所以 $R = 0$。
-    
-    \item \textbf{$0 < R < \infty$}：级数在圆盘 $|z - z_0| < R$ 内收敛，圆外发散。
-    
-    例如：$\sum_{n=0}^{\infty} z^n$，$R = 1$。
-    
-    \item \textbf{$R = +\infty$}：级数在整个复平面收敛。
-    
-    例如：$\sum_{n=0}^{\infty} \frac{z^n}{n!}$，$R = +\infty$（这是指数函数 $\mathrm{e}^z$）。
-\end{enumerate}
-\end{tishi}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[->, gray] (-3.2,0) -- (3.6,0) node[right] {$\operatorname{Re} z$};
+    \draw[->, gray] (0,-3.2) -- (0,3.4) node[above] {$\operatorname{Im} z$};
+    \draw[fill=blue!8, draw=blue, thick] (0,0) circle (2.2);
+    \fill[red] (0,0) circle (2pt);
+    \node[below right] at (0,0) {$z_0$};
+    \draw[blue, dashed] (0,0) -- (1.55,1.55);
+    \node[blue, above right] at (0.8,0.8) {$R$};
+    \node[blue!70!black] at (0,0.8) {$|z-z_0|<R$};
+    \node at (0,-2.8) {圆内绝对收敛，圆外发散，圆上需逐点分析};
+\end{tikzpicture}
+\caption{幂级数的收敛区域是一个圆盘}
+\label{fig:power-series-disk}
+\end{figure}
 
-\begin{jinshi}[收敛圆上的行为不确定！]
-收敛半径 $R$ 只告诉我们：
-\begin{itemize}
-    \item 圆内（$|z - z_0| < R$）：级数绝对收敛
-    \item 圆外（$|z - z_0| > R$）：级数发散
-\end{itemize}
-
-\textbf{圆上}（$|z - z_0| = R$）的情况呢？\textbf{要具体问题具体分析！}
-
-例如，$\sum_{n=0}^{\infty} z^n$ 在 $|z| = 1$ 上处处发散（因为通项不趋于零）。
-
-但 $\sum_{n=1}^{\infty} \frac{z^n}{n}$ 在 $z = -1$ 处收敛（交错级数），在 $z = 1$ 处发散（调和级数）。
+\begin{jinshi}[边界点最容易出错]
+收敛半径只告诉我们圆内和圆外的情况，\textbf{并不自动告诉我们圆周上的行为}。也就是说，$|z-z_0|=R$ 时到底收敛还是发散，必须具体问题具体分析。
 \end{jinshi}
 
-\begin{dingli}{}{阿贝尔第二定理（边界连续性定理）}
-设幂级数 $\sum_{n=0}^{\infty} a_n z^n$ 的收敛半径 $R = 1$，且在边界点 $z = 1$ 处收敛（即 $\sum_{n=0}^{\infty} a_n$ 收敛）。则
-\begin{equation}
-    \lim_{r \to 1^-} \sum_{n=0}^{\infty} a_n r^n = \sum_{n=0}^{\infty} a_n
-\end{equation}
-即：若幂级数在收敛圆边界某点收敛，则其和函数在该点连续（从圆内逼近）。
+\begin{dingli}{}{收敛半径的计算公式}
+设幂级数
+\[
+    \sum_{n=0}^{\infty} c_n (z-z_0)^n
+\]
+的系数满足
+\[
+    \lim_{n\to\infty}\left|\frac{c_{n+1}}{c_n}\right|=\rho
+\]
+存在，则
+\[
+    R=\frac{1}{\rho},
+\]
+其中约定 $\rho=0$ 时 $R=+\infty$，$\rho=+\infty$ 时 $R=0$。
 \end{dingli}
 
 \begin{proof}
-设 $s_n = \sum_{k=0}^{n} a_k$，$s = \lim_{n \to \infty} s_n$。我们需要证明
-\begin{equation}
-    \lim_{r \to 1^-} \sum_{n=0}^{\infty} a_n r^n = s
-\end{equation}
-
-利用阿贝尔变换（分部求和）。设 $0 < r < 1$，则
-\begin{equation}
-    \sum_{n=0}^{N} a_n r^n = s_N r^N + \sum_{n=0}^{N-1} s_n (r^n - r^{n+1})
-\end{equation}
-
-令 $N \to \infty$，由于 $s_n \to s$ 且 $r^N \to 0$（$r < 1$），得
-\begin{equation}
-    \sum_{n=0}^{\infty} a_n r^n = (1-r)\sum_{n=0}^{\infty} s_n r^n
-\end{equation}
-
-由于 $s_n \to s$，对于任意 $\varepsilon > 0$，存在 $N$ 使得 $|s_n - s| < \varepsilon$（$n > N$）。将上式拆分为前 $N$ 项和后无穷项，可证明当 $r \to 1^-$ 时，$\sum_{n=0}^{\infty} a_n r^n \to s$。
+把幂级数看成关于 $n$ 的数项级数，其第 $n$ 项是
+\[
+    a_n = c_n (z-z_0)^n.
+\]
+于是
+\[
+    \left|\frac{a_{n+1}}{a_n}\right|
+    = \left|\frac{c_{n+1}}{c_n}\right|\,|z-z_0|.
+\]
+当 $n\to\infty$ 时，这个比值趋于 $\rho |z-z_0|$。由比值判别法：
+\begin{itemize}
+    \item 当 $\rho |z-z_0|<1$ 时，级数绝对收敛；
+    \item 当 $\rho |z-z_0|>1$ 时，级数发散。
+\end{itemize}
+因此收敛边界由 $|z-z_0|=1/\rho$ 给出，即 $R=1/\rho$。
 \end{proof}
 
-\begin{tishi}[阿贝尔变换——核心技巧详解]
-上面的证明用到了一个关键技巧：\textbf{阿贝尔变换}（分部求和）。让我们详细解释一下。
-
-\textbf{阿贝尔变换公式}：设 $a_0, a_1, \ldots, a_N$ 和 $b_0, b_1, \ldots, b_N$ 是两列数，令 $s_n = \sum_{k=0}^{n} a_k$，则
-\begin{equation}
-    \sum_{n=0}^{N} a_n b_n = s_N b_N + \sum_{n=0}^{N-1} s_n (b_n - b_{n+1})
-\end{equation}
-
-\textbf{怎么理解这个公式？}
-
-它类似于分部积分！把``求和''类比``积分''：
-\begin{itemize}
-    \item 分部积分：$\int u\,\mathrm{d}v = uv - \int v\,\mathrm{d}u$
-    \item 分部求和：$\sum a_n b_n = s_N b_N - \sum s_n(b_{n+1} - b_n)$（注意符号）
-\end{itemize}
-
-\textbf{在阿贝尔定理中的应用}：取 $b_n = r^n$（$0 < r < 1$），则 $b_n - b_{n+1} = r^n(1-r)$，这正是我们得到
-\[
-    \sum_{n=0}^{N} a_n r^n = s_N r^N + (1-r)\sum_{n=0}^{N-1} s_n r^n
-\]
-的关键。
-
-\textbf{为什么这个技巧有用？}
-
-当 $s_n \to s$ 时，我们``控制''了 $s_n$，通过分部求和把这个``控制''转移到整个级数上。
-\end{tishi}
-
-\begin{tishi}[阿贝尔第二定理的意义]
-阿贝尔第二定理告诉我们：如果幂级数在收敛圆边界上某点收敛，我们可以通过让变量从圆内趋近该点来求级数的和。这是连接级数求和与函数极限的重要桥梁。
-\end{tishi}
-
 \begin{lizi}{}{}
-利用阿贝尔第二定理证明：$\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} = \ln 2$。
+求幂级数
+\[
+    \sum_{n=0}^{\infty} \frac{z^n}{n!}
+\]
+的收敛半径。
 
 \begin{jie}
-    考虑 $\ln(1+z)$ 的泰勒展开：
-    \begin{equation}
-        \ln(1+z) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1} z^n}{n}, \quad |z| < 1
-    \end{equation}
-    
-    收敛半径 $R = 1$。在边界点 $z = 1$ 处，级数 $\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n}$ 是交错级数，由莱布尼茨判别法知其收敛。
-    
-    由阿贝尔第二定理：
-    \begin{equation}
-        \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} = \lim_{r \to 1^-} \ln(1+r) = \ln 2
-    \end{equation}
+这里 $c_n=\dfrac{1}{n!}$，所以
+\[
+    \left|\frac{c_{n+1}}{c_n}\right|
+    = \frac{1}{n+1}\to 0.
+\]
+因此 $R=+\infty$。也就是说，这个级数在整个复平面都收敛。
 \end{jie}
 \end{lizi}
+
+\begin{lizi}{}{}
+求幂级数
+\[
+    \sum_{n=0}^{\infty} n! z^n
+\]
+的收敛半径。
+
+\begin{jie}
+这里 $c_n=n!$，故
+\[
+    \left|\frac{c_{n+1}}{c_n}\right| = n+1 \to +\infty.
+\]
+于是 $R=0$。这说明它只在 $z=0$ 这一点收敛。
+\end{jie}
+\end{lizi}
+
+\subsection{圆内的良好性质：逐项求导与逐项积分}
+
+幂级数特别适合表示解析函数，不只是因为它会收敛，更因为它在收敛圆内有非常好的运算性质。
+
+\begin{dingliyi}{}{一致收敛（直观说法）}
+设函数项级数
+\[
+    \sum_{n=0}^{\infty} u_n(z)
+\]
+定义在点集 $E$ 上。若对任意精度要求，都能找到同一个起点 $N$，使得当 $n>N$ 时，对所有 $z\in E$ 都同时满足误差足够小，那么就说这个级数在 $E$ 上\textbf{一致收敛}。
+\end{dingliyi}
+
+\begin{dingli}{}{Weierstrass 判别法}
+若存在与 $z$ 无关的常数列 $M_n\ge 0$，使得对所有 $z\in E$ 都有
+\[
+    |u_n(z)|\le M_n,
+\]
+且数项级数
+\[
+    \sum_{n=0}^{\infty} M_n
+\]
+收敛，则函数项级数
+\[
+    \sum_{n=0}^{\infty} u_n(z)
+\]
+在 $E$ 上绝对且一致收敛。
+\end{dingli}
+
+\begin{tishi}[为什么这里要提一致收敛]
+学生在这里最容易疑惑的是：无穷级数怎么能像有限和那样随便求导、积分？
+
+关键点在于：虽然幂级数在整个收敛圆边界上未必都表现良好，但只要我们把目光稍微缩到一个更小的闭圆盘
+\[
+    |z-z_0|\le r<R,
+\]
+它就会收敛得非常稳定。直观地说，在这个较小圆盘里，后面的高次项衰减得很快，所以我们可以把它当成``足够温顺''的无限和来操作。
+\end{tishi}
+
+\begin{dingli}{}{幂级数的逐项求导与逐项积分}
+设
+\[
+    f(z)=\sum_{n=0}^{\infty} c_n (z-z_0)^n
+\]
+的收敛半径为 $R>0$。则在圆盘 $|z-z_0|<R$ 内，
+\begin{enumerate}
+    \item $f(z)$ 是解析函数；
+    \item 可以逐项求导：
+    \[
+        f'(z)=\sum_{n=1}^{\infty} n c_n (z-z_0)^{n-1};
+    \]
+    \item 可以逐项积分：
+    \[
+        \int f(z)\,\mathrm{d}z
+        = C+\sum_{n=0}^{\infty} \frac{c_n}{n+1}(z-z_0)^{n+1}.
+    \]
+\end{enumerate}
+\end{dingli}
+
+\begin{proof}
+我们只说明为什么逐项求导是合理的。任取 $r$ 满足 $0<r<R$，在闭圆盘 $|z-z_0|\le r$ 上，
+\[
+    |c_n(z-z_0)^n| \le |c_n|r^n.
+\]
+因为 $r<R$，数项级数 $\sum |c_n|r^n$ 收敛，所以由 Weierstrass 判别法，幂级数在闭圆盘上一致收敛。类似地，导数级数
+\[
+    \sum_{n=1}^{\infty} n c_n (z-z_0)^{n-1}
+\]
+在更小的闭圆盘上也一致收敛。于是可以交换求和与求导次序，得到逐项求导公式。逐项积分同理。
+\end{proof}
+
+\begin{tishi}[这一定理为什么重要]
+这一节最该记住的不是公式本身，而是下面这句话：\textbf{幂级数在收敛圆内表现得像一个``无限次可微的多项式''。}正因为这样，解析函数一旦能写成幂级数，我们就能对它做很多局部分析。
+\end{tishi}
+
+\section{解析函数的泰勒展开}
+
+\begin{wulibj}[本节的核心问题]
+前一节只是告诉我们幂级数本身很好。但解析函数为什么一定能写成幂级数呢？这才是本节的关键。答案来自上一章学过的柯西积分公式。
+\end{wulibj}
+
+\subsection{从柯西积分公式到泰勒展开}
+
+设 $f(z)$ 在圆盘 $|z-z_0|<R$ 内解析。我们想研究它在点 $z_0$ 附近的局部行为。任取一个小圆
+\[
+    |\zeta-z_0|=r,\qquad |z-z_0|<r<R.
+\]
+由柯西积分公式，
+\[
+    f(z)=\frac{1}{2\pi \mathrm{i}}\oint_{|\zeta-z_0|=r}\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta.
+\]
+
+现在关键的一步来了：把分母 $\zeta-z$ 改写成
+\[
+    \zeta-z = (\zeta-z_0)-(z-z_0),
+\]
+于是
+\[
+    \frac{1}{\zeta-z}
+    = \frac{1}{\zeta-z_0}\cdot
+    \frac{1}{1-\frac{z-z_0}{\zeta-z_0}}.
+\]
+因为 $|z-z_0|<|\zeta-z_0|=r$，所以可以把后面这一项展开成几何级数：
+\[
+    \frac{1}{1-\frac{z-z_0}{\zeta-z_0}}
+    = \sum_{n=0}^{\infty}\left(\frac{z-z_0}{\zeta-z_0}\right)^n.
+\]
+这就把函数 $f(z)$ 和幂级数联系起来了。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    % 收敛圆
-    \draw[blue, thick] (1, 1) circle (1.5);
-    \fill[blue!10, opacity=0.5] (1, 1) circle (1.5);
-    
-    % 圆心
-    \fill[red] (1, 1) circle (2pt) node[above right] {$z_0$};
-    
-    % 收敛区域
-    \node at (1, 1) {收敛};
-    
-    % 发散区域
-    \node at (3.5, 1) {发散};
-    
-    % 半径
-    \draw[<->, thick] (1, 1) -- (2.5, 1) node[midway, above] {$R$};
-    
-    % 收敛圆标注
-    \node[blue] at (1, -0.8) {收敛圆 $|z - z_0| = R$};
-    
-    % 坐标轴
-    \draw[->, gray] (-1, 0) -- (4.5, 0) node[right] {$x$};
-    \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+\begin{tikzpicture}[scale=1.0]
+    \draw[->, gray] (-3.4,0) -- (4.0,0) node[right] {$\operatorname{Re}\zeta$};
+    \draw[->, gray] (0,-3.2) -- (0,3.5) node[above] {$\operatorname{Im}\zeta$};
+    \fill[red] (0,0) circle (2.2pt);
+    \node[below left] at (0,0) {$z_0$};
+    \draw[blue, thick] (0,0) circle (2.5);
+    \node[blue] at (2.2,1.45) {$|\zeta-z_0|=r$};
+    \fill[teal!70!black] (0.9,0.55) circle (2pt);
+    \node[above right] at (0.9,0.55) {$z$};
+    \draw[dashed] (0,0) -- (0.9,0.55);
+    \draw[dashed] (0,0) -- (1.77,1.77);
+    \node at (0.65,0.12) {$|z-z_0|$};
+    \node at (1.35,1.2) {$r$};
+    \node at (0,-2.85) {$|z-z_0|<|\zeta-z_0|$，因此可以展开成几何级数};
 \end{tikzpicture}
-\caption{幂级数的收敛圆}
-\label{fig:convergence-circle}
+\caption{从柯西积分公式到泰勒展开的几何关键：积分变量在圆周上，点 $z$ 在圆内}
+\label{fig:cauchy-to-taylor}
 \end{figure}
 
-\subsection{收敛半径的计算}
-
-给定幂级数 $\sum c_n z^n$，怎么求收敛半径？
-
-\textbf{核心想法}：用比值判别法或根值判别法！
-
-\begin{dingli}{}{比值法}
-若 $\lim_{n \to \infty} \left|\frac{c_{n+1}}{c_n}\right| = \rho$ 存在，则收敛半径
-\begin{equation}
-    R = \begin{cases}
-        \dfrac{1}{\rho}, & \rho \neq 0, +\infty \\
-        +\infty, & \rho = 0 \\
-        0, & \rho = +\infty
-    \end{cases}
-\end{equation}
+\begin{dingli}{}{泰勒展开定理}
+设 $f(z)$ 在圆盘 $|z-z_0|<R$ 内解析，则对任意 $|z-z_0|<R$，有
+\[
+    f(z)=\sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n.
+\]
 \end{dingli}
 
-\begin{tishi}[比值法的推导思路]
-回忆比值判别法：级数 $\sum a_n$ 收敛当 $\lim |a_{n+1}/a_n| < 1$。
-
-对于幂级数 $\sum c_n z^n$：
+\begin{proof}
+由上面的讨论，
+\begin{align*}
+    f(z)
+    &= \frac{1}{2\pi \mathrm{i}}\oint_{|\zeta-z_0|=r}
+    \frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta \\
+    &= \frac{1}{2\pi \mathrm{i}}\oint_{|\zeta-z_0|=r}
+    \frac{f(\zeta)}{\zeta-z_0}
+    \cdot
+    \frac{1}{1-\frac{z-z_0}{\zeta-z_0}}
+    \,\mathrm{d}\zeta \\
+    &= \frac{1}{2\pi \mathrm{i}}\oint_{|\zeta-z_0|=r}
+    \frac{f(\zeta)}{\zeta-z_0}
+    \sum_{n=0}^{\infty}
+    \left(\frac{z-z_0}{\zeta-z_0}\right)^n
+    \,\mathrm{d}\zeta.
+\end{align*}
+由于几何级数在 $|z-z_0|<r$ 内一致收敛，可以交换求和与积分次序，得到
+\begin{align*}
+    f(z)
+    &= \sum_{n=0}^{\infty}
+    \left[
+        \frac{1}{2\pi \mathrm{i}}
+        \oint_{|\zeta-z_0|=r}
+        \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}
+        \,\mathrm{d}\zeta
+    \right]
+    (z-z_0)^n.
+\end{align*}
+而由柯西积分公式的导数形式，
 \[
-    \left|\frac{a_{n+1}}{a_n}\right| = \left|\frac{c_{n+1} z^{n+1}}{c_n z^n}\right| = \left|\frac{c_{n+1}}{c_n}\right| \cdot |z|
+    f^{(n)}(z_0)
+    = \frac{n!}{2\pi \mathrm{i}}
+    \oint_{|\zeta-z_0|=r}
+    \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}
+    \,\mathrm{d}\zeta.
 \]
+因此
+\[
+    \frac{1}{2\pi \mathrm{i}}
+    \oint_{|\zeta-z_0|=r}
+    \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}
+    \,\mathrm{d}\zeta
+    = \frac{f^{(n)}(z_0)}{n!},
+\]
+代回即得
+\[
+    f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}(z_0)}{n!}(z-z_0)^n.
+\]
+\end{proof}
 
-设 $\lim |c_{n+1}/c_n| = \rho$，则上式趋于 $\rho |z|$。
-
-由比值判别法：
-\begin{itemize}
-    \item 当 $\rho |z| < 1$，即 $|z| < 1/\rho$ 时，级数收敛
-    \item 当 $\rho |z| > 1$，即 $|z| > 1/\rho$ 时，级数发散
-\end{itemize}
-
-所以收敛半径 $R = 1/\rho$！
+\begin{tishi}[这一结论为什么惊人]
+在实变函数里，``有很多阶导数''和``等于自己的泰勒级数''之间并没有必然联系；但在复变函数里，只要函数解析，这个展开就一定成立。也就是说，\textbf{复分析中的解析性远比实分析中的可导性强。}
 \end{tishi}
 
-\begin{proof}
-由达朗贝尔判别法：若 $\lim_{n \to \infty} |a_{n+1}/a_n| = \rho$，则当 $\rho < 1$ 时级数绝对收敛，$\rho > 1$ 时发散。
+\subsection{泰勒系数与唯一性}
 
-对于幂级数 $\sum c_n z^n$，有
-\begin{equation}
-    \lim_{n \to \infty} \left|\frac{c_{n+1} z^{n+1}}{c_n z^n}\right| = |z| \cdot \lim_{n \to \infty} \left|\frac{c_{n+1}}{c_n}\right| = |z| \cdot \rho
-\end{equation}
-由达朗贝尔判别法，当 $|z| \rho < 1$ 即 $|z| < 1/\rho$ 时绝对收敛；当 $|z| \rho > 1$ 即 $|z| > 1/\rho$ 时发散。故 $R = 1/\rho$。
-
-当 $\rho = 0$ 时，级数对所有 $z$ 收敛，$R = +\infty$；当 $\rho = +\infty$ 时，级数仅对 $z = 0$ 收敛，$R = 0$。
-\end{proof}
-\begin{dingli}{}{根值法}
-若 $\lim_{n \to \infty} \sqrt[n]{|c_n|} = \rho$ 存在，则收敛半径 $R = 1/\rho$（规定同上）。
+\begin{dingli}{}{泰勒系数公式}
+若
+\[
+    f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n
+\]
+在 $z_0$ 附近成立，则
+\[
+    a_n = \frac{f^{(n)}(z_0)}{n!}.
+\]
 \end{dingli}
 
 \begin{proof}
-由柯西判别法：若 $\lim_{n \to \infty} \sqrt[n]{|a_n|} = \rho$，则当 $\rho < 1$ 时级数绝对收敛，$\rho > 1$ 时发散。
-
-对于幂级数 $\sum c_n z^n$，有
-\begin{equation}
-    \lim_{n \to \infty} \sqrt[n]{|c_n z^n|} = |z| \cdot \lim_{n \to \infty} \sqrt[n]{|c_n|} = |z| \cdot \rho
-\end{equation}
-由柯西判别法，当 $|z| \rho < 1$ 即 $|z| < 1/\rho$ 时绝对收敛；当 $|z| \rho > 1$ 时发散。故 $R = 1/\rho$。
+把上式两边对 $z$ 求 $n$ 阶导数，再令 $z=z_0$ 即可。因为所有高于 $n$ 次的项在代入 $z_0$ 时都消失，低于 $n$ 次的项求 $n$ 阶导数后为零，只剩下
+\[
+    f^{(n)}(z_0)=n!a_n.
+\]
 \end{proof}
-\begin{lizi}{}{}
-求幂级数 $\displaystyle\sum_{n=0}^{\infty} \frac{z^n}{n!}$ 的收敛半径。
 
-\begin{jie}
-    用比值法：
-    \begin{equation}
-        \rho = \lim_{n \to \infty} \left|\frac{c_{n+1}}{c_n}\right| = \lim_{n \to \infty} \frac{n!}{(n+1)!} = \lim_{n \to \infty} \frac{1}{n+1} = 0
-    \end{equation}
-    所以 $R = +\infty$，级数在整个复平面上收敛。
-    
-    事实上，$\displaystyle\sum_{n=0}^{\infty} \frac{z^n}{n!} = \mathrm{e}^z$。
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求幂级数 $\displaystyle\sum_{n=0}^{\infty} n! z^n$ 的收敛半径。
-
-\begin{jie}
-    用比值法：
-    \begin{equation}
-        \rho = \lim_{n \to \infty} \frac{(n+1)!}{n!} = \lim_{n \to \infty} (n+1) = +\infty
-    \end{equation}
-    所以 $R = 0$，级数只在 $z = 0$ 处收敛。
-\end{jie}
-\end{lizi}
-
-\subsection{幂级数的性质}
-
-\begin{dingli}{}{幂级数的解析性}
-设幂级数 $\sum_{n=0}^{\infty} c_n(z - z_0)^n$ 的收敛半径 $R > 0$，则：
-\begin{enumerate}
-    \item 和函数 $f(z) = \sum_{n=0}^{\infty} c_n(z - z_0)^n$ 在收敛圆 $|z - z_0| < R$ 内解析。
-    \item $f(z)$ 可以逐项求导：$f'(z) = \sum_{n=1}^{\infty} n c_n(z - z_0)^{n-1}$。
-    \item $f(z)$ 可以逐项积分。
-\end{enumerate}
+\begin{dingli}{}{泰勒展开的唯一性}
+若同一个函数在 $z_0$ 附近有两个幂级数展开
+\[
+    f(z)=\sum_{n=0}^{\infty} a_n (z-z_0)^n
+    =\sum_{n=0}^{\infty} b_n (z-z_0)^n,
+\]
+则对一切 $n$ 都有 $a_n=b_n$。
 \end{dingli}
 
 \begin{proof}
-我们证明核心结论：$f(z)$ 解析且可逐项求导。
-
-\textbf{关键事实}：逐项求导后，收敛半径不变。
-
-逐项求导后的级数为 $\sum_{n=1}^{\infty} n c_n(z - z_0)^{n-1}$。由比值法：
+由上一定理，
 \[
-    \lim_{n \to \infty} \frac{|(n+1)c_{n+1}|}{|n c_n|} = \lim_{n \to \infty} \frac{n+1}{n} \cdot \lim_{n \to \infty} \left|\frac{c_{n+1}}{c_n}\right| = 1 \cdot \rho = \rho
+    a_n=\frac{f^{(n)}(z_0)}{n!}=b_n.
 \]
-所以逐项求导后的收敛半径仍为 $R$。
-
-\textbf{由此可得}：
-\begin{enumerate}
-    \item $f(z)$ 可以逐项求导，得到收敛半径相同的级数 $f'(z) = \sum_{n=1}^{\infty} n c_n(z - z_0)^{n-1}$
-    \item $f'(z)$ 也可以逐项求导
-    \item 递推得 $f(z)$ 有任意阶导数，即 $f(z)$ 解析
-\end{enumerate}
+所以两个展开的对应系数必相同。
 \end{proof}
-
-\subsection{幂级数的运算}
-
-利用幂级数的乘法、除法，可以间接求出许多函数的泰勒展开。
-
-\begin{dingli}{}{幂级数的乘法}
-设 $f(z) = \sum_{n=0}^{\infty} a_n z^n$ 和 $g(z) = \sum_{n=0}^{\infty} b_n z^n$ 的收敛半径分别为 $R_1$、$R_2$，则它们的乘积为
-\begin{equation}
-    f(z) \cdot g(z) = \sum_{n=0}^{\infty} c_n z^n, \quad |z| < \min(R_1, R_2)
-\end{equation}
-其中 $c_n = \sum_{k=0}^{n} a_k b_{n-k}$（\textbf{柯西乘积}）。
-\end{dingli}
-
-\begin{proof}
-设 $|z| < \min(R_1, R_2)$。则两个级数都在 $z$ 处绝对收敛。
-
-\textbf{第一步：展开乘积。}
-
-考虑有限部分积：
-\[
-    \left(\sum_{k=0}^{N} a_k z^k\right)\left(\sum_{m=0}^{N} b_m z^m\right) = \sum_{k=0}^{N}\sum_{m=0}^{N} a_k b_m z^{k+m}
-\]
-
-按 $n = k+m$ 重新组织，并令 $m = n-k$：
-\[
-    = \sum_{n=0}^{2N}\left(\sum_{k=\max(0, n-N)}^{\min(n, N)} a_k b_{n-k}\right)z^n
-\]
-
-\textbf{第二步：证明收敛性。}
-
-由于两个级数都绝对收敛，我们有
-\[
-    \sum_{k=0}^{\infty}|a_k||z|^k < \infty, \quad \sum_{m=0}^{\infty}|b_m||z|^m < \infty
-\]
-
-由绝对收敛级数的乘积定理（Mertens 定理），
-\[
-    \left(\sum_{k=0}^{\infty} a_k z^k\right)\left(\sum_{m=0}^{\infty} b_m z^m\right) = \sum_{n=0}^{\infty}\left(\sum_{k=0}^{n} a_k b_{n-k}\right)z^n
-\]
-
-且右端级数绝对收敛。
-
-\textbf{第三步：验证系数公式。}
-
-展开乘积 $f(z)g(z)$ 并合并 $z^n$ 的系数：
-\begin{align}
-    f(z)g(z) &= (a_0 + a_1 z + a_2 z^2 + \cdots)(b_0 + b_1 z + b_2 z^2 + \cdots) \\
-    &= a_0 b_0 + (a_0 b_1 + a_1 b_0)z + (a_0 b_2 + a_1 b_1 + a_2 b_0)z^2 + \cdots
-\end{align}
-
-因此 $c_n = \sum_{k=0}^{n} a_k b_{n-k}$。证毕。
-\end{proof}
-
-\begin{tishi}[柯西乘积的``交叉相乘''示意图]
-理解柯西乘积 $c_n = \sum_{k=0}^{n} a_k b_{n-k}$ 最好的方式是画一个``交叉相乘''表：
-
-\begin{center}
-\begin{tabular}{c|ccccc}
-    & $b_0$ & $b_1 z$ & $b_2 z^2$ & $b_3 z^3$ & $\cdots$ \\
-    \hline
-    $a_0$ & $\color{red}a_0 b_0$ & $\color{blue}a_0 b_1 z$ & $\color{green}a_0 b_2 z^2$ & $a_0 b_3 z^3$ & $\cdots$ \\
-    $a_1 z$ & $\color{blue}a_1 b_0 z$ & $\color{green}a_1 b_1 z^2$ & $a_1 b_2 z^3$ & $\cdots$ & \\
-    $a_2 z^2$ & $\color{green}a_2 b_0 z^2$ & $a_2 b_1 z^3$ & $\cdots$ & & \\
-    $a_3 z^3$ & $a_3 b_0 z^3$ & $\cdots$ & & & \\
-    $\vdots$ & $\cdots$ & & & &
-\end{tabular}
-\end{center}
-
-\begin{itemize}
-    \item {\color{red}$z^0$ 的系数}：$c_0 = a_0 b_0$（只有一项）
-    \item {\color{blue}$z^1$ 的系数}：$c_1 = a_0 b_1 + a_1 b_0$（对角线上两项）
-    \item {\color{green}$z^2$ 的系数}：$c_2 = a_0 b_2 + a_1 b_1 + a_2 b_0$（对角线上三项）
-\end{itemize}
-
-一般地，$z^n$ 的系数是表中第 $n$ 条对角线上的所有乘积之和。
-\end{tishi}
-
-\begin{lizi}{}{}
-利用幂级数乘法求 $\mathrm{e}^z \sin z$ 的泰勒展开。
-
-\begin{jie}
-    已知
-    \begin{align}
-        \mathrm{e}^z &= 1 + z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots \\
-        \sin z &= z - \frac{z^3}{3!} + \frac{z^5}{5!} - \cdots
-    \end{align}
-    
-    计算柯西乘积：
-    \begin{align}
-        c_0 &= 1 \cdot 0 = 0 \\
-        c_1 &= 1 \cdot 1 + 1 \cdot 0 = 1 \\
-        c_2 &= 1 \cdot 0 + 1 \cdot 1 + \frac{1}{2!} \cdot 0 = 1 \\
-        c_3 &= 1 \cdot \left(-\frac{1}{6}\right) + 1 \cdot 0 + \frac{1}{2} \cdot 1 + \frac{1}{6} \cdot 0 = \frac{1}{3}
-    \end{align}
-    
-    所以
-    \begin{equation}
-        \mathrm{e}^z \sin z = z + z^2 + \frac{z^3}{3} + \cdots
-    \end{equation}
-    
-    事实上，$\mathrm{e}^z \sin z = \frac{1}{2}\mathrm{e}^z(\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z})/\mathrm{i} = \frac{\mathrm{e}^{(1+\mathrm{i})z} - \mathrm{e}^{(1-\mathrm{i})z}}{2\mathrm{i}}$，由此可验证上述结果。
-\end{jie}
-\end{lizi}
-
-\begin{dingli}{}{幂级数的除法}
-设 $f(z) = \sum_{n=0}^{\infty} a_n z^n$，$g(z) = \sum_{n=0}^{\infty} b_n z^n$，$g(0) = b_0 \neq 0$，则
-\begin{equation}
-    \frac{f(z)}{g(z)} = \sum_{n=0}^{\infty} c_n z^n
-\end{equation}
-其中系数 $c_n$ 由方程 $f(z) = g(z) \cdot \sum_{n=0}^{\infty} c_n z^n$ 即柯西乘积递推确定：
-\begin{equation}
-    c_0 = \frac{a_0}{b_0}, \quad c_n = \frac{1}{b_0}\left(a_n - \sum_{k=0}^{n-1} b_{n-k} c_k\right)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-设 $\frac{f(z)}{g(z)} = h(z) = \sum_{n=0}^{\infty} c_n z^n$，其中系数 $c_n$ 待定。则
-\[
-    f(z) = g(z) \cdot h(z) = \left(\sum_{n=0}^{\infty} b_n z^n\right)\left(\sum_{n=0}^{\infty} c_n z^n\right)
-\]
-
-\textbf{第一步：利用幂级数乘法展开。}
-
-由幂级数乘法定理，
-\[
-    f(z) = \sum_{n=0}^{\infty}\left(\sum_{k=0}^{n} b_k c_{n-k}\right)z^n = \sum_{n=0}^{\infty}\left(\sum_{k=0}^{n} b_{n-k} c_k\right)z^n
-\]
-
-\textbf{第二步：比较系数。}
-
-由于 $f(z) = \sum_{n=0}^{\infty} a_n z^n$，比较两边系数得：
-\begin{align}
-    a_0 &= b_0 c_0 \\
-    a_1 &= b_1 c_0 + b_0 c_1 \\
-    a_2 &= b_2 c_0 + b_1 c_1 + b_0 c_2 \\
-    &\vdots \\
-    a_n &= \sum_{k=0}^{n} b_{n-k} c_k = b_0 c_n + \sum_{k=0}^{n-1} b_{n-k} c_k
-\end{align}
-
-\textbf{第三步：递推求解。}
-
-由于 $b_0 \neq 0$，可以递推解出 $c_n$：
-\begin{align}
-    c_0 &= \frac{a_0}{b_0} \\
-    c_n &= \frac{1}{b_0}\left(a_n - \sum_{k=0}^{n-1} b_{n-k} c_k\right), \quad n \geq 1
-\end{align}
-
-\textbf{第四步：收敛性。}
-
-由于 $b_0 \neq 0$，存在 $r > 0$ 使得 $|g(z)| \geq |b_0|/2 > 0$ 对于 $|z| < r$ 成立。因此 $\frac{f(z)}{g(z)}$ 在 $|z| < r$ 内解析，可以展开为幂级数。
-
-由泰勒展开的唯一性，上述递推得到的系数是唯一的。证毕。
-\end{proof}
-
-\begin{lizi}{}{}
-求 $\tan z = \frac{\sin z}{\cos z}$ 在 $z = 0$ 处的泰勒展开的前几项。
-
-\begin{jie}
-    设 $\tan z = c_0 + c_1 z + c_2 z^2 + c_3 z^3 + \cdots$。
-    
-    由 $\sin z = \cos z \cdot \tan z$，即
-    \begin{equation}
-        z - \frac{z^3}{6} + \cdots = \left(1 - \frac{z^2}{2} + \cdots\right)(c_0 + c_1 z + c_2 z^2 + c_3 z^3 + \cdots)
-    \end{equation}
-    
-    比较系数：
-    \begin{align}
-        z^0 &: 0 = c_0 \quad \Rightarrow \quad c_0 = 0 \\
-        z^1 &: 1 = c_1 \quad \Rightarrow \quad c_1 = 1 \\
-        z^2 &: 0 = c_2 - \frac{c_0}{2} = c_2 \quad \Rightarrow \quad c_2 = 0 \\
-        z^3 &: -\frac{1}{6} = c_3 - \frac{c_1}{2} = c_3 - \frac{1}{2} \quad \Rightarrow \quad c_3 = \frac{1}{3}
-    \end{align}
-    
-    所以 $\tan z = z + \frac{z^3}{3} + \frac{2z^5}{15} + \cdots$。
-\end{jie}
-\end{lizi}
 
 \begin{zhu}{}{}
-幂级数乘除法提供了求泰勒展开的间接方法，避免了直接计算高阶导数的繁琐过程。
+唯一性非常重要。它告诉我们：一旦知道了函数在一点的所有导数，就知道了它在该点附近的整个展开式。换句话说，解析函数的局部信息极其丰富。
 \end{zhu}
 
-\begin{tishi}[本节小结]
-\textbf{一、核心知识点}
+\subsection{收敛半径与最近奇点}
 
-\begin{enumerate}
-    \item \textbf{幂级数定义}：$\sum_{n=0}^{\infty} c_n(z - z_0)^n$，形如``系数乘幂次''的级数
-    \item \textbf{收敛圆}：幂级数的收敛域是以展开中心为圆心的圆盘
-    \item \textbf{收敛半径}：$R$ 使得 $|z - z_0| < R$ 时绝对收敛，$|z - z_0| > R$ 时发散
-    \item \textbf{幂级数性质}：在收敛圆内解析，可逐项求导、逐项积分
-\end{enumerate}
+泰勒展开虽然一定存在，但并不是在整个复平面都有效。它的有效范围由什么决定呢？
 
-\textbf{二、关键定理}
+答案是：\textbf{由展开中心到最近奇点的距离决定。}
 
-\begin{itemize}
-    \item \textbf{阿贝尔定理}：若级数在 $z_1$ 处收敛，则在所有 $|z| < |z_1|$ 处绝对收敛
-    \item \textbf{收敛半径计算}：
-    \[
-        \text{比值法：} R = \frac{1}{\lim |c_{n+1}/c_n|} \quad \text{根值法：} R = \frac{1}{\lim \sqrt[n]{|c_n|}}
-    \]
-    \item \textbf{阿贝尔第二定理}：若级数在收敛圆边界某点收敛，则和函数在该点连续
-\end{itemize}
-
-\textbf{三、知识结构图}
-\end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    node distance=1cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=0.7cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 幂级数定义
-    \node[box, fill=blue!15] (ps) {幂级数 $\sum c_n(z-z_0)^n$};
-    
-    % 收敛圆
-    \node[box, fill=green!15, below=of ps] (circle) {收敛圆\\$|z-z_0| < R$};
-    
-    % 收敛半径计算方法
-    \node[box, fill=orange!15, below left=1cm and -0.5cm of circle] (ratio) {比值法\\$R = 1/\rho$};
-    \node[box, fill=orange!15, below right=1cm and -0.5cm of circle] (root) {根值法\\$R = 1/\rho$};
-    
-    % 性质
-    \node[box, fill=red!15, below=1.5cm of circle] (prop) {收敛圆内解析\\可逐项求导/积分};
-    
-    % 阿贝尔定理
-    \node[box, fill=purple!15, right=2.5cm of circle] (abel) {阿贝尔定理};
-    
-    % 箭头
-    \draw[arrow] (ps) -- node[right, font=\scriptsize] {收敛域} (circle);
-    \draw[arrow] (circle) -- (ratio);
-    \draw[arrow] (circle) -- (root);
-    \draw[arrow] (circle) -- node[right, font=\scriptsize] {性质} (prop);
-    \draw[arrow] (ps) -| node[above, font=\scriptsize, pos=0.3] {核心定理} (abel);
-    \draw[arrow, dashed] (abel) -- node[right, font=\scriptsize] {确定收敛域} (circle);
-    
-    % R的三种情况
-    \node[below=0.3cm of ratio, font=\scriptsize, text width=2.5cm, align=center] {$R=0$：仅在$z_0$收敛\\$0<R<\infty$：圆盘\\$R=\infty$：全平面};
-\end{tikzpicture}
-\caption{幂级数知识结构图}
-\label{fig:ch04-sec2-summary}
-\end{figure}
-
-% ========== 第三节 ==========
-\section{泰勒\index{泰勒@泰勒（Taylor）}（Taylor）展开}
-
-\begin{tishi}[回顾：高等数学中的泰勒展开]
-在高等数学中，我们学过：一个\textbf{光滑}的实函数 $f(x)$ 可以在 $x_0$ 附近展开为泰勒级数：
-\[
-    f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!}(x - x_0)^n
-\]
-
-例如：
-\[
-    \mathrm{e}^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots
-\]
-
-这个展开式在 $x_0$ 附近的某个区间内成立。
-
-\textbf{问题}：复变函数能做同样的事情吗？
-\end{tishi}
-
-\begin{tishi}[复变函数的泰勒展开——好消息和坏消息]
-\textbf{好消息}：复变函数的泰勒展开\textbf{形式完全相同}！
-
-如果 $f(z)$ 在 $z_0$ 附近解析，那么：
-\[
-    f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z - z_0)^n
-\]
-
-\textbf{更惊人的好消息}：展开式在以 $z_0$ 为圆心的某个圆盘内成立，而且\textbf{展开式唯一}——这意味着解析函数由它在一点附近的值完全决定！
-
-\textbf{坏消息（相对的）}：复变函数要能泰勒展开，要求比实函数更高——必须\textbf{解析}（可导且导数连续），而不只是各阶可导。
-
-但好消息是：在复数域，解析性是一个很强的条件，带来很多美妙的结论。
-\end{tishi}
-
-\subsection{泰勒定理}
-
-\begin{zhongyao}[泰勒展开定理]
-设 $f(z)$ 在圆 $|z - z_0| < R$ 内解析，则在此圆内 $f(z)$ 可以展开为\keyword{幂级数}
-\[
-    f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z - z_0)^n
-\]
-且展开式唯一。
-\end{zhongyao}
-
-\begin{tishi}[证明思路——四步走]
-    关键技巧：利用\textbf{柯西积分公式}和\textbf{几何级数展开}。
-    
-    \textbf{第一步：用柯西积分公式表示 $f(z)$}
-    
-    柯西积分公式告诉我们，解析函数的值可以用边界积分表示：
-    \[
-        f(z) = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(\zeta)}{\zeta - z}\,\mathrm{d}\zeta
-    \]
-    这里 $C$ 是围绕 $z$ 的闭曲线。这一步把函数值``转化''成了积分形式。
-    
-    \textbf{第二步：展开 $\frac{1}{\zeta - z}$}
-    
-    核心技巧！注意到
-    \[
-        \frac{1}{\zeta - z} = \frac{1}{(\zeta - z_0) - (z - z_0)} 
-        = \frac{1}{\zeta - z_0} \cdot \frac{1}{1 - \frac{z - z_0}{\zeta - z_0}}
-    \]
-    
-    当 $|z - z_0| < |\zeta - z_0|$ 时，$\left|\frac{z - z_0}{\zeta - z_0}\right| < 1$，
-    可以用几何级数展开！
-    
-    \textbf{第三步：代入并交换积分求和}
-    
-    把展开式代入积分，由于级数一致收敛，可以交换积分和求和顺序。
-    
-    \textbf{第四步：识别系数}
-    
-    积分 $\frac{1}{2\pi\mathrm{i}}\oint \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta$
-    正好等于 $\frac{f^{(n)}(z_0)}{n!}$（高阶导数公式）！
-\end{tishi}
+\begin{dingli}{}{收敛半径与最近奇点}
+设 $f(z)$ 在点 $z_0$ 附近解析，并且除去若干奇点外在更大区域内解析。则 $f(z)$ 在 $z_0$ 处的泰勒展开的收敛半径，等于从 $z_0$ 到最近奇点的距离。
+\end{dingli}
 
 \begin{proof}
-设 $z$ 是圆内任意一点。以 $z_0$ 为圆心、$r < R$ 为半径作圆 $C_r$ 包含 $z$。
+设最近奇点到 $z_0$ 的距离为 $d$。那么在圆盘 $|z-z_0|<d$ 内没有奇点，所以 $f$ 在该圆盘内解析，由泰勒展开定理可知，展开至少在这个圆盘内成立，因此收敛半径 $R\ge d$。
 
-由柯西积分公式：
-\begin{equation}
-    f(z) = \frac{1}{2\pi\mathrm{i}}\oint_{C_r} \frac{f(\zeta)}{\zeta - z}\,\mathrm{d}\zeta
-\end{equation}
+另一方面，如果 $R>d$，那幂级数就在某个包含奇点的更大圆盘内收敛，而幂级数的和函数在收敛圆内必解析，这就意味着原函数可以穿过那个奇点继续解析，矛盾。因此 $R\le d$。
 
-关键技巧：利用几何级数展开。当 $|z - z_0| < |\zeta - z_0| = r$ 时，
-\begin{equation}
-    \frac{1}{\zeta - z} = \frac{1}{(\zeta - z_0) - (z - z_0)} = \frac{1}{\zeta - z_0} \cdot \frac{1}{1 - \frac{z - z_0}{\zeta - z_0}} = \sum_{n=0}^{\infty} \frac{(z - z_0)^n}{(\zeta - z_0)^{n+1}}
-\end{equation}
-
-代入积分公式：
-\begin{equation}
-    f(z) = \frac{1}{2\pi\mathrm{i}}\oint_{C_r} f(\zeta) \sum_{n=0}^{\infty} \frac{(z - z_0)^n}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta = \sum_{n=0}^{\infty} \left[\frac{1}{2\pi\mathrm{i}}\oint_{C_r} \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta\right](z - z_0)^n
-\end{equation}
-
-由高阶导数公式，括号内等于 $\frac{f^{(n)}(z_0)}{n!}$。证毕。
+综上，$R=d$。
 \end{proof}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
-    % 收敛圆
-    \draw[blue, thick] (0, 0) circle (2);
-    \fill[blue!10, opacity=0.5] (0, 0) circle (2);
-    
-    % 圆心（展开中心）
-    \fill[red] (0, 0) circle (2pt) node[below left] {$z_0$};
-    
-    % 奇点
-    \fill[orange] (2, 0) circle (2.5pt) node[below right] {$z_1$（奇点）};
-    \fill[orange] (-1.73, 1) circle (2.5pt) node[above left] {$z_2$（奇点）};
-    
-    % 半径
-    \draw[<->, thick] (0, 0) -- (2, 0) node[midway, above] {$R$};
-    
-    % 内部点
-    \fill[green!60!black] (0.8, 0.6) circle (2pt) node[above] {$z$};
-    
-    % 积分路径
-    \draw[dashed, thick] (0, 0) circle (1.3);
-    \node at (1.6, 0.9) {$C_r$};
-    
-    % 标注
-    \node[blue] at (0, -2.5) {收敛圆 $|z - z_0| < R$};
-    \node at (0, -3.2) {\small 收敛半径 $R$ = 到最近奇点的距离};
+    \draw[->, gray] (-3.5,0) -- (4.2,0) node[right] {$\operatorname{Re} z$};
+    \draw[->, gray] (0,-3.2) -- (0,3.4) node[above] {$\operatorname{Im} z$};
+    \fill[red] (0.2,0.2) circle (2pt);
+    \node[below left] at (0.2,0.2) {$z_0$};
+    \fill[blue!70!black] (2.7,0.8) circle (2.5pt);
+    \node[above right] at (2.7,0.8) {最近奇点};
+    \draw[blue, thick] (0.2,0.2) circle (2.59);
+    \draw[dashed] (0.2,0.2) -- (2.7,0.8);
+    \node[above] at (1.55,0.65) {$R$};
 \end{tikzpicture}
-\caption{泰勒展开的几何解释：收敛半径由最近奇点决定}
-\label{fig:taylor-geometry}
+\caption{泰勒展开的收敛半径由最近奇点决定}
+\label{fig:taylor-radius}
 \end{figure}
 
-\begin{tishi}[几何理解——收敛半径由什么决定？]
-泰勒展开的收敛半径 $R$ 等于从展开中心 $z_0$ 到函数 $f(z)$ 最近奇点的距离。
-
-\textbf{为什么？}
-
-直观理解：
-\begin{itemize}
-    \item 在收敛圆内，幂级数收敛且代表解析函数
-    \item 在奇点处，函数无定义或非解析，幂级数必须发散
-    \item 因此收敛圆的边界必须经过最近的奇点
-\end{itemize}
-
-\textbf{例子}：$f(z) = \frac{1}{1+z^2}$ 在 $z_0 = 0$ 处展开。
-
-奇点在 $z = \pm \mathrm{i}$，距原点距离都是 $1$。所以收敛半径 $R = 1$。
-
-\textbf{注意}：这个函数在实数域看起来很正常（$f(x) = \frac{1}{1+x^2}$，处处有定义），但它在复平面上有奇点！这就是复变函数和实函数的重要区别——\textbf{复变函数的奇点可能是``隐藏''的}。
-
-\textbf{一个生动的类比——``光源与障碍物''}：
-
-想象你在 $z_0$ 点放一个光源，函数的奇点是障碍物。
-
-\begin{itemize}
-    \item 收敛半径 $R$ = 光源能照亮的最远距离 = 到最近障碍物的距离
-    \item 障碍物（奇点）挡住了光线，再远就``看不清''了（级数发散）
-    \item 如果没有障碍物（整函数如 $\mathrm{e}^z$），光线可以照到无穷远（$R = \infty$）
-\end{itemize}
-
-这个类比帮助记忆：\textbf{收敛圆 = 以展开中心为圆心、到最近奇点为半径的圆}。
-\end{tishi}
-
-\subsection{常见函数的泰勒展开}
-
-\begin{dingli}{}{常见泰勒展开}
-\begin{align}
-    \mathrm{e}^z &= \sum_{n=0}^{\infty} \frac{z^n}{n!}, \quad |z| < \infty \\
-    \sin z &= \sum_{n=0}^{\infty} \frac{(-1)^n z^{2n+1}}{(2n+1)!}, \quad |z| < \infty \\
-    \cos z &= \sum_{n=0}^{\infty} \frac{(-1)^n z^{2n}}{(2n)!}, \quad |z| < \infty \\
-    \frac{1}{1-z} &= \sum_{n=0}^{\infty} z^n, \quad |z| < 1 \\
-    \ln(1+z) &= \sum_{n=1}^{\infty} \frac{(-1)^{n-1}z^n}{n}, \quad |z| < 1
-\end{align}
-\end{dingli}
-
-\begin{proof}
-我们依次验证每个展开式。
-
-\textbf{(1) 指数函数}：$f(z) = \mathrm{e}^z$。
-
-由于 $f^{(n)}(z) = \mathrm{e}^z$ 对所有 $n$ 成立，故 $f^{(n)}(0) = 1$。
-
-由泰勒展开公式：
-\[
-    \mathrm{e}^z = \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}z^n = \sum_{n=0}^{\infty}\frac{z^n}{n!}
-\]
-
-由于 $\mathrm{e}^z$ 是整函数（在全平面解析），收敛半径 $R = +\infty$。
-
-\textbf{(2) 正弦函数}：$f(z) = \sin z$。
-
-高阶导数：$f'(z) = \cos z$，$f''(z) = -\sin z$，$f'''(z) = -\cos z$，$f^{(4)}(z) = \sin z$，以此类推。
-
-在 $z = 0$ 处：
-\[
-    f(0) = 0, \quad f'(0) = 1, \quad f''(0) = 0, \quad f'''(0) = -1, \quad f^{(4)}(0) = 0, \ldots
-\]
-
-一般地，$f^{(2n)}(0) = 0$，$f^{(2n+1)}(0) = (-1)^n$。
-
-因此：
-\[
-    \sin z = \sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}z^n = \sum_{n=0}^{\infty}\frac{(-1)^n z^{2n+1}}{(2n+1)!}
-\]
-
-$\sin z$ 是整函数，收敛半径 $R = +\infty$。
-
-\textbf{(3) 余弦函数}：$f(z) = \cos z$。
-
-由 $\cos z = (\sin z)'$，对 $\sin z$ 的展开式逐项求导：
-\[
-    \cos z = \frac{\mathrm{d}}{\mathrm{d}z}\sum_{n=0}^{\infty}\frac{(-1)^n z^{2n+1}}{(2n+1)!} = \sum_{n=0}^{\infty}\frac{(-1)^n (2n+1)z^{2n}}{(2n+1)!} = \sum_{n=0}^{\infty}\frac{(-1)^n z^{2n}}{(2n)!}
-\]
-
-收敛半径 $R = +\infty$。
-
-\textbf{(4) 几何级数}：$f(z) = \frac{1}{1-z}$。
-
-这是几何级数，已在前面证明：
-\[
-    \frac{1}{1-z} = \sum_{n=0}^{\infty}z^n, \quad |z| < 1
-\]
-
-奇点在 $z = 1$，收敛半径 $R = 1$。
-
-\textbf{(5) 对数函数}：$f(z) = \ln(1+z)$。
-
-方法一：直接求导。$f'(z) = \frac{1}{1+z} = \sum_{n=0}^{\infty}(-1)^n z^n$（$|z| < 1$）。
-
-逐项积分：
-\begin{align*}
-    \ln(1+z)
-    &= \int_0^z \frac{1}{1+\zeta}\,\mathrm{d}\zeta \\
-    &= \sum_{n=0}^{\infty}(-1)^n \int_0^z \zeta^n\,\mathrm{d}\zeta \\
-    &= \sum_{n=0}^{\infty}\frac{(-1)^n z^{n+1}}{n+1} \\
-    &= \sum_{n=1}^{\infty}\frac{(-1)^{n-1}z^n}{n}
-\end{align*}
-
-方法二：直接计算高阶导数。$f^{(n)}(z) = \frac{(-1)^{n-1}(n-1)!}{(1+z)^n}$，故 $f^{(n)}(0) = (-1)^{n-1}(n-1)!$。
-
-由泰勒公式：
-\[
-    \ln(1+z) = \sum_{n=1}^{\infty}\frac{f^{(n)}(0)}{n!}z^n = \sum_{n=1}^{\infty}\frac{(-1)^{n-1}z^n}{n}
-\]
-
-奇点在 $z = -1$，收敛半径 $R = 1$。
-\end{proof}
-
-\begin{table}[htbp]
-\centering
-\begin{tabular}{lll}
-\toprule
-\textbf{函数} & \textbf{泰勒展开} & \textbf{收敛半径} \\
-\midrule
-$\mathrm{e}^z$ & $\sum_{n=0}^{\infty} \frac{z^n}{n!}$ & $R = \infty$ \\
-$\sin z$ & $\sum_{n=0}^{\infty} \frac{(-1)^n z^{2n+1}}{(2n+1)!}$ & $R = \infty$ \\
-$\cos z$ & $\sum_{n=0}^{\infty} \frac{(-1)^n z^{2n}}{(2n)!}$ & $R = \infty$ \\
-$\frac{1}{1-z}$ & $\sum_{n=0}^{\infty} z^n$ & $R = 1$ \\
-$\ln(1+z)$ & $\sum_{n=1}^{\infty} \frac{(-1)^{n-1}z^n}{n}$ & $R = 1$ \\
-$(1+z)^\alpha$ & $\sum_{n=0}^{\infty} \binom{\alpha}{n} z^n$ & $R = 1$ \\
-\bottomrule
-\end{tabular}
-\caption{常用泰勒展开汇总}
-\label{tab:taylor-summary}
-\end{table}
-
-\begin{tishi}[收敛半径的确定]
-泰勒级数的收敛半径等于从展开中心 $z_0$ 到最近奇点的距离。这是确定收敛半径的一个重要方法。
-\end{tishi}
-
 \begin{lizi}{}{}
-将 $f(z) = \frac{1}{1+z^2}$ 在 $z_0 = 0$ 处展开为泰勒级数，并求收敛半径。
+求函数
+\[
+    \frac{1}{1+z^2}
+\]
+在 $z=0$ 附近的泰勒展开，并说明它的收敛半径。
 
 \begin{jie}
-    奇点：$z = \pm \mathrm{i}$，距原点距离为 $1$。所以收敛半径 $R = 1$。
-    
-    利用几何级数：
-    \begin{equation}
-        \frac{1}{1+z^2} = \frac{1}{1-(-z^2)} = \sum_{n=0}^{\infty} (-z^2)^n = \sum_{n=0}^{\infty} (-1)^n z^{2n}, \quad |z| < 1
-    \end{equation}
+把它写成
+\[
+    \frac{1}{1+z^2} = \frac{1}{1-(-z^2)}
+    = \sum_{n=0}^{\infty} (-1)^n z^{2n},
+\qquad |z|<1.
+\]
+因此展开式为
+\[
+    1-z^2+z^4-z^6+\cdots.
+\]
+
+另一方面，函数的奇点在 $z=\pm \mathrm{i}$，它们到原点的距离都是 $1$，所以收敛半径就是 $1$。
 \end{jie}
 \end{lizi}
 
-\subsection{泰勒展开的唯一性}
-
-\begin{dingli}{}{泰勒展开的唯一性}
-设 $f(z)$ 在 $|z - z_0| < R$ 内解析。若在某邻域内有展开式 $f(z) = \sum_{n=0}^{\infty} a_n(z - z_0)^n$，则必有 $a_n = \frac{f^{(n)}(z_0)}{n!}$。
-\end{dingli}
-
-\begin{proof}
-设 $f(z) = \sum_{n=0}^{\infty} a_n(z - z_0)^n$ 在 $|z - z_0| < R$ 内成立。
-
-\textbf{方法一：利用幂级数的逐项求导性质。}
-
-由幂级数的解析性定理，$f(z)$ 可以逐项求导任意多次。逐次求导并令 $z = z_0$：
-\begin{align}
-    f(z_0) &= a_0 \\
-    f'(z_0) &= a_1 \\
-    f''(z_0) &= 2! a_2 \\
-    &\vdots \\
-    f^{(n)}(z_0) &= n! a_n
-\end{align}
-所以 $a_n = \frac{f^{(n)}(z_0)}{n!}$。
-
-\textbf{方法二：利用柯西积分公式。}
-
-由幂级数在收敛圆内的一致收敛性，以及柯西积分公式（回顾第三章）：
-\begin{equation}
-    a_n = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta = \frac{f^{(n)}(z_0)}{n!}
-\end{equation}
-其中 $C$ 是圆 $|z - z_0| = r < R$。最后一个等号用到了高阶导数公式。
-
-两种方法都得到 $a_n = \frac{f^{(n)}(z_0)}{n!}$，故展开式唯一。
-\end{proof}
-
-\begin{zhu}{}{}
-唯一性定理意味着：只要找到任何形式的幂级数展开，它就一定是泰勒级数。这给了我们多种求泰勒展开的方法：
-\begin{enumerate}
-    \item 直接用定义求 $f^{(n)}(z_0)$
-    \item 利用已知展开式进行代换、求导、积分
-    \item 利用幂级数的乘法、除法
-\end{enumerate}
-\end{zhu}
-
-\begin{tishi}[``DNA 决定整体''——唯一性的直观类比]
-泰勒展开的唯一性有一个很美的类比：
-
-\textbf{类比}：函数就像一个生物体，泰勒系数 $\{a_0, a_1, a_2, \ldots\}$ 就像它的 DNA 序列。
-
-\begin{itemize}
-    \item 只要你测出了 DNA 序列（泰勒系数），就完全确定了这个生物体（函数）
-    \item 同一个函数不可能有两套不同的 DNA（展开式唯一）
-    \item 局部信息（某点的各阶导数）决定了整体行为（整个收敛圆内的函数值）
-\end{itemize}
-
-\textbf{为什么这很神奇？}
-
-在实函数中，知道 $f(0), f'(0), f''(0), \ldots$ 并不一定能确定整个函数（存在光滑但非解析的函数）。
-
-但在复变函数中，解析性保证了一旦你知道了某点的各阶导数，你就知道了函数在该点附近的一切！这是复变函数与实函数的根本区别之一。
-
-\textbf{类比总结}：泰勒展开是解析函数的``DNA 序列''，唯一确定了函数的身份。
-\end{tishi}
-
-\subsection{Parseval 等式}
-
-泰勒系数不仅确定了函数，还与函数的``能量''密切相关。Parseval 等式揭示了泰勒系数与函数模平方积分之间的关系。
-
-\begin{dingli}{}{Parseval 等式}
-设 $f(z) = \sum_{n=0}^{\infty} a_n z^n$ 在 $|z| < R$ 内解析，则对任意 $0 < r < R$，有
-\begin{equation}
-    \boxed{\frac{1}{2\pi}\int_0^{2\pi} |f(re^{\mathrm{i}\theta})|^2\,\mathrm{d}\theta = \sum_{n=0}^{\infty} |a_n|^2 r^{2n}}
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-在圆 $|z| = r$ 上，$z = re^{\mathrm{i}\theta}$，$0 \leq \theta < 2\pi$。
-
-由于 $f(z) = \sum_{n=0}^{\infty} a_n r^n e^{\mathrm{i}n\theta}$，有
-\begin{equation}
-    |f(re^{\mathrm{i}\theta})|^2 = f(re^{\mathrm{i}\theta}) \cdot \overline{f(re^{\mathrm{i}\theta})} = \left(\sum_{n=0}^{\infty} a_n r^n e^{\mathrm{i}n\theta}\right) \left(\sum_{m=0}^{\infty} \overline{a_m} r^m e^{-\mathrm{i}m\theta}\right)
-\end{equation}
-
-对 $\theta$ 积分，利用三角函数的正交性：
-\begin{equation}
-    \int_0^{2\pi} e^{\mathrm{i}(n-m)\theta}\,\mathrm{d}\theta = 
-    \begin{cases}
-        2\pi, & n = m \\
-        0, & n \neq m
-    \end{cases}
-\end{equation}
-
-因此
-\begin{equation}
-    \frac{1}{2\pi}\int_0^{2\pi} |f(re^{\mathrm{i}\theta})|^2\,\mathrm{d}\theta = \sum_{n=0}^{\infty} |a_n|^2 r^{2n}
-\end{equation}
-证毕。
-\end{proof}
-
-\begin{tishi}[Parseval 等式的物理意义]
-在信号处理中，$|f(re^{\mathrm{i}\theta})|^2$ 代表信号的``功率''，$\frac{1}{2\pi}\int_0^{2\pi} |f|^2\,\mathrm{d}\theta$ 是平均功率。Parseval 等式说明：总功率等于各频率分量功率之和。这与傅里叶分析中的 Parseval 定理本质相同。
-\end{tishi}
-
 \begin{lizi}{}{}
-验证 Parseval 等式对 $f(z) = \frac{1}{1-z}$ 成立。
+求函数
+\[
+    \frac{1}{1-z}
+\]
+在 $z=0$ 附近的泰勒展开。
 
 \begin{jie}
-    泰勒展开：$f(z) = \sum_{n=0}^{\infty} z^n$，$|z| < 1$。系数 $a_n = 1$（所有 $n$）。
-    
-    左边：$|f(re^{\mathrm{i}\theta})|^2 = \frac{1}{|1-re^{\mathrm{i}\theta}|^2}$。
-    
-    利用 $|1-re^{\mathrm{i}\theta}|^2 = (1-re^{\mathrm{i}\theta})(1-re^{-\mathrm{i}\theta}) = 1 - 2r\cos\theta + r^2$，有
-    \begin{equation}
-        \frac{1}{2\pi}\int_0^{2\pi} \frac{\mathrm{d}\theta}{1 - 2r\cos\theta + r^2} = \frac{1}{2\pi} \cdot \frac{2\pi}{1-r^2} = \frac{1}{1-r^2}
-    \end{equation}
-    
-    右边：$\sum_{n=0}^{\infty} r^{2n} = \frac{1}{1-r^2}$。
-    
-    两边相等，验证成立。
+这是最基本的几何级数：
+\[
+    \frac{1}{1-z}=1+z+z^2+z^3+\cdots,\qquad |z|<1.
+\]
+最近奇点是 $z=1$，因此收敛半径为 $1$。
 \end{jie}
 \end{lizi}
 
-\begin{zhu}{}{}
-Parseval 等式的一个重要推论：若 $f(z)$ 在 $|z| < R$ 内有界（即 $|f(z)| \leq M$），则 $|a_n| \leq M/R^n$。这给出了泰勒系数的估计。
-\end{zhu}
+\section{零点与解析函数的局部结构}
 
-\begin{tishi}[本节小结]
-\textbf{一、核心知识点}
+\begin{wulibj}[为什么要单独讲零点]
+学完泰勒展开后，学生很容易把注意力放在``怎么展开''上。其实更重要的问题是：展开式能告诉我们函数在一点附近的结构。尤其当函数在某点取零时，最低次的非零项会把这个零点的本质说得非常清楚。后面讲极点、留数、辐角原理时，都会反复用到这个思想。
+\end{wulibj}
 
-\begin{enumerate}
-    \item \textbf{泰勒展开定理}：解析函数 $f(z)$ 在 $z_0$ 附近可唯一展开为幂级数
-    \item \textbf{展开公式}：$f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z - z_0)^n$
-    \item \textbf{收敛半径}：等于从展开中心到最近奇点的距离
-    \item \textbf{唯一性}：解析函数由它在一点附近的值完全决定
-\end{enumerate}
+\subsection{零点与零点阶数}
 
-\textbf{二、常用泰勒展开}
+\begin{dingliyi}{}{零点}
+若解析函数 $f(z)$ 满足
+\[
+    f(z_0)=0,
+\]
+则称 $z_0$ 是 $f(z)$ 的一个\textbf{零点}。
+\end{dingliyi}
 
-\begin{itemize}
-    \item $\mathrm{e}^z = \sum_{n=0}^{\infty} \frac{z^n}{n!}$（$R = \infty$）
-    \item $\sin z = \sum_{n=0}^{\infty} \frac{(-1)^n z^{2n+1}}{(2n+1)!}$（$R = \infty$）
-    \item $\frac{1}{1-z} = \sum_{n=0}^{\infty} z^n$（$R = 1$）
-    \item $\ln(1+z) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}z^n}{n}$（$R = 1$）
-\end{itemize}
+\begin{dingliyi}{}{零点的阶数}
+若存在正整数 $m$，使得
+\[
+    f(z)=(z-z_0)^m \varphi(z),
+\]
+其中 $\varphi(z)$ 在 $z_0$ 附近解析且 $\varphi(z_0)\ne 0$，则称 $z_0$ 是 $f(z)$ 的一个\textbf{$m$ 阶零点}。
+\end{dingliyi}
 
-\textbf{三、知识结构图}
-\end{tishi}
+这个定义看起来有点抽象，但它的意思其实很直白：函数在 $z_0$ 为零，而且这个零恰好由 $(z-z_0)^m$ 这一因子贡献出来，再多就没有了。
+
+\begin{dingli}{}{用泰勒展开判定零点阶数}
+设 $f(z)$ 在 $z_0$ 附近解析，且
+\[
+    f(z)=a_0+a_1(z-z_0)+a_2(z-z_0)^2+\cdots.
+\]
+若
+\[
+    a_0=a_1=\cdots=a_{m-1}=0,\qquad a_m\ne 0,
+\]
+则 $z_0$ 是 $f(z)$ 的 $m$ 阶零点。
+\end{dingli}
+
+\begin{proof}
+由条件可把泰勒展开写成
+\[
+    f(z)=a_m(z-z_0)^m+a_{m+1}(z-z_0)^{m+1}+\cdots
+    =(z-z_0)^m\bigl(a_m+a_{m+1}(z-z_0)+\cdots\bigr).
+\]
+记
+\[
+    \varphi(z)=a_m+a_{m+1}(z-z_0)+\cdots,
+\]
+则 $\varphi(z)$ 在 $z_0$ 附近解析，且
+\[
+    \varphi(z_0)=a_m\ne 0.
+\]
+因此 $z_0$ 是 $m$ 阶零点。
+\end{proof}
+
+\begin{lizi}{}{}
+判断 $z=0$ 是 $\sin z$ 的几阶零点。
+
+\begin{jie}
+由泰勒展开
+\[
+    \sin z = z-\frac{z^3}{3!}+\frac{z^5}{5!}-\cdots
+\]
+可见常数项为零，而 $z$ 的系数为 $1\ne 0$。所以 $z=0$ 是 $\sin z$ 的一阶零点。
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+判断 $z=0$ 是 $1-\cos z$ 的几阶零点。
+
+\begin{jie}
+由
+\[
+    \cos z = 1-\frac{z^2}{2!}+\frac{z^4}{4!}-\cdots
+\]
+得
+\[
+    1-\cos z = \frac{z^2}{2!}-\frac{z^4}{4!}+\cdots.
+\]
+最低次非零项是 $z^2$ 项，因此 $z=0$ 是二阶零点。
+\end{jie}
+\end{lizi}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[
-    node distance=0.8cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.8cm, minimum height=0.7cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 泰勒展开定理
-    \node[box, fill=blue!15] (taylor) {泰勒展开定理\\$f(z)=\sum\frac{f^{(n)}(z_0)}{n!}(z-z_0)^n$};
-    
-    % 条件
-    \node[box, fill=green!15, below left=1cm and 0.5cm of taylor] (condition) {条件：$f(z)$ 在\\$|z-z_0|<R$ 内解析};
-    
-    % 收敛半径
-    \node[box, fill=orange!15, below right=1cm and 0.5cm of taylor] (radius) {收敛半径 $R$\\$=$ 到最近奇点距离};
-    
-    % 唯一性
-    \node[box, fill=red!15, below=1.5cm of taylor] (unique) {展开式唯一\\函数由局部值决定};
-    
-    % 常用展开
-    \node[box, fill=purple!15, below=0.8cm of unique] (common) {常用展开\\$\mathrm{e}^z$, $\sin z$, $\frac{1}{1-z}$ 等};
-    
-    % 箭头
-    \draw[arrow] (condition) -- (taylor);
-    \draw[arrow] (radius) -- (taylor);
-    \draw[arrow] (taylor) -- node[right, font=\scriptsize] {推论} (unique);
-    \draw[arrow] (unique) -- node[right, font=\scriptsize] {应用} (common);
-    
-    % 证明方法
-    \node[box, fill=cyan!15, right=2.5cm of taylor] (proof) {证明方法\\柯西积分公式};
-    \draw[arrow, dashed] (proof) -- (taylor);
+\begin{tikzpicture}[scale=0.95]
+    \draw[->, gray] (-3.2,0) -- (3.4,0) node[right] {$x$};
+    \draw[->, gray] (0,-1.0) -- (0,3.8) node[above] {$y$};
+
+    \draw[blue, thick, domain=-1.6:1.6, samples=200] plot (\x, {\x});
+    \draw[teal!80!black, thick, domain=-1.7:1.7, samples=200] plot (\x, {0.7*(\x)^2});
+    \draw[purple, thick, domain=-1.45:1.45, samples=200] plot (\x, {0.28*(\x)^4});
+
+    \node[blue, right] at (1.75,1.55) {$y=x$};
+    \node[teal!80!black, right] at (1.75,2.15) {$y=x^2$};
+    \node[purple, right] at (1.75,3.0) {$y=x^4$};
+    \fill[red] (0,0) circle (2pt);
+    \node[below left] at (0,0) {$0$};
 \end{tikzpicture}
-\caption{泰勒展开知识结构图}
-\label{fig:ch04-sec3-summary}
+\caption{零点阶数的实变量直观类比：阶数越高，图像在零点附近越``贴住''横轴}
+\label{fig:zero-order-intuition}
 \end{figure}
 
-% ========== 第四节 ==========
-\section{洛朗\index{洛朗@洛朗（Laurent）}（Laurent）展开}
-
-\subsection{为什么需要洛朗展开？}
-
-\textbf{泰勒展开的局限}：只能在解析点附近展开。
-
-如果函数在 $z_0$ 处有奇点怎么办？
-
-\begin{lizi}{}{一个启发性的例子}
-考虑函数 $f(z) = \frac{1}{z(z-1)}$。
-
-在 $z = 0$ 处，这个函数有奇点（分母为零），所以不能用泰勒展开。
-
-但是，在 $z = 0$ 附近的圆环域 $0 < |z| < 1$ 内，函数是有定义的。能不能展开？
-
-\begin{jie}
-    把函数分解：
-    \[
-        \frac{1}{z(z-1)} = \frac{1}{z-1} - \frac{1}{z}
-    \]
-    
-    在 $0 < |z| < 1$ 内，$\frac{1}{z-1} = -\frac{1}{1-z} = -\sum_{n=0}^{\infty} z^n$（几何级数）。
-    
-    所以：
-    \[
-        \frac{1}{z(z-1)} = -\frac{1}{z} - 1 - z - z^2 - \cdots
-    \]
-    
-    \textbf{注意}：展开式中出现了负幂项 $-\frac{1}{z}$！这不是泰勒级数。
-\end{jie}
-
-\textbf{为什么在 $0 < |z| < 1$ 内展开有效？}
-
-这里的关键是理解展开成立的``区域''：
-\begin{itemize}
-    \item $z = 0$ 是奇点，函数无定义，所以不能包含原点
-    \item $z = 1$ 也是奇点，所以收敛区域不能超出 $|z| < 1$
-    \item 因此，展开成立的区域是圆环：$0 < |z| < 1$（内边界是奇点，外边界是下一个奇点）
-\end{itemize}
-
-这个圆环域正是洛朗展开的典型区域——以奇点为``洞''的环形区域。
-\end{lizi}
-
-\begin{tishi}[洛朗展开的动机]
-上面的例子揭示了：
-\begin{itemize}
-    \item 泰勒展开只包含\textbf{正幂项}：$c_0 + c_1(z-z_0) + c_2(z-z_0)^2 + \cdots$
-    \item 在奇点附近，我们需要\textbf{允许负幂项}：$\cdots + \frac{c_{-2}}{(z-z_0)^2} + \frac{c_{-1}}{z-z_0} + c_0 + c_1(z-z_0) + \cdots$
-\end{itemize}
-
-这就是\textbf{洛朗级数}——既有正幂项，也有负幂项。
-
-洛朗展开可以在圆环域（而不是圆盘）内展开函数，这正是处理奇点的关键工具。
+\begin{tishi}[如何借这个图理解零点阶数]
+上图只是一个帮助理解的实变量类比。它想说明的是：零点阶数越高，函数在该点附近``消失得越快''。在复变函数里，这种快慢不是靠图像的切触来严格定义，而是靠
+\[
+    f(z)=(z-z_0)^m\varphi(z),\qquad \varphi(z_0)\ne 0
+\]
+这样的分解来定义。
 \end{tishi}
 
-\subsection{洛朗级数的概念}
+\subsection{零点的孤立性}
+
+\begin{dingli}{}{零点的孤立性}
+若 $f(z)$ 在区域 $D$ 内解析且不恒等于零，则 $f(z)$ 的零点都是孤立的。
+\end{dingli}
+
+\begin{proof}
+设 $z_0\in D$ 是 $f$ 的一个零点。由于 $f$ 不恒等于零，它在 $z_0$ 的泰勒展开中必存在某个最低次非零项，即存在 $m\ge 1$，使得
+\[
+    f(z)=(z-z_0)^m \varphi(z),
+\]
+其中 $\varphi(z)$ 在 $z_0$ 附近解析且 $\varphi(z_0)\ne 0$。
+
+由解析函数的连续性，$\varphi(z_0)\ne 0$ 蕴含存在 $\delta>0$，当 $|z-z_0|<\delta$ 时都有
+\[
+    \varphi(z)\ne 0.
+\]
+于是当 $0<|z-z_0|<\delta$ 时，
+\[
+    f(z)=(z-z_0)^m\varphi(z)\ne 0.
+\]
+这说明在 $z_0$ 附近，除了 $z_0$ 本身外没有别的零点，因此 $z_0$ 是孤立零点。
+\end{proof}
+
+\begin{tishi}[这一定理的意义]
+``零点孤立''这件事并不是显然的。它反映了解析函数的刚性：一个非常值解析函数不可能在某个区域里密密麻麻地到处为零；如果真那样，它就只能是恒等于零。
+\end{tishi}
+
+\begin{jinshi}[一类常见误区]
+不要把``$f(z_0)=0$''和``$z_0$ 是一阶零点''混为一谈。函数在一点取零，只说明常数项没有了；究竟是一阶、二阶还是更高阶，必须看最低次非零项出现在哪一阶。
+\end{jinshi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \draw[->, gray] (-3.0,0) -- (3.3,0) node[right] {$\operatorname{Re} z$};
+    \draw[->, gray] (0,-2.8) -- (0,3.0) node[above] {$\operatorname{Im} z$};
+    \fill[red] (0,0) circle (2.4pt);
+    \node[below left] at (0,0) {$z_0$};
+    \draw[blue, thick] (0,0) circle (1.8);
+    \draw[green!60!black, dashed] (0,0) circle (0.95);
+    \foreach \p in {(1.05,1.0),(-1.1,0.8),(-1.2,-0.9),(1.15,-0.85),(0.2,1.55)} {
+        \fill[blue!70!black] \p circle (1.4pt);
+    }
+    \node[green!60!black] at (0,-1.25) {$0<|z-z_0|<\delta$};
+    \node at (0,2.35) {虚线小圆内没有别的零点};
+\end{tikzpicture}
+\caption{零点孤立性的几何直观：在足够小的邻域里，除了 $z_0$ 本身外没有别的零点}
+\label{fig:isolated-zero}
+\end{figure}
+
+\section{洛朗展开}
+
+\begin{wulibj}[为什么泰勒展开还不够]
+泰勒展开有一个前提：展开中心附近必须解析。可是很多我们真正关心的问题，恰恰发生在奇点附近。比如 $\dfrac{1}{z}$ 在 $z=0$ 附近显然没法做泰勒展开，但我们又很想知道它的局部结构。这时就需要允许负幂项出现，于是得到洛朗展开。
+\end{wulibj}
+
+\subsection{从有洞区域到洛朗级数}
 
 \begin{dingliyi}{}{洛朗级数}
 形如
-\begin{equation}
-    \sum_{n=-\infty}^{\infty} c_n(z - z_0)^n = \cdots + \frac{c_{-2}}{(z - z_0)^2} + \frac{c_{-1}}{z - z_0} + c_0 + c_1(z - z_0) + \cdots
-\end{equation}
-的级数称为\textbf{洛朗级数}。
-
-洛朗级数分为两部分：
-\begin{itemize}
-    \item \textbf{主要部分}（负幂项）：$\sum_{n=1}^{\infty} c_{-n}(z - z_0)^{-n}$，反映函数在 $z_0$ 处的奇异性
-    \item \textbf{解析部分}（正幂项）：$\sum_{n=0}^{\infty} c_n(z - z_0)^n$，是一个普通的幂级数
-\end{itemize}
+\[
+    \sum_{n=-\infty}^{\infty} c_n (z-z_0)^n
+\]
+的级数称为关于点 $z_0$ 的\textbf{洛朗级数}。
 \end{dingliyi}
 
-\begin{tishi}[洛朗级数与泰勒级数的关系]
-\begin{itemize}
-    \item 泰勒级数：只有正幂项，适用于解析点附近
-    \item 洛朗级数：正幂项 + 负幂项，适用于圆环域（包括奇点附近）
-    \item \textbf{特例}：如果主要部分为零（所有 $c_{-n} = 0$），洛朗级数就退化为泰勒级数
-\end{itemize}
+与幂级数不同，洛朗级数允许出现负幂项。通常我们把
+\[
+    \sum_{n=0}^{\infty} c_n (z-z_0)^n
+\]
+称为\textbf{正则部分}，把
+\[
+    \sum_{n=1}^{\infty} \frac{c_{-n}}{(z-z_0)^n}
+\]
+称为\textbf{主部}。
 
-可以把洛朗级数理解为泰勒级数的推广。
+\begin{tishi}[为什么会出现负幂项]
+如果函数在 $z_0$ 附近有奇点，那么它在这个点附近的行为往往像
+\[
+    \frac{1}{z-z_0},\qquad \frac{1}{(z-z_0)^2},\qquad \frac{1}{(z-z_0)^3}
+\]
+这类对象的线性组合。也就是说，奇点附近最自然的局部基底不再只是正幂，而必须把负幂也纳入进来。
 \end{tishi}
 
 \subsection{洛朗展开定理}
 
-\begin{zhongyao}[洛朗展开定理]
-设 $f(z)$ 在圆环域 $R_1 < |z - z_0| < R_2$ 内解析，则在此圆环内 $f(z)$ 可以唯一地展开为\keyword{洛朗级数}
+\begin{dingli}{}{洛朗展开定理}
+设 $f(z)$ 在圆环
 \[
-    f(z) = \sum_{n=-\infty}^{\infty} c_n(z - z_0)^n
+    r<|z-z_0|<R
 \]
-其中
+内解析，则在该圆环内可以展开成洛朗级数
 \[
-    c_n = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta, \quad n \in \mathbb{Z}
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n.
 \]
-$C$ 是圆环内绕 $z_0$ 的任意简单闭曲线。
-\end{zhongyao}
+\end{dingli}
 
-\begin{tishi}[证明思路——为什么正幂项和负幂项同时出现？]
-关键：用柯西积分公式，但这次 $z$ 在两个圆之间！
+\begin{proof}
+这个定理的证明思路和泰勒展开一样，仍然来自柯西积分公式，只不过因为区域变成了圆环，所以要同时考虑外边界和内边界。
 
-步骤：
-\begin{enumerate}
-    \item 构造两个同心圆 $C_1$ 和 $C_2$，$z$ 在它们之间
-    \item 由柯西积分公式（多连通区域形式）：
-    \[
-        f(z) = \frac{1}{2\pi\mathrm{i}}\oint_{C_2} \frac{f(\zeta)}{\zeta - z}\,\mathrm{d}\zeta - \frac{1}{2\pi\mathrm{i}}\oint_{C_1} \frac{f(\zeta)}{\zeta - z}\,\mathrm{d}\zeta
-    \]
-    
-    \item \textbf{外圆积分}（$C_2$）：$|z - z_0| < |\zeta - z_0|$，按泰勒展开的方式处理，得到\textbf{正幂项}
-    
-    \item \textbf{内圆积分}（$C_1$）：$|\zeta - z_0| < |z - z_0|$，这次要反着展开，得到\textbf{负幂项}！
-    
-    \item 两个积分相加，就得到完整的洛朗级数
-\end{enumerate}
+取两条同心圆
+\[
+    |\zeta-z_0|=R_1,\qquad |\zeta-z_0|=r_1,
+\]
+满足
+\[
+    r<r_1<|z-z_0|<R_1<R.
+\]
+由多连通区域上的柯西积分公式，
+\[
+    f(z)=\frac{1}{2\pi\mathrm{i}}
+    \oint_{|\zeta-z_0|=R_1}\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta
+    -
+    \frac{1}{2\pi\mathrm{i}}
+    \oint_{|\zeta-z_0|=r_1}\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta.
+\]
 
-\textbf{直觉}：外圆积分贡献``好的部分''（解析部分），内圆积分贡献``坏的部分''（主要部分，反映奇异性）。
+对于外圆积分，由于 $|z-z_0|<|\zeta-z_0|$，可以像泰勒展开那样把 $\dfrac{1}{\zeta-z}$ 展开成关于 $(z-z_0)$ 的正幂级数。
+
+对于内圆积分，由于此时 $|\zeta-z_0|<|z-z_0|$，应改写为
+\[
+    \frac{1}{\zeta-z}
+    = -\frac{1}{z-z_0}\cdot
+    \frac{1}{1-\frac{\zeta-z_0}{z-z_0}},
+\]
+再展开成关于 $(z-z_0)^{-1}$ 的负幂级数。
+
+把两部分合并起来，就得到
+\[
+    f(z)=\sum_{n=0}^{\infty} c_n (z-z_0)^n
+    + \sum_{n=1}^{\infty} \frac{c_{-n}}{(z-z_0)^n}.
+\]
+这就是洛朗展开。
+\end{proof}
+
+\begin{tishi}[这里用了上一章的哪一个结论]
+上面的证明在
+\[
+    f(z)=\frac{1}{2\pi\mathrm{i}}
+    \oint_{|\zeta-z_0|=R_1}\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta
+    -
+    \frac{1}{2\pi\mathrm{i}}
+    \oint_{|\zeta-z_0|=r_1}\frac{f(\zeta)}{\zeta-z}\,\mathrm{d}\zeta
+\]
+这一步，调用的是上一章已经讲过的\textbf{多连通区域上的柯西积分公式}。如果学生对这一步觉得突然，建议先回看上一章关于``有洞区域''的积分公式，再回来读这一节。
 \end{tishi}
+
+\begin{dingli}{}{洛朗展开的唯一性}
+若同一个函数在同一个圆环
+\[
+    r<|z-z_0|<R
+\]
+内有两个洛朗展开
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} a_n (z-z_0)^n
+    =\sum_{n=-\infty}^{\infty} b_n (z-z_0)^n,
+\]
+则对一切整数 $n$ 都有 $a_n=b_n$。
+\end{dingli}
+
+\begin{proof}
+两式相减，得
+\[
+    0=\sum_{n=-\infty}^{\infty} (a_n-b_n)(z-z_0)^n.
+\]
+记 $d_n=a_n-b_n$。任取满足 $r<\rho<R$ 的圆周
+\[
+    C_\rho:\ |z-z_0|=\rho.
+\]
+由于洛朗级数在任意闭圆环上都一致收敛，所以可以逐项积分。对任意整数 $k$，将上式乘以 $(z-z_0)^{-k-1}$ 后沿 $C_\rho$ 积分，得到
+\[
+    0=\sum_{n=-\infty}^{\infty} d_n
+    \oint_{C_\rho}(z-z_0)^{n-k-1}\,\mathrm{d}z.
+\]
+把圆周写成参数形式
+\[
+    z-z_0=\rho \mathrm{e}^{\mathrm{i}\theta},\qquad 0\le \theta\le 2\pi,
+\]
+可直接算出：当 $n-k-1\ne -1$ 时，
+\[
+    \oint_{C_\rho}(z-z_0)^{n-k-1}\,\mathrm{d}z=0,
+\]
+只有 $n=k$ 时积分才等于 $2\pi \mathrm{i}$。因此
+\[
+    0=d_k\cdot 2\pi \mathrm{i}.
+\]
+故 $d_k=0$。由于 $k$ 是任意整数，所以一切 $d_k$ 都为零，即 $a_k=b_k$。
+\end{proof}
+
+\begin{zhu}{}{}
+这里最值得学生注意的一点是：\textbf{洛朗展开的适用区域是圆环，而不是圆盘。}这和泰勒展开有本质区别。
+\end{zhu}
+
+\subsection{同一个函数在不同圆环中的不同展开}
+
+这是洛朗展开最容易让学生困惑，也最能体现其本质的地方。
+
+\begin{lizi}{}{}
+把函数
+\[
+    \frac{1}{z(1-z)}
+\]
+在区域 $0<|z|<1$ 中展开。
+
+\begin{jie}
+先写成
+\[
+    \frac{1}{z(1-z)}=\frac{1}{z}\cdot\frac{1}{1-z}.
+\]
+在 $|z|<1$ 内，
+\[
+    \frac{1}{1-z}=1+z+z^2+z^3+\cdots.
+\]
+于是
+\[
+    \frac{1}{z(1-z)}
+    = \frac{1}{z}+1+z+z^2+\cdots,
+\qquad 0<|z|<1.
+\]
+这是一个典型的洛朗展开，其中主部只有一项 $\dfrac{1}{z}$。
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+把同一个函数
+\[
+    \frac{1}{z(1-z)}
+\]
+在区域 $|z|>1$ 中展开。
+
+\begin{jie}
+这时不能再用刚才的展开，因为 $|z|>1$。要改写成
+\[
+    \frac{1}{1-z} = -\frac{1}{z}\cdot\frac{1}{1-\frac{1}{z}}.
+\]
+当 $|z|>1$ 时，
+\[
+    \frac{1}{1-\frac{1}{z}}
+    = 1+\frac{1}{z}+\frac{1}{z^2}+\cdots.
+\]
+因此
+\[
+    \frac{1}{z(1-z)}
+    = -\frac{1}{z^2}\left(1+\frac{1}{z}+\frac{1}{z^2}+\cdots\right)
+    = -\frac{1}{z^2}-\frac{1}{z^3}-\frac{1}{z^4}-\cdots,
+\qquad |z|>1.
+\]
+\end{jie}
+\end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[->, gray] (-3.5,0) -- (3.8,0) node[right] {$\operatorname{Re} z$};
+    \draw[->, gray] (0,-3.3) -- (0,3.5) node[above] {$\operatorname{Im} z$};
+    \draw[thick, blue] (0,0) circle (1.6);
+    \draw[thick, blue] (0,0) circle (2.8);
+    \fill[red] (0,0) circle (2pt);
+    \node[below left] at (0,0) {$z_0$};
+    \node at (0,0.7) {$0<|z-z_0|<r_2$};
+    \node at (2.1,0.8) {$r_1<|z-z_0|<r_2$};
+    \node at (3.2,-0.5) {$|z-z_0|>r_2$};
+\end{tikzpicture}
+\caption{围绕同一中心，不同圆环上可能对应不同的洛朗展开}
+\label{fig:laurent-annulus}
+\end{figure}
+
+\begin{jinshi}[洛朗展开必须带区域]
+写洛朗展开时，\textbf{一定要写明适用区域}。同一个函数、同一个展开中心，在不同圆环里往往对应不同的级数。如果只写公式不写区域，结论通常是不完整的。
+\end{jinshi}
+
+\section{孤立奇点及其分类}
+
+\begin{wulibj}[本节的目标]
+学洛朗展开不是为了多会一种计算，而是为了读懂奇点。奇点到底是哪一类，关键就看洛朗主部长什么样。这个思想非常统一，也非常适合初学者建立整体框架。
+\end{wulibj}
+
+\subsection{孤立奇点}
+
+\begin{dingliyi}{}{孤立奇点}
+若函数 $f(z)$ 在去心邻域
+\[
+    0<|z-z_0|<R
+\]
+内解析，而在 $z_0$ 处不解析，则称 $z_0$ 是 $f(z)$ 的一个\textbf{孤立奇点}。
+\end{dingliyi}
+
+``孤立''这两个字的意思很重要：它说明在 $z_0$ 附近，除了这个点本身以外，周围一圈都是好好的。
+
+\subsection{用洛朗主部分类奇点}
+
+\begin{dingliyi}{}{三类孤立奇点}
+设 $f(z)$ 在 $z_0$ 附近的洛朗展开为
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n.
+\]
+则：
+\begin{enumerate}
+    \item 若所有负幂项系数都为零，即主部为零，则 $z_0$ 是\textbf{可去奇点}；
+    \item 若主部只有有限项，且最高负幂为 $(z-z_0)^{-m}$，则 $z_0$ 是\textbf{$m$ 阶极点}；
+    \item 若主部有无穷多项，则 $z_0$ 是\textbf{本性奇点}。
+\end{enumerate}
+\end{dingliyi}
+
+这个分类特别值得记，因为它把三个概念统一在了一起：\textbf{看主部，就知道奇点类型。}
+
+\subsection{可去奇点}
+
+\begin{dingli}{}{可去奇点判别}
+若 $f(z)$ 在 $0<|z-z_0|<R$ 内解析，并且在 $z_0$ 附近有界，则 $z_0$ 是可去奇点。
+\end{dingli}
+
+\begin{proof}
+由洛朗展开，
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n.
+\]
+若存在某个负幂项系数 $c_{-m}\ne 0$，则主部中至少有一项像
+\[
+    \frac{c_{-m}}{(z-z_0)^m}
+\]
+那样在 $z\to z_0$ 时发散，从而函数在 $z_0$ 附近不可能有界。这与已知条件矛盾。所以所有负幂项系数都必须为零，主部为零，于是 $z_0$ 是可去奇点。
+\end{proof}
+
+\begin{lizi}{}{}
+判断
+\[
+    \frac{\sin z}{z}
+\]
+在 $z=0$ 的奇点类型。
+
+\begin{jie}
+由
+\[
+    \sin z = z-\frac{z^3}{3!}+\cdots
+\]
+可得
+\[
+    \frac{\sin z}{z} = 1-\frac{z^2}{3!}+\cdots.
+\]
+这个展开中没有负幂项，所以 $z=0$ 是可去奇点。
+
+事实上，只要在 $z=0$ 处补定义
+\[
+    f(0)=1,
+\]
+它就变成了解析函数。
+\end{jie}
+\end{lizi}
+
+\subsection{极点与极点阶数}
+
+\begin{dingliyi}{}{极点}
+若函数 $f(z)$ 在 $z_0$ 附近的洛朗展开主部只有有限项，且最高负幂为
+\[
+    \frac{c_{-m}}{(z-z_0)^m},\qquad c_{-m}\ne 0,
+\]
+则称 $z_0$ 是 $f(z)$ 的一个\textbf{$m$ 阶极点}。
+\end{dingliyi}
+
+\begin{dingli}{}{极点判别}
+若存在正整数 $m$，使得
+\[
+    (z-z_0)^m f(z)
+\]
+在 $z_0$ 附近解析，且在 $z_0$ 处不为零，则 $z_0$ 是 $m$ 阶极点。
+\end{dingli}
+
+\begin{proof}
+设
+\[
+    \varphi(z)=(z-z_0)^m f(z)
+\]
+在 $z_0$ 附近解析，且 $\varphi(z_0)\ne 0$。那么
+\[
+    f(z)=\frac{\varphi(z)}{(z-z_0)^m}.
+\]
+把 $\varphi(z)$ 在 $z_0$ 处作泰勒展开：
+\[
+    \varphi(z)=a_0+a_1(z-z_0)+a_2(z-z_0)^2+\cdots,
+\qquad a_0=\varphi(z_0)\ne 0.
+\]
+于是
+\[
+    f(z)=\frac{a_0}{(z-z_0)^m}+\frac{a_1}{(z-z_0)^{m-1}}+\cdots,
+\]
+主部恰好只有有限项，且最高负幂是 $(z-z_0)^{-m}$，所以 $z_0$ 是 $m$ 阶极点。
+\end{proof}
+
+\begin{lizi}{}{}
+判断
+\[
+    \frac{1}{(z-1)^3}
+\]
+在 $z=1$ 的奇点类型。
+
+\begin{jie}
+显然
+\[
+    (z-1)^3 \cdot \frac{1}{(z-1)^3}=1
+\]
+在 $z=1$ 附近解析且不为零，所以 $z=1$ 是三阶极点。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[现在再回头看零点与极点的联系]
+前面我们已经学过零点的阶数，现在极点的定义也有了。此时再讨论两者的关系，逻辑会更自然。
+\end{tishi}
+
+\begin{dingli}{}{零点与倒数函数的极点}
+若 $f(z)$ 在 $z_0$ 有 $m$ 阶零点，则
+\[
+    \frac{1}{f(z)}
+\]
+在 $z_0$ 有 $m$ 阶极点。
+\end{dingli}
+
+\begin{proof}
+由 $m$ 阶零点的定义，
+\[
+    f(z)=(z-z_0)^m\varphi(z),
+\qquad \varphi(z_0)\ne 0.
+\]
+因此
+\[
+    \frac{1}{f(z)}
+    = \frac{1}{(z-z_0)^m}\cdot\frac{1}{\varphi(z)}.
+\]
+由于 $\varphi(z_0)\ne 0$，所以 $\dfrac{1}{\varphi(z)}$ 在 $z_0$ 附近解析且不为零。这说明 $\dfrac{1}{f(z)}$ 在 $z_0$ 的奇异部分恰好是 $(z-z_0)^{-m}$，故它在 $z_0$ 有 $m$ 阶极点。
+\end{proof}
+
+\subsection{本性奇点}
+
+\begin{dingliyi}{}{本性奇点}
+若孤立奇点 $z_0$ 处的洛朗主部含有无穷多项，则称 $z_0$ 是\textbf{本性奇点}。
+\end{dingliyi}
+
+\begin{lizi}{}{}
+判断
+\[
+    \mathrm{e}^{1/z}
+\]
+在 $z=0$ 的奇点类型。
+
+\begin{jie}
+把指数函数展开为
+\[
+    \mathrm{e}^{1/z}
+    = 1+\frac{1}{z}+\frac{1}{2!z^2}+\frac{1}{3!z^3}+\cdots.
+\]
+主部含有无穷多项，因此 $z=0$ 是本性奇点。
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{}{}
+判断
+\[
+    \sin\frac{1}{z}
+\]
+在 $z=0$ 的奇点类型。
+
+\begin{jie}
+利用 $\sin w$ 的展开，
+\[
+    \sin\frac{1}{z}
+    = \frac{1}{z}-\frac{1}{3!z^3}+\frac{1}{5!z^5}-\cdots.
+\]
+这里主部也有无穷多项，所以 $z=0$ 是本性奇点。
+\end{jie}
+\end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.97]
+    \begin{scope}
+        \draw[->, gray] (-1.9,0) -- (1.9,0);
+        \draw[->, gray] (0,-1.9) -- (0,1.9);
+        \draw[blue, thick] (0,0) circle (1.25);
+        \fill[red] (0,0) circle (2pt);
+        \node[below left] at (0,0) {$z_0$};
+        \node[blue!80!black] at (0,-1.55) {可去奇点};
+        \node at (0,1.45) {主部为零};
+    \end{scope}
+
+    \begin{scope}[xshift=5.2cm]
+        \draw[->, gray] (-1.9,0) -- (1.9,0);
+        \draw[->, gray] (0,-1.9) -- (0,1.9);
+        \draw[blue, thick] (0,0) circle (1.25);
+        \fill[red] (0,0) circle (2pt);
+        \foreach \ang in {20,60,100,140,220,260,300,340} {
+            \draw[orange!85!black, ->, thick] ({0.35*cos(\ang)},{0.35*sin(\ang)}) -- ({1.15*cos(\ang)},{1.15*sin(\ang)});
+        }
+        \node[orange!85!black] at (0,-1.55) {极点};
+        \node at (0,1.45) {有限个负幂项};
+    \end{scope}
+
+    \begin{scope}[xshift=10.4cm]
+        \draw[->, gray] (-1.9,0) -- (1.9,0);
+        \draw[->, gray] (0,-1.9) -- (0,1.9);
+        \draw[blue, thick] (0,0) circle (1.25);
+        \fill[red] (0,0) circle (2pt);
+        \draw[purple, thick, decorate, decoration={snake, amplitude=1.3pt, segment length=4pt}] (0.15,0.15) -- (1.1,0.75);
+        \draw[purple, thick, decorate, decoration={snake, amplitude=1.3pt, segment length=4pt}] (-0.12,0.05) -- (-1.0,0.82);
+        \draw[purple, thick, decorate, decoration={snake, amplitude=1.3pt, segment length=4pt}] (0.05,-0.1) -- (0.92,-0.88);
+        \draw[purple, thick, decorate, decoration={snake, amplitude=1.3pt, segment length=4pt}] (-0.08,-0.12) -- (-0.95,-0.78);
+        \node[purple] at (0,-1.55) {本性奇点};
+        \node at (0,1.45) {无穷多个负幂项};
+    \end{scope}
+\end{tikzpicture}
+\caption{三类孤立奇点的直观示意：看洛朗主部，就知道奇点类型}
+\label{fig:singularity-types}
+\end{figure}
+
+\begin{tishi}[如何读这张图]
+这张图不是在画函数值本身，而是在帮助学生建立一种分类直觉：
+\begin{itemize}
+    \item 可去奇点：表面上有问题，但局部其实很平静；
+    \item 极点：发散有明确阶数，局部行为仍然很规则；
+    \item 本性奇点：主部无穷无尽，局部行为最复杂。
+\end{itemize}
+真正严格的分类标准仍然是洛朗展开的主部结构，而不是图形印象。
+\end{tishi}
+
+\begin{tishi}[三类奇点怎么快速判断]
+面对一个孤立奇点时，可以按下面的顺序思考：
+\begin{enumerate}
+    \item 先看能否通过约分、补定义消掉奇性。若能，通常是可去奇点。
+    \item 若不能，再看乘上适当幂次 $(z-z_0)^m$ 后是否变成解析且非零。若能，则是极点。
+    \item 若以上都不行，而且展开后负幂项无穷无尽，则是本性奇点。
+\end{enumerate}
+\end{tishi}
+
+\section{级数表示的应用与向留数理论过渡}
+
+\begin{wulibj}[本节的任务]
+学完前面几节后，我们已经会展开、会判断零点、会分类奇点。现在要做两件事：第一，让学生看到这些展开到底有什么用；第二，把视线自然地引向下一章的留数理论。
+\end{wulibj}
+
+\subsection{用展开求极限与局部近似}
+
+\begin{tishi}[关于 $O(z)$ 记号]
+下面会用到
+\[
+    O(z),\qquad O(z^2)
+\]
+这样的记号。它表示``至多和 $z$ 一样大''或``至多和 $z^2$ 一样大''的高阶小量。
+
+例如
+\[
+    g(z)=\frac{1}{2}+O(z)
+\]
+表示 $g(z)-\dfrac{1}{2}$ 在 $z\to 0$ 时和 $z$ 同阶或更高阶地趋于零。用这个记号可以把主导项和次要项区分得更清楚。
+\end{tishi}
+
+\begin{lizi}{}{}
+计算极限
+\[
+    \lim_{z\to 0}\left(\frac{1}{z}-\frac{1}{\mathrm{e}^z-1}\right).
+\]
+
+\begin{jie}
+先把分母展开：
+\[
+    \mathrm{e}^z-1 = z+\frac{z^2}{2}+\frac{z^3}{6}+\cdots
+    = z\left(1+\frac{z}{2}+\frac{z^2}{6}+\cdots\right).
+\]
+因此
+\[
+    \frac{1}{\mathrm{e}^z-1}
+    = \frac{1}{z}\cdot
+    \frac{1}{1+\frac{z}{2}+\frac{z^2}{6}+\cdots}.
+\]
+再把后面一项按几何级数思想展开，可得
+\[
+    \frac{1}{1+\frac{z}{2}+\cdots}
+    = 1-\frac{z}{2}+O(z^2).
+\]
+于是
+\[
+    \frac{1}{\mathrm{e}^z-1}
+    = \frac{1}{z}-\frac{1}{2}+O(z).
+\]
+所以
+\[
+    \frac{1}{z}-\frac{1}{\mathrm{e}^z-1}
+    = \frac{1}{2}+O(z),
+\]
+从而
+\[
+    \lim_{z\to 0}\left(\frac{1}{z}-\frac{1}{\mathrm{e}^z-1}\right)=\frac{1}{2}.
+\]
+\end{jie}
+\end{lizi}
+
+\begin{zhu}{}{}
+这个例题很能体现展开法的价值：原式看起来像两个都要发散的量在相减，但一旦写成级数，真正留下来的主导项立刻就清楚了。
+\end{zhu}
+
+\subsection{为什么一阶负幂项最特殊}
+
+下面我们来看一件对下一章极其重要的事。设 $C_\rho$ 是绕 $z_0$ 的小圆
+\[
+    z-z_0=\rho \mathrm{e}^{\mathrm{i}\theta},\qquad 0\le \theta\le 2\pi.
+\]
+考虑幂函数的积分
+\[
+    \oint_{C_\rho}(z-z_0)^n\,\mathrm{d}z.
+\]
+
+\begin{dingli}{}{圆周上幂函数的积分}
+对整数 $n$，有
+\[
+    \oint_{C_\rho}(z-z_0)^n\,\mathrm{d}z
+    =
+    \begin{cases}
+        0, & n\ne -1,\\[4pt]
+        2\pi \mathrm{i}, & n=-1.
+    \end{cases}
+\]
+\end{dingli}
+
+\begin{proof}
+作参数化
+\[
+    z-z_0=\rho \mathrm{e}^{\mathrm{i}\theta},\qquad
+    \mathrm{d}z=\mathrm{i}\rho \mathrm{e}^{\mathrm{i}\theta}\,\mathrm{d}\theta.
+\]
+于是
+\begin{align*}
+    \oint_{C_\rho}(z-z_0)^n\,\mathrm{d}z
+    &= \int_0^{2\pi}
+    (\rho \mathrm{e}^{\mathrm{i}\theta})^n
+    \cdot \mathrm{i}\rho \mathrm{e}^{\mathrm{i}\theta}\,\mathrm{d}\theta \\
+    &= \mathrm{i}\rho^{n+1}
+    \int_0^{2\pi}\mathrm{e}^{\mathrm{i}(n+1)\theta}\,\mathrm{d}\theta.
+\end{align*}
+当 $n\ne -1$ 时，
+\[
+    \int_0^{2\pi}\mathrm{e}^{\mathrm{i}(n+1)\theta}\,\mathrm{d}\theta=0,
+\]
+因此积分为零。
+
+当 $n=-1$ 时，
+\[
+    \oint_{C_\rho}\frac{1}{z-z_0}\,\mathrm{d}z
+    = \int_0^{2\pi}\mathrm{i}\,\mathrm{d}\theta
+    = 2\pi \mathrm{i}.
+\]
+\end{proof}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.0]
-    % 外圆
-    \draw[blue, thick] (0, 0) circle (2.5);
-    % 内圆
-    \draw[red, thick] (0, 0) circle (1);
-    
-    % 圆环区域
-    \fill[blue!10, opacity=0.5, even odd rule] (0,0) circle (2.5) (0,0) circle (1);
-    
-    % 圆心
-    \fill[black] (0, 0) circle (2pt) node[below] {$z_0$};
-    
-    % 半径标注
-    \draw[<->, thick] (0, 0) -- (1, 0) node[midway, above] {$R_1$};
-    \draw[<->, thick] (0, 0) -- (2.5, 0) node[midway, above] {$R_2$};
-    
-    % 积分路径
-    \draw[green!60!black, thick, dashed] (0, 0) circle (1.5);
-    \node[green!60!black] at (1.8, 1.2) {$C$};
-    
-    \node at (0, -3.2) {圆环域 $R_1 < |z - z_0| < R_2$};
+    \draw[->, gray] (-3.2,0) -- (3.5,0) node[right] {$\operatorname{Re} z$};
+    \draw[->, gray] (0,-3.0) -- (0,3.3) node[above] {$\operatorname{Im} z$};
+    \fill[red] (0,0) circle (2.5pt);
+    \node[below left] at (0,0) {$z_0$};
+    \draw[blue, thick, ->] (2.0,0) arc[start angle=0,end angle=330,radius=2.0];
+    \node[blue] at (2.45,1.45) {$C_\rho$};
+
+    \node[align=center] at (-2.0,1.8) {$\cdots$\\$\dfrac{c_{-2}}{(z-z_0)^2}$};
+    \node[align=center, text=importantred] at (0,2.45) {$\dfrac{c_{-1}}{z-z_0}$\\留下来};
+    \node[align=center] at (2.0,1.8) {$c_0$\\$c_1(z-z_0)$};
+
+    \draw[gray, dashed] (-2.0,1.25) -- (-1.05,0.85);
+    \draw[importantred, dashed] (0,2.05) -- (0,1.15);
+    \draw[gray, dashed] (2.0,1.25) -- (1.05,0.85);
+
+    \node at (0,-2.2) {$\displaystyle \oint_{C_\rho} f(z)\,\mathrm{d}z = 2\pi \mathrm{i}\,c_{-1}$};
 \end{tikzpicture}
-\caption{洛朗展开的区域}
-\label{fig:laurent-region}
+\caption{小圆积分的``筛选''机制：别的项都被筛掉，只有一阶负幂项留下来}
+\label{fig:residue-filter}
 \end{figure}
+
+\begin{tishi}[为什么这里可以逐项积分]
+在固定的小圆 $C_\rho$ 上，洛朗级数实际上变成了一列关于角变量 $\theta$ 的普通级数；由于它在圆环内部成立，在这条圆周上收敛是稳定的，因此可以逐项积分。直观地说，这和前面幂级数在较小闭圆盘上可以逐项运算是同一类现象。
+\end{tishi}
+
+\begin{tuilun}{}{洛朗展开中只有一阶负幂项会留下来}
+若
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n
+\]
+在小圆 $C_\rho$ 上成立，则
+\[
+    \oint_{C_\rho}f(z)\,\mathrm{d}z = 2\pi \mathrm{i}\, c_{-1}.
+\]
+\end{tuilun}
 
 \begin{proof}
-\textbf{核心想法}：外圆积分贡献正幂项，内圆积分贡献负幂项。
-
-设 $z$ 在圆环 $R_1 < |z - z_0| < R_2$ 内。取两个同心圆 $C_1$（内）、$C_2$（外），使得 $R_1 < r_1 < |z - z_0| < r_2 < R_2$。
-
-由柯西积分公式（多连通区域形式）：
+逐项积分：
 \[
-    f(z) = \frac{1}{2\pi\mathrm{i}}\oint_{C_2} \frac{f(\zeta)}{\zeta - z}\,\mathrm{d}\zeta 
-    - \frac{1}{2\pi\mathrm{i}}\oint_{C_1} \frac{f(\zeta)}{\zeta - z}\,\mathrm{d}\zeta
+    \oint_{C_\rho}f(z)\,\mathrm{d}z
+    = \sum_{n=-\infty}^{\infty} c_n
+    \oint_{C_\rho}(z-z_0)^n\,\mathrm{d}z.
 \]
-
-\textbf{外圆积分}：$|\zeta - z_0| > |z - z_0|$，用几何级数展开：
+由上一定理，除 $n=-1$ 外其余各项积分都为零，因此
 \[
-    \frac{1}{\zeta - z} = \sum_{n=0}^{\infty} \frac{(z - z_0)^n}{(\zeta - z_0)^{n+1}}
+    \oint_{C_\rho}f(z)\,\mathrm{d}z = 2\pi \mathrm{i}\, c_{-1}.
 \]
-代入积分，得到正幂项部分。
-
-\textbf{内圆积分}：$|\zeta - z_0| < |z - z_0|$，反过来展开：
-\[
-    \frac{1}{\zeta - z} = -\sum_{m=0}^{\infty} \frac{(\zeta - z_0)^m}{(z - z_0)^{m+1}}
-\]
-代入积分，得到负幂项部分。
-
-\textbf{为什么``反着展开''会得到负幂项？}
-
-关键在于几何级数展开的条件 $\left|\frac{\text{小的}}{\text{大的}}\right| < 1$。
-
-\begin{itemize}
-    \item 外圆积分：$|\zeta - z_0| > |z - z_0|$，所以 $\left|\frac{z - z_0}{\zeta - z_0}\right| < 1$
-    \[
-        \frac{1}{\zeta - z} = \frac{1}{(\zeta - z_0)\left(1 - \frac{z - z_0}{\zeta - z_0}\right)} = \sum_{n=0}^{\infty} \frac{(z - z_0)^n}{(\zeta - z_0)^{n+1}}
-    \]
-    展开后是 $(z - z_0)$ 的\textbf{正幂}。
-
-    \item 内圆积分：$|\zeta - z_0| < |z - z_0|$，所以 $\left|\frac{\zeta - z_0}{z - z_0}\right| < 1$，必须换一种方式：
-    \[
-        \frac{1}{\zeta - z} = \frac{1}{(z - z_0)\left(\frac{\zeta - z_0}{z - z_0} - 1\right)} = \frac{-1}{(z - z_0)\left(1 - \frac{\zeta - z_0}{z - z_0}\right)}
-    \]
-    \[
-        = -\frac{1}{z - z_0}\sum_{m=0}^{\infty} \left(\frac{\zeta - z_0}{z - z_0}\right)^m = -\sum_{m=0}^{\infty} \frac{(\zeta - z_0)^m}{(z - z_0)^{m+1}}
-    \]
-    展开后是 $(z - z_0)$ 的\textbf{负幂}（$m+1 = -n$，$n = -1, -2, \ldots$）。
-\end{itemize}
-
-\textbf{统一系数}：两个积分可以合并，系数公式为
-\[
-    c_n = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta
-\]
-
-\textbf{唯一性}：假设有两个展开，相减并利用积分公式可证系数相同。
-
-综上，洛朗展开存在且唯一。
 \end{proof}
 
-\begin{zhu}{}{}
-洛朗展开的关键在于：外圆积分贡献正幂项（解析部分），内圆积分贡献负幂项（主要部分）。这正是泰勒展开无法处理奇点的原因——泰勒展开只有外圆积分，没有内圆积分来抵消奇点的影响。
-\end{zhu}
-
-\begin{lizi}{}{}
-将 $f(z) = \frac{1}{z(z-1)}$ 在圆环域 $0 < |z| < 1$ 和 $|z| > 1$ 内分别展开为洛朗级数。
-
-\begin{jie}
-    \textbf{在 $0 < |z| < 1$ 内}：
-    
-    分解为部分分式：$\frac{1}{z(z-1)} = \frac{1}{z-1} - \frac{1}{z}$。
-    
-    由于 $|z| < 1$，有
-    \begin{equation}
-        \frac{1}{z-1} = -\frac{1}{1-z} = -\sum_{n=0}^{\infty} z^n
-    \end{equation}
-    
-    所以
-    \begin{equation}
-        f(z) = -\frac{1}{z} - \sum_{n=0}^{\infty} z^n = -\frac{1}{z} - 1 - z - z^2 - \cdots
-    \end{equation}
-    
-    \textbf{在 $|z| > 1$ 内}：
-    
-    由于 $|z| > 1$，有 $\left|\frac{1}{z}\right| < 1$，所以
-    \begin{equation}
-        \frac{1}{z-1} = \frac{1}{z} \cdot \frac{1}{1 - \frac{1}{z}} = \frac{1}{z} \sum_{n=0}^{\infty} \frac{1}{z^n} = \sum_{n=1}^{\infty} \frac{1}{z^n}
-    \end{equation}
-    
-    所以
-    \begin{equation}
-        f(z) = \frac{1}{z(z-1)} = \frac{1}{z}\sum_{n=1}^{\infty} \frac{1}{z^n} = \sum_{n=2}^{\infty} \frac{1}{z^n} = \frac{1}{z^2} + \frac{1}{z^3} + \cdots
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{tishi}[展开式与区域的关系]
-同一个函数在不同圆环域内的洛朗展开可能不同！展开式由展开中心和区域共同决定。
-\end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.7]
-    % 第一个圆环域：0 < |z| < 1
-    \begin{scope}[shift={(-5.5,0)}]
-        \draw[blue, thick] (0, 0) circle (2);
-        \draw[red, thick] (0, 0) circle (0.15);
-        \fill[blue!10, opacity=0.5, even odd rule] (0,0) circle (2) (0,0) circle (0.15);
-        \fill[red] (0, 0) circle (2pt);
-        \fill[orange] (2, 0) circle (2.5pt);
-        \fill[orange] (-2, 0) circle (2.5pt);
-        \node[below] at (0, -2.5) {\small $0 < |z| < 1$};
-        \node[below] at (0, -3.2) {\small 主要部分：$\frac{-1}{z}$};
-    \end{scope}
-    
-    % 第二个圆环域：1 < |z| < 2
-    \begin{scope}[shift={(0,0)}]
-        \draw[blue, thick] (0, 0) circle (2);
-        \draw[red, thick] (0, 0) circle (1);
-        \fill[blue!10, opacity=0.5, even odd rule] (0,0) circle (2) (0,0) circle (1);
-        \fill[red] (0, 0) circle (2pt);
-        \fill[orange] (2, 0) circle (2.5pt);
-        \fill[orange] (-2, 0) circle (2.5pt);
-        \node[below] at (0, -2.5) {\small $1 < |z| < 2$};
-        \node[below] at (0, -3.2) {\small 主要部分：$\frac{1}{z-1} - \frac{1}{z}$};
-    \end{scope}
-    
-    % 第三个圆环域：|z| > 1
-    \begin{scope}[shift={(5.5,0)}]
-        \draw[blue, thick] (0, 0) circle (2);
-        % 外部区域用浅色填充整个画布，再用白色填充内部表示``外部''
-        \fill[blue!10, opacity=0.5] (-3,-3) rectangle (3,3);
-        \fill[white] (0,0) circle (2);
-        \draw[blue, thick] (0, 0) circle (2);
-        \fill[red] (0, 0) circle (2pt);
-        \fill[orange] (2, 0) circle (2.5pt);
-        \fill[orange] (-2, 0) circle (2.5pt);
-        \node at (0, 0) {$\infty$};
-        \node[below] at (0, -2.5) {\small $|z| > 1$};
-        \node[below] at (0, -3.2) {\small 主要部分：$\sum_{n=2}^{\infty}\frac{1}{z^n}$};
-    \end{scope}
-    
-    \node at (0, -4.5) {\small 例：$f(z) = \frac{1}{z(z-1)}$ 在不同圆环域的洛朗展开};
-\end{tikzpicture}
-\caption{同一函数在不同圆环域的洛朗展开不同}
-\label{fig:laurent-different-regions}
-\end{figure}
-
-\begin{tishi}[洛朗展开的实用技巧]
-求洛朗展开时，常用以下技巧：
-\begin{enumerate}
-    \item \textbf{部分分式分解}：将复杂函数分解为简单分式，分别展开。
-    \item \textbf{几何级数变形}：关键是将 $\frac{1}{z-a}$ 化为 $\frac{1}{\pm(z-z_0 \text{ 或 } a-z_0)}$ 的形式，然后利用 $\frac{1}{1-w} = \sum w^n$（$|w| < 1$）。
-    \item \textbf{确定展开区域}：根据奇点位置划分圆环域，在每个区域内选择合适的展开方式。
-\end{enumerate}
-\end{tishi}
-
-\begin{lizi}{}{}
-将 $f(z) = \frac{1}{(z-1)(z-2)}$ 在圆环域 $1 < |z| < 2$ 内展开为洛朗级数。
-
-\begin{jie}
-    先分解为部分分式：
-    \begin{equation}
-        \frac{1}{(z-1)(z-2)} = \frac{1}{z-2} - \frac{1}{z-1}
-    \end{equation}
-    
-    在圆环域 $1 < |z| < 2$ 内：
-    \begin{itemize}
-        \item $\frac{1}{z-2}$：由于 $|z| < 2$，有 $\left|\frac{z}{2}\right| < 1$，所以
-        \begin{equation}
-            \frac{1}{z-2} = -\frac{1}{2} \cdot \frac{1}{1 - \frac{z}{2}} = -\frac{1}{2}\sum_{n=0}^{\infty} \left(\frac{z}{2}\right)^n = -\sum_{n=0}^{\infty} \frac{z^n}{2^{n+1}}
-        \end{equation}
-        
-        \item $-\frac{1}{z-1}$：由于 $|z| > 1$，有 $\left|\frac{1}{z}\right| < 1$，所以
-        \begin{equation}
-            -\frac{1}{z-1} = -\frac{1}{z} \cdot \frac{1}{1 - \frac{1}{z}} = -\frac{1}{z}\sum_{n=0}^{\infty} \frac{1}{z^n} = -\sum_{n=1}^{\infty} \frac{1}{z^n}
-        \end{equation}
-    \end{itemize}
-    
-    因此
-    \begin{equation}
-        f(z) = -\sum_{n=0}^{\infty} \frac{z^n}{2^{n+1}} - \sum_{n=1}^{\infty} \frac{1}{z^n} = -\frac{1}{z} - \frac{1}{z^2} - \cdots - \frac{1}{2} - \frac{z}{4} - \frac{z^2}{8} - \cdots
-    \end{equation}
-    
-    主要部分：$-\frac{1}{z} - \frac{1}{z^2} - \cdots$（无穷多项，本性奇点特征？不，这是因为 $z=0$ 不是奇点，负幂项来源于 $z=1$ 处的极点）。
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-将 $f(z) = \mathrm{e}^{z + \frac{1}{z}}$ 在 $0 < |z| < \infty$ 内展开为洛朗级数。
-
-\begin{jie}
-    利用指数函数的泰勒展开：
-    \begin{equation}
-        \mathrm{e}^{z + \frac{1}{z}} = \mathrm{e}^z \cdot \mathrm{e}^{\frac{1}{z}} = \left(\sum_{m=0}^{\infty} \frac{z^m}{m!}\right)\left(\sum_{n=0}^{\infty} \frac{1}{n! z^n}\right)
-    \end{equation}
-    
-    这是一个洛朗级数，既有正幂项也有负幂项。通过柯西乘积，可以写出：
-    \begin{equation}
-        \mathrm{e}^{z + \frac{1}{z}} = \sum_{k=-\infty}^{\infty} c_k z^k
-    \end{equation}
-    
-    其中
-    \begin{equation}
-        c_k = \sum_{n-m=k} \frac{1}{m! \cdot n!} = \sum_{n=0}^{\infty} \frac{1}{(n+k)! \cdot n!} \quad (k \geq 0)
-    \end{equation}
-    
-    特别地，$c_0 = \sum_{n=0}^{\infty} \frac{1}{(n!)^2} = I_0(2)$，其中 $I_0$ 是第一类修正贝塞尔函数。
-    
-    主要部分有无穷多项，说明 $z=0$ 是本性奇点。
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求 $f(z) = \frac{\sin z}{z^3}$ 在 $z=0$ 处的洛朗展开，并判断 $z=0$ 的奇点类型。
-
-\begin{jie}
-    利用 $\sin z$ 的泰勒展开：
-    \begin{equation}
-        \sin z = z - \frac{z^3}{6} + \frac{z^5}{120} - \cdots
-    \end{equation}
-    
-    除以 $z^3$：
-    \begin{equation}
-        \frac{\sin z}{z^3} = \frac{1}{z^2} - \frac{1}{6} + \frac{z^2}{120} - \cdots
-    \end{equation}
-    
-    主要部分只有一项 $\frac{1}{z^2}$，所以 $z=0$ 是二阶极点。
-\end{jie}
-\end{lizi}
-
-\begin{jinshi}[洛朗展开的常见错误]
-\begin{enumerate}
-    \item \textbf{忘记确定展开区域}：同一个函数在不同圆环域的洛朗展开不同，必须先明确展开区域。
-    
-    \textit{例子}：$f(z) = \frac{1}{z(z-1)}$ 有两个奇点 $z=0$ 和 $z=1$，需要在三个区域分别展开：
-    \begin{itemize}
-        \item $|z| < 1$（内圆盘）
-        \item $0 < |z| < 1$（圆环）
-        \item $|z| > 1$（外区域）
-    \end{itemize}
-    
-    \item \textbf{几何级数展开条件错误}：$\frac{1}{1-w} = \sum w^n$ 要求 $|w| < 1$，在复平面上是圆盘而非直线段。
-    
-    \textit{常见错误}：在 $|z| < 1$ 内展开 $\frac{1}{z-1}$，错误地写成 $\frac{1}{z-1} = -\frac{1}{1-z} = -\sum z^n$。
-    
-    \textit{正确做法}：$\frac{1}{z-1} = -\frac{1}{1-z}$，当 $|z| < 1$ 时，$-\sum_{n=0}^{\infty} z^n$ 是正确的。
-    
-    但如果要在 $|z| > 1$ 展开，则需 $\frac{1}{z-1} = \frac{1}{z} \cdot \frac{1}{1 - 1/z} = \sum_{n=1}^{\infty} \frac{1}{z^n}$。
-    
-    \item \textbf{混淆主要部分的项数与极点阶数}：主要部分有 $m$ 项 $\Rightarrow$ $m$ 阶极点。主要部分有无穷多项 $\Rightarrow$ 本性奇点。
-    
-    \item \textbf{系数公式使用错误}：洛朗展开的系数 $c_n = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta$，不能直接用导数公式 $c_n = \frac{f^{(n)}(z_0)}{n!}$！
-    
-    \textit{原因}：洛朗展开在奇点处进行，$f(z_0)$ 可能无定义，导数不存在。
-    
-    \item \textbf{泰勒展开 vs 洛朗展开}：当展开中心是函数的奇点时，\textbf{必须用洛朗展开}；只有当展开中心是函数的解析点时，才用泰勒展开。
-\end{enumerate}
-\end{jinshi}
-
-\begin{tishi}[本节小结]
-\textbf{一、核心知识点}
-
-\begin{enumerate}
-    \item \textbf{洛朗级数}：既有正幂项也有负幂项，形如 $\sum_{n=-\infty}^{\infty} c_n(z - z_0)^n$
-    \item \textbf{展开区域}：圆环域 $R_1 < |z - z_0| < R_2$（而非圆盘）
-    \item \textbf{主要部分}：负幂项部分 $\sum_{n=1}^{\infty} c_{-n}(z - z_0)^{-n}$，反映函数在 $z_0$ 处的奇异性
-    \item \textbf{解析部分}：正幂项部分 $\sum_{n=0}^{\infty} c_n(z - z_0)^n$，是普通的幂级数
-\end{enumerate}
-
-\textbf{二、关键定理}
-
-\begin{itemize}
-    \item \textbf{洛朗展开定理}：解析函数在圆环域内可唯一展开为洛朗级数
-    \item \textbf{系数公式}：$c_n = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(\zeta)}{(\zeta - z_0)^{n+1}}\,\mathrm{d}\zeta$
-    \item \textbf{区域依赖性}：同一函数在不同圆环域的洛朗展开可能不同
-\end{itemize}
-
-\textbf{三、与泰勒展开的关系}
-\begin{itemize}
-    \item 泰勒展开：只有正幂项，适用于解析点附近
-    \item 洛朗展开：正幂项 + 负幂项，适用于奇点附近的圆环域
-    \item 当主要部分为零时，洛朗展开退化为泰勒展开
-\end{itemize}
-
-\textbf{四、知识结构图}
-\end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    node distance=0.9cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=0.7cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 洛朗展开
-    \node[box, fill=blue!15] (laurent) {洛朗展开\\$\sum_{n=-\infty}^{\infty} c_n(z-z_0)^n$};
-    
-    % 两部分
-    \node[box, fill=red!15, below left=1cm and 0.3cm of laurent] (main) {主要部分（负幂项）\\反映奇异性};
-    \node[box, fill=green!15, below right=1cm and 0.3cm of laurent] (analytic) {解析部分（正幂项）\\普通幂级数};
-    
-    % 展开区域
-    \node[box, fill=orange!15, below=1.8cm of laurent] (region) {圆环域\\$R_1 < |z-z_0| < R_2$};
-    
-    % 系数
-    \node[box, fill=purple!15, right=2.5cm of laurent] (coef) {系数公式\\$c_n = \frac{1}{2\pi i}\oint \cdots$};
-    
-    % 应用
-    \node[box, fill=cyan!15, below=0.8cm of region] (app) {应用：奇点分类\\留数计算};
-    
-    % 箭头
-    \draw[arrow] (laurent) -- (main);
-    \draw[arrow] (laurent) -- (analytic);
-    \draw[arrow] (main) -- (region);
-    \draw[arrow] (analytic) -- (region);
-    \draw[arrow] (laurent) -- (coef);
-    \draw[arrow] (region) -- (app);
-    
-    % 与泰勒展开关系
-    \node[box, fill=yellow!20, left=2.5cm of laurent] (taylor) {泰勒展开\\（特例）};
-    \draw[arrow, dashed] (taylor) -- node[above, font=\scriptsize] {主要部分$=0$} (laurent);
-\end{tikzpicture}
-\caption{洛朗展开知识结构图}
-\label{fig:ch04-sec4-summary}
-\end{figure}
-
-% ========== 第五节 ==========
-\section{孤立奇点分类}
-
-\begin{tishi}[奇点分类——为什么重要？]
-洛朗展开不仅是一种展开方法，更重要的是它让我们能够\textbf{精确分类奇点}。
-
-回顾洛朗级数：
+\begin{tishi}[这就是下一章留数理论的出发点]
+现在你应该已经看到，洛朗展开中
 \[
-    f(z) = \underbrace{\cdots + \frac{c_{-2}}{(z - z_0)^2} + \frac{c_{-1}}{z - z_0}}_{\text{主要部分}} + \underbrace{c_0 + c_1(z - z_0) + \cdots}_{\text{解析部分}}
+    \frac{c_{-1}}{z-z_0}
 \]
-
-\textbf{关键观察}：主要部分的形式决定了奇点的类型！
-
-\begin{itemize}
-    \item 没有主要部分 $\Rightarrow$ 可去奇点
-    \item 主要部分有限项 $\Rightarrow$ 极点
-    \item 主要部分无穷项 $\Rightarrow$ 本性奇点
-\end{itemize}
-
-这种分类不仅数学上优雅，在物理上也有重要应用——比如量子力学中的散射问题，奇点类型决定了粒子的行为。
+这一项为什么特殊了：绕奇点一圈做积分时，别的项都被``筛掉''了，只有它会留下来。下一章的留数，正是这个系数 $c_{-1}$。
 \end{tishi}
 
-\subsection{孤立奇点的定义}
-
-\begin{dingliyi}{}{孤立奇点}
-设 $f(z)$ 在点 $z_0$ 的某个去心邻域 $0 < |z - z_0| < R$ 内解析，但在 $z_0$ 处不解析或无定义，则称 $z_0$ 为 $f(z)$ 的\textbf{孤立奇点}。
-\end{dingliyi}
-
-\begin{tishi}[什么是``孤立''奇点？]
-``孤立''意味着这个奇点是``单独''的——在它周围没有其他奇点。
-
-\textbf{例子}：
-\begin{itemize}
-    \item $f(z) = \frac{1}{z}$，$z = 0$ 是孤立奇点（周围没有其他奇点）
-    \item $f(z) = \frac{1}{z^2 - 1} = \frac{1}{(z-1)(z+1)}$，$z = 1$ 和 $z = -1$ 都是孤立奇点
-    \item $f(z) = \frac{1}{\sin z}$，奇点在 $z = n\pi$（$n$ 为整数），每个都是孤立的
-\end{itemize}
-
-\textbf{反例}：
-\begin{itemize}
-    \item $f(z) = \frac{1}{\sin(\pi/z)}$，奇点在 $z = \frac{1}{n}$（$n = \pm 1, \pm 2, \ldots$）。这些奇点越来越密集，在 $z = 0$ 处``聚积''。所以 $z = 0$ \textbf{不是}孤立奇点！
-\end{itemize}
-\end{tishi}
-
-\subsection{孤立奇点的分类}
-
-根据洛朗展开式中主要部分的形式，孤立奇点分为三类：
-
-\begin{tishi}[三种奇点的直观理解]
-\begin{center}
-\begin{tabular}{cccc}
-\toprule
-\textbf{奇点类型} & \textbf{主要部分} & \textbf{极限行为} & \textbf{典型例子} \\
-\midrule
-可去奇点 & 无（全为零） & 极限存在且有限 & $\frac{\sin z}{z}$ 在 $z = 0$ \\
-极点 & 有限项 & 极限为 $\infty$ & $\frac{1}{z}$，$\frac{1}{z^2}$ \\
-本性奇点 & 无穷项 & 极限不存在（任意值） & $\mathrm{e}^{1/z}$ 在 $z = 0$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{记忆技巧}：
-\begin{itemize}
-    \item 可去奇点：``可以去掉''——补充定义后函数变得解析
-    \item 极点：函数值``极''端地趋向无穷
-    \item 本性奇点：行为``本''质上不可预测——可以趋向任何值
-\end{itemize}
-\end{tishi}
-
-\begin{dingliyi}{}{可去奇点}
-若洛朗展开式中没有负幂项（即 $c_{-n} = 0$ 对所有 $n \geq 1$），则称 $z_0$ 为\textbf{可去奇点}。
-\end{dingliyi}
-
-\begin{dingli}{}{可去奇点的判定}
-$z_0$ 是 $f(z)$ 的可去奇点 $\Longleftrightarrow$ $\lim_{z \to z_0} f(z)$ 存在且有限。
-\end{dingli}
-
-\begin{proof}
-\textbf{核心想法}：极限存在意味着函数在奇点附近``安分守己''，不会剧烈振荡或发散。
-
-$\Rightarrow$：若 $z_0$ 是可去奇点，则洛朗展开的主要部分为零，即 $f(z) = \sum_{n=0}^{\infty} c_n (z-z_0)^n$。这是正常的幂级数，当 $z \to z_0$ 时趋于 $c_0$，极限存在。
-
-$\Leftarrow$：若 $\lim_{z \to z_0} f(z) = A$ 存在，则 $f(z)$ 在 $z_0$ 附近有界（$|f(z)| \leq M$）。由洛朗系数公式，负幂项系数 $c_{-n}$ 是积分，被积函数有界而积分区域趋于零，故 $c_{-n} = 0$。主要部分为零，$z_0$ 是可去奇点。
-\end{proof}
-\begin{lizi}{}{}
-$f(z) = \frac{\sin z}{z}$ 在 $z = 0$ 处有可去奇点。
-
-\begin{jie}
-    \textbf{方法一：计算极限}
-    \[
-        \lim_{z \to 0} \frac{\sin z}{z} = 1
-    \]
-    极限存在且有限，所以 $z = 0$ 是可去奇点。
-    
-    \textbf{方法二：洛朗展开}
-    \begin{align*}
-        \frac{\sin z}{z} &= \frac{1}{z}\left(z - \frac{z^3}{3!} + \frac{z^5}{5!} - \cdots\right) \\
-        &= 1 - \frac{z^2}{3!} + \frac{z^4}{5!} - \cdots
-    \end{align*}
-    展开式中没有负幂项，主要部分为零，所以 $z = 0$ 是可去奇点。
-    
-    \textbf{补充定义}：令 $f(0) = 1$，则 $f(z)$ 在 $z = 0$ 处变得解析。这就是``可去''的含义——奇点可以通过补充定义而``去掉''。
-\end{jie}
-\end{lizi}
-
-\begin{dingliyi}{}{极点}
-若洛朗展开式的主要部分只有有限项，设为
-\begin{equation}
-    f(z) = \frac{c_{-m}}{(z - z_0)^m} + \cdots + \frac{c_{-1}}{z - z_0} + c_0 + c_1(z - z_0) + \cdots
-\end{equation}
-其中 $c_{-m} \neq 0$，则称 $z_0$ 为 $f(z)$ 的 $m$ 阶\textbf{极点}。
-\end{dingliyi}
-
-\begin{dingli}{}{极点的判定}
-$z_0$ 是 $f(z)$ 的 $m$ 阶极点 $\Longleftrightarrow$ $\lim_{z \to z_0} (z - z_0)^m f(z)$ 存在且不为零。
-\end{dingli}
-
-\begin{proof}
-设 $f(z)$ 在 $z_0$ 处的洛朗展开为 $f(z) = \sum_{n=-m}^{\infty} c_n (z-z_0)^n$，其中 $c_{-m} \neq 0$。
-
-$\Rightarrow$：若 $z_0$ 是 $m$ 阶极点，则 $(z-z_0)^m f(z) = c_{-m} + c_{-m+1}(z-z_0) + \cdots$，当 $z \to z_0$ 时趋于 $c_{-m} \neq 0$。
-
-$\Leftarrow$：设 $\lim_{z \to z_0} (z-z_0)^m f(z) = A \neq 0$。令 $g(z) = (z-z_0)^m f(z)$，则 $g(z)$ 在 $z_0$ 处有可去奇点，极限为 $A$。定义 $g(z_0) = A$，则 $g(z)$ 在 $z_0$ 解析且 $g(z_0) = A \neq 0$。
-
-于是 $f(z) = \frac{g(z)}{(z-z_0)^m}$，其中 $g(z_0) \neq 0$。由泰勒展开，$f(z)$ 的洛朗展开的主要部分恰为 $m$ 项，即 $z_0$ 是 $m$ 阶极点。
-\end{proof}
-\begin{lizi}{}{}
-$f(z) = \frac{1}{z(z-1)^2}$ 的奇点分类。
-
-\begin{jie}
-    \textbf{第一步：找出奇点}
-    
-    令分母为零：$z = 0$ 或 $z = 1$。两个奇点。
-    
-    \textbf{第二步：判断 $z = 0$ 的类型}
-    
-    方法：看 $(z-0)^m f(z)$ 何时有非零极限。
-    \begin{itemize}
-        \item $m = 1$：$\lim_{z \to 0} z \cdot \frac{1}{z(z-1)^2} = \lim_{z \to 0} \frac{1}{(z-1)^2} = 1 \neq 0$ \checkmark
-    \end{itemize}
-    所以 $z = 0$ 是\textbf{一阶极点}。
-    
-    \textbf{第三步：判断 $z = 1$ 的类型}
-    \begin{itemize}
-        \item $m = 1$：$\lim_{z \to 1} (z-1) \cdot \frac{1}{z(z-1)^2} = \lim_{z \to 1} \frac{1}{z(z-1)} = \infty$ \ding{55}
-        \item $m = 2$：$\lim_{z \to 1} (z-1)^2 \cdot \frac{1}{z(z-1)^2} = \lim_{z \to 1} \frac{1}{z} = 1 \neq 0$ \checkmark
-    \end{itemize}
-    所以 $z = 1$ 是\textbf{二阶极点}。
-\end{jie}
-\end{lizi}
-
-\begin{tishi}[如何快速判断极点阶数？]
-对于有理函数 $f(z) = \frac{P(z)}{Q(z)}$，极点阶数等于分母零点的重数。
-
-上例中：$f(z) = \frac{1}{z(z-1)^2}$
-\begin{itemize}
-    \item $z = 0$ 是分母的单根 $\Rightarrow$ 一阶极点
-    \item $z = 1$ 是分母的二重根 $\Rightarrow$ 二阶极点
-\end{itemize}
-
-但如果分子也有零点，需要约分后再判断！
-\end{tishi}
-
-\begin{dingliyi}{}{本性奇点}
-若洛朗展开式的主要部分有无穷多项，则称 $z_0$ 为\textbf{本性奇点}。
-\end{dingliyi}
-
-\begin{dingli}{}{本性奇点的性质}
-若 $z_0$ 是 $f(z)$ 的本性奇点，则对于任意复数\index{复数} $A$（有限或无穷），存在趋于 $z_0$ 的序列 $\{z_n\}$ 使得 $\lim_{n \to \infty} f(z_n) = A$。
-\end{dingli}
-
-\begin{tishi}[本性奇点的``疯狂''行为]
-这个定理（Casorati-Weierstrass 定理）说的是：在本性奇点附近，函数的行为\textbf{完全不可预测}！
-
-\begin{itemize}
-    \item 你想要 $f(z_n) \to 0$？能找到这样的 $z_n \to z_0$
-    \item 你想要 $f(z_n) \to \infty$？也能找到
-    \item 你想要 $f(z_n) \to$ 任意复数 $A$？都能找到
-\end{itemize}
-
-\textbf{例子}：$f(z) = \mathrm{e}^{1/z}$ 在 $z = 0$ 处有本性奇点。
-
-\begin{itemize}
-    \item 沿正实轴趋近：$z = x \to 0^+$，$\mathrm{e}^{1/x} \to +\infty$
-    \item 沿负实轴趋近：$z = x \to 0^-$，$\mathrm{e}^{1/x} \to 0$
-    \item 沿虚轴趋近：$z = \mathrm{i}y \to 0$，$\mathrm{e}^{1/(\mathrm{i}y)} = \mathrm{e}^{-\mathrm{i}/y}$，在单位圆上振荡，不趋于任何值
-\end{itemize}
-
-从不同方向趋近，函数值可以有完全不同的极限——这就是本性奇点的``本性''！
-\end{tishi}
-
-\begin{proof}
-这是 Casorati-Weierstrass 定理的证明思路。
-
-\textbf{核心想法}：本性奇点既不是可去奇点（极限有限）也不是极点（极限无穷），所以它必须能``做''这两者都做不到的事——取到任意值。
-
-\textbf{情况一：$A = \infty$}。若 $f(z)$ 在 $z_0$ 的任意邻域内有界，则 $z_0$ 是可去奇点，矛盾。故 $f(z)$ 无界，存在 $z_n \to z_0$ 使 $f(z_n) \to \infty$。
-
-\textbf{情况二：$A$ 有限}。考虑 $g(z) = \frac{1}{f(z) - A}$。若 $g(z)$ 在 $z_0$ 有可去奇点或极点，则 $f(z) - A$ 有极点或可去奇点，与 $z_0$ 是本性奇点矛盾。故存在 $z_n \to z_0$ 使 $g(z_n) \to 0$，即 $f(z_n) \to A$。
-\end{proof}
-\begin{lizi}{}{}
-$f(z) = \mathrm{e}^{1/z}$ 在 $z = 0$ 处有本性奇点。
-
-洛朗展开：$\mathrm{e}^{1/z} = \sum_{n=0}^{\infty} \frac{1}{n! z^n}$，主要部分有无穷多项。
-
-当 $z \to 0^+$（沿正实轴）时，$\mathrm{e}^{1/z} \to +\infty$。
-
-当 $z \to 0^-$（沿负实轴）时，$\mathrm{e}^{1/z} \to 0$。
-
-当 $z = \frac{1}{2\pi\mathrm{i}n} \to 0$ 时，$\mathrm{e}^{1/z} = \mathrm{e}^{2\pi\mathrm{i}n} = 1$。
-\end{lizi}
-
-\subsection{奇点分类总结}
-
-\begin{table}[htbp]
-\centering
-\begin{tabular}{llll}
-\toprule
-\textbf{奇点类型} & \textbf{洛朗展开} & \textbf{极限行为} & \textbf{例子} \\
-\midrule
-可去奇点 & 无负幂项 & 极限存在有限 & $\frac{\sin z}{z}$，$z = 0$ \\
-$m$ 阶极点 & 有限个负幂项 & 极限为无穷 & $\frac{1}{z^n}$，$z = 0$ \\
-本性奇点 & 无穷个负幂项 & 极限不存在 & $\mathrm{e}^{1/z}$，$z = 0$ \\
-\bottomrule
-\end{tabular}
-\caption{孤立奇点分类}
-\label{tab:singularity-types}
-\end{table}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.8]
-    % 可去奇点
-    \begin{scope}[shift={(-5,0)}]
-        \draw[->, gray] (-1.5, 0) -- (1.5, 0) node[right] {$\Re(z)$};
-        \draw[->, gray] (0, -1.5) -- (0, 1.5) node[above] {$\Im(z)$};
-        \fill[blue] (0, 0) circle (3pt);
-        \node[below] at (0, -1.8) {\small 可去奇点};
-        \node[below] at (0, -2.3) {\small $\lim\limits_{z \to z_0} f(z) = A$};
-        \draw[green!60!black, thick, ->] (-1, 1) to[out=-45, in=135] (0, 0);
-        \draw[green!60!black, thick, ->] (1, 1) to[out=-135, in=45] (0, 0);
-        \draw[green!60!black, thick, ->] (0, -1) -- (0, 0);
-        \node at (0, 1.8) {\small 极限存在};
-    \end{scope}
-    
-    % 极点
-    \begin{scope}[shift={(0,0)}]
-        \draw[->, gray] (-1.5, 0) -- (1.5, 0) node[right] {$\Re(z)$};
-        \draw[->, gray] (0, -1.5) -- (0, 1.5) node[above] {$\Im(z)$};
-        \fill[red] (0, 0) circle (3pt);
-        \node[below] at (0, -1.8) {\small 极点};
-        \node[below] at (0, -2.3) {\small $\lim\limits_{z \to z_0} |f(z)| = \infty$};
-        \draw[orange, thick, ->] (-0.8, 0.5) to[out=-30, in=150] (0, 3);
-        \draw[orange, thick, ->] (0.8, 0.5) to[out=-150, in=30] (0, 3);
-        \draw[orange, thick, ->] (0, -0.5) -- (0, 3);
-        \node at (0, 1.8) {\small $|f(z)| \to \infty$};
-    \end{scope}
-    
-    % 本性奇点
-    \begin{scope}[shift={(5,0)}]
-        \draw[->, gray] (-1.5, 0) -- (1.5, 0) node[right] {$\Re(z)$};
-        \draw[->, gray] (0, -1.5) -- (0, 1.5) node[above] {$\Im(z)$};
-        \fill[purple] (0, 0) circle (3pt);
-        \node[below] at (0, -1.8) {\small 本性奇点};
-        \node[below] at (0, -2.3) {\small 极限不存在};
-        \draw[cyan, thick, ->] (-0.7, 0.7) to[out=-60, in=120] (0.5, -0.3);
-        \draw[cyan, thick, ->] (0.7, -0.5) to[out=120, in=-60] (-0.3, 1);
-        \draw[cyan, thick, ->] (0, -0.8) to[out=60, in=-120] (0.8, 0.8);
-        \node at (0, 1.8) {\small 行为混乱};
-    \end{scope}
-\end{tikzpicture}
-\caption{三种奇点类型的示意图}
-\label{fig:singularity-types}
-\end{figure}
-
-\begin{tishi}[奇点类型判断流程——三步走]
-面对一个奇点，如何系统化地判断其类型？以下是一个实用的判断流程：
-
-\textbf{第一步：计算极限} $\lim_{z \to z_0} f(z)$
-
-\begin{itemize}
-    \item 极限存在且有限 $\Rightarrow$ \textbf{可去奇点}
-    \item 极限为 $\infty$ $\Rightarrow$ \textbf{极点}（进入第二步确定阶数）
-    \item 极限不存在且不为 $\infty$ $\Rightarrow$ \textbf{本性奇点}
-\end{itemize}
-
-\textbf{第二步：确定极点阶数}（仅当第一步判定为极点时）
-
-逐次计算 $\lim_{z \to z_0} (z - z_0)^m f(z)$：
-\begin{itemize}
-    \item 从 $m = 1$ 开始尝试
-    \item 若极限非零有限，则为 $m$ 阶极点
-    \item 若极限为零或不存在，尝试更大的 $m$
-\end{itemize}
-
-\textbf{第三步：验证}（用洛朗展开）
-
-如果仍不确定，做洛朗展开看主要部分的项数：
-\begin{itemize}
-    \item 0 项 $\Rightarrow$ 可去奇点
-    \item 有限项 $m$ $\Rightarrow$ $m$ 阶极点
-    \item 无穷项 $\Rightarrow$ 本性奇点
-\end{itemize}
-
-\textbf{速记口诀}：
-\begin{quote}
-\itshape
-极限有限可去掉，极限无穷是极点，\\
-极限乱跳本性奇，主要部分定乾坤。
-\end{quote}
-\end{tishi}
-
-\begin{jinshi}[奇点判定的常见错误]
-\begin{enumerate}
-    \item \textbf{混淆函数的零点与极点}：$f(z) = \frac{1}{z-1}$ 在 $z=1$ 处有极点，不是零点。
-    \item \textbf{忽略可去奇点的可去除性}：$\frac{\sin z}{z}$ 在 $z=0$ 处看似未定义，但极限存在，是可去奇点。
-    \item \textbf{误判极点的阶数}：$\frac{1}{z^2(z-1)}$ 在 $z=0$ 是二阶极点，不是一阶。
-\end{enumerate}
-\end{jinshi}
-
-\begin{tishi}[本节小结]
-\textbf{一、核心知识点}
-
-\begin{enumerate}
-    \item \textbf{孤立奇点}：函数在去心邻域内解析，但在该点不解析或无定义
-    \item \textbf{三种奇点}：可去奇点、极点、本性奇点
-    \item \textbf{判定方法}：极限判断法、洛朗展开判断法
-\end{enumerate}
-
-\textbf{二、关键定理}
-
-\begin{itemize}
-    \item \textbf{可去奇点}：$\lim_{z \to z_0} f(z)$ 存在且有限 $\Longleftrightarrow$ 主要部分为零
-    \item \textbf{极点}：$\lim_{z \to z_0} f(z) = \infty$ $\Longleftrightarrow$ 主要部分有有限项
-    \item \textbf{本性奇点}：极限不存在 $\Longleftrightarrow$ 主要部分有无穷项
-    \item \textbf{Casorati-Weierstrass 定理}：在本性奇点附近，函数可取任意复数值
-\end{itemize}
-
-\textbf{三、知识结构图}
-\end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    node distance=0.8cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.8cm, minimum height=0.7cm, align=center, font=\small},
-    decision/.style={diamond, draw, aspect=2, minimum width=1.5cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 开始
-    \node[decision, fill=yellow!20] (start) {计算\\$\lim\limits_{z \to z_0} f(z)$\\（$z_0$处）};
-    
-    % 三种情况
-    \node[box, fill=green!15, below left=1.2cm and 1.5cm of start] (finite) {极限有限};
-    \node[box, fill=red!15, below=1.2cm of start] (infty) {极限 $= \infty$};
-    \node[box, fill=purple!15, below right=1.2cm and 1.5cm of start] (none) {极限不存在};
-    
-    % 奇点类型
-    \node[box, fill=green!30, below=0.6cm of finite] (removable) {可去奇点\\主要部分 $= 0$};
-    \node[box, fill=red!30, below=0.6cm of infty] (pole) {极点\\主要部分有限项};
-    \node[box, fill=purple!30, below=0.6cm of none] (essential) {本性奇点\\主要部分无穷项};
-    
-    % 极点阶数判断
-    \node[box, fill=orange!15, below=0.6cm of pole, text width=2.8cm] (order) {求 $m$ 使\\$\lim(z-z_0)^m f(z) \neq 0$\\$\Rightarrow$ $m$ 阶极点};
-    
-    % 箭头
-    \draw[arrow] (start) -- node[left, font=\scriptsize] {有限} (finite);
-    \draw[arrow] (start) -- node[right, font=\scriptsize] {$\infty$} (infty);
-    \draw[arrow] (start) -- node[right, font=\scriptsize] {不存在} (none);
-    \draw[arrow] (finite) -- (removable);
-    \draw[arrow] (infty) -- (pole);
-    \draw[arrow] (none) -- (essential);
-    \draw[arrow] (pole) -- (order);
-\end{tikzpicture}
-\caption{奇点分类判断流程图}
-\label{fig:ch04-sec5-summary}
-\end{figure}
-
-% 过渡：从奇点分类到应用
-掌握了奇点分类后，我们已经建立了复变函数级数理论的核心框架。让我们回顾一下本章的脉络：
-
-\begin{enumerate}
-    \item \textbf{级数基础}：从实数项级数过渡到复数项级数，建立收敛性判别
-    \item \textbf{幂级数}：研究收敛圆、收敛半径，理解``圆内收敛、圆外发散''的几何特性
-    \item \textbf{泰勒展开}：解析点附近的级数表示，唯一性保证展开的确定性
-    \item \textbf{洛朗展开}：奇点附近的级数表示，负幂项揭示奇点性质
-    \item \textbf{奇点分类}：可去、极点、本性——三种基本类型
-\end{enumerate}
-
-现在，让我们看看这些理论有什么实际用处。级数不仅是表示函数的工具，更是求解问题的利器。
-
-% ========== 第六节 ==========
-\section{应用：级数求和与渐近展开}
-
-\subsection{利用泰勒展开求和}
-
-\begin{lizi}{}{}
-求级数 $\displaystyle\sum_{n=1}^{\infty} \frac{n}{2^n}$ 的和。
-
-\begin{jie}
-    考虑函数 $f(x) = \sum_{n=1}^{\infty} x^n = \frac{x}{1-x}$（$|x| < 1$）。
-    
-    求导得：
-    \begin{equation}
-        f'(x) = \sum_{n=1}^{\infty} n x^{n-1} = \frac{1}{(1-x)^2}
-    \end{equation}
-    
-    因此
-    \begin{equation}
-        \sum_{n=1}^{\infty} n x^n = x f'(x) = \frac{x}{(1-x)^2}
-    \end{equation}
-    
-    代入 $x = \frac{1}{2}$：
-    \begin{equation}
-        \sum_{n=1}^{\infty} \frac{n}{2^n} = \frac{\frac{1}{2}}{(1-\frac{1}{2})^2} = 2
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{tishi}[级数求和常用方法总结]
-级数求和的核心思想：\textbf{将求和问题转化为函数求值问题}。
-
-\textbf{方法一：构造幂级数，求导/积分}
-
-适用于 $\sum n^k x^n$ 型级数。
-\begin{enumerate}
-    \item 从已知级数 $\sum x^n = \frac{1}{1-x}$ 出发
-    \item 求导得到 $\sum n x^{n-1}$，积分得到 $\sum \frac{x^{n+1}}{n+1}$
-    \item 代入特定 $x$ 值
-\end{enumerate}
-
-\textbf{方法二：利用泰勒展开}
-
-适用于 $\sum \frac{a_n}{n!}$ 型级数。
-\begin{enumerate}
-    \item 写出相关函数的泰勒展开
-    \item 比较系数，求出和函数
-    \item 代入特定值
-\end{enumerate}
-
-\textbf{方法三：利用复变函数的洛朗展开或留数}
-
-适用于复数项级数或更复杂的情形。这将在留数一章详细讨论。
-
-\textbf{速记}：求导乘 $n$，积分除以 $n$，代入转化求值。
-\end{tishi}
-
-\subsection{渐近展开}
-
-在物理问题中，我们经常需要估计函数在某个参数趋于特定值时的行为。级数展开是渐近分析的重要工具。
-
-\begin{tishi}[为什么需要渐近展开？——从一个例子说起]
-
-\textbf{问题}：估计 $n!$ 当 $n$ 很大时的值。
-
-直接算 $100!$？那是 $9.3 \times 10^{157}$，太大了！有没有简单的近似公式？
-
-\textbf{斯特林（Stirling）发现}：
-\[
-    n! \approx \sqrt{2\pi n}\left(\frac{n}{e}\right)^n
-\]
-
-验证一下：
-\begin{itemize}
-    \item $10! = 3628800$
-    \item 斯特林近似：$\sqrt{20\pi}(10/e)^{10} \approx 3598696$（误差仅 $0.8\%$！）
-\end{itemize}
-
-更精确地，可以添加修正项：
-\[
-    n! \approx \sqrt{2\pi n}\left(\frac{n}{e}\right)^n \left(1 + \frac{1}{12n} + \frac{1}{288n^2} - \frac{139}{51840n^3} + \cdots\right)
-\]
-
-\textbf{有趣的是}：这个级数是\textbf{发散的}！但它仍然有用——取前几项，对于大的 $n$ 给出极好的近似。这就是\textbf{渐近展开}的魅力！
-
-\textbf{关键区别}：
-\begin{itemize}
-    \item \textbf{收敛级数}：固定参数，增加项数 $\Rightarrow$ 误差趋于零
-    \item \textbf{渐近级数}：固定项数，参数趋于某值 $\Rightarrow$ 误差趋于零
-\end{itemize}
-
-\textbf{``望远镜''类比}——理解收敛级数与渐近级数的区别：
-
-想象你在观察一个遥远的物体（函数在某点的行为）：
-
-\begin{itemize}
-    \item \textbf{收敛级数就像一台精密望远镜}：你看得越仔细（取越多项），图像就越清晰。最终，无限精确的调节能让你看到``真实面目''。
-
-    \item \textbf{渐近级数就像一台有缺陷的望远镜}：调到某个程度后再调反而模糊（级数发散）！但是，只要你调节到``最佳位置''（取适当项数），图像就足够清晰。特别地，物体越近（参数越接近目标值），图像越清晰。
-\end{itemize}
-
-这就是为什么发散的渐近级数仍然有用——在``最佳项数''处截断，可以得到极好的近似。
-\end{tishi}
-
-\begin{dingliyi}{}{渐近展开}
-设 $f(z)$ 在 $z_0$ 附近有定义。若存在级数 $\sum_{n=0}^{\infty} a_n(z - z_0)^n$ 使得对任意固定的 $N$，
-\begin{equation}
-    \lim_{z \to z_0} \frac{f(z) - \sum_{n=0}^{N} a_n(z - z_0)^n}{(z - z_0)^N} = 0
-\end{equation}
-则称该级数为 $f(z)$ 在 $z_0$ 处的\textbf{渐近展开}，记作
-\begin{equation}
-    f(z) \sim \sum_{n=0}^{\infty} a_n(z - z_0)^n \quad (z \to z_0)
-\end{equation}
-\end{dingliyi}
-
-\begin{tishi}[如何理解渐近展开的定义？]
-条件 $\lim_{z \to z_0} \frac{f(z) - \sum_{n=0}^{N} a_n(z - z_0)^n}{(z - z_0)^N} = 0$ 的含义是：
-
-\textbf{误差比 $(z - z_0)^N$ 更快地趋于零}。
-
-换句话说：用前 $N+1$ 项近似 $f(z)$，当 $z \to z_0$ 时，误差是 $(z - z_0)^N$ 的高阶无穷小。
-
-\textbf{对比}：
-\begin{itemize}
-    \item 泰勒展开：$f(z) = \sum_{n=0}^{\infty} a_n(z - z_0)^n$，级数收敛
-    \item 渐近展开：$f(z) \sim \sum_{n=0}^{\infty} a_n(z - z_0)^n$，级数可能发散，但近似有效
-\end{itemize}
-
-符号 $\sim$ 和 $=$ 的区别：$\sim$ 表示渐近行为，不是精确相等。
-\end{tishi}
-
-\begin{zhu}{}{}
-渐近展开与收敛级数的区别：
-\begin{enumerate}
-    \item \textbf{收敛级数}：固定 $z$，让 $N \to \infty$，误差 $\to 0$。
-    \item \textbf{渐近展开}：固定 $N$，让 $z \to z_0$，误差比 $(z-z_0)^N$ 更快地趋于 $0$。
-\end{enumerate}
-一个级数可以既是收敛的又是渐近的（如泰勒级数），也可以是发散的但渐近的（如许多物理中的渐近级数）。
-\end{zhu}
-
-\begin{wulibj}[应用：量子力学中的微扰展开]
-在量子力学中，哈密顿量 $\hat{H} = \hat{H}_0 + \lambda \hat{V}$，其中 $\lambda$ 是小参数。能量本征值的微扰展开为
-\begin{equation}
-    E(\lambda) = E^{(0)} + \lambda E^{(1)} + \lambda^2 E^{(2)} + \cdots
-\end{equation}
-对于大多数物理系统，这个级数是\textbf{渐近的}而非收敛的——级数发散，但前几项对于小 $\lambda$ 提供极好的近似。
-
-例如，在量子电动力学中，电子的反常磁矩的计算使用了微扰展开的前几项，与实验符合到小数点后 12 位！
-\end{wulibj}
-
-\begin{lizi}{}{}
-斯特林公式是渐近展开的经典例子：
-\begin{equation}
-    n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n \left(1 + \frac{1}{12n} + \frac{1}{288n^2} - \frac{139}{51840n^3} + \cdots\right)
-\end{equation}
-
-当 $n \to \infty$ 时，取有限项即可得到很好的近似。例如 $n = 10$ 时：
-\begin{itemize}
-    \item 精确值：$10! = 3628800$
-    \item 一阶近似：$\sqrt{20\pi}(10/e)^{10} \approx 3598696$（误差 $0.8\%$）
-    \item 两项近似：$\cdots (1 + 1/120) \approx 3628682$（误差 $0.003\%$）
-\end{itemize}
-\end{lizi}
-
-\begin{jinshi}[渐近展开的正确使用]
-\begin{enumerate}
-    \item 渐近展开不一定收敛，不能无限增加项数！对于固定的 $z$，增加项数可能使结果变差。
-    \item 渐近展开依赖于展开的方向（$z \to z_0$ 沿不同路径可能得到不同的展开）。
-    \item 渐近符号 $\sim$ 与等号 $=$ 不同：$\sim$ 表示渐近行为，不是相等。
-\end{enumerate}
-\end{jinshi}
-
-\begin{lizi}{}{}
-求级数 $\displaystyle\sum_{n=0}^{\infty} \frac{1}{n!}$ 的和。
-
-\begin{jie}
-    这正好是指数函数的泰勒展开在 $z = 1$ 处的值：
-    \begin{equation}
-        \sum_{n=0}^{\infty} \frac{1}{n!} = \mathrm{e}^1 = \mathrm{e}
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求级数 $\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)(2n+1)!}$ 的和。
-
-\begin{jie}
-    考虑积分 $\int_0^1 \sin t\,\mathrm{d}t = 1 - \cos 1$。
-    
-    另一方面，利用 $\sin t$ 的泰勒展开并逐项积分：
-    \begin{align}
-        \int_0^1 \sin t\,\mathrm{d}t &= \int_0^1 \sum_{n=0}^{\infty} \frac{(-1)^n t^{2n+1}}{(2n+1)!}\,\mathrm{d}t \\
-        &= \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} \int_0^1 t^{2n+1}\,\mathrm{d}t \\
-        &= \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} \cdot \frac{1}{2n+2} \\
-        &= \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)(2n+1)!}
-    \end{align}
-    
-    因此
-    \begin{equation}
-        \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)(2n+1)!} = 1 - \cos 1 \approx 0.4597
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求级数 $\displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!}$ 的和。
-
-\begin{jie}
-    这是 $\sin z$ 在 $z = 1$ 处的值：
-    \begin{equation}
-        \sin z = \sum_{n=0}^{\infty} \frac{(-1)^n z^{2n+1}}{(2n+1)!}
-    \end{equation}
-    
-    令 $z = 1$：
-    \begin{equation}
-        \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} = \sin 1
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\subsection{利用级数展开计算极限}
-
-\begin{lizi}{}{}
-计算极限 $\displaystyle\lim_{z \to 0} \left(\frac{1}{z} - \frac{1}{\mathrm{e}^z - 1}\right)$。
-
-\begin{jie}
-    将 $\mathrm{e}^z$ 展开为泰勒级数：
-    \begin{equation}
-        \mathrm{e}^z - 1 = z + \frac{z^2}{2!} + \frac{z^3}{3!} + \cdots = z\left(1 + \frac{z}{2} + \frac{z^2}{6} + \cdots\right)
-    \end{equation}
-    
-    所以
-    \begin{equation}
-        \frac{1}{\mathrm{e}^z - 1} = \frac{1}{z} \cdot \frac{1}{1 + \frac{z}{2} + \cdots} = \frac{1}{z}\left(1 - \frac{z}{2} + \cdots\right) = \frac{1}{z} - \frac{1}{2} + O(z)
-    \end{equation}
-    
-    因此
-    \begin{equation}
-        \frac{1}{z} - \frac{1}{\mathrm{e}^z - 1} = \frac{1}{2} + O(z) \to \frac{1}{2}
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\subsection{泰勒展开在近似计算中的应用}
-
-泰勒展开提供了计算函数值的有效方法，特别是对于无法用初等函数表示的积分。
-
-\begin{lizi}{}{}
-计算误差函数 $\displaystyle\operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x \mathrm{e}^{-t^2}\,\mathrm{d}t$ 在 $x = 0.5$ 处的近似值（取前四项）。
-
-\begin{jie}
-    将 $\mathrm{e}^{-t^2}$ 展开为泰勒级数：
-    \begin{equation}
-        \mathrm{e}^{-t^2} = 1 - t^2 + \frac{t^4}{2!} - \frac{t^6}{3!} + \cdots
-    \end{equation}
-    
-    逐项积分：
-    \begin{equation}
-        \operatorname{erf}(x) = \frac{2}{\sqrt{\pi}}\left(x - \frac{x^3}{3} + \frac{x^5}{10} - \frac{x^7}{42} + \cdots\right)
-    \end{equation}
-    
-    代入 $x = 0.5$，取前四项：
-    \begin{equation}
-        \operatorname{erf}(0.5) \approx \frac{2}{\sqrt{\pi}}\left(0.5 - \frac{0.125}{3} + \frac{0.03125}{10} - \frac{0.0078125}{42}\right) \approx 0.5205
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{zhu}{}{}
-级数展开在数值计算中的优点：
-\begin{enumerate}
-    \item 对于小变量，低阶项已经足够精确
-    \item 可以通过增加项数提高精度
-    \item 适用于无法解析求积的函数
-\end{enumerate}
-\end{zhu}
-
-\begin{tishi}[本节小结]
-\textbf{一、核心知识点}
-
-\begin{enumerate}
-    \item \textbf{级数求和方法}：将求和问题转化为函数求值问题
-    \item \textbf{渐近展开}：级数可能发散但有限项近似仍有效
-    \item \textbf{渐近符号}：$f(z) \sim \sum a_n(z-z_0)^n$ 表示渐近行为而非精确相等
-\end{enumerate}
-
-\textbf{二、级数求和常用方法}
-
-\begin{itemize}
-    \item \textbf{构造幂级数}：求导乘 $n$，积分除以 $n$
-    \item \textbf{利用泰勒展开}：比较系数求和函数
-    \item \textbf{洛朗展开与留数}：适用于复数项级数
-\end{itemize}
-
-\textbf{三、渐近展开 vs 收敛级数}
-
-\begin{center}
-\begin{tabular}{ll}
-\toprule
-\textbf{收敛级数} & 固定 $z$，让 $N \to \infty$，误差 $\to 0$ \\
-\textbf{渐近展开} & 固定 $N$，让 $z \to z_0$，误差 $\to 0$ \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\textbf{四、知识结构图}
-\end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    node distance=0.9cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.8cm, minimum height=0.7cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 应用总览
-    \node[box, fill=blue!15] (app) {级数展开的应用};
-    
-    % 两大应用
-    \node[box, fill=green!15, below left=1cm and 0.5cm of app] (sum) {级数求和\\转化为函数求值};
-    \node[box, fill=orange!15, below right=1cm and 0.5cm of app] (asymp) {渐近展开\\近似计算};
-    
-    % 求和方法
-    \node[box, fill=green!30, below=0.7cm of sum, text width=2.5cm] (sum1) {构造幂级数\\泰勒展开\\留数法};
-    
-    % 渐近展开特点
-    \node[box, fill=orange!30, below=0.7cm of asymp, text width=2.5cm] (asymp1) {级数可能发散\\但有限项近似有效\\斯特林公式};
-    
-    % 物理应用
-    \node[box, fill=purple!15, below=1.5cm of app] (phys) {物理应用\\量子微扰展开\\误差函数计算};
-    
-    % 箭头
-    \draw[arrow] (app) -- (sum);
-    \draw[arrow] (app) -- (asymp);
-    \draw[arrow] (sum) -- (sum1);
-    \draw[arrow] (asymp) -- (asymp1);
-    \draw[arrow] (sum) -- (phys);
-    \draw[arrow] (asymp) -- (phys);
-\end{tikzpicture}
-\caption{级数应用知识结构图}
-\label{fig:ch04-sec6-summary}
-\end{figure}
-
-% ========== 本章小结 ==========
 \section{本章小结}
 
-\begin{tishi}[本章学到了什么？]
-本章的核心内容可以用一句话概括：\textbf{解析函数可以用级数来表示和研究}。
-
-具体来说：
+\begin{tishi}[本章最重要的结论]
 \begin{enumerate}
-    \item \textbf{幂级数}是研究解析函数的基本工具——解析函数在解析点附近可以展开为幂级数
-    \item \textbf{泰勒展开}展示了``局部决定整体''的深刻性质——这在实函数中是不成立的！
-    \item \textbf{洛朗展开}让我们能够研究奇点——通过分析负幂项的形式来分类奇点
-    \item \textbf{奇点分类}为下一章的留数理论奠定了基础——留数的计算依赖于洛朗展开
+    \item 幂级数的收敛区域是圆盘，圆内可逐项求导、逐项积分。
+    \item 解析函数在解析点附近一定能展开成泰勒级数。
+    \item 泰勒展开的收敛半径由最近奇点决定。
+    \item 零点阶数由泰勒展开中最低次非零项决定，零点都是孤立的。
+    \item 在奇点附近，需要用允许负幂项的洛朗展开。
+    \item 洛朗主部决定孤立奇点的类型：可去奇点、极点、本性奇点。
+    \item 围绕奇点的小圆积分只取决于洛朗展开中 $(z-z_0)^{-1}$ 的系数。
 \end{enumerate}
-
-\textbf{与高等数学的联系}：如果你熟悉实函数的泰勒展开，复变函数的级数理论会很容易上手。关键区别在于：复变函数的``解析''条件更强，带来的结论也更深刻。
 \end{tishi}
 
-\subsection{本章易错点总结}
-
-在学习和做题时，以下是一些常见的错误和需要注意的地方：
-
-\begin{jinshi}[易错点一：收敛半径的边界]
-收敛半径 $R$ 给出的只是\textbf{收敛圆的半径}，边界上的收敛性需要单独判断！
-
-\begin{itemize}
-    \item 圆内（$|z - z_0| < R$）：级数绝对收敛
-    \item 圆外（$|z - z_0| > R$）：级数发散
-    \item 边界（$|z - z_0| = R$）：可能收敛，可能发散，需要单独讨论
-\end{itemize}
-
-例如 $\sum_{n=1}^{\infty} \frac{z^n}{n}$ 的收敛半径是 $1$，但在 $z = 1$ 发散（调和级数），在 $z = -1$ 收敛（交错级数）。
-\end{jinshi}
-
-\begin{jinshi}[易错点二：泰勒展开的收敛域]
-泰勒展开成立的区域是\textbf{收敛圆}，不一定是函数的定义域！
-
-函数 $\frac{1}{1+z^2}$ 在实数域处处有定义，但它的泰勒展开 $\sum (-1)^n z^{2n}$ 只在 $|z| < 1$ 内收敛（因为奇点在 $z = \pm i$）。
-
-记住：\textbf{收敛半径 = 到最近奇点的距离}。
-\end{jinshi}
-
-\begin{jinshi}[易错点三：洛朗展开的圆环域]
-洛朗展开必须在\textbf{圆环域}内进行，而且圆环域的选择会影响展开式！
-
-同一个函数 $\frac{1}{z(z-1)}$ 在不同的圆环域内展开：
-
-\begin{itemize}
-    \item $0 < |z| < 1$：展开式不同于
-    \item $|z| > 1$：展开式又不同
-\end{itemize}
-
-这是因为几何级数 $\frac{1}{1-z}$ 和 $\frac{1}{1-1/z}$ 的收敛条件不同。
-\end{jinshi}
-
-\begin{jinshi}[易错点四：极点的阶数]
-极点的阶数由洛朗展开的\textbf{最高负幂次}决定，不是由极限的``大小''决定！
-
-例如 $f(z) = \frac{1}{z^2}$ 在 $z = 0$ 处是\textbf{二阶极点}（不是一阶！），因为展开式为 $\frac{1}{z^2} = z^{-2}$，最高负幂次是 $-2$。
-
-判断方法：如果 $\lim_{z \to z_0}(z - z_0)^m f(z)$ 存在且非零，则 $z_0$ 是 $m$ 阶极点。
-\end{jinshi}
-
-\begin{jinshi}[易错点五：展开式的唯一性]
-洛朗展开在\textbf{给定的圆环域内}是唯一的，但不同圆环域的展开式不同！
-
-不要混淆：
-\begin{itemize}
-    \item 泰勒展开：在解析点附近展开，唯一确定
-    \item 洛朗展开：在给定圆环域内展开，该域内唯一；但换一个圆环域，展开式可能完全不同
-\end{itemize}
-\end{jinshi}
-
-\subsection{核心概念}
-
+\begin{jinshi}[本章常见误区]
 \begin{enumerate}
-    \item \textbf{幂级数}：$\sum_{n=0}^{\infty} c_n(z - z_0)^n$，收敛域为圆盘
-    \item \textbf{泰勒展开}：解析函数\index{解析函数}在解析点附近的幂级数展开
-    \item \textbf{洛朗展开}：函数在圆环域内的级数展开（含负幂项）
-    \item \textbf{孤立奇点}：可去奇点、极点、本性奇点
+    \item 只会机械求展开，不会说明展开式在哪个区域有效。
+    \item 把``函数在一点为零''误认为``一阶零点''。
+    \item 认为泰勒展开和洛朗展开只是形式不同，没有看到它们背后的解析性与奇点结构。
+    \item 学完洛朗展开后还看不出 $(z-z_0)^{-1}$ 项的特殊地位。
 \end{enumerate}
+\end{jinshi}
 
-\subsection{核心定理}
-
-\begin{itemize}
-    \item 泰勒展开定理：$f(z) = \sum_{n=0}^{\infty} \frac{f^{(n)}(z_0)}{n!}(z - z_0)^n$
-    \item 洛朗展开定理：$f(z) = \sum_{n=-\infty}^{\infty} c_n(z - z_0)^n$
-\end{itemize}
-
-\subsection{关键联系}
-
-\begin{itemize}
-    \item 泰勒展开是洛朗展开在解析点处的特例（无负幂项）
-    \item 奇点类型由洛朗展开的主要部分决定
-    \item 收敛半径等于到最近奇点的距离
-\end{itemize}
-
-\subsection{学习建议}
-
-\begin{enumerate}
-    \item \textbf{掌握几何级数}：它是理解级数收敛性的基础
-    \item \textbf{理解收敛半径的几何意义}：它是到最近奇点的距离
-    \item \textbf{会求泰勒展开和洛朗展开}：常用方法是利用已知展开式和几何级数
-    \item \textbf{会判断奇点类型}：通过极限或洛朗展开的主要部分
-\end{enumerate}
-
-\subsection{知识结构图}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    node distance=1.5cm,
-    box/.style={rectangle, draw, rounded corners, minimum width=2.5cm, minimum height=0.8cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
-]
-    % 第一层：幂级数
-    \node[box, fill=blue!10] (power) {幂级数\\$\sum c_n(z-z_0)^n$};
-    
-    % 第二层：泰勒展开和洛朗展开
-    \node[box, fill=green!10, below left=1.2cm and 0.5cm of power] (taylor) {泰勒展开\\（解析点）};
-    \node[box, fill=orange!10, below right=1.2cm and 0.5cm of power] (laurent) {洛朗展开\\（奇点附近）};
-    
-    % 第三层：应用
-    \node[box, fill=yellow!10, below=1cm of taylor] (app1) {函数表示\\近似计算};
-    \node[box, fill=red!10, below=1cm of laurent] (singularity) {奇点分类\\留数计算};
-    
-    % 奇点类型
-    \node[box, fill=purple!10, below=0.8cm of singularity, minimum width=5cm] (types) {可去奇点 / 极点 / 本性奇点};
-    
-    % 连接
-    \draw[arrow] (power) -- node[left, font=\scriptsize] {解析点} (taylor);
-    \draw[arrow] (power) -- node[right, font=\scriptsize] {圆环域} (laurent);
-    \draw[arrow] (taylor) -- (app1);
-    \draw[arrow] (laurent) -- (singularity);
-    \draw[arrow] (singularity) -- node[right, font=\scriptsize] {主要部分} (types);
-    
-    % 泰勒是洛朗的特例
-    \draw[arrow, dashed, blue] (taylor) -- node[above, font=\scriptsize, sloped] {特例} (laurent);
-\end{tikzpicture}
-\caption{第四章知识结构图}
-\label{fig:ch4-structure}
-\end{figure}
-
-% ========== 习题 ==========
 \section{习题}
 
-\textbf{基础题}
+\subsection*{基础题}
 
 \begin{enumerate}
-    \item 求下列幂级数的收敛半径：
+    \item 求幂级数
+    \[
+        \sum_{n=0}^{\infty} \frac{(z-1)^n}{2^n}
+    \]
+    的收敛半径。
+
+    \item 求函数
+    \[
+        \frac{1}{1-z}
+    \]
+    在 $z=0$ 附近的泰勒展开，并写出收敛范围。
+
+    \item 判断 $z=0$ 是下列函数的几阶零点：
     \begin{enumerate}
-        \item $\sum_{n=0}^{\infty} \frac{z^n}{n^2}$
-        \item $\sum_{n=0}^{\infty} n! z^n$
-        \item $\sum_{n=0}^{\infty} \frac{(z-1)^n}{2^n}$
+        \item $\sin z$
+        \item $1-\cos z$
+        \item $\mathrm{e}^z-1-z$
     \end{enumerate}
-    
-    \item 将下列函数在指定点展开为泰勒级数：
+
+    \item 判断下列函数在给定点的奇点类型：
     \begin{enumerate}
-        \item $f(z) = \frac{1}{z}$，在 $z_0 = 1$
-        \item $f(z) = \sin z$，在 $z_0 = 0$
-        \item $f(z) = \frac{1}{(1-z)^2}$，在 $z_0 = 0$
-    \end{enumerate}
-    
-    \item 确定下列函数奇点的类型：
-    \begin{enumerate}
-        \item $f(z) = \frac{z-1}{z^2}$，$z = 0$
-        \item $f(z) = \frac{\mathrm{e}^z - 1}{z}$，$z = 0$
-        \item $f(z) = \sin\frac{1}{z}$，$z = 0$
+        \item $\dfrac{\sin z}{z}$ 在 $z=0$
+        \item $\dfrac{1}{(z+2)^2}$ 在 $z=-2$
+        \item $\mathrm{e}^{1/z}$ 在 $z=0$
     \end{enumerate}
 \end{enumerate}
 
-\textbf{综合题}
+\subsection*{综合题}
 
-\begin{enumerate}[resume]
-    \item 将 $f(z) = \frac{1}{z(z-2)}$ 分别在以下区域展开为洛朗级数：
-    \begin{enumerate}
-        \item $0 < |z| < 2$
-        \item $|z| > 2$
-        \item $1 < |z-1| < 3$
-    \end{enumerate}
-    
-    \item 设 $f(z)$ 在 $|z| < R$ 内解析，泰勒展开为 $\sum_{n=0}^{\infty} a_n z^n$。证明：
-    \begin{equation}
-        \frac{1}{2\pi}\int_0^{2\pi} |f(re^{\mathrm{i}\theta})|^2\,\mathrm{d}\theta = \sum_{n=0}^{\infty} |a_n|^2 r^{2n}, \quad r < R
-    \end{equation}
-    
-    \item 利用泰勒展开证明：若 $f(z)$ 是整函数且 $|f(z)| \leq M|z|^n$（$|z|$ 充分大），则 $f(z)$ 是次数不超过 $n$ 的多项式。
-\end{enumerate}
-
-\textbf{挑战题}
-
-\begin{enumerate}[resume]
-    \item 设 $f(z)$ 在 $0 < |z| < R$ 内解析，$z = 0$ 是可去奇点或极点。证明：
-    \begin{equation}
-        \lim_{r \to 0} \int_0^{2\pi} f(re^{\mathrm{i}\theta})\,\mathrm{d}\theta = 0
-    \end{equation}
-    
-    \item 设 $f(z)$ 在 $|z| < 1$ 内解析，$f(0) = 0$，$|f(z)| < 1$。证明：
-    \begin{equation}
-        |f(z)| \leq |z|, \quad |z| < 1
-    \end{equation}
-    （这是施瓦茨引理的一种形式）
-\end{enumerate}
-
-\begin{tishi}[习题思路提示]
-\textbf{基础题}：
 \begin{enumerate}
-    \item 用比值法：$\lim_{n\to\infty}|c_{n+1}/c_n|$ 的倒数是收敛半径。
-    \item 利用已知展开式（几何级数、$\sin z$、$\mathrm{e}^z$ 等），通过代数变形得到。
-    \item 先计算极限 $\lim_{z \to z_0} f(z)$，判断奇点类型；若是极点，再确定阶数。
+    \item 将
+    \[
+        \frac{1}{z(1-z)}
+    \]
+    分别在 $0<|z|<1$ 与 $|z|>1$ 中展开成洛朗级数。
+
+    \item 将
+    \[
+        \frac{1}{(z-1)(z-2)}
+    \]
+    分别在 $|z|<1$、$1<|z|<2$、$|z|>2$ 中展开。
+
+    \item 利用泰勒展开计算极限
+    \[
+        \lim_{z\to 0}\frac{\sin z-z}{z^3}.
+    \]
+
+    \item 设 $f(z)$ 在 $z_0$ 有二阶零点，证明 $\dfrac{1}{f(z)}$ 在 $z_0$ 有二阶极点。
 \end{enumerate}
 
-\textbf{综合题}：
-\begin{enumerate}[resume]
-    \setcounter{enumi}{3}
-    \item 分式分解后，根据展开区域选择合适的几何级数形式。
-    \item 关键：将 $|f|^2 = f \bar{f}$ 展开，利用 $\int_0^{2\pi} \mathrm{e}^{\mathrm{i}n\theta}\,\mathrm{d}\theta = 0$（$n \neq 0$）。
-    \item 这是刘维尔定理的推广。利用泰勒展开和柯西估计。
+\subsection*{挑战题}
+
+\begin{enumerate}
+    \item 证明：若解析函数 $f(z)$ 在区域内不恒等于零，则它的零点必孤立。
+
+    \item 设
+    \[
+        f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n
+    \]
+    在圆环内成立，证明
+    \[
+        c_n = \frac{1}{2\pi \mathrm{i}}\oint_C \frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\,\mathrm{d}\zeta
+    \]
+    其中 $C$ 是圆环内任意一条绕 $z_0$ 一周的简单闭曲线。
+
+    \item 设 $f(z)$ 在 $z_0$ 附近解析，且 $f(z_0)\ne 0$。证明 $\dfrac{1}{f(z)}$ 也能在 $z_0$ 附近展开成泰勒级数。
 \end{enumerate}
 
-\textbf{挑战题}：
-\begin{enumerate}[resume]
-    \setcounter{enumi}{6}
-    \item 利用洛朗展开，主要部分在积分后贡献什么？常数项呢？
-    \item 考虑 $g(z) = f(z)/z$，证明 $|g(z)| \leq 1$，然后应用最大模原理。
-\end{enumerate}
+\begin{tishi}[习题提示]
+\begin{itemize}
+    \item 本章习题不要只盯着算式，重点是练习三个判断：收敛域、零点阶数、奇点类型。
+    \item 做洛朗展开时，第一步往往不是直接展开，而是先判断自己处在哪个区域。
+    \item 遇到极限题时，先问自己：有没有必要把函数的主导项展开出来？
+\end{itemize}
 \end{tishi}
