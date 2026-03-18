@@ -696,7 +696,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \draw[->, thick] (-0.8,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
     \draw[->, thick] (0,-0.8) -- (0,3.2) node[above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- node[midway, below, sloped, text=blue!80!black] {$r=|z|$} (Z);
     \fill[blue!80!black] (Z) circle (2pt) node[above right] {$z$};
     \draw[thick, green!60!black] (1,0) arc[start angle=0,end angle=33.69,radius=1];
     \node[green!50!black] at (1.45,0.42) {$\theta$};
