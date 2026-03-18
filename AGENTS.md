@@ -98,6 +98,12 @@ xelatex -interaction=nonstopmode main.tex
 grep -i "error" main.log
 ```
 
+## 版本控制要求
+
+1. 只要本次任务修改了项目文件，完成后默认执行 `git commit`。
+2. 若工作区中存在与本次任务无关的未提交改动，不得回退、覆盖或一并提交；提交时只包含本次任务相关文件。
+3. 提交信息应简洁明确，能概括本次修改内容。
+
 ## 文件职责
 
 - `AGENTS.md`：短版执行规范
