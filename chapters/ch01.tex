@@ -9,7 +9,7 @@
 
 本章我们要完成三件事：
 \begin{enumerate}
-    \item 建立复数的基本概念，回答``为什么要引入复数''；
+    \item 建立复数的基本概念，回答``为什么要引入复数''，并掌握代数形式下的基本运算（arithmetic operations）；
     \item 建立复平面直观，理解模（modulus）、辐角（argument）、共轭复数（complex conjugate）以及乘法的几何意义；
     \item 初步认识扩充复平面（extended complex plane）、无穷远点（point at infinity）与复球面（Riemann sphere），为后面的级数展开（series expansion）和留数理论作准备。
 \end{enumerate}
@@ -158,6 +158,31 @@ z_4=0
 既是实数，也是纯虚数。
 \end{jie}
 \end{lizi}
+
+\subsection{复数的四则运算（arithmetic operations）}
+
+在后面讨论复平面上的距离、共轭复数和三角不等式以前，我们先把复数在代数形式下怎样进行四则运算说明清楚。否则一旦看到 $z_1-z_2$、$z\bar z$ 这样的式子，就会产生一种``对象已经出现了，但规则还没交代''的感觉。
+
+设
+\[
+z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
+\]
+则复数的加法（addition）、减法（subtraction）、乘法（multiplication）分别定义为
+\begin{align}
+    z_1+z_2&=(x_1+x_2)+\mathrm{i}(y_1+y_2),\label{eq:complex-addition-algebraic}\\
+    z_1-z_2&=(x_1-x_2)+\mathrm{i}(y_1-y_2),\label{eq:complex-subtraction-algebraic}\\
+    z_1z_2&=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).\label{eq:complex-multiplication-algebraic}
+\end{align}
+
+若 $z_2\neq 0$，则复数的除法（division）定义为
+\begin{equation}\label{eq:complex-division-algebraic}
+    \frac{z_1}{z_2}
+    =\frac{(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2)}{x_2^2+y_2^2}.
+\end{equation}
+
+\begin{tishi}[怎样理解这些公式]
+加法和减法本质上就是把实部与虚部分别相加、相减；乘法来自普通代数展开，再利用 $\mathrm{i}^2=-1$ 化简；除法公式这里先记住代数结果，后面讨论其几何意义时还会再回头看它。
+\end{tishi}
 
 \subsection{为什么物理问题中也会出现复数}
 
@@ -380,26 +405,31 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \end{dingli}
 
 \begin{proof}
-先计算模的平方：
+设
+\[
+z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
+\]
+则
 \begin{align*}
     |z_1+z_2|^2
-    &= (z_1+z_2)\overline{(z_1+z_2)} \\
-    &= (z_1+z_2)(\bar z_1+\bar z_2) \\
-    &= |z_1|^2+|z_2|^2+z_1\bar z_2+\bar z_1 z_2.
+    &= (x_1+x_2)^2+(y_1+y_2)^2 \\
+    &= x_1^2+y_1^2+x_2^2+y_2^2+2(x_1x_2+y_1y_2).
 \end{align*}
-注意最后两项互为共轭，因此
+另一方面，
+\begin{align*}
+    (|z_1||z_2|)^2-(x_1x_2+y_1y_2)^2
+    &= (x_1^2+y_1^2)(x_2^2+y_2^2)-(x_1x_2+y_1y_2)^2 \\
+    &= (x_1y_2-x_2y_1)^2\ge 0.
+\end{align*}
+因此
 \[
-z_1\bar z_2+\bar z_1 z_2=2\operatorname{Re}(z_1\bar z_2).
+x_1x_2+y_1y_2\le |z_1||z_2|.
 \]
-又因为
-\[
-\operatorname{Re}(z_1\bar z_2)\le |z_1\bar z_2|=|z_1||z_2|,
-\]
-所以
+代回上式得
 \[
 |z_1+z_2|^2\le |z_1|^2+2|z_1||z_2|+|z_2|^2=(|z_1|+|z_2|)^2.
 \]
-两边都非负，开平方便得到
+两边都非负，开平方就得到
 \[
 |z_1+z_2|\le |z_1|+|z_2|.
 \]
@@ -724,16 +754,16 @@ w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2
 \section{复数的运算及其几何意义}
 
 \begin{wulibj}[本节的核心观念]
-本节最重要的一句话是：\textbf{复数乘法不是单纯的代数乘法，而是平面上的伸缩与旋转。} 只要把这句话真正看懂，后面学习解析函数的导数、保角性（conformality）和 Möbius 变换（Möbius transformation）时，很多现象都会自然得多。
+前面我们已经在代数形式下定义了复数的加、减、乘、除。本节最重要的任务，不再是重复这些公式，而是看清它们在复平面上的几何意义。尤其要记住一句话：\textbf{复数乘法不是单纯的代数乘法，而是平面上的伸缩与旋转。} 只要把这句话真正看懂，后面学习解析函数的导数、保角性（conformality）和 Möbius 变换（Möbius transformation）时，很多现象都会自然得多。
 \end{wulibj}
 
 \subsection{加法与减法：向量加法（vector addition）的观点}
 
-设
+先回顾前面已经得到的代数公式。设
 \[
 z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \]
-则
+则由 \eqref{eq:complex-addition-algebraic} 和 \eqref{eq:complex-subtraction-algebraic} 知
 \begin{equation}
     z_1+z_2=(x_1+x_2)+\mathrm{i}(y_1+y_2),
 \end{equation}
@@ -770,7 +800,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 
 \subsection{乘法：模相乘，辐角相加}
 
-先看代数形式下的乘法：
+先回顾代数形式下的乘法公式 \eqref{eq:complex-multiplication-algebraic}：
 \begin{align}
     (x_1+\mathrm{i}y_1)(x_2+\mathrm{i}y_2)
     =(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
@@ -852,10 +882,7 @@ z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr
 
 \subsection{除法：模相除，辐角相减}
 
-设 $z_2\neq 0$，则复数除法定义为
-\begin{equation}
-    \frac{z_1}{z_2}=z_1\cdot \frac{1}{z_2}.
-\end{equation}
+前面已经在代数形式下定义了复数除法，具体公式见 \eqref{eq:complex-division-algebraic}。现在若把 $z_1,z_2$ 写成指数形式，就能更清楚地看出它的几何意义。
 若
 \[
 z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
@@ -1539,13 +1566,15 @@ u_L(t)=L\frac{\mathrm{d}i}{\mathrm{d}t}
 \subsection{知识主线回顾}
 
 本章的主线可以概括为：
-\[
-\begin{aligned}
-    &\text{复数的引入}
-    \Longrightarrow
-    \text{复平面与几何表示}
-    \Longrightarrow
-    \text{三角形式与指数形式} \\
+    \[
+    \begin{aligned}
+        &\text{复数的引入}
+        \Longrightarrow
+        \text{基本运算}
+        \Longrightarrow
+        \text{复平面与几何表示}
+        \Longrightarrow
+        \text{三角形式与指数形式} \\
     &\Longrightarrow
     \text{乘法的几何意义}
     \Longrightarrow
