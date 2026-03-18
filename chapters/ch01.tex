@@ -696,13 +696,13 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \draw[->, thick] (-0.8,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
     \draw[->, thick] (0,-0.8) -- (0,3.2) node[above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- node[midway, below, sloped, text=blue!80!black] {$r=|z|$} (Z);
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- node[midway, above, sloped, text=blue!80!black] {$r=|z|$} (Z);
     \fill[blue!80!black] (Z) circle (2pt) node[above right] {$z$};
     \draw[thick, green!60!black] (1,0) arc[start angle=0,end angle=33.69,radius=1];
     \node[green!50!black] at (1.45,0.42) {$\theta$};
     \node[below left] at (0,0) {$O$};
 \end{tikzpicture}
-\caption{复数的模与辐角}
+\caption{复数的模$r=|z|$与辐角$\theta$}
 \label{fig:modulus-argument}
 \end{figure}
 
@@ -728,6 +728,53 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \item 零点没有辐角，这一点以后讨论对数和幂函数时尤其重要。
 \end{itemize}
 \end{jinshi}
+
+先把几个典型点放到复平面上看一眼，会更容易明白为什么主辐角不能只靠
+\[
+\arctan\frac{y}{x}
+\]
+机械判断：同样是一个反正切值，点落在不同象限时，真正的方向角可能完全不同。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[->, thick] (-2.6,0) -- (2.9,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-2.8) -- (0,2.6) node[above] {$\operatorname{Im}z$};
+
+    \node[gray!65] at (1.7,1.7) {I};
+    \node[gray!65] at (-1.7,1.7) {II};
+    \node[gray!65] at (-1.7,-1.8) {III};
+    \node[gray!65] at (1.7,-1.8) {IV};
+
+    \coordinate (Z1) at (1,1.732);
+    \coordinate (Z2) at (-1,1);
+    \coordinate (Z3) at (0,-2);
+
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z2);
+    \draw[->, thick, purple!80!black, shorten >=2.5pt] (0,0) -- (Z3);
+
+    \fill[blue!80!black] (Z1) circle (2pt);
+    \fill[red!75!black] (Z2) circle (2pt);
+    \fill[purple!80!black] (Z3) circle (2pt);
+
+    \node[above right] at (Z1) {$z_1$};
+    \node[above left] at (Z2) {$z_2$};
+    \node[right] at (Z3) {$z_3$};
+    \node[below left] at (0,0) {$O$};
+
+    \draw[thick, blue!50!black] (0.65,0) arc[start angle=0,end angle=60,radius=0.65];
+    \node[blue!50!black] at (0.9,0.28) {$\frac{\pi}{3}$};
+
+    \draw[thick, red!60!black] (0.9,0) arc[start angle=0,end angle=135,radius=0.9];
+    \node[red!60!black] at (0.1,1.05) {$\frac{3\pi}{4}$};
+
+    \draw[thick, purple!60!black] (0,-0.95) arc[start angle=-90,end angle=0,radius=0.95];
+    \node[purple!60!black] at (0.48,-0.6) {$-\frac{\pi}{2}$};
+\end{tikzpicture}
+\caption{三个复数所在的象限与对应的主辐角}
+\label{fig:arg-example-quadrants}
+\end{figure}
 
 \begin{lizi}{求主辐角}{}
 求下列复数的主辐角：
