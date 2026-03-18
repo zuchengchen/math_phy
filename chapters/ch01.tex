@@ -561,8 +561,8 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \draw[->, thick] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
         \draw[->, thick] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
         \coordinate (O) at (0,0);
-        \coordinate (A) at (1.8,1.1);
-        \coordinate (B) at (3.35,2.25);
+        \coordinate (A) at (1.9,0.8);
+        \coordinate (B) at (3.2,2.45);
         \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
         \draw[->, thick, blue!80!black] (O) -- (A);
         \draw[->, thick, orange!85!black] (A) -- (B);
@@ -570,11 +570,11 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \fill[blue!80!black] (A) circle (2pt);
         \fill[red!75!black] (B) circle (2pt);
         \node[below left] at (O) {$O$};
-        \node[above left] at (A) {$A$};
+        \node[below right] at (A) {$A$};
         \node[above right] at (B) {$B$};
         \node[above left] at ($(O)!0.55!(A)$) {$z_1$};
-        \node[above] at ($(A)!0.55!(B)$) {$z_2$};
-        \node[below right] at ($(O)!0.58!(B)$) {$z_1+z_2$};
+        \node[above left] at ($(A)!0.52!(B)$) {$z_2$};
+        \node[right] at ($(O)!0.58!(B)$) {$z_1+z_2$};
         \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
 
@@ -587,7 +587,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \draw[gray!65, dashed] (O2) -- (P) -- (Q) -- cycle;
         \draw[->, thick, blue!80!black] (O2) -- (P);
         \draw[->, thick, orange!85!black] (O2) -- (Q);
-        \draw[->, thick, red!75!black] (Q) -- (P);
+        \draw[->, thick, red!75!black] (Q) -- node[midway, above, sloped, fill=white, inner sep=1pt] {$z_1-z_2$} (P);
         \fill[blue!80!black] (P) circle (2pt);
         \fill[orange!85!black] (Q) circle (2pt);
         \node[below left] at (O2) {$O$};
@@ -595,7 +595,6 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \node[above left] at (Q) {$Q$};
         \node[below] at ($(O2)!0.52!(P)$) {$z_1$};
         \node[left] at ($(O2)!0.58!(Q)$) {$z_2$};
-        \node[above] at ($(Q)!0.55!(P)$) {$z_1-z_2$};
         \node[below] at (1.7,-0.85) {$\bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|$};
     \end{scope}
 \end{tikzpicture}
