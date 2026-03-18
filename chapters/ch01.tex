@@ -552,6 +552,69 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \end{equation}
 \end{dingli}
 
+如果只把式子 \eqref{eq:triangle-inequality} 当成一个代数结论来记，往往会觉得它有些突然。其实它背后的几何图像非常朴素：复数既可以看成向量，也可以看成点；而三角不等式与反三角不等式，本质上都在描述同一个三角形里的边长关系。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \begin{scope}
+        \draw[->, thick] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+        \draw[->, thick] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
+        \coordinate (O) at (0,0);
+        \coordinate (A) at (1.8,1.1);
+        \coordinate (B) at (3.35,2.25);
+        \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
+        \draw[->, thick, blue!80!black] (O) -- (A);
+        \draw[->, thick, orange!85!black] (A) -- (B);
+        \draw[->, thick, red!75!black] (O) -- (B);
+        \fill[blue!80!black] (A) circle (2pt);
+        \fill[red!75!black] (B) circle (2pt);
+        \node[below left] at (O) {$O$};
+        \node[above left] at (A) {$A$};
+        \node[above right] at (B) {$B$};
+        \node[above left] at ($(O)!0.55!(A)$) {$z_1$};
+        \node[above] at ($(A)!0.55!(B)$) {$z_2$};
+        \node[below right] at ($(O)!0.58!(B)$) {$z_1+z_2$};
+        \node[below] at (1.7,-0.85) {首尾相接：$|z_1+z_2|\le |z_1|+|z_2|$};
+    \end{scope}
+
+    \begin{scope}[xshift=7.2cm]
+        \draw[->, thick] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+        \draw[->, thick] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
+        \coordinate (O2) at (0,0);
+        \coordinate (P) at (3.1,1.0);
+        \coordinate (Q) at (1.35,2.45);
+        \draw[gray!65, dashed] (O2) -- (P) -- (Q) -- cycle;
+        \draw[->, thick, blue!80!black] (O2) -- (P);
+        \draw[->, thick, orange!85!black] (O2) -- (Q);
+        \draw[->, thick, red!75!black] (Q) -- (P);
+        \fill[blue!80!black] (P) circle (2pt);
+        \fill[orange!85!black] (Q) circle (2pt);
+        \node[below left] at (O2) {$O$};
+        \node[below right] at (P) {$P$};
+        \node[above left] at (Q) {$Q$};
+        \node[below] at ($(O2)!0.52!(P)$) {$z_1$};
+        \node[left] at ($(O2)!0.58!(Q)$) {$z_2$};
+        \node[above] at ($(Q)!0.55!(P)$) {$z_1-z_2$};
+        \node[below] at (1.7,-0.85) {$\bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|$};
+    \end{scope}
+\end{tikzpicture}
+\caption{三角不等式与反三角不等式的几何图像}
+\label{fig:triangle-geometry}
+\end{figure}
+
+左图中，$\overrightarrow{OA}=z_1$，$\overrightarrow{AB}=z_2$，因此
+\[
+\overrightarrow{OB}=\overrightarrow{OA}+\overrightarrow{AB}=z_1+z_2.
+\]
+这时三角形 $OAB$ 的三条边长分别是 $|z_1|,|z_2|,|z_1+z_2|$，所以三角不等式说的就是：``从 $O$ 直接走到 $B$ 的路程，不会超过先从 $O$ 走到 $A$，再从 $A$ 走到 $B$ 的总路程。''
+
+右图中，$\overrightarrow{OP}=z_1$，$\overrightarrow{OQ}=z_2$，而
+\[
+\overrightarrow{QP}=\overrightarrow{OP}-\overrightarrow{OQ}=z_1-z_2.
+\]
+于是三角形 $OPQ$ 的三条边长分别是 $|z_1|,|z_2|,|z_1-z_2|$。这就说明两点到原点距离的差，不可能大于这两点之间的实际距离，也就是反三角不等式。
+
 \begin{proof}
 设
 \[
@@ -610,7 +673,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \end{proof}
 
 \begin{tishi}[几何理解]
-三角不等式本质上就是平面几何里``三角形两边之和大于第三边''的复数版本。以后无论是估计幂级数、证明极限，还是给复积分作上界，模的不等式都会反复出现。
+图 \ref{fig:triangle-geometry} 值得反复看。以后只要看到 $|a+b|$，就可以提醒自己：它对应的是``合位移不超过分段路程之和''；而看到 $|a-b|$ 时，就要想到：它对应的是``两点之间的距离，至少大于等于它们到原点距离之差''。后面无论是估计幂级数、证明极限，还是给复积分作上界，这两个几何直观都会不断出现。
 \end{tishi}
 
 \subsection{辐角（argument）、主辐角（principal argument）与多值性（multi-valuedness）}
