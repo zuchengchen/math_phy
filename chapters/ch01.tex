@@ -1703,6 +1703,61 @@ F(w)=f\!\left(\frac{1}{w}\right),
 换句话说，直线之所以在普通复平面里看起来不像圆，只是因为它的``两端''都跑到了无穷远处；在扩充复平面里把这个点补上以后，它也可以被看成一个闭合的几何对象。
 \end{tishi}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \draw[thick] (-4.2,0) -- (4.2,0) node[right] {复平面};
+    \draw[thick, blue] (0,1.4) circle (1.4);
+
+    \coordinate (N) at (0,2.8);
+    \coordinate (S) at (0,0);
+
+    % 经过北极的球面圆在剖面中的示意
+    \draw[orange!85!black, thick] (0,1.4) ellipse[x radius=0.75, y radius=1.4];
+    \node[orange!85!black] at (-1.35,1.95) {$C$};
+
+    % 球面圆上的几个样本点
+    \coordinate (P1) at (-0.55,2.3);
+    \coordinate (P2) at (-0.75,1.4);
+    \coordinate (P3) at (-0.35,0.55);
+
+    % 它们在复平面上的像点（都落在同一直线上）
+    \coordinate (Z1) at (-3.08,0);
+    \coordinate (Z2) at (-1.5,0);
+    \coordinate (Z3) at (-0.44,0);
+
+    % 像直线
+    \draw[red!75!black, line width=1.3pt] (-3.35,0) -- (0.45,0);
+    \node[red!75!black, below] at (-2.2,0) {$\ell$};
+
+    % 投影线
+    \draw[gray!70, dashed] (N) -- (Z1);
+    \draw[gray!70, dashed] (N) -- (Z2);
+    \draw[gray!70, dashed] (N) -- (Z3);
+
+    % 点标记
+    \fill[blue] (N) circle (2pt) node[above] {$N$};
+    \fill[blue] (S) circle (2pt) node[below right] {$S$};
+    \fill[orange!85!black] (P1) circle (2pt);
+    \fill[orange!85!black] (P2) circle (2pt);
+    \fill[orange!85!black] (P3) circle (2pt);
+    \fill[red!75!black] (Z1) circle (2pt);
+    \fill[red!75!black] (Z2) circle (2pt);
+    \fill[red!75!black] (Z3) circle (2pt);
+
+    \node[left] at (P1) {$P_1$};
+    \node[left] at (P2) {$P_2$};
+    \node[right] at (P3) {$P_3$};
+    \node[above] at (2.1,2.4) {$N\leftrightarrow \infty$};
+\end{tikzpicture}
+\caption{经过北极的球面圆在球极投影下变成复平面上的直线}
+\label{fig:line-from-circle-projection}
+\end{figure}
+
+图 \ref{fig:line-from-circle-projection} 画的是一个二维剖面图。图中虽然只画了三个样本点，但已经可以看出：它们从北极 $N$ 投到复平面后，像点都落在同一直线 $\ell$ 上。
+
+于是，当点 $P$ 沿着整个圆 $C$ 移动时，它的像点 $z$ 就会沿着一条直线移动。这就是``经过无穷远点的球面圆投影成直线''的更具体的几何图像。
+
 \begin{zhu}{}{}
 从扩充复平面的角度看，圆和直线常常可以统一称为\textbf{广义圆}（generalized circle）：普通圆是不经过 $\infty$ 的广义圆，而直线则是经过 $\infty$ 的广义圆。这样后面学习 Möbius 变换时，``圆或直线映成圆或直线''这类结论就会显得自然得多。
 \end{zhu}
