@@ -378,7 +378,7 @@ z=x+\mathrm{i}y.
     \draw[->, thick] (0,-0.6) -- (0,3.4) node[above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
     \fill[blue!80!black] (Z) circle (2pt);
-    \draw[->, thick, blue!80!black] (0,0) -- (Z);
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
     \draw[dashed, gray] (Z) -- (3,0);
     \draw[dashed, gray] (Z) -- (0,2);
     \node[above right] at (Z) {$z=x+\mathrm{i}y$};
@@ -474,8 +474,8 @@ z=x+\mathrm{i}y,
     \coordinate (ZB) at (2.8,-1.8);
     \fill[blue!80!black] (Z) circle (2pt);
     \fill[red!75!black] (ZB) circle (2pt);
-    \draw[->, thick, blue!80!black] (0,0) -- (Z);
-    \draw[->, thick, red!75!black] (0,0) -- (ZB);
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (ZB);
     \draw[dashed, gray] (Z) -- (ZB);
     \node[above right] at (Z) {$z=x+\mathrm{i}y$};
     \node[below right] at (ZB) {$\bar z=x-\mathrm{i}y$};
@@ -564,9 +564,9 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \coordinate (A) at (1.9,0.8);
         \coordinate (B) at (3.2,2.45);
         \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
-        \draw[->, thick, blue!80!black] (O) -- (A);
-        \draw[->, thick, orange!85!black] (A) -- (B);
-        \draw[->, thick, red!75!black] (O) -- (B);
+        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (A);
+        \draw[->, thick, orange!85!black, shorten >=2.5pt] (A) -- (B);
+        \draw[->, thick, red!75!black, shorten >=2.5pt] (O) -- node[midway, right, sloped, fill=white, inner sep=1pt] {$z_1+z_2$} (B);
         \fill[blue!80!black] (A) circle (2pt);
         \fill[red!75!black] (B) circle (2pt);
         \node[below left] at (O) {$O$};
@@ -574,7 +574,6 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \node[above right] at (B) {$B$};
         \node[above left] at ($(O)!0.55!(A)$) {$z_1$};
         \node[above left] at ($(A)!0.52!(B)$) {$z_2$};
-        \node[right] at ($(O)!0.58!(B)$) {$z_1+z_2$};
         \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
 
@@ -585,9 +584,9 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \coordinate (P) at (3.1,1.0);
         \coordinate (Q) at (1.35,2.45);
         \draw[gray!65, dashed] (O2) -- (P) -- (Q) -- cycle;
-        \draw[->, thick, blue!80!black] (O2) -- (P);
-        \draw[->, thick, orange!85!black] (O2) -- (Q);
-        \draw[->, thick, red!75!black] (Q) -- node[midway, above, sloped, fill=white, inner sep=1pt] {$z_1-z_2$} (P);
+        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O2) -- (P);
+        \draw[->, thick, orange!85!black, shorten >=2.5pt] (O2) -- (Q);
+        \draw[->, thick, red!75!black, shorten >=2.5pt] (Q) -- node[midway, above, sloped, fill=white, inner sep=1pt] {$z_1-z_2$} (P);
         \fill[blue!80!black] (P) circle (2pt);
         \fill[orange!85!black] (Q) circle (2pt);
         \node[below left] at (O2) {$O$};
@@ -695,7 +694,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \draw[->, thick] (-0.8,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
     \draw[->, thick] (0,-0.8) -- (0,3.2) node[above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
-    \draw[->, thick, blue!80!black] (0,0) -- (Z);
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
     \fill[blue!80!black] (Z) circle (2pt) node[above right] {$z$};
     \draw[thick, green!60!black] (1,0) arc[start angle=0,end angle=33.69,radius=1];
     \node[green!50!black] at (1.45,0.42) {$\theta$};
@@ -900,7 +899,7 @@ r=|z|,\qquad \theta\in \arg z,
     \draw[->, thick] (0,-1.4) -- (0,1.5) node[above] {$\operatorname{Im}z$};
     \draw[thick, blue] (0,0) circle (1);
     \coordinate (Z) at ({cos(50)},{sin(50)});
-    \draw[->, thick, red!75!black] (0,0) -- (Z);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z);
     \fill[red!75!black] (Z) circle (2pt);
     \draw[thick, green!60!black] (0.35,0) arc[start angle=0,end angle=50,radius=0.35];
     \node[green!50!black] at (0.55,0.23) {$\theta$};
@@ -991,9 +990,9 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
     \coordinate (A) at (2,1);
     \coordinate (B) at (1.5,2);
     \coordinate (C) at (3.5,3);
-    \draw[->, thick, blue!80!black] (0,0) -- (A) node[midway, below right] {$z_1$};
-    \draw[->, thick, red!75!black] (0,0) -- (B) node[midway, left] {$z_2$};
-    \draw[->, thick, purple!85!black] (0,0) -- (C) node[midway, above left] {$z_1+z_2$};
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (A) node[midway, below right] {$z_1$};
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (B) node[midway, left] {$z_2$};
+    \draw[->, thick, purple!85!black, shorten >=2.5pt] (0,0) -- node[midway, above, sloped, fill=white, inner sep=1pt] {$z_1+z_2$} (C);
     \draw[dashed, gray] (A) -- (C);
     \draw[dashed, gray] (B) -- (C);
     \fill[blue!80!black] (A) circle (2pt);
@@ -1178,8 +1177,8 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
     \draw[->, thick] (0,-2.3) -- (0,3.3) node[above] {$\operatorname{Im}z$};
     \coordinate (Z) at (2,1);
     \coordinate (IZ) at (-1,2);
-    \draw[->, thick, blue!80!black] (0,0) -- (Z);
-    \draw[->, thick, red!75!black] (0,0) -- (IZ);
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (IZ);
     \fill[blue!80!black] (Z) circle (2pt) node[below right] {$z$};
     \fill[red!75!black] (IZ) circle (2pt) node[above left] {$\mathrm{i}z$};
     \draw[thick, green!60!black] (0.55,0.28) arc[start angle=26.565,end angle=116.565,radius=0.62];
@@ -1701,9 +1700,9 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \coordinate (A) at (3,0);
     \coordinate (B) at (0,-4);
     \coordinate (C) at (3,-4);
-    \draw[->, thick, blue!80!black] (0,0) -- (A) node[midway, above] {$3$};
-    \draw[->, thick, red!75!black] (0,0) -- (B) node[midway, left] {$-4\mathrm{i}$};
-    \draw[->, thick, purple!85!black] (0,0) -- (C) node[midway, right] {$3-4\mathrm{i}$};
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (A) node[midway, above] {$3$};
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (B) node[midway, left] {$-4\mathrm{i}$};
+    \draw[->, thick, purple!85!black, shorten >=2.5pt] (0,0) -- node[midway, right, sloped, fill=white, inner sep=1pt] {$3-4\mathrm{i}$} (C);
     \draw[dashed, gray] (A) -- (C);
     \draw[dashed, gray] (B) -- (C);
     \fill[purple!85!black] (C) circle (2pt);
