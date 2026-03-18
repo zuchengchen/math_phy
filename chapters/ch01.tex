@@ -919,7 +919,7 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \end{jie}
 \end{lizi}
 
-\subsection{欧拉公式（Euler's formula）}
+\subsection{欧拉公式}
 
 三角形式已经很有用，但它还可以进一步压缩成更简洁的指数形式。关键就是下面这个著名公式。
 
@@ -954,7 +954,7 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 欧拉公式之所以重要，不只是因为它漂亮，而是因为它把\textbf{旋转}和\textbf{指数运算}统一了起来。以后你会发现，很多涉及周期、相位和波动的问题，一旦改写成复指数形式，结构就会清楚得多。
 \end{tishi}
 
-\subsection{指数形式（exponential form）及其优点}
+\subsection{指数形式及其优点}
 
 由欧拉公式 \eqref{eq:euler-formula}，三角形式 \eqref{eq:trigonometric-form} 可以进一步写成
 \begin{equation}
@@ -962,7 +962,7 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \end{equation}
 这称为复数的\textbf{指数形式}。
 
-\begin{dingliyi}{指数形式（exponential form）}{}
+\begin{dingliyi}{指数形式}{}
 设 $z\neq 0$，若
 \[
 r=|z|,\qquad \theta\in \arg z,
@@ -971,14 +971,14 @@ r=|z|,\qquad \theta\in \arg z,
 \begin{equation}\label{eq:exp-form}
     z=re^{\mathrm{i}\theta}
 \end{equation}
-称为复数 $z$ 的\textbf{指数形式}。
+称为复数 $z$ 的\textbf{指数形式（exponential form）}。
 \end{dingliyi}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.25]
-    \draw[->, thick] (-1.5,0) -- (1.7,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-1.4) -- (0,1.5) node[above] {$\operatorname{Im}z$};
+    \draw[->, gray] (-1.5,0) -- (1.7,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-1.4) -- (0,1.5) node[above] {$\operatorname{Im}z$};
     \draw[thick, blue] (0,0) circle (1);
     \coordinate (Z) at ({cos(50)},{sin(50)});
     \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z);
@@ -1045,10 +1045,10 @@ w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2
 \section{复数的运算及其几何意义}
 
 \begin{wulibj}[本节的核心观念]
-前面我们已经在代数形式下定义了复数的加、减、乘、除。本节最重要的任务，不再是重复这些公式，而是看清它们在复平面上的几何意义。尤其要记住一句话：\textbf{复数乘法不是单纯的代数乘法，而是平面上的伸缩与旋转。} 只要把这句话真正看懂，后面学习解析函数的导数、保角性（conformality）和 Möbius 变换（Möbius transformation）时，很多现象都会自然得多。
+前面我们已经在代数形式下定义了复数的加、减、乘、除。本节最重要的任务，不再是重复这些公式，而是看清它们在复平面上的几何意义。尤其要记住一句话：\textbf{复数乘法不是单纯的代数乘法，而是平面上的伸缩与旋转。} 只要把这句话真正看懂，后面学习解析函数的导数、保角性和 Möbius 变换时，很多现象都会自然得多。
 \end{wulibj}
 
-\subsection{加法与减法：向量加法（vector addition）的观点}
+\subsection{加法与减法：向量加法的观点}
 
 先回顾前面已经得到的代数公式。设
 \[
@@ -1067,8 +1067,8 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[->, thick] (-0.6,0) -- (5.5,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-0.6) -- (0,4) node[above] {$\operatorname{Im}z$};
+    \draw[->] (-0.6,0) -- (5.5,0) node[right] {$\operatorname{Re}z$};
+    \draw[->] (0,-0.6) -- (0,4) node[above] {$\operatorname{Im}z$};
     \coordinate (A) at (2,1);
     \coordinate (B) at (1.5,2);
     \coordinate (C) at (3.5,3);
@@ -1098,7 +1098,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{align}
 只看这个式子，几何意义并不明显；但一旦改写成指数形式，结构就会立刻显现出来。
 
-\begin{dingli}{复数乘法的极形式法则（multiplication rule in polar form）}{}
+\begin{dingli}{复数乘法的极形式法则}{}
 若
 \[
 z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2},
@@ -1123,7 +1123,7 @@ z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr
 \end{proof}
 
 \begin{tishi}[乘法的几何意义]
-把一个复数乘上另一个复数，本质上是在做两件事：
+把一个复数乘上另一个复数$|z_2|$，本质上是在做两件事：
 \begin{enumerate}
     \item 把长度按比例 $|z_2|$ 放大或缩小；
     \item 把方向额外旋转 $\arg z_2$。
@@ -1255,8 +1255,8 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[->, thick] (-3,0) -- (3.2,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-2.3) -- (0,3.3) node[above] {$\operatorname{Im}z$};
+    \draw[->, gray] (-3,0) -- (3.2,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-2.3) -- (0,3.3) node[above] {$\operatorname{Im}z$};
     \coordinate (Z) at (2,1);
     \coordinate (IZ) at (-1,2);
     \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
@@ -1264,7 +1264,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
     \fill[blue!80!black] (Z) circle (2pt) node[below right] {$z$};
     \fill[red!75!black] (IZ) circle (2pt) node[above left] {$\mathrm{i}z$};
     \draw[thick, green!60!black] (0.55,0.28) arc[start angle=26.565,end angle=116.565,radius=0.62];
-    \node[green!50!black] at (0.15,1.05) {$\pi/2$};
+    \node[green!50!black] at (0.35,0.9) {$\pi/2$};
 \end{tikzpicture}
 \caption{乘以 $\mathrm{i}$ 相当于逆时针旋转 $\pi/2$}
 \label{fig:multiply-by-i}
@@ -1280,7 +1280,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
 复数的乘方和开方，表面上看只是运算技巧，实际上它第一次把``多值性''和``几何对称''同时摆到了我们面前。后面讨论奇点、留数、部分分式分解以及某些围道积分（contour integral）时，单位根和复数根的分布会不断出现，所以这一节绝不是孤立的代数练习。
 \end{wulibj}
 
-\subsection{棣莫弗公式（De Moivre's formula）}
+\subsection{棣莫弗公式}
 
 \begin{dingli}{棣莫弗公式（De Moivre's formula）}{}
 对任意整数 $n$，都有
@@ -1308,7 +1308,7 @@ e^{\mathrm{i}n\theta}=\cos(n\theta)+\mathrm{i}\sin(n\theta).
 \]
 从而得到棣莫弗公式。若再乘上模 $r$ 的 $n$ 次幂，便有
 \[
-(re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
+z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \]
 \end{proof}
 
@@ -1339,7 +1339,7 @@ e^{\mathrm{i}n\theta}=\cos(n\theta)+\mathrm{i}\sin(n\theta).
 \end{jie}
 \end{lizi}
 
-\subsection{\texorpdfstring{复数的 $n$ 次方根（$n$-th roots）}{复数的 n 次方根（n-th roots）}}
+\subsection{\texorpdfstring{复数的 $n$ 次方根}{复数的 n 次方根}}
 
 与乘幂相反的问题是：已知 $z$，求所有满足
 \begin{equation}
@@ -1494,9 +1494,9 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 单位根不仅在代数方程求根中出现，在后面的部分分式分解、积分计算、傅里叶分析以及特殊函数的某些对称结构里也会不断出现。理解它们的几何分布，比单纯记住公式更重要。
 \end{tishi}
 
-\section{扩充复平面（extended complex plane）、无穷远点（point at infinity）与复球面（Riemann sphere）}
+\section{扩充复平面、无穷远点与复球面}
 
-\begin{wulibj}[为什么这一节不能省]
+\begin{wulibj}[为什么要考虑无穷远点]
 学到这里，我们一直把复数看成复平面上的有限点。但后面研究函数时，我们经常还会问：当 $|z|$ 越来越大时，函数究竟趋向什么？它在``无穷远处''有什么行为？如果每次都只能说``远处''、``很大''，语言就不够统一。于是数学家做了一件很自然的事：给复平面再补上一个点，把所有朝无穷远走去的方向都统一到这个点上，这就是无穷远点。
 \end{wulibj}
 
@@ -1517,19 +1517,19 @@ x\to +\infty,\qquad x\to -\infty.
 
 \subsection{扩充复平面}
 
-\begin{dingliyi}{扩充复平面（extended complex plane）}{}
+\begin{dingliyi}{扩充复平面}{}
 在复平面 $\mathbb{C}$ 上再添一个新点 $\infty$，得到的集合
 \begin{equation}
     \hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}
 \end{equation}
-称为\textbf{扩充复平面}。
+称为\textbf{扩充复平面}（extended complex plane）。
 \end{dingliyi}
 
 \begin{zhu}{}{}
 这里的 $\infty$ 不是普通复数，而是为了统一讨论``无穷远行为''而补上的一个新点。第一章里我们主要掌握它的几何意义和邻域概念，不急着做过多形式运算。
 \end{zhu}
 
-\subsection{无穷远点的邻域（neighborhood of infinity）}
+\subsection{无穷远点的邻域}
 
 对有限点 $z_0$ 来说，邻域（neighborhood）是小圆盘
 \[
