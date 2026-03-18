@@ -357,19 +357,19 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
 这里的人名和年份不必死记硬背，更重要的是抓住复数发展的主线：\textbf{先是问题把它逼出来，然后运算规则逐步稳定，接着几何意义被澄清，最后它成为更大理论和物理应用的基础。} 下一节我们要学习的复平面，正是这条历史线索中的关键一步：一旦把复数放到平面上，很多原本显得神秘的事情就会突然变得直观起来。
 \end{tishi}
 
-\section{复数的几何表示（geometric representation）：复平面（complex plane）、模（modulus）、辐角（argument）与共轭复数（complex conjugate）}
+\section{复数的几何表示：复平面、模、辐角与共轭复数}
 
 \begin{wulibj}[为什么要把复数放到平面上]
 复数 $z=x+\mathrm{i}y$ 由两个实数 $x,y$ 决定，而平面上的点 $(x,y)$ 也由两个坐标决定。正是这种天然的一一对应，使得复数不只是一个代数对象，更是一个几何对象。后面我们将看到，一旦把复数看成平面上的点和向量，很多运算的含义就会一下子变得直观起来。
 \end{wulibj}
 
-\subsection{复平面与点表示（point representation）、向量表示（vector representation）}
+\subsection{复平面与点表示、向量表示}
 
 我们用平面上的点 $(x,y)$ 来表示复数
 \[
 z=x+\mathrm{i}y.
 \]
-这个平面称为\textbf{复平面}，横轴称为\textbf{实轴（real axis）}，纵轴称为\textbf{虚轴（imaginary axis）}。
+这个平面称为\textbf{复平面}（complex plane），横轴称为\textbf{实轴（real axis）}，纵轴称为\textbf{虚轴（imaginary axis）}。
 
 \begin{figure}[htbp]
 \centering
@@ -400,14 +400,14 @@ z=x+\mathrm{i}y.
 以后遇到位置关系时，我们常把复数看成点；遇到加法、减法、旋转和伸缩时，我们常把复数看成向量。这两种看法没有冲突，只是侧重点不同。
 \end{zhu}
 
-\subsection{复数的模（modulus）与平面距离（distance in the complex plane）}
+\subsection{复数的模与平面距离}
 
-\begin{dingliyi}{复数的模（modulus）}{}
+\begin{dingliyi}{复数的模}{}
 设
 \[
 z=x+\mathrm{i}y,
 \]
-则复数 $z$ 的\textbf{模}定义为
+则复数 $z$ 的\textbf{模}（modulus）定义为
 \begin{equation}
     |z|=\sqrt{x^2+y^2}.
 \end{equation}
@@ -449,9 +449,9 @@ z_1-z_2=(1+2\mathrm{i})-(4+\mathrm{i})=-3+\mathrm{i},
 \end{jie}
 \end{lizi}
 
-\subsection{共轭复数（complex conjugate）及其几何意义}
+\subsection{共轭复数及其几何意义}
 
-\begin{dingliyi}{共轭复数（complex conjugate）}{}
+\begin{dingliyi}{共轭复数}{}
 设
 \[
 z=x+\mathrm{i}y,
@@ -460,7 +460,7 @@ z=x+\mathrm{i}y,
 \begin{equation}
     \bar z=x-\mathrm{i}y
 \end{equation}
-为 $z$ 的\textbf{共轭复数}。
+为 $z$ 的\textbf{共轭复数}（complex conjugate）。
 \end{dingliyi}
 
 几何上，共轭操作就是把复平面上的点关于实轴作对称。
@@ -543,7 +543,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 以后做复数除法、求模、处理实部与虚部，以及后面做复积分估值时，共轭都是非常常用的工具。很多看起来复杂的式子，一旦乘上共轭，结构就会立刻清楚起来。
 \end{tishi}
 
-\subsection{三角不等式（triangle inequality）与反三角不等式（reverse triangle inequality）}
+\subsection{三角不等式与反三角不等式}
 
 \begin{dingli}{三角不等式（triangle inequality）}{}
 对任意复数 $z_1,z_2$，都有
@@ -575,7 +575,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \node[above left] at ($(O)!0.55!(A)$) {$z_1$};
         \node[above] at ($(A)!0.55!(B)$) {$z_2$};
         \node[below right] at ($(O)!0.58!(B)$) {$z_1+z_2$};
-        \node[below] at (1.7,-0.85) {首尾相接：$|z_1+z_2|\le |z_1|+|z_2|$};
+        \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
 
     \begin{scope}[xshift=7.2cm]
