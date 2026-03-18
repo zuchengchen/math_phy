@@ -1,2204 +1,1683 @@
-% 第一章：复数与复平面基础
+% 第一章：复数、复平面与扩充复平面基础
 
-\chapter{复数与复平面基础}
+\chapter{复数、复平面与扩充复平面基础}
 
 \begin{wulibj}[本章导读]
-复数\index{复数}最初是为了解决``负数开方''问题而引入的，后来却发现它在物理学中有广泛的应用：交流电路分析、量子力学波函数、二维势场问题……本章我们将学习复数\index{复数}的基本概念、几何表示和运算，为后续学习复变函数打下基础。
+很多同学一开始学复变函数时，最容易产生一种错觉：好像课程真正的重点在后面的复积分、留数定理和保角映射，而复数本身只是一个很短的预备章节。其实恰恰相反。后面那些看起来十分强大的方法，几乎都建立在对复数几何结构的深刻理解之上。
+
+复数和实数最大的不同，并不只是多了一个 $\sqrt{-1}$，而是它天然地把\textbf{代数运算}和\textbf{平面几何}连在了一起。一个复数既可以看成一个数，也可以看成复平面上的一点，还可以看成一条从原点出发的向量。它既有大小，也有方向；既能做四则运算，也能把旋转和伸缩编码进去。正因为这样，复数特别适合描述振动、交流电、波动、相位，以及后面复分析中各种局部变换。
+
+本章我们要完成三件事：
+\begin{enumerate}
+    \item 建立复数的基本概念，回答``为什么要引入复数''；
+    \item 建立复平面直观，理解模、辐角、共轭以及乘法的几何意义；
+    \item 初步认识扩充复平面、无穷远点与复球面，为后面的级数展开和留数理论作准备。
+\end{enumerate}
+
+请大家带着一个意识来学这一章：我们不是为了多会几道代数题，而是在学习一门新语言。这门语言将贯穿后面的整套课程。
 \end{wulibj}
 
-% ========== 第一节 ==========
-\section{复数\index{复数}的引入}
+\begin{tishi}[与后续章节的关系]
+\begin{itemize}
+    \item 第二章讨论复变函数的极限、连续与导数时，会直接用到本章的复平面语言。
+    \item 后面讨论解析函数的局部几何意义时，会反复回到本章的``乘法对应旋转与伸缩''这一事实。
+    \item 第四章研究洛朗展开、第五章研究留数时，都会涉及无穷远点附近的行为，因此本章引入扩充复平面绝不是可有可无的附录。
+\end{itemize}
+\end{tishi}
 
-\subsection{虚数单位}
+\section{复数的引入与基本概念}
 
-让我们从一个简单的问题开始：求方程 $x^2 + 1 = 0$ 的解。 在实数范围内，这个方程无解，因为任何实数的平方都是非负的。但是，数学家们想：能不能``发明''一个数，使得它的平方等于 $-1$？
+\subsection{从方程无解到数系扩张}
+
+我们先从一个非常简单的问题开始：
+\begin{equation}
+    x^2+1=0
+\end{equation}
+这个方程在实数范围内没有解。原因很直接：任何实数的平方都不可能等于 $-1$。
+
+但数学的发展经常就是这样开始的：当旧的数系里某些方程没有解时，人们就会问，能不能把数的范围再扩充一点，让这些方程也能被统一处理？从自然数到整数，是为了让减法更普遍地有意义；从整数到有理数，是为了让除法更普遍地有意义；从有理数到实数，是为了处理长度、极限和无理量；而从实数到复数，则是为了让像 $x^2+1=0$ 这样的方程也能被纳入统一框架。
+
+\begin{tishi}[数系为什么总在扩张]
+数系的扩张不是``随便发明新对象''，而是数学在解决实际问题时的一种自然演化。每一次扩张，都会让原来做不到的事情变得可以做，也会让原来零散的现象获得统一解释。复数正是这样进入数学和物理视野的。
+\end{tishi}
+
+\subsection{虚数单位与复数的定义}
 
 \begin{dingliyi}{虚数单位}{}
-引入记号 $\mathrm{i}$（或 $j$），称为\textbf{虚数单位}，规定
+引入一个新的数 $\mathrm{i}$，规定
 \begin{equation}
-    \mathrm{i}^2 = -1 \quad \text{或等价地} \quad \mathrm{i} = \sqrt{-1}
+    \mathrm{i}^2=-1.
 \end{equation}
+这个数称为\textbf{虚数单位}。
 \end{dingliyi}
 
-有了虚数单位，方程 $x^2 + 1 = 0$ 就有解了：$x = \pm \mathrm{i}$。
-
-\subsection{复数\index{复数}的定义}
+有了 $\mathrm{i}$ 以后，方程
+\begin{equation}
+    x^2+1=0
+\end{equation}
+就有了两个解：
+\begin{equation}
+    x=\pm \mathrm{i}.
+\end{equation}
 
 \begin{dingliyi}{复数}{}
 形如
-\begin{equation}\label{defz}
-    z = x + \mathrm{i}y
+\begin{equation}\label{eq:complex-algebraic}
+    z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R},
 \end{equation}
-的数称为\textbf{复数\index{复数}}，其中 $x, y$ 是实数，$\mathrm{i}$ 是虚数单位。称 $x$ 为复数\index{复数} $z$ 的\textbf{实部}(Real part)，记作 $x = \operatorname{Re}(z)$；称 $y$ 为复数\index{复数} $z$ 的\textbf{虚部} (Imaginary part)，记作 $y = \operatorname{Im}(z)$。
-
-\begin{zhu}{}{}
-虚部是 $y$，不是 $\mathrm{i}y$。例如，复数\index{复数} $z = 3 + 2\mathrm{i}$ 的实部是 $3$，虚部是 $2$。
-\end{zhu}
+的数称为\textbf{复数}。其中
+\begin{equation}
+    x=\operatorname{Re}z,\qquad y=\operatorname{Im}z
+\end{equation}
+分别称为复数 $z$ 的\textbf{实部}和\textbf{虚部}。
 \end{dingliyi}
 
-我们把\eqref{defz}式称为复数的代数表示。
+\begin{zhu}{}{}
+这里的虚部是实数 $y$，不是 $\mathrm{i}y$。例如，若
+\[
+z=3-2\mathrm{i},
+\]
+那么它的实部是 $3$，虚部是 $-2$。
+\end{zhu}
 
-\subsection{复数\index{复数}的分类}
+式 \eqref{eq:complex-algebraic} 称为复数的\textbf{代数形式}。以后若没有特别说明，我们讨论的复数默认都写成这种形式。
 
-根据实部和虚部的取值，复数\index{复数}可以分为：
+\subsection{复数相等与基本分类}
 
+两个复数相等，当且仅当它们的实部和虚部分别相等。也就是说，
+\begin{equation}
+    x_1+\mathrm{i}y_1=x_2+\mathrm{i}y_2
+    \Longleftrightarrow
+    \begin{cases}
+        x_1=x_2,\\
+        y_1=y_2.
+    \end{cases}
+\end{equation}
+
+这是以后解复数方程时最常用的基本方法之一。
+
+根据实部和虚部是否为零，复数可以作如下分类：
 \begin{itemize}
-    \item \textbf{实数}：虚部为零的复数\index{复数}，即 $y = 0$。
-    \item \textbf{纯虚数}：实部为零的复数\index{复数}，即 $x = 0$。
+    \item 若 $y=0$，则 $z=x$，它其实就是一个实数；
+    \item 若 $x=0$，则 $z=\mathrm{i}y$，称为纯虚数；
+    \item 若 $x=y=0$，则得到零复数 $0$；
+    \item 若 $x\neq 0$ 且 $y\neq 0$，则称为一般复数。
 \end{itemize}
 
-\begin{lizi}{}{}
-    判断以下复数\index{复数}的类型：
-    \begin{enumerate}
-        \item $z_1 = 5$
-        \item $z_2 = 3\mathrm{i}$
-        \item $z_3 = 2 + 3\mathrm{i}$
-        \item $z_4 = 0$
-    \end{enumerate}
-    \begin{jie}
-        \begin{enumerate}
-            \item $z_1 = 5$：实数（虚部为 $0$）
-            \item $z_2 = 3\mathrm{i}$：纯虚数（实部为 $0$）
-            \item $z_3 = 2 + 3\mathrm{i}$：一般复数\index{复数}
-            \item $z_4 = 0$：既是实数又是纯虚数（实部和虚部都为 $0$）
-        \end{enumerate}
-    \end{jie}
-\end{lizi}
-
-\subsection{为什么需要复数\index{复数}？}
-
-你可能会问：实数还不够用吗？为什么非要引入复数\index{复数}？
-
-\begin{enumerate}
-    \item \textbf{代数完备性}：在复数\index{复数}范围内，任何 $n$ 次多项式方程都有 $n$ 个根（计重数）。这称为\textbf{代数基本定理}。实数没有这个性质。
-
-    \item \textbf{物理应用}：
-    \begin{itemize}
-        \item \textbf{交流电路}：复数\index{复数}可以简洁地表示交流电的振幅和相位。
-        \item \textbf{量子力学}：波函数是复值函数，复数\index{复数}的相位有物理意义。
-        \item \textbf{信号处理}：傅里叶变换\index{傅里叶变换}涉及复数\index{复数}，是现代通信的基础。
-    \end{itemize}
-    
-    \item \textbf{数学简化}：很多实数问题用复数\index{复数}处理更简单。例如，计算某些实积分，用复变函数的留数定理\index{留数定理}会出奇地简单。
-\end{enumerate}
-
-\begin{tishi}[代数基本定理]
-\textbf{定理}：任何 $n$ 次多项式方程
+\begin{lizi}{由复数相等求参数}{}
+若
 \begin{equation}
-    a_n z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0 = 0
+    (2a-1)+\mathrm{i}(a+b)=3+2\mathrm{i},
 \end{equation}
-在复数范围内恰好有 $n$ 个根（计重数）。
+求 $a,b$。
 
-这是复数相对于实数的根本优势。例如，方程 $x^2 + 1 = 0$ 在实数范围内无解，但在复数范围内有 $z = \pm \mathrm{i}$ 两个根。
-严格证明需要后面解析函数部分的刘维尔定理等工具，这里先把它作为一个重要事实记住即可。
-\end{tishi}
-
-\begin{wulibj}[物理背景：交流电路]
-在交流电路中，电压和电流都是时间的正弦函数。如果直接用三角函数进行运算，涉及到大量的三角恒等式，计算非常繁琐。
-奇妙的是，当我们用复数\index{复数}来表示这些正弦量时，阻抗计算、功率分析都可以大大简化——原本复杂的三角运算变成了简洁的复数\index{复数}代数运算。具体方法会在本章后面的应用部分详细介绍。
-\end{wulibj}
-
-\subsection{复数的历史发展}
-\index{复数!历史}
-
-看到这里，你可能会好奇：复数这个看似``人为发明''的概念，是如何一步步被数学家接受并成为现代科学基石的？这背后有一段曲折而精彩的历史。
-
-\subsubsection{起源：三次方程的困扰}
-
-故事要从16世纪的意大利说起。当时，数学家们正在研究三次方程的求解方法。
-1545年，卡尔达诺\index{卡尔达诺@卡尔达诺（Cardano）}（Cardano）在他的著作《大术》中发表了三次方程的求根公式。对于方程 $x^3 + px + q = 0$，一个根为
-\begin{equation}
-    x = \sqrt[3]{-\frac{q}{2} + \sqrt{\frac{q^2}{4} + \frac{p^3}{27}}} + \sqrt[3]{-\frac{q}{2} - \sqrt{\frac{q^2}{4} + \frac{p^3}{27}}}
-\end{equation}
-
-这个公式看起来很完美——直到人们遇到这样的方程：$x^3 - 15x - 4 = 0$。
-容易验证，$x = 4$ 是一个解。但按公式计算，会得到
-\begin{equation}
-    x = \sqrt[3]{2 + \sqrt{-121}} + \sqrt[3]{2 - \sqrt{-121}}
-\end{equation}
-这里出现了 $\sqrt{-121}$！在当时，负数开方被认为是没有意义的。
-
-\begin{tishi}[卡尔达诺的困惑]
-卡尔达诺写道：``算术就是这样微妙……它的精妙程度不亚于任何真正的悖论。''他虽然写下了涉及负数开方的表达式，但认为这些是``诡辩的''、``虚构的''量，没有实际意义。
-\end{tishi}
-
-\subsubsection{突破：邦贝利的发现}
-
-1572年，意大利数学家邦贝利\index{邦贝利@邦贝利（Bombelli）}（Bombelli）在他的《代数学》中做出了一个大胆的尝试：假设这些``不可能的数''也遵循普通的运算规则，看看会发生什么。
-
-他设 $\sqrt{-1} = \mathrm{i}$（这是现代记号，当时他用的是其他符号），然后按照规则计算：
-\begin{equation}
-    \sqrt[3]{2 + 11\mathrm{i}} = 2 + \mathrm{i}, \quad \sqrt[3]{2 - 11\mathrm{i}} = 2 - \mathrm{i}
-\end{equation}
-因此
-\begin{equation}
-    x = (2 + \mathrm{i}) + (2 - \mathrm{i}) = 4
-\end{equation}
-居然得到了正确答案！
-
-这是一个革命性的发现：通过``虚构''的数，可以算出真实的答案。但邦贝利本人对此也很谨慎，他说这些数是``新奇而非无用的''。
-
-\subsubsection{命名：笛卡尔的``虚数''}
-
-1637年，法国数学家笛卡尔\index{笛卡尔@笛卡尔（Descartes）}（Descartes）在他的《几何学》中首次使用了``虚数''（imaginary number）这个名称。他写道：
-
-\begin{mingyan}{}
-    正如我们能够想象多于一维的任何维数，尽管它们并不存在……所以我们可以想象某些被称为虚数的数，它们在现实中并不存在，但在代数中却是有用的。
-\end{mingyan}
-
-笛卡尔的命名带有一种``贬义''——虚数是``想象出来的''，不是``真实''的数。这个名字沿用至今，尽管我们现在知道虚数一点也不``虚''。
-
-\subsubsection{几何解释：复平面的诞生}
-
-复数\index{复数}的``合法性''在很大程度上来自于它的几何解释。
-
-1685年，英国数学家沃利斯\index{沃利斯@沃利斯（Wallis）}（Wallis）最早尝试用几何方法表示复数\index{复数}，但他的方法不太成功。
-
-1797年，挪威测量员韦塞尔\index{韦塞尔@韦塞尔（Wessel）}（Wessel）提出了复平面\index{复平面}的概念：用平面上的点表示复数\index{复数}，实部和虚部分别作为横纵坐标。遗憾的是，他的论文是用丹麦语写的，在当时没有引起注意。
-
-1806年，法国数学家阿甘德\index{阿甘德@阿甘德（Argand）}（Argand）独立地提出了同样的想法。这次，这个概念传播开来。复平面因此也被称为``阿甘德平面''。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.95]
-    % 时间轴
-    \draw[->, thick] (-0.5, 0) -- (11.5, 0) node[right] {\small 时间};
-    
-    % 时间节点
-    \foreach \x/\year/\name/\event in {
-        0.5/1545/卡尔达诺/三次方程公式,
-        2.5/1572/邦贝利/运算规则验证,
-        4.5/1637/笛卡尔/命名``虚数'',
-        6.5/1685/沃利斯/几何尝试,
-        8.5/1797/韦塞尔/复平面,
-        10.5/1806/阿甘德/复平面
-    } {
-        \fill[blue!70] (\x, 0) circle (2.5pt);
-        \node[above, blue!80!black] at (\x, 0.25) {\small\bfseries \year};
-        \node[below, teal!80!black] at (\x, -0.35) {\small \name};
-        \node[below, red!70!black] at (\x, -0.95) {\scriptsize \event};
-    }
-\end{tikzpicture}
-\caption{复数\index{复数}发展的关键节点}
-\label{fig:complex-history}
-\end{figure}
-
-\subsubsection{高斯的贡献}
-
-真正确立复数\index{复数}地位的是高斯\index{高斯@高斯（Gauss）}（Gauss）。他在1799年的博士论文中使用了复数\index{复数}来证明代数基本定理，并在后续工作中大量使用复数\index{复数}。高斯的名望使得复数\index{复数}逐渐被数学界接受。
-
-高斯还引入了``复数''（complex number）这个名称，用以替代带有贬义的``虚数''。他说：
-
-\begin{mingyan}{}
-    如果我们把 $+1$、$-1$、$\sqrt{-1}$ 不称为正、负、虚单位，而称为正向、反向、侧向单位，就不会有这样的困惑了。
-\end{mingyan}
-
-\subsubsection{复数\index{复数}在物理中的应用}
-
-19世纪以后，复数\index{复数}找到了越来越多的应用：
-
-\begin{itemize}
-    \item \textbf{交流电路}：1893年，斯坦梅茨\index{斯坦梅茨@斯坦梅茨（Steinmetz）}（Steinmetz）将复数\index{复数}方法引入交流电路分析，大大简化了计算。从此，``相量''成为电气工程师的必备工具。
-    
-    \item \textbf{流体力学}：复变函数的保角映射被用于解决二维势流问题。
-    
-    \item \textbf{量子力学}：1920年代，薛定谔\index{薛定谔@薛定谔（Schrödinger）}（Schrödinger）、海森堡\index{海森堡@海森堡（Heisenberg）}（Heisenberg）等人建立量子力学时，复数\index{复数}成为描述波函数的语言。薛定谔方程本身就包含虚数单位 $\mathrm{i}$。
-    
-    \item \textbf{信号处理}：傅里叶\index{傅里叶@傅里叶（Fourier）}（Fourier）变换\index{傅里叶变换}、拉普拉斯\index{拉普拉斯@拉普拉斯（Laplace）}（Laplace）变换\index{拉普拉斯变换}等积分变换都基于复数\index{复数}，是现代通信、图像处理的核心工具。
-\end{itemize}
-
-\begin{tishi}[现代观点]
-在今天，数学家已经证明：复数\index{复数}系统在某种意义上是``最完美''的数系。它是一个代数闭域——任何多项式方程在复数\index{复数}范围内都有解。实数只是复数\index{复数}的一个子域。
-\end{tishi}
-
-\begin{mingyan}{}{费曼\index{费曼@费曼（Feynman）}}
-    复数\index{复数}不是人造的发明，它只是大自然的一部分。
-\end{mingyan}
-
-% ========== 第二节 ==========
-\section{复数\index{复数}的几何表示}
-
-\subsection{复平面}
-
-复数\index{复数} $z = x + \mathrm{i}y$ 由实部 $x$ 和虚部 $y$ 两个实数唯一确定，而平面上的点 $(x, y)$ 同样由两个坐标确定。这种一一对应关系，使我们能够用平面上的点来表示复数。我们把这个平面称为\textbf{复平面}（或\textbf{阿甘德平面}）。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.2]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$ (实轴)};
-    \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$ (虚轴)};
-    
-    % 复数\index{复数} z = 3 + 2i
-    \coordinate (z) at (3, 2);
-    \fill[blue] (z) circle (2pt) node[above right] {$z = x + \mathrm{i} y$};
-    
-    % 投影
-    \draw[dashed, gray] (z) -- (3, 0) node[below] {$x$};
-    \draw[dashed, gray] (z) -- (0, 2) node[left] {$y$};
-    
-    % 向量
-    \draw[->, thick, blue!70] (0, 0) -- (z);
-    
-    % 原点
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{复数\index{复数} $z = x + \mathrm{i} y$ 在复平面上的表示}
-\label{fig:complex-plane}
-\end{figure}
-
-在复平面中：
-\begin{itemize}
-    \item \textbf{横轴}称为\textbf{实轴}，表示实部$x$。
-    \item \textbf{纵轴}称为\textbf{虚轴}，表示虚部$y$。
-    \item 复数\index{复数} $z = x + \mathrm{i}y$ 对应点 $(x, y)$，也可以用从原点到该点的\textbf{向量}表示。
-\end{itemize}
-
-\begin{tishi}[几何直观的好处]
-把复数\index{复数}表示为平面上的点或向量，可以让我们用几何方法理解复数\index{复数}的运算。后面我们会看到，复数\index{复数}加法就是向量加法，复数\index{复数}乘法对应向量的旋转和伸缩。
-\end{tishi}
-
-\subsection{复数\index{复数}的模}
-
-复数\index{复数} $z = x + \mathrm{i}y$ 的\textbf{模}（或\textbf{绝对值}）定义为
-\begin{equation}
-    |z| = \sqrt{x^2 + y^2}
-\end{equation}
-
-几何上，模 $|z|$ 表示从原点到点 $z$ 的距离，也就是向量的长度。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.2]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (6, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 4) node[above] {$y$};
-    
-    % 复数\index{复数} z = 3 + 2i
-    \coordinate (z) at (4.5, 3);
-    \fill[blue] (z) circle (2pt) node[above right] {$z = 3 + 2\mathrm{i}$};
-    
-    % 模
-    \draw[thick, red] (0, 0) -- (z) node[midway, above left] {$|z| = \sqrt{13}$};
-    
-    % 辐角
-    \draw[thick, green!60!black] (1, 0) arc (0:33.69:1);
-    \node[green!60!black] at (1.5, 0.4) {$\theta$};
-    
-    % 坐标分量
-    \draw[dashed, gray] (z) -- (4.5, 0) node[below] {$x=3$};
-    \draw[dashed, gray] (z) -- (0, 3) node[left] {$y=2$};
-    
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{复数\index{复数}的模$|z|$与辐角$\theta$}
-\label{fig:modulus-argument}
-\end{figure}
-
-\begin{lizi}{}{}
-计算复数\index{复数} $z = 3 + 2\mathrm{i}$ 的模。
 \begin{jie}
-    $|z| = \sqrt{3^2 + 2^2} = \sqrt{9 + 4} = \sqrt{13}$
+由复数相等的条件知
+\[
+2a-1=3,\qquad a+b=2.
+\]
+先由第一式得
+\[
+2a=4,\qquad a=2.
+\]
+再代入第二式得
+\[
+2+b=2,
+\]
+所以
+\[
+b=0.
+\]
+因此
+\[
+a=2,\qquad b=0.
+\]
 \end{jie}
 \end{lizi}
 
-\subsubsection{模的性质}
+\begin{lizi}{判断复数的类型}{}
+判断下列各数属于哪一类复数：
+\[
+z_1=5,\qquad z_2=-3\mathrm{i},\qquad z_3=2+\mathrm{i},\qquad z_4=0.
+\]
 
-模具有以下重要性质：
+\begin{jie}
+\[
+z_1=5
+\]
+的虚部为 $0$，所以它是实数；
+\[
+z_2=-3\mathrm{i}
+\]
+的实部为 $0$，所以它是纯虚数；
+\[
+z_3=2+\mathrm{i}
+\]
+的实部和虚部都不为零，所以它是一般复数；
+\[
+z_4=0
+\]
+既是实数，也是纯虚数。
+\end{jie}
+\end{lizi}
 
-\begin{dingli}{模的乘法性质}{}
-设 $z_1, z_2$ 是复数，则
-\begin{equation}
-    |z_1 z_2| = |z_1| \cdot |z_2|
-\end{equation}
-\end{dingli}
+\subsection{为什么物理问题中也会出现复数}
 
-\begin{proof}
-    这里我们故意不用后面才会学到的指数形式，而是直接从代数形式出发。
+如果复数只是为了让某些代数方程有解，那它的地位还不至于如此重要。真正让复数成为数学物理核心语言的，是它在物理中的广泛适用性。
 
-    设
-    \begin{equation}
-        z_1 = x_1 + \mathrm{i}y_1, \qquad z_2 = x_2 + \mathrm{i}y_2
-    \end{equation}
-    则
-    \begin{equation}
-        z_1 z_2 = (x_1 x_2 - y_1 y_2) + \mathrm{i}(x_1 y_2 + x_2 y_1)
-    \end{equation}
-    因而
-    \begin{align}
-        |z_1 z_2|^2 &= (x_1 x_2 - y_1 y_2)^2 + (x_1 y_2 + x_2 y_1)^2 \notag \\
-        &= x_1^2 x_2^2 - 2x_1 x_2 y_1 y_2 + y_1^2 y_2^2 + x_1^2 y_2^2 + 2x_1 x_2 y_1 y_2 + x_2^2 y_1^2 \notag \\
-        &= x_1^2(x_2^2 + y_2^2) + y_1^2(x_2^2 + y_2^2) \notag \\
-        &= (x_1^2 + y_1^2)(x_2^2 + y_2^2) \notag \\
-        &= |z_1|^2 |z_2|^2
-    \end{align}
-    两边都是非负数，开平方便得到
-    \begin{equation}
-        |z_1 z_2| = |z_1| \cdot |z_2|
-    \end{equation}
-\end{proof}
-
-\begin{tishi}[先记住一个节奏]
-现在我们先证明乘法性质。至于
-\begin{equation}
-    \left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}
-\end{equation}
-这个除法性质，等学完复数除法和指数形式后，再回头看会更自然。
-\end{tishi}
-
-\begin{tishi}[几何意义]
-模的乘法性质有直观的几何解释：
+\begin{wulibj}[复数为什么特别适合描述物理现象]
 \begin{itemize}
-    \item 乘法：两个向量相乘，长度相乘。例如 $|2 \cdot 3\mathrm{i}| = 2 \cdot 3 = 6$。
-    \item 这意味着复数乘法不仅会改变方向，也会把长度按比例放大或缩小。
+    \item 在简谐振动和交流电中，物理量不仅有大小，还有相位；复数恰好能把这两部分信息写在同一个对象里。
+    \item 在波动问题中，复指数形式
+    \[
+        e^{\mathrm{i}(kx-\omega t)}
+    \]
+    比单独写正弦和余弦要简洁得多，而且更容易做微分运算。
+    \item 在二维势场问题中，复平面上的几何结构能和解析函数紧密结合，这正是后面复变函数论的主线之一。
+    \item 在傅里叶分析、拉普拉斯变换和留数法里，复数不再只是``辅助记号''，而是整个方法的语言基础。
 \end{itemize}
+\end{wulibj}
+
+\subsection{复数发展小史}
+
+复数的历史并不是一条平坦的道路。16 世纪研究三次方程时，数学家已经在计算中被迫接触到负数开方，但那时很多人并不相信这类对象是``合法''的数。后来，邦贝利尝试按照普通代数规则去运算这些``奇怪的数''，竟然算出了正确结果；再后来，阿甘德和高斯为复数提供了清楚的几何解释，复数才真正被广泛接受。
+
+\begin{tishi}[历史给我们的启发]
+很多概念在第一次出现时都显得陌生，甚至有些``不真实''。但只要它们能统一地解释问题、稳定地参与运算、并且带来新的方法，它们就会逐渐成为数学的一部分。复数的发展正是一个很典型的例子。
 \end{tishi}
 
-\begin{dingli}{三角不等式}{}
-设 $z_1, z_2$ 是复数，则
-\begin{equation}\label{eq:triangle}
-    |z_1 + z_2| \leq |z_1| + |z_2|
-\end{equation}
-等号成立当且仅当 $z_1$ 和 $z_2$ 对应的向量同向，即存在 $\lambda \geq 0$ 使 $z_1 = \lambda z_2$，或者其中之一为零。
-\end{dingli}
+\section{复数的几何表示：复平面、模、辐角与共轭}
 
-\begin{proof}
-    设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$。我们需要证明
-    \begin{equation}
-        \sqrt{(x_1 + x_2)^2 + (y_1 + y_2)^2} \leq \sqrt{x_1^2 + y_1^2} + \sqrt{x_2^2 + y_2^2}
-    \end{equation}
-    
-    注意两边都是非负数，所以可以放心平方而不改变不等号方向。两边平方，得
-    \begin{equation}
-        (x_1 + x_2)^2 + (y_1 + y_2)^2 \leq x_1^2 + y_1^2 + x_2^2 + y_2^2 + 2\sqrt{(x_1^2 + y_1^2)(x_2^2 + y_2^2)}
-    \end{equation}
-    
-    展开左边：
-    \begin{equation}
-        x_1^2 + 2x_1 x_2 + x_2^2 + y_1^2 + 2y_1 y_2 + y_2^2
-    \end{equation}
-    
-    消去两边相同的项，得到
-    \begin{equation}
-        2(x_1 x_2 + y_1 y_2) \leq 2\sqrt{(x_1^2 + y_1^2)(x_2^2 + y_2^2)}
-    \end{equation}
-    
-    即
-    \begin{equation}
-        x_1 x_2 + y_1 y_2 \leq \sqrt{(x_1^2 + y_1^2)(x_2^2 + y_2^2)}
-    \end{equation}
-    
-    由二维向量的柯西不等式
-    \begin{equation}
-        (x_1 x_2 + y_1 y_2)^2 \leq (x_1^2 + y_1^2)(x_2^2 + y_2^2)
-    \end{equation}
-    
-    由于右边开方后是非负数，这正说明
-    \begin{equation}
-        x_1 x_2 + y_1 y_2 \leq \sqrt{(x_1^2 + y_1^2)(x_2^2 + y_2^2)}
-    \end{equation}
-    也就是上面要证的不等式成立。等号成立当且仅当 $(x_1, y_1)$ 与 $(x_2, y_2)$ 同向，或者其中一个向量为零。
-\end{proof}
+\begin{wulibj}[为什么要把复数放到平面上]
+复数 $z=x+\mathrm{i}y$ 由两个实数 $x,y$ 决定，而平面上的点 $(x,y)$ 也由两个坐标决定。正是这种天然的一一对应，使得复数不只是一个代数对象，更是一个几何对象。后面我们将看到，一旦把复数看成平面上的点和向量，很多运算的含义就会一下子变得直观起来。
+\end{wulibj}
+
+\subsection{复平面与点表示、向量表示}
+
+我们用平面上的点 $(x,y)$ 来表示复数
+\[
+z=x+\mathrm{i}y.
+\]
+这个平面称为\textbf{复平面}，横轴称为\textbf{实轴}，纵轴称为\textbf{虚轴}。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 3.5) node[above] {$y$};
-    
-    % 向量 z1
-    \coordinate (z1) at (2, 1);
-    \draw[->, thick, blue] (0, 0) -- (z1) node[midway, below right] {$z_1$};
-    \fill[blue] (z1) circle (2pt);
-    
-    % 向量 z2
-    \coordinate (z2) at (1.5, 2);
-    \draw[->, thick, red] (0, 0) -- (z2) node[midway, left] {$z_2$};
-    \fill[red] (z2) circle (2pt);
-    
-    % 向量 z1 + z2 (平行四边形法则)
-    \coordinate (z1z2) at (3.5, 3);
-    \draw[->, thick, purple] (0, 0) -- (z1z2) node[midway, above left] {$z_1 + z_2$};
-    \fill[purple] (z1z2) circle (2pt);
-    
-    % 平行四边形
-    \draw[dashed, gray] (z1) -- (z1z2);
-    \draw[dashed, gray] (z2) -- (z1z2);
-    
-    % 标注
-    \node[below left] at (0, 0) {$O$};
-    
-    % 长度标注
-    \node[blue, below] at (1, -0.3) {$|z_1|$};
-    \node[red, left] at (-0.3, 1) {$|z_2|$};
-    \node[purple, right] at (4, 2) {$|z_1+z_2|$};
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, thick] (-0.6,0) -- (4.3,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-0.6) -- (0,3.4) node[above] {$\operatorname{Im}z$};
+    \coordinate (Z) at (3,2);
+    \fill[blue!80!black] (Z) circle (2pt);
+    \draw[->, thick, blue!80!black] (0,0) -- (Z);
+    \draw[dashed, gray] (Z) -- (3,0);
+    \draw[dashed, gray] (Z) -- (0,2);
+    \node[above right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[below] at (3,0) {$x$};
+    \node[left] at (0,2) {$y$};
+    \node[below left] at (0,0) {$O$};
 \end{tikzpicture}
-\caption{三角不等式：三角形两边之和大于第三边}
-\label{fig:triangle-inequality}
+\caption{复数在复平面上的点表示与向量表示}
+\label{fig:complex-plane-basic}
 \end{figure}
 
-\begin{tishi}[几何直观]
-三角不等式的几何意义非常直观：在平面上，从原点到 $z_1 + z_2$ 的距离（即 $|z_1 + z_2|$），不超过从原点到 $z_1$ 的距离加上从原点到 $z_2$ 的距离（即 $|z_1| + |z_2|$）。
+在复平面中，一个复数可以有两种互补的看法：
+\begin{itemize}
+    \item 把它看成点 $(x,y)$；
+    \item 把它看成从原点 $O$ 指向该点的向量 $\overrightarrow{Oz}$。
+\end{itemize}
 
-这就像走路：从 $O$ 经 $z_1$ 走到 $z_1 + z_2$，路程是 $|z_1| + |z_2|$。而直接从 $O$ 走到 $z_1 + z_2$，路程是 $|z_1 + z_2|$。三角形两边之和大于第三边，所以 $|z_1 + z_2| \leq |z_1| + |z_2|$。
+\begin{zhu}{}{}
+以后遇到位置关系时，我们常把复数看成点；遇到加法、减法、旋转和伸缩时，我们常把复数看成向量。这两种看法没有冲突，只是侧重点不同。
+\end{zhu}
+
+\subsection{复数的模与平面距离}
+
+\begin{dingliyi}{复数的模}{}
+设
+\[
+z=x+\mathrm{i}y,
+\]
+则复数 $z$ 的\textbf{模}定义为
+\begin{equation}
+    |z|=\sqrt{x^2+y^2}.
+\end{equation}
+\end{dingliyi}
+
+几何上，$|z|$ 表示复平面上点 $z$ 到原点的距离，也表示向量 $\overrightarrow{Oz}$ 的长度。
+
+更一般地，若 $z_1,z_2$ 是两个复数，那么
+\begin{equation}
+    |z_1-z_2|
+\end{equation}
+表示复平面上点 $z_1$ 与点 $z_2$ 之间的距离。
+
+\begin{lizi}{模与距离}{}
+设
+\[
+z_1=1+2\mathrm{i},\qquad z_2=4+\mathrm{i}.
+\]
+求 $|z_1|$ 与 $|z_1-z_2|$。
+
+\begin{jie}
+先求模：
+\[
+|z_1|=\sqrt{1^2+2^2}=\sqrt{5}.
+\]
+
+再求两点距离：
+\[
+z_1-z_2=(1+2\mathrm{i})-(4+\mathrm{i})=-3+\mathrm{i},
+\]
+所以
+\[
+|z_1-z_2|=\sqrt{(-3)^2+1^2}=\sqrt{10}.
+\]
+因此
+\[
+|z_1|=\sqrt{5},\qquad |z_1-z_2|=\sqrt{10}.
+\]
+\end{jie}
+\end{lizi}
+
+\subsection{共轭复数及其几何意义}
+
+\begin{dingliyi}{共轭复数}{}
+设
+\[
+z=x+\mathrm{i}y,
+\]
+则称
+\begin{equation}
+    \bar z=x-\mathrm{i}y
+\end{equation}
+为 $z$ 的\textbf{共轭复数}。
+\end{dingliyi}
+
+几何上，共轭操作就是把复平面上的点关于实轴作对称。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+    \draw[->, thick] (-0.6,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-2.7) -- (0,2.7) node[above] {$\operatorname{Im}z$};
+    \coordinate (Z) at (2.8,1.8);
+    \coordinate (ZB) at (2.8,-1.8);
+    \fill[blue!80!black] (Z) circle (2pt);
+    \fill[red!75!black] (ZB) circle (2pt);
+    \draw[->, thick, blue!80!black] (0,0) -- (Z);
+    \draw[->, thick, red!75!black] (0,0) -- (ZB);
+    \draw[dashed, gray] (Z) -- (ZB);
+    \node[above right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[below right] at (ZB) {$\bar z=x-\mathrm{i}y$};
+    \node[below left] at (0,0) {$O$};
+\end{tikzpicture}
+\caption{共轭复数关于实轴对称}
+\label{fig:complex-conjugate}
+\end{figure}
+
+\begin{dingli}{共轭与模的基本关系}{}
+对任意复数 $z$，有
+\begin{equation}
+    z\bar z=|z|^2,\qquad \overline{\bar z}=z,\qquad |\bar z|=|z|.
+\end{equation}
+此外，
+\begin{equation}
+    \operatorname{Re}z=\frac{z+\bar z}{2},\qquad
+    \operatorname{Im}z=\frac{z-\bar z}{2\mathrm{i}}.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+设
+\[
+z=x+\mathrm{i}y,
+\]
+则
+\[
+\bar z=x-\mathrm{i}y.
+\]
+于是
+\[
+z\bar z=(x+\mathrm{i}y)(x-\mathrm{i}y)=x^2+y^2=|z|^2.
+\]
+
+再由定义直接得到
+\[
+\overline{\bar z}=x+\mathrm{i}y=z.
+\]
+
+又因为
+\[
+|\bar z|=\sqrt{x^2+(-y)^2}=\sqrt{x^2+y^2}=|z|.
+\]
+
+最后，
+\[
+z+\bar z=(x+\mathrm{i}y)+(x-\mathrm{i}y)=2x,
+\]
+所以
+\[
+\operatorname{Re}z=x=\frac{z+\bar z}{2}.
+\]
+同理，
+\[
+z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
+\]
+因此
+\[
+\operatorname{Im}z=y=\frac{z-\bar z}{2\mathrm{i}}.
+\]
+\end{proof}
+
+\begin{tishi}[为什么共轭经常出现]
+以后做复数除法、求模、处理实部与虚部，以及后面做复积分估值时，共轭都是非常常用的工具。很多看起来复杂的式子，一旦乘上共轭，结构就会立刻清楚起来。
 \end{tishi}
 
+\subsection{三角不等式与反三角不等式}
+
+\begin{dingli}{三角不等式}{}
+对任意复数 $z_1,z_2$，都有
+\begin{equation}\label{eq:triangle-inequality}
+    |z_1+z_2|\le |z_1|+|z_2|.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+先计算模的平方：
+\begin{align*}
+    |z_1+z_2|^2
+    &= (z_1+z_2)\overline{(z_1+z_2)} \\
+    &= (z_1+z_2)(\bar z_1+\bar z_2) \\
+    &= |z_1|^2+|z_2|^2+z_1\bar z_2+\bar z_1 z_2.
+\end{align*}
+注意最后两项互为共轭，因此
+\[
+z_1\bar z_2+\bar z_1 z_2=2\operatorname{Re}(z_1\bar z_2).
+\]
+又因为
+\[
+\operatorname{Re}(z_1\bar z_2)\le |z_1\bar z_2|=|z_1||z_2|,
+\]
+所以
+\[
+|z_1+z_2|^2\le |z_1|^2+2|z_1||z_2|+|z_2|^2=(|z_1|+|z_2|)^2.
+\]
+两边都非负，开平方便得到
+\[
+|z_1+z_2|\le |z_1|+|z_2|.
+\]
+\end{proof}
+
 \begin{yinli}{反三角不等式}{}
-设 $z_1, z_2$ 是复数，则
+对任意复数 $z_1,z_2$，都有
 \begin{equation}
-    \big||z_1| - |z_2|\big| \leq |z_1 - z_2|
+    \bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|.
 \end{equation}
 \end{yinli}
 
 \begin{proof}
-    由三角不等式，
-    \begin{equation}
-        |z_1| = |(z_1 - z_2) + z_2| \leq |z_1 - z_2| + |z_2|
-    \end{equation}
-    从而
-    \begin{equation}
-        |z_1| - |z_2| \leq |z_1 - z_2|
-    \end{equation}
-
-    同理，
-    \begin{equation}
-        |z_2| = |(z_2 - z_1) + z_1| \leq |z_2 - z_1| + |z_1| = |z_1 - z_2| + |z_1|
-    \end{equation}
-    即
-    \begin{equation}
-        |z_2| - |z_1| \leq |z_1 - z_2|
-    \end{equation}
-
-    把这两个不等式合在一起，就得到
-    \begin{equation}
-        \big||z_1| - |z_2|\big| \leq |z_1 - z_2|
-    \end{equation}
+由三角不等式，
+\[
+|z_1|=|(z_1-z_2)+z_2|\le |z_1-z_2|+|z_2|,
+\]
+所以
+\[
+|z_1|-|z_2|\le |z_1-z_2|.
+\]
+交换 $z_1,z_2$ 的位置，同理可得
+\[
+|z_2|-|z_1|\le |z_1-z_2|.
+\]
+把这两个不等式合起来，就得到
+\[
+\bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|.
+\]
 \end{proof}
 
-\subsection{复数\index{复数}的辐角}
+\begin{tishi}[几何理解]
+三角不等式本质上就是平面几何里``三角形两边之和大于第三边''的复数版本。以后无论是估计幂级数、证明极限，还是给复积分作上界，模的不等式都会反复出现。
+\end{tishi}
+
+\subsection{辐角、主辐角与多值性}
+
+对于非零复数 $z$，除了长度 $|z|$ 之外，我们还需要一个量来描述它的方向，这就是辐角。
 
 \begin{dingliyi}{辐角与主辐角}{}
-设 $z = x + \mathrm{i}y \neq 0$。从实轴正方向逆时针转到向量 $\overrightarrow{Oz}$ 所得到的有向角，称为复数\index{复数} $z$ 的一个\textbf{辐角}，记作 $\arg z$。
+设 $z\neq 0$。从实轴正方向逆时针转到向量 $\overrightarrow{Oz}$ 所形成的角称为 $z$ 的一个\textbf{辐角}，记作 $\arg z$。
 
-在所有辐角中，满足
+在所有辐角中，落在区间
 \begin{equation}
-    -\pi < \theta \leq \pi
+    -\pi<\theta\le \pi
 \end{equation}
-的那个值称为 $z$ 的\textbf{主辐角}，记作 $\operatorname{Arg}(z)$。
+内的那个值称为 $z$ 的\textbf{主辐角}，记作 $\operatorname{Arg}z$。
 \end{dingliyi}
-
-这里要特别注意两点：
-\begin{itemize}
-    \item 辐角只对非零复数定义，$z = 0$ 没有确定的方向，因此\textbf{没有辐角}。
-    \item 若 $x \neq 0$，则辐角满足 $\tan\theta = y/x$；但这只是辅助关系，不能单靠它确定 $\theta$。
-\end{itemize}
-
-\begin{tishi}[辐角的多值性]
-由于角度可以绕原点旋转任意整数圈后到达同一位置，所以辐角不是唯一确定的：
-\begin{itemize}
-    \item 旋转一圈：$\theta$ 和 $\theta + 2\pi$ 表示同一个方向。
-    \item 旋转两圈：$\theta$ 和 $\theta + 4\pi$ 也表示同一个方向。
-    \item 一般地，$\theta$、$\theta + 2k\pi$（$k \in \mathbb{Z}$）都指向同一方向。
-\end{itemize}
-因此，复数的辐角有无穷多个值，彼此相差 $2\pi$ 的整数倍。
-\end{tishi}
-
-全体辐角可以统一写成
-\begin{equation}
-    \arg(z) = \operatorname{Arg}(z) + 2k\pi, \quad k \in \mathbb{Z}
-\end{equation}
-$\arg$ 是拉丁语单词 \emph{argumentum} 的缩写，意为``论据''或``说明''。在数学中，辐角指明了复数在平面上的方向。
-
-\begin{tishi}[主辐角怎样分情况确定]
-对于 $z = x + \mathrm{i}y \neq 0$，主辐角 $\operatorname{Arg}(z)$ 可以按位置分情况写成
-\begin{equation}
-    \operatorname{Arg}(z)=
-    \begin{cases}
-        \arctan\dfrac{y}{x}, & x>0, \\[0.8em]
-        \arctan\dfrac{y}{x}+\pi, & x<0,\ y\ge 0, \\[0.8em]
-        \arctan\dfrac{y}{x}-\pi, & x<0,\ y<0, \\[0.8em]
-        \dfrac{\pi}{2}, & x=0,\ y>0, \\[0.8em]
-        -\dfrac{\pi}{2}, & x=0,\ y<0.
-    \end{cases}
-\end{equation}
-特别地，正实轴上的点主辐角为 $0$，负实轴上的点主辐角为 $\pi$。
-\end{tishi}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.85]
-    % 第一个图：主辐角 θ
-    \begin{scope}
-        \draw[->, thick] (-0.3, 0) -- (3.5, 0) node[right] {$x$};
-        \draw[->, thick] (0, -0.3) -- (0, 3) node[above] {$y$};
-        
-        \coordinate (z) at (2.5, 1.5);
-        \fill[blue] (z) circle (2pt) node[above right] {$z$};
-        \draw[thick, blue!70] (0, 0) -- (z);
-        
-        \draw[thick, red, ->] (0.9, 0) arc (0:30.96:0.9);
-        \node[red] at (1.3, 0.3) {$\theta$};
-        
-        \node[red] at (1.0, -1.3) {$\theta = \operatorname{Arg}(z)$};
-        \node[below left] at (0, 0) {$O$};
-    \end{scope}
-    
-    % 第二个图：θ - 2π
-    \begin{scope}[xshift=5cm]
-        \draw[->, thick] (-0.3, 0) -- (3.5, 0) node[right] {$x$};
-        \draw[->, thick] (0, -0.3) -- (0, 3) node[above] {$y$};
-        
-        \coordinate (z) at (2.5, 1.5);
-        \fill[blue] (z) circle (2pt) node[above right] {$z$};
-        \draw[thick, blue!70] (0, 0) -- (z);
-        
-        % 先顺时针转一整圈，再转θ
-        \draw[thick, orange, ->] (0.9, 0) arc (0:-329.04:0.9);
-        \node[orange] at (0.2, -1.3) {$\theta-2\pi$};
-        
-        \node[below left] at (0, 0) {$O$};
-    \end{scope}
-    
-    % 第三个图：θ + 2π（用螺旋线表示"绕一圈再加θ"）
-    \begin{scope}[xshift=10cm]
-        \draw[->, thick] (-0.3, 0) -- (3.5, 0) node[right] {$x$};
-        \draw[->, thick] (0, -0.3) -- (0, 3) node[above] {$y$};
-        
-        \coordinate (z) at (2.5, 1.5);
-        \fill[blue] (z) circle (2pt) node[above right] {$z$};
-        \draw[thick, blue!70] (0, 0) -- (z);
-        
-        % 螺旋线：从半径0.5开始，绕一圈后到达半径0.9
-        \draw[thick, green!60!black, ->, domain=0:390.96, samples=150, smooth, variable=\a] 
-            plot ({(0.5 + 0.4*\a/360)*cos(\a)}, {(0.5 + 0.4*\a/360)*sin(\a)});
-        \node[green!60!black] at (0.3, -1.3) {$\theta+2\pi$};
-        
-        \node[below left] at (0, 0) {$O$};
-    \end{scope}
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, thick] (-0.8,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-0.8) -- (0,3.2) node[above] {$\operatorname{Im}z$};
+    \coordinate (Z) at (3,2);
+    \draw[->, thick, blue!80!black] (0,0) -- (Z);
+    \fill[blue!80!black] (Z) circle (2pt) node[above right] {$z$};
+    \draw[thick, green!60!black] (1,0) arc[start angle=0,end angle=33.69,radius=1];
+    \node[green!50!black] at (1.45,0.42) {$\theta$};
+    \node[below left] at (0,0) {$O$};
 \end{tikzpicture}
-\caption{辐角的多值性：$\arg(z) = \theta + 2k\pi$（$k \in \mathbb{Z}$）}
-\label{fig:argument-multivalued}
+\caption{复数的模与辐角}
+\label{fig:modulus-argument}
 \end{figure}
 
-\begin{jinshi}[常见错误：直接用反正切]
-计算主辐角时，不能简单地用 $\theta = \arctan(y/x)$，因为反正切函数的值域是 $(-\pi/2, \pi/2)$，无法区分第二、三象限的点；当 $x=0$ 时，这个式子甚至根本没有意义。
-
-正确的做法是：
+这里有两个特别容易混淆的地方：
 \begin{itemize}
-    \item 先判断点是在第几象限，还是恰好落在坐标轴上。
-    \item 若在象限内，再用 $\arctan$ 计算参考角。
-    \item 若在坐标轴上，就直接使用轴上的标准角：$0$、$\pi$、$\pi/2$、$-\pi/2$。
+    \item 零复数没有方向，因此 $0$ 没有辐角；
+    \item 辐角不是唯一的，因为同一方向可以多转若干整圈后得到。
+\end{itemize}
+
+因此，若 $\theta$ 是 $z$ 的一个辐角，那么
+\begin{equation}
+    \theta+2k\pi,\qquad k\in\mathbb{Z},
+\end{equation}
+也都是它的辐角。全体辐角可以统一写成
+\begin{equation}
+    \arg z=\operatorname{Arg}z+2k\pi,\qquad k\in\mathbb{Z}.
+\end{equation}
+
+\begin{jinshi}[辐角最容易出错的地方]
+\begin{itemize}
+    \item 不要把 $\arg z$ 和 $\operatorname{Arg}z$ 混为一谈。前者表示全体辐角，后者表示主辐角。
+    \item 不要机械地用 $\theta=\arctan(y/x)$ 决定辐角，因为反正切只能给出主值，且不能自动区分象限。
+    \item 零点没有辐角，这一点以后讨论对数和幂函数时尤其重要。
 \end{itemize}
 \end{jinshi}
 
-\begin{lizi}{}{}
-求复数\index{复数} $z = -1 - \mathrm{i}$ 的模和主辐角。
-\begin{jie}
-    模：$|z| = \sqrt{(-1)^2 + (-1)^2} = \sqrt{2}$
+\begin{lizi}{求主辐角}{}
+求下列复数的主辐角：
+\[
+z_1=1+\sqrt{3}\,\mathrm{i},\qquad z_2=-1+\mathrm{i},\qquad z_3=-2\mathrm{i}.
+\]
 
-    主辐角：点 $(-1, -1)$ 在第三象限。$\arctan(1) = \pi/4$，所以主辐角为 $-\pi + \pi/4 = -3\pi/4$。
+\begin{jie}
+对
+\[
+z_1=1+\sqrt{3}\,\mathrm{i},
+\]
+它位于第一象限，且
+\[
+\tan\theta=\sqrt{3},
+\]
+所以
+\[
+\operatorname{Arg}z_1=\frac{\pi}{3}.
+\]
+
+对
+\[
+z_2=-1+\mathrm{i},
+\]
+它位于第二象限，参考角为 $\pi/4$，因此
+\[
+\operatorname{Arg}z_2=\frac{3\pi}{4}.
+\]
+
+对
+\[
+z_3=-2\mathrm{i},
+\]
+它落在负虚轴上，所以
+\[
+\operatorname{Arg}z_3=-\frac{\pi}{2}.
+\]
 \end{jie}
 \end{lizi}
 
-\begin{figure}[htbp]
-\centering
-\begin{minipage}{0.49\textwidth}
-\centering
-\begin{tikzpicture}[scale=1.0]
-    % 四个象限填充
-    \fill[red!15] (0, 0) rectangle (2.5, 2.5);
-    \fill[blue!15] (-2.5, 0) rectangle (0, 2.5);
-    \fill[green!15] (-2.5, -2.5) rectangle (0, 0);
-    \fill[orange!15] (0, -2.5) rectangle (2.5, 0);
+\section{复数的三角形式与指数形式}
 
-    % 坐标轴（在填充之后绘制，确保可见）
-    \draw[->, thick] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$y$};
-
-    % 象限标注
-    \node[red!70!black] at (1.3, 1.7) {第一象限};
-    \node[red!70!black] at (1.3, 1.2) {\small $x>0,\ y>0$};
-    \node[red!70!black] at (1.3, 0.7) {\small $0<\theta<\frac{\pi}{2}$};
-
-    \node[blue!70!black] at (-1.3, 1.7) {第二象限};
-    \node[blue!70!black] at (-1.3, 1.2) {\small $x<0,\ y>0$};
-    \node[blue!70!black] at (-1.3, 0.7) {\small $\frac{\pi}{2}<\theta<\pi$};
-
-    \node[green!60!black] at (-1.3, -0.7) {第三象限};
-    \node[green!60!black] at (-1.3, -1.2) {\small $x<0,\ y<0$};
-    \node[green!60!black] at (-1.3, -1.7) {\small $-\pi<\theta<-\frac{\pi}{2}$};
-
-    \node[orange!80!black] at (1.3, -0.7) {第四象限};
-    \node[orange!80!black] at (1.3, -1.2) {\small $x>0,\ y<0$};
-    \node[orange!80!black] at (1.3, -1.7) {\small $-\frac{\pi}{2}<\theta<0$};
-
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{四个象限与辐角范围}
-\label{fig:quadrants}
-\end{minipage}
-\hfill
-\begin{minipage}{0.49\textwidth}
-\centering
-\begin{tikzpicture}[scale=1.0]
-    % 坐标轴
-    \draw[->, thick] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$y$};
-
-    % 点 z = -1 - i
-    \fill[blue] (-1.5, -1.5) circle (2pt) node[below] {$z = -1 - \mathrm{i}$};
-
-    % 向量
-    \draw[->, blue, thick] (0, 0) -- (-1.5, -1.5);
-
-    % 模
-    \draw[dashed, gray] (-1.5, 0) -- (-1.5, -1.5) -- (0, -1.5);
-    \node[above] at (-1.5, 0) {\small $-1$};
-    \node[right] at (0, -1.5) {\small $-1$};
-
-    % 辐角弧
-    \draw[->, red, thick] (0.6, 0) arc (0:-135:0.6);
-    \node[red] at (0.3, -0.8) {\small $\theta = -\frac{3\pi}{4}$};
-
-    \node[above right] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{$z = -1 - \mathrm{i}$ 的模与辐角}
-\label{fig:z-1-i}
-\end{minipage}
-\end{figure}
-
-\subsection{复数\index{复数}的三角形式}
-
-有了模和辐角，复数\index{复数}可以表示为\textbf{三角形式}：
-
-\begin{zhongyao}[复数的三角形式]
-设复数\index{复数} $z$ 的模为 $r = |z|$，一个辐角为 $\theta$，则
-\begin{equation}\label{eq:trig-form}
-    z = r(\cos\theta + \mathrm{i}\sin\theta)
-\end{equation}
-\end{zhongyao}
-
-这个形式可以直接从几何意义得到。复数\index{复数} $z$ 对应平面向量 $(x, y)$，而极坐标关系告诉我们
-\begin{equation}
-    x = r\cos\theta, \qquad y = r\sin\theta
-\end{equation}
-把它们代回 $z = x + \mathrm{i}y$，就得到三角形式。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.2]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
-    
-    % 复数 z
-    \coordinate (z) at (3, 2);
-    \fill[blue] (z) circle (2pt) node[above right] {$z = x + \mathrm{i}y$};
-    
-    % 向量
-    \draw[->, blue, thick] (0, 0) -- (z);
-    
-    % 模
-    \draw[dashed, gray] (3, 0) -- (z) -- (0, 2);
-    \node[below] at (3, 0) {$x = r\cos\theta$};
-    \node[left] at (0, 2) {$y = r\sin\theta$};
-    
-    % 辐角
-    \draw[red, thick] (0.7, 0) arc (0:33.7:0.7);
-    \node[red] at (1.1, 0.3) {$\theta$};
-    
-    % 模标注
-    \node[blue, above left] at (1.5, 1) {$r = |z|$};
-    
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{三角形式的几何意义}
-\label{fig:trig-form}
-\end{figure}
-
-\begin{lizi}{}{}
-将复数\index{复数} $z = 1 + \mathrm{i}$ 写成三角形式。
-\begin{jie}
-    模为 $r = |z| = \sqrt{1^2 + 1^2} = \sqrt{2}$。
-    
-    辐角为 $\theta = \arctan\frac{1}{1} = \frac{\pi}{4}$（在第一象限）。
-    
-    因此三角形式为
-    \begin{equation}
-        z = \sqrt{2}\left(\cos\frac{\pi}{4} + \mathrm{i}\sin\frac{\pi}{4}\right)
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\subsection{欧拉公式与指数形式}
-
-三角形式虽然几何意义清晰，但在运算时不够简洁。欧拉（Euler）发现了一个美妙的关系：
-
-\begin{zhongyao}[欧拉公式]
-\begin{equation}\label{eq:euler}
-    \mathrm{e}^{\mathrm{i}\theta} = \cos\theta + \mathrm{i}\sin\theta
-\end{equation}
-\end{zhongyao}
-
-\begin{tishi}[形式推导]
-严格定义复指数函数需要级数理论，这部分会在后面的级数章节中认真处理；这里我们先\textbf{形式地}验证欧拉公式，把主要注意力放在它揭示出的结构上。
-
-回顾实函数的泰勒展开：
-\begin{align}
-    \mathrm{e}^x &= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \cdots \\
-    \cos x &= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots \\
-    \sin x &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots
-\end{align}
-
-将 $x = \mathrm{i}\theta$ 代入 $\mathrm{e}^x$ 的展开式：
-\begin{equation}
-    \mathrm{e}^{\mathrm{i}\theta} = 1 + \mathrm{i}\theta + \frac{(\mathrm{i}\theta)^2}{2!} + \frac{(\mathrm{i}\theta)^3}{3!} + \frac{(\mathrm{i}\theta)^4}{4!} + \frac{(\mathrm{i}\theta)^5}{5!} + \cdots
-\end{equation}
-
-利用 $\mathrm{i}^2 = -1$，整理得：
-\begin{align}
-    \mathrm{e}^{\mathrm{i}\theta} &= 1 + \mathrm{i}\theta - \frac{\theta^2}{2!} - \mathrm{i}\frac{\theta^3}{3!} + \frac{\theta^4}{4!} + \mathrm{i}\frac{\theta^5}{5!} - \cdots \notag \\
-    &= \underbrace{\left(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \cdots\right)}_{\cos\theta} + \mathrm{i}\underbrace{\left(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \cdots\right)}_{\sin\theta} \notag \\
-    &= \cos\theta + \mathrm{i}\sin\theta
-\end{align}
-
-这正是欧拉公式\eqref{eq:euler}。
-\end{tishi}
-
-\begin{tishi}[几何直观]
-从几何上看，当 $\theta$ 从 $0$ 增加到 $2\pi$ 时，点 $\mathrm{e}^{\mathrm{i}\theta} = \cos\theta + \mathrm{i}\sin\theta$ 在单位圆上逆时针旋转一周。
-
-\begin{center}
-\begin{tikzpicture}[scale=1.0]
-    % 坐标轴
-    \draw[->, thick] (-1.5, 0) -- (1.5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -1.5) -- (0, 1.5) node[above] {$y$};
-    
-    % 单位圆
-    \draw[blue, thick] (0, 0) circle (1);
-    
-    % 特殊点
-    \fill[red] (1, 0) circle (2pt) node[below right] {$\mathrm{e}^0=1$};
-    \fill[red] (0, 1) circle (2pt) node[above right] {$\mathrm{e}^{\mathrm{i}\pi/2}=\mathrm{i}$};
-    \fill[red] (-1, 0) circle (2pt) node[below left] {$\mathrm{e}^{\mathrm{i}\pi}=-1$};
-    \fill[red] (0, -1) circle (2pt) node[below right] {$\mathrm{e}^{\mathrm{i}3\pi/2}=-\mathrm{i}$};
-    
-    % 一般点
-    \draw[->, thick, purple] (0, 0) -- ({cos(60)}, {sin(60)});
-    \fill[purple] ({cos(60)}, {sin(60)}) circle (2pt);
-    \node[purple, right] at ({cos(60)+0.1}, {sin(60)}) {$\mathrm{e}^{\mathrm{i}\theta}$};
-    
-    % 角度
-    \draw[thick, purple] (0.4, 0) arc (0:60:0.4);
-    \node[purple] at (0.6, 0.2) {$\theta$};
-\end{tikzpicture}
-\end{center}
-
-所以 $\mathrm{e}^{\mathrm{i}\theta}$ 可以理解为：从 $1$ 开始，逆时针旋转角度 $\theta$ 后到达的位置。这正是乘法的几何意义——乘以 $\mathrm{e}^{\mathrm{i}\theta}$ 就是旋转角度 $\theta$。
-\end{tishi}
-
-有了欧拉公式，复数\index{复数}的三角形式可以写成更简洁的\textbf{指数形式}：
-
-\begin{zhongyao}[复数的指数形式]
-\begin{equation}\label{eq:exp-form}
-    z = r(\cos\theta + \mathrm{i}\sin\theta) = r\mathrm{e}^{\mathrm{i}\theta}
-\end{equation}
-其中 $r = |z|$ 是模，$\theta$ 是 $z$ 的一个辐角。
-\end{zhongyao}
-
-\begin{tishi}[三种形式的比较]
-\begin{center}
-\begin{tabular}{lll}
-\toprule
-\textbf{形式} & \textbf{表达式} & \textbf{适用场合} \\
-\midrule
-代数形式 & $z = x + \mathrm{i}y$ & 加法、减法 \\
-三角形式 & $z = r(\cos\theta + \mathrm{i}\sin\theta)$ & 推导公式 \\
-指数形式 & $z = r\mathrm{e}^{\mathrm{i}\theta}$ & 乘法、除法、幂运算 \\
-\bottomrule
-\end{tabular}
-\end{center}
-解题时根据运算类型选择合适的形式。
-\end{tishi}
-
-\begin{lizi}{}{}
-将复数\index{复数} $z = 1 + \mathrm{i}$ 写成指数形式。
-\begin{jie}
-    模 $r = \sqrt{2}$，辐角 $\theta = \frac{\pi}{4}$。
-    
-    指数形式为 $z = \sqrt{2}\,\mathrm{e}^{\mathrm{i}\pi/4}$。
-\end{jie}
-\end{lizi}
-
-\begin{jinshi}[欧拉公式的特殊情形]
-当 $\theta = \pi$ 时，欧拉公式给出
-\begin{equation}
-    \mathrm{e}^{\mathrm{i}\pi} + 1 = 0
-\end{equation}
-这被称为``最美的公式''，它将数学中最重要的五个常数 $\mathrm{e}$、$\mathrm{i}$、$\pi$、$1$、$0$ 联系在了一起！
-\end{jinshi}
-
-\subsection{复平面上的点集、区域与连通性}
-
-前面我们一直在讨论``一个复数对应一个点''。但真正进入复变函数以后，我们更常研究的是``一大片点''：函数在哪个区域里有定义？积分路径能不能连续变形？奇点周围有没有``洞''？这些问题都需要点集语言。
-
-\begin{dingliyi}{邻域}{}
-设 $z_0 \in \mathbb{C}$，$r > 0$。点集
-\begin{equation}
-    U(z_0, r) = \{z \in \mathbb{C} : |z-z_0| < r\}
-\end{equation}
-称为点 $z_0$ 的一个\textbf{邻域}，也就是以 $z_0$ 为圆心、$r$ 为半径的开圆盘。
-\end{dingliyi}
-
-这一定义的意思并不复杂：如果一个点 $z$ 落在 $U(z_0,r)$ 里，就说明 $z$ 到 $z_0$ 的距离小于 $r$。
-
-\begin{dingliyi}{区域}{}
-如果一个点集既是\textbf{开集}又是\textbf{连通}的，就称它为一个\textbf{区域}。
-\end{dingliyi}
-
-这里的两个关键词可以先这样理解：
-\begin{itemize}
-    \item \textbf{开集}：集合中每一点周围都能画一个足够小的邻域，而且这个邻域仍完全包含在集合内部。
-    \item \textbf{连通}：集合不是分裂成几块彼此断开的部分，你可以在集合内部连续移动，而不必``跳过去''。
-\end{itemize}
-
-\begin{dingliyi}{单连通与多连通}{}
-如果一个区域中任意闭曲线都能在不离开该区域的前提下连续缩成一点，就称这个区域为\textbf{单连通区域}；如果做不到，通常是因为区域里有``洞''，就称为\textbf{多连通区域}。
-\end{dingliyi}
-
-\begin{figure}[htbp]
-\centering
-\begin{minipage}{0.47\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.9]
-    \draw[->, thick] (-2.6, 0) -- (2.6, 0) node[right] {$x$};
-    \draw[->, thick] (0, -2.6) -- (0, 2.6) node[above] {$y$};
-    \fill[blue!12] (0, 0) circle (1.8);
-    \draw[blue!70!black, thick] (0, 0) circle (1.8);
-    \node[blue!70!black] at (0, 0) {$|z-1|<2$ 型圆盘};
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\par\smallskip
-圆盘：单连通区域
-\end{minipage}
-\hfill
-\begin{minipage}{0.47\textwidth}
-\centering
-\begin{tikzpicture}[scale=0.9]
-    \draw[->, thick] (-2.8, 0) -- (2.8, 0) node[right] {$x$};
-    \draw[->, thick] (0, -2.8) -- (0, 2.8) node[above] {$y$};
-    \fill[orange!12, even odd rule] (0, 0) circle (2.1) (0, 0) circle (0.9);
-    \draw[orange!80!black, thick] (0, 0) circle (2.1);
-    \draw[orange!80!black, thick] (0, 0) circle (0.9);
-    \node[orange!80!black] at (0, 1.45) {$1<|z|<2$ 型圆环};
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\par\smallskip
-圆环：多连通区域
-\end{minipage}
-\caption{单连通区域与多连通区域的直观图像}
-\label{fig:regions}
-\end{figure}
-
-\begin{tishi}[为什么这组概念重要]
-后面学习复积分时，我们经常会问：积分路径能不能连续变形？一个闭路围没围住奇点？函数是在整个区域里解析，还是中间挖掉了一点？这些问题都离不开``区域''和``连通性''的语言。
-\end{tishi}
-
-\begin{lizi}{}{}
-判断下列两个集合是不是区域；如果是，再说明它是单连通还是多连通：
-\begin{equation}
-    D_1=\{z:|z-1|<2\}, \qquad D_2=\{z:1<|z|<2\}
-\end{equation}
-\begin{jie}
-    对于 $D_1$，它表示以点 $1$ 为圆心、$2$ 为半径的开圆盘。圆盘内部没有断裂，也没有``洞''，所以 $D_1$ 是一个\textbf{单连通区域}。
-
-    对于 $D_2$，它表示内半径为 $1$、外半径为 $2$ 的开圆环。这个集合仍然是开的，而且内部是连成一片的，所以它是一个区域；但中间挖掉了 $|z|\le 1$ 的部分，闭曲线不能随意缩成一点，因此 $D_2$ 是一个\textbf{多连通区域}。
-\end{jie}
-\end{lizi}
-
-% ========== 第三节 ==========
-\section{复数\index{复数}的运算与几何意义}
-
-\subsection{加法与减法}
-
-\begin{dingliyi}{复数的加减}{}
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$，则
-\begin{align}
-    z_1 + z_2 &= (x_1 + x_2) + \mathrm{i}(y_1 + y_2) \\
-    z_1 - z_2 &= (x_1 - x_2) + \mathrm{i}(y_1 - y_2)
-\end{align}
-\end{dingliyi}
-
-\textbf{几何意义}：复数\index{复数}加法对应向量加法（平行四边形法则或三角形法则），减法对应向量减法。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.9]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 4) node[above] {$y$};
-    
-    % 向量 z1, z2
-    \coordinate (z1) at (2, 1);
-    \coordinate (z2) at (1, 2);
-    \coordinate (zsum) at (3, 3);
-    
-    \draw[->, thick, blue] (0, 0) -- (z1) node[right] {$z_1$};
-    \draw[->, thick, red] (0, 0) -- (z2) node[above] {$z_2$};
-    \draw[->, thick, green!60!black] (0, 0) -- (zsum) node[pos=1, right] {$z_1+z_2$};
-    
-    % 平行四边形
-    \draw[dashed, gray] (z1) -- (zsum);
-    \draw[dashed, gray] (z2) -- (zsum);
-    
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{复数\index{复数}加法的平行四边形法则}
-\label{fig:complex-add}
-\end{figure}
-
-\subsection{乘法}
-
-\begin{dingliyi}{复数的乘法}{}
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$，则
-\begin{equation}
-    z_1 z_2 = (x_1 x_2 - y_1 y_2) + \mathrm{i}(x_1 y_2 + x_2 y_1)
-\end{equation}
-\end{dingliyi}
-
-这个公式不太好记。如果用指数形式，就简单多了：
-
-设 $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$，$z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$，则
-\begin{equation}
-    z_1 z_2 = r_1 r_2 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}
-\end{equation}
-
-\textbf{几何意义}：两个复数相乘，模相乘，辐角相加。这意味着：
-\begin{itemize}
-    \item \keyword{模}乘以 $r_2$：向量的长度伸缩 $r_2$ 倍。
-    \item \keyword{辐角}加 $\theta_2$：向量逆时针旋转 $\theta_2$ 角。
-\end{itemize}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.85]
-    % z 平面
-    \begin{scope}
-        \draw[->, thick, gray] (-0.5, 0) -- (4.5, 0) node[right] {$x$};
-        \draw[->, thick, gray] (0, -0.5) -- (0, 3.5) node[above] {$y$};
-        
-        % z1
-        \coordinate (z1) at (2, 1);
-        \draw[->, very thick, blue] (0, 0) -- (z1);
-        \fill[blue] (z1) circle (2pt) node[above right] {$z_1$};
-        \draw[blue, dashed] (0, 0) -- (2, 0) node[below] {$r_1$};
-        \draw[blue, thick] (0.6, 0) arc (0:26.57:0.6);
-        \node[blue] at (0.9, 0.25) {$\theta_1$};
-        
-        % z2
-        \coordinate (z2) at (1, 2.5);
-        \draw[->, very thick, red] (0, 0) -- (z2);
-        \fill[red] (z2) circle (2pt) node[above] {$z_2$};
-        \draw[red, thick] (0.4, 0) arc (0:68.2:0.4);
-        \node[red] at (0.5, 0.6) {$\theta_2$};
-        
-        \node at (2, -1) {$z$ 平面};
-    \end{scope}
-    
-    % 箭头
-    \draw[->, very thick, purple!70!black] (5, 1.5) -- (6.5, 1.5) node[midway, above] {$\times z_2$};
-    
-    % w 平面
-    \begin{scope}[xshift=8cm]
-        \draw[->, thick, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
-        \draw[->, thick, gray] (0, -0.5) -- (0, 4.5) node[above] {$y$};
-        
-        % z1*z2 (模变大，角度增加)
-        \coordinate (prod) at (2.5, 4);
-        \draw[->, very thick, purple!70!black] (0, 0) -- (prod);
-        \fill[purple!70!black] (prod) circle (2pt) node[above right] {$z_1 z_2$};
-        
-        % 原来的z1（虚线）
-        \draw[dashed, blue!50] (0, 0) -- (2, 1);
-        
-        % 模标注
-        \draw[purple!70!black, dashed] (0, 0) -- (2.5, 0) node[below] {$r_1 r_2$};
-        \draw[purple!70!black, thick] (0.8, 0) arc (0:58:0.8);
-        \node[purple!70!black] at (1.3, 0.7) {$\theta_1+\theta_2$};
-        
-        \node at (2.5, -1) {$w$ 平面};
-    \end{scope}
-\end{tikzpicture}
-\caption{复数乘法的几何意义：模伸缩、辐角相加}
-\label{fig:complex-mult}
-\end{figure}
-
-\begin{tishi}[乘以 $\mathrm{i}$ 的几何意义]
-$\mathrm{i} = \mathrm{e}^{\mathrm{i}\pi/2}$，模为 $1$，辐角为 $\pi/2$（即 $90^\circ$）。因此，任何复数 $z$ 乘以 $\mathrm{i}$，相当于：
-\begin{itemize}
-    \item 模不变（$|\mathrm{i}| = 1$）
-    \item 辐角增加 $90^\circ$，即逆时针旋转 $90^\circ$
-\end{itemize}
-这正是为什么 $\mathrm{i}$ 在交流电路中代表 $90^\circ$ 相位差的原因。
-\end{tishi}
-
-\begin{tishi}[复数乘法与旋转矩阵]
-复数乘法与二维旋转矩阵有深刻的对应关系。
-
-设 $z_2 = \cos\theta + \mathrm{i}\sin\theta$（模为 $1$ 的复数），则 $z_1 \cdot z_2$ 相当于把 $z_1$ 旋转 $\theta$ 角。
-
-用代数形式展开：设 $z_1 = x + \mathrm{i}y$，$z_2 = \cos\theta + \mathrm{i}\sin\theta$，则
-\begin{align}
-    z_1 z_2 &= (x + \mathrm{i}y)(\cos\theta + \mathrm{i}\sin\theta) \notag \\
-           &= (x\cos\theta - y\sin\theta) + \mathrm{i}(x\sin\theta + y\cos\theta)
-\end{align}
-这与二维旋转矩阵的作用完全一致：
-\begin{equation}
-    \begin{pmatrix} x' \\ y' \end{pmatrix} = 
-    \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}
-    \begin{pmatrix} x \\ y \end{pmatrix}
-\end{equation}
-也就是说：\textbf{复数乘法等价于二维平面上的旋转变换}（当模为 $1$ 时）或旋转加缩放变换（一般情况）。这个对应关系在计算机图形学、机器人学中有广泛应用。
-\end{tishi}
-
-\begin{lizi}{}{}
-设 $z = 1 + \mathrm{i}$，求 $z^4$。
-\begin{jie}
-    先化成指数形式。$|z| = \sqrt{2}$，$\theta = \pi/4$，所以
-    \begin{equation}
-        z = \sqrt{2}\,\mathrm{e}^{\mathrm{i}\pi/4}
-    \end{equation}
-    于是
-    \begin{equation}
-        z^4 = (\sqrt{2})^4 \mathrm{e}^{\mathrm{i}\pi} = 4(-1) = -4
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\subsection{复数运算的运算律}
-
-复数之所以能成为一种``数''，是因为它满足实数运算的基本规律。下面我们来验证这些运算律。
-
-\begin{dingli}{复数加法的运算律}{}
-设 $z_1, z_2, z_3$ 是任意复数，则：
-\begin{enumerate}
-    \item \textbf{交换律}：$z_1 + z_2 = z_2 + z_1$
-    \item \textbf{结合律}：$(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3)$
-\end{enumerate}
-\end{dingli}
-
-\begin{proof}
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$，$z_3 = x_3 + \mathrm{i}y_3$。
-
-\textbf{证明交换律}：
-\begin{align}
-    z_1 + z_2 &= (x_1 + x_2) + \mathrm{i}(y_1 + y_2) \notag \\
-    &= (x_2 + x_1) + \mathrm{i}(y_2 + y_1) \quad \text{（实数加法交换律）} \notag \\
-    &= z_2 + z_1
-\end{align}
-
-\textbf{证明结合律}：
-\begin{align}
-    (z_1 + z_2) + z_3 &= \big[(x_1 + x_2) + \mathrm{i}(y_1 + y_2)\big] + (x_3 + \mathrm{i}y_3) \notag \\
-    &= (x_1 + x_2 + x_3) + \mathrm{i}(y_1 + y_2 + y_3)
-\end{align}
-同理，
-\begin{align}
-    z_1 + (z_2 + z_3) &= (x_1 + \mathrm{i}y_1) + \big[(x_2 + x_3) + \mathrm{i}(y_2 + y_3)\big] \notag \\
-    &= (x_1 + x_2 + x_3) + \mathrm{i}(y_1 + y_2 + y_3)
-\end{align}
-两者相等，故结合律成立。
-\end{proof}
-
-\begin{tishi}[几何直观]
-加法的交换律和结合律从几何上看是显然的：向量相加的最终结果与相加的顺序无关。你可以先加 $\vec{z}_1$ 再加 $\vec{z}_2$，也可以反过来，终点是一样的。
-\end{tishi}
-
-\begin{dingli}{复数乘法的运算律}{}
-设 $z_1, z_2, z_3$ 是任意复数，则：
-\begin{enumerate}
-    \item \textbf{交换律}：$z_1 z_2 = z_2 z_1$
-    \item \textbf{结合律}：$(z_1 z_2) z_3 = z_1 (z_2 z_3)$
-    \item \textbf{分配律}：$z_1 (z_2 + z_3) = z_1 z_2 + z_1 z_3$
-\end{enumerate}
-\end{dingli}
-
-\begin{proof}
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$，$z_3 = x_3 + \mathrm{i}y_3$。
-
-\textbf{证明交换律}：
-
-按乘法定义：
-\begin{align}
-    z_1 z_2 &= (x_1 x_2 - y_1 y_2) + \mathrm{i}(x_1 y_2 + x_2 y_1)
-\end{align}
-另一方面：
-\begin{align}
-    z_2 z_1 &= (x_2 x_1 - y_2 y_1) + \mathrm{i}(x_2 y_1 + x_1 y_2)
-\end{align}
-由于实数乘法满足交换律（$x_1 x_2 = x_2 x_1$，$y_1 y_2 = y_2 y_1$），以及 $x_1 y_2 + x_2 y_1 = x_2 y_1 + x_1 y_2$，因此 $z_1 z_2 = z_2 z_1$。
-
-\textbf{证明结合律}：
-
-我们用指数形式来简化。设 $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$，$z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$，$z_3 = r_3 \mathrm{e}^{\mathrm{i}\theta_3}$，则：
-\begin{align}
-    (z_1 z_2) z_3 &= \big(r_1 r_2 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}\big) \cdot r_3 \mathrm{e}^{\mathrm{i}\theta_3} \notag \\
-    &= r_1 r_2 r_3 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2 + \theta_3)}
-\end{align}
-同理：
-\begin{align}
-    z_1 (z_2 z_3) &= r_1 \mathrm{e}^{\mathrm{i}\theta_1} \cdot \big(r_2 r_3 \mathrm{e}^{\mathrm{i}(\theta_2 + \theta_3)}\big) \notag \\
-    &= r_1 r_2 r_3 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2 + \theta_3)}
-\end{align}
-两者相等，故结合律成立。
-
-\textbf{证明分配律}：
-
-首先计算左边：
-\begin{align}
-    z_1 (z_2 + z_3) &= (x_1 + \mathrm{i}y_1)\big[(x_2 + x_3) + \mathrm{i}(y_2 + y_3)\big] \notag \\
-    &= (x_1 x_2 + x_1 x_3 - y_1 y_2 - y_1 y_3) + \mathrm{i}(x_1 y_2 + x_1 y_3 + y_1 x_2 + y_1 x_3)
-\end{align}
-
-再计算右边：
-\begin{align}
-    z_1 z_2 + z_1 z_3 &= (x_1 x_2 - y_1 y_2 + x_1 x_3 - y_1 y_3) + \mathrm{i}(x_1 y_2 + y_1 x_2 + x_1 y_3 + y_1 x_3) \notag \\
-    &= (x_1 x_2 + x_1 x_3 - y_1 y_2 - y_1 y_3) + \mathrm{i}(x_1 y_2 + x_1 y_3 + y_1 x_2 + y_1 x_3)
-\end{align}
-
-左边与右边相等，分配律得证。
-\end{proof}
-
-\begin{tishi}[用指数形式简化证明]
-对于乘法的交换律和结合律，使用指数形式证明极为简洁：
-\begin{align}
-    z_1 z_2 &= r_1 r_2 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)} = r_2 r_1 \mathrm{e}^{\mathrm{i}(\theta_2 + \theta_1)} = z_2 z_1 \\
-    (z_1 z_2) z_3 &= r_1 r_2 r_3 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2 + \theta_3)} = z_1 (z_2 z_3)
-\end{align}
-这体现了指数形式的威力——它把复数乘法转化为模的乘法和辐角的加法，本质上``降维''了。
-\end{tishi}
-
-\begin{tishi}[什么叫域？]
-由于复数满足上述所有运算律，加上存在加法单位元 $0$、乘法单位元 $1$，以及每个非零复数都有乘法逆元 $z^{-1} = \bar{z}/|z|^2$，我们说复数集合 $\mathbb{C}$ 构成一个\textbf{域}（field）。
-
-如果你暂时没有学过抽象代数，把``域''理解成``可以稳定做四则运算的数系''就够了。有理数 $\mathbb{Q}$、实数 $\mathbb{R}$、复数 $\mathbb{C}$ 都是域。
-
-但复数域有一个独特的优势：它是\textbf{代数闭}的，即任何复系数多项式在 $\mathbb{C}$ 中都有根。这是代数基本定理的结论。
-\end{tishi}
-
-\begin{tishi}[整数为什么不构成域？]
-整数集合 $\mathbb{Z}$ 不构成域，因为它缺少乘法逆元。域要求每个非零元素都有倒数，但整数的倒数通常不是整数（如 $2$ 的倒数是 $\frac{1}{2}$）。
-
-$\mathbb{Z}$ 构成的是\textbf{整环}（integral domain）——满足交换律、结合律、分配律，有单位元，无零因子，但不是所有非零元素都有逆元。要得到域，必须把整数扩充为有理数 $\mathbb{Q}$，即允许分数。
-\end{tishi}
-
-\begin{jinshi}[除法不满足分配律]
-注意，除法对加法\textbf{不}满足分配律：
-\begin{equation}
-    \frac{z_1}{z_2 + z_3} \neq \frac{z_1}{z_2} + \frac{z_1}{z_3}
-\end{equation}
-这是因为除法本质上是乘以逆元，而乘法对加法的分配律只能单向展开：
-\begin{equation}
-    z_1(z_2 + z_3) = z_1 z_2 + z_1 z_3
-\end{equation}
-但不能逆向收缩——这在处理分式时要格外小心。
-\end{jinshi}
-
-\subsection{除法}
-
-\begin{dingliyi}{复数的除法}{}
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2 \neq 0$，则
-\begin{equation}
-    \frac{z_1}{z_2} = \frac{z_1 \bar{z}_2}{|z_2|^2} = \frac{(x_1 x_2 + y_1 y_2) + \mathrm{i}(x_2 y_1 - x_1 y_2)}{x_2^2 + y_2^2}
-\end{equation}
-\end{dingliyi}
-
-用指数形式更简洁：若 $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$，$z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$，则
-\begin{equation}
-    \frac{z_1}{z_2} = \frac{r_1}{r_2} \mathrm{e}^{\mathrm{i}(\theta_1 - \theta_2)}
-\end{equation}
-
-\begin{tuilun}{模的除法性质}{}
-若 $z_2 \neq 0$，则
-\begin{equation}
-    \left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}
-\end{equation}
-\end{tuilun}
-
-\begin{proof}
-    由指数形式
-    \begin{equation}
-        \frac{z_1}{z_2} = \frac{r_1}{r_2}\mathrm{e}^{\mathrm{i}(\theta_1-\theta_2)}
-    \end{equation}
-    可见它的模正好是 $r_1/r_2$，也就是
-    \begin{equation}
-        \left|\frac{z_1}{z_2}\right| = \frac{r_1}{r_2} = \frac{|z_1|}{|z_2|}
-    \end{equation}
-\end{proof}
-
-\textbf{几何意义}：模相除，辐角相减。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.3]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 4) node[above] {$y$};
-    
-    % z1 = 2 + 2i
-    \coordinate (z1) at (2, 2);
-    \draw[->, thick, blue] (0, 0) -- (z1);
-    \fill[blue] (z1) circle (2pt) node[above right] {$z_1 = 2+2\mathrm{i}$};
-    
-    % z2 = 1 + sqrt(3)i
-    \coordinate (z2) at (1, 1.732);
-    \draw[->, thick, red] (0, 0) -- (z2);
-    \fill[red] (z2) circle (2pt) node[above left] {$z_2 = 1+\sqrt{3}\mathrm{i}$};
-    
-    % z1/z2 = sqrt(2)
-    \coordinate (z1z2) at (1.366, 0.366);
-    \draw[->, thick, purple] (0, 0) -- (z1z2);
-    \fill[purple] (z1z2) circle (2pt) node[right] {$\frac{z_1}{z_2}$};
-    
-    % 角度标注
-    \draw[thick, blue!50] (0.6, 0) arc (0:45:0.6);
-    \node[blue] at (0.85, 0.25) {$\theta_1$};
-    
-    \draw[thick, red!50] (0.8, 0) arc (0:60:0.8);
-    \node[red] at (0.6, 0.5) {$\theta_2$};
-    
-    \draw[thick, purple!50] (1.0, 0) arc (0:15:1.0);
-    \node[purple] at (1.3, 0.15) {$\theta_1-\theta_2$};
-    
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{复数除法：$z_1/z_2$ 的辐角等于 $\theta_1 - \theta_2$}
-\label{fig:division}
-\end{figure}
-
-\begin{lizi}{}{}
-计算 $\displaystyle\frac{2 + 2\mathrm{i}}{1 + \sqrt{3}\mathrm{i}}$。
-\begin{jie}
-    \textbf{方法一：代数形式}
-    
-    分子分母同乘共轭：
-    \begin{align}
-        \frac{2 + 2\mathrm{i}}{1 + \sqrt{3}\mathrm{i}} &= \frac{(2 + 2\mathrm{i})(1 - \sqrt{3}\mathrm{i})}{(1 + \sqrt{3}\mathrm{i})(1 - \sqrt{3}\mathrm{i})} \notag \\
-        &= \frac{2 - 2\sqrt{3}\mathrm{i} + 2\mathrm{i} - 2\sqrt{3}\mathrm{i}^2}{1 + 3} \notag \\
-        &= \frac{(2 + 2\sqrt{3}) + 2(1 - \sqrt{3})\mathrm{i}}{4} \notag \\
-        &= \frac{1 + \sqrt{3}}{2} + \frac{1 - \sqrt{3}}{2}\mathrm{i}
-    \end{align}
-    
-    \textbf{方法二：指数形式}
-    
-    先化成指数形式：
-    \begin{align}
-        z_1 &= 2 + 2\mathrm{i} = 2\sqrt{2}\,\mathrm{e}^{\mathrm{i}\pi/4} \\
-        z_2 &= 1 + \sqrt{3}\mathrm{i} = 2\,\mathrm{e}^{\mathrm{i}\pi/3}
-    \end{align}
-    
-    相除：
-    \begin{equation}
-        \frac{z_1}{z_2} = \frac{2\sqrt{2}}{2}\,\mathrm{e}^{\mathrm{i}(\pi/4 - \pi/3)} = \sqrt{2}\,\mathrm{e}^{-\mathrm{i}\pi/12}
-    \end{equation}
-    
-    展开：
-    \begin{equation}
-        \sqrt{2}\,\mathrm{e}^{-\mathrm{i}\pi/12} = \sqrt{2}\left(\cos\frac{\pi}{12} - \mathrm{i}\sin\frac{\pi}{12}\right) = \frac{1 + \sqrt{3}}{2} + \frac{1 - \sqrt{3}}{2}\mathrm{i}
-    \end{equation}
-    （利用 $\cos\frac{\pi}{12} = \frac{\sqrt{6}+\sqrt{2}}{4}$，$\sin\frac{\pi}{12} = \frac{\sqrt{6}-\sqrt{2}}{4}$）
-\end{jie}
-\end{lizi}
-
-\begin{tishi}[除法的几何意义]
-从图中可以看出：
-\begin{itemize}
-    \item $z_1$：模为 $2\sqrt{2}$，辐角为 $\pi/4$（$45^\circ$）
-    \item $z_2$：模为 $2$，辐角为 $\pi/3$（$60^\circ$）
-    \item $z_1/z_2$：模为 $\sqrt{2}$，辐角为 $-\pi/12$（$-15^\circ$）
-\end{itemize}
-除法的效果是：$z_1$ 顺时针旋转 $60^\circ$（减去 $z_2$ 的辐角），长度变为原来的 $1/2$（除以 $z_2$ 的模）。
-\end{tishi}
-
-\subsection{乘方与开方}
-
-\subsubsection{乘方}
-
-设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，则 $z$ 的 $n$ 次幂为
-\begin{equation}
-    z^n = r^n \mathrm{e}^{\mathrm{i}n\theta}
-\end{equation}
-
-特别地，当 $r = 1$ 时，有\textbf{棣莫弗公式}：
-\begin{equation}
-    (\cos\theta + \mathrm{i}\sin\theta)^n = \cos n\theta + \mathrm{i}\sin n\theta
-\end{equation}
-
-\begin{proof}
-    我们用两种方法证明。
-    
-    \textbf{方法一：利用指数形式}
-    
-    由欧拉公式 $\mathrm{e}^{\mathrm{i}\theta} = \cos\theta + \mathrm{i}\sin\theta$，有
-    \begin{equation}
-        (\cos\theta + \mathrm{i}\sin\theta)^n = \left(\mathrm{e}^{\mathrm{i}\theta}\right)^n = \mathrm{e}^{\mathrm{i}n\theta} = \cos n\theta + \mathrm{i}\sin n\theta
-    \end{equation}
-    
-    \textbf{方法二：数学归纳法}
-    
-    当 $n = 1$ 时，公式显然成立。
-    
-    设当 $n = k$ 时公式成立，即
-    \begin{equation}
-        (\cos\theta + \mathrm{i}\sin\theta)^k = \cos k\theta + \mathrm{i}\sin k\theta
-    \end{equation}
-    
-    当 $n = k + 1$ 时：
-    \begin{align}
-        (\cos\theta + \mathrm{i}\sin\theta)^{k+1} &= (\cos\theta + \mathrm{i}\sin\theta)^k \cdot (\cos\theta + \mathrm{i}\sin\theta) \notag \\
-        &= (\cos k\theta + \mathrm{i}\sin k\theta)(\cos\theta + \mathrm{i}\sin\theta) \notag \\
-        &= \cos k\theta \cos\theta - \sin k\theta \sin\theta \notag \\
-        &\quad + \mathrm{i}(\sin k\theta \cos\theta + \cos k\theta \sin\theta) \notag \\
-        &= \cos(k\theta + \theta) + \mathrm{i}\sin(k\theta + \theta) \notag \\
-        &= \cos(k+1)\theta + \mathrm{i}\sin(k+1)\theta
-    \end{align}
-    其中用到了和角公式。由数学归纳法，公式对所有正整数 $n$ 成立。
-    
-    对于负整数 $n = -m$（$m > 0$），注意到
-    \begin{align}
-        (\cos\theta + \mathrm{i}\sin\theta)^{-m}
-        &= \frac{1}{(\cos\theta + \mathrm{i}\sin\theta)^m} \notag \\
-        &= \frac{1}{\cos m\theta + \mathrm{i}\sin m\theta} \notag \\
-        &= \cos m\theta - \mathrm{i}\sin m\theta \notag \\
-        &= \cos(-m\theta) + \mathrm{i}\sin(-m\theta)
-    \end{align}
-    公式同样成立。
-\end{proof}
-
-\begin{lizi}{}{}
-用棣莫弗公式计算 $\cos 3\theta$。
-\begin{jie}
-    由棣莫弗公式：
-    \begin{align}
-        \cos 3\theta + \mathrm{i}\sin 3\theta &= (\cos\theta + \mathrm{i}\sin\theta)^3 \\
-        &= \cos^3\theta + 3\mathrm{i}\cos^2\theta\sin\theta - 3\cos\theta\sin^2\theta - \mathrm{i}\sin^3\theta
-    \end{align}
-    比较实部，得
-    \begin{equation}
-        \cos 3\theta = \cos^3\theta - 3\cos\theta\sin^2\theta = 4\cos^3\theta - 3\cos\theta
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\subsubsection{开方}
-
-设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，求 $z$ 的 $n$ 次方根 $w = \sqrt[n]{z}$。
-
-设 $w = \rho\mathrm{e}^{\mathrm{i}\varphi}$，则 $w^n = z$ 给出
-\begin{equation}
-    \rho^n \mathrm{e}^{\mathrm{i}n\varphi} = r\mathrm{e}^{\mathrm{i}\theta}
-\end{equation}
-因此 $\rho = \sqrt[n]{r}$，$n\varphi = \theta + 2k\pi$（$k = 0, 1, \ldots, n-1$），即
-\begin{equation}
-    \varphi_k = \frac{\theta + 2k\pi}{n}, \quad k = 0, 1, \ldots, n-1
-\end{equation}
-
-所以 $z$ 的 $n$ 次方根有 $n$ 个值：
-\begin{equation}
-    w_k = \sqrt[n]{r} \, \mathrm{e}^{\mathrm{i}(\theta + 2k\pi)/n}, \quad k = 0, 1, \ldots, n-1
-\end{equation}
-
-\begin{tishi}[几何意义]
-$n$ 次方根的 $n$ 个值均匀分布在以原点为圆心、$\sqrt[n]{|z|}$ 为半径的圆周上，构成一个正 $n$ 边形。
-\end{tishi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.5]
-    % 圆
-    \draw[gray, dashed] (0,0) circle (1);
-    
-    % 坐标轴
-    \draw[->, thick] (-1.5, 0) -- (1.5, 0) node[right] {$x$};
-    \draw[->, thick] (0, -1.5) -- (0, 1.5) node[above] {$y$};
-    
-    % 单位根
-    \foreach \k in {0,1,2,3,4,5} {
-        \pgfmathsetmacro{\angle}{60*\k}
-        \coordinate (w\k) at (\angle:1);
-        \fill[blue] (w\k) circle (1.5pt);
-        \node at (\angle:1.25) {$w_{\k}$};
-    }
-    
-    % 连接成正六边形
-    \draw[blue!50, thick] (w0) -- (w1) -- (w2) -- (w3) -- (w4) -- (w5) -- cycle;
-    
-    \node[below] at (0, -1.8) {$1$ 的 $6$ 次方根};
-\end{tikzpicture}
-\caption{$1$ 的 $n$ 次方根构成正 $n$ 边形}
-\label{fig:roots-unity}
-\end{figure}
-
-\begin{lizi}{}{}
-求 $z = 1$ 的立方根。
-\begin{jie}
-    写成指数形式：$z = 1 = \mathrm{e}^{\mathrm{i}\cdot 0}$。
-    
-    立方根为
-    \begin{equation}
-        w_k = \mathrm{e}^{\mathrm{i} \cdot 2k\pi/3}, \quad k = 0, 1, 2
-    \end{equation}
-    
-    即
-    \begin{align}
-        w_0 &= \mathrm{e}^0 = 1 \\
-        w_1 &= \mathrm{e}^{\mathrm{i}2\pi/3} = -\frac{1}{2} + \frac{\sqrt{3}}{2}\mathrm{i} \\
-        w_2 &= \mathrm{e}^{\mathrm{i}4\pi/3} = -\frac{1}{2} - \frac{\sqrt{3}}{2}\mathrm{i}
-    \end{align}
-    
-    这三个值在复平面上构成正三角形。
-\end{jie}
-\end{lizi}
-
-\subsection{共轭复数\index{复数}}
-
-复数\index{复数} $z = x + \mathrm{i}y$ 的\textbf{共轭复数\index{复数}}定义为
-\begin{equation}
-    \bar{z} = x - \mathrm{i}y
-\end{equation}
-即把虚部取相反数。
-
-几何上，共轭复数\index{复数} $\bar{z}$ 关于实轴与 $z$ 对称。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.2]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$};
-    \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$y$};
-    
-    % 复数\index{复数} z
-    \coordinate (z) at (3, 2);
-    \fill[blue] (z) circle (2pt) node[above right] {$z = 3 + 2\mathrm{i}$};
-    
-    % 共轭复数\index{复数}
-    \coordinate (zbar) at (3, -2);
-    \fill[red] (zbar) circle (2pt) node[below right] {$\bar{z} = 3 - 2\mathrm{i}$};
-    
-    % 对称线
-    \draw[dashed, gray] (z) -- (zbar);
-    
-    \node[below left] at (0, 0) {$O$};
-\end{tikzpicture}
-\caption{共轭复数\index{复数}的几何意义}
-\label{fig:conjugate}
-\end{figure}
-
-共轭复数\index{复数}有以下重要性质：
-
-\begin{dingli}{共轭复数的性质}{}
-设 $z = x + \mathrm{i}y$，则：
-\begin{enumerate}
-    \item $z + \bar{z} = 2x = 2\operatorname{Re}(z)$
-    \item $z - \bar{z} = 2\mathrm{i}y = 2\mathrm{i}\operatorname{Im}(z)$
-    \item $z\bar{z} = |z|^2 = x^2 + y^2$
-    \item $\overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2$
-    \item $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$
-    \item $\overline{z^n} = (\bar{z})^n$
-    \item $|\bar{z}| = |z|$
-    \item 若 $\theta$ 是 $z$ 的一个辐角，则 $-\theta$ 是 $\bar{z}$ 的一个辐角；特别地，当 $z$ 不在负实轴上时，$\operatorname{Arg}(\bar{z}) = -\operatorname{Arg}(z)$
-\end{enumerate}
-\end{dingli}
-
-\begin{proof}
-设 $z = x + \mathrm{i}y$，则 $\bar{z} = x - \mathrm{i}y$。我们逐一证明各条性质。
-
-\textbf{第1条}：$z + \bar{z} = 2x$
-\begin{align}
-    z + \bar{z} &= (x + \mathrm{i}y) + (x - \mathrm{i}y) = 2x
-\end{align}
-这正是实部的两倍，即 $z + \bar{z} = 2\operatorname{Re}(z)$。
-
-\textbf{第2条}：$z - \bar{z} = 2\mathrm{i}y$
-\begin{align}
-    z - \bar{z} &= (x + \mathrm{i}y) - (x - \mathrm{i}y) = 2\mathrm{i}y
-\end{align}
-因此 $z - \bar{z} = 2\mathrm{i}\operatorname{Im}(z)$，即虚部的两倍乘以 $\mathrm{i}$。
-
-\textbf{第3条}：$z\bar{z} = |z|^2$
-\begin{align}
-    z\bar{z} &= (x + \mathrm{i}y)(x - \mathrm{i}y) \\
-             &= x^2 - \mathrm{i}xy + \mathrm{i}xy - \mathrm{i}^2 y^2 \\
-             &= x^2 + y^2 = |z|^2
-\end{align}
-
-\textbf{第4条}：$\overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2$
-
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$，则
-\begin{align}
-    z_1 + z_2 &= (x_1 + x_2) + \mathrm{i}(y_1 + y_2) \\
-    \overline{z_1 + z_2} &= (x_1 + x_2) - \mathrm{i}(y_1 + y_2) \\
-    &= (x_1 - \mathrm{i}y_1) + (x_2 - \mathrm{i}y_2) = \bar{z}_1 + \bar{z}_2
-\end{align}
-这说明共轭运算对加法是可分配的。
-
-\textbf{第5条}：$\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$
-
-设 $z_1 = x_1 + \mathrm{i}y_1$，$z_2 = x_2 + \mathrm{i}y_2$，则
-\begin{align}
-    z_1 z_2 &= (x_1 x_2 - y_1 y_2) + \mathrm{i}(x_1 y_2 + x_2 y_1)
-\end{align}
-取共轭得
-\begin{align}
-    \overline{z_1 z_2} &= (x_1 x_2 - y_1 y_2) - \mathrm{i}(x_1 y_2 + x_2 y_1)
-\end{align}
-另一方面，
-\begin{align}
-    \bar{z}_1 \bar{z}_2 &= (x_1 - \mathrm{i}y_1)(x_2 - \mathrm{i}y_2) \\
-    &= x_1 x_2 - \mathrm{i}x_1 y_2 - \mathrm{i}x_2 y_1 + \mathrm{i}^2 y_1 y_2 \\
-    &= (x_1 x_2 - y_1 y_2) - \mathrm{i}(x_1 y_2 + x_2 y_1)
-\end{align}
-两者相等，故 $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$。
-
-\textbf{第6条}：$\overline{z^n} = (\bar{z})^n$
-
-用数学归纳法。当 $n = 1$ 时显然成立。假设当 $n = k$ 时成立，即 $\overline{z^k} = (\bar{z})^k$。则当 $n = k + 1$ 时，由第5条：
-\begin{align}
-    \overline{z^{k+1}} = \overline{z^k \cdot z} = \overline{z^k} \cdot \bar{z} = (\bar{z})^k \cdot \bar{z} = (\bar{z})^{k+1}
-\end{align}
-由归纳原理，对一切正整数 $n$ 成立。
-
-\textbf{第7条}：$|\bar{z}| = |z|$
-
-设 $z = x + \mathrm{i}y$，则 $\bar{z} = x - \mathrm{i}y$。
-\begin{align}
-    |\bar{z}| &= \sqrt{x^2 + (-y)^2} = \sqrt{x^2 + y^2} = |z|
-\end{align}
-这从几何上看也很清楚：$z$ 和 $\bar{z}$ 关于实轴对称，到原点的距离相等。
-
-    \textbf{第8条}：共轭会把辐角取相反数
-
-    设 $z = r(\cos\theta + \mathrm{i}\sin\theta) = r\mathrm{e}^{\mathrm{i}\theta}$，则
-    \begin{align}
-        \bar{z} &= r(\cos\theta - \mathrm{i}\sin\theta) = r(\cos(-\theta) + \mathrm{i}\sin(-\theta)) = r\mathrm{e}^{-\mathrm{i}\theta}
-    \end{align}
-    这说明：如果 $\theta$ 是 $z$ 的一个辐角，那么 $-\theta$ 就是 $\bar{z}$ 的一个辐角。
-
-    当 $z$ 不在负实轴上时，主辐角不会碰到端点跳变，因此
-    \begin{equation}
-        \operatorname{Arg}(\bar{z}) = -\operatorname{Arg}(z)
-    \end{equation}
-    从几何上看也很直观：$\bar{z}$ 关于实轴与 $z$ 对称，所以方向正好翻到另一侧。
-\end{proof}
-
-\begin{lizi}{}{}
-利用共轭复数\index{复数}计算 $\displaystyle\frac{3 + 2\mathrm{i}}{1 - \mathrm{i}}$。
-\begin{jie}
-    将分母``实数化''：分子分母同乘分母的共轭复数\index{复数}。
-    \begin{align}
-        \frac{3 + 2\mathrm{i}}{1 - \mathrm{i}} &= \frac{(3 + 2\mathrm{i})(1 + \mathrm{i})}{(1 - \mathrm{i})(1 + \mathrm{i})} \\
-        &= \frac{3 + 3\mathrm{i} + 2\mathrm{i} + 2\mathrm{i}^2}{1 - \mathrm{i}^2} \\
-        &= \frac{3 + 5\mathrm{i} - 2}{2} \\
-        &= \frac{1 + 5\mathrm{i}}{2} = \frac{1}{2} + \frac{5}{2}\mathrm{i}
-    \end{align}
-\end{jie}
-\end{lizi}
-
-% ========== 第四节 ==========
-\section{扩充复平面与无穷远点}
-
-\begin{wulibj}[先抓住主线]
-这一节带一点``预习''性质。第一次阅读时，先记住两件事：第一，复平面里所有``走向无穷远''的方向，可以统一看成同一个点 $\infty$；第二，这样做以后，直线和圆能够放在同一个框架里讨论。至于球极投影的细节和后面的统一方程，先有直观印象就够了。
+\begin{wulibj}[为什么要换一种表示法]
+代数形式 $x+\mathrm{i}y$ 很适合做加减法，也方便看出实部与虚部；但当我们关心复数的长度和方向、尤其要处理乘法、除法、乘幂和开方时，它就不够灵活了。既然复数在复平面上本来就像一个向量，那么用极坐标来表示它就会更加自然。
 \end{wulibj}
 
-到目前为止，我们一直用平面上的点表示复数。当讨论 $|z| \to \infty$ 时，普通复平面没有一个真正的``落点''，所以很多表述显得不够整齐。为了解决这个问题，我们引入复球面（黎曼球面）以及扩充复平面。
+\subsection{从直角坐标到极坐标}
 
-\subsection{球极投影}
+设 $z=x+\mathrm{i}y\neq 0$。记
+\[
+r=|z|,\qquad \theta\in \arg z.
+\]
+根据平面几何中的极坐标关系，有
+\begin{equation}
+    x=r\cos\theta,\qquad y=r\sin\theta.
+\end{equation}
+于是
+\begin{equation}
+    z=x+\mathrm{i}y=r(\cos\theta+\mathrm{i}\sin\theta).
+\end{equation}
 
-考虑一个单位球面，放在复平面上方，使得球的南极与原点相切。设球的北极为 $N$，南极为 $S$。
+这说明：一个非零复数完全可以用``长度 $r$ + 方向 $\theta$''来描述。
 
-\begin{dingliyi}{球极投影}{}
-对于复平面上任意一点 $z$，连接 $N$ 和 $z$ 的直线与球面相交于一点 $P$（异于 $N$）。这个映射 $z \mapsto P$ 称为\textbf{球极投影}。
+\subsection{复数的三角形式}
+
+\begin{dingliyi}{三角形式}{}
+设 $z\neq 0$，若
+\[
+r=|z|,\qquad \theta\in \arg z,
+\]
+则
+\begin{equation}\label{eq:trigonometric-form}
+    z=r(\cos\theta+\mathrm{i}\sin\theta)
+\end{equation}
+称为复数 $z$ 的\textbf{三角形式}。
+\end{dingliyi}
+
+\begin{zhu}{}{}
+三角形式里，模 $r$ 总取非负值，而角 $\theta$ 不是唯一的。若把 $\theta$ 换成 $\theta+2k\pi$，表示的仍然是同一个复数。
+\end{zhu}
+
+\begin{lizi}{写成三角形式}{}
+把
+\[
+z=-1+\sqrt{3}\,\mathrm{i}
+\]
+写成三角形式。
+
+\begin{jie}
+先求模：
+\[
+|z|=\sqrt{(-1)^2+(\sqrt{3})^2}=2.
+\]
+
+再求主辐角。该点位于第二象限，参考角为 $\pi/3$，所以
+\[
+\operatorname{Arg}z=\frac{2\pi}{3}.
+\]
+
+因此
+\[
+z=2\left(\cos\frac{2\pi}{3}+\mathrm{i}\sin\frac{2\pi}{3}\right).
+\]
+若写出全部辐角，则也可写成
+\[
+z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr),\qquad k\in\mathbb{Z}.
+\]
+\end{jie}
+\end{lizi}
+
+\subsection{欧拉公式}
+
+三角形式已经很有用，但它还可以进一步压缩成更简洁的指数形式。关键就是下面这个著名公式。
+
+\begin{dingli}{欧拉公式}{}
+对任意实数 $\theta$，都有
+\begin{equation}\label{eq:euler-formula}
+    e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+这里调用高等数学中已经学过的幂级数展开：
+\begin{align*}
+    e^t&=\sum_{n=0}^{\infty}\frac{t^n}{n!},\\
+    \cos t&=\sum_{k=0}^{\infty}(-1)^k\frac{t^{2k}}{(2k)!},\\
+    \sin t&=\sum_{k=0}^{\infty}(-1)^k\frac{t^{2k+1}}{(2k+1)!}.
+\end{align*}
+把 $t$ 换成 $\mathrm{i}\theta$，得
+\begin{align*}
+    e^{\mathrm{i}\theta}
+    &=\sum_{n=0}^{\infty}\frac{(\mathrm{i}\theta)^n}{n!} \\
+    &=\sum_{k=0}^{\infty}\frac{(\mathrm{i}\theta)^{2k}}{(2k)!}
+      +\sum_{k=0}^{\infty}\frac{(\mathrm{i}\theta)^{2k+1}}{(2k+1)!} \\
+    &=\sum_{k=0}^{\infty}(-1)^k\frac{\theta^{2k}}{(2k)!}
+      +\mathrm{i}\sum_{k=0}^{\infty}(-1)^k\frac{\theta^{2k+1}}{(2k+1)!} \\
+    &=\cos\theta+\mathrm{i}\sin\theta.
+\end{align*}
+这就证明了欧拉公式。
+\end{proof}
+
+\begin{tishi}[怎样看待欧拉公式]
+欧拉公式之所以重要，不只是因为它漂亮，而是因为它把\textbf{旋转}和\textbf{指数运算}统一了起来。以后你会发现，很多涉及周期、相位和波动的问题，一旦改写成复指数形式，结构就会清楚得多。
+\end{tishi}
+
+\subsection{指数形式及其优点}
+
+由欧拉公式 \eqref{eq:euler-formula}，三角形式 \eqref{eq:trigonometric-form} 可以进一步写成
+\begin{equation}
+    z=re^{\mathrm{i}\theta}.
+\end{equation}
+这称为复数的\textbf{指数形式}。
+
+\begin{dingliyi}{指数形式}{}
+设 $z\neq 0$，若
+\[
+r=|z|,\qquad \theta\in \arg z,
+\]
+则
+\begin{equation}\label{eq:exp-form}
+    z=re^{\mathrm{i}\theta}
+\end{equation}
+称为复数 $z$ 的\textbf{指数形式}。
 \end{dingliyi}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.0]
-    % 球面
-    \shade[ball color=blue!20, opacity=0.6] (0, 0) circle (1.5);
-    \draw[thick] (0, 0) circle (1.5);
-    
-    % 坐标轴（复平面）
-    \draw[->, thick] (-3, -1.5) -- (3, -1.5) node[right] {$x$};
-    \draw[->, thick] (0, -1.5) -- (0, 2.5) node[above] {$y$};
-    
-    % 复平面上的点
-    \coordinate (z) at (2, -1.5);
-    \fill[red] (z) circle (2pt) node[below] {$z$};
-    
-    % 北极
-    \coordinate (N) at (0, 1.5);
-    \fill[blue] (N) circle (2pt) node[above right] {$N$};
-    
-    % 南极
-    \coordinate (S) at (0, -1.5);
-    \fill[green!60!black] (S) circle (2pt) node[below] {$S$ (原点)};
-    
-    % 球面上的点 P
-    \coordinate (P) at (1.2, 0.6);
-    \fill[orange] (P) circle (2pt) node[right] {$P$};
-    
-    % 投影线
-    \draw[dashed, thick, purple] (N) -- (z);
-    
-    % 标注
-    \node at (0, -2.5) {复平面};
-    \node at (2.2, 2) {球面};
+\begin{tikzpicture}[scale=1.25]
+    \draw[->, thick] (-1.5,0) -- (1.7,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-1.4) -- (0,1.5) node[above] {$\operatorname{Im}z$};
+    \draw[thick, blue] (0,0) circle (1);
+    \coordinate (Z) at ({cos(50)},{sin(50)});
+    \draw[->, thick, red!75!black] (0,0) -- (Z);
+    \fill[red!75!black] (Z) circle (2pt);
+    \draw[thick, green!60!black] (0.35,0) arc[start angle=0,end angle=50,radius=0.35];
+    \node[green!50!black] at (0.55,0.23) {$\theta$};
+    \node[above right] at (Z) {$e^{\mathrm{i}\theta}$};
+    \node[below left] at (0,0) {$O$};
 \end{tikzpicture}
-\caption{球极投影：复平面上的点 $z$ 映射到球面上的点 $P$}
-\label{fig:stereographic}
+\caption{单位圆上的 $e^{\mathrm{i}\theta}$}
+\label{fig:euler-unit-circle}
 \end{figure}
 
-通过球极投影，复平面上的每一点都唯一对应球面上的一个点（除北极 $N$ 外）；反过来，球面上除北极外的每一点也都对应复平面上的一个点。
+指数形式的优点在于：
+\begin{itemize}
+    \item 它把模和辐角压缩进一个紧凑表达式中；
+    \item 乘法、除法、乘幂和开方都能直接用它处理；
+    \item 对物理中的振动和相位问题特别自然。
+\end{itemize}
 
-\subsection{无穷远点}
-
-当复平面上的点 $z$ 越来越远离原点（即 $|z| \to \infty$）时，投影点 $P$ 会越来越接近北极 $N$。
-
-\begin{dingliyi}{无穷远点}{}
-在球极投影下，北极 $N$ 对应复平面上的一个特殊点，称为\textbf{无穷远点}，记作 $\infty$。
-\end{dingliyi}
-
-引入无穷远点后，复平面被扩充为\textbf{扩充复平面}：
+由欧拉公式还可立刻得到
 \begin{equation}
-    \overline{\mathbb{C}} = \mathbb{C} \cup \{\infty\}
+    \cos\theta=\frac{e^{\mathrm{i}\theta}+e^{-\mathrm{i}\theta}}{2},\qquad
+    \sin\theta=\frac{e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}}{2\mathrm{i}}.
+\end{equation}
+这两个公式以后在傅里叶分析中会频繁出现。
+
+\begin{lizi}{代数形式与指数形式互化}{}
+把
+\[
+z=1-\sqrt{3}\,\mathrm{i}
+\]
+写成指数形式；再把
+\[
+w=2e^{-\mathrm{i}\pi/4}
+\]
+写成代数形式。
+
+\begin{jie}
+先看 $z$。它的模为
+\[
+|z|=\sqrt{1^2+(\sqrt{3})^2}=2.
+\]
+它位于第四象限，主辐角为
+\[
+\operatorname{Arg}z=-\frac{\pi}{3}.
+\]
+因此
+\[
+z=2e^{-\mathrm{i}\pi/3}.
+\]
+
+再看 $w$。由欧拉公式，
+\[
+w=2\left(\cos\left(-\frac{\pi}{4}\right)+\mathrm{i}\sin\left(-\frac{\pi}{4}\right)\right).
+\]
+于是
+\[
+w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2}\,\mathrm{i}.
+\]
+\end{jie}
+\end{lizi}
+
+\section{复数的运算及其几何意义}
+
+\begin{wulibj}[本节的核心观念]
+本节最重要的一句话是：\textbf{复数乘法不是单纯的代数乘法，而是平面上的伸缩与旋转。} 只要把这句话真正看懂，后面学习解析函数的导数、保角性和 Möbius 变换时，很多现象都会自然得多。
+\end{wulibj}
+
+\subsection{加法与减法：向量加法的观点}
+
+设
+\[
+z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
+\]
+则
+\begin{equation}
+    z_1+z_2=(x_1+x_2)+\mathrm{i}(y_1+y_2),
+\end{equation}
+\begin{equation}
+    z_1-z_2=(x_1-x_2)+\mathrm{i}(y_1-y_2).
 \end{equation}
 
-\begin{tishi}[无穷远点的直观理解]
-无穷远点 $\infty$ 可以理解为：
-\begin{itemize}
-    \item 模 $|z|$ 趋于无穷大时的统一去向；
-    \item 不论从哪个方向``走向无穷远''，最终都落到同一个点 $\infty$；
-    \item 在复球面上，它就是北极 $N$。
-\end{itemize}
-这与实数中的 $+\infty$ 和 $-\infty$ 不同。复平面里只有\textbf{一个}无穷远点。
+从坐标的角度看，这不过是``横坐标分别相加、纵坐标分别相加''；但从几何上看，它恰好对应平面向量的加减法。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[->, thick] (-0.6,0) -- (5.5,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-0.6) -- (0,4) node[above] {$\operatorname{Im}z$};
+    \coordinate (A) at (2,1);
+    \coordinate (B) at (1.5,2);
+    \coordinate (C) at (3.5,3);
+    \draw[->, thick, blue!80!black] (0,0) -- (A) node[midway, below right] {$z_1$};
+    \draw[->, thick, red!75!black] (0,0) -- (B) node[midway, left] {$z_2$};
+    \draw[->, thick, purple!85!black] (0,0) -- (C) node[midway, above left] {$z_1+z_2$};
+    \draw[dashed, gray] (A) -- (C);
+    \draw[dashed, gray] (B) -- (C);
+    \fill[blue!80!black] (A) circle (2pt);
+    \fill[red!75!black] (B) circle (2pt);
+    \fill[purple!85!black] (C) circle (2pt);
+\end{tikzpicture}
+\caption{复数加法对应平行四边形法则}
+\label{fig:complex-addition}
+\end{figure}
+
+\begin{zhu}{}{}
+复数加法的几何意义并不神秘：它就是向量加法。因此，加减法主要体现的是``平移''和``合成''，真正能体现复数特殊魅力的，是下面的乘法。
+\end{zhu}
+
+\subsection{乘法：模相乘，辐角相加}
+
+先看代数形式下的乘法：
+\begin{align}
+    (x_1+\mathrm{i}y_1)(x_2+\mathrm{i}y_2)
+    =(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
+\end{align}
+只看这个式子，几何意义并不明显；但一旦改写成指数形式，结构就会立刻显现出来。
+
+\begin{dingli}{复数乘法的极形式法则}{}
+若
+\[
+z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2},
+\]
+则
+\begin{equation}\label{eq:complex-multiply-polar}
+    z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)}.
+\end{equation}
+从而
+\begin{equation}
+    |z_1z_2|=|z_1||z_2|,\qquad \arg(z_1z_2)=\arg z_1+\arg z_2.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由指数形式直接计算：
+\[
+z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr)
+=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)}.
+\]
+这就得到 \eqref{eq:complex-multiply-polar}。于是乘积的模等于模的乘积，乘积的辐角等于辐角的和。
+\end{proof}
+
+\begin{tishi}[乘法的几何意义]
+把一个复数乘上另一个复数，本质上是在做两件事：
+\begin{enumerate}
+    \item 把长度按比例 $|z_2|$ 放大或缩小；
+    \item 把方向额外旋转 $\arg z_2$。
+\end{enumerate}
+所以，复数乘法就是``伸缩 + 旋转''的组合。
 \end{tishi}
 
-\subsection{无穷远点的运算}
+\begin{lizi}{用指数形式做乘法}{}
+计算
+\[
+(\sqrt{3}+\mathrm{i})(1-\mathrm{i}).
+\]
 
-为了在记号上保持统一，我们约定一些与 $\infty$ 有关的运算规则。
+\begin{jie}
+先把两个复数写成指数形式。
 
-\begin{dingliyi}{无穷远点的运算规则}{}
-设 $z \in \mathbb{C}$ 是有限复数，且 $z \neq 0$。约定
-\begin{align}
-    z + \infty &= \infty + z = \infty \\
-    z \cdot \infty &= \infty \cdot z = \infty \\
-    \frac{z}{0} &= \infty \\
-    \frac{z}{\infty} &= 0 \\
-    \frac{\infty}{z} &= \infty
-\end{align}
+对
+\[
+\sqrt{3}+\mathrm{i},
+\]
+它的模是 $2$，主辐角是 $\pi/6$，所以
+\[
+\sqrt{3}+\mathrm{i}=2e^{\mathrm{i}\pi/6}.
+\]
+
+对
+\[
+1-\mathrm{i},
+\]
+它的模是 $\sqrt{2}$，主辐角是 $-\pi/4$，所以
+\[
+1-\mathrm{i}=\sqrt{2}\,e^{-\mathrm{i}\pi/4}.
+\]
+
+因此
+\[
+(\sqrt{3}+\mathrm{i})(1-\mathrm{i})
+=2\sqrt{2}\,e^{\mathrm{i}(\pi/6-\pi/4)}
+=2\sqrt{2}\,e^{-\mathrm{i}\pi/12}.
+\]
+若再写回代数形式，也可以得到
+\[
+(\sqrt{3}+1)+(\,1-\sqrt{3}\,)\mathrm{i}.
+\]
+\end{jie}
+\end{lizi}
+
+\subsection{除法：模相除，辐角相减}
+
+设 $z_2\neq 0$，则复数除法定义为
+\begin{equation}
+    \frac{z_1}{z_2}=z_1\cdot \frac{1}{z_2}.
+\end{equation}
+若
+\[
+z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
+\]
+则
+\begin{equation}\label{eq:complex-division-polar}
+    \frac{z_1}{z_2}=\frac{r_1}{r_2}e^{\mathrm{i}(\theta_1-\theta_2)}.
+\end{equation}
+
+这说明，复数除法的几何意义就是：先把长度除以 $r_2$，再把方向减去 $\theta_2$，也就是撤销一次旋转与伸缩。
+
+在代数形式下，常用共轭把分母化成实数：
+\begin{equation}
+    \frac{z_1}{z_2}
+    =\frac{z_1}{z_2}\cdot\frac{\bar z_2}{\bar z_2}
+    =\frac{z_1\bar z_2}{|z_2|^2}.
+\end{equation}
+若
+\[
+z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
+\]
+则
+\begin{equation}
+    \frac{z_1}{z_2}
+    =\frac{(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2)}{x_2^2+y_2^2}.
+\end{equation}
+
+\begin{lizi}{用共轭做除法}{}
+计算
+\[
+\frac{2+\mathrm{i}}{1-\mathrm{i}}.
+\]
+
+\begin{jie}
+用分母的共轭 $1+\mathrm{i}$ 去乘：
+\[
+\frac{2+\mathrm{i}}{1-\mathrm{i}}
+=\frac{2+\mathrm{i}}{1-\mathrm{i}}\cdot \frac{1+\mathrm{i}}{1+\mathrm{i}}
+=\frac{(2+\mathrm{i})(1+\mathrm{i})}{(1-\mathrm{i})(1+\mathrm{i})}.
+\]
+
+先算分母：
+\[
+(1-\mathrm{i})(1+\mathrm{i})=1-\mathrm{i}^2=2.
+\]
+
+再算分子：
+\[
+(2+\mathrm{i})(1+\mathrm{i})=2+2\mathrm{i}+\mathrm{i}+\mathrm{i}^2=1+3\mathrm{i}.
+\]
+
+因此
+\[
+\frac{2+\mathrm{i}}{1-\mathrm{i}}=\frac{1+3\mathrm{i}}{2}=\frac{1}{2}+\frac{3}{2}\mathrm{i}.
+\]
+\end{jie}
+\end{lizi}
+
+\subsection{乘以 \texorpdfstring{$\mathrm{i}$}{i} 的几何意义}
+
+下面这个特殊情形特别值得单独记住。
+
+由
+\[
+\mathrm{i}=e^{\mathrm{i}\pi/2},
+\]
+以及乘法的极形式法则知，任意复数 $z$ 乘上 $\mathrm{i}$ 后，模不变，辐角增加 $\pi/2$。也就是说：
+\begin{equation}
+    \mathrm{i}z
+\end{equation}
+表示把 $z$ 在复平面上\textbf{逆时针旋转 $\pi/2$}。
+
+若从代数上直接算，
+\[
+\mathrm{i}(x+\mathrm{i}y)=-y+\mathrm{i}x.
+\]
+这也说明点 $(x,y)$ 变成了点 $(-y,x)$，正是逆时针旋转 $\pi/2$ 的结果。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[->, thick] (-3,0) -- (3.2,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, thick] (0,-2.3) -- (0,3.3) node[above] {$\operatorname{Im}z$};
+    \coordinate (Z) at (2,1);
+    \coordinate (IZ) at (-1,2);
+    \draw[->, thick, blue!80!black] (0,0) -- (Z);
+    \draw[->, thick, red!75!black] (0,0) -- (IZ);
+    \fill[blue!80!black] (Z) circle (2pt) node[below right] {$z$};
+    \fill[red!75!black] (IZ) circle (2pt) node[above left] {$\mathrm{i}z$};
+    \draw[thick, green!60!black] (0.55,0.28) arc[start angle=26.565,end angle=116.565,radius=0.62];
+    \node[green!50!black] at (0.15,1.05) {$\pi/2$};
+\end{tikzpicture}
+\caption{乘以 $\mathrm{i}$ 相当于逆时针旋转 $\pi/2$}
+\label{fig:multiply-by-i}
+\end{figure}
+
+\begin{jinshi}[不要把乘以 $\mathrm{i}$ 理解成``多写一个 $\mathrm{i}$'' ]
+乘以 $\mathrm{i}$ 不是在原来的复数后面``再挂一个符号''，而是在复平面上做了一个明确的几何变换：长度不变，方向逆时针转 $\pi/2$。以后学习解析函数导数的几何意义时，这一点会再次出现。
+\end{jinshi}
+
+\section{复数的乘方、开方与单位根}
+
+\begin{wulibj}[为什么这一节很重要]
+复数的乘方和开方，表面上看只是运算技巧，实际上它第一次把``多值性''和``几何对称''同时摆到了我们面前。后面讨论奇点、留数、部分分式分解以及某些围道积分时，单位根和复数根的分布会不断出现，所以这一节绝不是孤立的代数练习。
+\end{wulibj}
+
+\subsection{棣莫弗公式}
+
+\begin{dingli}{棣莫弗公式}{}
+对任意整数 $n$，都有
+\begin{equation}\label{eq:de-moivre}
+    \bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n=\cos(n\theta)+\mathrm{i}\sin(n\theta).
+\end{equation}
+更一般地，若 $z=re^{\mathrm{i}\theta}$，则
+\begin{equation}
+    z^n=r^n e^{\mathrm{i}n\theta}.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由欧拉公式，
+\[
+\cos\theta+\mathrm{i}\sin\theta=e^{\mathrm{i}\theta}.
+\]
+因此
+\[
+\bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n=(e^{\mathrm{i}\theta})^n=e^{\mathrm{i}n\theta}.
+\]
+再由欧拉公式把右边写回三角形式，就得
+\[
+e^{\mathrm{i}n\theta}=\cos(n\theta)+\mathrm{i}\sin(n\theta).
+\]
+从而得到棣莫弗公式。若再乘上模 $r$ 的 $n$ 次幂，便有
+\[
+(re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
+\]
+\end{proof}
+
+\begin{lizi}{求复数的高次幂}{}
+计算
+\[
+(1-\mathrm{i})^8.
+\]
+
+\begin{jie}
+先把 $1-\mathrm{i}$ 写成指数形式。它的模是
+\[
+\sqrt{2},
+\]
+主辐角是
+\[
+-\frac{\pi}{4}.
+\]
+所以
+\[
+1-\mathrm{i}=\sqrt{2}\,e^{-\mathrm{i}\pi/4}.
+\]
+
+于是
+\[
+(1-\mathrm{i})^8=(\sqrt{2})^8 e^{-2\pi\mathrm{i}}=16.
+\]
+\end{jie}
+\end{lizi}
+
+\subsection{复数的 \texorpdfstring{$n$}{n} 次方根}
+
+与乘幂相反的问题是：已知 $z$，求所有满足
+\begin{equation}
+    w^n=z
+\end{equation}
+的复数 $w$。这就是求 $z$ 的 $n$ 次方根。
+
+\begin{dingli}{复数的 $n$ 次方根}{}
+设
+\[
+z=re^{\mathrm{i}\theta}\neq 0,\qquad r>0.
+\]
+则方程
+\begin{equation}
+    w^n=z
+\end{equation}
+的全部解为
+\begin{equation}\label{eq:nth-roots}
+    w_k=\sqrt[n]{r}\,e^{\mathrm{i}(\theta+2k\pi)/n},\qquad k=0,1,\dots,n-1.
+\end{equation}
+它们一共有 $n$ 个，且在复平面上均匀分布在一个圆周上。
+\end{dingli}
+
+\begin{proof}
+设
+\[
+w=\rho e^{\mathrm{i}\varphi}.
+\]
+则条件 $w^n=z$ 等价于
+\[
+\rho^n e^{\mathrm{i}n\varphi}=re^{\mathrm{i}\theta}.
+\]
+比较模与辐角，得到
+\begin{equation}
+    \rho^n=r,\qquad n\varphi=\theta+2k\pi,\quad k\in\mathbb{Z}.
+\end{equation}
+于是
+\[
+\rho=\sqrt[n]{r},\qquad \varphi=\frac{\theta+2k\pi}{n}.
+\]
+所以
+\[
+w_k=\sqrt[n]{r}\,e^{\mathrm{i}(\theta+2k\pi)/n}.
+\]
+
+当 $k$ 增加 $n$ 时，辐角恰好多加一个 $2\pi$，对应同一个复数，因此只需取
+\[
+k=0,1,\dots,n-1
+\]
+就得到全部不同的根，共 $n$ 个。这些根具有相同的模 $\sqrt[n]{r}$，相邻辐角相差
+\[
+\frac{2\pi}{n},
+\]
+故它们在圆周上均匀分布。
+\end{proof}
+
+\begin{jinshi}[复数开方为什么容易出错]
+在实数范围内，大家很容易形成一种习惯：说``平方根''时，总想着取那个非负的主值。但在复数范围内，$n$ 次方根通常有 $n$ 个不同的值，不能只盯着其中一个。以后学多值函数时，这个观念会变得更加重要。
+\end{jinshi}
+
+\begin{lizi}{求全部四次方根}{}
+求方程
+\[
+z^4=-16
+\]
+的全部解。
+
+\begin{jie}
+把 $-16$ 写成指数形式：
+\[
+-16=16e^{\mathrm{i}(\pi+2k\pi)}.
+\]
+因此它的四次方根为
+\[
+z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
+\]
+所以四个根分别是
+\begin{align*}
+    z_0&=2e^{\mathrm{i}\pi/4}=\sqrt{2}+\sqrt{2}\,\mathrm{i},\\
+    z_1&=2e^{3\mathrm{i}\pi/4}=-\sqrt{2}+\sqrt{2}\,\mathrm{i},\\
+    z_2&=2e^{5\mathrm{i}\pi/4}=-\sqrt{2}-\sqrt{2}\,\mathrm{i},\\
+    z_3&=2e^{7\mathrm{i}\pi/4}=\sqrt{2}-\sqrt{2}\,\mathrm{i}.
+\end{align*}
+它们位于圆
+\[
+|z|=2
+\]
+上，彼此相隔 $\pi/2$。
+\end{jie}
+\end{lizi}
+
+\subsection{单位根及其几何分布}
+
+\begin{dingliyi}{单位根}{}
+方程
+\begin{equation}
+    z^n=1
+\end{equation}
+的全部解称为\textbf{$n$ 次单位根}。
 \end{dingliyi}
 
-\begin{jinshi}[这些式子不是普通代数恒等式]
-和 $\infty$ 打交道时，最容易犯的错误是把它当作普通实数或复数来机械运算。下面这些表达式在扩充复平面中仍然\textbf{没有定义}：
+由公式 \eqref{eq:nth-roots} 立刻得到，$n$ 次单位根为
+\begin{equation}
+    \omega_k=e^{2k\pi\mathrm{i}/n},\qquad k=0,1,\dots,n-1.
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.7]
+    \draw[->, gray] (-1.4,0) -- (1.4,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-1.35) -- (0,1.35) node[above] {$\operatorname{Im}z$};
+    \draw[blue, thick] (0,0) circle (1);
+    \foreach \k in {0,1,2,3,4,5} {
+        \coordinate (P\k) at ({cos(60*\k)},{sin(60*\k)});
+        \fill[red!80!black] (P\k) circle (1.4pt);
+    }
+    \node[right] at (1,0) {$1$};
+    \node[above right] at ({cos(60)},{sin(60)}) {$\omega$};
+    \node[above left] at ({cos(120)},{sin(120)}) {$\omega^2$};
+    \node[left] at (-1,0) {$\omega^3$};
+    \node[below left] at ({cos(240)},{sin(240)}) {$\omega^4$};
+    \node[below right] at ({cos(300)},{sin(300)}) {$\omega^5$};
+\end{tikzpicture}
+\caption{六次单位根在单位圆上的均匀分布}
+\label{fig:roots-of-unity}
+\end{figure}
+
+单位根全部落在单位圆上，并且把圆周平均分成 $n$ 份。这种高度对称的结构在很多地方都会出现。
+
+\begin{dingli}{单位根之和}{}
+当 $n\ge 2$ 时，全部 $n$ 次单位根之和为
+\begin{equation}
+    1+\omega+\omega^2+\cdots+\omega^{n-1}=0,
+\end{equation}
+其中
+\[
+\omega=e^{2\pi\mathrm{i}/n}
+\]
+是一个原始 $n$ 次单位根。
+\end{dingli}
+
+\begin{proof}
+因为 $\omega^n=1$ 且 $\omega\neq 1$，所以几何级数求和公式给出
+\[
+1+\omega+\omega^2+\cdots+\omega^{n-1}
+=\frac{\omega^n-1}{\omega-1}
+=0.
+\]
+\end{proof}
+
+\begin{tishi}[为什么单位根很值得熟悉]
+单位根不仅在代数方程求根中出现，在后面的部分分式分解、积分计算、傅里叶分析以及特殊函数的某些对称结构里也会不断出现。理解它们的几何分布，比单纯记住公式更重要。
+\end{tishi}
+
+\section{扩充复平面、无穷远点与复球面}
+
+\begin{wulibj}[为什么这一节不能省]
+学到这里，我们一直把复数看成复平面上的有限点。但后面研究函数时，我们经常还会问：当 $|z|$ 越来越大时，函数究竟趋向什么？它在``无穷远处''有什么行为？如果每次都只能说``远处''、``很大''，语言就不够统一。于是数学家做了一件很自然的事：给复平面再补上一个点，把所有朝无穷远走去的方向都统一到这个点上，这就是无穷远点。
+\end{wulibj}
+
+\subsection{为什么要引入无穷远点}
+
+在实变函数里，我们经常写
+\[
+x\to +\infty,\qquad x\to -\infty.
+\]
+但在复平面里，点可以沿着任意方向远离原点。如果我们总是分别讨论各种方向，会显得非常零散。
+
+引入无穷远点以后，很多说法就会整齐得多。例如：
 \begin{itemize}
-    \item $\infty + \infty$
-    \item $\infty - \infty$
-    \item $\infty \cdot 0$ 和 $0 \cdot \infty$
-    \item $\frac{\infty}{\infty}$
-    \item $\frac{0}{0}$
+    \item 可以统一讨论``函数在无穷远点附近的行为''；
+    \item 可以把某些关于有限点的结论自然延伸到无穷远点；
+    \item 在几何上，直线和圆也能在更高一级的视角下统一起来。
 \end{itemize}
-它们之所以危险，是因为不同极限过程可能给出完全不同的结果。
-\end{jinshi}
+
+\subsection{扩充复平面}
+
+\begin{dingliyi}{扩充复平面}{}
+在复平面 $\mathbb{C}$ 上再添一个新点 $\infty$，得到的集合
+\begin{equation}
+    \hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}
+\end{equation}
+称为\textbf{扩充复平面}。
+\end{dingliyi}
+
+\begin{zhu}{}{}
+这里的 $\infty$ 不是普通复数，而是为了统一讨论``无穷远行为''而补上的一个新点。第一章里我们主要掌握它的几何意义和邻域概念，不急着做过多形式运算。
+\end{zhu}
 
 \subsection{无穷远点的邻域}
 
-在扩充复平面 $\overline{\mathbb{C}}$ 上，无穷远点也应该像普通点那样拥有自己的邻域。
+对有限点 $z_0$ 来说，邻域是小圆盘
+\[
+\{z:|z-z_0|<\varepsilon\}.
+\]
+而对无穷远点来说，``离它近''意味着``离原点足够远''。
 
 \begin{dingliyi}{无穷远点的邻域}{}
-点集
+形如
 \begin{equation}
-    U(\infty, R) = \{z \in \mathbb{C} : |z| > R\} \cup \{\infty\}
+    \{z\in\mathbb{C}:|z|>R\},\qquad R>0,
 \end{equation}
-称为无穷远点的一个\textbf{$R$ 邻域}。也就是说，圆 $|z| = R$ 外部的那一大片区域，再把 $\infty$ 一起算进去，就是 $\infty$ 的邻域。
+的点集称为无穷远点 $\infty$ 的一个\textbf{邻域}。
 \end{dingliyi}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.9]
-    % 坐标轴
-    \draw[->, thick] (-4, 0) -- (4, 0) node[right] {$x$};
-    \draw[->, thick] (0, -4) -- (0, 4) node[above] {$y$};
-    
-    % 圆
-    \draw[blue, thick] (0, 0) circle (2);
-    \node[blue] at (1.7, 1.7) {$|z| = R$};
-    
-    % 外部区域（阴影）
-    \draw[fill=blue!10, even odd rule] (-4, -4) rectangle (4, 4) (0, 0) circle (2);
-    
-    % 无穷远点
-    \node at (0, 4.8) {$\infty$};
-    \fill[red] (0, 4.5) circle (3pt);
-    
-    % 标注
-    \node at (3.2, 3.2) {$U(\infty, R)$};
-\end{tikzpicture}
-\caption{无穷远点的邻域：圆外区域连同 $\infty$}
-\label{fig:infinity-neighborhood}
-\end{figure}
+这个定义非常值得体会：越远离原点，就越接近无穷远点。
 
-\begin{tishi}[为什么要引入复球面？]
-复球面并不是为了多记一个几何模型，而是为了让很多说法更统一：
-\begin{enumerate}
-    \item 当点``越来越远''时，我们终于有了一个明确的去处 $\infty$；
-    \item 直线可以看成经过 $\infty$ 的圆，于是直线和圆能够统一处理；
-    \item 后面讨论函数在无穷远处的行为时，语言会更整齐。
-\end{enumerate}
-如果你第一次读到这里，只要先把这些直观记住就已经很够用了。
-\end{tishi}
+\begin{lizi}{判断无穷远点的邻域}{}
+下列集合中，哪些是无穷远点的邻域？
+\[
+E_1=\{z:|z|>3\},\qquad E_2=\{z:\operatorname{Re}z>3\},\qquad E_3=\{z:|z-1|>5\}.
+\]
 
-\begin{lizi}{}{}
-在扩充复平面上，圆 $|z| = 1$ 把平面分成内部和外部两部分。问：这两部分在复球面上分别是什么形状？
 \begin{jie}
-    在复球面上：
-    \begin{itemize}
-        \item 圆的内部 $|z| < 1$ 映射为球面上靠近南极的球冠；
-        \item 圆的外部 $|z| > 1$ 连同 $\infty$ 一起，映射为球面上靠近北极的球冠；
-        \item 圆周 $|z| = 1$ 映射为球面上的一条闭曲线，把两个球冠分开。
-    \end{itemize}
-    所以在复球面的眼光下，圆内和圆外并不是一个``有限''、一个``无限''那样地位不同的两块区域，而是球面上彼此对称的两部分。
+$E_1$ 显然是无穷远点的邻域，因为它正是标准形式
+\[
+\{z:|z|>R\}
+\]
+的集合。
+
+$E_2$ 不是无穷远点的邻域。虽然里面有很多模很大的点，但也漏掉了大量远离原点的点，例如负实轴方向的大点。
+
+$E_3$ 虽然不是标准形式，但它包含一个足够远离原点的外部区域，因此也可作为无穷远点的邻域。事实上，当 $|z|>6$ 时，由三角不等式有
+\[
+|z-1|\ge |z|-1>5,
+\]
+故
+\[
+\{z:|z|>6\}\subset E_3.
+\]
+所以 $E_3$ 确实包含无穷远点附近的所有足够远的点。
 \end{jie}
 \end{lizi}
 
-\subsection{复球面上的直线与圆}
+\subsection{用 \texorpdfstring{$w=1/z$}{w=1/z} 理解无穷远点附近}
 
-在复球面上，一个很有用的观点是：\textbf{直线和圆其实可以统一起来看}。
-
-\begin{dingli}{扩充复平面上的广义圆}{}
-在扩充复平面上，满足方程
+研究无穷远点最常用的桥梁，是变换
 \begin{equation}
-    A|z|^2 + \bar{B}z + B\bar{z} + C = 0
+    w=\frac{1}{z}.
 \end{equation}
-的点集称为一个\textbf{广义圆}，其中 $A, C \in \mathbb{R}$，$B \in \mathbb{C}$，且 $|B|^2 > AC$（保证曲线非退化）。
+它会把远离原点的大点，送到靠近原点的小点。
 
-特别地：
-\begin{itemize}
-    \item 当 $A \neq 0$ 时，它是普通圆，圆心为 $-B/A$，半径为 $\sqrt{|B|^2 - AC}/|A|$；
-    \item 当 $A = 0$ 时，它退化为一条直线，而在扩充复平面中这条直线可以看成一条经过 $\infty$ 的圆。
-\end{itemize}
+\begin{dingli}{无穷远点与原点的对应}{}
+设 $z\neq 0$，令
+\[
+w=\frac{1}{z}.
+\]
+则
+\begin{equation}
+    z\to \infty \Longleftrightarrow w\to 0.
+\end{equation}
 \end{dingli}
 
 \begin{proof}
-    设
-    \begin{equation}
-        z = x + \mathrm{i}y, \qquad B = b_1 + \mathrm{i}b_2
-    \end{equation}
-    其中 $b_1, b_2 \in \mathbb{R}$。先把混合项展开：
-    \begin{align}
-        \bar{B}z + B\bar{z}
-        &= (b_1 - \mathrm{i}b_2)(x + \mathrm{i}y) + (b_1 + \mathrm{i}b_2)(x - \mathrm{i}y) \notag \\
-        &= 2b_1 x + 2b_2 y
-    \end{align}
-    所以原方程等价于
-    \begin{equation}
-        A(x^2 + y^2) + 2b_1 x + 2b_2 y + C = 0
-    \end{equation}
-
-    当 $A \neq 0$ 时，两边同除以 $A$ 并配方，得
-    \begin{align}
-        x^2 + y^2 + 2\frac{b_1}{A}x + 2\frac{b_2}{A}y + \frac{C}{A} &= 0 \notag \\
-        \left(x + \frac{b_1}{A}\right)^2 + \left(y + \frac{b_2}{A}\right)^2 &= \frac{b_1^2 + b_2^2 - AC}{A^2}
-    \end{align}
-    由于 $b_1^2 + b_2^2 = |B|^2$，右边就是
-    \begin{equation}
-        \frac{|B|^2 - AC}{A^2} > 0
-    \end{equation}
-    因而它确实是一条圆，圆心为
-    \begin{equation}
-        \left(-\frac{b_1}{A}, -\frac{b_2}{A}\right) = -\frac{B}{A}
-    \end{equation}
-    半径为
-    \begin{equation}
-        \frac{\sqrt{|B|^2 - AC}}{|A|}
-    \end{equation}
-
-    当 $A = 0$ 时，条件 $|B|^2 > AC$ 变成 $|B|^2 > 0$，所以 $B \neq 0$。此时方程化为
-    \begin{equation}
-        2b_1 x + 2b_2 y + C = 0
-    \end{equation}
-    这就是一条直线。
-
-    因此，普通圆和直线都可以由同一类方程描述。在扩充复平面里，直线再加上无穷远点 $\infty$，就被统一看成一条``经过 $\infty$ 的圆''，所以我们把它们统称为广义圆。
+由
+\[
+|w|=\left|\frac{1}{z}\right|=\frac{1}{|z|}
+\]
+可知：
+\begin{itemize}
+    \item 若 $z\to\infty$，即 $|z|\to\infty$，则
+    \[
+    |w|=\frac{1}{|z|}\to 0,
+    \]
+    所以 $w\to 0$；
+    \item 反过来，若 $w\to 0$，则 $|w|\to 0$，于是
+    \[
+    |z|=\frac{1}{|w|}\to \infty,
+    \]
+    所以 $z\to\infty$。
+\end{itemize}
+故命题成立。
 \end{proof}
 
-\begin{tishi}[第一次读这一段该抓什么]
-最重要的不是把方程死记下来，而是记住这句话：\textbf{在扩充复平面里，直线也可以看成圆的一种统一对象。} 这就是后面很多结果写成``广义圆映成广义圆''的出发点。
-\end{tishi}
+\begin{lizi}{用 $1/z$ 讨论无穷远点处的极限}{}
+求
+\[
+\lim_{z\to\infty}\frac{z^2}{z^2+1}.
+\]
 
-\begin{lizi}{}{}
-将圆 $|z - 1| = 2$ 写成统一形式。
 \begin{jie}
-    展开得
-    \begin{equation}
-        |z|^2 - \bar{z} - z + 1 = 4
-    \end{equation}
-    即
-    \begin{equation}
-        |z|^2 - \bar{z} - z - 3 = 0
-    \end{equation}
-    所以 $A = 1$，$B = -1$，$C = -3$。
-
-    再用上面得到的公式核对一下：圆心应为 $-B/A = 1$，半径应为
-    \begin{equation}
-        \frac{\sqrt{|B|^2 - AC}}{|A|} = \sqrt{1 + 3} = 2
-    \end{equation}
-    与原题完全一致。
+令
+\[
+w=\frac{1}{z},
+\]
+则当 $z\to\infty$ 时，$w\to 0$。原函数可写成
+\[
+\frac{z^2}{z^2+1}
+=\frac{1/w^2}{1/w^2+1}
+=\frac{1}{1+w^2}.
+\]
+因此
+\[
+\lim_{z\to\infty}\frac{z^2}{z^2+1}
+=\lim_{w\to 0}\frac{1}{1+w^2}=1.
+\]
 \end{jie}
 \end{lizi}
 
-这个统一观点在研究保角映射时非常有用：很多看似只对``圆''成立的结论，其实对直线也同时成立。
-
-% ========== 第五节 ==========
-\section{复数\index{复数}的应用：交流电路、量子力学}
-
-前面我们学习了复数\index{复数}的基本概念和运算。现在我们真正回到物理问题，看看复数\index{复数}为什么不是``数学家的游戏''，而是物理学中非常自然的语言。
-
-\begin{wulibj}[本节主线]
-这一节我们都按同一条主线来讲：
-\begin{center}
-物理问题 $\longrightarrow$ 数学模型 $\longrightarrow$ 复数化简 $\longrightarrow$ 物理解释
-\end{center}
-这样你就不会觉得复数只是额外多学了一套符号，而会看到它确实在帮我们把问题讲得更清楚、算得更省力。
-\end{wulibj}
-
-\subsection{交流电路中的复数\index{复数}方法}
-
-在交流稳态电路中，电压和电流通常都是同频率的正弦量。我们的物理问题是：\textbf{已知电源和元件参数后，电流的振幅和相位怎么求？}
-
-如果直接把
-\begin{equation}
-    u(t),\ i(t)
-\end{equation}
-都写成三角函数，再代入微分方程去比较系数，计算往往很繁琐。复数方法的妙处就在于：它把``求导会带来相位差''这件事压缩成了乘以 $\mathrm{i}\omega$ 这样的代数运算。
-
-\subsubsection{相量表示}
-
-设电压和电流为
-\begin{align}
-    u(t) &= U_0 \cos(\omega t + \varphi_u) \\
-    i(t) &= I_0 \cos(\omega t + \varphi_i)
-\end{align}
-其中 $U_0$、$I_0$ 是振幅，$\omega$ 是角频率，$\varphi_u$、$\varphi_i$ 是初相位。
-
-引入\textbf{相量}（复数\index{复数}）表示：
-\begin{align}
-    \dot{U} &= U_0 \mathrm{e}^{\mathrm{i}\varphi_u} \\
-    \dot{I} &= I_0 \mathrm{e}^{\mathrm{i}\varphi_i}
-\end{align}
-
-于是原来的时间函数可以写成
-\begin{align}
-    u(t) &= \operatorname{Re}\big(\dot{U}\mathrm{e}^{\mathrm{i}\omega t}\big) \\
-    i(t) &= \operatorname{Re}\big(\dot{I}\mathrm{e}^{\mathrm{i}\omega t}\big)
-\end{align}
-
-注意：相量只保留振幅和相位信息，不包含频率；只有\textbf{同一频率}的交流量，才能在同一个相量框架下直接运算。
-
-\subsubsection{阻抗的复数\index{复数}表示}
-
-对于电阻 $R$、电感 $L$、电容 $C$，定义\textbf{复阻抗}：
-\begin{align}
-    Z_R &= R \\
-    Z_L &= \mathrm{i}\omega L \\
-    Z_C &= \frac{1}{\mathrm{i}\omega C} = -\frac{\mathrm{i}}{\omega C}
-\end{align}
-
-\begin{tishi}[为什么电感阻抗有 $\mathrm{i}$？]
-电感两端的电压 $u = L \frac{\mathrm{d}i}{\mathrm{d}t}$。若 $i = I_0 \cos(\omega t)$，则
-\begin{equation}
-    u = -L\omega I_0 \sin(\omega t) = L\omega I_0 \cos\left(\omega t + \frac{\pi}{2}\right)
-\end{equation}
-电压超前电流 $\pi/2$，也就是 $90^\circ$。这正是 $\mathrm{i} = \mathrm{e}^{\mathrm{i}\pi/2}$ 所代表的旋转效果。
+\begin{tishi}[这一招为什么很重要]
+以后研究函数在无穷远点附近的奇性、展开式或者留数时，最常用的方法都是先把
+\[
+f(z)
+\]
+改写成
+\[
+F(w)=f\!\left(\frac{1}{w}\right),
+\]
+再转而研究 $w=0$ 附近的行为。也就是说，无穷远点的问题常常会被拉回到原点附近来处理。
 \end{tishi}
 
-\subsubsection{欧姆定律的复数\index{复数}形式}
+\subsection{球极投影与复球面}
 
-复数\index{复数}形式的欧姆定律为
-\begin{equation}
-    \dot{U} = Z \dot{I}
-\end{equation}
+无穷远点的引入不仅是分析上的方便，也有一个非常优美的几何模型：\textbf{复球面}。
 
-这与直流电路的欧姆定律形式完全相同。原来要靠微分方程处理的相位差问题，被压缩进了复阻抗 $Z$ 里。
+想象一个单位球与复平面在南极点处相切。取球面北极 $N$，对球面上除北极外任一点 $P$，连结 $N$ 和 $P$ 的直线，它会与复平面相交于一点 $z$。这样就建立了球面与复平面之间的一一对应。北极 $N$ 本身则对应于无穷远点 $\infty$。
 
-\begin{lizi}{}{}
-电阻 $R = 30\,\Omega$ 与电感 $L = 40\,\mathrm{mH}$ 串联，电源 $u(t) = 220\sqrt{2}\cos(100\pi t)\,\mathrm{V}$。\\求电流的有效值与初相位。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[thick] (-3.0,0) -- (3.0,0) node[right] {复平面};
+    \draw[thick, blue] (0,1) circle (1);
+    \coordinate (N) at (0,2);
+    \coordinate (S) at (0,0);
+    \coordinate (P) at (1,1);
+    \coordinate (Z) at (2,0);
+    \draw[thick, red!75!black] (N) -- (Z);
+    \fill[blue] (N) circle (2pt) node[above] {$N$};
+    \fill[blue] (S) circle (2pt) node[below left] {$S$};
+    \fill[red!75!black] (P) circle (2pt) node[above] {$P$};
+    \fill[red!75!black] (Z) circle (2pt) node[below] {$z$};
+    \node[left] at (-1,1) {球面截面};
+    \node[right] at (2.4,1.8) {$N\leftrightarrow \infty$};
+\end{tikzpicture}
+\caption{球极投影示意图：北极对应无穷远点}
+\label{fig:stereographic-projection}
+\end{figure}
 
-\begin{jie}
-    角频率 $\omega = 100\pi\,\mathrm{rad/s}$。
-    
-    复阻抗为
-    \begin{equation}
-        Z = R + \mathrm{i}\omega L = 30 + \mathrm{i} \cdot 100\pi \cdot 0.04 = 30 + \mathrm{i} \cdot 4\pi \approx 30 + \mathrm{i} \cdot 12.57\,\Omega
-    \end{equation}
-    
-    阻抗的模为
-    \begin{equation}
-        |Z| = \sqrt{30^2 + 12.57^2} \approx 32.5\,\Omega
-    \end{equation}
-    
-    电压的振幅为 $220\sqrt{2}\,\mathrm{V}$，因此其有效值为 $U = 220\,\mathrm{V}$。所以电流的有效值为
-    \begin{equation}
-        I = \frac{U}{|Z|} = \frac{220}{32.5} \approx 6.77\,\mathrm{A}
-    \end{equation}
-    
-    阻抗的辐角为
-    \begin{equation}
-        \arg Z = \arctan\frac{\omega L}{R} = \arctan\frac{12.57}{30} \approx 22.7^\circ
-    \end{equation}
-
-    由于 $\dot{U} = Z\dot{I}$，所以
-    \begin{equation}
-        \arg \dot{I} = \arg \dot{U} - \arg Z = 0 - 22.7^\circ = -22.7^\circ
-    \end{equation}
-    这说明电流\textbf{滞后}电压 $22.7^\circ$，因此电流的初相位为
-    \begin{equation}
-        \varphi_i = -22.7^\circ
-    \end{equation}
-
-    如果把结果写回时间域，那么
-    \begin{equation}
-        i(t) = 6.77\sqrt{2}\cos(100\pi t - 22.7^\circ)\,\mathrm{A}
-    \end{equation}
-\end{jie}
-\end{lizi}
-
-\begin{tishi}[这一题真正省掉了什么]
-如果不用复数方法，我们需要从微分方程
-\begin{equation}
-    u(t) = Ri(t) + L\frac{\mathrm{d}i}{\mathrm{d}t}
-\end{equation}
-出发，代入三角函数后再展开、配相位。相量法把求导带来的相位差直接编码到 $\mathrm{i}\omega L$ 中，所以整个问题被简化成了代数除法。
-\end{tishi}
-
-\subsection{量子力学中的复数\index{复数}}
-
-在量子力学中，我们面对的问题不再是电压电流，而是\textbf{如何描述微观粒子的状态}。这时出现的对象是波函数 $\psi(x, t)$，它通常是复值函数。
-
-\begin{dingliyi}{玻恩统计诠释}{}
-波函数的模方
-\begin{equation}
-    |\psi(x, t)|^2 = \psi^*(x, t)\psi(x, t)
-\end{equation}
-表示在时刻 $t$、位置 $x$ 处找到粒子的概率密度。
+\begin{dingliyi}{复球面}{}
+把扩充复平面 $\hat{\mathbb{C}}$ 通过球极投影与球面建立对应后，这个球面模型称为\textbf{复球面}，也常称为\textbf{黎曼球面}。
 \end{dingliyi}
 
-这里 $\psi^*$ 表示 $\psi$ 的复共轭。也就是说，真正直接和实验概率联系起来的，不是 $\psi$ 本身，而是它的模方。
+\begin{zhu}{}{}
+从几何上看，复平面本来是``无边无际''的；但加上无穷远点以后，它就可以被看成一个封闭的球面。这个观点在后面讨论 Möbius 变换时尤其自然。
+\end{zhu}
 
-\begin{wulibj}[为什么量子力学需要复数？]
-在经典物理中，很多量都可以直接用实数描述；但在量子力学中，复数\index{复数}几乎是不可避免的：
-\begin{enumerate}
-    \item \textbf{干涉现象}：量子叠加不仅要叠加大小，还要叠加相位。相对相位不同，干涉结果就不同。
-    \item \textbf{时间演化}：薛定谔方程
-    \begin{equation}
-        \mathrm{i}\hbar \frac{\partial \psi}{\partial t} = \hat{H}\psi
-    \end{equation}
-    中的 $\mathrm{i}$ 保证了时间演化既保留相位信息，又能保持总概率守恒。
-    \item \textbf{可观测量是实数}：虽然波函数本身是复数\index{复数}，但最终可测量的概率、能量等量仍然由实数给出。
-\end{enumerate}
+\subsection{直线与圆的统一观点}
+
+在普通复平面里，直线和圆看起来是两类不同的对象；但在扩充复平面上，它们可以得到统一。
+
+\begin{tishi}[直线可以看作经过无穷远点的圆]
+球极投影有一个非常漂亮的结论：球面上的圆投影到复平面后，要么仍然是圆，要么是直线。于是从扩充复平面的角度看，直线可以理解为``经过无穷远点的圆''。这种统一观点会让后面的分式线性变换看起来顺畅得多。
+\end{tishi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \begin{scope}
+        \draw[->, gray] (-2,0) -- (2.2,0);
+        \draw[->, gray] (0,-1.8) -- (0,1.8);
+        \draw[blue, thick] (0,0) circle (1.2);
+        \node at (0,-2.1) {(a) 普通圆};
+    \end{scope}
+    \begin{scope}[xshift=6cm]
+        \draw[->, gray] (-2,0) -- (2.2,0);
+        \draw[->, gray] (0,-1.8) -- (0,1.8);
+        \draw[red!75!black, thick] (-1.8,0.8) -- (1.8,0.8);
+        \fill[red!75!black] (1.55,1.4) circle (2pt);
+        \node[red!75!black] at (1.85,1.55) {$\infty$};
+        \node at (0,-2.1) {(b) 直线可看作经过 $\infty$ 的圆};
+    \end{scope}
+\end{tikzpicture}
+\caption{扩充复平面中直线与圆的统一视角}
+\label{fig:line-circle-unified}
+\end{figure}
+
+\section{复数的物理应用初步}
+
+\begin{wulibj}[这一节的目标]
+这里我们不打算把电路课、振动学或量子力学完整搬进来，而是只做一件事：让大家真正体验到，前面学的模、辐角和指数形式不是抽象游戏，而是会立刻让物理计算变得更清楚、更统一。
 \end{wulibj}
 
-\begin{lizi}{}{}
-考虑自由粒子的平面波
-\begin{equation}
-    \psi(x, t) = A \mathrm{e}^{\mathrm{i}(kx - \omega t)}
-\end{equation}
-其中 $A$ 是常数振幅，$k = p/\hbar$ 是波数，$\omega = E/\hbar$ 是角频率。
+\subsection{简谐振动的复表示}
 
-验证：概率密度 $|\psi|^2$ 与时间和位置无关。
+一个最基本的简谐振动通常写成
+\begin{equation}
+    x(t)=A\cos(\omega t+\varphi).
+\end{equation}
+若利用欧拉公式，它可以写成
+\begin{equation}
+    x(t)=\operatorname{Re}\bigl(Ae^{\mathrm{i}(\omega t+\varphi)}\bigr).
+\end{equation}
+
+这样写的好处是：微分运算会变得特别简单。例如
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}t}e^{\mathrm{i}\omega t}=\mathrm{i}\omega e^{\mathrm{i}\omega t}.
+\end{equation}
+这说明，求导对应的只是乘上一个常数 $\mathrm{i}\omega$。对于振动和波动问题，这种简化非常重要。
+
+\subsection{同频振动的叠加与相量法}
+
+设有两个同频振动
+\begin{equation}
+    x_1(t)=3\cos\omega t,\qquad x_2(t)=4\cos\left(\omega t-\frac{\pi}{2}\right).
+\end{equation}
+若直接用三角恒等式相加，会比较繁琐；而用复数表示就很清楚。
+
+把它们分别写成复振幅形式：
+\begin{equation}
+    x_1(t)=\operatorname{Re}\bigl(3e^{\mathrm{i}\omega t}\bigr),\qquad
+    x_2(t)=\operatorname{Re}\left(4e^{-\mathrm{i}\pi/2}e^{\mathrm{i}\omega t}\right).
+\end{equation}
+于是总振动可写成
+\begin{equation}
+    x(t)=\operatorname{Re}\bigl((3-4\mathrm{i})e^{\mathrm{i}\omega t}\bigr).
+\end{equation}
+
+现在问题变成了：把复振幅
+\[
+3-4\mathrm{i}
+\]
+写成指数形式即可。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \draw[->, thick] (-0.6,0) -- (4.2,0) node[right] {实部};
+    \draw[->, thick] (0,-4.8) -- (0,1.4) node[above] {虚部};
+    \coordinate (A) at (3,0);
+    \coordinate (B) at (0,-4);
+    \coordinate (C) at (3,-4);
+    \draw[->, thick, blue!80!black] (0,0) -- (A) node[midway, above] {$3$};
+    \draw[->, thick, red!75!black] (0,0) -- (B) node[midway, left] {$-4\mathrm{i}$};
+    \draw[->, thick, purple!85!black] (0,0) -- (C) node[midway, right] {$3-4\mathrm{i}$};
+    \draw[dashed, gray] (A) -- (C);
+    \draw[dashed, gray] (B) -- (C);
+    \fill[purple!85!black] (C) circle (2pt);
+\end{tikzpicture}
+\caption{相量叠加：$3+(-4\mathrm{i})=3-4\mathrm{i}$}
+\label{fig:phasor-addition}
+\end{figure}
+
+\begin{lizi}{两个同频振动的叠加}{}
+求
+\[
+x(t)=3\cos\omega t+4\cos\left(\omega t-\frac{\pi}{2}\right)
+\]
+的振幅和初相。
 
 \begin{jie}
-    先取复共轭：
-    \begin{equation}
-        \psi^*(x, t) = A^* \mathrm{e}^{-\mathrm{i}(kx - \omega t)}
-    \end{equation}
-    
-    因而
-    \begin{align}
-        |\psi(x, t)|^2 &= \psi^*(x, t)\psi(x, t) \notag \\
-        &= A^* \mathrm{e}^{-\mathrm{i}(kx - \omega t)} \cdot A \mathrm{e}^{\mathrm{i}(kx - \omega t)} \notag \\
-        &= |A|^2
-    \end{align}
-    这确实是一个常数，说明这个平面波在所有位置上都有相同的概率密度。
+由上面的分析，只需求复振幅
+\[
+3-4\mathrm{i}
+\]
+的模和辐角。
 
-    不过要注意，它表示的是一种\textbf{理想化的、完全展开的自由粒子状态}。严格地说，这样的平面波在整条空间上通常不能按通常方式归一化，所以这里更应该把它理解成``动量确定、位置完全不局域''的模型，而不是一个真正局限在某一小块空间里的粒子。
+其模为
+\[
+|3-4\mathrm{i}|=5,
+\]
+主辐角为
+\[
+\operatorname{Arg}(3-4\mathrm{i})=-\arctan\frac{4}{3}.
+\]
+因此
+\[
+3-4\mathrm{i}=5e^{-\mathrm{i}\arctan(4/3)}.
+\]
+
+于是
+\[
+x(t)=\operatorname{Re}\left(5e^{-\mathrm{i}\arctan(4/3)}e^{\mathrm{i}\omega t}\right)
+=5\cos\left(\omega t-\arctan\frac{4}{3}\right).
+\]
+所以总振动的振幅为
+\[
+5,
+\]
+初相为
+\[
+-\arctan\frac{4}{3}.
+\]
 \end{jie}
 \end{lizi}
 
-% ========== 本章小结 ==========
+\subsection{交流电路中的相量思想}
+
+在交流电路里，电压和电流往往都是同频正弦量。若把它们写成复数形式，就可以把许多微分关系化成代数关系。例如，若电流写成
+\[
+i(t)=\operatorname{Re}\bigl(\tilde I e^{\mathrm{i}\omega t}\bigr),
+\]
+那么对电感元件，
+\[
+u_L(t)=L\frac{\mathrm{d}i}{\mathrm{d}t}
+\]
+对应的复振幅关系就是
+\[
+\tilde U_L=\mathrm{i}\omega L\,\tilde I.
+\]
+类似地，电容元件会带来
+\[
+\tilde U_C=\frac{1}{\mathrm{i}\omega C}\tilde I.
+\]
+
+\begin{tishi}[为什么相量法这么有效]
+原来需要处理的三角函数微分方程，在复数表示下往往会变成简单的代数乘法和除法。也正因为这样，复数方法在电路、振动和波动问题里极其常用。
+\end{tishi}
+
+\subsection{量子力学中的复振幅}
+
+在量子力学里，波函数一般写成复值函数。它的模平方与概率有关，而相位本身也携带重要信息。这再次说明：复数并不是数学家为了好看而引入的对象，它已经深深嵌入现代物理的表达方式中。
+
 \section{本章小结}
 
-\subsection{知识框架}
+\subsection{知识主线回顾}
 
-本章我们建立了复数\index{复数}的基本理论框架：
+本章的主线可以概括为：
+\[
+\begin{aligned}
+    &\text{复数的引入}
+    \Longrightarrow
+    \text{复平面与几何表示}
+    \Longrightarrow
+    \text{三角形式与指数形式} \\
+    &\Longrightarrow
+    \text{乘法的几何意义}
+    \Longrightarrow
+    \text{乘方、开方与单位根}
+    \Longrightarrow
+    \text{扩充复平面与复球面}.
+\end{aligned}
+\]
 
-\begin{center}
-\begin{tikzpicture}[node distance=1.2cm, auto,
-    % 定义框样式（绿色）
-    defblock/.style={rectangle, draw=defteal, fill=defteal!15, text width=5.5em, text centered, rounded corners, minimum height=2em, font=\small, line width=0.8pt},
-    % 概念框样式（蓝色）
-    conblock/.style={rectangle, draw=theoremblue, fill=theoremblue!15, text width=5.5em, text centered, rounded corners, minimum height=2em, font=\small, line width=0.8pt},
-    % 运算框样式（紫色）
-    opblock/.style={rectangle, draw=examplepurple, fill=examplepurple!15, text width=5.5em, text centered, rounded corners, minimum height=2em, font=\small, line width=0.8pt},
-    line/.style={draw, -latex, thick, gray!70}]
-    
-    % 第一层
-    \node[defblock] (def) {复数定义 $z=x+\mathrm{i}y$};
-    \node[conblock, right=of def] (geom) {几何表示\\复平面};
-    \node[conblock, right=of geom] (form) {三种形式\\代数/三角/指数};
-    \node[conblock, right=of form] (sphere) {复球面\\无穷远点};
-    
-    % 第二层
-    \node[conblock, below=of def] (mod) {模 $|z|$};
-    \node[conblock, below=of geom] (arg) {辐角 $\theta$};
-    \node[conblock, below=of form] (conj) {共轭 $\bar{z}$};
-    \node[conblock, below=of sphere] (extend) {扩充复平面\\ $\overline{\mathbb{C}}$};
-    
-    % 第三层
-    \node[opblock, below=1.2cm of mod, xshift=2cm] (op) {运算\\四则/幂/根};
-    \node[opblock, below=1.2cm of arg, xshift=2cm] (set) {点集\\区域/连通性};
-    
-    \path[line] (def) -- (geom);
-    \path[line] (geom) -- (form);
-    \path[line] (form) -- (sphere);
-    \path[line] (geom) -- (mod);
-    \path[line] (geom) -- (arg);
-    \path[line] (form) -- (conj);
-    \path[line] (sphere) -- (extend);
-    \path[line] (mod) -- (op);
-    \path[line] (arg) -- (op);
-    \path[line] (conj) -- (op);
-    \path[line] (geom) -- (set);
-\end{tikzpicture}
-\end{center}
+如果说高等数学里我们主要习惯把数看成数轴上的点，那么本章则要求大家适应一种新的视角：\textbf{复数是平面上的点，也是向量，也是旋转与伸缩的载体。}
 
-\subsection{核心公式}
+\subsection{核心公式整理}
 
-\begin{table}[htbp]
-\centering
-\begin{tabular}{p{0.22\textwidth}p{0.68\textwidth}}
-\toprule
-\textbf{内容} & \textbf{公式/概念} \\
-\midrule
-复数\index{复数}定义 & $z = x + \mathrm{i}y$ \\
-模 & $|z| = \sqrt{x^2 + y^2}$ \\
-主辐角 & $\operatorname{Arg}(z)\in(-\pi,\pi]$，需按象限和轴上情形分情况确定 \\
-三角形式 & $z = r(\cos\theta + \mathrm{i}\sin\theta)$ \\
-指数形式 & $z = r\mathrm{e}^{\mathrm{i}\theta}$ \\
-共轭 & $\bar{z} = x - \mathrm{i}y$ \\
-乘法（指数形式） & $z_1 z_2 = r_1 r_2 \mathrm{e}^{\mathrm{i}(\theta_1 + \theta_2)}$ \\
-棣莫弗公式 & $(\cos\theta + \mathrm{i}\sin\theta)^n = \cos n\theta + \mathrm{i}\sin n\theta$ \\
-$n$ 次方根 & $w_k = \sqrt[n]{r} \, \mathrm{e}^{\mathrm{i}(\theta + 2k\pi)/n}$ \\
-\midrule
-区域 & 开且连通；圆盘单连通，圆环多连通 \\
-扩充复平面 & $\overline{\mathbb{C}} = \mathbb{C} \cup \{\infty\}$ \\
-球极投影 & 复平面 $\longleftrightarrow$ 复球面（北极对应 $\infty$） \\
-\bottomrule
-\end{tabular}
-\caption{本章核心公式与概念}
-\label{tab:formulas-ch1}
-\end{table}
+\begin{zhongyao}[本章核心公式]
+\begin{align*}
+    z&=x+\mathrm{i}y,\\
+    |z|&=\sqrt{x^2+y^2},\\
+    \bar z&=x-\mathrm{i}y,\\
+    z\bar z&=|z|^2,\\
+    z&=r(\cos\theta+\mathrm{i}\sin\theta)=re^{\mathrm{i}\theta},\\
+    e^{\mathrm{i}\theta}&=\cos\theta+\mathrm{i}\sin\theta,\\
+    z_1z_2&=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},\\
+    \frac{z_1}{z_2}&=\frac{r_1}{r_2}e^{\mathrm{i}(\theta_1-\theta_2)},\\
+    (re^{\mathrm{i}\theta})^n&=r^n e^{\mathrm{i}n\theta},\\
+    w_k&=\sqrt[n]{r}\,e^{\mathrm{i}(\theta+2k\pi)/n},\qquad k=0,1,\dots,n-1.
+\end{align*}
+\end{zhongyao}
 
 \subsection{易错点提醒}
 
+\begin{jinshi}[本章最常见的误区]
 \begin{enumerate}
-    \item \textbf{虚部的定义}：虚部是 $y$，不是 $\mathrm{i}y$。
-    \item \textbf{辐角计算}：不能用 $\theta = \arctan(y/x)$ 直接计算主辐角；要先看象限，轴上的点还要单独处理。特别地，$z=0$ 没有辐角。
-    \item \textbf{开方多值性}：$n$ 次方根有 $n$ 个值，不要遗漏。
-    \item \textbf{区域的判定}：区域不仅要``连成一片''，还必须是开集；圆环虽然连通，但因为中间有洞，所以不是单连通区域。
-    \item \textbf{无穷远点的唯一性}：复平面中只有一个无穷远点 $\infty$，不像实数有 $+\infty$ 和 $-\infty$ 之分。
-    \item \textbf{不定式}：$\infty - \infty$、$\infty \cdot 0$、$\frac{\infty}{\infty}$、$\frac{0}{0}$ 都无定义，需要具体情况具体分析。
-    \item \textbf{相量法的适用前提}：只有同一频率的正弦量，才能直接放进同一个相量框架里运算。
+    \item 虚部是实数 $y$，不是 $\mathrm{i}y$。
+    \item $\arg z$ 表示全体辐角，$\operatorname{Arg}z$ 表示主辐角，不要混淆。
+    \item 只用 $\arctan(y/x)$ 不能自动判断辐角所在象限。
+    \item 复数的 $n$ 次方根一般有 $n$ 个，不要只写一个主值。
+    \item 无穷远点不是普通复数；第一章里最重要的是理解它的邻域和几何意义。
 \end{enumerate}
+\end{jinshi}
 
-% ========== 习题 ==========
 \section{习题}
 
-\textbf{基础题}
+\subsection{基础题}
 
 \begin{enumerate}
-    \item 计算下列复数\index{复数}的模和主辐角：
-    \begin{enumerate}
-        \item $z = 1 + \mathrm{i}$
-        \item $z = -1 + \sqrt{3}\mathrm{i}$
-        \item $z = -2 - 2\mathrm{i}$
-        \item $z = 3 - 4\mathrm{i}$
-        \item $z = 2\mathrm{i}$
-        \item $z = -3$
-    \end{enumerate}
-    
-    \item 将下列复数\index{复数}化为指数形式：
-    \begin{enumerate}
-        \item $z = 1 - \mathrm{i}$
-        \item $z = -\sqrt{3} + \mathrm{i}$
-        \item $z = 2 + 2\sqrt{3}\mathrm{i}$
-    \end{enumerate}
-    
-    \item 计算：
-    \begin{enumerate}
-        \item $(1 + \mathrm{i})^8$
-        \item $\displaystyle\frac{1 + \mathrm{i}}{1 - \mathrm{i}}$
-        \item $\sqrt[3]{-8}$
-    \end{enumerate}
-    
-    \item 求 $z^4 + 1 = 0$ 的所有根。
+    \item 写出下列复数的实部和虚部，并判断它们属于实数、纯虚数还是一般复数：
+    \[
+        4,\qquad -5\mathrm{i},\qquad 2-3\mathrm{i},\qquad 0.
+    \]
+
+    \item 已知
+    \[
+        (a+2)+\mathrm{i}(2a-b)=1+3\mathrm{i},
+    \]
+    求 $a,b$。
+
+    \item 求下列复数的模、共轭和主辐角：
+    \[
+        1+\mathrm{i},\qquad -1+\sqrt{3}\,\mathrm{i},\qquad -2-\mathrm{i}.
+    \]
+
+    \item 把下列复数写成三角形式和指数形式：
+    \[
+        \sqrt{3}+\mathrm{i},\qquad -1-\mathrm{i}.
+    \]
+
+    \item 计算下列各式，并写成代数形式：
+    \[
+        (2-\mathrm{i})(1+3\mathrm{i}),\qquad \frac{3+\mathrm{i}}{1-\mathrm{i}}.
+    \]
+
+    \item 证明
+    \[
+        |\bar z|=|z|,\qquad \operatorname{Re}z=\frac{z+\bar z}{2}.
+    \]
 \end{enumerate}
 
-\textbf{综合题}
+\subsection{综合题}
 
-\begin{enumerate}[resume]
-    \item 设 $z_1 = r_1 \mathrm{e}^{\mathrm{i}\theta_1}$，$z_2 = r_2 \mathrm{e}^{\mathrm{i}\theta_2}$，证明：
-    \begin{enumerate}
-        \item $|z_1 z_2| = |z_1| \cdot |z_2|$
-        \item $\left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}$（$z_2 \neq 0$）
-    \end{enumerate}
-    
-    \item 利用棣莫弗公式证明：
-    \begin{enumerate}
-        \item $\sin 3\theta = 3\sin\theta - 4\sin^3\theta$
-        \item $\cos 4\theta = 8\cos^4\theta - 8\cos^2\theta + 1$
-    \end{enumerate}
-    
-    \item 设 $z \neq 0$，证明：
-    \begin{equation}
-        \operatorname{Re}(z) = \frac{z + \bar{z}}{2}, \quad \operatorname{Im}(z) = \frac{z - \bar{z}}{2\mathrm{i}}
-    \end{equation}
-    
-    \item 证明：$|z_1 + z_2| \leq |z_1| + |z_2|$（三角不等式），并说明几何意义。
+\begin{enumerate}
+    \item 用几何语言解释为什么乘以 $\mathrm{i}$ 对应逆时针旋转 $\pi/2$。
+
+    \item 设
+    \[
+        z_1=2e^{\mathrm{i}\pi/6},\qquad z_2=3e^{-\mathrm{i}\pi/4},
+    \]
+    求 $z_1z_2$ 和 $\dfrac{z_1}{z_2}$ 的模与辐角。
+
+    \item 求方程
+    \[
+        z^3=8\mathrm{i}
+    \]
+    的全部解，并在复平面上画出这些根的大致位置。
+
+    \item 设 $\omega=e^{2\pi\mathrm{i}/5}$，计算
+    \[
+        1+\omega+\omega^2+\omega^3+\omega^4.
+    \]
+
+    \item 用复数方法把
+    \[
+        2\cos\omega t+2\cos\left(\omega t+\frac{\pi}{3}\right)
+    \]
+    化成一个单一余弦函数的形式。
 \end{enumerate}
 
-\textbf{挑战题}
+\subsection{挑战题}
 
-\begin{enumerate}[resume]
-    \item 设 $z_1, z_2, z_3$ 是复平面上三角形的三个顶点，证明：
-    \begin{enumerate}
-        \item 三角形的重心为 $\displaystyle\frac{z_1 + z_2 + z_3}{3}$
-        \item 若 $|z_1| = |z_2| = |z_3|$，则三角形的外心在原点
-    \end{enumerate}
-    
-    \item 设 $z = x + \mathrm{i}y$，证明：
-    \begin{equation}
-        \mathrm{e}^z = \mathrm{e}^x(\cos y + \mathrm{i}\sin y)
-    \end{equation}
-    由此说明 $\mathrm{e}^z$ 的周期性。
-    
-    \item 在复平面上描绘下列点集：
-    \begin{enumerate}
-        \item $\{z : |z - 1| < 2\}$
-        \item $\{z : |z - 1| = |z + 1|\}$
-        \item $\{z : 1 < |z| < 2\}$
-        \item $\{z : \operatorname{Re}(z) > 0, |z| < 1\}$
-    \end{enumerate}
-    并判断每个集合是否为区域，是单连通还是多连通。
+\begin{enumerate}
+    \item 设 $z_1,z_2,\dots,z_n$ 是方程
+    \[
+        z^n=a\qquad (a\neq 0)
+    \]
+    的全部根，证明这些根位于同一圆周上，且相邻两根对应的圆心角相等。
+
+    \item 利用变换
+    \[
+        w=\frac{1}{z}
+    \]
+    说明：研究 $f(z)$ 在无穷远点附近的行为，可以转化为研究 $f(1/w)$ 在原点附近的行为。
+
+    \item 试从扩充复平面的角度解释：为什么直线可以看作经过无穷远点的圆？
+
+    \item 设 $\omega=e^{2\pi\mathrm{i}/n}$，证明
+    \[
+        \prod_{k=1}^{n-1}(1-\omega^k)=n.
+    \]
+    提示：可考虑多项式
+    \[
+        z^n-1=(z-1)(z-\omega)\cdots(z-\omega^{n-1})
+    \]
+    并在 $z=1$ 处比较两边。
 \end{enumerate}
