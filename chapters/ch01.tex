@@ -837,6 +837,39 @@ r=|z|,\qquad \theta\in \arg z.
     z=x+\mathrm{i}y=r(\cos\theta+\mathrm{i}\sin\theta).
 \end{equation}
 
+图 \ref{fig:cartesian-polar-relation} 把直角坐标与极坐标放在同一张图里：$x,y$ 是点 $z$ 在两个坐标轴方向上的投影长度，$r$ 是点 $z$ 到原点的距离，$\theta$ 则描述这条向量相对实轴正方向的转角。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+    \draw[->] (-0.7,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+    \draw[->] (0,-0.7) -- (0,3.4) node[above] {$\operatorname{Im}z$};
+
+    \coordinate (O) at (0,0);
+    \coordinate (X) at (3,0);
+    \coordinate (Z) at (3,2);
+
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (Z);
+    \fill[blue!80!black] (Z) circle (2pt);
+
+    \draw[dashed, gray] (Z) -- (X);
+    \draw[dashed, gray] (X) -- (O);
+
+    \draw[thick, green!60!black] (0.8,0) arc[start angle=0,end angle=33.69,radius=0.8];
+    \node[green!50!black] at (1.03,0.33) {$\theta$};
+
+    \draw[gray!70, thick] (2.78,0) -- (2.78,0.22) -- (3,0.22);
+
+    \node[below] at ($(O)!0.5!(X)$) {$x$};
+    \node[right] at ($(X)!0.5!(Z)$) {$y$};
+    \node[above left, text=blue!80!black] at ($(O)!0.52!(Z)$) {$r$};
+    \node[above right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[below left] at (O) {$O$};
+\end{tikzpicture}
+\caption{复数的直角坐标与极坐标关系}
+\label{fig:cartesian-polar-relation}
+\end{figure}
+
 这说明：一个非零复数完全可以用``长度 $r$ + 方向 $\theta$''来描述。
 
 \subsection{复数的三角形式}
