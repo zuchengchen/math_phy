@@ -564,16 +564,14 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \coordinate (A) at (1.9,0.8);
         \coordinate (B) at (3.2,2.45);
         \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
-        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (A);
-        \draw[->, thick, orange!85!black, shorten >=2.5pt] (A) -- (B);
-        \draw[->, thick, red!75!black, shorten >=2.5pt] (O) -- node[midway, right, sloped, fill=white, inner sep=1pt] {$z_1+z_2$} (B);
+        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- node[midway, below, sloped, fill=white, inner sep=1pt, text=blue!80!black] {$z_1$} (A);
+        \draw[->, thick, orange!85!black, shorten >=2.5pt] (A) -- node[midway, above, sloped, fill=white, inner sep=1pt, text=orange!85!black] {$z_2$} (B);
+        \draw[->, thick, red!75!black, shorten >=2.5pt] (O) -- node[midway, right, sloped, fill=white, inner sep=1pt, text=red!75!black] {$z_1+z_2$} (B);
         \fill[blue!80!black] (A) circle (2pt);
         \fill[red!75!black] (B) circle (2pt);
         \node[below left] at (O) {$O$};
         \node[below right] at (A) {$A$};
         \node[above right] at (B) {$B$};
-        \node[above left] at ($(O)!0.55!(A)$) {$z_1$};
-        \node[above left] at ($(A)!0.52!(B)$) {$z_2$};
         \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
 
