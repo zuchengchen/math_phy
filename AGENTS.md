@@ -98,6 +98,12 @@ xelatex -interaction=nonstopmode main.tex
 grep -i "error" main.log
 ```
 
+默认要求：
+
+1. 只要本次任务修改了项目文件，完成后应执行编译检查。
+2. 默认按 `xelatex main.tex` 连续编译两次，确保交叉引用、目录和编号稳定。
+3. 若编译报错或出现明显警告，应检查 `main.log` 并在回复中说明结果。
+
 ## 版本控制要求
 
 1. 只要本次任务修改了项目文件，完成后默认执行 `git commit`。
