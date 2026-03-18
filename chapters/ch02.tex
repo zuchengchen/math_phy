@@ -19,7 +19,7 @@
 
 \subsection{点的邻域}
 
-\begin{dingliyi}{}{邻域}
+\begin{dingliyi}{邻域}{}
 设 $z_0$ 是复平面上的一个点，$\varepsilon > 0$ 是正数。点集
 \begin{equation}
     U(z_0, \varepsilon) = \{z \in \mathbb{C} : |z - z_0| < \varepsilon\}
@@ -52,7 +52,7 @@
 
 \subsection{内点、外点、边界点}
 
-\begin{dingliyi}{}{内点、外点、边界点}
+\begin{dingliyi}{内点、外点、边界点}{}
 设 $E$ 是复平面上的一个点集，$z_0$ 是一个点。
 \begin{itemize}
     \item 若存在 $\varepsilon > 0$，使得 $U(z_0, \varepsilon) \subset E$，则称 $z_0$ 是 $E$ 的\textbf{内点}。
@@ -79,7 +79,7 @@
 
 \subsection{开集与闭集}
 
-\begin{dingliyi}{}{开集与闭集}
+\begin{dingliyi}{开集与闭集}{}
 \begin{itemize}
     \item 若点集 $E$ 中的每个点都是内点，则称 $E$ 是\textbf{开集}。
     \item 若点集 $E$ 的补集 $\mathbb{C} \setminus E$ 是开集，则称 $E$ 是\textbf{闭集}。
@@ -93,7 +93,7 @@
 
 \subsection{区域}
 
-\begin{dingliyi}{}{区域}
+\begin{dingliyi}{区域}{}
 若点集 $D$ 满足：
 \begin{enumerate}
     \item $D$ 是开集；
@@ -132,7 +132,7 @@
 
 \subsection{单连通与多连通区域}
 
-\begin{dingliyi}{}{单连通区域}
+\begin{dingliyi}{单连通区域}{}
 若区域 $D$ 内任意一条简单闭曲线的内部仍在 $D$ 内，则称 $D$ 是\textbf{单连通区域}。否则称为\textbf{多连通区域}。
 
 直观地说，单连通区域是``没有洞''的区域。
@@ -189,7 +189,7 @@
 
 在高等数学中，我们学习了实变函数 $y = f(x)$，其中 $x, y$ 都是实数。现在，让我们把定义域和值域都扩展到复数\index{复数}。
 
-\begin{dingliyi}{}{复变函数}
+\begin{dingliyi}{复变函数}{}
 设 $D$ 是复平面上的一个点集。若对于 $D$ 中的每一个点 $z$，按照某种规则，都有一个或多个复数\index{复数} $w$ 与之对应，则称 $w$ 是 $z$ 的\textbf{复变函数}，记作
 \begin{equation}
     w = f(z)
@@ -275,7 +275,7 @@
 
 \subsection{极限的概念}
 
-\begin{dingliyi}{}{极限}
+\begin{dingliyi}{极限}{}
 设函数 $f(z)$ 在点 $z_0$ 的某个去心邻域内有定义。若存在复数\index{复数} $A$，使得对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $0 < |z - z_0| < \delta$ 时，有 $|f(z) - A| < \varepsilon$，则称 $A$ 是 $f(z)$ 当 $z \to z_0$ 时的\textbf{极限}，记作
 \begin{equation}
     \lim_{z \to z_0} f(z) = A
@@ -313,7 +313,7 @@
 
 \subsection{极限的等价条件}
 
-\begin{dingli}{}{极限的实部虚部表示}\label{thm:limit-real-imag}
+\begin{dingli}{极限的实部虚部表示}{}\label{thm:limit-real-imag}
 设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z_0 = x_0 + \mathrm{i}y_0$，$A = a + \mathrm{i}b$。则
 \begin{equation}
     \lim_{z \to z_0} f(z) = A \quad \Longleftrightarrow \quad 
@@ -336,7 +336,7 @@
 
 \subsection{连续性}
 
-\begin{dingliyi}{}{连续}
+\begin{dingliyi}{连续}{}
 设函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若
 \begin{equation}
     \lim_{z \to z_0} f(z) = f(z_0)
@@ -344,7 +344,7 @@
 则称 $f(z)$ 在点 $z_0$ \textbf{连续}。若 $f(z)$ 在区域 $D$ 内每一点都连续，则称 $f(z)$ 在 $D$ 内\textbf{连续}。
 \end{dingliyi}
 
-\begin{dingli}{}{连续的等价条件}
+\begin{dingli}{连续的等价条件}{}
 函数 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在 $z_0 = x_0 + \mathrm{i}y_0$ 处连续，当且仅当 $u(x, y)$ 和 $v(x, y)$ 都在 $(x_0, y_0)$ 处连续。
 \end{dingli}
 
@@ -363,7 +363,7 @@
 
 \subsection{连续函数的性质}
 
-\begin{dingli}{}{连续函数的基本性质}
+\begin{dingli}{连续函数的基本性质}{}
 设 $f(z)$ 和 $g(z)$ 在点 $z_0$ 连续，则：
 \begin{enumerate}
     \item $f(z) \pm g(z)$ 在 $z_0$ 连续
@@ -409,7 +409,7 @@
 
 \subsection{复变函数的导数}
 
-\begin{dingliyi}{}{导数}
+\begin{dingliyi}{导数}{}
 设函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若极限
 \begin{equation}
     \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z}
@@ -468,7 +468,7 @@
 
 \subsection{解析函数\index{解析函数}}
 
-\begin{dingliyi}{}{解析函数}
+\begin{dingliyi}{解析函数}{}
 \begin{itemize}
     \item 若函数 $f(z)$ 在点 $z_0$ 及其某个邻域内可导，则称 $f(z)$ 在 $z_0$ \textbf{解析}（或\textbf{全纯}）。
     \item 若函数 $f(z)$ 在区域 $D$ 内每一点都解析，则称 $f(z)$ 在 $D$ 内\textbf{解析函数\index{解析函数}}。
@@ -489,7 +489,7 @@
 
 复变函数的求导法则与实变函数类似：
 
-\begin{dingli}{}{基本求导法则}
+\begin{dingli}{基本求导法则}{}
 设 $f(z)$ 和 $g(z)$ 都可导，则：
 \begin{align}
     [f(z) \pm g(z)]' &= f'(z) \pm g'(z) \\
@@ -595,7 +595,7 @@
 
 \subsection{C-R 条件的充分性}
 
-\begin{dingli}{}{可导的充分条件}
+\begin{dingli}{可导的充分条件}{}
 设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在点 $z_0 = x_0 + \mathrm{i}y_0$ 的邻域内有定义，且 $u_x, u_y, v_x, v_y$ 都在 $(x_0, y_0)$ 处连续并满足 C-R 条件，则 $f(z)$ 在 $z_0$ 可导，且
 \begin{equation}
     f'(z_0) = u_x(x_0, y_0) + \mathrm{i}v_x(x_0, y_0) = v_y(x_0, y_0) - \mathrm{i}u_y(x_0, y_0)
@@ -747,7 +747,7 @@
 
 \subsection{保角性}
 
-\begin{dingliyi}{}{保角映射}
+\begin{dingliyi}{保角映射}{}
 若映射 $w = f(z)$ 在点 $z_0$ 处满足：
 \begin{enumerate}
     \item 保持角度大小不变
@@ -756,7 +756,7 @@
 则称该映射在 $z_0$ 处是\textbf{保角的}。
 \end{dingliyi}
 
-\begin{dingli}{}{保角映射的判定}
+\begin{dingli}{保角映射的判定}{}
 设 $f(z)$ 在点 $z_0$ 解析且 $f'(z_0) \neq 0$，则 $w = f(z)$ 在 $z_0$ 处是保角映射。
 \end{dingli}
 
@@ -824,7 +824,7 @@
 \]
 \end{zhongyao}
 
-\begin{dingli}{}{指数函数的性质}
+\begin{dingli}{指数函数的性质}{}
 \begin{enumerate}
     \item $\mathrm{e}^z \neq 0$ 对所有 $z \in \mathbb{C}$ 成立
     \item $\mathrm{e}^{z_1 + z_2} = \mathrm{e}^{z_1} \cdot \mathrm{e}^{z_2}$
@@ -848,7 +848,7 @@
 
 \subsection{对数函数}
 
-\begin{dingliyi}{}{复对数函数}
+\begin{dingliyi}{复对数函数}{}
 设 $z \neq 0$，满足 $\mathrm{e}^w = z$ 的 $w$ 称为 $z$ 的\textbf{对数}，记作 $\ln z$。
 
 设 $z = r\mathrm{e}^{\mathrm{i}\theta}$（$r > 0$），$w = u + \mathrm{i}v$。由 $\mathrm{e}^w = z$ 得
@@ -883,7 +883,7 @@
 
 \subsection{三角函数}
 
-\begin{dingliyi}{}{复三角函数}
+\begin{dingliyi}{复三角函数}{}
 \begin{align}
     \sin z &= \frac{\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}} \\
     \cos z &= \frac{\mathrm{e}^{\mathrm{i}z} + \mathrm{e}^{-\mathrm{i}z}}{2}
@@ -952,7 +952,7 @@
 
 \subsection{等势线与电场线的正交性}
 
-\begin{dingli}{}{等势线与电场线正交}
+\begin{dingli}{等势线与电场线正交}{}
 解析函数\index{解析函数} $w = \phi + \mathrm{i}\psi$ 的实部 $\phi$ 的等值线（等势线）与虚部 $\psi$ 的等值线（电场线）相互正交。
 \end{dingli}
 

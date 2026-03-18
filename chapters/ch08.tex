@@ -15,7 +15,7 @@
 
 拉普拉斯变换\index{拉普拉斯变换}的思想是：引入衰减因子 $\mathrm{e}^{-\sigma t}$，使 $\mathrm{e}^{-\sigma t}f(t)$ 绝对可积。
 
-\begin{dingliyi}{}{拉普拉斯变换}
+\begin{dingliyi}{拉普拉斯变换}{}
 设 $f(t)$ 在 $t \geq 0$ 上有定义。若存在 $\sigma > 0$ 使得积分
 \begin{equation}
     F(s) = \mathcal{L}[f(t)] = \int_0^{+\infty} f(t)\mathrm{e}^{-st}\,\mathrm{d}t
@@ -29,7 +29,7 @@
 
 \subsection{拉普拉斯变换\index{拉普拉斯变换}的存在条件}
 
-\begin{dingli}{}{存在定理}
+\begin{dingli}{存在定理}{}
 若 $f(t)$ 满足：
 \begin{enumerate}
     \item 在 $t \geq 0$ 的任意有限区间上分段连续
@@ -45,7 +45,7 @@
 \end{equation}
 故积分收敛。解析性可由积分号下求导验证（求导后积分仍收敛）。
 \end{proof}
-\begin{dingliyi}{}{增长指数}
+\begin{dingliyi}{增长指数}{}
 满足 $|f(t)| \leq M\mathrm{e}^{\sigma t}$ 的最小 $\sigma$ 称为 $f(t)$ 的\textbf{增长指数}。
 \end{dingliyi}
 
@@ -133,7 +133,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 
 \subsection{基本性质}
 
-\begin{dingli}{}{线性性质}
+\begin{dingli}{线性性质}{}
 \begin{equation}
     \mathcal{L}[\alpha f(t) + \beta g(t)] = \alpha F(s) + \beta G(s)
 \end{equation}
@@ -145,7 +145,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
     \mathcal{L}[\alpha f(t) + \beta g(t)] = \int_0^{+\infty} [\alpha f(t) + \beta g(t)]\mathrm{e}^{-st}\,\mathrm{d}t = \alpha F(s) + \beta G(s)
 \end{equation}
 \end{proof}
-\begin{dingli}{}{延迟性质（时域平移）}
+\begin{dingli}{延迟性质（时域平移）}{}
 \begin{equation}
     \mathcal{L}[f(t-\tau)u(t-\tau)] = \mathrm{e}^{-\tau s}F(s)
 \end{equation}
@@ -158,7 +158,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 \end{equation}
 \end{proof}
 
-\begin{dingli}{}{频移性质}
+\begin{dingli}{频移性质}{}
 \begin{equation}
     \mathcal{L}[\mathrm{e}^{at}f(t)] = F(s-a)
 \end{equation}
@@ -170,7 +170,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
     \mathcal{L}[f(at)] = \int_0^{+\infty} f(at)\mathrm{e}^{-st}\,\mathrm{d}t = \frac{1}{a}\int_0^{+\infty} f(u)\mathrm{e}^{-\frac{s}{a}u}\,\mathrm{d}u = \frac{1}{a}F\left(\frac{s}{a}\right)
 \end{equation}
 \end{proof}
-\begin{dingli}{}{伸缩性质}
+\begin{dingli}{伸缩性质}{}
 \begin{equation}
     \mathcal{L}[f(at)] = \frac{1}{a}F\left(\frac{s}{a}\right), \quad a > 0
 \end{equation}
@@ -195,7 +195,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 所以 $\mathcal{L}[f'(t)] = -f(0) + sF(s)$。
 \end{proof}
 
-\begin{dingli}{}{高阶导数}
+\begin{dingli}{高阶导数}{}
 \begin{equation}
     \mathcal{L}[f^{(n)}(t)] = s^n F(s) - s^{n-1}f(0) - s^{n-2}f'(0) - \cdots - f^{(n-1)}(0)
 \end{equation}
@@ -208,7 +208,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 \end{equation}
 由数学归纳法可得一般公式。
 \end{proof}
-\begin{dingli}{}{频域微分}
+\begin{dingli}{频域微分}{}
 \begin{equation}
     \mathcal{L}[tf(t)] = -F'(s)
 \end{equation}
@@ -230,7 +230,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 
 \subsection{积分性质}
 
-\begin{dingli}{}{时域积分}
+\begin{dingli}{时域积分}{}
 \begin{equation}
     \mathcal{L}\left[\int_0^t f(\tau)\,\mathrm{d}\tau\right] = \frac{F(s)}{s}
 \end{equation}
@@ -243,7 +243,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 \end{equation}
 所以 $\mathcal{L}[g(t)] = \frac{F(s)}{s}$。
 \end{proof}
-\begin{dingli}{}{频域积分}
+\begin{dingli}{频域积分}{}
 \begin{equation}
     \mathcal{L}\left[\frac{f(t)}{t}\right] = \int_s^{+\infty} F(u)\,\mathrm{d}u
 \end{equation}
@@ -261,7 +261,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 \end{proof}
 \subsection{卷积定理}
 
-\begin{dingliyi}{}{卷积}
+\begin{dingliyi}{卷积}{}
 \begin{equation}
     (f * g)(t) = \int_0^t f(\tau)g(t-\tau)\,\mathrm{d}\tau
 \end{equation}
@@ -278,7 +278,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 
 \subsection{反演公式}
 
-\begin{dingli}{}{拉普拉斯逆变换}
+\begin{dingli}{拉普拉斯逆变换}{}
 \begin{equation}
     f(t) = \mathcal{L}^{-1}[F(s)] = \frac{1}{2\pi\mathrm{i}}\int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty} F(s)\mathrm{e}^{st}\,\mathrm{d}s
 \end{equation}
@@ -326,7 +326,7 @@ $\cosh at$ & $\dfrac{s}{s^2-a^2}$ & $\mathrm{Re}(s) > |a|$ \\
 
 利用复变函数的留数理论，逆变换可以表示为：
 
-\begin{dingli}{}{海维赛德展开定理}
+\begin{dingli}{海维赛德展开定理}{}
 设 $F(s) = \frac{A(s)}{B(s)}$ 是有理函数，$s_1, s_2, \ldots, s_n$ 是 $B(s)$ 的零点。
 
 \begin{enumerate}

@@ -11,7 +11,7 @@
 
 \subsection{复积分的定义}
 
-\begin{dingliyi}{}{复积分}
+\begin{dingliyi}{复积分}{}
 设 $C$ 是复平面上一条有向光滑曲线，起点为 $A$，终点为 $B$。函数 $f(z)$ 在 $C$ 上有定义。将 $C$ 任意分割成 $n$ 段，分点为 $z_0 = A, z_1, \ldots, z_n = B$。在每个小弧段上任意取点 $\zeta_k$，作和
 \begin{equation}
     S_n = \sum_{k=1}^{n} f(\zeta_k)(z_k - z_{k-1}) = \sum_{k=1}^{n} f(\zeta_k)\Delta z_k
@@ -75,7 +75,7 @@
 
 \subsection{复积分的基本性质}
 
-\begin{dingli}{}{复积分的基本性质}
+\begin{dingli}{复积分的基本性质}{}
 设 $f(z)$ 和 $g(z)$ 沿曲线 $C$ 可积，则：
 \begin{enumerate}
     \item $\displaystyle\int_C [f(z) + g(z)]\,\mathrm{d}z = \int_C f(z)\,\mathrm{d}z + \int_C g(z)\,\mathrm{d}z$
@@ -96,7 +96,7 @@
 \subsection{定理的陈述}
 
 设 $f(z)$ 在\keyword{单连通区域} $D$ 内解析，$C$ 是 $D$ 内任意一条简单闭曲线，则
-\begin{dingli}{}{柯西积分定理}
+\begin{dingli}{柯西积分定理}{}
 设 $f(z)$ 在单连通区域 $D$ 内解析，$C$ 是 $D$ 内任意一条简单闭曲线，则
 \[
     \oint_C f(z)\,\mathrm{d}z = 0
@@ -146,11 +146,11 @@
 
 \subsection{原函数与不定积分}
 
-\begin{dingliyi}{}{原函数}
+\begin{dingliyi}{原函数}{}
 设 $f(z)$ 在区域 $D$ 内连续。若存在 $F(z)$ 使得 $F'(z) = f(z)$ 在 $D$ 内成立，则称 $F(z)$ 是 $f(z)$ 的一个\textbf{原函数}。
 \end{dingliyi}
 
-\begin{dingli}{}{原函数的存在性}
+\begin{dingli}{原函数的存在性}{}
 若 $f(z)$ 在单连通区域 $D$ 内解析，则 $f(z)$ 在 $D$ 内存在原函数。
 \end{dingli}
 
@@ -162,7 +162,7 @@
 由柯西积分定理\index{柯西积分定理}，积分值与路径无关。可以证明 $F'(z) = f(z)$。
 \end{proof}
 
-\begin{dingli}{}{牛顿--莱布尼茨公式}
+\begin{dingli}{牛顿--莱布尼茨公式}{}
 \index{牛顿@牛顿（Newton）}\index{莱布尼茨@莱布尼茨（Leibniz）}
 设 $f(z)$ 在单连通区域 $D$ 内解析，$F(z)$ 是 $f(z)$ 的原函数，则
 \begin{equation}
@@ -185,7 +185,7 @@
 \end{proof}
 \subsection{多连通区域的柯西积分定理\index{柯西积分定理}}
 
-\begin{dingli}{}{多连通区域的柯西积分定理}
+\begin{dingli}{多连通区域的柯西积分定理}{}
 设 $f(z)$ 在多连通区域 $D$ 内解析，$C$ 是 $D$ 内的简单闭曲线，$C_1, C_2, \ldots, C_n$ 是被 $C$ 包围的内部边界。若这些曲线都取正向（外边界逆时针，内边界顺时针），则
 \begin{equation}
     \oint_C f(z)\,\mathrm{d}z = \sum_{k=1}^{n} \oint_{C_k} f(z)\,\mathrm{d}z
@@ -244,7 +244,7 @@
 
 \subsection{公式的推导}
 
-\begin{dingli}{}{柯西积分公式}
+\begin{dingli}{柯西积分公式}{}
 设 $f(z)$ 在简单闭曲线 $C$ 所围区域 $D$ 内解析，在 $\bar{D} = D \cup C$ 上连续，$z_0$ 是 $D$ 内任意一点，则
 \[
     f(z_0) = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z
@@ -319,7 +319,7 @@
 
 \subsection{高阶导数公式}
 
-\begin{dingli}{}{高阶导数公式}
+\begin{dingli}{高阶导数公式}{}
 在柯西积分公式的条件下，$f(z)$ 在 $D$ 内有\keyword{任意阶导数}，且
 \[
     f^{(n)}(z_0) = \frac{n!}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{(z - z_0)^{n+1}}\,\mathrm{d}z
@@ -364,7 +364,7 @@
 
 \subsection{莫雷拉定理}
 
-\begin{dingli}{}{莫雷拉定理}
+\begin{dingli}{莫雷拉定理}{}
 设 $f(z)$ 在区域 $D$ 内连续，且对于 $D$ 内任意简单闭曲线 $C$，有 $\oint_C f(z)\,\mathrm{d}z = 0$，则 $f(z)$ 在 $D$ 内解析。
 \end{dingli}
 
@@ -387,7 +387,7 @@
 
 \subsection{刘维尔\index{刘维尔@刘维尔（Liouville）}（Liouville）定理}
 
-\begin{dingli}{}{刘维尔定理}
+\begin{dingli}{刘维尔定理}{}
 在整个复平面上解析且有界的函数必为常数。
 \end{dingli}
 
@@ -415,7 +415,7 @@
 
 \subsection{最大模原理}
 
-\begin{dingli}{}{最大模原理}
+\begin{dingli}{最大模原理}{}
 设 $f(z)$ 在区域 $D$ 内解析且不恒为常数，则 $|f(z)|$ 在 $D$ 内不可能达到最大值。
 \end{dingli}
 

@@ -11,7 +11,7 @@
 
 \subsection{周期函数的傅里叶展开}
 
-\begin{dingliyi}{}{傅里叶级数}
+\begin{dingliyi}{傅里叶级数}{}
 设 $f(x)$ 是周期为 $2\pi$ 的函数，在一定条件下可以展开为
 \begin{equation}
     f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}(a_n\cos nx + b_n\sin nx)
@@ -27,7 +27,7 @@
 
 利用欧拉公式，傅里叶级数可以写成更简洁的复数\index{复数}形式：
 
-\begin{dingli}{}{复数形式傅里叶级数}
+\begin{dingli}{复数形式傅里叶级数}{}
 \begin{equation}
     f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}nx}
 \end{equation}
@@ -60,7 +60,7 @@
 
 对于周期为 $2L$ 的函数：
 
-\begin{dingli}{}{周期 $2L$ 的傅里叶级数}
+\begin{dingli}{周期 $2L$ 的傅里叶级数}{}
 \begin{equation}
     f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}n\pi x/L}
 \end{equation}
@@ -106,7 +106,7 @@
 
 当 $L \to \infty$，求和变成积分：
 
-\begin{dingliyi}{}{傅里叶变换}
+\begin{dingliyi}{傅里叶变换}{}
 设 $f(x)$ 在 $(-\infty, +\infty)$ 上绝对可积。定义
 \begin{equation}
     \hat{f}(\omega) = \mathcal{F}[f(x)] = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
@@ -114,7 +114,7 @@
 为 $f(x)$ 的\textbf{傅里叶变换\index{傅里叶变换}}（或频谱）。
 \end{dingliyi}
 
-\begin{dingliyi}{}{傅里叶逆变换}
+\begin{dingliyi}{傅里叶逆变换}{}
 \begin{equation}
     f(x) = \mathcal{F}^{-1}[\hat{f}(\omega)] = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
 \end{equation}
@@ -157,7 +157,7 @@
 
 \subsection{傅里叶变换\index{傅里叶变换}的存在条件}
 
-\begin{dingli}{}{狄利克雷（Dirichlet）条件}
+\begin{dingli}{狄利克雷（Dirichlet）条件}{}
 \index{狄利克雷@狄利克雷（Dirichlet）}
 若 $f(x)$ 满足：
 \begin{enumerate}
@@ -231,7 +231,7 @@
 
 \subsection{基本性质}
 
-\begin{dingli}{}{线性性质}
+\begin{dingli}{线性性质}{}
 若 $\mathcal{F}[f(x)] = \hat{f}(\omega)$，$\mathcal{F}[g(x)] = \hat{g}(\omega)$，则
 \begin{equation}
     \mathcal{F}[\alpha f(x) + \beta g(x)] = \alpha\hat{f}(\omega) + \beta\hat{g}(\omega)
@@ -244,7 +244,7 @@
     \mathcal{F}[\alpha f(x) + \beta g(x)] = \int_{-\infty}^{+\infty} [\alpha f(x) + \beta g(x)]\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \alpha\hat{f}(\omega) + \beta\hat{g}(\omega)
 \end{equation}
 \end{proof}
-\begin{dingli}{}{平移性质}
+\begin{dingli}{平移性质}{}
 \begin{equation}
     \mathcal{F}[f(x - a)] = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega)
 \end{equation}
@@ -256,7 +256,7 @@
 \end{equation}
 \end{proof}
 
-\begin{dingli}{}{频移性质}
+\begin{dingli}{频移性质}{}
 \begin{equation}
     \mathcal{F}[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)] = \hat{f}(\omega - \omega_0)
 \end{equation}
@@ -267,7 +267,7 @@
     \mathcal{F}[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)] = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{\mathrm{i}\omega_0 x}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}(\omega-\omega_0) x}\,\mathrm{d}x = \hat{f}(\omega - \omega_0)
 \end{equation}
 \end{proof}
-\begin{dingli}{}{伸缩性质}
+\begin{dingli}{伸缩性质}{}
 \begin{equation}
     \mathcal{F}[f(ax)] = \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right), \quad a \neq 0
 \end{equation}
@@ -282,7 +282,7 @@
 
 \subsection{微分性质}
 
-\begin{dingli}{}{时域微分}
+\begin{dingli}{时域微分}{}
 若 $f(x)$ 及其导数满足傅里叶变换\index{傅里叶变换}条件，则
 \begin{equation}
     \mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)
@@ -300,7 +300,7 @@
 \end{equation}
 \end{proof}
 
-\begin{dingli}{}{频域微分}
+\begin{dingli}{频域微分}{}
 \begin{equation}
     \mathcal{F}[xf(x)] = \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)
 \end{equation}
@@ -317,7 +317,7 @@
 \end{equation}
 故 $\mathcal{F}[xf(x)] = \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)$。
 \end{proof}
-\begin{dingli}{}{高阶导数}
+\begin{dingli}{高阶导数}{}
 \begin{equation}
     \mathcal{F}[f^{(n)}(x)] = (\mathrm{i}\omega)^n\hat{f}(\omega)
 \end{equation}
@@ -336,7 +336,7 @@
 \end{proof}
 \subsection{卷积定理}
 
-\begin{dingliyi}{}{卷积}
+\begin{dingliyi}{卷积}{}
 两个函数 $f(x)$ 和 $g(x)$ 的\textbf{卷积}定义为
 \begin{equation}
     (f * g)(x) = \int_{-\infty}^{+\infty} f(\tau)g(x - \tau)\,\mathrm{d}\tau
@@ -367,7 +367,7 @@
 
 \subsection{帕塞瓦尔等式}
 
-\begin{dingli}{}{帕塞瓦尔等式}
+\begin{dingli}{帕塞瓦尔等式}{}
 \begin{equation}
     \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x = \frac{1}{2\pi}\int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega
 \end{equation}
@@ -492,13 +492,13 @@
 
 \subsection{二维傅里叶变换\index{傅里叶变换}}
 
-\begin{dingliyi}{}{二维傅里叶变换}
+\begin{dingliyi}{二维傅里叶变换}{}
 \begin{equation}
     \hat{f}(\omega_1, \omega_2) = \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f(x_1, x_2)\mathrm{e}^{-\mathrm{i}(\omega_1 x_1 + \omega_2 x_2)}\,\mathrm{d}x_1\mathrm{d}x_2
 \end{equation}
 \end{dingliyi}
 
-\begin{dingliyi}{}{二维傅里叶逆变换}
+\begin{dingliyi}{二维傅里叶逆变换}{}
 \begin{equation}
     f(x_1, x_2) = \frac{1}{(2\pi)^2}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \hat{f}(\omega_1, \omega_2)\mathrm{e}^{\mathrm{i}(\omega_1 x_1 + \omega_2 x_2)}\,\mathrm{d}\omega_1\mathrm{d}\omega_2
 \end{equation}

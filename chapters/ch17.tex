@@ -51,7 +51,7 @@
 
 \subsection{厄米方程}
 
-\begin{dingliyi}{}{厄米方程}
+\begin{dingliyi}{厄米方程}{}
 \begin{equation}
     \frac{\mathrm{d}^2 y}{\mathrm{d}x^2} - 2x\frac{\mathrm{d}y}{\mathrm{d}x} + \lambda y = 0
 \end{equation}
@@ -72,7 +72,7 @@
 
 \subsection{厄米多项式}
 
-\begin{dingliyi}{}{厄米多项式的定义}
+\begin{dingliyi}{厄米多项式的定义}{}
 \begin{equation}
     H_n(x) = (-1)^n\mathrm{e}^{x^2}\frac{\mathrm{d}^n}{\mathrm{d}x^n}\mathrm{e}^{-x^2}
 \end{equation}
@@ -131,7 +131,7 @@
 
 \subsection{递推关系与微分方程}
 
-\begin{dingli}{}{递推关系}
+\begin{dingli}{递推关系}{}
 厄米多项式满足以下递推关系：
 \begin{align}
     H_{n+1}(x) &= 2xH_n(x) - 2nH_{n-1}(x) \\
@@ -153,7 +153,7 @@
 
 \subsection{正交性与母函数}
 
-\begin{dingli}{}{正交性}
+\begin{dingli}{正交性}{}
 \begin{equation}
     \int_{-\infty}^{+\infty} \mathrm{e}^{-x^2}H_m(x)H_n(x)\,\mathrm{d}x = 2^n n!\sqrt{\pi}\delta_{mn}
 \end{equation}
@@ -170,7 +170,7 @@
 \end{equation}
 展开 $\mathrm{e}^{2ts} = \sum_{n=0}^{\infty} \frac{(2ts)^n}{n!}$，比较 $t^m s^n$ 的系数，得正交性。
 \end{proof}
-\begin{dingli}{}{母函数}
+\begin{dingli}{母函数}{}
 \begin{equation}
     \mathrm{e}^{2xt - t^2} = \sum_{n=0}^{\infty} H_n(x)\frac{t^n}{n!}
 \end{equation}
@@ -322,7 +322,7 @@
 
 \subsection{拉盖尔方程}
 
-\begin{dingliyi}{}{拉盖尔方程}
+\begin{dingliyi}{拉盖尔方程}{}
 \begin{equation}
     x\frac{\mathrm{d}^2 y}{\mathrm{d}x^2} + (1-x)\frac{\mathrm{d}y}{\mathrm{d}x} + ny = 0
 \end{equation}
@@ -335,7 +335,7 @@
 
 \subsection{拉盖尔多项式}
 
-\begin{dingliyi}{}{拉盖尔多项式的定义}
+\begin{dingliyi}{拉盖尔多项式的定义}{}
 \begin{equation}
     L_n(x) = \mathrm{e}^x\frac{\mathrm{d}^n}{\mathrm{d}x^n}(x^n\mathrm{e}^{-x})
 \end{equation}
@@ -385,7 +385,7 @@
 
 \subsection{连带拉盖尔多项式}
 
-\begin{dingliyi}{}{连带拉盖尔多项式}
+\begin{dingliyi}{连带拉盖尔多项式}{}
 \begin{equation}
     L_n^k(x) = \frac{\mathrm{d}^k}{\mathrm{d}x^k}L_{n+k}(x)
 \end{equation}
@@ -396,7 +396,7 @@
     x\frac{\mathrm{d}^2 y}{\mathrm{d}x^2} + (k+1-x)\frac{\mathrm{d}y}{\mathrm{d}x} + ny = 0
 \end{equation}
 
-\begin{dingli}{}{正交性}
+\begin{dingli}{正交性}{}
 \begin{equation}
     \int_0^{+\infty} x^k \mathrm{e}^{-x} L_n^k(x)L_m^k(x)\,\mathrm{d}x = \frac{(n+k)!}{n!}\delta_{mn}
 \end{equation}
@@ -501,7 +501,7 @@
 
 \subsection{超几何函数}
 
-\begin{dingliyi}{}{超几何函数}
+\begin{dingliyi}{超几何函数}{}
 \begin{equation}
     \boxed{F(a, b; c; x) = {}_2F_1(a, b; c; x) = \sum_{n=0}^{\infty} \frac{(a)_n(b)_n}{(c)_n}\frac{x^n}{n!}}
 \end{equation}
@@ -546,7 +546,7 @@
 
 \subsection{定义}
 
-\begin{dingliyi}{}{Γ 函数}
+\begin{dingliyi}{Γ 函数}{}
 \[
     \Gamma(z) = \int_0^{+\infty} t^{z-1}\mathrm{e}^{-t}\,\mathrm{d}t, \quad \mathrm{Re}(z) > 0
 \]
@@ -554,7 +554,7 @@
 
 \subsection{性质}
 
-\begin{dingli}{}{基本性质}
+\begin{dingli}{基本性质}{}
 \begin{align}
     \Gamma(z+1) &= z\Gamma(z) \\
     \Gamma(n+1) &= n! \quad (n \in \mathbb{N}) \\
