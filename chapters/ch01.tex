@@ -558,8 +558,8 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \centering
 \begin{tikzpicture}[scale=1.0]
     \begin{scope}
-        \draw[->, thick] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
-        \draw[->, thick] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
+        \draw[->] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+        \draw[->] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
         \coordinate (O) at (0,0);
         \coordinate (A) at (1.9,0.8);
         \coordinate (B) at (3.2,2.45);
@@ -579,8 +579,8 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
     \end{scope}
 
     \begin{scope}[xshift=7.2cm]
-        \draw[->, thick] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
-        \draw[->, thick] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
+        \draw[->] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+        \draw[->] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
         \coordinate (O2) at (0,0);
         \coordinate (P) at (3.1,1.0);
         \coordinate (Q) at (1.35,2.45);
@@ -738,13 +738,13 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[->, thick] (-3,0) -- (3,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-2.6) -- (0,2.6) node[above] {$\operatorname{Im}z$};
+    \draw[->, gray] (-4,0) -- (4,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-2.6) -- (0,2.6) node[above] {$\operatorname{Im}z$};
 
-    \node[gray!65] at (3,1.7) {第一象限};
-    \node[gray!65] at (-3,1.7) {第二象限};
-    \node[gray!65] at (-3,-1.8) {第三象限};
-    \node[gray!65] at (3,-1.8) {第四象限};
+    \node[gray] at (3,1.7) {第一象限};
+    \node[gray] at (-3,1.7) {第二象限};
+    \node[gray] at (-3,-1.8) {第三象限};
+    \node[gray] at (3,-1.8) {第四象限};
 
     \coordinate (Z1) at (1,1.732);
     \coordinate (Z2) at (-1,1);
@@ -763,14 +763,14 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \node[right, text=green!60!black] at (Z3) {$z_3$};
     \node[below left] at (0,0) {$O$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, blue!60!black] (0.65,0) arc[start angle=0,end angle=60,radius=0.65];
-    \node[blue!60!black] at (0.9,0.28) {$\frac{\pi}{3}$};
+    \draw[-{Stealth[length=1.8mm]}, thick, blue!60!black] (0.9,0) arc[start angle=0,end angle=60,radius=0.9];
+    \node[blue!60!black] at (1,0.5) {$\frac{\pi}{3}$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, red!75!black] (0.9,0) arc[start angle=0,end angle=135,radius=0.9];
-    \node[red!75!black] at (0.1,1.05) {$\frac{3\pi}{4}$};
+    \draw[-{Stealth[length=1.8mm]}, thick, red!75!black] (0.6,0) arc[start angle=0,end angle=135,radius=0.6];
+    \node[red!75!black] at (-0.3,0.9) {$\frac{3\pi}{4}$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, green!60!black] (0.95,0) arc[start angle=0,end angle=-90,radius=0.95];
-    \node[green!60!black] at (1,-0.8) {$-\frac{\pi}{2}$};
+    \draw[-{Stealth[length=1.8mm]}, thick, green!60!black] (0.7,0) arc[start angle=0,end angle=-90,radius=0.7];
+    \node[green!60!black] at (0.75,-0.75) {$-\frac{\pi}{2}$};
 \end{tikzpicture}
 \caption{三个复数所在的象限与对应的主辐角}
 \label{fig:arg-example-quadrants}
@@ -841,7 +841,7 @@ r=|z|,\qquad \theta\in \arg z.
 
 \subsection{复数的三角形式}
 
-\begin{dingliyi}{三角形式（trigonometric form）}{}
+\begin{dingliyi}{三角形式}{}
 设 $z\neq 0$，若
 \[
 r=|z|,\qquad \theta\in \arg z,
@@ -850,7 +850,7 @@ r=|z|,\qquad \theta\in \arg z,
 \begin{equation}\label{eq:trigonometric-form}
     z=r(\cos\theta+\mathrm{i}\sin\theta)
 \end{equation}
-称为复数 $z$ 的\textbf{三角形式}。
+称为复数 $z$ 的\textbf{三角形式}（trigonometric form）。
 \end{dingliyi}
 
 \begin{zhu}{}{}
