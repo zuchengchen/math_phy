@@ -159,30 +159,133 @@ z_4=0
 \end{jie}
 \end{lizi}
 
-\subsection{复数的四则运算（arithmetic operations）}
+\subsection{复数的四则运算}
 
-在后面讨论复平面上的距离、共轭复数和三角不等式以前，我们先把复数在代数形式下怎样进行四则运算说明清楚。否则一旦看到 $z_1-z_2$、$z\bar z$ 这样的式子，就会产生一种``对象已经出现了，但规则还没交代''的感觉。
+前面我们已经知道，复数可以写成
+\[
+z=x+\mathrm{i}y.
+\]
+但``会写出来''还不够。后面无论是讨论复平面上的几何意义，还是把复数真正用于物理计算，我们都必须先弄清楚两个复数怎样相加、相减、相乘、相除。这里最重要的原则是：\textbf{每次运算结束后，都要把结果整理成}
+\[
+x+\mathrm{i}y
+\]
+\textbf{这样的标准形式}，这样实部和虚部才清楚，后续讨论也才方便。
 
 设
 \[
 z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \]
-则复数的加法（addition）、减法（subtraction）、乘法（multiplication）分别定义为
+
+加法（addition）和减法（subtraction）最自然：实部与实部分别相加减，虚部与虚部分别相加减，因此
 \begin{align}
     z_1+z_2&=(x_1+x_2)+\mathrm{i}(y_1+y_2),\label{eq:complex-addition-algebraic}\\
-    z_1-z_2&=(x_1-x_2)+\mathrm{i}(y_1-y_2),\label{eq:complex-subtraction-algebraic}\\
-    z_1z_2&=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).\label{eq:complex-multiplication-algebraic}
+    z_1-z_2&=(x_1-x_2)+\mathrm{i}(y_1-y_2).\label{eq:complex-subtraction-algebraic}
 \end{align}
 
-若 $z_2\neq 0$，则复数的除法（division）定义为
+\begin{lizi}{复数的加法与减法}{}
+计算
+\[
+(2+3\mathrm{i})+(-1+4\mathrm{i}),\qquad (2+3\mathrm{i})-(-1+4\mathrm{i}).
+\]
+
+\begin{jie}
+分别对实部、虚部做运算即可：
+\[
+(2+3\mathrm{i})+(-1+4\mathrm{i})=(2-1)+\mathrm{i}(3+4)=1+7\mathrm{i},
+\]
+\[
+(2+3\mathrm{i})-(-1+4\mathrm{i})=(2+1)+\mathrm{i}(3-4)=3-\mathrm{i}.
+\]
+\end{jie}
+\end{lizi}
+
+乘法（multiplication）就要更小心一些。它不能简单理解成``实部乘实部，虚部乘虚部''，而必须按照普通代数的展开规则来做，并在最后用
+\[
+\mathrm{i}^2=-1
+\]
+化简：
+\begin{align*}
+    z_1z_2
+    &=(x_1+\mathrm{i}y_1)(x_2+\mathrm{i}y_2)\\
+    &=x_1x_2+\mathrm{i}x_1y_2+\mathrm{i}x_2y_1+\mathrm{i}^2y_1y_2\\
+    &=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
+\end{align*}
+因此
+\begin{equation}\label{eq:complex-multiplication-algebraic}
+    z_1z_2=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
+\end{equation}
+
+除法（division）更需要把步骤看清楚。若 $z_2\neq 0$，我们想把
+\[
+\frac{z_1}{z_2}=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}
+\]
+整理成标准形式，但分母里有 $\mathrm{i}$，不方便直接看出实部和虚部。一个自然想法是：\textbf{设法把分母变成实数}。为此，我们把分子、分母同时乘以
+\[
+x_2-\mathrm{i}y_2.
+\]
+这个量以后会正式称为 $z_2$ 的共轭复数（complex conjugate）。于是
+\begin{align*}
+    \frac{z_1}{z_2}
+    &=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}\cdot \frac{x_2-\mathrm{i}y_2}{x_2-\mathrm{i}y_2}\\
+    &=\frac{(x_1+\mathrm{i}y_1)(x_2-\mathrm{i}y_2)}{(x_2+\mathrm{i}y_2)(x_2-\mathrm{i}y_2)}.
+\end{align*}
+先看分母：
+\begin{align*}
+    (x_2+\mathrm{i}y_2)(x_2-\mathrm{i}y_2)
+    &=x_2^2-(\mathrm{i}y_2)^2\\
+    &=x_2^2+y_2^2.
+\end{align*}
+再看分子：
+\begin{align*}
+    (x_1+\mathrm{i}y_1)(x_2-\mathrm{i}y_2)
+    &=x_1x_2-\mathrm{i}x_1y_2+\mathrm{i}x_2y_1-\mathrm{i}^2y_1y_2\\
+    &=(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2).
+\end{align*}
+所以
 \begin{equation}\label{eq:complex-division-algebraic}
     \frac{z_1}{z_2}
     =\frac{(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2)}{x_2^2+y_2^2}.
 \end{equation}
 
-\begin{tishi}[怎样理解这些公式]
-加法和减法本质上就是把实部与虚部分别相加、相减；乘法来自普通代数展开，再利用 $\mathrm{i}^2=-1$ 化简；除法公式这里先记住代数结果，后面讨论其几何意义时还会再回头看它。
-\end{tishi}
+\begin{jinshi}[乘法与除法最容易错的地方]
+\begin{itemize}
+    \item 不要把乘法误写成``实部乘实部，虚部乘虚部''，因为展开后一定会出现交叉项。
+    \item 不要把除法误写成
+    \[
+        \frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}
+        =\frac{x_1}{x_2}+\mathrm{i}\frac{y_1}{y_2}.
+    \]
+    复数除法绝不是把实部、虚部分别相除。
+    \item 每一步算完后，都要重新整理成 $x+\mathrm{i}y$ 的形式。
+\end{itemize}
+\end{jinshi}
+
+\begin{lizi}{复数的乘法与除法}{}
+计算
+\[
+(2+3\mathrm{i})(1-2\mathrm{i}),\qquad \frac{2+3\mathrm{i}}{1-2\mathrm{i}}.
+\]
+
+\begin{jie}
+先算乘法：
+\begin{align*}
+    (2+3\mathrm{i})(1-2\mathrm{i})
+    &=2-4\mathrm{i}+3\mathrm{i}-6\mathrm{i}^2\\
+    &=2-\mathrm{i}+6\\
+    &=8-\mathrm{i}.
+\end{align*}
+
+再算除法。为了把分母化成实数，我们同乘 $1+2\mathrm{i}$：
+\begin{align*}
+    \frac{2+3\mathrm{i}}{1-2\mathrm{i}}
+    &=\frac{2+3\mathrm{i}}{1-2\mathrm{i}}\cdot \frac{1+2\mathrm{i}}{1+2\mathrm{i}}\\
+    &=\frac{(2+3\mathrm{i})(1+2\mathrm{i})}{(1-2\mathrm{i})(1+2\mathrm{i})}\\
+    &=\frac{2+4\mathrm{i}+3\mathrm{i}+6\mathrm{i}^2}{1+4}\\
+    &=\frac{-4+7\mathrm{i}}{5}\\
+    &=-\frac{4}{5}+\frac{7}{5}\mathrm{i}.
+\end{align*}
+\end{jie}
+\end{lizi}
 
 \subsection{为什么物理问题中也会出现复数}
 
