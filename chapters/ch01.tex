@@ -751,26 +751,26 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \coordinate (Z3) at (0,-2);
 
     \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
-    \draw[->, thick, orange!85!black, shorten >=2.5pt] (0,0) -- (Z2);
-    \draw[->, thick, magenta!75!black, shorten >=2.5pt] (0,0) -- (Z3);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z2);
+    \draw[->, thick, green!60!black, shorten >=2.5pt] (0,0) -- (Z3);
 
     \fill[blue!80!black] (Z1) circle (2pt);
-    \fill[orange!85!black] (Z2) circle (2pt);
-    \fill[magenta!75!black] (Z3) circle (2pt);
+    \fill[red!75!black] (Z2) circle (2pt);
+    \fill[green!60!black] (Z3) circle (2pt);
 
     \node[above right, text=blue!80!black] at (Z1) {$z_1$};
-    \node[above left, text=orange!85!black] at (Z2) {$z_2$};
-    \node[right, text=magenta!75!black] at (Z3) {$z_3$};
+    \node[above left, text=red!75!black] at (Z2) {$z_2$};
+    \node[right, text=green!60!black] at (Z3) {$z_3$};
     \node[below left] at (0,0) {$O$};
 
     \draw[-{Stealth[length=1.8mm]}, thick, blue!60!black] (0.65,0) arc[start angle=0,end angle=60,radius=0.65];
     \node[blue!60!black] at (0.9,0.28) {$\frac{\pi}{3}$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, orange!85!black] (0.9,0) arc[start angle=0,end angle=135,radius=0.9];
-    \node[orange!85!black] at (0.1,1.05) {$\frac{3\pi}{4}$};
+    \draw[-{Stealth[length=1.8mm]}, thick, red!75!black] (0.9,0) arc[start angle=0,end angle=135,radius=0.9];
+    \node[red!75!black] at (0.1,1.05) {$\frac{3\pi}{4}$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, magenta!75!black] (0.95,0) arc[start angle=0,end angle=-90,radius=0.95];
-    \node[magenta!75!black] at (0.48,-0.6) {$-\frac{\pi}{2}$};
+    \draw[-{Stealth[length=1.8mm]}, thick, green!60!black] (0.95,0) arc[start angle=0,end angle=-90,radius=0.95];
+    \node[green!60!black] at (0.48,-0.6) {$-\frac{\pi}{2}$};
 \end{tikzpicture}
 \caption{三个复数所在的象限与对应的主辐角}
 \label{fig:arg-example-quadrants}
@@ -819,10 +819,10 @@ z_3=-2\mathrm{i},
 \section{复数的三角形式与指数形式}
 
 \begin{wulibj}[为什么要换一种表示法]
-代数形式 $x+\mathrm{i}y$ 很适合做加减法，也方便看出实部与虚部；但当我们关心复数的长度和方向、尤其要处理乘法、除法、乘幂和开方时，它就不够灵活了。既然复数在复平面上本来就像一个向量，那么用极坐标（polar coordinates）来表示它就会更加自然。
+代数形式 $x+\mathrm{i}y$ 很适合做加减法，也方便看出实部与虚部；但当我们关心复数的长度和方向、尤其要处理乘法、除法、乘幂和开方时，它就不够灵活了。既然复数在复平面上本来就像一个向量，那么用极坐标来表示它就会更加自然。
 \end{wulibj}
 
-\subsection{从直角坐标（Cartesian coordinates）到极坐标（polar coordinates）}
+\subsection{从直角坐标到极坐标}
 
 设 $z=x+\mathrm{i}y\neq 0$。记
 \[
