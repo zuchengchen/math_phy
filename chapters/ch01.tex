@@ -9,16 +9,16 @@
 
 本章我们要完成三件事：
 \begin{enumerate}
-    \item 建立复数的基本概念，回答``为什么要引入复数''，并掌握代数形式下的基本运算（arithmetic operations）；
-    \item 建立复平面直观，理解模（modulus）、辐角（argument）、共轭复数（complex conjugate）以及乘法的几何意义；
-    \item 初步认识扩充复平面（extended complex plane）、无穷远点（point at infinity）与复球面（Riemann sphere），为后面的级数展开（series expansion）和留数理论作准备。
+    \item 建立复数的基本概念，回答``为什么要引入复数''，并掌握代数形式下的基本运算；
+    \item 建立复平面直观，理解模、辐角、共轭复数以及乘法的几何意义；
+    \item 初步认识扩充复平面、无穷远点与复球面，为后面的级数展开和留数理论作准备。
 \end{enumerate}
 \end{wulibj}
 
 \begin{tishi}[与后续章节的关系]
 \begin{itemize}
-    \item 第二章讨论解析函数（analytic function）的极限（limit）、连续（continuity）与导数（derivative）时，会直接用到本章建立的复平面语言。
-    \item 后面研究洛朗展开（Laurent expansion）和留数（residue）时，会不断回到本章关于无穷远点与扩充复平面的视角。
+    \item 第二章讨论解析函数的极限、连续与导数时，会直接用到本章建立的复平面语言。
+    \item 后面研究洛朗展开和留数时，会不断回到本章关于无穷远点与扩充复平面的视角。
     \item 后面讨论解析函数的局部几何意义时，本章``乘法对应旋转与伸缩''这一事实会再次成为核心直观。
 \end{itemize}
 \end{tishi}
@@ -94,14 +94,6 @@ z=3-2\mathrm{i},
 
 这是以后解复数方程时最常用的基本方法之一。
 
-根据实部和虚部是否为零，复数可以作如下分类：
-\begin{itemize}
-    \item 若 $y=0$，则 $z=x$，它其实就是一个实数；
-    \item 若 $x=0$，则 $z=\mathrm{i}y$，称为纯虚数（pure imaginary number）；
-    \item 若 $x=y=0$，则得到零复数 $0$；
-    \item 若 $x\neq 0$ 且 $y\neq 0$，则称为一般复数。
-\end{itemize}
-
 \begin{lizi}{由复数相等求参数}{}
 若
 \begin{equation}
@@ -114,24 +106,21 @@ z=3-2\mathrm{i},
 \[
 2a-1=3,\qquad a+b=2.
 \]
-先由第一式得
-\[
-2a=4,\qquad a=2.
-\]
-再代入第二式得
-\[
-2+b=2,
-\]
-所以
-\[
-b=0.
-\]
 因此
 \[
 a=2,\qquad b=0.
 \]
 \end{jie}
 \end{lizi}
+
+
+根据实部和虚部是否为零，复数可以作如下分类：
+\begin{itemize}
+	\item 若 $y=0$，则 $z=x$，它其实就是一个实数；
+	\item 若 $x=0$，则 $z=\mathrm{i}y$，称为纯虚数（pure imaginary number）；
+	\item 若 $x=y=0$，则得到零复数 $0$；
+	\item 若 $x\neq 0$ 且 $y\neq 0$，则称为一般复数。
+\end{itemize}
 
 \begin{lizi}{判断复数的类型}{}
 判断下列各数属于哪一类复数：
@@ -171,7 +160,7 @@ x+\mathrm{i}y
 \]
 \textbf{这样的标准形式}，这样实部和虚部才清楚，后续讨论也才方便。
 
-设
+设有两个复数，分别为
 \[
 z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \]
@@ -215,6 +204,22 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
     z_1z_2=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
 \end{equation}
 
+\begin{lizi}{复数的乘法}{}
+计算
+\[
+(2+3\mathrm{i})(1-2\mathrm{i}).
+\]
+
+\begin{jie}
+\begin{align*}
+    (2+3\mathrm{i})(1-2\mathrm{i})
+    &=2-4\mathrm{i}+3\mathrm{i}-6\mathrm{i}^2\\
+    &=2-\mathrm{i}+6\\
+    &=8-\mathrm{i}.
+\end{align*}
+\end{jie}
+\end{lizi}
+
 除法（division）更需要把步骤看清楚。若 $z_2\neq 0$，我们想把
 \[
 \frac{z_1}{z_2}=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}
@@ -247,6 +252,25 @@ x_2-\mathrm{i}y_2.
     =\frac{(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2)}{x_2^2+y_2^2}.
 \end{equation}
 
+\begin{lizi}{复数的除法}{}
+计算
+\[
+\frac{2+3\mathrm{i}}{1-2\mathrm{i}}.
+\]
+
+\begin{jie}
+为了把分母化成实数，我们同乘 $1+2\mathrm{i}$：
+\begin{align*}
+    \frac{2+3\mathrm{i}}{1-2\mathrm{i}}
+    &=\frac{2+3\mathrm{i}}{1-2\mathrm{i}}\cdot \frac{1+2\mathrm{i}}{1+2\mathrm{i}}\\
+    &=\frac{(2+3\mathrm{i})(1+2\mathrm{i})}{(1-2\mathrm{i})(1+2\mathrm{i})}\\
+    &=\frac{2+4\mathrm{i}+3\mathrm{i}+6\mathrm{i}^2}{1+4}\\
+    &=\frac{-4+7\mathrm{i}}{5}\\
+    &=-\frac{4}{5}+\frac{7}{5}\mathrm{i}.
+\end{align*}
+\end{jie}
+\end{lizi}
+
 \begin{jinshi}[乘法与除法最容易错的地方]
 \begin{itemize}
     \item 不要把乘法误写成``实部乘实部，虚部乘虚部''，因为展开后一定会出现交叉项。
@@ -259,33 +283,6 @@ x_2-\mathrm{i}y_2.
     \item 每一步算完后，都要重新整理成 $x+\mathrm{i}y$ 的形式。
 \end{itemize}
 \end{jinshi}
-
-\begin{lizi}{复数的乘法与除法}{}
-计算
-\[
-(2+3\mathrm{i})(1-2\mathrm{i}),\qquad \frac{2+3\mathrm{i}}{1-2\mathrm{i}}.
-\]
-
-\begin{jie}
-先算乘法：
-\begin{align*}
-    (2+3\mathrm{i})(1-2\mathrm{i})
-    &=2-4\mathrm{i}+3\mathrm{i}-6\mathrm{i}^2\\
-    &=2-\mathrm{i}+6\\
-    &=8-\mathrm{i}.
-\end{align*}
-
-再算除法。为了把分母化成实数，我们同乘 $1+2\mathrm{i}$：
-\begin{align*}
-    \frac{2+3\mathrm{i}}{1-2\mathrm{i}}
-    &=\frac{2+3\mathrm{i}}{1-2\mathrm{i}}\cdot \frac{1+2\mathrm{i}}{1+2\mathrm{i}}\\
-    &=\frac{(2+3\mathrm{i})(1+2\mathrm{i})}{(1-2\mathrm{i})(1+2\mathrm{i})}\\
-    &=\frac{2+4\mathrm{i}+3\mathrm{i}+6\mathrm{i}^2}{1+4}\\
-    &=\frac{-4+7\mathrm{i}}{5}\\
-    &=-\frac{4}{5}+\frac{7}{5}\mathrm{i}.
-\end{align*}
-\end{jie}
-\end{lizi}
 
 \subsection{为什么物理问题中也会出现复数}
 
