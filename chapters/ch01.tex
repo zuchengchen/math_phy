@@ -564,14 +564,17 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \coordinate (A) at (1.9,0.8);
         \coordinate (B) at (3.2,2.45);
         \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
-        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- node[midway, below, sloped, fill=white, inner sep=1pt, text=blue!80!black] {$z_1$} (A);
-        \draw[->, thick, orange!85!black, shorten >=2.5pt] (A) -- node[midway, above, sloped, fill=white, inner sep=1pt, text=orange!85!black] {$z_2$} (B);
-        \draw[->, thick, red!75!black, shorten >=2.5pt] (O) -- node[midway, right, sloped, fill=white, inner sep=1pt, text=red!75!black] {$z_1+z_2$} (B);
+        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (A);
+        \draw[->, thick, orange!85!black, shorten >=2.5pt] (A) -- (B);
+        \draw[->, thick, red!75!black, shorten >=2.5pt] (O) -- (B);
         \fill[blue!80!black] (A) circle (2pt);
         \fill[red!75!black] (B) circle (2pt);
         \node[below left] at (O) {$O$};
         \node[below right] at (A) {$A$};
         \node[above right] at (B) {$B$};
+        \node[fill=white, inner sep=1pt, text=blue!80!black] at ($(O)!0.47!(A)+(0.08,-0.22)$) {$z_1$};
+        \node[fill=white, inner sep=1pt, text=orange!85!black] at ($(A)!0.52!(B)+(0.28,0.12)$) {$z_2$};
+        \node[fill=white, inner sep=1pt, text=red!75!black] at ($(O)!0.54!(B)+(0.34,-0.02)$) {$z_1+z_2$};
         \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
 
@@ -584,14 +587,15 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \draw[gray!65, dashed] (O2) -- (P) -- (Q) -- cycle;
         \draw[->, thick, blue!80!black, shorten >=2.5pt] (O2) -- (P);
         \draw[->, thick, orange!85!black, shorten >=2.5pt] (O2) -- (Q);
-        \draw[->, thick, red!75!black, shorten >=2.5pt] (Q) -- node[midway, above, sloped, fill=white, inner sep=1pt] {$z_1-z_2$} (P);
+        \draw[->, thick, red!75!black, shorten >=2.5pt] (Q) -- (P);
         \fill[blue!80!black] (P) circle (2pt);
         \fill[orange!85!black] (Q) circle (2pt);
         \node[below left] at (O2) {$O$};
         \node[below right] at (P) {$P$};
         \node[above left] at (Q) {$Q$};
-        \node[below] at ($(O2)!0.52!(P)$) {$z_1$};
-        \node[left] at ($(O2)!0.58!(Q)$) {$z_2$};
+        \node[fill=white, inner sep=1pt, text=blue!80!black] at ($(O2)!0.52!(P)+(0.14,-0.18)$) {$z_1$};
+        \node[fill=white, inner sep=1pt, text=orange!85!black] at ($(O2)!0.58!(Q)+(-0.28,0.02)$) {$z_2$};
+        \node[fill=white, inner sep=1pt, text=red!75!black] at ($(Q)!0.55!(P)+(0.06,0.24)$) {$z_1-z_2$};
         \node[below] at (1.7,-0.85) {$\bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|$};
     \end{scope}
 \end{tikzpicture}
@@ -765,7 +769,7 @@ z_3=-2\mathrm{i},
 \end{jie}
 \end{lizi}
 
-\section{复数的三角形式（trigonometric form）与指数形式（exponential form）}
+\section{复数的三角形式与指数形式}
 
 \begin{wulibj}[为什么要换一种表示法]
 代数形式 $x+\mathrm{i}y$ 很适合做加减法，也方便看出实部与虚部；但当我们关心复数的长度和方向、尤其要处理乘法、除法、乘幂和开方时，它就不够灵活了。既然复数在复平面上本来就像一个向量，那么用极坐标（polar coordinates）来表示它就会更加自然。
