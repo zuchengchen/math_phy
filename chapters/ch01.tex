@@ -1740,7 +1740,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
     % image line on plane
     \draw[orange!90!black, line width=1.4pt] (-4.8,-0.92) -- (2.4,0.16);
-    \node[orange!90!black, below] at (-1.2,-0.55) {$\ell$};
+    \node[orange!90!black, below] at (-2.2,-0.4) {$\ell$};
 
     % sphere
     \coordinate (O) at (0,1.35);
@@ -1748,8 +1748,6 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \draw[gray!80!black, thick] (O) circle (1.55);
     \draw[gray!70, thin] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
     \draw[gray!70, thin, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
-    \draw[gray!70, thin] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.42,y radius=1.55];
-    \draw[gray!70, thin, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=90,x radius=0.42,y radius=1.55];
 
     % north/south
     \coordinate (N) at ($(O)+(0,1.55)$);
@@ -1761,31 +1759,31 @@ F(w)=f\!\left(\frac{1}{w}\right),
     % highlighted circle through N and S
     \draw[orange!90!black, line width=1.4pt] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
     \draw[orange!90!black, line width=1.1pt, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
-    \node[orange!90!black] at ($(O)+(-1.1,1.0)$) {$C$};
+    \node[orange!90!black] at ($(O)+(-1.05,0.01)$) {$C$};
 
     % sample points on the circle
     \coordinate (P1) at ($(O)+(-0.71014,0.775)$);
     \coordinate (P2) at ($(O)+(-0.77055,-0.53013)$);
     \coordinate (P3) at ($(O)+(-0.41000,-1.34234)$);
-    \fill[black] (P1) circle (2pt) node[left] {$P_1$};
-    \fill[black] (P2) circle (2pt) node[left] {$P_2$};
-    \fill[black] (P3) circle (2pt) node[left] {$P_3$};
+    \fill[blue] (P1) circle (2pt) node[left] {$P_1$};
+    \fill[blue] (P2) circle (2pt) node[left] {$P_2$};
+    \fill[blue] (P3) circle (2pt) node[above right] {$P_3$};
 
     % image points on plane line
     \coordinate (Z1) at (-3.29320,-0.69398);
     \coordinate (Z2) at (-1.21591,-0.38239);
     \coordinate (Z3) at (-0.44898,-0.26735);
-    \fill[black] (Z1) circle (2pt);
-    \fill[black] (Z2) circle (2pt);
-    \fill[black] (Z3) circle (2pt);
-    \node[below] at (Z1) {$z_1$};
-    \node[below] at (Z2) {$z_2$};
-    \node[below] at (Z3) {$z_3$};
+    \fill[blue] (Z1) circle (2pt);
+    \fill[blue] (Z2) circle (2pt);
+    \fill[blue] (Z3) circle (2pt);
+    \node[below, blue] at (Z1) {$z_1$};
+    \node[below, blue] at (Z2) {$z_2$};
+    \node[below, blue] at (Z3) {$z_3$};
 
     % projection lines
-    \draw[gray!70, dashed] (N) -- (Z1);
-    \draw[gray!70, dashed] (N) -- (Z2);
-    \draw[gray!70, dashed] (N) -- (Z3);
+    \draw[blue, dashed] (N) -- (Z1);
+    \draw[blue, dashed] (N) -- (Z2);
+    \draw[blue, dashed] (N) -- (Z3);
 \end{tikzpicture}
 \caption{球极投影的立体示意：橙色球面圆 $C$ 经球极投影对应平面上的橙色直线 $\ell$}
 \label{fig:line-from-circle-projection-3d}
