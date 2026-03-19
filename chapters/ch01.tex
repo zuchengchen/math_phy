@@ -1802,28 +1802,6 @@ F(w)=f\!\left(\frac{1}{w}\right),
 从扩充复平面的角度看，圆和直线常常可以统一称为\textbf{广义圆}（generalized circle）：普通圆是不经过 $\infty$ 的广义圆，而直线则是经过 $\infty$ 的广义圆。这样后面学习 Möbius 变换时，``圆或直线映成圆或直线''这类结论就会显得自然得多。
 \end{zhu}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.95]
-    \begin{scope}
-        \draw[->, gray] (-2,0) -- (2.2,0);
-        \draw[->, gray] (0,-1.8) -- (0,1.8);
-        \draw[blue, thick] (0,0) circle (1.2);
-        \node at (0,-2.1) {(a) 普通圆};
-    \end{scope}
-    \begin{scope}[xshift=6cm]
-        \draw[->, gray] (-2,0) -- (2.2,0);
-        \draw[->, gray] (0,-1.8) -- (0,1.8);
-        \draw[red!75!black, thick] (-1.8,0.8) -- (1.8,0.8);
-        \fill[red!75!black] (1.55,1.4) circle (2pt);
-        \node[red!75!black] at (1.85,1.55) {$\infty$};
-        \node at (0,-2.1) {(b) 直线可看作经过 $\infty$ 的圆};
-    \end{scope}
-\end{tikzpicture}
-\caption{扩充复平面中直线与圆的统一视角}
-\label{fig:line-circle-unified}
-\end{figure}
-
 \section{复数的物理应用初步}
 
 \begin{wulibj}[为什么复数会反复出现在物理里]
