@@ -1,1088 +1,1459 @@
-% 第二章：复变函数
+% 第二章：复变函数与解析函数初步
 
-\chapter{复变函数}
+\chapter{复变函数与解析函数初步}
 
 \begin{wulibj}[本章导读]
-复变函数是把实变函数的定义域从实数扩展到复数\index{复数}后的自然推广。但这个``自然推广''却带来了全新的结构：解析函数\index{解析函数}。解析函数\index{解析函数}具有许多令人惊奇的性质，比如：一个解析函数\index{解析函数}在一点知道它的值，就知道了整个区域内的值！本章我们将先学习复平面上的点集与区域概念，然后讨论复变函数的基本概念、极限、连续、导数和解析性。
+第一章里，我们已经把复数看成了复平面上的点、向量和旋转伸缩的载体。接下来，一个非常自然的问题就是：如果自变量和函数值都放到复平面上，我们得到的``函数''会是什么样子？
+
+乍一看，这好像只是把高等数学里的 $x$ 改成了 $z$。但真正学下去就会发现，事情远没有这么简单。因为复数本身是二维的，所以复变函数的极限、连续和导数，都要同时面对``从任意方向趋近''这一要求。正是这一点，使复分析中的解析函数表现出比实变函数强得多的刚性。
+
+本章要完成下面几件事：
+\begin{enumerate}
+    \item 建立复平面上点集、区域与曲线的语言，为后面的复积分与奇点讨论打基础；
+    \item 理解复变函数的概念、极限、连续、导数与解析性，弄清楚复可导为何比实可导严格得多；
+    \item 推导柯西--黎曼条件，并由此看见解析函数和调和函数、二维势场、局部保角性之间的联系。
+\end{enumerate}
+
+这三部分内容彼此是连着的。第一节建立的``区域''和``曲线''语言，会在下一章的复积分中立刻派上用场；本章后半部分得到的柯西--黎曼条件和调和性质，又会把复分析和后面的拉普拉斯方程、二维静电场自然接起来；而第一章里反复强调的``复数乘法对应旋转与伸缩''，会在本章最后以``导数的局部几何意义''的形式重新出现。
 \end{wulibj}
 
-% ========== 第一节 ==========
-\section{区域与连通性}
+\section{复平面上的点集、区域与曲线}
 
-在高等数学中，我们学习过函数的定义域：比如 $f(x) = \sqrt{x}$ 的定义域是 $x \geq 0$，$g(x) = 1/x$ 在 $x = 0$ 处无定义。当时我们用不等式来描述这些区域。
+\begin{wulibj}[为什么先讲这一节]
+在高等数学里，函数的定义域往往是实轴上的一个区间；而到了复变函数里，定义域变成了复平面中的点集。于是很多在一维里不太显眼的区别，现在都必须认真对待：什么叫``在点附近''？什么叫``边界上''？什么叫``区域里没有洞''？什么样的曲线才适合作为积分路径？
 
-但是，当定义域从实数轴（一维）扩展到复平面（二维）后，情况变得复杂多了。复平面上的一个点 $(x, y)$ 需要两个坐标来确定，区域的形状也更加多样——可能是圆盘、环形、带洞的区域等等。
+这些概念看起来像是术语准备，但其实它们都是后面理论的骨架。比如，柯西积分定理要用到单连通区域；奇点要用到去心邻域；复积分则要沿曲线进行。要是这一节的语言没有建立起来，后面很多定理都会显得像是突然从天上掉下来的。
+\end{wulibj}
 
-于是问题来了：我们如何精确地描述一个区域？什么叫``在区域内''？什么叫``边界上''？什么叫``连通''？这些概念在讨论复变函数的积分路径、解析性、柯西积分定理时都会用到。例如，柯西积分定理要求区域是``单连通''的——你知道这意味着什么吗？
-
-所以，在本节我们要建立一套精确的语言，为后续学习打好基础。虽然这些定义看起来有些抽象，但它们都是为解决实际问题而自然引入的。
-
-\subsection{点的邻域}
+\subsection{邻域与去心邻域}
 
 \begin{dingliyi}{邻域}{}
-设 $z_0$ 是复平面上的一个点，$\varepsilon > 0$ 是正数。点集
+设 $z_0$ 是复平面上的一个点，$\varepsilon>0$。点集
 \begin{equation}
-    U(z_0, \varepsilon) = \{z \in \mathbb{C} : |z - z_0| < \varepsilon\}
+    U(z_0,\varepsilon)=\{z\in\mathbb{C}:|z-z_0|<\varepsilon\}
 \end{equation}
-称为点 $z_0$ 的\textbf{$\varepsilon$ 邻域}，即以 $z_0$ 为圆心、$\varepsilon$ 为半径的开圆盘。
+称为点 $z_0$ 的\textbf{$\varepsilon$ 邻域}，也就是以 $z_0$ 为圆心、$\varepsilon$ 为半径的开圆盘。
 \end{dingliyi}
+
+\begin{dingliyi}{去心邻域}{}
+集合
+\begin{equation}
+    \{z\in\mathbb{C}:0<|z-z_0|<\varepsilon\}
+\end{equation}
+称为点 $z_0$ 的一个\textbf{去心邻域}。
+\end{dingliyi}
+
+\begin{zhu}{}{}
+``去心''这两个字的意思很直白：就是把中心点 $z_0$ 本身拿掉。以后讨论极限时，我们关心的是 $z$ 靠近 $z_0$ 的过程，而不是 $z$ 恰好等于 $z_0$，所以去心邻域会频繁出现。
+\end{zhu}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    % 圆
-    \draw[blue, thick, fill=blue!10] (2, 1) circle (1);
-    
-    % 圆心
-    \fill[red] (2, 1) circle (2pt) node[above right] {$z_0$};
-    
-    % 半径
-    \draw[<->, thick] (2, 1) -- (3, 1) node[midway, above] {$\varepsilon$};
-    
-    % 任意点
-    \fill[green!60!black] (2.5, 1.7) circle (1.5pt) node[right] {$z$};
-    
-    % 坐标轴
-    \draw[->, gray] (-0.5, 0) -- (4.5, 0) node[right] {$x$};
-    \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+\begin{tikzpicture}[scale=1.18]
+    \draw[mp axis] (-0.8,0) -- (4.7,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.8) -- (0,3.6) node[mp label, above] {$\operatorname{Im}z$};
+
+    \coordinate (O) at (2.2,1.4);
+    \draw[figblue, thick, fill=figblue!8] (O) circle (1.15);
+    \node[mp point c] at (O) {};
+    \node[mp label, above right] at (O) {$z_0$};
+    \draw[figteal, thick] (O) -- ++(0:1.15) node[midway, above] {$\varepsilon$};
+
+    \coordinate (P) at (2.85,2.05);
+    \node[mp point b] at (P) {};
+    \node[mp label, right] at (P) {$z$};
 \end{tikzpicture}
 \caption{点 $z_0$ 的 $\varepsilon$ 邻域}
-\label{fig:neighborhood}
+\label{fig:ch02-neighborhood}
 \end{figure}
 
-\subsection{无穷远点的邻域}
+\subsection{内点、外点与边界点}
 
-前一章末尾我们已经见过扩充复平面
-\[
-\hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}.
-\]
-既然有限点可以谈邻域，一个很自然的问题就是：无穷远点 $\infty$ 能不能也谈邻域？答案是可以，而且这个概念在后面讨论 $z\to\infty$ 的极限、无穷远点处的奇性时都很有用。
-
-对有限点 $z_0$ 来说，``离它近''意味着
-\[
-|z-z_0|<\varepsilon;
-\]
-而对无穷远点来说，``离它近''恰好意味着``离原点足够远''。
-
-\begin{dingliyi}{无穷远点的邻域}{}
-在扩充复平面 $\hat{\mathbb{C}}$ 中，形如
-\begin{equation}
-    \{z\in\mathbb{C}:|z|>R\},\qquad R>0,
-\end{equation}
-的点集称为无穷远点 $\infty$ 的一个\textbf{邻域}。
+\begin{dingliyi}{内点、外点与边界点}{}
+设 $E\subset\mathbb{C}$，$z_0\in\mathbb{C}$。
+\begin{itemize}
+    \item 若存在 $\varepsilon>0$，使得 $U(z_0,\varepsilon)\subset E$，则称 $z_0$ 是 $E$ 的\textbf{内点}；
+    \item 若存在 $\varepsilon>0$，使得 $U(z_0,\varepsilon)\cap E=\emptyset$，则称 $z_0$ 是 $E$ 的\textbf{外点}；
+    \item 若 $z_0$ 的任意邻域内既有 $E$ 中的点，也有不属于 $E$ 的点，则称 $z_0$ 是 $E$ 的\textbf{边界点}。
+\end{itemize}
 \end{dingliyi}
 
-这个定义第一次看时容易有点别扭，因为它和有限点邻域的直觉正好相反：有限点附近对应的是一个``小圆盘''，无穷远点附近对应的却是``外部区域''。但这恰恰是扩充复平面的关键想法：\textbf{越远离原点，就越接近无穷远点。}
-
-\begin{lizi}{判断无穷远点的邻域}{}
-下列集合中，哪些是无穷远点的邻域？
+\begin{lizi}{判断点的类型}{}
+设
 \[
-E_1=\{z:|z|>3\},\qquad E_2=\{z:\operatorname{Re}z>3\},\qquad E_3=\{z:|z-1|>5\}.
+    E=\{z:|z|<1\}
+\]
+是单位开圆盘，判断下列各点的类型：
+\[
+    z_1=0,\qquad z_2=1,\qquad z_3=2.
 \]
 
 \begin{jie}
-$E_1$ 显然是无穷远点的邻域，因为它正是标准形式
-\[
-\{z:|z|>R\}
-\]
-的集合。
+点 $z_1=0$ 是内点，因为只要取半径足够小的邻域，例如 $U(0,1/2)$，它就完全包含在 $E$ 内。
 
-$E_2$ 不是无穷远点的邻域。虽然里面有很多模很大的点，但也漏掉了大量远离原点的点，例如负实轴方向上的大点。所以它并没有把``所有足够远的点''都包含进去。
+点 $z_2=1$ 是边界点。因为无论邻域取多小，它都会同时碰到圆盘内部的点和圆盘外部的点。
 
-$E_3$ 虽然不是标准形式，但它包含一个足够远离原点的外部区域，因此也可作为无穷远点的邻域。事实上，当 $|z|>6$ 时，由三角不等式有
-\[
-|z-1|\ge |z|-1>5,
-\]
-故
-\[
-\{z:|z|>6\}\subset E_3.
-\]
-所以 $E_3$ 确实包含无穷远点附近的所有足够远的点。
+点 $z_3=2$ 是外点，因为可以找到一个小邻域，例如 $U(2,1/2)$，使它与 $E$ 完全不相交。
 \end{jie}
 \end{lizi}
 
-\subsection{内点、外点、边界点}
-
-\begin{dingliyi}{内点、外点、边界点}{}
-设 $E$ 是复平面上的一个点集，$z_0$ 是一个点。
-\begin{itemize}
-    \item 若存在 $\varepsilon > 0$，使得 $U(z_0, \varepsilon) \subset E$，则称 $z_0$ 是 $E$ 的\textbf{内点}。
-    \item 若存在 $\varepsilon > 0$，使得 $U(z_0, \varepsilon) \cap E = \emptyset$，则称 $z_0$ 是 $E$ 的\textbf{外点}。
-    \item 若 $z_0$ 既不是 $E$ 的内点也不是外点，即 $z_0$ 的任意邻域内既有 $E$ 中的点又有不在 $E$ 中的点，则称 $z_0$ 是 $E$ 的\textbf{边界点}。
-\end{itemize}
-\end{dingliyi}
-
-\begin{lizi}{}{}
-    设 $E = \{z : |z| < 1\}$ 是单位开圆盘。判断以下点的类型：
-    \begin{enumerate}
-        \item $z_1 = 0$
-        \item $z_2 = 1$
-        \item $z_3 = 2$
-    \end{enumerate}
-    \begin{jie}
-        \begin{enumerate}
-            \item $z_1 = 0$：内点。因为存在邻域 $U(0, 0.5) \subset E$，完全在 $E$ 内。
-            \item $z_2 = 1$：边界点。任意邻域 $U(1, \varepsilon)$ 内既有 $E$ 中的点（如 $1 - \varepsilon/2$），又有 $E$ 外的点（如 $1 + \varepsilon/2$）。
-            \item $z_3 = 2$：外点。存在邻域 $U(2, 0.5)$ 与 $E$ 不相交。
-        \end{enumerate}
-    \end{jie}
-\end{lizi}
-
-\subsection{开集与闭集}
+\subsection{开集、闭集与区域}
 
 \begin{dingliyi}{开集与闭集}{}
 \begin{itemize}
-    \item 若点集 $E$ 中的每个点都是内点，则称 $E$ 是\textbf{开集}。
-    \item 若点集 $E$ 的补集 $\mathbb{C} \setminus E$ 是开集，则称 $E$ 是\textbf{闭集}。
-    \item 点集 $E$ 的所有边界点构成的集合称为 $E$ 的\textbf{边界}，记作 $\partial E$。
+    \item 若点集 $E$ 中每一点都是它的内点，则称 $E$ 是\textbf{开集}；
+    \item 若 $\mathbb{C}\setminus E$ 是开集，则称 $E$ 是\textbf{闭集}；
+    \item $E$ 的所有边界点构成的集合称为 $E$ 的\textbf{边界}，记作 $\partial E$。
 \end{itemize}
 \end{dingliyi}
 
 \begin{zhu}{}{}
-``开''和``闭''不是互斥的。例如，空集 $\emptyset$ 和全空间 $\mathbb{C}$ 既开又闭。
+``开''和``闭''并不是互相对立的两种状态。空集 $\emptyset$ 和整个复平面 $\mathbb{C}$ 既是开集，也是闭集。
 \end{zhu}
 
-\subsection{区域}
-
 \begin{dingliyi}{区域}{}
-若点集 $D$ 满足：
+若点集 $D\subset\mathbb{C}$ 同时满足：
 \begin{enumerate}
     \item $D$ 是开集；
-    \item $D$ 是连通的，即 $D$ 中任意两点都可以用一条完全在 $D$ 内的曲线连接。
+    \item $D$ 是连通的；
 \end{enumerate}
-则称 $D$ 是一个\textbf{区域}。
-
-区域 $D$ 连同它的边界 $\partial D$ 构成的集合称为\textbf{闭区域}，记作 $\bar{D} = D \cup \partial D$。
+则称 $D$ 为一个\textbf{区域}。
 \end{dingliyi}
+
+\begin{tishi}[为什么区域一定要要求``开'']
+以后我们讨论函数在某点可导、在某区域内解析时，都会默认该点附近还有一小块空间可以活动。如果一个点集连边界点都拿来当内部点讨论，那么很多关于邻域、导数和积分路径的说法就会变得很别扭。所以复分析里通常把真正工作的对象选成开集，再额外单独处理边界。
+\end{tishi}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.8]
-    % 左图：区域
+\begin{tikzpicture}[scale=0.88]
     \begin{scope}
-        \draw[blue, thick, fill=blue!20] (0, 0) circle (1.5);
-        \draw[blue, thick, fill=blue!20] (2.5, 0) circle (1);
-        % 连接部分
-        \draw[blue, thick, fill=blue!20] (0, 0) -- (2.5, 0);
-        
-        \node at (1.25, -2.5) {(a) 区域（连通开集）};
+        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.45);
+        \draw[figblue, thick, fill=figblue!12] (2.5,0) circle (0.95);
+        \fill[figblue!12] (0,0.22) rectangle (2.5,-0.22);
+        \draw[figblue, thick] (0,0.22) -- (2.5,0.22);
+        \draw[figblue, thick] (0,-0.22) -- (2.5,-0.22);
+        \node[mp label] at (1.25,-2.35) {(a) 连通开集，是区域};
     \end{scope}
-    
-    % 右图：非区域
+
     \begin{scope}[xshift=7cm]
-        \draw[blue, thick, fill=blue!20] (0, 0) circle (1.5);
-        \draw[blue, thick, fill=blue!20] (3, 0) circle (1);
-        % 不连接
-        
-        \node at (1.5, -2.5) {(b) 非区域（不连通）};
+        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.45);
+        \draw[figblue, thick, fill=figblue!12] (3,0) circle (0.95);
+        \node[mp label] at (1.5,-2.35) {(b) 不连通，不是区域};
     \end{scope}
 \end{tikzpicture}
 \caption{区域与非区域的区别}
-\label{fig:region}
+\label{fig:ch02-region}
 \end{figure}
 
-\subsection{单连通与多连通区域}
+\subsection{单连通与多连通}
+
+连通只说明一片区域没有被分裂成互不相通的几块，但还没有说明它内部是不是有``洞''。这个区别在实分析里不太显眼，在复分析里却非常重要。
 
 \begin{dingliyi}{单连通区域}{}
-若区域 $D$ 内任意一条简单闭曲线的内部仍在 $D$ 内，则称 $D$ 是\textbf{单连通区域}。否则称为\textbf{多连通区域}。
-
-直观地说，单连通区域是``没有洞''的区域。
+若区域 $D$ 内任意简单闭曲线都可以在 $D$ 内连续缩成一点，则称 $D$ 为\textbf{单连通区域}；否则称为\textbf{多连通区域}。
 \end{dingliyi}
+
+\begin{zhu}{}{}
+直观地说，单连通区域就是``没有洞''的区域。像圆盘、上半平面、整个复平面都是单连通的；环域、去掉原点的平面则不是。
+\end{zhu}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.9]
-    % 单连通
+\begin{tikzpicture}[scale=0.95]
     \begin{scope}
-        \draw[blue, thick, fill=blue!20] (0, 0) ellipse (1.5 and 1);
-        \node at (0, -2) {(a) 单连通区域};
-        
-        % 闭曲线
-        \draw[red, thick, dashed] (0, 0) circle (0.5);
-        \node[red] at (0, 0.8) {\small 闭曲线};
+        \draw[figblue, thick, fill=figblue!12] (0,0) ellipse (1.6 and 1.05);
+        \draw[figred, thick, dashed] (0,0) circle (0.46);
+        \node[mp label] at (0,-2.05) {(a) 单连通区域};
     \end{scope}
-    
-    % 多连通
-    \begin{scope}[xshift=5cm]
-        \draw[blue, thick, fill=blue!20] (0, 0) ellipse (1.5 and 1);
-        \draw[white, thick, fill=white] (0, 0) circle (0.4);
-        \draw[blue, thick] (0, 0) circle (0.4);
-        \node at (0, -2) {(b) 多连通区域（有洞）};
-        
-        % 闭曲线
-        \draw[red, thick, dashed] (0, 0) circle (0.25);
-    \end{scope}
-    
-    % 环形区域
-    \begin{scope}[xshift=10cm]
-        \draw[blue, thick, fill=blue!20] (0, 0) circle (1.5);
-        \draw[white, thick, fill=white] (0, 0) circle (0.5);
-        \draw[blue, thick] (0, 0) circle (0.5);
-        \node at (0, -2) {(c) 环形区域（多连通）};
+
+    \begin{scope}[xshift=5.2cm]
+        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.5);
+        \draw[fill=white, draw=figblue, thick] (0,0) circle (0.48);
+        \draw[figred, thick, dashed] (0,0) circle (0.9);
+        \node[mp label] at (0,-2.05) {(b) 多连通区域（有洞）};
     \end{scope}
 \end{tikzpicture}
 \caption{单连通与多连通区域}
-\label{fig:simply-connected}
+\label{fig:ch02-simply-connected}
 \end{figure}
 
-\begin{zhu}{}{}
-单连通与多连通的区别在研究柯西积分定理\index{柯西积分定理}时非常重要。简单来说：
-\begin{itemize}
-    \item 在单连通区域内，闭路积分可以``收缩''为一点。
-    \item 在多连通区域内，围绕``洞''的闭路积分可能不为零。
-\end{itemize}
-\end{zhu}
+\begin{lizi}{判断区域是否单连通}{}
+判断下列集合是否为单连通区域：
+\[
+    D_1=\{z:|z|<1\},\qquad D_2=\{z:1<|z|<2\},\qquad D_3=\mathbb{C}\setminus\{0\}.
+\]
 
-% ========== 第二节 ==========
-\section{复变函数的概念}
+\begin{jie}
+$D_1$ 是单位开圆盘，没有洞，所以是单连通区域。
+
+$D_2$ 是环域，中间挖掉了一圈，所以不是单连通区域。
+
+$D_3$ 虽然除了原点外其余部分都还连在一起，但原点的缺失形成了一个``绕不过去''的洞，因此它也是多连通的，不是单连通区域。
+\end{jie}
+\end{lizi}
+
+\subsection{曲线、简单闭曲线与正向}
+
+后面讲复积分时，我们不是在一块区域上直接求和，而是沿着某条路径积分。因此，必须先把``什么样的路径''说清楚。
+
+\begin{dingliyi}{曲线}{}
+若存在连续参数方程
+\[
+    z=z(t),\qquad a\le t\le b,
+\]
+则称点集 $C=\{z(t):a\le t\le b\}$ 为一条曲线。
+\end{dingliyi}
+
+\begin{dingliyi}{分段光滑曲线}{}
+若参数方程在若干小区间上可微，且导数连续，则称该曲线为\textbf{分段光滑曲线}。
+\end{dingliyi}
+
+\begin{dingliyi}{简单闭曲线}{}
+若曲线起点与终点重合，且除此之外没有自交，则称其为\textbf{简单闭曲线}。
+\end{dingliyi}
+
+\begin{dingliyi}{正向}{}
+若简单闭曲线按逆时针方向绕行，使区域始终位于行进方向的左侧，则称该方向为\textbf{正向}。
+\end{dingliyi}
+
+\begin{tishi}[为什么这里要强调正向]
+以后写闭路积分
+\[
+    \oint_C f(z)\,\mathrm{d}z
+\]
+时，方向不是可有可无的小细节。把曲线反向以后，积分值会变号；而多连通区域里的外边界和内边界，取向也不一样。这些规则都会在下一章反复出现。
+\end{tishi}
+
+\section{复变函数的概念与映射观点}
+
+\begin{wulibj}[为什么这一节不只是写个定义]
+在实变函数里，我们习惯把函数画成一条曲线 $y=f(x)$；但到了复变函数里，这种图像已经不够用了。因为自变量 $z$ 本身就在复平面里，函数值 $w=f(z)$ 也落在另一个复平面里，所以更自然的理解方式，不是画一条曲线，而是把整个区域看成被映到另一个区域中去。
+
+因此，这一节的任务有两个：一是建立复变函数最基本的语言，二是尽早让学生形成``映射''的眼光。后面讲局部保角性时，真正起作用的正是这个观点。
+\end{wulibj}
 
 \subsection{从实变函数到复变函数}
 
-在高等数学中，我们学习了实变函数 $y = f(x)$，其中 $x, y$ 都是实数。现在，让我们把定义域和值域都扩展到复数\index{复数}。
-
 \begin{dingliyi}{复变函数}{}
-设 $D$ 是复平面上的一个点集。若对于 $D$ 中的每一个点 $z$，按照某种规则，都有一个或多个复数\index{复数} $w$ 与之对应，则称 $w$ 是 $z$ 的\textbf{复变函数}，记作
+设 $D\subset\mathbb{C}$。若对每个 $z\in D$，都按某一规则唯一对应一个复数 $w$，则称 $w$ 是 $z$ 的\textbf{复变函数}，记作
 \begin{equation}
-    w = f(z)
+    w=f(z).
 \end{equation}
-若每个 $z$ 只对应一个 $w$，称为\textbf{单值函数}；若对应多个 $w$，称为\textbf{多值函数}。
 \end{dingliyi}
 
 \begin{zhu}{}{}
-在本书中，如无特别说明，``函数''均指单值函数。多值函数会在后续章节专门讨论（如对数函数、根式函数）。
+本书如无特别说明，默认讨论的是单值函数。像对数函数、根式函数这类多值对象，会在后面的选学章专门讨论。
 \end{zhu}
 
 \subsection{实部与虚部的分离}
 
-设 $z = x + \mathrm{i}y$，$w = u + \mathrm{i}v$。复变函数 $w = f(z)$ 可以写成
+设
+\[
+    z=x+\mathrm{i}y,\qquad w=f(z)=u+\mathrm{i}v.
+\]
+由于 $u$ 和 $v$ 最终都依赖于 $x,y$，所以复变函数通常可以写成
 \begin{equation}
-    w = f(z) = u(x, y) + \mathrm{i}v(x, y)
+    f(z)=u(x,y)+\mathrm{i}v(x,y),
 \end{equation}
-其中 $u(x, y)$ 和 $v(x, y)$ 都是二元实函数，分别称为 $f(z)$ 的\textbf{实部}和\textbf{虚部}。
+其中 $u(x,y)$ 和 $v(x,y)$ 都是二元实函数，分别称为 $f(z)$ 的实部和虚部。
 
-\begin{lizi}{}{}
-设 $f(z) = z^2$，求其实部和虚部。
+\begin{lizi}{把复函数写成 $u+\mathrm{i}v$ 的形式}{}
+设 $f(z)=z^2$，求它的实部和虚部。
+
 \begin{jie}
-    设 $z = x + \mathrm{i}y$，则
-    \begin{align}
-        f(z) &= (x + \mathrm{i}y)^2 \\
-             &= x^2 + 2\mathrm{i}xy + \mathrm{i}^2 y^2 \\
-             &= x^2 - y^2 + \mathrm{i} \cdot 2xy
-    \end{align}
-    所以实部 $u(x, y) = x^2 - y^2$，虚部 $v(x, y) = 2xy$。
+设 $z=x+\mathrm{i}y$，则
+\begin{align*}
+    f(z)&=(x+\mathrm{i}y)^2\\
+        &=x^2+2\mathrm{i}xy+\mathrm{i}^2y^2\\
+        &=(x^2-y^2)+\mathrm{i}(2xy).
+\end{align*}
+因此
+\[
+    u(x,y)=x^2-y^2,\qquad v(x,y)=2xy.
+\]
 \end{jie}
 \end{lizi}
 
-\subsection{复变函数的几何意义}
+\begin{jinshi}[一个最容易出错的小地方]
+这里的虚部是实函数 $v(x,y)$，不是 $\mathrm{i}v(x,y)$。例如，若
+\[
+    f(z)=3-2\mathrm{i},
+\]
+那么虚部是 $-2$，不是 $-2\mathrm{i}$。
+\end{jinshi}
 
-复变函数 $w = f(z)$ 可以看作从 $z$ 平面（定义域）到 $w$ 平面（值域）的\textbf{映射}。
+\subsection{映射观点}
+
+从几何上看，复变函数 $w=f(z)$ 可以理解为：把 $z$ 平面上的点映到 $w$ 平面上。这样一来，我们不仅关心单个点的像，也关心一条曲线、一个圆盘、一组射线被映过去以后会变成什么样。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.7]
-    % z 平面
+\begin{tikzpicture}[scale=0.78]
     \begin{scope}
-        \draw[->, thick] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
-        \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$y$};
-        \node at (0, -3) {$z$ 平面};
-        
-        % 单位圆
-        \draw[blue, thick] (0, 0) circle (1);
-        \node[blue] at (1.5, 1.2) {$|z|=1$};
-        
-        % 点
-        \fill[red] (1, 0) circle (2pt) node[below right] {$1$};
-        \fill[red] (0, 1) circle (2pt) node[above right] {$\mathrm{i}$};
+        \draw[mp axis] (-2.6,0) -- (2.8,0) node[mp label, right] {$x$};
+        \draw[mp axis] (0,-2.6) -- (0,2.8) node[mp label, above] {$y$};
+        \draw[figblue, thick] (0,0) circle (1.2);
+        \node[mp label] at (0,-3.1) {$z$ 平面};
+        \node[mp label, figblue] at (1.95,1.15) {$|z|=1$};
+        \node[mp point c] at (1.2,0) {};
+        \node[mp point c] at (0,1.2) {};
+        \node[mp label, below right] at (1.2,0) {$1$};
+        \node[mp label, above right] at (0,1.2) {$\mathrm{i}$};
     \end{scope}
-    
-    % 箭头
-    \draw[->, very thick, green!60!black] (3, 0) -- (4, 0) node[midway, above] {$w=z^2$};
-    
-    % w 平面
-    \begin{scope}[xshift=7cm]
-        \draw[->, thick] (-2.5, 0) -- (2.5, 0) node[right] {$u$};
-        \draw[->, thick] (0, -2.5) -- (0, 2.5) node[above] {$v$};
-        \node at (0, -3) {$w$ 平面};
-        
-        % 映射后的单位圆（变成单位圆）
-        \draw[blue, thick] (0, 0) circle (1);
-        \node[blue] at (1.8, 1) {$|w|=1$};
-        
-        % 点
-        \fill[red] (1, 0) circle (2pt) node[below right] {$1$};
-        \fill[red] (-1, 0) circle (2pt) node[below left] {$-1$};
+
+    \draw[figteal, very thick, ->] (3.25,0) -- (4.55,0) node[midway, above] {$w=z^2$};
+
+    \begin{scope}[xshift=8cm]
+        \draw[mp axis] (-2.6,0) -- (2.8,0) node[mp label, right] {$u$};
+        \draw[mp axis] (0,-2.6) -- (0,2.8) node[mp label, above] {$v$};
+        \draw[figblue, thick] (0,0) circle (1.2);
+        \node[mp label] at (0,-3.1) {$w$ 平面};
+        \node[mp label, figblue] at (1.95,1.0) {$|w|=1$};
+        \node[mp point c] at (1.2,0) {};
+        \node[mp point c] at (-1.2,0) {};
+        \node[mp label, below right] at (1.2,0) {$1$};
+        \node[mp label, below left] at (-1.2,0) {$-1$};
     \end{scope}
 \end{tikzpicture}
-\caption{映射 $w = z^2$ 将 $z$ 平面上的单位圆映射到 $w$ 平面}
-\label{fig:mapping}
+\caption{映射 $w=z^2$ 将单位圆仍映为单位圆，但点的位置发生了变化}
+\label{fig:ch02-mapping}
 \end{figure}
 
-\begin{tishi}[映射的视角]
-用``映射''的视角看待复变函数，在后续若继续选学保角映射时会非常重要。我们不仅关心函数在某点的值，还关心函数如何``变形''整个区域。
+\subsection{几个最基本的例子}
+
+\begin{lizi}{一个带定义域限制的复函数}{}
+把
+\[
+    f(z)=\frac{1}{z}
+\]
+写成 $u(x,y)+\mathrm{i}v(x,y)$ 的形式，并指出它的定义域。
+
+\begin{jie}
+设 $z=x+\mathrm{i}y$，则
+\[
+    \frac{1}{z}=\frac{1}{x+\mathrm{i}y}\cdot\frac{x-\mathrm{i}y}{x-\mathrm{i}y}
+    =\frac{x-\mathrm{i}y}{x^2+y^2}.
+\]
+因此
+\[
+    u(x,y)=\frac{x}{x^2+y^2},\qquad v(x,y)=-\frac{y}{x^2+y^2}.
+\]
+
+但这里要求
+\[
+    x^2+y^2\neq 0,
+\]
+也就是 $z\neq 0$。所以它的定义域是 $\mathbb{C}\setminus\{0\}$。
+\end{jie}
+\end{lizi}
+
+\begin{lizi}{一个看起来很简单但后面会出问题的例子}{}
+设
+\[
+    f(z)=\bar z.
+\]
+写出它的实部与虚部，并说明它的几何意义。
+
+\begin{jie}
+若 $z=x+\mathrm{i}y$，则
+\[
+    \bar z=x-\mathrm{i}y.
+\]
+因此
+\[
+    u(x,y)=x,\qquad v(x,y)=-y.
+\]
+
+几何上，这个映射把复平面上的点关于实轴做镜像反射。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[为什么特意举 $\bar z$ 这个例子]
+因为它能提醒我们：一个函数看上去再简单，也不一定是解析函数。后面讨论导数时，$\bar z$ 会成为最经典的反例之一。
 \end{tishi}
 
-% ========== 第三节 ==========
 \section{复变函数的极限与连续}
 
-\subsection{极限的概念}
+\begin{wulibj}[为什么复变极限更严格]
+实变函数里，$x\to x_0$ 的过程本质上只是在数轴上从左边或右边靠近；而复变函数里，$z\to z_0$ 却意味着可以从整个平面上的任意方向、沿任意路径靠近。这就是复变极限比实变极限严格得多的根本原因。
 
-\begin{dingliyi}{极限}{}
-设函数 $f(z)$ 在点 $z_0$ 的某个去心邻域内有定义。若存在复数\index{复数} $A$，使得对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $0 < |z - z_0| < \delta$ 时，有 $|f(z) - A| < \varepsilon$，则称 $A$ 是 $f(z)$ 当 $z \to z_0$ 时的\textbf{极限}，记作
+所以，这一节真正要讲清楚的，不是定义的外壳，而是定义的内核：\textbf{不管你怎样靠近同一个点，函数值都必须朝着同一个极限走去。} 一旦这句话在脑子里立住了，后面复导数为什么这么苛刻，就会变得顺理成章。
+\end{wulibj}
+
+\subsection{极限的定义}
+
+\begin{dingliyi}{复变函数的极限}{}
+设 $f(z)$ 在点 $z_0$ 的某个去心邻域内有定义。若存在复数 $A$，使得对于任意 $\varepsilon>0$，都存在 $\delta>0$，当
 \begin{equation}
-    \lim_{z \to z_0} f(z) = A
+    0<|z-z_0|<\delta
+\end{equation}
+时，都有
+\begin{equation}
+    |f(z)-A|<\varepsilon,
+\end{equation}
+则称 $f(z)$ 当 $z\to z_0$ 时的极限为 $A$，记作
+\begin{equation}
+    \lim_{z\to z_0}f(z)=A.
 \end{equation}
 \end{dingliyi}
 
-\begin{zhu}{}{}
-定义中 $z \to z_0$ 的方式是任意的——可以从任何方向、沿任何路径趋近。这是复变函数极限与实变函数极限的重要区别！
-\end{zhu}
-
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    % z 平面
-    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
-    
-    % z_0 点
-    \fill[blue] (2, 1.5) circle (2pt) node[above right] {$z_0$};
-    
-    % delta 邻域
-    \draw[blue, dashed] (2, 1.5) circle (0.8);
-    \node[blue] at (3.2, 1.5) {$\delta$};
-    
-    % 不同路径趋近
-    \draw[->, thick, red] (1, 0.5) to[out=60, in=210] (2, 1.5);
-    \draw[->, thick, green!60!black] (3, 2.5) to[out=240, in=60] (2, 1.5);
-    \draw[->, thick, orange] (1, 2.5) to[out=-30, in=120] (2, 1.5);
-    
-    \node at (2, -0.8) {$z$ 可以沿任意路径趋近 $z_0$};
+\begin{tikzpicture}[scale=1.16]
+    \draw[mp axis] (-0.5,0) -- (4.2,0) node[mp label, right] {$x$};
+    \draw[mp axis] (0,-0.5) -- (0,3.2) node[mp label, above] {$y$};
+
+    \coordinate (Z0) at (2.2,1.6);
+    \node[mp point c] at (Z0) {};
+    \node[mp label, above right] at (Z0) {$z_0$};
+    \draw[figblue, dashed, thick] (Z0) circle (0.86);
+    \node[mp label, figblue] at (3.28,1.6) {$\delta$};
+
+    \draw[figred, thick, ->] (1.0,0.75) to[out=50, in=220] (Z0);
+    \draw[figteal, thick, ->] (3.25,2.75) to[out=230, in=45] (Z0);
+    \draw[figpurple, thick, ->] (1.1,2.65) to[out=-20, in=130] (Z0);
 \end{tikzpicture}
-\caption{复变函数极限：沿任意路径趋近}
-\label{fig:limit-paths}
+\caption{复变函数极限要求 $z$ 沿任意路径趋近 $z_0$ 时都给出同一个结果}
+\label{fig:ch02-limit-paths}
 \end{figure}
 
-\subsection{极限的等价条件}
+\subsection{为什么必须考虑所有路径}
 
-\begin{dingli}{极限的实部虚部表示}{}\label{thm:limit-real-imag}
-设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z_0 = x_0 + \mathrm{i}y_0$，$A = a + \mathrm{i}b$。则
-\begin{equation}
-    \lim_{z \to z_0} f(z) = A \quad \Longleftrightarrow \quad 
-    \begin{cases}
-        \lim\limits_{(x,y) \to (x_0,y_0)} u(x, y) = a \\
-        \lim\limits_{(x,y) \to (x_0,y_0)} v(x, y) = b
-    \end{cases}
-\end{equation}
+定义中最值得注意的地方，是 $z\to z_0$ 并没有规定路径。也就是说，$z$ 可以沿直线、圆弧、折线，甚至更复杂的曲线趋近于 $z_0$。如果这些不同路径给出的结果不一致，那么极限就不存在。
+
+\begin{lizi}{用两条路径否定极限存在}{}
+讨论
+\[
+    f(z)=\frac{\bar z}{z}
+\]
+当 $z\to 0$ 时极限是否存在。
+
+\begin{jie}
+先沿实轴趋近。此时 $z=x$，且 $x\neq 0$，于是
+\[
+    \frac{\bar z}{z}=\frac{x}{x}=1.
+\]
+因此沿实轴趋近时，函数值趋于 $1$。
+
+再沿虚轴趋近。此时 $z=\mathrm{i}y$，且 $y\neq 0$，于是
+\[
+    \frac{\bar z}{z}=\frac{-\mathrm{i}y}{\mathrm{i}y}=-1.
+\]
+因此沿虚轴趋近时，函数值趋于 $-1$。
+
+两条路径得到的结果不同，所以
+\[
+    \lim_{z\to 0}\frac{\bar z}{z}
+\]
+不存在。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[这一类题目的基本判断策略]
+要证明极限不存在，最常用的方法不是从定义硬推，而是主动去找两条路径。只要找到两条路径使函数值趋于不同结果，结论就已经成立了。
+\end{tishi}
+
+\subsection{极限的实部虚部表示}
+
+\begin{dingli}{极限的实部虚部判据}{}\label{thm:ch02-limit-real-imag}
+设
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y),\qquad z_0=x_0+\mathrm{i}y_0,\qquad A=a+\mathrm{i}b.
+\]
+则
+\[
+    \lim_{z\to z_0}f(z)=A
+\]
+当且仅当
+\[
+    \lim_{(x,y)\to(x_0,y_0)}u(x,y)=a,\qquad
+    \lim_{(x,y)\to(x_0,y_0)}v(x,y)=b.
+\]
 \end{dingli}
 
 \begin{proof}
-设 $\lim_{z \to z_0} f(z) = A$。对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $0 < |z - z_0| < \delta$ 时，
-\begin{equation}
-    |f(z) - A| = \sqrt{(u - a)^2 + (v - b)^2} < \varepsilon
-\end{equation}
-由于 $\sqrt{(u-a)^2} \leq \sqrt{(u-a)^2 + (v-b)^2}$，所以 $|u - a| < \varepsilon$。同理 $|v - b| < \varepsilon$。
+先证必要性。若
+\[
+    \lim_{z\to z_0}f(z)=A,
+\]
+则当 $z$ 足够接近 $z_0$ 时，
+\[
+    |f(z)-A|
+    =\sqrt{(u-a)^2+(v-b)^2}
+\]
+可以任意小。于是
+\[
+    |u-a|\le |f(z)-A|,\qquad |v-b|\le |f(z)-A|.
+\]
+因此
+\[
+    u(x,y)\to a,\qquad v(x,y)\to b.
+\]
 
-反之亦然。详细的证明留给读者。
+再证充分性。若
+\[
+    u(x,y)\to a,\qquad v(x,y)\to b,
+\]
+则对任意 $\varepsilon>0$，存在 $\delta>0$，当 $0<|z-z_0|<\delta$ 时，
+\[
+    |u-a|<\frac{\varepsilon}{\sqrt{2}},\qquad |v-b|<\frac{\varepsilon}{\sqrt{2}}.
+\]
+于是
+\[
+    |f(z)-A|
+    =\sqrt{(u-a)^2+(v-b)^2}
+    <\sqrt{\frac{\varepsilon^2}{2}+\frac{\varepsilon^2}{2}}
+    =\varepsilon.
+\]
+所以
+\[
+    \lim_{z\to z_0}f(z)=A.
+\]
 \end{proof}
 
 \subsection{连续性}
 
 \begin{dingliyi}{连续}{}
-设函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若
+若函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义，且
 \begin{equation}
-    \lim_{z \to z_0} f(z) = f(z_0)
+    \lim_{z\to z_0}f(z)=f(z_0),
 \end{equation}
-则称 $f(z)$ 在点 $z_0$ \textbf{连续}。若 $f(z)$ 在区域 $D$ 内每一点都连续，则称 $f(z)$ 在 $D$ 内\textbf{连续}。
+则称 $f(z)$ 在点 $z_0$ \textbf{连续}。
 \end{dingliyi}
 
-\begin{dingli}{连续的等价条件}{}
-函数 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在 $z_0 = x_0 + \mathrm{i}y_0$ 处连续，当且仅当 $u(x, y)$ 和 $v(x, y)$ 都在 $(x_0, y_0)$ 处连续。
+\begin{dingli}{连续的实部虚部判据}{}
+设
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y).
+\]
+则 $f(z)$ 在 $z_0=x_0+\mathrm{i}y_0$ 处连续，当且仅当 $u(x,y)$ 与 $v(x,y)$ 在 $(x_0,y_0)$ 处连续。
 \end{dingli}
 
 \begin{proof}
-由极限的实部虚部表示，$f(z)$ 在 $z_0$ 连续等价于
-\begin{equation}
-    \lim_{z \to z_0} f(z) = f(z_0) = u(x_0, y_0) + \mathrm{i}v(x_0, y_0)
-\end{equation}
-由定理\ref{thm:limit-real-imag}（极限的实部虚部表示），这等价于
-\begin{equation}
-    \lim_{(x,y) \to (x_0,y_0)} u(x, y) = u(x_0, y_0), \quad
-    \lim_{(x,y) \to (x_0,y_0)} v(x, y) = v(x_0, y_0)
-\end{equation}
-这正是 $u$ 和 $v$ 在 $(x_0, y_0)$ 连续的定义。
+这只是定理 \ref{thm:ch02-limit-real-imag} 的直接应用。因为 $f$ 在 $z_0$ 处连续，等价于
+\[
+    \lim_{z\to z_0}f(z)=f(z_0)=u(x_0,y_0)+\mathrm{i}v(x_0,y_0),
+\]
+再把极限拆成实部和虚部即可。
 \end{proof}
-
-\subsection{连续函数的性质}
 
 \begin{dingli}{连续函数的基本性质}{}
-设 $f(z)$ 和 $g(z)$ 在点 $z_0$ 连续，则：
+若 $f(z)$ 与 $g(z)$ 在 $z_0$ 处连续，则
 \begin{enumerate}
-    \item $f(z) \pm g(z)$ 在 $z_0$ 连续
-    \item $f(z) \cdot g(z)$ 在 $z_0$ 连续
-    \item 若 $g(z_0) \neq 0$，则 $\frac{f(z)}{g(z)}$ 在 $z_0$ 连续
-    \item 若 $f(z)$ 在 $z_0$ 连续，$g(w)$ 在 $w_0 = f(z_0)$ 连续，则 $g(f(z))$ 在 $z_0$ 连续
+    \item $f(z)\pm g(z)$ 在 $z_0$ 处连续；
+    \item $f(z)g(z)$ 在 $z_0$ 处连续；
+    \item 若 $g(z_0)\neq 0$，则 $\dfrac{f(z)}{g(z)}$ 在 $z_0$ 处连续。
 \end{enumerate}
 \end{dingli}
-\begin{proof}
-设 $f(z) = u_1 + \mathrm{i}v_1$，$g(z) = u_2 + \mathrm{i}v_2$，其中 $u_1, v_1, u_2, v_2$ 都连续。
 
-\textbf{（1）和差连续}：由连续的等价条件，只需证明 $u_1 \pm u_2$ 和 $v_1 \pm v_2$ 连续。这是二元连续函数的性质，显然成立。
-
-\textbf{（2）乘积连续}：
-\begin{equation}
-    f(z) \cdot g(z) = (u_1 u_2 - v_1 v_2) + \mathrm{i}(u_1 v_2 + v_1 u_2)
-\end{equation}
-由二元连续函数的乘积连续，$u_1 u_2$、$v_1 v_2$、$u_1 v_2$、$v_1 u_2$ 都连续，故乘积连续。
-
-\textbf{（3）商连续}：只需证明 $\frac{1}{g(z)}$ 连续。设 $g(z_0) \neq 0$，则
-\begin{equation}
-    \frac{1}{g(z)} = \frac{\overline{g(z)}}{|g(z)|^2} = \frac{u_2 - \mathrm{i}v_2}{u_2^2 + v_2^2}
-\end{equation}
-由连续性，$u_2^2 + v_2^2$ 在 $z_0$ 处不为零，故分母连续且不为零，商连续。
-
-\textbf{（4）复合函数连续}：由极限的复合性质可得。
-\end{proof}
-
-\begin{lizi}{}{}
-讨论函数 $f(z) = \frac{z}{z - \mathrm{i}}$ 的连续性。
+\begin{lizi}{讨论有理函数的连续性}{}
+讨论函数
+\[
+    f(z)=\frac{z}{z-\mathrm{i}}
+\]
+的连续性。
 
 \begin{jie}
-    函数在 $z \neq \mathrm{i}$ 时有定义。
-    
-    由连续函数的性质，$z$ 和 $z - \mathrm{i}$ 都在整个复平面上连续，所以 $\frac{z}{z - \mathrm{i}}$ 在 $z \neq \mathrm{i}$ 处连续。
-    
-    在 $z = \mathrm{i}$ 处，函数无定义，当然不连续。
+分子 $z$ 和分母 $z-\mathrm{i}$ 都是复平面上的连续函数，因此在分母不为零的地方，商函数也连续。这里分母在
+\[
+    z=\mathrm{i}
+\]
+处为零，所以 $f(z)$ 在 $\mathbb{C}\setminus\{\mathrm{i}\}$ 内连续，而在 $z=\mathrm{i}$ 处无定义，自然也谈不上连续。
 \end{jie}
 \end{lizi}
 
-% ========== 第四节 ==========
-\section{导数与解析性}
+\section{复变函数的导数与解析性}
 
-\subsection{复变函数的导数}
+\begin{wulibj}[为什么复导数会比实导数苛刻得多]
+实变函数的导数讨论的是
+\[
+    \frac{f(x+\Delta x)-f(x)}{\Delta x}
+\]
+在 $\Delta x\to 0$ 时的极限。由于 $\Delta x$ 只能沿实轴趋近于零，所以我们最终只是在一维里比较左右两边的变化率。
 
-\begin{dingliyi}{导数}{}
+而复变函数里，增量
+\[
+    \Delta z=\Delta x+\mathrm{i}\Delta y
+\]
+可以从任意方向趋近于零。于是，差商极限不仅要存在，还必须与趋近方向无关。这一下，要求就比实变函数严格得多了。本节要做的，就是把这一点真正讲透。
+\end{wulibj}
+
+\subsection{复导数的定义}
+
+\begin{dingliyi}{复导数}{}
 设函数 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若极限
 \begin{equation}
-    \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z}
+    \lim_{\Delta z\to 0}\frac{f(z_0+\Delta z)-f(z_0)}{\Delta z}
 \end{equation}
-存在且有限，则称 $f(z)$ 在点 $z_0$ \textbf{可导}，此极限称为 $f(z)$ 在 $z_0$ 的\textbf{导数}，记作 $f'(z_0)$ 或 $\frac{\mathrm{d}f}{\mathrm{d}z}\big|_{z=z_0}$。
+存在，则称 $f(z)$ 在 $z_0$ \textbf{可导}，并称该极限为 $f$ 在 $z_0$ 处的\textbf{导数}，记作 $f'(z_0)$。
 \end{dingliyi}
 
-\begin{jinshi}[关键区别：$\Delta z$ 可从任意方向趋近]
-在实变函数中，$\Delta x$ 只能沿实轴正方向或负方向趋近于 $0$。但在复变函数中，$\Delta z = \Delta x + \mathrm{i}\Delta y$ 可以从任意方向趋近于 $0$！
-
-这导致复变函数可导的条件比实变函数\textbf{严格得多}。
+\begin{jinshi}[这里真正严格的地方在哪里]
+在复变函数里，$\Delta z\to 0$ 不是只沿某一条轴靠近，而是可以从整个复平面上的任意方向趋近于零。于是，差商极限必须对所有趋近方向都给出同一个结果。这就是复可导比实可导严格得多的根源。
 \end{jinshi}
 
-\begin{lizi}{}{}
-用定义求 $f(z) = z^2$ 的导数。
+\subsection{由定义直接求导}
+
+\begin{lizi}{用定义求 $z^2$ 的导数}{}
+设 $f(z)=z^2$，求 $f'(z)$。
 
 \begin{jie}
-    \begin{align}
-        f'(z) &= \lim_{\Delta z \to 0} \frac{(z + \Delta z)^2 - z^2}{\Delta z} \\
-              &= \lim_{\Delta z \to 0} \frac{z^2 + 2z\Delta z + (\Delta z)^2 - z^2}{\Delta z} \\
-              &= \lim_{\Delta z \to 0} \frac{2z\Delta z + (\Delta z)^2}{\Delta z} \\
-              &= \lim_{\Delta z \to 0} (2z + \Delta z) = 2z
-    \end{align}
-    所以 $f'(z) = 2z$。
+由定义，
+\begin{align*}
+    f'(z)
+    &=\lim_{\Delta z\to 0}\frac{(z+\Delta z)^2-z^2}{\Delta z}\\
+    &=\lim_{\Delta z\to 0}\frac{2z\Delta z+(\Delta z)^2}{\Delta z}\\
+    &=\lim_{\Delta z\to 0}(2z+\Delta z)\\
+    &=2z.
+\end{align*}
+所以
+\[
+    f'(z)=2z.
+\]
 \end{jie}
 \end{lizi}
 
-\subsection{一个不可导的例子}
+\subsection{一个处处不可导的经典反例}
 
-\begin{lizi}{}{}
-证明 $f(z) = \bar{z}$ 在任意点都不可导。
+\begin{lizi}{证明 $f(z)=\bar z$ 处处不可导}{}
+设 $f(z)=\bar z$，证明它在任意点都不可导。
 
 \begin{jie}
-    设 $\Delta z = \Delta x + \mathrm{i}\Delta y$，则
-    \begin{equation}
-        \frac{f(z + \Delta z) - f(z)}{\Delta z} = \frac{\overline{z + \Delta z} - \bar{z}}{\Delta z} = \frac{\overline{\Delta z}}{\Delta z} = \frac{\Delta x - \mathrm{i}\Delta y}{\Delta x + \mathrm{i}\Delta y}
-    \end{equation}
-    
-    若 $\Delta z$ 沿实轴趋近（$\Delta y = 0$），则
-    \begin{equation}
-        \lim_{\Delta x \to 0} \frac{\Delta x}{\Delta x} = 1
-    \end{equation}
-    
-    若 $\Delta z$ 沿虚轴趋近（$\Delta x = 0$），则
-    \begin{equation}
-        \lim_{\Delta y \to 0} \frac{-\mathrm{i}\Delta y}{\mathrm{i}\Delta y} = -1
-    \end{equation}
-    
-    沿不同路径极限不同，所以 $f(z) = \bar{z}$ 不可导。
+取任意点 $z$，则
+\[
+    \frac{f(z+\Delta z)-f(z)}{\Delta z}
+    =\frac{\overline{z+\Delta z}-\bar z}{\Delta z}
+    =\frac{\overline{\Delta z}}{\Delta z}.
+\]
+
+若 $\Delta z$ 沿实轴趋近于零，即 $\Delta z=\Delta x$，则
+\[
+    \frac{\overline{\Delta z}}{\Delta z}
+    =\frac{\Delta x}{\Delta x}=1.
+\]
+
+若 $\Delta z$ 沿虚轴趋近于零，即 $\Delta z=\mathrm{i}\Delta y$，则
+\[
+    \frac{\overline{\Delta z}}{\Delta z}
+    =\frac{-\mathrm{i}\Delta y}{\mathrm{i}\Delta y}=-1.
+\]
+
+两条路径给出的结果不同，因此导数极限不存在。由于 $z$ 是任意点，所以 $f(z)=\bar z$ 在任意点都不可导。
 \end{jie}
 \end{lizi}
 
-\begin{tishi}[为什么 $\bar{z}$ 不可导？]
-从几何上看，$w = \bar{z}$ 是关于实轴的镜像反射。这种变换``翻转''了复平面的方向，因此不能用一个统一的``变化率''来描述。
+\begin{tishi}[这个反例为什么重要]
+$\bar z$ 看上去非常光滑，几何上也只是一个镜像反射，但它仍然处处不可导。这说明复可导要求的不是``看起来平滑''，而是局部变化率必须具有极强的一致性。
 \end{tishi}
 
-\subsection{解析函数\index{解析函数}}
+\subsection{解析、整函数与奇点}
 
 \begin{dingliyi}{解析函数}{}
-\begin{itemize}
-    \item 若函数 $f(z)$ 在点 $z_0$ 及其某个邻域内可导，则称 $f(z)$ 在 $z_0$ \textbf{解析}（或\textbf{全纯}）。
-    \item 若函数 $f(z)$ 在区域 $D$ 内每一点都解析，则称 $f(z)$ 在 $D$ 内\textbf{解析函数\index{解析函数}}。
-    \item 若函数 $f(z)$ 在点 $z_0$ 不解析，则称 $z_0$ 为 $f(z)$ 的\textbf{奇点}。
-\end{itemize}
+若函数 $f(z)$ 在点 $z_0$ 的某个邻域内处处可导，则称 $f(z)$ 在 $z_0$ \textbf{解析}。若 $f(z)$ 在某区域 $D$ 内每一点都解析，则称 $f$ 为 $D$ 内的\textbf{解析函数}。
+\end{dingliyi}
+
+\begin{dingliyi}{整函数与奇点}{}
+若函数在整个复平面上解析，则称其为\textbf{整函数}。若函数在某点不解析，则称该点为它的\textbf{奇点}。
 \end{dingliyi}
 
 \begin{zhu}{}{}
-``可导''和``解析''的区别：
-\begin{itemize}
-    \item 可导：只在一点有意义。
-    \item 解析：在一个邻域内都有意义。
-\end{itemize}
-对于复变函数，如果函数在一点可导，则一定在该点解析（这是一个深奥的结论，将在第四章证明）。
+``在一点可导''和``在这一点解析''并不是同一回事。前者只讨论一个点上的导数极限，后者要求在这一点附近的一整小块区域里都可导。以后遇到这两个说法时，一定要分清。
 \end{zhu}
 
-\subsection{求导法则}
+\begin{lizi}{一个在一点可导但不解析的例子}{}
+设
+\[
+    f(z)=|z|^2.
+\]
+讨论它在 $z=0$ 处是否可导，并说明它为什么不是解析函数。
 
-复变函数的求导法则与实变函数类似：
+\begin{jie}
+先看 $z=0$ 处的导数。由定义，
+\[
+    \frac{f(0+\Delta z)-f(0)}{\Delta z}
+    =\frac{|\Delta z|^2}{\Delta z}
+    =\overline{\Delta z}.
+\]
+当 $\Delta z\to 0$ 时，
+\[
+    \overline{\Delta z}\to 0,
+\]
+所以 $f$ 在 $z=0$ 处可导，且
+\[
+    f'(0)=0.
+\]
+
+但若 $z\neq 0$，则
+\[
+    f(z)=z\bar z,
+\]
+它会同时依赖 $z$ 和 $\bar z$。事实上，后面用柯西--黎曼条件可以验证，它在 $z\neq 0$ 处不可导。因此 $f$ 不可能在 $0$ 的某个邻域内处处可导，所以它在 $z=0$ 处并不解析。
+\end{jie}
+\end{lizi}
+
+\subsection{基本求导法则}
 
 \begin{dingli}{基本求导法则}{}
-设 $f(z)$ 和 $g(z)$ 都可导，则：
+若 $f(z)$ 和 $g(z)$ 在点 $z$ 处可导，则
 \begin{align}
-    [f(z) \pm g(z)]' &= f'(z) \pm g'(z) \\
-    [f(z) \cdot g(z)]' &= f'(z)g(z) + f(z)g'(z) \\
-    \left[\frac{f(z)}{g(z)}\right]' &= \frac{f'(z)g(z) - f(z)g'(z)}{[g(z)]^2}, \quad g(z) \neq 0 \\
-    [f(g(z))]' &= f'(g(z)) \cdot g'(z) \quad \text{（链式法则）}
+    [f(z)\pm g(z)]'&=f'(z)\pm g'(z),\\
+    [f(z)g(z)]'&=f'(z)g(z)+f(z)g'(z).
 \end{align}
+若此外 $g(z)\neq 0$，则
+\begin{equation}
+    \left[\frac{f(z)}{g(z)}\right]'
+    =\frac{f'(z)g(z)-f(z)g'(z)}{[g(z)]^2}.
+\end{equation}
 \end{dingli}
 
 \begin{proof}
-这些法则的证明与实变函数完全类似，我们以乘积法则为例：
-
-设 $h(z) = f(z) \cdot g(z)$，则
-\begin{align}
-    h'(z) &= \lim_{\Delta z \to 0} \frac{f(z+\Delta z)g(z+\Delta z) - f(z)g(z)}{\Delta z} \\
-           &= \lim_{\Delta z \to 0} \frac{
-               f(z+\Delta z)g(z+\Delta z) - f(z)g(z+\Delta z)
-               + f(z)g(z+\Delta z) - f(z)g(z)
-               }{\Delta z} \\
-           &= \lim_{\Delta z \to 0} \Biggl[
-               g(z+\Delta z)\frac{f(z+\Delta z) - f(z)}{\Delta z}
-               + f(z)\frac{g(z+\Delta z) - g(z)}{\Delta z}
-               \Biggr] \\
-           &= g(z)f'(z) + f(z)g'(z)
-\end{align}
-其中用到 $g(z)$ 可导则连续，故 $\lim_{\Delta z \to 0} g(z+\Delta z) = g(z)$。
-
-其他法则类似可证，读者可自行尝试。
+加法法则直接由极限的线性性质得到。这里证明乘法法则：
+\begin{align*}
+    [f(z)g(z)]'
+    &=\lim_{\Delta z\to 0}\frac{f(z+\Delta z)g(z+\Delta z)-f(z)g(z)}{\Delta z}\\
+    &=\lim_{\Delta z\to 0}\frac{f(z+\Delta z)g(z+\Delta z)-f(z)g(z+\Delta z)}{\Delta z}\\
+    &\quad+\lim_{\Delta z\to 0}\frac{f(z)g(z+\Delta z)-f(z)g(z)}{\Delta z}\\
+    &=\lim_{\Delta z\to 0}g(z+\Delta z)\frac{f(z+\Delta z)-f(z)}{\Delta z}
+      +f(z)\lim_{\Delta z\to 0}\frac{g(z+\Delta z)-g(z)}{\Delta z}.
+\end{align*}
+因为可导推出连续，所以 $g(z+\Delta z)\to g(z)$。于是
+\[
+    [f(z)g(z)]'=g(z)f'(z)+f(z)g'(z).
+\]
+商法则可把 $1/g(z)$ 先写出来再用乘法法则得到。
 \end{proof}
-基本初等函数的导数：
-\begin{align}
-    (c)' &= 0 \quad (c \text{ 为常数}) \\
-    (z^n)' &= nz^{n-1} \quad (n \in \mathbb{Z}) \\
-    (\mathrm{e}^z)' &= \mathrm{e}^z \\
-    (\sin z)' &= \cos z \\
-    (\cos z)' &= -\sin z
-\end{align}
 
-% ========== 第五节 ==========
-\section{柯西\index{柯西@柯西（Cauchy）}（Cauchy）--黎曼\index{黎曼@黎曼（Riemann）}（Riemann）条件}
+\section{柯西--黎曼条件与可导判别}
 
-前面我们看到，复变函数可导的条件比实变函数严格得多。一个函数 $f(z) = \bar{z}$ 看起来很简单，却在任意点都不可导！这让我们不禁要问：复变函数可导的条件到底是什么？
+\begin{wulibj}[为什么需要这一节]
+仅靠导数定义来判断一个函数是否可导，往往非常麻烦。因为每次都要重新处理
+\[
+    \frac{f(z+\Delta z)-f(z)}{\Delta z}
+\]
+在任意方向上的极限。于是一个自然想法就是：能不能把``可导''翻译成实部 $u(x,y)$ 与虚部 $v(x,y)$ 的偏导关系？
 
-用定义判断可导需要计算极限，每次都要重新推导，太麻烦了。我们希望找到一个更实用的判别方法——最好能直接从函数的实部和虚部判断它是否可导，而不需要每次都回到极限定义。
-
-这个判别方法就是著名的\textbf{柯西--黎曼条件}。它的思想很朴素：如果 $\Delta z$ 可以沿任意方向趋近零，那么沿不同方向趋近的结果必须相等！我们选取两个特殊方向来推导条件。
+柯西--黎曼条件正是这种想法的结果。它不是凭空出现的公式，而是复导数必须与趋近方向无关这一事实的直接表达。所以，这一节最重要的不是记住等式，而是看清这些等式是怎么来的。
+\end{wulibj}
 
 \subsection{柯西--黎曼条件的导出}
 
-设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z = x + \mathrm{i}y$。考虑导数的定义：
-\begin{equation}
-    f'(z) = \lim_{\Delta z \to 0} \frac{f(z + \Delta z) - f(z)}{\Delta z}
-\end{equation}
-
-关键观察：$\Delta z \to 0$ 可以沿不同路径。我们选择两条特殊路径：
-
-\textbf{路径一}：沿实轴方向，$\Delta z = \Delta x$（即 $\Delta y = 0$）。
-\begin{align}
-    f'(z) &= \lim_{\Delta x \to 0} \frac{u(x+\Delta x, y) - u(x,y) + \mathrm{i}[v(x+\Delta x, y) - v(x,y)]}{\Delta x} \\
-          &= \frac{\partial u}{\partial x} + \mathrm{i}\frac{\partial v}{\partial x}
-\end{align}
-
-\textbf{路径二}：沿虚轴方向，$\Delta z = \mathrm{i}\Delta y$（即 $\Delta x = 0$）。
-\begin{align}
-    f'(z) &= \lim_{\Delta y \to 0} \frac{u(x, y+\Delta y) - u(x,y) + \mathrm{i}[v(x, y+\Delta y) - v(x,y)]}{\mathrm{i}\Delta y} \\
-          &= \frac{1}{\mathrm{i}}\left(\frac{\partial u}{\partial y} + \mathrm{i}\frac{\partial v}{\partial y}\right) = \frac{\partial v}{\partial y} - \mathrm{i}\frac{\partial u}{\partial y}
-\end{align}
-
-如果 $f(z)$ 可导，两个结果必须相等：
-\begin{equation}
-    \frac{\partial u}{\partial x} + \mathrm{i}\frac{\partial v}{\partial x} = \frac{\partial v}{\partial y} - \mathrm{i}\frac{\partial u}{\partial y}
-\end{equation}
-
-比较实部和虚部，得到：
-
-\begin{zhongyao}[柯西--黎曼条件]
-设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在点 $z = x + \mathrm{i}y$ 可导，则 $u$ 和 $v$ 满足
+设
 \[
-    \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+    f(z)=u(x,y)+\mathrm{i}v(x,y),\qquad z=x+\mathrm{i}y.
 \]
-这称为\keyword{柯西--黎曼条件}（简称 C-R 条件）。
-\end{zhongyao}
+如果 $f$ 在点 $z$ 可导，那么导数
+\[
+    f'(z)=\lim_{\Delta z\to 0}\frac{f(z+\Delta z)-f(z)}{\Delta z}
+\]
+必须与 $\Delta z\to 0$ 的方式无关。
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.1]
-    % 坐标轴
-    \draw[->, thick, gray] (-0.5, 0) -- (4, 0) node[right] {$x$};
-    \draw[->, thick, gray] (0, -0.5) -- (0, 3.5) node[above] {$y$};
-    
-    % 点 z_0
-    \coordinate (z0) at (2, 1.5);
-    \fill[red] (z0) circle (2.5pt) node[above right] {$z_0$};
-    
-    % x方向导数
-    \draw[->, very thick, blue] (z0) -- ++(1.2, 0) node[right] {$u_x + \mathrm{i}v_x$};
-    \node[blue, below] at (2.6, 1.5) {$\partial x$ 方向};
-    
-    % y方向导数
-    \draw[->, very thick, green!60!black] (z0) -- ++(0, 1.2) node[above] {$u_y + \mathrm{i}v_y$};
-    \node[green!60!black, left] at (2, 2.1) {$\partial y$ 方向};
-    
-    % C-R 条件的几何解释
-    \node[align=center] at (2, -1) {C-R 条件：两个方向的导数相等};
-\end{tikzpicture}
-\caption{柯西--黎曼条件的几何解释}
-\label{fig:cr-geometry}
-\end{figure}
+先让 $\Delta z=\Delta x$，也就是沿实轴方向趋近于零。此时
+\begin{align*}
+    f'(z)
+    &=\lim_{\Delta x\to 0}
+    \frac{u(x+\Delta x,y)-u(x,y)+\mathrm{i}[v(x+\Delta x,y)-v(x,y)]}{\Delta x}\\
+    &=u_x+\mathrm{i}v_x.
+\end{align*}
 
-\subsection{C-R 条件的充分性}
+再让 $\Delta z=\mathrm{i}\Delta y$，也就是沿虚轴方向趋近于零。此时
+\begin{align*}
+    f'(z)
+    &=\lim_{\Delta y\to 0}
+    \frac{u(x,y+\Delta y)-u(x,y)+\mathrm{i}[v(x,y+\Delta y)-v(x,y)]}{\mathrm{i}\Delta y}\\
+    &=\frac{1}{\mathrm{i}}\left(u_y+\mathrm{i}v_y\right)\\
+    &=v_y-\mathrm{i}u_y.
+\end{align*}
 
-\begin{dingli}{可导的充分条件}{}
-设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$ 在点 $z_0 = x_0 + \mathrm{i}y_0$ 的邻域内有定义，且 $u_x, u_y, v_x, v_y$ 都在 $(x_0, y_0)$ 处连续并满足 C-R 条件，则 $f(z)$ 在 $z_0$ 可导，且
-\begin{equation}
-    f'(z_0) = u_x(x_0, y_0) + \mathrm{i}v_x(x_0, y_0) = v_y(x_0, y_0) - \mathrm{i}u_y(x_0, y_0)
+若 $f'(z)$ 存在，这两个结果必须相同，因此
+\[
+    u_x+\mathrm{i}v_x=v_y-\mathrm{i}u_y.
+\]
+比较实部与虚部，就得到
+\begin{equation}\label{eq:ch02-cr}
+    u_x=v_y,\qquad u_y=-v_x.
 \end{equation}
+
+\begin{dingli}{柯西--黎曼条件的必要性}{}
+若
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y)
+\]
+在点 $z$ 可导，则 $u$ 和 $v$ 在该点满足柯西--黎曼条件
+\[
+    u_x=v_y,\qquad u_y=-v_x.
+\]
+\end{dingli}
+
+\subsection{偏导连续时的充分条件}
+
+\begin{dingli}{可导的充分条件}{}\label{thm:ch02-cr-sufficient}
+设
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y)
+\]
+在点 $z_0=x_0+\mathrm{i}y_0$ 的某个邻域内有定义。若 $u_x,u_y,v_x,v_y$ 在 $(x_0,y_0)$ 附近存在并连续，且在 $(x_0,y_0)$ 处满足柯西--黎曼条件，则 $f$ 在 $z_0$ 可导。
 \end{dingli}
 
 \begin{proof}
-利用二元函数的全微分公式。设 $\Delta z = \Delta x + \mathrm{i}\Delta y$，则
-\begin{align}
-    \Delta f &= f(z_0 + \Delta z) - f(z_0) \\
-             &= [u(x_0+\Delta x, y_0+\Delta y) - u(x_0, y_0)] + \mathrm{i}[v(x_0+\Delta x, y_0+\Delta y) - v(x_0, y_0)]
-\end{align}
-
-由全微分公式（$u_x, u_y, v_x, v_y$ 连续）：
-\begin{align}
-    \Delta u &= u_x \Delta x + u_y \Delta y + o(|\Delta z|) \\
-    \Delta v &= v_x \Delta x + v_y \Delta y + o(|\Delta z|)
-\end{align}
-
-代入 C-R 条件 $u_x = v_y$，$u_y = -v_x$：
-\begin{align}
-    \Delta f &= (u_x \Delta x + u_y \Delta y) + \mathrm{i}(v_x \Delta x + v_y \Delta y) + o(|\Delta z|) \\
-             &= (u_x \Delta x - v_x \Delta y) + \mathrm{i}(v_x \Delta x + u_x \Delta y) + o(|\Delta z|) \\
-             &= u_x(\Delta x + \mathrm{i}\Delta y) + \mathrm{i}v_x(\Delta x + \mathrm{i}\Delta y) + o(|\Delta z|) \\
-             &= (u_x + \mathrm{i}v_x)\Delta z + o(|\Delta z|)
-\end{align}
-
+设
+\[
+    \Delta z=\Delta x+\mathrm{i}\Delta y.
+\]
+由多元函数的全增量公式，
+\begin{align*}
+    \Delta u&=u_x\Delta x+u_y\Delta y+o(|\Delta z|),\\
+    \Delta v&=v_x\Delta x+v_y\Delta y+o(|\Delta z|).
+\end{align*}
+于是
+\begin{align*}
+    \Delta f
+    &=\Delta u+\mathrm{i}\Delta v\\
+    &=(u_x\Delta x+u_y\Delta y)+\mathrm{i}(v_x\Delta x+v_y\Delta y)+o(|\Delta z|).
+\end{align*}
+由柯西--黎曼条件 $u_x=v_y,\ u_y=-v_x$，得
+\begin{align*}
+    \Delta f
+    &=(u_x\Delta x-v_x\Delta y)+\mathrm{i}(v_x\Delta x+u_x\Delta y)+o(|\Delta z|)\\
+    &=(u_x+\mathrm{i}v_x)(\Delta x+\mathrm{i}\Delta y)+o(|\Delta z|)\\
+    &=(u_x+\mathrm{i}v_x)\Delta z+o(|\Delta z|).
+\end{align*}
 因此
-\begin{equation}
-    \frac{\Delta f}{\Delta z} = u_x + \mathrm{i}v_x + \frac{o(|\Delta z|)}{\Delta z} \to u_x + \mathrm{i}v_x \quad (\Delta z \to 0)
-\end{equation}
-证毕。
+\[
+    \frac{\Delta f}{\Delta z}=u_x+\mathrm{i}v_x+\frac{o(|\Delta z|)}{\Delta z}.
+\]
+当 $\Delta z\to 0$ 时，最后一项趋于零，所以极限存在，并且
+\[
+    f'(z_0)=u_x(x_0,y_0)+\mathrm{i}v_x(x_0,y_0).
+\]
+故 $f$ 在 $z_0$ 可导。
 \end{proof}
 
-\subsection{C-R 条件的应用}
+\begin{dingli}{导数公式}{}
+在定理 \ref{thm:ch02-cr-sufficient} 的条件下，
+\begin{equation}
+    f'(z)=u_x+\mathrm{i}v_x=v_y-\mathrm{i}u_y.
+\end{equation}
+\end{dingli}
 
-\begin{lizi}{}{}
-验证 $f(z) = z^2 = (x^2 - y^2) + \mathrm{i}(2xy)$ 满足 C-R 条件。
+\subsection{典型例子}
+
+\begin{lizi}{用 C-R 条件验证 $z^2$ 的可导性}{}
+验证
+\[
+    f(z)=z^2=(x^2-y^2)+\mathrm{i}(2xy)
+\]
+在整个复平面上解析，并求其导数。
 
 \begin{jie}
-    实部 $u = x^2 - y^2$，虚部 $v = 2xy$。
-    
-    计算偏导数：
-    \begin{align}
-        \frac{\partial u}{\partial x} &= 2x, \quad \frac{\partial u}{\partial y} = -2y \\
-        \frac{\partial v}{\partial x} &= 2y, \quad \frac{\partial v}{\partial y} = 2x
-    \end{align}
-    
-    验证 C-R 条件：
-    \begin{enumerate}
-        \item $\frac{\partial u}{\partial x} = 2x = \frac{\partial v}{\partial y}$ \checkmark
-        \item $\frac{\partial u}{\partial y} = -2y = -\frac{\partial v}{\partial x}$ \checkmark
-    \end{enumerate}
-    
-    C-R 条件满足。由于偏导数连续，所以 $f(z) = z^2$ 在整个复平面上解析。
-    
-    导数为
-    \begin{equation}
-        f'(z) = \frac{\partial u}{\partial x} + \mathrm{i}\frac{\partial v}{\partial x} = 2x + \mathrm{i} \cdot 2y = 2z
-    \end{equation}
+这里
+\[
+    u=x^2-y^2,\qquad v=2xy.
+\]
+于是
+\[
+    u_x=2x,\qquad u_y=-2y,\qquad v_x=2y,\qquad v_y=2x.
+\]
+因此
+\[
+    u_x=v_y,\qquad u_y=-v_x,
+\]
+柯西--黎曼条件处处成立，而且这些偏导数都连续，所以 $f(z)=z^2$ 在整个复平面上解析。
+
+导数为
+\[
+    f'(z)=u_x+\mathrm{i}v_x=2x+\mathrm{i}(2y)=2z.
+\]
 \end{jie}
 \end{lizi}
 
-\begin{lizi}{}{}
-验证 $f(z) = \bar{z} = x - \mathrm{i}y$ 不满足 C-R 条件。
+\begin{lizi}{再看一次 $\bar z$}{}
+用柯西--黎曼条件验证 $f(z)=\bar z$ 在任意点都不可导。
 
 \begin{jie}
-    实部 $u = x$，虚部 $v = -y$。
-    
-    偏导数：
-    \begin{align}
-        \frac{\partial u}{\partial x} &= 1, \quad \frac{\partial u}{\partial y} = 0 \\
-        \frac{\partial v}{\partial x} &= 0, \quad \frac{\partial v}{\partial y} = -1
-    \end{align}
-    
-    C-R 条件：
-    \begin{enumerate}
-        \item $\frac{\partial u}{\partial x} = 1 \neq -1 = \frac{\partial v}{\partial y}$ \ding{55}
-        \item $\frac{\partial u}{\partial y} = 0 = -0 = -\frac{\partial v}{\partial x}$ \checkmark
-    \end{enumerate}
-    
-    第一个条件不满足，所以 $f(z) = \bar{z}$ 在任意点都不可导。
+由
+\[
+    \bar z=x-\mathrm{i}y
+\]
+可知
+\[
+    u=x,\qquad v=-y.
+\]
+于是
+\[
+    u_x=1,\qquad u_y=0,\qquad v_x=0,\qquad v_y=-1.
+\]
+显然
+\[
+    u_x\neq v_y.
+\]
+因此柯西--黎曼条件不成立，所以 $f(z)=\bar z$ 在任意点都不可导。这与上一节用导数定义得到的结论完全一致。
 \end{jie}
 \end{lizi}
 
-% ========== 第六节 ==========
-\section{解析函数\index{解析函数}的几何意义：局部保角性}
+\subsection{不要机械套用 C-R 条件}
 
-前面在第一章讨论复数乘法时，我们已经知道：乘以一个非零复数，几何上对应着``伸缩加旋转''。现在自然会问：解析函数在一点附近，是否也有类似的几何作用？
+\begin{jinshi}[满足 C-R 条件不一定就可导]
+柯西--黎曼条件是可导的必要条件；若再配合偏导连续等条件，它也是充分条件。但如果只知道某一点上恰好满足 C-R 条件，这还不足以推出函数在该点可导。
+\end{jinshi}
+
+\begin{lizi}{一个在一点满足 C-R 条件但不可导的反例}{}
+定义
+\[
+    f(z)=
+    \begin{cases}
+        \dfrac{x^3}{x^2+y^2}+\mathrm{i}\dfrac{y^3}{x^2+y^2}, & z\neq 0,\\[1em]
+        0, & z=0.
+    \end{cases}
+\]
+证明它在原点满足柯西--黎曼条件，但在原点不可导。
+
+\begin{jie}
+先算原点的偏导数。设
+\[
+    u(x,y)=
+    \begin{cases}
+        \dfrac{x^3}{x^2+y^2}, & (x,y)\neq(0,0),\\
+        0, & (x,y)=(0,0),
+    \end{cases}
+\]
+以及
+\[
+    v(x,y)=
+    \begin{cases}
+        \dfrac{y^3}{x^2+y^2}, & (x,y)\neq(0,0),\\
+        0, & (x,y)=(0,0).
+    \end{cases}
+\]
+
+由定义可得
+\[
+    u_x(0,0)=1,\qquad u_y(0,0)=0,\qquad v_x(0,0)=0,\qquad v_y(0,0)=1.
+\]
+所以在原点有
+\[
+    u_x=v_y,\qquad u_y=-v_x.
+\]
+也就是说，柯西--黎曼条件在原点形式上成立。
+
+但看导数差商：
+\[
+    \frac{f(z)-f(0)}{z}=\frac{f(z)}{z}.
+\]
+若沿实轴 $y=0$ 趋近于零，则
+\[
+    f(x)=x,\qquad \frac{f(x)}{x}=1.
+\]
+若沿直线 $y=x$ 趋近于零，则
+\[
+    f(x+\mathrm{i}x)
+    =\frac{x^3}{2x^2}+\mathrm{i}\frac{x^3}{2x^2}
+    =\frac{x}{2}(1+\mathrm{i}),
+\]
+从而
+\[
+    \frac{f(x+\mathrm{i}x)}{x+\mathrm{i}x}=\frac{1}{2}.
+\]
+两条路径给出的结果不同，所以导数极限不存在。故 $f$ 在原点不可导。
+\end{jie}
+\end{lizi}
+
+\section{解析函数的调和性质与共轭调和函数}
+
+\begin{wulibj}[为什么这一节很重要]
+如果只把柯西--黎曼条件看成一个``判断可导的技巧''，那它的作用就被低估了。事实上，C-R 条件一旦成立，就会强迫实部和虚部满足拉普拉斯方程。也就是说，解析函数内部并不是任意拼出来的，而是自带非常整齐的结构。
+
+对数学物理方法来说，这一点尤其关键。因为拉普拉斯方程正是二维静电场、稳态温度场、理想流体等模型里最常见的方程之一。本节就是要让学生第一次看见：解析函数和物理中的势函数，并不是两套互不相干的语言。
+\end{wulibj}
+
+\subsection{调和函数}
+
+\begin{dingliyi}{调和函数}{}
+若二元实函数 $u(x,y)$ 满足
+\begin{equation}
+    u_{xx}+u_{yy}=0,
+\end{equation}
+则称 $u$ 为\textbf{调和函数}。
+\end{dingliyi}
+
+\begin{dingli}{解析函数的调和性质}{}
+设
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y)
+\]
+在区域 $D$ 内解析，并且 $u,v$ 在 $D$ 内有连续的二阶偏导数，则 $u$ 和 $v$ 都是调和函数。
+\end{dingli}
+
+\begin{proof}
+由柯西--黎曼条件，
+\[
+    u_x=v_y,\qquad u_y=-v_x.
+\]
+对第一式再对 $x$ 求偏导，对第二式再对 $y$ 求偏导，得
+\[
+    u_{xx}=v_{yx},\qquad u_{yy}=-v_{xy}.
+\]
+由于二阶偏导连续，可交换求导次序，所以
+\[
+    v_{yx}=v_{xy}.
+\]
+于是
+\[
+    u_{xx}+u_{yy}=v_{xy}-v_{xy}=0.
+\]
+所以 $u$ 是调和函数。
+
+同理，对
+\[
+    v_y=u_x,\qquad v_x=-u_y
+\]
+做同样处理，可得
+\[
+    v_{xx}+v_{yy}=0.
+\]
+所以 $v$ 也是调和函数。
+\end{proof}
+
+\begin{lizi}{验证实部和虚部都是调和函数}{}
+对
+\[
+    f(z)=z^2=(x^2-y^2)+\mathrm{i}(2xy),
+\]
+验证其实部和虚部都满足拉普拉斯方程。
+
+\begin{jie}
+实部为
+\[
+    u=x^2-y^2,
+\]
+所以
+\[
+    u_{xx}=2,\qquad u_{yy}=-2,
+\]
+从而
+\[
+    u_{xx}+u_{yy}=0.
+\]
+
+虚部为
+\[
+    v=2xy,
+\]
+所以
+\[
+    v_{xx}=0,\qquad v_{yy}=0,
+\]
+从而
+\[
+    v_{xx}+v_{yy}=0.
+\]
+因此 $u$ 和 $v$ 都是调和函数。
+\end{jie}
+\end{lizi}
+
+\subsection{共轭调和函数}
+
+\begin{dingliyi}{共轭调和函数}{}
+若两个调和函数 $u(x,y)$ 和 $v(x,y)$ 满足柯西--黎曼条件
+\[
+    u_x=v_y,\qquad u_y=-v_x,
+\]
+则称 $u$ 和 $v$ 互为\textbf{共轭调和函数}。
+\end{dingliyi}
+
+\begin{zhu}{}{}
+如果 $u$ 和 $v$ 互为共轭调和函数，那么
+\[
+    f(z)=u+\mathrm{i}v
+\]
+就是一个解析函数。反过来，解析函数的实部和虚部一定互为共轭调和函数。
+\end{zhu}
+
+\subsection{由已知实部求共轭函数}
+
+\begin{lizi}{由实部求共轭调和函数}{}
+已知解析函数的实部为
+\[
+    u(x,y)=x^2-y^2,
+\]
+求一个对应的共轭调和函数 $v(x,y)$。
+
+\begin{jie}
+由柯西--黎曼条件，
+\[
+    v_y=u_x=2x,\qquad v_x=-u_y=2y.
+\]
+先由
+\[
+    v_y=2x
+\]
+对 $y$ 积分，得
+\[
+    v(x,y)=2xy+\varphi(x),
+\]
+其中 $\varphi(x)$ 只依赖于 $x$。
+
+再对上式求 $x$ 导数，得
+\[
+    v_x=2y+\varphi'(x).
+\]
+而根据柯西--黎曼条件，必须有
+\[
+    v_x=2y.
+\]
+因此
+\[
+    \varphi'(x)=0,
+\]
+从而 $\varphi(x)$ 是常数。于是一个共轭调和函数为
+\[
+    v(x,y)=2xy+C.
+\]
+通常把常数并入函数中，写成
+\[
+    v(x,y)=2xy.
+\]
+\end{jie}
+\end{lizi}
+
+\subsection{等值线的正交性}
+
+\begin{dingli}{共轭调和函数等值线的正交性}{}
+设 $u(x,y)$ 与 $v(x,y)$ 互为共轭调和函数。在满足
+\[
+    \nabla u\neq 0,\qquad \nabla v\neq 0
+\]
+的点附近，两族曲线
+\[
+    u(x,y)=C_1,\qquad v(x,y)=C_2
+\]
+彼此正交。
+\end{dingli}
+
+\begin{proof}
+曲线
+\[
+    u(x,y)=C_1
+\]
+的法向量为
+\[
+    \nabla u=(u_x,u_y),
+\]
+而曲线
+\[
+    v(x,y)=C_2
+\]
+的法向量为
+\[
+    \nabla v=(v_x,v_y).
+\]
+由柯西--黎曼条件，
+\[
+    u_x=v_y,\qquad u_y=-v_x.
+\]
+于是
+\[
+    \nabla u\cdot\nabla v=u_xv_x+u_yv_y=v_yv_x+(-v_x)v_y=0.
+\]
+两条曲线的法向量垂直，所以它们本身也彼此正交。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[mp axis] (-0.2,0) -- (4.7,0) node[mp label, right] {$x$};
+    \draw[mp axis] (0,-0.2) -- (0,4.5) node[mp label, above] {$y$};
+
+    \draw[figblue, thick, domain=0.55:3.7, samples=120] plot (\x,{0.55+0.55/(\x)});
+    \draw[figblue, thick, domain=0.8:3.9, samples=120] plot (\x,{1.2+1.4/(\x)});
+    \draw[figred, thick, domain=0.55:3.9, samples=120] plot (\x,{2.9-0.9/(\x)});
+    \draw[figred, thick, domain=0.7:4.0, samples=120] plot (\x,{3.65-1.7/(\x)});
+
+    \node[mp label, figblue] at (4.15,1.05) {$u=C_1$};
+    \node[mp label, figred] at (3.95,3.25) {$v=C_2$};
+\end{tikzpicture}
+\caption{共轭调和函数的两族等值线在正则点附近彼此正交}
+\label{fig:ch02-orthogonal-level-curves}
+\end{figure}
+
+\section{二维势场与解析函数的局部几何意义}
+
+\begin{wulibj}[为什么要用这一节收束全章]
+如果第二章只停在定义、定理和偏导关系上，学生很容易觉得这一章只是复杂的符号操练。本节的作用，就是把前面得到的数学结构重新放回图像和物理问题里：解析函数的实部和虚部，可以看成同一个二维场的两张正交地图；而解析函数的导数，在局部上又像第一章里学过的``乘以一个复数''一样，对小图形施加统一的伸缩和旋转。
+
+本节不是要把保角映射系统讲完，也不是要把二维势场的边值问题一次求尽。它的任务更像是一张全景图：让学生在学完整章以后，第一次真正看清解析函数为什么既有物理意义，又有几何意义。
+\end{wulibj}
+
+\subsection{二维无源场与复势的最初图像}
+
+在二维静电场、稳态温度场等问题里，常会遇到一个势函数 $\phi(x,y)$，它满足拉普拉斯方程
+\[
+    \phi_{xx}+\phi_{yy}=0.
+\]
+如果还能找到另一个函数 $\psi(x,y)$，使得
+\[
+    \phi_x=\psi_y,\qquad \phi_y=-\psi_x,
+\]
+那么
+\[
+    W(z)=\phi(x,y)+\mathrm{i}\psi(x,y)
+\]
+就是一个解析函数。这个函数通常称为\textbf{复势}。
+
+\begin{zhu}{}{}
+这里的 $\phi$ 和 $\psi$ 可以有不同的物理解释。在静电问题里，$\phi$ 常对应电势，$\psi$ 对应与电场线相关的流函数；在稳态导热中，$\phi$ 可以对应温度分布，$\psi$ 则与热流线相关。具体名字会因问题而异，但数学结构是一样的。
+\end{zhu}
+
+\subsection{等势线与场线的正交}
+
+\begin{dingli}{等势线与场线正交}{}
+若
+\[
+    W(z)=\phi(x,y)+\mathrm{i}\psi(x,y)
+\]
+在某区域内解析，则两族曲线
+\[
+    \phi(x,y)=C_1,\qquad \psi(x,y)=C_2
+\]
+在正则点附近彼此正交。
+\end{dingli}
+
+\begin{proof}
+这其实就是上一节正交性定理的直接物理解释。因为解析性保证 $\phi$ 与 $\psi$ 满足柯西--黎曼条件，所以它们的梯度点积为零，从而两族等值线正交。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+    \draw[mp axis] (-3.6,0) -- (3.8,0) node[mp label, right] {$x$};
+    \draw[mp axis] (0,-2.9) -- (0,3.0) node[mp label, above] {$y$};
+
+    \draw[figblue, thick] (0,0) circle (0.75);
+    \draw[figblue, thick] (0,0) circle (1.45);
+    \draw[figblue, thick] (0,0) circle (2.15);
+
+    \draw[figred, thick, dashed] (0,0) -- (3.0,0);
+    \draw[figred, thick, dashed] (0,0) -- (-2.4,1.65);
+    \draw[figred, thick, dashed] (0,0) -- (-1.8,-2.2);
+    \draw[figred, thick, dashed] (0,0) -- (0,2.7);
+
+    \node[mp label, figblue] at (2.45,1.8) {$\phi=\text{常数}$};
+    \node[mp label, figred] at (1.85,2.55) {$\psi=\text{常数}$};
+\end{tikzpicture}
+\caption{二维势场中，等势线与场线在解析函数框架下互相正交}
+\label{fig:ch02-potential-lines}
+\end{figure}
 
 \subsection{导数的局部作用}
 
-设 $w = f(z)$ 在点 $z_0$ 解析，记 $w_0 = f(z_0)$。由导数的定义可知，当 $z$ 足够接近 $z_0$ 时，
-\begin{equation}
-    f(z) - f(z_0) = f'(z_0)(z - z_0) + o(|z - z_0|)
+设 $f(z)$ 在点 $z_0$ 可导，则由导数定义，
+\[
+    \frac{f(z)-f(z_0)}{z-z_0}\to f'(z_0)\qquad (z\to z_0).
+\]
+把它改写一下，就得到
+\begin{equation}\label{eq:ch02-local-linear}
+    f(z)-f(z_0)=f'(z_0)(z-z_0)+o(|z-z_0|).
 \end{equation}
 
-这句话的意思是：在很小的尺度上，映射 $w = f(z)$ 几乎就像一个线性变换。更具体地说，它近似等于``把向量 $z-z_0$ 乘以 $f'(z_0)$，再平移到点 $w_0$''。
+这句话的意思非常重要：当 $z$ 足够接近 $z_0$ 时，映射 $w=f(z)$ 的主要作用，几乎就等于先把向量 $z-z_0$ 乘上一个复数 $f'(z_0)$，再平移到点 $f(z_0)$。
 
-若 $f'(z_0) \neq 0$，把
-\begin{equation}
-    f'(z_0) = \rho \mathrm{e}^{\mathrm{i}\theta}, \quad \rho = |f'(z_0)| > 0
-\end{equation}
+若把
+\[
+    f'(z_0)=\rho e^{\mathrm{i}\theta},\qquad \rho=|f'(z_0)|,
+\]
 写成极形式，那么乘以 $f'(z_0)$ 的几何意义就很清楚了：
 \begin{itemize}
     \item 长度被放大或缩小为原来的 $\rho$ 倍；
-    \item 方向统一旋转了 $\theta = \arg f'(z_0)$。
+    \item 方向统一旋转了角度 $\theta$。
 \end{itemize}
 
-所以，解析函数在一点附近虽然整体上可能很复杂，但只要把尺度缩小到足够小，它看起来就像一个``旋转加伸缩''的局部线性变换。
+\begin{tishi}[这里和第一章的联系]
+第一章里，我们已经知道：乘以一个非零复数，几何上对应``伸缩加旋转''。式 \eqref{eq:ch02-local-linear} 告诉我们，解析函数在足够小的尺度上，也正是这样起作用的。也就是说，解析函数的导数把第一章的复数几何意义重新带了回来。
+\end{tishi}
 
-\subsection{局部保角性}
+\subsection{局部保角性的预告}
 
-\begin{dingli}{解析函数的局部保角性}{}
-设 $f(z)$ 在点 $z_0$ 解析且 $f'(z_0) \neq 0$，则映射 $w = f(z)$ 在 $z_0$ 附近局部保持角度的大小和方向。
+\begin{dingli}{局部保角性的预告}{}
+若函数 $f(z)$ 在点 $z_0$ 解析，且
+\[
+    f'(z_0)\neq 0,
+\]
+则它在 $z_0$ 附近局部保持角度。
 \end{dingli}
 
 \begin{proof}
-在点 $z_0$ 附近，$f(z)$ 可以用一次线性部分 $f'(z_0)(z-z_0)$ 近似。乘以非零复数 $f'(z_0)$ 只会对所有方向同时施加同一个旋转，并乘上同一个伸缩因子，因此两条曲线的夹角大小不变，方向也不变。于是 $w=f(z)$ 在 $z_0$ 附近是局部保角的。
+由式 \eqref{eq:ch02-local-linear}，
+\[
+    f(z)-f(z_0)=f'(z_0)(z-z_0)+o(|z-z_0|).
+\]
+当 $z$ 足够靠近 $z_0$ 时，主导作用来自一次项 $f'(z_0)(z-z_0)$。而乘以非零复数 $f'(z_0)$ 只会对所有方向统一施加同一个旋转和伸缩，因此曲线间的夹角大小保持不变，方向也保持一致。所以 $f$ 在 $z_0$ 附近局部保角。
 \end{proof}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.7]
-    % z 平面
+\begin{tikzpicture}[scale=0.82]
     \begin{scope}
-        \draw[->, thick] (-0.5, 0) -- (3, 0) node[right] {$x$};
-        \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
-        
-        % 两条曲线
-        \draw[blue, thick] (0.5, 0.5) -- (2, 2);
-        \draw[red, thick] (2, 0.5) -- (0.5, 2);
-        
-        \fill[black] (1.25, 1.25) circle (2pt);
-        
-        % 角度
-        \draw[green!60!black, thick] (1.25, 1.25) ++(45:0.5) arc (45:135:0.5);
-        \node[green!60!black] at (1.25, 2) {$\alpha$};
-        
-        \node at (1.25, -0.8) {映射前};
+        \draw[mp axis] (-0.5,0) -- (3.1,0) node[mp label, right] {$x$};
+        \draw[mp axis] (0,-0.5) -- (0,3.1) node[mp label, above] {$y$};
+
+        \draw[figblue, thick] (0.55,0.7) -- (2.35,2.1);
+        \draw[figred, thick] (2.1,0.6) -- (0.7,2.25);
+        \node[mp point c] at (1.45,1.4) {};
+        \draw[figteal, thick] (1.45,1.4) ++(38:0.5) arc (38:128:0.5);
+        \node[mp label, figteal] at (1.52,2.05) {$\alpha$};
+        \node[mp label] at (1.35,-0.85) {映射前};
     \end{scope}
-    
-    % 箭头
-    \draw[->, very thick] (4, 1.25) -- (5, 1.25);
-    
-    % w 平面
-    \begin{scope}[xshift=7cm]
-        \draw[->, thick] (-0.5, 0) -- (3, 0) node[right] {$u$};
-        \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$v$};
-        
-        % 两条曲线（旋转后）
-        \draw[blue, thick] (0.3, 0.8) -- (1.8, 2.3);
-        \draw[red, thick] (2.2, 1.2) -- (0.7, 2.2);
-        
-        \fill[black] (1.2, 1.7) circle (2pt);
-        
-        % 角度（相同）
-        \draw[green!60!black, thick] (1.2, 1.7) ++(50:0.5) arc (50:130:0.5);
-        \node[green!60!black] at (1.2, 2.4) {$\alpha$};
-        
-        \node at (1.25, -0.8) {映射后};
-\end{scope}
+
+    \draw[figteal, very thick, ->] (3.9,1.35) -- (5.05,1.35);
+
+    \begin{scope}[xshift=6.8cm]
+        \draw[mp axis] (-0.5,0) -- (3.1,0) node[mp label, right] {$u$};
+        \draw[mp axis] (0,-0.5) -- (0,3.1) node[mp label, above] {$v$};
+
+        \draw[figblue, thick] (0.45,0.95) -- (2.15,2.4);
+        \draw[figred, thick] (2.18,1.05) -- (0.85,2.45);
+        \node[mp point c] at (1.42,1.72) {};
+        \draw[figteal, thick] (1.42,1.72) ++(42:0.5) arc (42:132:0.5);
+        \node[mp label, figteal] at (1.52,2.38) {$\alpha$};
+        \node[mp label] at (1.35,-0.85) {映射后};
+    \end{scope}
 \end{tikzpicture}
-\caption{解析函数在导数非零处局部保持曲线夹角}
-\label{fig:angle-preserve}
+\caption{解析函数在导数非零的点附近局部保持角度}
+\label{fig:ch02-local-conformal}
 \end{figure}
 
-\begin{jinshi}[别忽略导数为零的情形]
-条件 $f'(z_0) \neq 0$ 不能省略。如果 $f'(z_0)=0$，映射在这一点附近的主导项往往不再是一次项，局部图形可能被压扁、折叠或多重覆盖，此时一般就不能把它看成简单的``旋转加伸缩''。例如 $w = z^2$ 在 $z = 0$ 处就不是保角的。
+\begin{jinshi}[为什么一定要要求 $f'(z_0)\neq 0$]
+如果 $f'(z_0)=0$，局部主导项不再是一次项，这时映射可能会把角度压扁或多重覆盖。例如 $f(z)=z^2$ 在 $z=0$ 处就不能简单地看成一个保角映射。
 \end{jinshi}
 
-\begin{tishi}[这一节先抓住什么]
-这一节只需要先记住一句话：\textbf{解析函数在导数非零的点附近，局部上像乘以一个非零复数，因此会保持角度。}至于怎样系统构造具体的保角映射，属于后面的选学内容。
-\end{tishi}
-
-% ========== 第七节 ==========
-\section{初等解析函数\index{解析函数}}
-
-\subsection{指数函数}
-
-\begin{zhongyao}[复指数函数]
-对于 $z = x + \mathrm{i}y$，定义\keyword{复指数函数}
-\[
-    \mathrm{e}^z = \mathrm{e}^x(\cos y + \mathrm{i}\sin y)
-\]
-\end{zhongyao}
-
-\begin{dingli}{指数函数的性质}{}
-\begin{enumerate}
-    \item $\mathrm{e}^z \neq 0$ 对所有 $z \in \mathbb{C}$ 成立
-    \item $\mathrm{e}^{z_1 + z_2} = \mathrm{e}^{z_1} \cdot \mathrm{e}^{z_2}$
-    \item $(\mathrm{e}^z)' = \mathrm{e}^z$
-    \item $\mathrm{e}^{z + 2\pi\mathrm{i}} = \mathrm{e}^z$（周期性，周期为 $2\pi\mathrm{i}$）
-\end{enumerate}
-\end{dingli}
-
-\begin{proof}
-我们证明第4条性质。设 $z = x + \mathrm{i}y$，则
-\begin{align}
-    \mathrm{e}^{z + 2\pi\mathrm{i}} &= \mathrm{e}^{x + \mathrm{i}(y + 2\pi)} \\
-    &= \mathrm{e}^x[\cos(y + 2\pi) + \mathrm{i}\sin(y + 2\pi)] \\
-    &= \mathrm{e}^x(\cos y + \mathrm{i}\sin y) = \mathrm{e}^z
-\end{align}
-\end{proof}
-
-\begin{zhu}{}{}
-复指数函数与实指数函数的一个重要区别：复指数函数是周期函数！这意味着 $\mathrm{e}^z = 1$ 有无穷多个解：$z = 2k\pi\mathrm{i}$（$k \in \mathbb{Z}$）。
-\end{zhu}
-
-\subsection{对数函数}
-
-\begin{dingliyi}{复对数函数}{}
-设 $z \neq 0$，满足 $\mathrm{e}^w = z$ 的 $w$ 称为 $z$ 的\textbf{对数}，记作 $\ln z$。
-
-设 $z = r\mathrm{e}^{\mathrm{i}\theta}$（$r > 0$），$w = u + \mathrm{i}v$。由 $\mathrm{e}^w = z$ 得
-\begin{equation}
-    \mathrm{e}^u \cdot \mathrm{e}^{\mathrm{i}v} = r\mathrm{e}^{\mathrm{i}\theta}
-\end{equation}
-比较得 $u = \ln r$，$v = \theta + 2k\pi$。所以
-\begin{equation}
-    \ln z = \ln|z| + \mathrm{i}(\arg z + 2k\pi), \quad k \in \mathbb{Z}
-\end{equation}
-
-\textbf{对数是多值函数！}取 $k = 0$ 得到\textbf{主值}：
-\begin{equation}
-    \operatorname{Ln} z = \ln|z| + \mathrm{i}\operatorname{Arg} z
-\end{equation}
-\end{dingliyi}
-
-\begin{lizi}{}{}
-计算 $\ln(1 + \mathrm{i})$。
-
-\begin{jie}
-    $|1 + \mathrm{i}| = \sqrt{2}$，$\operatorname{Arg}(1 + \mathrm{i}) = \frac{\pi}{4}$。
-    
-    所以
-    \begin{equation}
-        \ln(1 + \mathrm{i}) = \ln\sqrt{2} + \mathrm{i}\left(\frac{\pi}{4} + 2k\pi\right), \quad k \in \mathbb{Z}
-    \end{equation}
-    
-    主值为 $\operatorname{Ln}(1 + \mathrm{i}) = \frac{1}{2}\ln 2 + \mathrm{i}\frac{\pi}{4}$。
-\end{jie}
-\end{lizi}
-
-\subsection{三角函数}
-
-\begin{dingliyi}{复三角函数}{}
-\begin{align}
-    \sin z &= \frac{\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}} \\
-    \cos z &= \frac{\mathrm{e}^{\mathrm{i}z} + \mathrm{e}^{-\mathrm{i}z}}{2}
-\end{align}
-\end{dingliyi}
-
-\begin{zhu}{}{}
-复三角函数与实三角函数的重要区别：
-\begin{enumerate}
-    \item $|\sin z|$ 和 $|\cos z|$ 可以大于 $1$。
-    \item 例如，$\cos(\mathrm{i}y) = \cosh y$（双曲余弦），当 $y \to \infty$ 时趋向无穷。
-\end{enumerate}
-\end{zhu}
-
-% ========== 第八节 ==========
-\section{解析函数\index{解析函数}的物理意义：平面静电场}
-
-解析函数\index{解析函数}不仅是数学对象，还有深刻的物理意义。在二维势场问题（two-dimensional potential problem）中，解析函数\index{解析函数}天然出现。
-
-\subsection{平面静电场的复势}
-
-考虑二维静电场（电场强度 $\vec{E}$ 只依赖于两个坐标）。设电势为 $\phi(x, y)$，则
-\begin{equation}
-    \vec{E} = -\nabla\phi = -\left(\frac{\partial \phi}{\partial x}\hat{i} + \frac{\partial \phi}{\partial y}\hat{j}\right)
-\end{equation}
-
-在无源区域，电场满足 $\nabla \cdot \vec{E} = 0$，即
-\begin{equation}
-    \frac{\partial E_x}{\partial x} + \frac{\partial E_y}{\partial y} = 0
-\end{equation}
-
-这启示我们引入一个\textbf{电通量函数} $\psi(x, y)$，满足
-\begin{equation}
-    E_x = -\frac{\partial \phi}{\partial x} = \frac{\partial \psi}{\partial y}, \quad E_y = -\frac{\partial \phi}{\partial y} = -\frac{\partial \psi}{\partial x}
-\end{equation}
-
-这正是 C-R 条件！因此，复函数
-\begin{equation}
-    w(z) = \phi(x, y) + \mathrm{i}\psi(x, y)
-\end{equation}
-是一个解析函数\index{解析函数}，称为\textbf{复势（complex potential）}。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.2]
-    % 坐标轴
-    \draw[->, thick] (-0.5, 0) -- (4, 0) node[right] {$x$};
-    \draw[->, thick] (0, -0.5) -- (0, 3) node[above] {$y$};
-    
-    % 等势线（实线）
-    \draw[blue, thick] (0, 0) circle (1);
-    \draw[blue, thick] (0, 0) circle (2);
-    \node[blue] at (2.5, 1.5) {$\phi = \text{const}$};
-    
-    % 电场线（虚线）
-    \draw[red, thick, dashed] (0, 0) -- (3, 0);
-    \draw[red, thick, dashed] (0, 0) -- (0, 2.5);
-    \draw[red, thick, dashed] (0, 0) -- (2.1, 2.1);
-    \node[red] at (1.5, 2.2) {$\psi = \text{const}$};
-    
-    \node at (2, -0.8) {点电荷产生的电场};
-\end{tikzpicture}
-\caption{等势线与电场线正交}
-\label{fig:electric-field}
-\end{figure}
-
-\subsection{等势线与电场线的正交性}
-
-\begin{dingli}{等势线与电场线正交}{}
-解析函数\index{解析函数} $w = \phi + \mathrm{i}\psi$ 的实部 $\phi$ 的等值线（等势线）与虚部 $\psi$ 的等值线（电场线）相互正交。
-\end{dingli}
-
-\begin{proof}
-电场线方程为 $\psi(x, y) = c_2$，法向量 $\nabla\psi = (\psi_x, \psi_y)$。
-
-由 C-R 条件 $\phi_x = \psi_y$，$\phi_y = -\psi_x$，得
-\begin{equation}
-    \nabla\phi \cdot \nabla\psi = \phi_x\psi_x + \phi_y\psi_y = \psi_y\psi_x + (-\psi_x)\psi_y = 0
-\end{equation}
-两个法向量垂直，所以曲线正交。
-\end{proof}
-
-\begin{wulibj}[物理意义]
-\begin{itemize}
-    \item \textbf{等势线} $\phi = c_1$：电势相等的点连成的曲线。
-    \item \textbf{电场线} $\psi = c_2$：电场的方向，也是电通量守恒的曲线。
-    \item 两者正交是电磁学中的基本结论，解析函数\index{解析函数}理论为此提供了优美的数学框架。
-\end{itemize}
-\end{wulibj}
-
-\begin{tishi}[这一节在全书中的位置]
-这一节的重点，不是立刻把所有二维势场边值问题都解完，而是先建立一幅清楚的图景：在二维无源区域中，电势函数与电通量函数往往组成一对共轭调和函数（harmonic conjugates），从而合成为解析函数。
-
-后面的内容会把这幅图景逐步展开：
-\begin{itemize}
-    \item 在保角映射一章，我们会看到解析映射怎样把复杂边界变成简单边界；
-    \item 到数理方程部分，我们会把二维静电场、稳态温度场统一写成拉普拉斯方程的边值问题；
-    \item 在分离变量法和格林函数法中，我们会分别学到求解规则区域与一般边界问题的典型方法。
-\end{itemize}
-
-如果此时你只能先记住一句话，那么就是：\textbf{解析函数的实部和虚部，不只是两个形式上的函数，它们常常对应同一个二维物理场的两张互相垂直的``地图''。}
-\end{tishi}
-
-% ========== 本章小结 ==========
 \section{本章小结}
 
-\subsection{核心概念}
+\begin{tishi}[一句话回看本章]
+这一章的核心任务，是把``复数的几何语言''真正升级成``解析函数的结构语言''：从区域和曲线出发，经由极限、连续、导数和柯西--黎曼条件，最终看见了解析函数与调和函数、二维势场和局部保角性的联系。
+\end{tishi}
 
-\begin{enumerate}
-    \item \textbf{复变函数}：$w = f(z) = u(x,y) + \mathrm{i}v(x,y)$
-    \item \textbf{解析函数\index{解析函数}}：在区域内每一点都可导的函数
-    \item \textbf{C-R 条件}：$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$，$\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$
-    \item \textbf{局部保角性}：解析函数在导数非零的点附近局部保持角度
-\end{enumerate}
+本章的主线可以整理成：
+\[
+\begin{aligned}
+    \text{区域与曲线}
+    &\Longrightarrow \text{复变函数}
+    \Longrightarrow \text{极限与连续}
+    \Longrightarrow \text{导数与解析}\\
+    &\Longrightarrow \text{C-R 条件}
+    \Longrightarrow \text{调和性质}
+    \Longrightarrow \text{物理与几何图像}.
+\end{aligned}
+\]
 
-\subsection{重要公式}
+\begin{tishi}[本章最重要的结论]
+\begin{itemize}
+    \item 复变极限必须对任意路径趋近都给出同一个结果。
+    \item 复导数的存在条件远比实导数严格，因为增量 $\Delta z$ 可以从任意方向趋近于零。
+    \item 柯西--黎曼条件
+    \[
+        u_x=v_y,\qquad u_y=-v_x
+    \]
+    是可导判别的核心工具。
+    \item 解析函数的实部和虚部都是调和函数，并互为共轭调和函数。
+    \item 当 $f'(z_0)\neq 0$ 时，解析函数在 $z_0$ 附近局部上像乘以一个非零复数，因此会局部保角。
+\end{itemize}
+\end{tishi}
 
-\begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{内容} & \textbf{公式} \\
-\midrule
-导数定义 & $f'(z) = \lim_{\Delta z \to 0} \frac{f(z+\Delta z) - f(z)}{\Delta z}$ \\
-C-R 条件 & $u_x = v_y$，$u_y = -v_x$ \\
-导数公式 & $f' = u_x + \mathrm{i}v_x = v_y - \mathrm{i}u_y$ \\
-局部线性近似 & $f(z)-f(z_0) = f'(z_0)(z-z_0) + o(|z-z_0|)$ \\
-指数函数 & $\mathrm{e}^z = \mathrm{e}^x(\cos y + \mathrm{i}\sin y)$ \\
-对数函数 & $\ln z = \ln|z| + \mathrm{i}(\arg z + 2k\pi)$ \\
-三角函数 & $\sin z = \frac{\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}}$ \\
-\bottomrule
-\end{tabular}
-\caption{本章核心公式}
-\end{table}
+\begin{jinshi}[本章最容易混淆的地方]
+\begin{itemize}
+    \item 不要把``在一点可导''和``解析''混为一谈。
+    \item 不要把``满足柯西--黎曼条件''机械等同于``可导''；充分性还需要附加条件。
+    \item 不要把保角理解成``长度和面积都保持不变''。保角的重点是角度保持，而不是距离保持。
+\end{itemize}
+\end{jinshi}
 
-% ========== 习题 ==========
+\begin{tishi}[和后面章节的联系]
+\begin{itemize}
+    \item 下一章的复积分，将直接使用本章建立的区域、曲线和单连通语言。
+    \item 第四章的泰勒展开与洛朗展开，都建立在本章的``解析性''概念上。
+    \item 后面的数理方程部分会再次遇到拉普拉斯方程，本章关于调和函数的结论正是一个重要连接点。
+    \item 选学的保角映射章，则会把本章最后的``局部保角性''系统展开。
+\end{itemize}
+\end{tishi}
+
 \section{习题}
 
 \textbf{基础题}
 
 \begin{enumerate}
-    \item 将下列函数写成 $u(x, y) + \mathrm{i}v(x, y)$ 的形式：
-    \begin{enumerate}
-        \item $f(z) = z^3$
-        \item $f(z) = \frac{1}{z}$
-        \item $f(z) = \mathrm{e}^z$
-    \end{enumerate}
-    
-    \item 验证下列函数是否满足 C-R 条件，若是，求其导数：
-    \begin{enumerate}
-        \item $f(z) = z^2 - z$
-        \item $f(z) = xy + \mathrm{i}(x^2 + y^2)$
-        \item $f(z) = \mathrm{e}^{2z}$
-    \end{enumerate}
-    
-    \item 计算：
-    \begin{enumerate}
-        \item $\mathrm{e}^{\mathrm{i}\pi}$
-        \item $\ln(-1)$
-        \item $\sin(\mathrm{i})$
-    \end{enumerate}
+    \item 判断下列集合是否为区域；若是，再判断其是否单连通：
+    \[
+        \{z:|z|<2\},\qquad \{z:1<|z|<3\},\qquad \mathbb{C}\setminus\{0\},\qquad \{z:\operatorname{Im}z>0\}.
+    \]
+
+    \item 把下列函数写成 $u(x,y)+\mathrm{i}v(x,y)$ 的形式：
+    \[
+        z^2,\qquad \frac{1}{z},\qquad \bar z.
+    \]
+
+    \item 讨论下列极限是否存在：
+    \[
+        \lim_{z\to 0}\frac{\bar z}{z},\qquad
+        \lim_{z\to 0}|z|^2.
+    \]
+
+    \item 讨论函数
+    \[
+        f(z)=\frac{z+1}{z-\mathrm{i}}
+    \]
+    在哪些点连续。
+
+    \item 用导数定义求下列函数的导数：
+    \[
+        f(z)=z^2,\qquad f(z)=z^3.
+    \]
 \end{enumerate}
 
 \textbf{综合题}
 
 \begin{enumerate}[resume]
-    \item 设 $f(z)$ 解析，证明 $|f(z)|^2 = u^2 + v^2$ 的偏导数满足：
-    \begin{equation}
-        \frac{\partial^2 |f|^2}{\partial x^2} + \frac{\partial^2 |f|^2}{\partial y^2} = 4|f'(z)|^2
-    \end{equation}
-    
-    \item 证明：若 $f(z)$ 在区域 $D$ 内解析且 $f'(z) = 0$，则 $f(z)$ 在 $D$ 内为常数。
-    
-    \item 设 $f(z) = u + \mathrm{i}v$ 解析，证明 $u$ 和 $v$ 都满足拉普拉斯方程：
-    \begin{equation}
-        \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0
-    \end{equation}
+    \item 用柯西--黎曼条件判断下列函数在何处可导，并在可导处求导数：
+    \[
+        f(z)=z^2,\qquad f(z)=\bar z,\qquad f(z)=|z|^2.
+    \]
+
+    \item 已知解析函数的实部为
+    \[
+        u(x,y)=x^2-y^2,
+    \]
+    求其一个共轭调和函数。
+
+    \item 证明：若
+    \[
+        f(z)=u(x,y)+\mathrm{i}v(x,y)
+    \]
+    在区域内解析，且 $u,v$ 具有连续二阶偏导数，则 $u$ 和 $v$ 都满足拉普拉斯方程。
+
+    \item 说明为什么
+    \[
+        u(x,y)=x^2+y^2
+    \]
+    不能作为某个解析函数的实部。
 \end{enumerate}
 
 \textbf{挑战题}
 
 \begin{enumerate}[resume]
-    \item 设 $f(z)$ 在区域 $D$ 内解析，且 $|f(z)|$ 在 $D$ 内为常数。证明 $f(z)$ 在 $D$ 内为常数。
-    
-    \item 研究映射 $w = z^2$ 在 $z_0 \neq 0$ 和 $z_0 = 0$ 处的局部几何作用：它分别对应怎样的旋转与伸缩？为什么在 $z = 0$ 处不再保角？
+    \item 设
+    \[
+        f(z)=
+        \begin{cases}
+            \dfrac{x^3}{x^2+y^2}+\mathrm{i}\dfrac{y^3}{x^2+y^2}, & z\neq 0,\\[1em]
+            0, & z=0,
+        \end{cases}
+    \]
+    验证它在原点满足柯西--黎曼条件，但在原点不可导。
+
+    \item 设 $f(z)$ 在 $z_0$ 处解析且 $f'(z_0)\neq 0$。结合本章最后的局部线性化公式，说明为什么它在 $z_0$ 附近局部保持角度。
+
+    \item 研究映射
+    \[
+        w=z^2
+    \]
+    在 $z_0\neq 0$ 与 $z_0=0$ 附近的局部几何作用有何不同，并解释这和条件 $f'(z_0)\neq 0$ 的关系。
 \end{enumerate}
