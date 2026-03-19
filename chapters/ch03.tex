@@ -1,13 +1,35 @@
-% 第三章：复变函数的积分
+% 第三章：复积分与柯西理论
 
-\chapter{复变函数的积分}
+\chapter{复积分与柯西理论}
 
 \begin{wulibj}[本章导读]
-复变函数的积分是复变函数论的核心。本章我们将学习复积分的定义、柯西积分定理\index{柯西积分定理}、柯西积分公式，以及它们的重要推论。这些结果不仅优美，而且在计算实积分、研究解析函数\index{解析函数}性质等方面有广泛应用。
+第二章里，我们已经知道：解析函数不是普通的``二维函数''，它满足柯西--黎曼条件，和调和函数、二维势场、局部保角性都有紧密联系。接下来，一个非常自然的问题就是：如果我们把这样的函数沿复平面中的曲线积分，会发生什么？
+
+一开始，复积分看上去只是把实变积分里的 $\mathrm{d}x$ 换成了 $\mathrm{d}z$。但真正学下去以后，你会发现差别远不止于此。对于一般连续函数，积分当然会依赖路径；可对于解析函数，情况会突然变得异常整齐：闭路积分往往为零，积分可能只由端点决定，甚至区域内部一点的函数值都能由边界上的积分表示出来。
+
+本章要完成下面几件事：
+\begin{enumerate}
+    \item 建立复积分的定义、参数化计算方法和基本性质；
+    \item 理解路径无关、原函数与闭路积分之间的关系；
+    \item 掌握柯西积分定理\index{柯西积分定理}与柯西积分公式这两条主线定理；
+    \item 为下一章的泰勒展开、解析函数刚性以及第五章的留数理论作准备。
+\end{enumerate}
+
+如果把本章压缩成一条主线，那就是
+\[
+    \begin{aligned}
+        \text{解析函数}
+        &\Longrightarrow \text{闭路积分为零}
+        \Longrightarrow \text{路径无关与原函数} \\
+        &\Longrightarrow \text{柯西积分公式}
+        \Longrightarrow \text{解析函数的刚性}.
+    \end{aligned}
+\]
+请大家带着这个主线往下看。这样后面遇到各种公式时，就不容易把它们看成彼此孤立的技巧。
 \end{wulibj}
 
 % ========== 第一节 ==========
-\section{复积分的定义与计算}
+\section{复积分的定义、参数化与基本性质}
 
 \subsection{复积分的定义}
 
@@ -47,7 +69,7 @@
 \label{fig:complex-int-def}
 \end{figure}
 
-\subsection{复积分的计算方法}
+\subsection{复积分的参数化与计算}
 
 设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z = x + \mathrm{i}y$，$\mathrm{d}z = \mathrm{d}x + \mathrm{i}\mathrm{d}y$。则
 \begin{align}
@@ -91,7 +113,99 @@
 \end{zhu}
 
 % ========== 第二节 ==========
-\section{柯西积分定理\index{柯西积分定理}}
+\section{路径无关、原函数与复积分基本公式}
+
+\begin{wulibj}[为什么这里先谈路径无关]
+上一节我们已经看到，复积分的定义本身是沿曲线作和，因此对一般函数来说，积分自然会依赖路径。可一旦某个函数存在原函数，积分就会突然变得和实变积分很像：它只和起点、终点有关，而与中间具体怎样走无关。
+
+这一节先把这种``如果有原函数，就会路径无关''的思路讲清楚。下一节再用柯西积分定理说明：为什么在单连通区域里，解析函数恰好会拥有这种特殊性质。
+\end{wulibj}
+
+\subsection{什么叫积分与路径无关}
+
+设 $z_1,z_2$ 是区域 $D$ 内两点，$C_1,C_2$ 是连接 $z_1$ 与 $z_2$ 的两条分段光滑曲线。若对任意这样的两条曲线都有
+\[
+    \int_{C_1} f(z)\,\mathrm{d}z = \int_{C_2} f(z)\,\mathrm{d}z,
+\]
+则称 $f(z)$ 在区域 $D$ 内的积分\textbf{与路径无关}。
+
+\begin{zhu}{}{}
+``与路径无关''不是一个定义性的空话，而是一个很强的性质。它的意思是：从同一点出发走到同一点终止时，中间绕不绕弯、沿哪条路走，都不会改变积分值。
+\end{zhu}
+
+\subsection{原函数与复积分的基本公式}
+
+\begin{dingliyi}{原函数}{}
+设 $f(z)$ 在区域 $D$ 内连续。若存在 $F(z)$ 使得
+\[
+    F'(z)=f(z)
+\]
+在 $D$ 内成立，则称 $F(z)$ 是 $f(z)$ 的一个\textbf{原函数}。
+\end{dingliyi}
+
+\begin{dingli}{有原函数时的复积分基本公式}{}
+\index{牛顿@牛顿（Newton）}\index{莱布尼茨@莱布尼茨（Leibniz）}
+设 $f(z)$ 在区域 $D$ 内有原函数 $F(z)$。若 $C$ 是 $D$ 内一条从 $z_1$ 到 $z_2$ 的分段光滑曲线，则
+\[
+    \int_C f(z)\,\mathrm{d}z = F(z_2)-F(z_1).
+\]
+\end{dingli}
+
+\begin{proof}
+沿曲线 $C$ 作参数化
+\[
+    z=z(t),\qquad a\le t\le b,
+\]
+其中
+\[
+    z(a)=z_1,\qquad z(b)=z_2.
+\]
+于是
+\[
+    \int_C f(z)\,\mathrm{d}z
+    = \int_a^b f(z(t))z'(t)\,\mathrm{d}t
+    = \int_a^b F'(z(t))z'(t)\,\mathrm{d}t.
+\]
+由链式法则，
+\[
+    \frac{\mathrm{d}}{\mathrm{d}t}F(z(t)) = F'(z(t))z'(t),
+\]
+因此
+\[
+    \int_C f(z)\,\mathrm{d}z
+    = \int_a^b \frac{\mathrm{d}}{\mathrm{d}t}F(z(t))\,\mathrm{d}t
+    = F(z(b))-F(z(a))
+    = F(z_2)-F(z_1).
+\]
+这就得到了所需公式。
+\end{proof}
+
+\begin{tuilun}{有原函数时积分与路径无关}{}
+若 $f(z)$ 在区域 $D$ 内有原函数，则它在 $D$ 内的积分与路径无关；特别地，对任意闭曲线 $C$，都有
+\[
+    \oint_C f(z)\,\mathrm{d}z = 0.
+\]
+\end{tuilun}
+
+\begin{proof}
+若 $C_1,C_2$ 都从 $z_1$ 走到 $z_2$，则由上一定理，
+\[
+    \int_{C_1} f(z)\,\mathrm{d}z = F(z_2)-F(z_1)=\int_{C_2} f(z)\,\mathrm{d}z.
+\]
+所以积分与路径无关。
+
+当 $C$ 是闭曲线时，起点与终点重合，于是
+\[
+    \oint_C f(z)\,\mathrm{d}z = F(z_1)-F(z_1)=0.
+\]
+\end{proof}
+
+\begin{tishi}[这一节和下一节的关系]
+到目前为止，我们只是说明了：\textbf{如果}原函数存在，那么积分就会路径无关。下一节真正关键的内容是：为什么单连通区域里的解析函数会满足闭路积分为零，从而反过来获得原函数。这正是柯西积分定理\index{柯西积分定理}的威力所在。
+\end{tishi}
+
+% ========== 第三节 ==========
+\section{柯西积分定理与闭路积分\index{柯西积分定理}}
 
 \subsection{定理的陈述}
 
@@ -144,45 +258,49 @@
 这个证明要求 $u_x, u_y, v_x, v_y$ 连续。更一般的证明（不要求偏导数连续）需要更细致的分析。
 \end{zhu}
 
-\subsection{原函数与不定积分}
+\subsection{闭路积分为零带来的后果}
 
-\begin{dingliyi}{原函数}{}
-设 $f(z)$ 在区域 $D$ 内连续。若存在 $F(z)$ 使得 $F'(z) = f(z)$ 在 $D$ 内成立，则称 $F(z)$ 是 $f(z)$ 的一个\textbf{原函数}。
-\end{dingliyi}
-
-\begin{dingli}{原函数的存在性}{}
+\begin{dingli}{单连通区域中原函数的存在性}{}
 若 $f(z)$ 在单连通区域 $D$ 内解析，则 $f(z)$ 在 $D$ 内存在原函数。
 \end{dingli}
 
 \begin{proof}
-取定点 $z_0 \in D$，定义
-\begin{equation}
-    F(z) = \int_{z_0}^{z} f(\zeta)\,\mathrm{d}\zeta
-\end{equation}
-由柯西积分定理\index{柯西积分定理}，积分值与路径无关。可以证明 $F'(z) = f(z)$。
+取定一点 $z_0\in D$。对任意 $z\in D$，定义
+\[
+    F(z)=\int_{z_0}^{z} f(\zeta)\,\mathrm{d}\zeta,
+\]
+其中积分路径取在区域 $D$ 内。
+
+由柯西积分定理\index{柯西积分定理}，任意闭曲线上的积分都为零，因此两点之间的积分与路径无关，所以 $F(z)$ 的定义是良好的。
+
+再仿照上一节的参数化讨论，可以证明
+\[
+    F'(z)=f(z).
+\]
+因此 $F(z)$ 正是 $f(z)$ 的一个原函数。
 \end{proof}
 
-\begin{dingli}{牛顿--莱布尼茨公式}{}
-\index{牛顿@牛顿（Newton）}\index{莱布尼茨@莱布尼茨（Leibniz）}
-设 $f(z)$ 在单连通区域 $D$ 内解析，$F(z)$ 是 $f(z)$ 的原函数，则
-\begin{equation}
-    \int_{z_1}^{z_2} f(z)\,\mathrm{d}z = F(z_2) - F(z_1)
-\end{equation}
-\end{dingli}
+\begin{tishi}[三件事其实连在一起]
+到这里为止，我们已经看到了下面这条主线：
+\[
+    \text{闭路积分为零} \Longrightarrow \text{路径无关} \Longrightarrow \text{原函数存在}.
+\]
+而在单连通区域里，解析函数之所以拥有这些性质，根源正是柯西积分定理。换句话说，复积分之所以``突然变整齐''，并不是偶然，而是解析性带来的结果。
+\end{tishi}
 
-\begin{proof}
-设 $F(z)$ 是 $f(z)$ 的原函数，即 $F'(z) = f(z)$。
+% ========== 第四节 ==========
+\section{多连通区域与典型闭路积分}
 
-沿从 $z_1$ 到 $z_2$ 的路径 $C$ 参数化：$z = z(t)$，$a \leq t \leq b$。则
-\begin{equation}
-    \int_{z_1}^{z_2} f(z)\,\mathrm{d}z = \int_a^b f(z(t))z'(t)\,\mathrm{d}t = \int_a^b F'(z(t))z'(t)\,\mathrm{d}t
-\end{equation}
-由链式法则，$\frac{\mathrm{d}}{\mathrm{d}t}F(z(t)) = F'(z(t))z'(t)$，故
-\begin{equation}
-    \int_{z_1}^{z_2} f(z)\,\mathrm{d}z = \int_a^b \frac{\mathrm{d}}{\mathrm{d}t}F(z(t))\,\mathrm{d}t = F(z(b)) - F(z(a)) = F(z_2) - F(z_1)
-\end{equation}
-这正是牛顿--莱布尼茨公式。
-\end{proof}
+\begin{wulibj}[为什么单连通条件不能随手丢掉]
+上一节的柯西积分定理是在单连通区域里成立的。很多同学第一次看到这个条件时，会把它当成一句技术性限制；但一进入多连通区域，情形就会立刻改变。最典型的例子就是
+\[
+    \frac{1}{z-z_0}.
+\]
+它除了 $z_0$ 以外处处解析，可一旦曲线把 $z_0$ 围住，闭路积分就不再是零。
+
+这一节的任务，就是让大家真正看见：区域里的``洞''会怎样改变积分行为。
+\end{wulibj}
+
 \subsection{多连通区域的柯西积分定理\index{柯西积分定理}}
 
 \begin{dingli}{多连通区域的柯西积分定理}{}
@@ -317,6 +435,9 @@
 \end{jie}
 \end{lizi}
 
+% ========== 第六节 ==========
+\section{柯西积分公式的直接推论}
+
 \subsection{高阶导数公式}
 
 \begin{dingli}{高阶导数公式}{}
@@ -359,8 +480,14 @@
 \end{jie}
 \end{lizi}
 
-% ========== 第四节 ==========
-\section{解析函数\index{解析函数}的无穷可微性}
+% ========== 第七节 ==========
+\section{解析性的积分判据：莫雷拉定理（选读）}
+
+\begin{wulibj}[为什么把莫雷拉定理放在章末]
+到前一节为止，本章主线其实已经完整了：复积分的定义、柯西积分定理\index{柯西积分定理}、多连通区域中的典型闭路积分、柯西积分公式以及高阶导数公式，这些内容已经足以支撑下一章的泰勒展开。
+
+莫雷拉\index{莫雷拉@莫雷拉（Morera）}（Morera）定理回答的是一个反方向的问题：如果我们只知道某个连续函数对任意闭曲线的积分都为零，能不能反过来推出它解析？这个问题很漂亮，也很重要，但它更像是对本章主线的一次回看，因此放在章末作为选读更合适。
+\end{wulibj}
 
 \subsection{莫雷拉定理}
 
@@ -385,111 +512,9 @@
 \end{equation}
 \end{tishi}
 
-\subsection{刘维尔\index{刘维尔@刘维尔（Liouville）}（Liouville）定理}
-
-\begin{dingli}{刘维尔定理}{}
-在整个复平面上解析且有界的函数必为常数。
-\end{dingli}
-
-\begin{proof}
-设 $|f(z)| \leq M$ 对所有 $z \in \mathbb{C}$ 成立。
-
-取 $z_0 \in \mathbb{C}$，以 $z_0$ 为圆心、$R$ 为半径作圆 $C_R$。由高阶导数公式：
-\begin{equation}
-    f'(z_0) = \frac{1}{2\pi\mathrm{i}}\oint_{C_R} \frac{f(z)}{(z - z_0)^2}\,\mathrm{d}z
-\end{equation}
-
-估值：
-\begin{equation}
-    |f'(z_0)| \leq \frac{1}{2\pi} \cdot \frac{M}{R^2} \cdot 2\pi R = \frac{M}{R}
-\end{equation}
-
-令 $R \to \infty$，得 $|f'(z_0)| = 0$。由 $z_0$ 的任意性，$f'(z) \equiv 0$，故 $f(z)$ 为常数。
-\end{proof}
-
-\begin{wulibj}[应用：代数基本定理]
-刘维尔定理可以简洁地证明代数基本定理：任何 $n$ 次多项式 $P(z)$ 在复数\index{复数}范围内有根。
-
-证明：若 $P(z)$ 无根，则 $f(z) = 1/P(z)$ 在整个复平面上解析。又 $|P(z)| \to \infty$ 当 $|z| \to \infty$，所以 $|f(z)| \to 0$，即 $f(z)$ 有界。由刘维尔定理，$f(z)$ 为常数，矛盾。
-\end{wulibj}
-
-\subsection{最大模原理}
-
-\begin{dingli}{最大模原理}{}
-设 $f(z)$ 在区域 $D$ 内解析且不恒为常数，则 $|f(z)|$ 在 $D$ 内不可能达到最大值。
-\end{dingli}
-
-\begin{proof}
-用反证法。设 $|f(z)|$ 在 $D$ 内某点 $z_0$ 达到最大值 $M = |f(z_0)|$。
-
-由于 $f(z)$ 在 $z_0$ 解析，存在幂级数展开：
-\begin{equation}
-    f(z) = \sum_{n=0}^{\infty} a_n(z - z_0)^n
-\end{equation}
-
-若 $a_n = 0$ 对所有 $n \geq 1$ 成立，则 $f(z) \equiv a_0$ 为常数，与条件矛盾。
-
-设 $k$ 是使 $a_k \neq 0$ 的最小正整数，则
-\begin{equation}
-    f(z) = a_0 + a_k(z - z_0)^k + O((z - z_0)^{k+1})
-\end{equation}
-
-取 $z = z_0 + r\mathrm{e}^{\mathrm{i}\theta}$（$r$ 充分小），有
-\begin{equation}
-    |f(z)|^2 = |a_0 + a_k r^k \mathrm{e}^{\mathrm{i}k\theta} + O(r^{k+1})|^2
-\end{equation}
-
-选择 $\theta$ 使 $a_k \mathrm{e}^{\mathrm{i}k\theta}$ 与 $a_0$ 同相位，则
-\begin{equation}
-    |f(z)| \geq |a_0| + |a_k|r^k - O(r^{k+1}) = M + |a_k|r^k + o(r^k) > M
-\end{equation}
-
-当 $r$ 充分小时，这与 $|f(z_0)| = M$ 是最大值矛盾。
-
-因此 $|f(z)|$ 不能在 $D$ 内达到最大值。
-\end{proof}
-
-\begin{zhu}{}{}
-最大模原理说明：解析函数\index{解析函数}的模的最大值只能在边界上达到。这是解析函数\index{解析函数}``刚性''的又一体现。
-\end{zhu}
-
-% ========== 第五节 ==========
-\section{应用：静电场的格林\index{格林@格林（Green）}（Green）函数\index{格林函数}}
-
-\subsection{二维静电场}
-
-考虑二维无源静电场，电势 $\phi(x, y)$ 满足拉普拉斯方程：
-\begin{equation}
-    \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} = 0
-\end{equation}
-
-若 $f(z) = \phi + \mathrm{i}\psi$ 解析，则 $\phi$ 自动满足拉普拉斯方程（C-R 条件的推论）。
-
-\subsection{点电荷的电势}
-
-在 $z_0$ 处放置单位点电荷，其电势为
-\begin{equation}
-    \phi(z) = -\frac{1}{2\pi}\ln|z - z_0|
-\end{equation}
-
-这称为二维拉普拉斯方程的\textbf{格林函数\index{格林函数}}。
-\begin{lizi}{}{}
-设上半平面 $y > 0$ 内在 $z_0 = a$（$a > 0$ 实数）处有一点电荷，边界 $y = 0$ 接地。求电势分布。
-
-\begin{jie}
-    用镜像法：在 $z_0^* = -a$ 处放置相反电荷。电势为
-    \begin{equation}
-        \phi(z) = -\frac{1}{2\pi}\ln|z - a| + \frac{1}{2\pi}\ln|z + a|
-    \end{equation}
-    
-    在 $y = 0$ 上，$z = x$，有
-    \begin{equation}
-        \phi(x) = -\frac{1}{2\pi}\ln|x - a| + \frac{1}{2\pi}\ln|x + a| = \frac{1}{2\pi}\ln\left|\frac{x + a}{x - a}\right|
-    \end{equation}
-    
-    当 $x = a$ 时，$\phi(a) \to -\infty$（点电荷位置）；当 $x \neq a$ 时有限。
-\end{jie}
-\end{lizi}
+\begin{tishi}[和下一章的衔接]
+刘维尔定理和最大模原理虽然同样从柯西积分公式长出来，但它们更适合和泰勒展开、解析函数刚性放在一起系统讨论。因此它们将放到下一章``解析函数的整体性质与刚性''中出现。这样安排以后，本章主线会更集中，下一章的逻辑也会更顺。
+\end{tishi}
 
 % ========== 本章小结 ==========
 \section{本章小结}
@@ -497,20 +522,21 @@
 \subsection{核心定理}
 
 \begin{enumerate}
+    \item \textbf{有原函数时的复积分基本公式}：$\displaystyle \int_C f(z)\,\mathrm{d}z = F(z_2)-F(z_1)$
     \item \textbf{柯西积分定理\index{柯西积分定理}}：单连通区域内解析函数\index{解析函数}沿闭曲线积分等于零
-    \item \textbf{柯西积分公式}：$f(z_0) = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z$
-    \item \textbf{高阶导数公式}：$f^{(n)}(z_0) = \frac{n!}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{(z - z_0)^{n+1}}\,\mathrm{d}z$
-    \item \textbf{莫雷拉定理}：柯西积分定理\index{柯西积分定理}的逆定理
-    \item \textbf{刘维尔定理}：有界整函数为常数
-    \item \textbf{最大模原理}：解析函数\index{解析函数}模的最大值在边界上
+    \item \textbf{单连通区域中的原函数存在性}：解析函数在单连通区域内存在原函数
+    \item \textbf{柯西积分公式}：$\displaystyle f(z_0) = \frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z$
+    \item \textbf{高阶导数公式}：$\displaystyle f^{(n)}(z_0) = \frac{n!}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{(z - z_0)^{n+1}}\,\mathrm{d}z$
+    \item \textbf{莫雷拉定理（选读）}：闭路积分为零可反推函数解析
 \end{enumerate}
 
 \subsection{重要结论}
 
 \begin{itemize}
-    \item 解析函数\index{解析函数}有任意阶导数
-    \item 解析函数\index{解析函数}的值由边界值完全确定
-    \item 解析函数\index{解析函数}具有``刚性''——局部信息决定整体
+    \item 在单连通区域里，解析函数\index{解析函数}的积分与路径无关，并且存在原函数
+    \item 典型闭路积分 $\displaystyle\oint_C \frac{1}{z-z_0}\,\mathrm{d}z = 2\pi\mathrm{i}$ 是柯西积分公式的基础
+    \item 解析函数\index{解析函数}在一点的值和各阶导数都可以由边界积分表示
+    \item 下一章的泰勒展开、刘维尔定理和最大模原理，都将从本章结果继续生长出来
 \end{itemize}
 
 % ========== 习题 ==========
@@ -522,7 +548,7 @@
     \item 计算下列积分：
     \begin{enumerate}
         \item $\displaystyle\int_C z^2\,\mathrm{d}z$，$C$ 是从 $0$ 到 $1 + \mathrm{i}$ 的直线段
-        \item $\displaystyle\oint_C \frac{1}{z^2 + 1}\,\mathrm{d}z$，$C$ 是 $|z| = 2$
+        \item 分别沿两条路径计算 $\displaystyle\int_C \overline{z}\,\mathrm{d}z$：一路径为从 $0$ 到 $1+\mathrm{i}$ 的直线段，另一路径先沿实轴从 $0$ 到 $1$，再沿竖直线段从 $1$ 到 $1+\mathrm{i}$
     \end{enumerate}
     
     \item 利用柯西积分公式计算：
@@ -535,25 +561,32 @@
 \textbf{综合题}
 
 \begin{enumerate}[resume]
-    \item 设 $f(z)$ 在 $|z| \leq 1$ 上解析，且 $|f(z)| \leq 1$。证明 $|f'(0)| \leq 1$。
-    
-    \item 证明：若 $f(z)$ 在有界区域 $D$ 内解析，在 $\bar{D}$ 上连续，则 $|f(z)|$ 的最大值在边界 $\partial D$ 上达到。
+    \item 设 $f(z)$ 在区域 $D$ 内有原函数 $F(z)$。证明：$f(z)$ 在 $D$ 内的积分与路径无关，并说明为什么任意闭曲线上的积分都为零。
     
     \item 计算 $\displaystyle\oint_C \frac{z}{(z - 1)(z - 2)}\,\mathrm{d}z$，其中 $C$ 分别为：
     \begin{enumerate}
         \item $|z| = 1.5$
         \item $|z| = 3$
     \end{enumerate}
+    
+    \item 说明为什么 $\displaystyle \frac{1}{z}$ 在穿孔平面 $\mathbb{C}\setminus\{0\}$ 上不可能有单值原函数。
 \end{enumerate}
 
 \textbf{挑战题}
 
 \begin{enumerate}[resume]
-    \item 设 $f(z)$ 在 $|z| < R$ 内解析，$f(0) = 0$，$|f(z)| \leq M$。证明：
-    \begin{equation}
-        |f(z)| \leq \frac{M|z|}{R}
-    \end{equation}
-    （施瓦茨引理）
+    \item 用参数化方法直接证明：若 $C$ 是圆周 $|z-z_0|=r$ 的逆时针方向，则
+    \[
+        \oint_C \frac{1}{z-z_0}\,\mathrm{d}z = 2\pi\mathrm{i}.
+    \]
     
-    \item 利用刘维尔定理证明：任何 $n$ 次多项式在复数\index{复数}范围内必有根。
+    \item 设 $f(z)$ 在区域 $D$ 内连续，且对 $D$ 内任意闭曲线 $C$ 都有
+    \[
+        \oint_C f(z)\,\mathrm{d}z = 0.
+    \]
+    取定 $z_0\in D$，定义
+    \[
+        F(z)=\int_{z_0}^{z} f(\zeta)\,\mathrm{d}\zeta.
+    \]
+    试证明 $F'(z)=f(z)$，并说明这与莫雷拉定理有什么关系。
 \end{enumerate}
