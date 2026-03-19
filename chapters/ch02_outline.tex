@@ -1,0 +1,746 @@
+% 第二章：复变函数与解析函数初步（详细提纲）
+
+\chapter{复变函数与解析函数初步}
+
+\begin{wulibj}[本章定位]
+第一章已经把复数的代数形式、几何图像、极形式和扩充复平面讲清楚了。接下来，学生会自然追问一个问题：既然复数既能表示大小，又能表示方向，那么把``自变量''和``函数值''都放到复平面上以后，会发生什么？
+
+这就是第二章要回答的核心问题。它的任务不是把后面所有内容一次讲完，而是先把最根本的桥梁搭起来：什么叫复变函数，什么叫解析函数，为什么复变函数的极限与导数比实变函数严格得多，柯西--黎曼条件从哪里来，以及解析函数为什么会和调和函数、二维势场、局部保角性联系在一起。
+
+从内容主线看，本章可以概括为：
+\[
+    \text{区域与曲线} \Longrightarrow \text{复变函数} \Longrightarrow \text{极限与连续} \Longrightarrow \text{导数与解析} \Longrightarrow \text{C-R 条件} \Longrightarrow \text{调和性质} \Longrightarrow \text{物理与几何图像}.
+\]
+
+如果这一章讲得扎实，后面的复积分、泰勒展开、洛朗展开和留数理论就会真正有依托；如果这一章只停留在公式罗列上，学生后面很容易把整门课看成零散技巧。
+\end{wulibj}
+
+\begin{tishi}[写作总原则]
+\begin{enumerate}
+    \item 要明显借用第一章的讲法：先讲``为什么要学这一节''，再给定义和定理。
+    \item 要持续提醒学生：复变函数不是把实变函数里的 $x$ 改成 $z$ 这么简单，而是整个问题从一维变成了二维。
+    \item 要把本章和第一章连起来。尤其要反复调用第一章里已经建立的复平面语言，以及``复数乘法对应旋转与伸缩''这一几何事实。
+    \item 多值函数、支点、解析支在本章只作伏笔，不正式展开；这一部分留到后面的选学章系统讲。
+    \item 第七节只讲``局部几何意义''和``二维势场的最初图像''，不要提前写成完整的保角映射专题。
+    \item 例题应尽量围绕概念辨析来选，不宜过早堆砌复杂计算。
+\end{enumerate}
+\end{tishi}
+
+\section{第一节\quad 复平面上的点集、区域与曲线}
+
+\begin{wulibj}[本节要解决的问题]
+在高等数学里，函数的定义域通常是实轴上的区间；而到了复变函数里，定义域变成了复平面中的点集。于是很多原来不需要认真区分的问题，现在都变得重要起来了：什么叫``在点附近''？什么叫``区域内部''？什么叫``边界上''？什么叫``没有洞''？
+
+这些概念看起来有些抽象，但它们不是纯粹的术语准备。后面讲复积分时，我们要讨论积分路径和闭曲线；讲柯西积分定理时，我们要判断区域是不是单连通；讲奇点时，我们要反复用到去心邻域。如果这一节的语言没有建立起来，后面每走一步都会觉得定义是突然出现的。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握邻域、去心邻域、内点、边界点、开集、闭集等基本概念。
+    \item 让学生理解``区域''是开且连通的点集，而不是任何看起来像一片地方的集合。
+    \item 让学生建立``单连通就是没有洞''的几何直观。
+    \item 让学生熟悉分段光滑曲线、简单闭曲线等后面做复积分必用的对象。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 邻域与去心邻域
+    \item 内点、外点与边界点
+    \item 开集、闭集与区域
+    \item 连通、单连通与多连通
+    \item 曲线、分段光滑曲线与简单闭曲线
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 邻域是以一点为中心的小圆盘；去心邻域则是把中心点拿掉以后剩下的部分。
+    \item 区域的关键词不是``大''或``小''，而是``开''和``连通''。
+    \item 单连通的真正直观，是区域里没有洞，闭曲线可以在区域内连续缩成一点。
+    \item 以后说``积分路径''时，默认讨论的是分段光滑曲线，而不是任意奇怪的点集。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{邻域与去心邻域}{}
+设 $z_0\in\mathbb{C}$，$\varepsilon>0$。集合
+\[
+    U(z_0,\varepsilon)=\{z\in\mathbb{C}:|z-z_0|<\varepsilon\}
+\]
+称为点 $z_0$ 的 $\varepsilon$ 邻域。集合
+\[
+    0<|z-z_0|<\varepsilon
+\]
+称为点 $z_0$ 的去心邻域。
+\end{dingliyi}
+
+\begin{dingliyi}{区域}{}
+若点集 $D\subset\mathbb{C}$ 同时满足：
+\begin{enumerate}
+    \item $D$ 是开集；
+    \item $D$ 是连通的；
+\end{enumerate}
+则称 $D$ 为一个区域。
+\end{dingliyi}
+
+\begin{dingliyi}{单连通区域}{}
+若区域 $D$ 内任意简单闭曲线都能在 $D$ 内连续收缩为一点，则称 $D$ 为单连通区域；否则称为多连通区域。
+\end{dingliyi}
+
+\begin{dingliyi}{简单闭曲线}{}
+若曲线没有自交，且起点与终点重合，则称它为简单闭曲线。
+\end{dingliyi}
+
+\subsection*{建议例题}
+\begin{lizi}{判断集合是否为区域}{}
+判断单位开圆盘、闭圆盘、上半平面、环域 $\{z:1<|z|<2\}$、去掉原点的平面 $\mathbb{C}\setminus\{0\}$ 是否为区域，若是，再判断其是否单连通。
+\end{lizi}
+
+\begin{lizi}{判断曲线类型}{}
+给出几条具体曲线，判断它们是否为分段光滑曲线、是否为简单闭曲线，并说明理由。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 内点、边界点、外点示意图。
+    \item 单连通区域与环域的对比图。
+    \item 简单闭曲线与自交曲线的对比图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``闭区域''和``闭集''混为一谈。
+    \item 不要把``看起来连在一起''误当成严格的连通定义。
+    \item 不要把``去掉一个点问题不大''机械套用到复平面上；去掉一个点有时会直接破坏单连通性。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：判断给定点集是否开、是否闭、是否为区域。
+    \item 综合题：判断若干区域是否单连通，并解释``洞''在哪里。
+    \item 挑战题：说明为什么 $\mathbb{C}\setminus\{0\}$ 连通但不是单连通。
+\end{itemize}
+
+\section{第二节\quad 复变函数的概念与映射观点}
+
+\begin{wulibj}[本节要解决的问题]
+在实变函数里，我们习惯把函数看成一条曲线 $y=f(x)$；但在复变函数里，这种图像已经不够用了。因为 $z$ 本身就在平面上，$w=f(z)$ 也落在另一个平面上，于是函数更自然的理解方式，不再是画一条曲线，而是把一个区域映到另一个区域。
+
+这一节的关键，不是把所有函数都分类完，而是帮助学生建立两个基本视角：一方面，复变函数可以拆成实部和虚部这两个二元实函数；另一方面，它也可以看成把 $z$ 平面中的点和图形变到 $w$ 平面中去的映射。后面讲解析函数的局部几何意义时，这个映射视角会立刻派上用场。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握复变函数的定义和单值函数的默认约定。
+    \item 让学生会把复变函数写成 $u(x,y)+\mathrm{i}v(x,y)$ 的形式。
+    \item 让学生建立``函数是映射''这一视角。
+    \item 让学生通过几个最基本的例子初步感受``解析''与``不解析''的区别。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从实变函数到复变函数
+    \item 单值函数与多值函数的最初说明
+    \item 实部与虚部的分离
+    \item 映射观点与几何直观
+    \item 最基本的函数例子
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 复变函数本质上对应两个二元实函数 $u(x,y)$ 和 $v(x,y)$。
+    \item 但后面会看到，并不是任意两个 $u,v$ 都能拼成一个解析函数。
+    \item ``函数是映射''意味着我们不仅关心函数值，还关心图形怎样被变形。
+    \item 本章默认讨论单值函数；多值函数只在注释中做最初提醒。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{复变函数}{}
+设 $D\subset\mathbb{C}$。若对每个 $z\in D$，按某一规则都有唯一的复数 $w$ 与之对应，则称 $w$ 是 $z$ 的复变函数，记作
+\[
+    w=f(z).
+\]
+\end{dingliyi}
+
+\begin{dingliyi}{实部与虚部表示}{}
+设 $z=x+\mathrm{i}y$，$w=f(z)$。若
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y),
+\]
+其中 $u,v$ 为二元实函数，则称 $u$ 为 $f$ 的实部，$v$ 为 $f$ 的虚部。
+\end{dingliyi}
+
+\subsection*{建议例题}
+\begin{lizi}{分离实部与虚部}{}
+把 $f(z)=z^2$ 写成 $u(x,y)+\mathrm{i}v(x,y)$ 的形式，并说明它把复平面中的点怎样映到新的位置。
+\end{lizi}
+
+\begin{lizi}{带定义域限制的例子}{}
+把 $f(z)=1/z$ 写成 $u(x,y)+\mathrm{i}v(x,y)$ 的形式，并指出为什么 $z=0$ 必须从定义域中删去。
+\end{lizi}
+
+\begin{lizi}{一个很像却不解析的例子}{}
+写出 $f(z)=\bar z$ 的实部和虚部，并说明它在几何上对应关于实轴的镜像反射。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item $w=z^2$ 对单位圆或若干射线的像。
+    \item $w=\bar z$ 的镜像示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把虚部写成 $\mathrm{i}v$；虚部是实函数 $v$ 本身。
+    \item 不要以为只要能写成 $u+\mathrm{i}v$ 就已经理解了该函数的全部性质。
+    \item 不要在这里过早展开多值函数的分支问题；这一节只需告诉学生``以后会专门讨论''。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：把若干简单函数写成 $u+\mathrm{i}v$ 的形式。
+    \item 综合题：判断给定函数的定义域和值域特征。
+    \item 挑战题：比较 $z^2$、$1/z$、$\bar z$ 在几何意义上的差异。
+\end{itemize}
+
+\section{第三节\quad 复变函数的极限与连续}
+
+\begin{wulibj}[本节要解决的问题]
+很多同学第一次学到这里时，会觉得复变函数的极限定义和高等数学里很像，好像只是把 $x\to x_0$ 换成了 $z\to z_0$。真正的难点恰恰藏在这里：实变函数趋近一个点，本质上是在数轴上靠近；复变函数趋近一个点，却意味着可以从整个平面上的任意方向、沿任意路径靠近。
+
+因此，本节真正要讲透的，不是极限定义的形式，而是复变极限的本质要求：\textbf{不管你怎样靠近同一个点，函数值都必须朝同一个极限走去。} 一旦学生把这一点真正理解了，后面就会明白为什么复可导是如此强的条件。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握复变函数极限与连续的定义。
+    \item 让学生意识到复变极限必须对一切路径都成立。
+    \item 让学生掌握通过两条路径否定极限存在的基本方法。
+    \item 让学生知道极限与连续都可以转化为实部、虚部的二元极限问题。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 极限的定义
+    \item ``沿任意路径趋近''的本质
+    \item 极限不存在的路径判别法
+    \item 极限的实部虚部表示
+    \item 连续性的定义与基本性质
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 复变极限的严格定义仍然是 $\varepsilon$--$\delta$ 语言。
+    \item 证明极限存在时，必须对所有路径统一成立。
+    \item 证明极限不存在时，只要找出两条路径给出不同结果就够了。
+    \item 连续性本质上就是``极限等于函数值''。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{复变函数的极限}{}
+设 $f(z)$ 在点 $z_0$ 的某个去心邻域内有定义。若存在复数 $A$，使得对任意 $\varepsilon>0$，存在 $\delta>0$，当
+\[
+    0<|z-z_0|<\delta
+\]
+时都有
+\[
+    |f(z)-A|<\varepsilon,
+\]
+则称 $f(z)$ 当 $z\to z_0$ 时极限为 $A$，记作
+\[
+    \lim_{z\to z_0}f(z)=A.
+\]
+\end{dingliyi}
+
+\begin{dingli}{极限的实部虚部判据}{}
+设
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y),\qquad z_0=x_0+\mathrm{i}y_0,\qquad A=a+\mathrm{i}b.
+\]
+则
+\[
+    \lim_{z\to z_0}f(z)=A
+\]
+当且仅当
+\[
+    \lim_{(x,y)\to(x_0,y_0)}u(x,y)=a,\qquad
+    \lim_{(x,y)\to(x_0,y_0)}v(x,y)=b.
+\]
+\end{dingli}
+
+\begin{dingliyi}{连续}{}
+若
+\[
+    \lim_{z\to z_0}f(z)=f(z_0),
+\]
+则称 $f(z)$ 在 $z_0$ 处连续。
+\end{dingliyi}
+
+\subsection*{建议例题}
+\begin{lizi}{一个极限存在的基本例子}{}
+证明 $\lim_{z\to z_0} z^2 = z_0^2$，并用这个例子说明复变极限并不神秘，但要求比实变函数更统一。
+\end{lizi}
+
+\begin{lizi}{路径不同导致极限不存在}{}
+讨论
+\[
+    f(z)=\frac{\bar z}{z}
+\]
+当 $z\to 0$ 时极限是否存在，并比较沿实轴与虚轴趋近时的结果。
+\end{lizi}
+
+\begin{lizi}{连续性的判断}{}
+讨论有理函数在其定义域内的连续性，并指出在哪些点连续性失效。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 点 $z_0$ 附近沿不同路径趋近的示意图。
+    \item 两条不同路径导致不同极限的图示。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要只沿实轴和虚轴检验一下，就武断地说极限存在。
+    \item 不要把``沿任意路径趋近''误当成另一种定义；它只是帮助理解 $\varepsilon$--$\delta$ 定义的本质。
+    \item 不要把连续性简单理解成``图像不断开''；在复平面里，它背后是二元极限问题。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求若干简单复函数的极限，讨论连续性。
+    \item 综合题：通过不同路径判断极限是否存在。
+    \item 挑战题：构造一个沿直线方向都给出同一极限、但总体极限仍不存在的例子。
+\end{itemize}
+
+\section{第四节\quad 复变函数的导数与解析性}
+
+\begin{wulibj}[本节要解决的问题]
+前一节已经告诉我们：复变极限必须对任意路径都一致。导数比极限更进一步，因为它讨论的是差商
+\[
+    \frac{f(z+\Delta z)-f(z)}{\Delta z}
+\]
+在 $\Delta z\to 0$ 时有没有统一的极限。于是，复导数的存在条件会比实导数严格得多。
+
+这一节的重点，不只是给出导数定义，而是帮助学生真正建立两种区分：第一，复可导比实可导强得多；第二，``在一点可导''和``在一个邻域内解析''不是同一回事。尤其第二点，初学者最容易混淆，必须借助反例讲透。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握复导数与解析性的定义。
+    \item 让学生理解复可导为何比实可导严格得多。
+    \item 让学生分清``在一点可导''与``在邻域内解析''。
+    \item 让学生掌握最基本的求导法则和若干典型例子。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 复导数的定义
+    \item 复可导与实可导的差别
+    \item 解析、整函数与奇点的最初概念
+    \item 基本求导法则
+    \item 由定义直接求导的典型例子
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 复导数定义中，$\Delta z$ 是二维复增量，不只沿一条轴趋近。
+    \item 看起来非常光滑的函数，也可能在复意义下不可导。
+    \item 在一点可导并不等于在邻域内解析，必须明确区分。
+    \item 第一章里``乘以复数对应旋转与伸缩''这一事实，会在第七节重新出现。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{复导数}{}
+设 $f(z)$ 在点 $z_0$ 的某个邻域内有定义。若极限
+\[
+    \lim_{\Delta z\to 0}\frac{f(z_0+\Delta z)-f(z_0)}{\Delta z}
+\]
+存在，则称 $f$ 在 $z_0$ 处可导，此极限称为 $f$ 在 $z_0$ 处的导数，记作 $f'(z_0)$。
+\end{dingliyi}
+
+\begin{dingliyi}{解析函数}{}
+若函数 $f$ 在点 $z_0$ 的某个邻域内处处可导，则称 $f$ 在 $z_0$ 处解析。若 $f$ 在某区域内处处解析，则称 $f$ 为该区域上的解析函数。
+\end{dingliyi}
+
+\begin{dingliyi}{整函数与奇点}{}
+若函数在整个复平面上解析，则称其为整函数。若函数在某点不解析，则该点称为它的奇点。
+\end{dingliyi}
+
+\subsection*{建议例题}
+\begin{lizi}{由定义求导}{}
+用导数定义求 $f(z)=z^2$ 的导数。
+\end{lizi}
+
+\begin{lizi}{一个处处不可导的例子}{}
+证明 $f(z)=\bar z$ 在任意点都不可导，并解释不可导的根源是什么。
+\end{lizi}
+
+\begin{lizi}{一点可导但不解析的例子}{}
+讨论
+\[
+    f(z)=|z|^2
+\]
+在 $z=0$ 处是否可导，并说明这个例子为什么能帮助区分``一点可导''和``解析''。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 复增量 $\Delta z$ 从不同方向趋近于 $0$ 的示意图。
+    \item $w=\bar z$ 关于实轴的镜像图，可与上一节呼应。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把实变函数中的求导直觉直接照搬到复变函数。
+    \item 不要写成``在一点可导就一定解析''；正确的表述必须保留``邻域''这一要求。
+    \item 不要忽略反例的作用。本节必须让学生亲眼看到：$|z|^2$ 在一点可导，但并不因此成为解析函数。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：用定义求若干简单函数的导数。
+    \item 综合题：讨论 $z^n$、$\bar z$、$|z|^2$ 的可导性差别。
+    \item 挑战题：构造一个在某一点可导、但在任何邻域内都不解析的函数例子。
+\end{itemize}
+
+\section{第五节\quad 柯西--黎曼条件与可导判别}
+
+\begin{wulibj}[本节要解决的问题]
+如果每次判断复函数是否可导，都从导数定义重新计算一遍，工作量会非常大。于是一个自然问题出现了：能不能把复可导的条件翻译成实部 $u(x,y)$ 和虚部 $v(x,y)$ 的偏导关系？这就是柯西--黎曼条件出现的原因。
+
+这一节最重要的，不是把公式背下来，而是让学生看见它的来路：因为差商极限必须与趋近方向无关，所以沿实轴方向和沿虚轴方向算出来的结果也必须一样。柯西--黎曼条件正是这一要求的最直接表达。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解柯西--黎曼条件的推导思路。
+    \item 让学生掌握可导的必要条件与充分条件。
+    \item 让学生会用导数公式通过 $u_x,v_x$ 或 $u_y,v_y$ 求导。
+    \item 让学生避免把``满足 C-R 条件''机械等同于``解析''。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 沿两个特殊方向推导 C-R 条件
+    \item C-R 条件的必要性
+    \item 偏导连续时的充分性
+    \item 导数公式
+    \item 典型函数的判别与反例
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item C-R 条件来自``不同方向的差商极限必须一致''。
+    \item 若函数可导，则必满足
+    \[
+        u_x=v_y,\qquad u_y=-v_x.
+    \]
+    \item 反过来，仅在一点满足这两个等式还不够；通常还需配合偏导连续等条件。
+    \item 本节应安排至少一个反例，提醒学生不能死套公式。
+\end{itemize}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{柯西--黎曼条件的必要性}{}
+设
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y)
+\]
+在点 $z_0=x_0+\mathrm{i}y_0$ 可导，则在该点有
+\[
+    u_x=v_y,\qquad u_y=-v_x.
+\]
+\end{dingli}
+
+\begin{dingli}{可导的充分条件}{}
+若 $u_x,u_y,v_x,v_y$ 在点 $(x_0,y_0)$ 的某个邻域内存在，并在该点连续，且满足柯西--黎曼条件，则 $f(z)$ 在 $z_0$ 可导。
+\end{dingli}
+
+\begin{dingli}{导数公式}{}
+在可导条件下，有
+\[
+    f'(z)=u_x+\mathrm{i}v_x=v_y-\mathrm{i}u_y.
+\]
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{验证解析并求导}{}
+验证 $f(z)=z^2=(x^2-y^2)+\mathrm{i}(2xy)$ 满足 C-R 条件，并求其导数。
+\end{lizi}
+
+\begin{lizi}{一个不满足 C-R 条件的例子}{}
+验证 $f(z)=\bar z$ 不满足 C-R 条件，并解释这和上一节由定义得到的结论为什么一致。
+\end{lizi}
+
+\begin{lizi}{提醒学生不要死套公式的反例}{}
+安排一个在某点形式上满足 C-R 条件、但并不可导的经典反例，用来说明``必要''和``充分''之间仍有距离。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 沿实轴方向和沿虚轴方向求差商的示意图。
+    \item 用箭头图表示``两个方向给出的导数必须重合''。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把 C-R 条件当作凭空掉下来的记忆公式。
+    \item 不要忘记区分必要条件和充分条件。
+    \item 不要在反例环节偷工减料；这一节不把误区点破，学生后面做题时会频繁误判。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：验证若干简单函数是否满足 C-R 条件。
+    \item 综合题：由实部或虚部反求另一个部分，并判断是否解析。
+    \item 挑战题：给出或分析一个在一点满足 C-R 条件但不可导的反例。
+\end{itemize}
+
+\section{第六节\quad 解析函数的调和性质与共轭调和函数}
+
+\begin{wulibj}[本节要解决的问题]
+前一节刚得到柯西--黎曼条件，学生很容易觉得这只是一个判断可导的工具。但它的意义远不止于此。把 C-R 条件再微分一次，就会发现：解析函数的实部和虚部都自动满足拉普拉斯方程。也就是说，一旦一个函数解析，它的内部结构就会变得非常整齐。
+
+这件事对数学物理方法尤其重要。因为拉普拉斯方程正是二维静电场、稳态温度场等问题的核心方程。本节要让学生开始感受到：解析函数不是孤立的数学技巧，而是和物理模型天然联通的对象。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解解析函数的实部、虚部都是调和函数。
+    \item 让学生掌握共轭调和函数的概念。
+    \item 让学生会从一个简单的调和函数出发求它的共轭函数。
+    \item 让学生建立``解析函数和拉普拉斯方程相关''的意识。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 由 C-R 条件推出拉普拉斯方程
+    \item 调和函数的定义
+    \item 共轭调和函数的概念
+    \item 由一个调和函数求共轭函数
+    \item 等值线正交的初步认识
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 若 $f=u+\mathrm{i}v$ 解析，则
+    \[
+        u_{xx}+u_{yy}=0,\qquad v_{xx}+v_{yy}=0.
+    \]
+    \item 共轭调和函数不是随便凑出来的，它和 C-R 条件直接相连。
+    \item 一个调和函数若能找到共轭函数，就能嵌入某个解析函数中。
+    \item 等值线正交这一现象会在下一节被赋予物理解释。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{调和函数}{}
+若二元实函数 $u(x,y)$ 满足
+\[
+    u_{xx}+u_{yy}=0,
+\]
+则称 $u$ 为调和函数。
+\end{dingliyi}
+
+\begin{dingli}{解析函数的调和性质}{}
+若
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y)
+\]
+在区域内解析，则 $u$ 和 $v$ 都是调和函数。
+\end{dingli}
+
+\begin{dingliyi}{共轭调和函数}{}
+若 $u$ 和 $v$ 都是调和函数，且满足柯西--黎曼条件，则称 $u$ 和 $v$ 互为共轭调和函数。
+\end{dingliyi}
+
+\subsection*{建议例题}
+\begin{lizi}{由解析函数验证调和性}{}
+对 $f(z)=z^2$ 的实部 $u=x^2-y^2$ 与虚部 $v=2xy$，验证它们都满足拉普拉斯方程。
+\end{lizi}
+
+\begin{lizi}{由实部反求共轭函数}{}
+已知
+\[
+    u(x,y)=x^2-y^2,
+\]
+求与之对应的共轭调和函数 $v(x,y)$。
+\end{lizi}
+
+\begin{lizi}{判断某个调和函数能否作为实部}{}
+给出一个简单调和函数，让学生尝试寻找共轭函数，并借此理解``只差一个加法常数''这一点。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一组 $u=\text{const}$ 和 $v=\text{const}$ 的正交曲线图。
+    \item 由 $f(z)=z^2$ 产生的等值线示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``调和函数''和``解析函数''混成同一个概念。
+    \item 不要忘记共轭函数通常只差一个加法常数。
+    \item 由 $u$ 求 $v$ 时，积分以后要补上只依赖另一变量的函数，再由 C-R 条件确定它。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：验证给定函数是否调和。
+    \item 综合题：已知实部或虚部，求对应共轭调和函数。
+    \item 挑战题：证明解析函数的实部和虚部的等值线在正则点附近互相正交。
+\end{itemize}
+
+\section{第七节\quad 二维势场与解析函数的局部几何意义}
+
+\begin{wulibj}[本节要解决的问题]
+如果第二章只停留在极限、导数和 C-R 条件，学生虽然会觉得内容严密，却不一定能感受到这门课的气质。本节的作用，就是把前面已经建立起来的数学结构重新放回物理和几何图像中去：解析函数的实部和虚部，可以看成二维无源场中的两张互相正交的``地图''；而解析函数的导数，在局部上又像第一章里讲过的``乘以一个复数''那样，对小图形施加统一的伸缩和旋转。
+
+这一节不打算把保角映射系统讲完，更不打算把二维势场问题一次求尽。它的任务更像一幅收束性的全景图：让学生在学完整章以后，第一次看清解析函数为什么既有物理意义，又有几何意义。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生知道二维静电场或稳态温度场为什么会自然联系到解析函数。
+    \item 让学生理解等势线与场线正交的复分析来源。
+    \item 让学生看懂导数的局部``伸缩加旋转''意义。
+    \item 让学生把第一章中的复数乘法几何意义，和本章中的解析函数导数联系起来。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 二维无源场与拉普拉斯方程的最初图像
+    \item 电势函数与流函数（或电通量函数）
+    \item 等势线与场线的正交性
+    \item 导数的局部线性化
+    \item 局部保角性的预告
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 在二维无源区域中，常常会出现一对互为共轭调和函数的量。
+    \item 它们的等值线互相正交，这不是巧合，而是 C-R 条件的直接结果。
+    \item 当 $f'(z_0)\neq 0$ 时，
+    \[
+        f(z)-f(z_0)=f'(z_0)(z-z_0)+o(|z-z_0|),
+    \]
+    因而解析函数在局部上近似于乘以一个非零复数。
+    \item 这恰好把第一章里``复数乘法对应旋转与伸缩''的几何意义重新接了回来。
+\end{itemize}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{等势线与场线正交}{}
+若
+\[
+    f(z)=\phi(x,y)+\mathrm{i}\psi(x,y)
+\]
+在区域内解析，则 $\phi=\text{常数}$ 与 $\psi=\text{常数}$ 所给出的两族曲线在正则点附近彼此正交。
+\end{dingli}
+
+\begin{dingli}{解析函数的局部线性近似}{}
+若 $f$ 在 $z_0$ 处解析，则当 $z$ 充分接近 $z_0$ 时，
+\[
+    f(z)-f(z_0)=f'(z_0)(z-z_0)+o(|z-z_0|).
+\]
+\end{dingli}
+
+\begin{dingli}{局部保角性的预告}{}
+若 $f$ 在 $z_0$ 处解析且 $f'(z_0)\neq 0$，则它在 $z_0$ 附近局部保持角度。
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{最简单的复势图像}{}
+以一个简单解析函数为例，画出其实部和虚部的等值线，说明为什么它们像是同一个二维场的两张正交地图。
+\end{lizi}
+
+\begin{lizi}{局部伸缩与旋转}{}
+用 $f(z)=z^2$ 说明导数在非零点附近如何决定局部的伸缩率和旋转角。
+\end{lizi}
+
+\begin{lizi}{为什么要求 $f'(z_0)\neq 0$}{}
+讨论 $f(z)=z^2$ 在 $z=0$ 附近的情形，解释为什么局部保角性条件里不能省掉 $f'(z_0)\neq 0$。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 等势线与场线正交图。
+    \item 映射前后两组曲线夹角保持的示意图。
+    \item 用小向量图说明``乘以 $f'(z_0)$''的局部意义。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``保角''误解成``长度和面积都保持不变''。
+    \item 不要忽略条件 $f'(z_0)\neq 0$。
+    \item 不要在本节把保角映射全部讲完；这里只需给出最初图像和后续伏笔。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：画出简单解析函数实部与虚部的等值线。
+    \item 综合题：解释导数的模与辐角在局部几何中的意义。
+    \item 挑战题：结合图像说明为什么 $f'(z_0)=0$ 时局部保角性会失效。
+\end{itemize}
+
+\section{本章小结}
+
+\begin{tishi}[本章小结建议写法]
+这一章的小结应围绕下面四个问题展开：
+\begin{enumerate}
+    \item 这一章到底在解决什么问题？
+    \item 复变函数比实变函数到底难在哪里？
+    \item 本章真正需要记住的判别工具是什么？
+    \item 这些内容会怎样通向后面的复积分、级数和保角映射？
+\end{enumerate}
+\end{tishi}
+
+\subsection*{小结中必须回顾的内容}
+\begin{itemize}
+    \item 复平面中的区域、单连通和曲线语言。
+    \item 复变极限必须对任意路径一致。
+    \item 复导数存在的条件远比实导数严格。
+    \item 柯西--黎曼条件是可导判别的核心工具，但不能死套。
+    \item 解析函数的实部和虚部是调和函数。
+    \item 解析函数在导数非零处局部上像旋转加伸缩，因此会局部保角。
+\end{itemize}
+
+\begin{jinshi}[小结里要特别提醒学生的误区]
+\begin{enumerate}
+    \item 不要把``在一点可导''和``解析''混为一谈。
+    \item 不要把``满足 C-R 条件''机械等同于``可导''。
+    \item 不要把解析函数理解成纯粹的符号游戏；它的实部、虚部和物理场图像是紧密联系的。
+\end{enumerate}
+\end{jinshi}
+
+\section{习题}
+
+\subsection*{习题分层建议}
+\begin{itemize}
+    \item 基础题：区域判断、实部虚部分离、极限与连续性判断、简单 C-R 验证。
+    \item 综合题：讨论函数在哪些区域解析，由调和函数求共轭函数，比较若干典型函数的可导性。
+    \item 挑战题：构造反例、证明调和性质、解释局部保角性的条件。
+\end{itemize}
+
+\subsection*{建议加入的代表性习题}
+\begin{enumerate}
+    \item 判断若干集合是否为区域，是否单连通。
+    \item 把若干复函数写成 $u+\mathrm{i}v$ 的形式。
+    \item 通过不同路径讨论某些极限是否存在。
+    \item 用定义讨论 $z^2$、$\bar z$、$|z|^2$ 的可导性。
+    \item 利用 C-R 条件判断若干函数是否解析，并求其导数。
+    \item 已知实部或虚部，求其共轭调和函数。
+    \item 说明为什么解析函数在导数非零处局部保角。
+\end{enumerate}
+
+\begin{tishi}[与后续章节的联系]
+\begin{itemize}
+    \item 第三章会直接使用本章第一节建立的区域与曲线语言。
+    \item 第四章的泰勒展开与洛朗展开，都建立在本章的``解析性''概念上。
+    \item 第六章的多值函数虽然暂时不讲，但第一章的辐角多值性和本章的解析性观念会在那里重新汇合。
+    \item 第七章的保角映射，就是本章第七节``局部保角性''的系统展开。
+\end{itemize}
+\end{tishi}
