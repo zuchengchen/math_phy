@@ -1717,9 +1717,39 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 \[
 |z|=2
 \]
-上，彼此相隔 $\pi/2$。
+上。从正实轴出发，第一个根的辐角是 $\pi/4$；此后每增加一个根，辐角就再增加 $\pi/2$。因此这四个根在复平面上均匀分布在圆 $|z|=2$ 上，如图~\ref{fig:fourth-roots-minus16} 所示。
 \end{jie}
 \end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, gray] (-2.7,0) -- (2.9,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-2.6) -- (0,2.8) node[above] {$\operatorname{Im}z$};
+    \draw[blue, thick] (0,0) circle (2);
+
+    \coordinate (P0) at ({sqrt(2)},{sqrt(2)});
+    \coordinate (P1) at ({-sqrt(2)},{sqrt(2)});
+    \coordinate (P2) at ({-sqrt(2)},{-sqrt(2)});
+    \coordinate (P3) at ({sqrt(2)},{-sqrt(2)});
+
+    \foreach \P in {P0,P1,P2,P3} {
+        \draw[dashed, gray] (0,0) -- (\P);
+        \fill[red!80!black] (\P) circle (1.5pt);
+    }
+
+    \node[above right] at (P0) {$z_0$};
+    \node[above left] at (P1) {$z_1$};
+    \node[below left] at (P2) {$z_2$};
+    \node[below right] at (P3) {$z_3$};
+
+    \draw[orange!85!black, thick, ->] (0.8,0) arc[start angle=0,end angle=45,radius=0.8];
+    \node[orange!85!black] at (1.02,0.34) {$\pi/4$};
+    \node[blue] at (1.45,-0.5) {$|z|=2$};
+\end{tikzpicture}
+\caption{方程 $z^4=-16$ 的四个根在复平面上的位置}
+\label{fig:fourth-roots-minus16}
+\end{figure}
 
 \subsection{单位根及其几何分布}
 
