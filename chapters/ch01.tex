@@ -2537,6 +2537,75 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \]
 这说明，实验上看到的概率分布会随着相位差 $\phi_1-\phi_2$ 改变：相位差为 $0$ 时增强，相位差为 $\pi$ 时减弱，甚至可以完全相消。
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \begin{scope}
+        \draw[mp axis] (-0.6,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}$};
+        \draw[mp axis] (0,-0.5) -- (0,3.3) node[mp label, above] {$\operatorname{Im}$};
+
+        \coordinate (A) at (2.2,0);
+        \coordinate (B) at ({2.2*cos(58)},{2.2*sin(58)});
+        \coordinate (C) at ($(A)+(B)$);
+
+        \draw[mp vector] (0,0) -- (A);
+        \draw[mp vector d] (0,0) -- (B);
+        \draw[mp vector c] (0,0) -- (C);
+        \draw[mp helper] (A) -- (C);
+        \draw[mp helper] (B) -- (C);
+
+        \node[mp point] at (A) {};
+        \node[mp point d] at (B) {};
+        \node[mp point c] at (C) {};
+
+        \draw[mp angle] (0.72,0) arc[start angle=0,end angle=58,radius=0.72];
+        \node[mp label, text=figbrown] at (0.95,0.42) {$\phi$};
+
+        \node[mp label, below] at ($(0,0)!0.5!(A)$) {$\psi_1$};
+        \node[mp label, left, text=figred] at ($(0,0)!0.52!(B)$) {$\psi_2$};
+        \node[mp label, above, text=figpurple] at ($(0,0)!0.52!(C)+(0.08,0.12)$) {$\psi=\psi_1+\psi_2$};
+        \node[mp label, below left] at (0,0) {$O$};
+        \node[mp small, text=black!46] at (2.1,-0.8) {相位差改变合成振幅};
+    \end{scope}
+
+    \begin{scope}[xshift=7.1cm]
+        \begin{axis}[
+            width=6.5cm,
+            height=4.7cm,
+            axis lines=left,
+            xmin=0, xmax=360,
+            ymin=0, ymax=4.3,
+            xtick={0,90,180,270,360},
+            xticklabels={$0$,$\pi/2$,$\pi$,$3\pi/2$,$2\pi$},
+            ytick={0,2,4},
+            xlabel={$\phi$},
+            ylabel={$\dfrac{|\psi|^2}{A^2}$},
+            every axis/.append style={font=\small},
+            tick label style={font=\footnotesize},
+            label style={font=\small},
+            samples=200,
+            domain=0:360,
+            smooth,
+            clip=false
+        ]
+            \addplot[draw=figpurple, line width=1.05pt] {2*(1+cos(x))};
+            \addplot[only marks, mark=*, mark size=1.7pt, color=figblue] coordinates {(0,4)};
+            \addplot[only marks, mark=*, mark size=1.7pt, color=figred] coordinates {(180,0)};
+            \node[font=\footnotesize, text=figblue] at (axis cs:28,4.05) {同相增强};
+            \node[font=\footnotesize, text=figred] at (axis cs:180,0.35) {反相相消};
+        \end{axis}
+    \end{scope}
+\end{tikzpicture}
+\caption{相位差既决定两波函数的合成振幅，也决定概率密度的增强或减弱}
+\label{fig:quantum-interference-phase}
+\end{figure}
+
+图 \ref{fig:quantum-interference-phase} 左边把两个等振幅波函数看成相量，右边则把
+\[
+\frac{|\psi|^2}{A^2}=2(1+\cos\phi)
+\]
+随相位差 $\phi$ 的变化画了出来：当 $\phi=0$ 时，两者方向一致，合成振幅最大；当 $\phi=\pi$ 时，两者方向相反，干涉项最强烈地抵消，概率密度降到零。
+
 所以，在量子力学里，复数的作用并不只是``把式子写得更紧凑''。它还能把振幅和相位统一起来，而相对相位又会真实地影响干涉结果。这正是复数在现代物理中如此重要的一个原因。
 
 \begin{lizi}{两个波函数叠加时，相位差如何影响概率密度}{}
