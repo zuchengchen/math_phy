@@ -561,7 +561,20 @@ $v(x, t)$ 满足齐次边界条件的热传导方程，可用分离变量法\ind
 % ========== 第五节 ==========
 \section{拉普拉斯方程的分离变量解}
 
+\begin{wulibj}[这一节在解什么问题]
+从第九章开始，我们已经知道：二维静电场的电势、薄板的稳态温度、不可压缩无旋流动的速度势，都常常满足拉普拉斯方程。于是，所谓``解二维势场问题''，很多时候就是：
+\begin{enumerate}
+    \item 先根据区域的几何形状选择合适坐标；
+    \item 再把边界上的已知量展开成本征函数；
+    \item 最后求出区域内部的势函数。
+\end{enumerate}
+
+矩形域和圆域是两个最基本、也最值得真正算会的模型。后面更复杂的二维边界问题，常常都要先拿这两个标准模型作参照。
+\end{wulibj}
+
 \subsection{矩形区域}
+
+可以把下面的问题看成一块矩形薄板的稳态温度分布，也可以看成矩形导体截面内的静电势分布。这里先用温度语言来描述：
 
 考虑矩形区域 $0 < x < a$，$0 < y < b$ 上的拉普拉斯方程：
 \begin{equation}
@@ -571,6 +584,10 @@ $v(x, t)$ 满足齐次边界条件的热传导方程，可用分离变量法\ind
         u(x, 0) = 0, \quad u(x, b) = f(x)
     \end{cases}
 \end{equation}
+
+\begin{tishi}
+拉普拉斯方程没有初始条件。我们现在不是在研究薄板的温度怎样随时间逐渐变化到稳态，而是直接求那个已经达到平衡以后、在整个区域内必须满足的空间分布。
+\end{tishi}
 
 设 $u(x, y) = X(x)Y(y)$，分离变量得：
 \begin{align}
@@ -599,7 +616,7 @@ $Y$ 方程的解：
 \end{equation}
 
 \begin{lizi}{}{}
-求解矩形区域上的拉普拉斯方程：
+求一块边长为 $\pi$ 的矩形薄板在稳态时的温度分布。设左右边及下边保持温度 $0$，上边温度分布为 $\sin x$。数学模型为
 \begin{equation}
     \begin{cases}
         u_{xx} + u_{yy} = 0, \quad 0 < x < \pi, \; 0 < y < \pi \\
@@ -624,12 +641,14 @@ $Y$ 方程的解：
     \end{equation}
 
     \textbf{验证}：在 $y = \pi$ 边上，$u(x, \pi) = \sin x$，满足边界条件。
+
+    这个结果说明：边界上给定的正弦型温度分布会向板内传递，但随着离上边界越来越远，温度起伏的幅值会逐渐减小。
 \end{jie}
 \end{lizi}
 
 \subsection{圆域问题}
 
-对于圆域问题，使用极坐标 $(r, \theta)$ 更方便。
+圆域问题是二维势场中的另一个标准模型。它对应圆形导体、圆柱截面内的稳态温度、圆盘区域上的电势分布等情形。对于圆域问题，使用极坐标 $(r, \theta)$ 更方便。
 
 \begin{figure}[htbp]
 \centering
@@ -699,6 +718,43 @@ $R$ 方程是欧拉方程，解为：
 \begin{equation}
     a_n = \frac{1}{\pi}\int_0^{2\pi} f(\theta)\cos n\theta\,\mathrm{d}\theta, \quad b_n = \frac{1}{\pi}\int_0^{2\pi} f(\theta)\sin n\theta\,\mathrm{d}\theta
 \end{equation}
+
+\begin{jinshi}
+圆内问题和圆外问题不能混为一谈。只要研究区域包含 $r = 0$，就必须剔除 $\ln r$ 与 $r^{-n}$ 这类在原点发散的项；如果研究的是圆外区域，保留下来的往往恰恰是另一类项。
+\end{jinshi}
+
+\begin{lizi}{}{}
+求半径为 $R$ 的圆形区域内的静电势。设圆周上的电势为
+\begin{equation}
+    u(R, \theta) = V_0\cos\theta
+\end{equation}
+求区域内的电势分布。
+
+\begin{jie}
+边界函数只含有 $n = 1$ 的余弦项，因此
+\begin{equation}
+    a_1 = V_0, \quad a_n = 0 \quad (n \neq 1), \quad b_n = 0
+\end{equation}
+
+代入圆内问题的一般解，得
+\begin{equation}
+    u(r, \theta) = V_0\frac{r}{R}\cos\theta
+\end{equation}
+
+这个解在 $r = 0$ 处有限，满足圆内问题对原点的要求。
+
+若改写成直角坐标，由 $x = r\cos\theta$ 得
+\begin{equation}
+    u(x, y) = \frac{V_0}{R}x
+\end{equation}
+
+这表明圆内电势是线性的，对应一个近似均匀的电场。它也和第二章中的复变函数观点完全一致，因为这里的势函数正是解析函数
+\begin{equation}
+    f(z) = \frac{V_0}{R}z
+\end{equation}
+的实部。
+\end{jie}
+\end{lizi}
 
 % ========== 第六节 ==========
 \section{非齐次方程的处理}
