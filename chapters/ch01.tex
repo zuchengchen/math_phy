@@ -281,6 +281,132 @@ x_2-\mathrm{i}y_2.
 \end{itemize}
 \end{jinshi}
 
+\subsection{复数运算的基本运算律}
+
+前面我们已经分别写出了复数加、减、乘、除的计算公式。接下来还要补上一件很重要的事：这些运算到底满足哪些基本规律？如果这一点没有说清楚，后面推导里一旦出现移项、合并同类项、展开括号、提取公因式，同学们心里就会不踏实，不知道自己是不是还可以像处理实数那样处理复数。
+
+好消息是：在\textbf{加法与乘法}这两种基本运算上，复数和实数一样，也满足交换律、结合律和分配律。也正因为如此，后面我们做代数化简时，很多熟悉的操作都仍然成立。
+
+\begin{dingli}{复数加法与乘法的基本运算律}{}
+对任意复数 $z_1,z_2,z_3$，都有
+\begin{align}
+    z_1+z_2&=z_2+z_1, \label{eq:complex-add-commutative}\\
+    (z_1+z_2)+z_3&=z_1+(z_2+z_3), \label{eq:complex-add-associative}\\
+    z_1z_2&=z_2z_1, \label{eq:complex-mul-commutative}\\
+    (z_1z_2)z_3&=z_1(z_2z_3), \label{eq:complex-mul-associative}\\
+    z_1(z_2+z_3)&=z_1z_2+z_1z_3, \label{eq:complex-left-distributive}\\
+    (z_1+z_2)z_3&=z_1z_3+z_2z_3. \label{eq:complex-right-distributive}
+\end{align}
+\end{dingli}
+
+\begin{proof}
+设
+\[
+z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
+\]
+
+\noindent\textbf{1. 加法交换律}
+\begin{align*}
+    z_1+z_2
+    &=(x_1+x_2)+\mathrm{i}(y_1+y_2)\\
+    &=(x_2+x_1)+\mathrm{i}(y_2+y_1)\\
+    &=z_2+z_1.
+\end{align*}
+
+\noindent\textbf{2. 加法结合律}
+\begin{align*}
+    (z_1+z_2)+z_3
+    &=[(x_1+x_2)+\mathrm{i}(y_1+y_2)]+(x_3+\mathrm{i}y_3)\\
+    &=(x_1+x_2+x_3)+\mathrm{i}(y_1+y_2+y_3),
+\end{align*}
+而
+\begin{align*}
+    z_1+(z_2+z_3)
+    &=(x_1+\mathrm{i}y_1)+[(x_2+x_3)+\mathrm{i}(y_2+y_3)]\\
+    &=(x_1+x_2+x_3)+\mathrm{i}(y_1+y_2+y_3).
+\end{align*}
+因此
+\[
+    (z_1+z_2)+z_3=z_1+(z_2+z_3).
+\]
+
+\noindent\textbf{3. 乘法交换律}
+由复数乘法公式，
+\begin{align*}
+    z_1z_2
+    &=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1)\\
+    &=(x_2x_1-y_2y_1)+\mathrm{i}(x_2y_1+x_1y_2)\\
+    &=z_2z_1.
+\end{align*}
+
+\noindent\textbf{4. 乘法结合律}
+先算 $z_1z_2$：
+\[
+z_1z_2=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
+\]
+于是
+\begin{align*}
+    (z_1z_2)z_3
+    &=[(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1)](x_3+\mathrm{i}y_3)\\
+    &=[(x_1x_2-y_1y_2)x_3-(x_1y_2+x_2y_1)y_3]\\
+    &\quad+\mathrm{i}[(x_1x_2-y_1y_2)y_3+(x_1y_2+x_2y_1)x_3]\\
+    &=(x_1x_2x_3-y_1y_2x_3-x_1y_2y_3-x_2y_1y_3)\\
+    &\quad+\mathrm{i}(x_1x_2y_3-y_1y_2y_3+x_1y_2x_3+x_2y_1x_3).
+\end{align*}
+
+再算 $z_2z_3$：
+\[
+z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
+\]
+于是
+\begin{align*}
+    z_1(z_2z_3)
+    &=(x_1+\mathrm{i}y_1)[(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2)]\\
+    &=[x_1(x_2x_3-y_2y_3)-y_1(x_2y_3+x_3y_2)]\\
+    &\quad+\mathrm{i}[x_1(x_2y_3+x_3y_2)+y_1(x_2x_3-y_2y_3)]\\
+    &=(x_1x_2x_3-x_1y_2y_3-y_1x_2y_3-y_1x_3y_2)\\
+    &\quad+\mathrm{i}(x_1x_2y_3+x_1x_3y_2+y_1x_2x_3-y_1y_2y_3).
+\end{align*}
+
+由于实数乘法满足交换律，$x_2y_1y_3=y_1x_2y_3$，$y_1x_3y_2=y_1y_2x_3$，$x_1y_2x_3=x_1x_3y_2$，$x_2y_1x_3=y_1x_2x_3$，所以这两个结果完全相同，从而
+\[
+    (z_1z_2)z_3=z_1(z_2z_3).
+\]
+
+\noindent\textbf{5. 左分配律}
+\begin{align*}
+    z_1(z_2+z_3)
+    &=(x_1+\mathrm{i}y_1)[(x_2+x_3)+\mathrm{i}(y_2+y_3)]\\
+    &=[x_1(x_2+x_3)-y_1(y_2+y_3)]\\
+    &\quad+\mathrm{i}[x_1(y_2+y_3)+y_1(x_2+x_3)]\\
+    &=(x_1x_2-y_1y_2)+(x_1x_3-y_1y_3)\\
+    &\quad+\mathrm{i}(x_1y_2+x_2y_1)+\mathrm{i}(x_1y_3+x_3y_1)\\
+    &=z_1z_2+z_1z_3.
+\end{align*}
+
+\noindent\textbf{6. 右分配律}
+\begin{align*}
+    (z_1+z_2)z_3
+    &=[(x_1+x_2)+\mathrm{i}(y_1+y_2)](x_3+\mathrm{i}y_3)\\
+    &=[(x_1+x_2)x_3-(y_1+y_2)y_3]\\
+    &\quad+\mathrm{i}[(x_1+x_2)y_3+(y_1+y_2)x_3]\\
+    &=(x_1x_3-y_1y_3)+(x_2x_3-y_2y_3)\\
+    &\quad+\mathrm{i}(x_1y_3+x_3y_1)+\mathrm{i}(x_2y_3+x_3y_2)\\
+    &=z_1z_3+z_2z_3.
+\end{align*}
+\end{proof}
+
+\begin{zhu}{}{}
+这里我们只把交换律、结合律和分配律说给加法与乘法听，是因为减法和除法本来就不是独立的新运算：减去 $z_2$ 本质上是加上它的相反数，除以 $z_2$（$z_2\neq 0$）本质上是乘上它的倒数。也正因为如此，减法和除法一般\textbf{不满足}交换律和结合律。例如，
+\[
+1-\mathrm{i}\neq \mathrm{i}-1,\qquad \frac{1+\mathrm{i}}{1-\mathrm{i}}\neq \frac{1-\mathrm{i}}{1+\mathrm{i}}.
+\]
+\end{zhu}
+
+\begin{tishi}[这一小节的真正作用]
+从现在开始，只要表达式里只涉及复数的加法、乘法以及由它们派生出来的减法、除法，你就可以像在实数里那样放心地展开括号、合并同类项、提取公因式。当然，前提仍然是每一步运算都要合法，例如做除法时分母不能为零。
+\end{tishi}
+
 \subsection{为什么物理问题中也会出现复数}
 
 前面我们是从代数方程出发引入复数的，但复数之所以在数学物理中占据重要地位，并不只是因为它能让某些方程有解。更深一层的原因在于：它能把振幅与相位、微分与旋转、代数运算与几何结构统一到同一种语言里。
@@ -1207,6 +1333,14 @@ z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr
 \]
 这就得到 \eqref{eq:complex-multiply-polar}。于是乘积的模等于模的乘积，而辐角等于原来两辐角之和；如果相差一个 $2\pi$ 的整数倍，我们仍把它看成同一方向。
 \end{proof}
+
+\begin{zhu}{}{}
+这一节其实也从另一种角度解释了前面小节里的乘法交换律与结合律。因为
+\[
+z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
+\]
+这里用到的只是实数乘法 $r_1r_2=r_2r_1$ 和实数加法 $\theta_1+\theta_2=\theta_2+\theta_1$ 的交换性；同理，三个复数相乘时，模相乘和辐角相加也都满足结合律。所以极形式给出了一个更紧凑、也更有几何意味的理解。不过逻辑上，复数乘法首先还是在代数形式下定义清楚的，前面的小节已经把这些运算律严格验证过了。
+\end{zhu}
 
 如果把公式 \eqref{eq:complex-multiply-polar} 放到复平面上看，图 \ref{fig:complex-multiplication} 的意思就很直观了：蓝色向量 $z_1$ 原来长度为 $r_1$，方向为 $\theta_1$；乘上 $z_2=r_2e^{\mathrm{i}\theta_2}$ 以后，长度变成原来的 $r_2$ 倍，所以从 $r_1$ 变成 $r_1r_2$；方向则再转过一个 $\theta_2$，于是从 $\theta_1$ 变成 $\theta_1+\theta_2$。这正是``模相乘，辐角相加''的几何含义。
 
