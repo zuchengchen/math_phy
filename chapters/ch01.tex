@@ -39,6 +39,54 @@
 数系的扩张不是``随便发明新对象''，而是数学在解决实际问题时的一种自然演化。每一次扩张，都会让原来做不到的事情变得可以做，也会让原来零散的现象获得统一解释。复数正是这样进入数学和物理视野的。
 \end{tishi}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=0.92cm and 0.7cm,
+    stage/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=mainblue!82!black,
+        top color=mainblue!11,
+        bottom color=white,
+        line width=0.8pt,
+        text width=2.05cm,
+        minimum height=1.1cm,
+        align=center,
+        font=\small
+    },
+    stage c/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=physicsbrown!82!black,
+        top color=physicsbrown!11,
+        bottom color=white,
+        line width=0.9pt,
+        text width=2.2cm,
+        minimum height=1.1cm,
+        align=center,
+        font=\small\bfseries
+    },
+    arrow/.style={-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!66},
+    why/.style={font=\footnotesize, text=figbrown, align=center}
+]
+\node[stage] (N) {$\mathbb{N}$\\自然数};
+\node[stage, right=of N] (Z) {$\mathbb{Z}$\\整数};
+\node[stage, right=of Z] (Q) {$\mathbb{Q}$\\有理数};
+\node[stage, right=of Q] (R) {$\mathbb{R}$\\实数};
+\node[stage c, right=of R] (C) {$\mathbb{C}$\\复数};
+
+\draw[arrow] (N) -- (Z) node[midway, above=2pt, why] {减法};
+\draw[arrow] (Z) -- (Q) node[midway, above=2pt, why] {除法};
+\draw[arrow] (Q) -- (R) node[midway, above=2pt, why] {极限与\\无理量};
+\draw[arrow] (R) -- (C) node[midway, above=2pt, why] {方程求解、\\旋转与相位};
+\end{tikzpicture}
+\caption{数系扩张的一条主线：复数不是孤立发明，而是数系发展中的自然下一步}
+\label{fig:number-system-expansion}
+\end{figure}
+
+图 \ref{fig:number-system-expansion} 值得多看几眼。它提醒我们：复数不是突然冒出来和前面所有数格格不入的``陌生对象''，而是数系扩张链条上的下一站。也正因为如此，本章并不是在学一个和高等数学毫无关系的新玩具，而是在继续完成数系扩张这条已经走过很多步的主线。
+
 \subsection{虚数单位与复数的定义}
 
 \begin{dingliyi}{虚数单位}{}
@@ -1037,6 +1085,20 @@ z_3=-2\mathrm{i},
 \end{jie}
 \end{lizi}
 
+\begin{tishi}[到这里为止，我们已经有了两套语言]
+如果把复数写成
+\[
+z=x+\mathrm{i}y,
+\]
+我们看到的是``横坐标与纵坐标''，也就是实部和虚部；如果把它放到复平面上看，我们看到的是``长度与方向''，也就是模和辐角。
+
+这两套语言描述的是同一个对象，只是观察角度不同。下一节真正要做的事，并不是再学一个新对象，而是把这两套语言压缩成更适合计算的形式：把
+\[
+x+\mathrm{i}y
+\]
+改写成``长度 $+$ 方向''的表达。这样一来，乘法、除法、乘幂和开方的结构就会一下子清楚起来。
+\end{tishi}
+
 \section{复数的三角形式与指数形式}
 
 \begin{wulibj}[为什么要换一种表示法]
@@ -1044,6 +1106,51 @@ z_3=-2\mathrm{i},
 
 这一节就来建立复数的三角形式和指数形式。这样一来，乘法、除法、乘幂和开方都会变得更整齐，也更容易和前面建立的几何图像对应起来。
 \end{wulibj}
+
+在真正开始推公式之前，不妨先把这一节的目标看得更清楚一点。图 \ref{fig:three-representations} 把同一个复数最常用的三种表示法摆在了一起。以后做题时，很多时候真正的关键不是``会不会算''，而是能不能一眼判断：眼前这道题更适合用哪一种语言。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.05cm and 1.25cm,
+    rep/.style={
+        rectangle,
+        rounded corners=5pt,
+        line width=0.85pt,
+        minimum height=2.2cm,
+        text width=3.55cm,
+        align=center,
+        font=\small
+    },
+    algebra/.style={rep, draw=mainblue!82!black, top color=mainblue!10, bottom color=white},
+    trig/.style={rep, draw=defteal!82!black, top color=defteal!11, bottom color=white},
+    expo/.style={rep, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
+    link/.style={-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!62},
+    note/.style={font=\footnotesize, text=black!58, align=center}
+]
+\node[algebra] (A) {\textbf{代数形式}\\[0.35em]
+    $z=x+\mathrm{i}y$\\[0.45em]
+    擅长处理\\
+    实部、虚部、参数比较\\
+    与直接代数运算};
+\node[trig, right=of A] (T) {\textbf{三角形式}\\[0.35em]
+    $z=r(\cos\theta+\mathrm{i}\sin\theta)$\\[0.45em]
+    擅长描述\\
+    长度、方向\\
+    和几何位置};
+\node[expo, right=of T] (E) {\textbf{指数形式}\\[0.35em]
+    $z=re^{\mathrm{i}\theta}$\\[0.45em]
+    擅长处理\\
+    乘除、乘幂、开方\\
+    与相位问题};
+
+\draw[link] (A) -- (T) node[midway, above=2pt, note] {$x=r\cos\theta,\ y=r\sin\theta$};
+\draw[link] (T) -- (E) node[midway, above=2pt, note] {欧拉公式};
+\draw[link, bend left=25] (E.north) to node[midway, above=3pt, note] {必要时再拆回实部与虚部} (A.north);
+\end{tikzpicture}
+\caption{同一个复数的三种常用表示法：对象没有变，只是为了不同问题换了一种更顺手的语言}
+\label{fig:three-representations}
+\end{figure}
 
 \subsection{从直角坐标到极坐标}
 
@@ -2714,7 +2821,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 本章最核心的事情，是把复数从``一个新记号''讲成``一种新的语言''：它既能处理实数范围内无解的方程，又能把平面几何中的长度、方向、旋转和物理中的振幅、相位统一到同一套表示里。
 \end{tishi}
 
-本章的知识主线如下图所示：
+如果你现在暂时合上书，最好已经能顺着下面这条线口头复述一遍：为什么实数还不够用，复数怎样落到复平面上，同一个复数为什么需要几种不同表示法，而这些表示法又怎样把旋转、开方、无穷远点和物理相位自然串起来。本章的知识主线如下图所示：
 
 \begin{figure}[htbp]
 \centering
@@ -2794,7 +2901,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \label{fig:ch01-summary-map}
 \end{figure}
 
-读这张图时，只要抓住一条主线：先建立复数的代数与几何语言，再借助三角形式与指数形式，把乘法、除法、乘方、开方、扩充复平面以及物理应用连成一个整体。
+读这张图时，可以把自己想象成正在复盘一整章课：先用代数语言把复数安顿下来，再用复平面把它看成点和向量，接着通过三角形式与指数形式把``长度与方向''压缩成更适合运算的表达，最后再把这些工具送去处理乘方、开方、无穷远点以及物理中的相位叠加。只要这条线是顺的，本章就算真正学通了。
 
 \begin{zhongyao}[本章主要结论]
 \raggedright
