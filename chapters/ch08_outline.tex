@@ -1,0 +1,810 @@
+% 第八章：傅里叶变换（详细提纲）
+
+\chapter{傅里叶变换}
+
+\begin{wulibj}[本章定位]
+第八章是整门课从复变函数部分转入积分变换部分的第一站。它的任务，不只是再引入一个新的积分公式，而是要帮助学生真正建立这样一种认识：\textbf{许多看起来复杂的函数和方程，如果换一个角度放到频域里看，结构会变得更清楚，运算也会变得更简单。}
+
+从内容主线看，本章可以概括为：
+\[
+    \text{傅里叶级数中的离散频谱}
+    \Longrightarrow
+    \text{非周期函数的连续频谱}
+    \Longrightarrow
+    \text{傅里叶变换与反演}
+    \Longrightarrow
+    \text{平移、微分、卷积在频域中的简化}
+    \Longrightarrow
+    \text{整轴问题的标准应用}
+\]
+
+因此，本章不宜写成``常用公式大全''，更不能一上来就只堆性质和例题。真正需要建立起来的，是下面这三层理解：
+\begin{enumerate}
+    \item 为什么非周期函数也可以被分解为频率成分；
+    \item 为什么傅里叶变换特别适合处理整条实轴上的问题；
+    \item 为什么微分、平移、卷积这些运算在频域里会变得更好处理。
+\end{enumerate}
+
+与后面的章节分工上，也要有意识地区分：
+\begin{itemize}
+    \item 本章以\textbf{思想、定义、性质和基本直觉}为主；
+    \item 第十三章则再系统讨论\textbf{如何用积分变换解数学物理方程}。
+\end{itemize}
+
+也就是说，第八章要让学生先把工具真正理解清楚，而不是急着把所有方程题都搬过来。
+\end{wulibj}
+
+\begin{tishi}[写作总原则]
+\begin{enumerate}
+    \item 开头必须先回答``为什么要从傅里叶级数走向傅里叶变换''，不能直接空降定义。
+    \item 要反复强调``离散谱 $\to$ 连续谱''这条主线，让学生知道连续频谱不是新发明，而是极限过程的结果。
+    \item 反演公式不能只写成一个形式上的逆过程，必须说明它在什么条件下成立、在间断点处恢复的是什么值。
+    \item 例题应优先服务于频谱直观、性质理解和后续方程应用的桥接，不宜把篇幅过早消耗在复杂技巧题上。
+    \item 图示要多用来帮助学生建立直观，尤其是离散谱与连续谱、矩形函数与 $\mathrm{sinc}$ 频谱、卷积与滤波、偶延拓与奇延拓。
+    \item 本章与第九章拉普拉斯变换之间的关系要主动点明：前者更适合整轴问题，后者更适合半轴初值问题。
+\end{enumerate}
+\end{tishi}
+
+\section{第一节\quad 从傅里叶级数到傅里叶积分}
+
+\begin{wulibj}[本节要解决的问题]
+学生在高等数学或数学物理方法中通常先接触的是傅里叶级数：周期函数可以写成一串离散频率的叠加。但真正的物理问题里，很多对象并不周期，例如一段局域脉冲、无限长介质上的初始温度分布、一次性的外力扰动。这时学生自然会问：没有周期以后，还能不能谈``频率分解''？本节的任务，就是把这个问题讲清楚。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解傅里叶变换不是凭空定义，而是傅里叶级数在区间长度趋于无穷时的自然极限。
+    \item 让学生理解``离散谱''与``连续谱''的区别及联系。
+    \item 让学生知道从求和过渡到积分时，频率间隔 $\Delta\omega$ 为什么不能漏掉。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 回顾周期为 $2L$ 的复指数形式傅里叶级数
+    \item 频率点 $\omega_n = \dfrac{n\pi}{L}$ 与频率间隔 $\Delta\omega = \dfrac{\pi}{L}$
+    \item 当 $L \to \infty$ 时，离散频谱如何变成连续频谱
+    \item 傅里叶积分公式的来历
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 对周期为 $2L$ 的函数，
+    \[
+        f(x)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L}
+    \]
+    本质上是在做离散频率的叠加。
+    \item 当 $L$ 变大时，相邻频率之间的间隔
+    \[
+        \Delta\omega=\frac{\pi}{L}
+    \]
+    变小，谱线会越来越密。
+    \item 当 $L\to\infty$ 时，求和不能只是形式上改成积分，而必须把
+    \[
+        \sum \hat{f}(\omega_n)\Delta\omega
+    \]
+    这一层结构保留下来。
+    \item 连续频谱不是``把整数指标 $n$ 改成实数变量 $\omega$'' 这么简单，而是一个\textbf{离散测度向连续测度}的极限思想。
+\end{itemize}
+
+\subsection*{建议使用的定义与结论}
+\begin{dingli}{周期为 $2L$ 的复指数形式傅里叶级数}{}
+若 $f(x)$ 的周期为 $2L$，则在适当条件下有
+\[
+    f(x)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L},
+    \qquad
+    c_n=\frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x.
+\]
+\end{dingli}
+
+\begin{dingli}{傅里叶积分公式的形式来源}{}
+当 $L\to\infty$ 时，离散和式
+\[
+    \sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}\omega_n x}
+\]
+在适当意义下趋向连续积分表示
+\[
+    f(x)\sim \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\]
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{从周期矩形脉冲看谱线变密}{}
+考虑周期为 $2L$ 的矩形脉冲，写出它的傅里叶级数系数，并说明当 $L$ 增大时，频谱由离散谱线逐渐逼近连续谱曲线。
+\end{lizi}
+
+\begin{lizi}{为什么 $\Delta\omega$ 不能漏掉}{}
+把
+\[
+    f(x)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}\omega_n x}
+\]
+改写成含 $\Delta\omega$ 的形式，解释为什么如果忽略 $\Delta\omega$，极限过程的量纲和数值都会出问题。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 周期脉冲与单个脉冲的对比图。
+    \item 离散谱线随 $L$ 增大逐渐变密，最终逼近连续谱曲线的示意图。
+    \item ``求和 $\to$ 积分'' 的流程图，特别标出 $\Delta\omega$ 的作用。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把连续频谱理解成``把离散系数下标改成连续变量''；真正关键的是求和测度变了。
+    \item 不要在极限过程中漏掉 $\Delta\omega$。
+    \item 不要让学生误以为所有函数都可以不加条件地做这种极限；这里应说明仍需要适当的可积性和光滑性背景。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：把周期为 $2L$ 的傅里叶级数写成复指数形式。
+    \item 综合题：说明频率间隔与周期长度的关系，并解释其物理意义。
+    \item 挑战题：从周期矩形脉冲出发，定性说明它的谱线如何在 $L\to\infty$ 时趋于连续谱。
+\end{itemize}
+
+\section{第二节\quad 傅里叶变换、逆变换与反演公式}
+
+\begin{wulibj}[本节要解决的问题]
+经过上一节的铺垫，学生已经知道：非周期函数也可以用连续频率来表示。接下来最重要的问题是：这个表示究竟怎样定义？逆过程是否总是成立？如果函数有间断，又应该恢复成哪个值？这一节就是全章的理论核心。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握傅里叶变换与逆变换的基本定义。
+    \item 让学生理解``反演''不是写下一个逆公式就结束，而是需要条件支撑。
+    \item 让学生知道间断点处恢复的是左右极限的平均值，而不是机械地等于原函数在该点的写法。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 傅里叶变换与逆变换的定义
+    \item 常见存在条件：绝对可积、分段光滑
+    \item 傅里叶积分定理或反演定理
+    \item 间断点处的恢复值
+\end{enumerate}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{傅里叶变换}{}
+设 $f(x)$ 在 $\mathbb{R}$ 上绝对可积，定义
+\[
+    \hat{f}(\omega)=\mathcal{F}[f](\omega)=\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x.
+\]
+称 $\hat{f}(\omega)$ 为 $f(x)$ 的傅里叶变换。
+\end{dingliyi}
+
+\begin{dingliyi}{傅里叶逆变换}{}
+若 $\hat{f}(\omega)$ 满足适当条件，则定义
+\[
+    f(x)=\mathcal{F}^{-1}[\hat{f}](x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\]
+\end{dingliyi}
+
+\begin{dingli}{傅里叶积分定理}{}
+若 $f(x)$ 在 $\mathbb{R}$ 上绝对可积，并在 $x$ 的邻域内分段光滑，则
+\[
+    \frac{f(x+0)+f(x-0)}{2}
+    =
+    \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\]
+特别地，在连续点处有
+\[
+    f(x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 傅里叶变换的定义体现了``把函数投影到各个频率模式上''的思想。
+    \item 逆变换不是纯形式操作，而是傅里叶积分定理支持下的恢复过程。
+    \item 若函数在某点有跳跃间断，则反演恢复的是
+    \[
+        \frac{f(x+0)+f(x-0)}{2},
+    \]
+    这与傅里叶级数在间断点的结论是一致的。
+    \item 绝对可积是一个常用的充分条件，但不是唯一条件；这里可以点到为止，为以后更一般的函数空间观点留余地。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{矩形函数与跳跃点的恢复}{}
+求矩形函数的傅里叶变换，并用反演公式说明在跳跃点处恢复的是左右极限的平均值。
+\end{lizi}
+
+\begin{lizi}{指数衰减函数的傅里叶变换}{}
+求
+\[
+    f(x)=\mathrm{e}^{-a|x|}, \qquad a>0
+\]
+的傅里叶变换，并说明它为什么是一个典型的``可积且适合反演''的例子。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 时域函数与频域函数之间的双向箭头示意图。
+    \item 矩形函数在跳跃点处的恢复示意图，直观标出平均值。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把逆变换简单当成``把符号改回来''。
+    \item 不要忽略变换约定中的常数因子，不同教材的规范不同，本讲义必须始终保持一致。
+    \item 不要把间断点处的恢复值写成原函数某一侧的值。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求若干绝对可积函数的傅里叶变换。
+    \item 综合题：利用傅里叶积分定理讨论间断点的恢复值。
+    \item 挑战题：比较不同常数规范下的傅里叶变换与逆变换写法。
+\end{itemize}
+
+\section{第三节\quad 常见变换对与频谱直观}
+
+\begin{wulibj}[本节要解决的问题]
+学生刚学完定义后，最容易陷入两种状态：一种是只会机械积分，另一种是只记住几个符号而没有频谱直觉。本节的任务，就是通过几个最典型的例子，让学生真正开始``看见''时域和频域之间的关系。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握几类最常见、最有代表性的傅里叶变换对。
+    \item 让学生建立矩形函数、高斯函数、指数衰减函数等对象的频谱直觉。
+    \item 让学生理解偶函数、奇函数、实函数时频谱会出现的简化和对称性。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 矩形函数与 $\mathrm{sinc}$ 型频谱
+    \item 高斯函数的自相似性
+    \item 指数衰减函数与洛伦兹型频谱
+    \item 偶函数、奇函数与实函数的频谱对称
+    \item Dirac $\delta$ 函数作为频谱直觉的预告
+\end{enumerate}
+
+\subsection*{建议使用的定理与结论}
+\begin{dingli}{偶函数与奇函数的变换简化}{}
+\begin{enumerate}
+    \item 若 $f(x)$ 为偶函数，则
+    \[
+        \hat{f}(\omega)=2\int_{0}^{+\infty} f(x)\cos \omega x\,\mathrm{d}x,
+    \]
+    因而 $\hat{f}(\omega)$ 也是偶函数。
+    \item 若 $f(x)$ 为奇函数，则
+    \[
+        \hat{f}(\omega)=-2\mathrm{i}\int_{0}^{+\infty} f(x)\sin \omega x\,\mathrm{d}x,
+    \]
+    因而 $\hat{f}(\omega)$ 是纯虚奇函数。
+\end{enumerate}
+\end{dingli}
+
+\begin{dingli}{实函数的共轭对称性}{}
+若 $f(x)$ 为实值函数，则
+\[
+    \hat{f}(-\omega)=\overline{\hat{f}(\omega)}.
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 矩形函数在时域越集中，频域往往越分散；这能帮助学生建立``局域化与带宽''之间的矛盾直觉。
+    \item 高斯函数的傅里叶变换仍是高斯函数，这是一个极其重要的典型例子。
+    \item 函数越光滑，其频谱通常衰减越快；这一点虽然不必上升到严格定理，但应作为重要直觉明确讲出。
+    \item 奇偶性与实值性能够显著降低计算量，也有助于学生检查结果是否合理。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{矩形函数的傅里叶变换}{}
+计算
+\[
+    f(x)=
+    \begin{cases}
+        1, & |x|<a, \\
+        0, & |x|>a
+    \end{cases}
+\]
+的傅里叶变换，并解释为什么其频谱呈现 $\mathrm{sinc}$ 型振荡。
+\end{lizi}
+
+\begin{lizi}{高斯函数的傅里叶变换}{}
+计算
+\[
+    f(x)=\mathrm{e}^{-ax^2}, \qquad a>0
+\]
+的傅里叶变换，并说明为什么``高斯变换后仍是高斯''在后续热方程中非常重要。
+\end{lizi}
+
+\begin{lizi}{偶函数的快速计算}{}
+利用偶函数性质，求
+\[
+    f(x)=\mathrm{e}^{-a|x|}
+\]
+的傅里叶变换，并比较直接从全轴积分与从余弦积分计算的差别。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 矩形函数与 $\mathrm{sinc}$ 频谱的并排图。
+    \item 宽高斯与窄高斯对应频谱宽度变化的对比图。
+    \item 实函数频谱的共轭对称示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把频谱只理解成``一个实数大小''；一般而言，幅值和相位都重要。
+    \item 不要忽略奇偶性带来的化简。
+    \item 讲 $\delta$ 函数时必须提醒学生：它不是普通函数，这里只做广义函数的初步预告。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求矩形函数、高斯函数、指数衰减函数的傅里叶变换。
+    \item 综合题：利用奇偶性和实值性判断频谱的形状与对称性。
+    \item 挑战题：比较两个不同光滑程度函数的频谱衰减快慢，并给出解释。
+\end{itemize}
+
+\section{第四节\quad 傅里叶变换的基本性质}
+
+\begin{wulibj}[本节要解决的问题]
+如果说前面几节是在帮助学生理解傅里叶变换是什么，那么这一节就是要把它整理成真正可用的工具箱。但这里最需要避免的，是把一串性质堆成公式表。每条性质都应当回答：它说明了什么？以后要拿它做什么？
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握平移、频移、伸缩、微分等最常用性质。
+    \item 让学生理解这些性质背后的结构意义，而不是只记符号。
+    \item 让学生建立通过已知变换对快速生成新变换对的意识。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 线性性质
+    \item 平移与频移
+    \item 伸缩性质
+    \item 时域微分与频域微分
+    \item 共轭与对称关系
+\end{enumerate}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{平移性质}{}
+若 $\mathcal{F}[f](\omega)=\hat{f}(\omega)$，则
+\[
+    \mathcal{F}[f(x-a)](\omega)=\mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
+\]
+\end{dingli}
+
+\begin{dingli}{频移性质}{}
+若 $\mathcal{F}[f](\omega)=\hat{f}(\omega)$，则
+\[
+    \mathcal{F}\!\left[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)\right](\omega)=\hat{f}(\omega-\omega_0).
+\]
+\end{dingli}
+
+\begin{dingli}{伸缩性质}{}
+若 $a\neq 0$，则
+\[
+    \mathcal{F}[f(ax)](\omega)=\frac{1}{|a|}\hat{f}\!\left(\frac{\omega}{a}\right).
+\]
+\end{dingli}
+
+\begin{dingli}{微分性质}{}
+在适当条件下，
+\[
+    \mathcal{F}[f'(x)](\omega)=\mathrm{i}\omega \hat{f}(\omega),
+    \qquad
+    \mathcal{F}[x f(x)](\omega)=\mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega).
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 时域平移并不会改变频谱幅值的分布，但会引入相位因子。
+    \item 伸缩性质体现了``时域压缩 $\leftrightarrow$ 频域展宽''这一极重要的直觉。
+    \item 微分性质是傅里叶变换能用来解微分方程的根本原因。
+    \item 学生不仅要会套公式，更要学会用奇偶性、量纲和极限情形检查符号是否正确。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{由高斯函数生成平移后的变换}{}
+已知
+\[
+    \mathcal{F}[\mathrm{e}^{-ax^2}](\omega)
+\]
+后，求
+\[
+    \mathcal{F}[\mathrm{e}^{-a(x-b)^2}](\omega)
+\]
+并解释相位因子的来源。
+\end{lizi}
+
+\begin{lizi}{利用微分性质求导数的变换}{}
+已知 $\mathcal{F}[f](\omega)=\hat{f}(\omega)$，求 $f'(x)$ 与 $f''(x)$ 的傅里叶变换，并说明高阶导数对应频域中的什么操作。
+\end{lizi}
+
+\begin{lizi}{伸缩与带宽}{}
+设 $g(x)=f(ax)$，讨论当 $|a|$ 增大时，$g$ 的图像和频谱如何变化。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 时域平移引入相位而不改变幅频包络的示意图。
+    \item 时域压缩对应频域展宽、时域展宽对应频域压缩的对比图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 平移性质里的相位因子最容易写错符号。
+    \item 伸缩性质中的绝对值符号不能漏。
+    \item 微分性质成立时，边界项消失的条件要说明清楚，不能把分部积分写成纯形式操作。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：由已知变换对推出平移、伸缩、调制后的新变换对。
+    \item 综合题：利用微分性质求多项式乘高斯函数的变换。
+    \item 挑战题：设计一题要求学生同时结合奇偶性、平移和微分性质检查结果。
+\end{itemize}
+
+\section{第五节\quad 卷积定理、帕塞瓦尔等式与物理解释}
+
+\begin{wulibj}[本节要解决的问题]
+很多学生会觉得卷积是一个公式上看起来不难、做题时却总是容易糊涂的运算。本节的任务，不只是定义卷积，更重要的是让学生理解：\textbf{卷积定理是傅里叶变换最有力量的地方之一。}它把一个积分运算变成了乘法，也因此把滤波、格林函数和积分变换法串在了一起。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握卷积的定义和卷积定理。
+    \item 让学生理解帕塞瓦尔等式的能量意义。
+    \item 让学生看到卷积定理在信号滤波和后续数学物理方法中的桥梁作用。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 卷积的定义及几何理解
+    \item 卷积定理
+    \item 乘积与频域卷积
+    \item 帕塞瓦尔等式与能量守恒观点
+    \item 滤波的初步物理解释
+\end{enumerate}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{卷积}{}
+两个函数 $f$ 与 $g$ 的卷积定义为
+\[
+    (f*g)(x)=\int_{-\infty}^{+\infty} f(\tau)g(x-\tau)\,\mathrm{d}\tau.
+\]
+\end{dingliyi}
+
+\begin{dingli}{卷积定理}{}
+在适当条件下，
+\[
+    \mathcal{F}[f*g](\omega)=\hat{f}(\omega)\hat{g}(\omega).
+\]
+\end{dingli}
+
+\begin{dingli}{乘积的变换公式}{}
+在适当条件下，
+\[
+    \mathcal{F}[f g](\omega)=\frac{1}{2\pi}(\hat{f}*\hat{g})(\omega).
+\]
+\end{dingli}
+
+\begin{dingli}{帕塞瓦尔等式}{}
+在适当条件下，
+\[
+    \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x
+    =
+    \frac{1}{2\pi}\int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega.
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 卷积可以理解为``一个函数翻转、平移后与另一个函数重叠面积的变化''。
+    \item 卷积定理把复杂的积分运算转成乘法，是频域方法的核心优势。
+    \item 帕塞瓦尔等式说明时域能量和频域能量本质一致，这能帮助学生理解为什么频谱分析有物理意义。
+    \item 这一节要主动提醒学生：卷积思想以后会在热核、格林函数、滤波等地方反复出现。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{两个矩形函数的卷积}{}
+计算两个矩形函数的卷积，并说明为什么结果会出现三角形轮廓。
+\end{lizi}
+
+\begin{lizi}{由卷积定理理解滤波}{}
+设输入信号为 $f(t)$，系统冲激响应为 $h(t)$，说明输出
+\[
+    y(t)=f*h
+\]
+在频域中为什么对应于
+\[
+    \hat{y}(\omega)=\hat{f}(\omega)\hat{h}(\omega).
+\]
+\end{lizi}
+
+\begin{lizi}{帕塞瓦尔等式的能量解释}{}
+选取一个简单函数，比较其时域能量和频域能量，帮助学生理解帕塞瓦尔等式的物理含义。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 卷积中``翻转并平移''的几何示意图。
+    \item 低通滤波前后信号频谱对比图。
+    \item 时域能量与频域能量对应的示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 卷积中的积分变量是哑变量，符号混淆是最常见错误。
+    \item 不要把卷积和普通乘法混淆，也不要把卷积定理的常数因子写错。
+    \item 讲帕塞瓦尔等式时，不要只给出公式而不解释其物理意义。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求简单函数的卷积。
+    \item 综合题：利用卷积定理求若干逆变换或卷积积分。
+    \item 挑战题：从一个简单滤波模型出发，解释频域乘法为何对应时域卷积。
+\end{itemize}
+
+\section{第六节\quad 正弦变换、余弦变换与半无界区间预告}
+
+\begin{wulibj}[本节要解决的问题]
+如果本章只停留在整条实轴上的傅里叶变换，学生在后面遇到半轴问题时会突然感到不适应：为什么同样是积分变换，这里却出现了正弦变换和余弦变换？本节的任务，就是提前把这个桥搭好。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解正弦变换和余弦变换与奇延拓、偶延拓的关系。
+    \item 让学生知道边界条件会影响所选的变换形式。
+    \item 为后续半无界区间问题做自然过渡。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 偶延拓与余弦变换
+    \item 奇延拓与正弦变换
+    \item 这两类变换为什么适合半轴问题
+    \item 与第九章、第十三章内容的联系预告
+\end{enumerate}
+
+\subsection*{建议使用的定义}
+\begin{dingliyi}{傅里叶余弦变换}{}
+对定义在 $[0,+\infty)$ 上的函数 $f(x)$，可定义
+\[
+    F_c(\omega)=\int_{0}^{+\infty} f(x)\cos \omega x\,\mathrm{d}x.
+\]
+\end{dingliyi}
+
+\begin{dingliyi}{傅里叶正弦变换}{}
+对定义在 $[0,+\infty)$ 上的函数 $f(x)$，可定义
+\[
+    F_s(\omega)=\int_{0}^{+\infty} f(x)\sin \omega x\,\mathrm{d}x.
+\]
+\end{dingliyi}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 余弦变换可以看成把半轴函数做偶延拓以后，在全轴上作傅里叶变换所得的实部结构。
+    \item 正弦变换可以看成把半轴函数做奇延拓以后，在全轴上作傅里叶变换所得的虚部结构。
+    \item 边界条件不同，适合的延拓方式不同；这不是计算技巧上的偶然，而是问题结构决定的。
+    \item 本节不必讲得过深，但一定要让学生知道：半轴问题不是硬套整轴变换，而是需要根据边界条件做适配。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{从偶延拓得到余弦变换}{}
+设 $f(x)$ 只定义在 $x\ge 0$ 上，对它作偶延拓，说明为什么其全轴傅里叶变换自然导向余弦积分。
+\end{lizi}
+
+\begin{lizi}{从奇延拓得到正弦变换}{}
+设 $f(x)$ 只定义在 $x\ge 0$ 上，对它作奇延拓，说明为什么其全轴傅里叶变换自然导向正弦积分。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 半轴函数的偶延拓示意图。
+    \item 半轴函数的奇延拓示意图。
+    \item ``边界条件 $\to$ 延拓方式 $\to$ 变换选择'' 的流程图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把正弦变换、余弦变换看成与傅里叶变换完全无关的新工具。
+    \item 不要忽略边界条件与延拓方式之间的联系。
+    \item 不要在这一节里引入过多技术细节，以免打断本章主线；它的重点是搭桥，而不是把后面内容提前讲完。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：给定半轴函数，写出其偶延拓与奇延拓。
+    \item 综合题：说明某类边界条件下应优先考虑正弦变换还是余弦变换。
+    \item 挑战题：尝试把半轴热方程写成适合用正弦或余弦变换处理的形式。
+\end{itemize}
+
+\section{第七节\quad 一个标准应用：整轴热方程}
+
+\begin{wulibj}[本节要解决的问题]
+学到这里，学生最需要亲眼看到的一件事是：傅里叶变换不只是用来画频谱的，它真的能够把偏微分方程变成更简单的问题。本节选择整轴热方程作为标准应用，是因为它既能充分体现微分性质和逆变换的威力，又不会过早与后面第十三章的系统应用重复太多。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生看到傅里叶变换如何把偏微分方程化成常微分方程。
+    \item 让学生理解为什么整条实轴上的问题天然适合用傅里叶变换。
+    \item 让学生初步认识热核和卷积表示式。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 整轴热方程初值问题的提出
+    \item 对空间变量作傅里叶变换
+    \item 在频域求解常微分方程
+    \item 逆变换与热核
+    \item 解的物理解释与第十三章预告
+\end{enumerate}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{整轴热方程的傅里叶变换解}{}
+对初值问题
+\[
+    \begin{cases}
+        u_t=a^2 u_{xx}, & x\in \mathbb{R}, \ t>0, \\
+        u(x,0)=\varphi(x), & x\in \mathbb{R},
+    \end{cases}
+\]
+在适当条件下，解可写为
+\[
+    u(x,t)=\frac{1}{2a\sqrt{\pi t}}
+    \int_{-\infty}^{+\infty}
+    \varphi(\xi)\,
+    \mathrm{e}^{-(x-\xi)^2/(4a^2 t)}
+    \,\mathrm{d}\xi.
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 由于空间区间是整条实轴，没有额外边界条件干扰，所以对 $x$ 作傅里叶变换最自然。
+    \item 微分性质使
+    \[
+        u_{xx}
+    \]
+    在频域中变成
+    \[
+        -\omega^2 \hat{u},
+    \]
+    于是偏微分方程降为常微分方程。
+    \item 逆变换后出现的高斯核，不只是计算结果，更反映了扩散过程会把局部初值逐渐抹平。
+    \item 这一节只保留一个标准应用即可，重点是示范思想；更多方程和边界问题放到第十三章系统展开。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{整轴热方程的标准求解}{}
+完整求解无限长细杆的热传导初值问题，给出频域解与时域卷积解。
+\end{lizi}
+
+\begin{lizi}{高斯初值下的显式解}{}
+设
+\[
+    \varphi(x)=\mathrm{e}^{-x^2},
+\]
+利用高斯函数的傅里叶变换求出对应的热方程解，并说明解随时间如何展宽。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 求解流程图：原方程 $\to$ 傅里叶变换 $\to$ 频域常微分方程 $\to$ 逆变换。
+    \item 热核随时间从尖变宽、从高变矮的图像。
+    \item 不同初值在扩散作用下被平滑化的示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把整轴问题与有边界的有限区间问题混为一谈。
+    \item 不要在频域求解后忘记回到时域并解释结果的物理意义。
+    \item 不要让本节篇幅膨胀过大，以免和第十三章的积分变换法重复。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：按步骤写出整轴热方程作傅里叶变换后的频域方程。
+    \item 综合题：对给定初值求解整轴热方程。
+    \item 挑战题：比较傅里叶变换法与分离变量法在整轴问题和有界区间问题中的适用性。
+\end{itemize}
+
+\section{本章小结与写作建议}
+
+\begin{wulibj}[一句话回看本章]
+本章最重要的任务，是让学生明白：傅里叶变换把非周期函数也纳入了``频率分解''的统一框架，并且把微分、平移、卷积这些操作转化成了频域中的更简单结构，因此它天然适合整条实轴上的数学物理问题。
+\end{wulibj}
+
+\subsection*{知识主线建议}
+\begin{itemize}
+    \item 先由周期函数的傅里叶级数看到离散频谱；
+    \item 再通过区间长度趋于无穷走向连续频谱；
+    \item 接着建立傅里叶变换与反演公式；
+    \item 然后整理出平移、伸缩、微分、卷积等基本性质；
+    \item 最后用整轴热方程说明这种工具如何真正进入数学物理问题。
+\end{itemize}
+
+\subsection*{本章主要结论建议}
+\begin{zhongyao}[本章主要结论]
+\raggedright
+\begin{enumerate}
+    \item \textbf{傅里叶变换来自离散谱向连续谱的极限过渡：}它不是凭空定义，而是傅里叶级数理论的自然延伸。
+    \item \textbf{反演公式说明时域与频域是可相互恢复的：}在连续点处恢复原函数，在跳跃点处恢复左右极限的平均值。
+    \item \textbf{奇偶性与实值性能帮助我们快速判断频谱结构：}偶函数对应余弦型积分，奇函数对应正弦型积分，实函数频谱满足共轭对称。
+    \item \textbf{平移、伸缩与微分性质揭示了频域运算的简化机制：}尤其是微分变乘法，是后续求解微分方程的根本原因。
+    \item \textbf{卷积定理是连接信号处理、热核、格林函数与积分变换法的桥梁：}它把积分运算转成了频域乘法。
+    \item \textbf{傅里叶变换特别适合整轴问题：}整轴热方程是最典型的标准应用。
+\end{enumerate}
+\end{zhongyao}
+
+\subsection*{做题时的判断思路建议}
+\begin{tishi}[做题时的判断思路]
+\begin{enumerate}
+    \item 看到非周期函数时，先问自己：它是否更适合在频域中理解？
+    \item 看到整条实轴上的微分方程时，应优先想到傅里叶变换是否能把空间微分化成代数运算。
+    \item 看到平移、伸缩、导数或乘以 $x$ 的结构时，先想能否直接利用性质，而不是重新积分。
+    \item 看到卷积时，优先想频域乘法；看到频域乘积时，也要能反过来想到时域卷积。
+    \item 若问题只定义在半轴上，则要进一步判断是否该转向正弦变换、余弦变换或拉普拉斯变换。
+\end{enumerate}
+\end{tishi}
+
+\subsection*{正式写作时的篇幅建议}
+\begin{tishi}[正式写作时的篇幅建议]
+\begin{enumerate}
+    \item 第一节和第二节应写扎实，因为它们决定学生是否真正明白傅里叶变换从哪里来。
+    \item 第三节和第四节是本章工具箱，既要有证明，也要有足够例题帮助消化。
+    \item 第五节建议写得有物理味道，不要把卷积定理和帕塞瓦尔等式写成纯公式。
+    \item 第六节可以作为承上启下的短节，不必喧宾夺主，但非常值得保留。
+    \item 第七节只保留一个标准应用即可，以免与第十三章过度重复。
+    \item ``信号处理''与``多维傅里叶变换''可放入章末简短拓展或选读，不宜压过主线。
+\end{enumerate}
+\end{tishi}
+
+\begin{jinshi}[本章最容易混淆的地方]
+\begin{enumerate}
+    \item 不要把傅里叶变换看成一张公式表，而忽略它来自离散谱向连续谱的过渡。
+    \item 不要把逆变换视为纯形式操作，而忽略反演条件和间断点平均值结论。
+    \item 不要把频谱只理解成幅值大小，相位信息同样重要。
+    \item 不要在平移、伸缩、微分性质里频繁写错相位因子、绝对值和 $\mathrm{i}$ 的符号。
+    \item 不要把整轴傅里叶变换和半轴问题、拉普拉斯变换的适用场景混淆。
+\end{enumerate}
+\end{jinshi}
+
+\begin{sikao}{}{}
+如果把第八章看成后续积分变换法的准备，那么学生学完本章后，至少应该能回答下面四个问题：
+\begin{enumerate}
+    \item 为什么非周期函数也可以谈频率分解？
+    \item 为什么傅里叶变换在间断点处恢复的是平均值？
+    \item 为什么微分在频域里会变成乘法？
+    \item 为什么整条实轴上的热方程特别适合用傅里叶变换来处理？
+\end{enumerate}
+\end{sikao}
+
+\section{习题}
+
+\subsection*{基础题}
+\begin{itemize}
+    \item 把周期为 $2L$ 的函数写成复指数形式傅里叶级数，并说明频率间隔如何依赖于 $L$。
+    \item 求矩形函数、高斯函数、指数衰减函数的傅里叶变换。
+    \item 利用奇偶性和实值性判断给定函数频谱的对称结构。
+\end{itemize}
+
+\subsection*{综合题}
+\begin{itemize}
+    \item 利用平移、伸缩、微分性质，由已知变换对推出新的变换对。
+    \item 计算简单卷积，并用卷积定理核对结果。
+    \item 利用傅里叶变换求解整轴热方程的典型初值问题。
+\end{itemize}
+
+\subsection*{挑战题}
+\begin{itemize}
+    \item 讨论矩形函数在反演公式下为什么会在跳跃点处取平均值。
+    \item 说明正弦变换、余弦变换与奇延拓、偶延拓之间的关系。
+    \item 比较傅里叶变换与拉普拉斯变换在整轴问题、半轴问题中的适用特点。
+\end{itemize}
