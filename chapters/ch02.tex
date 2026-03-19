@@ -78,6 +78,39 @@
 \end{itemize}
 \end{dingliyi}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \draw[mp axis] (-2.8,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.4) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
+
+    \coordinate (O) at (0,0);
+    \draw[figblue, thick, fill=figblue!10] (O) circle (1.55);
+    \node[mp label, figblue] at (1.95,1.45) {$E=\{z:|z|<1\}$};
+
+    \coordinate (A) at (-0.45,0.35);
+    \draw[figteal, thick] (A) circle (0.42);
+    \node[mp point b] at (A) {};
+    \node[mp label, above left, figteal] at (A) {$z_1$};
+
+    \coordinate (B) at (1.55,0);
+    \draw[figred, thick] (B) circle (0.42);
+    \node[mp point d] at (B) {};
+    \node[mp label, below, figred] at (B) {$z_2$};
+
+    \coordinate (C) at (3.15,0.55);
+    \draw[figpurple, thick] (C) circle (0.42);
+    \node[mp point c] at (C) {};
+    \node[mp label, above right, figpurple] at (C) {$z_3$};
+
+    \node[mp label, figteal] at (-1.7,-1.55) {内点：邻域全在 $E$ 内};
+    \node[mp label, figred] at (1.95,-1.55) {边界点：邻域横跨边界};
+    \node[mp label, figpurple] at (3.35,1.55) {外点：邻域与 $E$ 不交};
+\end{tikzpicture}
+\caption{内点、边界点与外点的几何直观}
+\label{fig:ch02-interior-boundary-exterior}
+\end{figure}
+
 \begin{lizi}{判断点的类型}{}
 设
 \[
@@ -225,6 +258,28 @@ $D_3$ 虽然除了原点外其余部分都还连在一起，但原点的缺失�
 时，方向不是可有可无的小细节。把曲线反向以后，积分值会变号；而多连通区域里的外边界和内边界，取向也不一样。这些规则都会在下一章反复出现。
 \end{tishi}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \begin{scope}
+        \draw[mp axis] (-2.3,0) -- (2.6,0) node[mp label, right] {$x$};
+        \draw[mp axis] (0,-2.1) -- (0,2.4) node[mp label, above] {$y$};
+        \draw[figblue, thick, ->] plot[smooth cycle] coordinates {(-1.4,0.2) (-0.6,1.2) (0.9,1.15) (1.5,0.1) (0.7,-1.0) (-0.8,-0.95)};
+        \node[mp label] at (0,-2.55) {(a) 简单闭曲线，逆时针为正向};
+        \node[mp label, figteal] at (1.35,1.7) {正向};
+    \end{scope}
+
+    \begin{scope}[xshift=7.2cm]
+        \draw[mp axis] (-2.3,0) -- (2.6,0) node[mp label, right] {$x$};
+        \draw[mp axis] (0,-2.1) -- (0,2.4) node[mp label, above] {$y$};
+        \draw[figred, thick, ->] plot[smooth cycle] coordinates {(-1.6,0.8) (-0.2,1.45) (1.2,0.1) (-0.6,-1.15) (-1.0,0.15) (1.1,1.0)};
+        \node[mp label] at (0,-2.55) {(b) 自交曲线，不是简单闭曲线};
+    \end{scope}
+\end{tikzpicture}
+\caption{简单闭曲线、正向与自交曲线的区别}
+\label{fig:ch02-simple-closed-curve}
+\end{figure}
+
 \section{复变函数的概念与映射观点}
 
 \begin{wulibj}[为什么这一节不只是写个定义]
@@ -368,6 +423,29 @@ $D_3$ 虽然除了原点外其余部分都还连在一起，但原点的缺失�
 几何上，这个映射把复平面上的点关于实轴做镜像反射。
 \end{jie}
 \end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.12]
+    \draw[mp axis] (-2.7,0) -- (2.9,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
+
+    \coordinate (Z) at (1.35,1.45);
+    \coordinate (CZ) at (1.35,-1.45);
+
+    \node[mp point c] at (Z) {};
+    \node[mp point d] at (CZ) {};
+    \draw[figpurple, dashed] (Z) -- (CZ);
+    \draw[figteal, thick] (0,0) -- (Z);
+    \draw[figred, thick] (0,0) -- (CZ);
+
+    \node[mp label, figpurple, right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[mp label, figred, right] at (CZ) {$\bar z=x-\mathrm{i}y$};
+    \node[mp label, black!55] at (2.15,0.22) {实轴};
+\end{tikzpicture}
+\caption{映射 $w=\bar z$ 把点关于实轴作镜像反射}
+\label{fig:ch02-conjugation-reflection}
+\end{figure}
 
 \begin{tishi}[为什么特意举 $\bar z$ 这个例子]
 因为它能提醒我们：一个函数看上去再简单，也不一定是解析函数。后面讨论导数时，$\bar z$ 会成为最经典的反例之一。
@@ -773,6 +851,27 @@ $\bar z$ 看上去非常光滑，几何上也只是一个镜像反射，但它�
 \begin{equation}\label{eq:ch02-cr}
     u_x=v_y,\qquad u_y=-v_x.
 \end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.12]
+    \draw[mp axis] (-0.4,0) -- (4.2,0) node[mp label, right] {$x$};
+    \draw[mp axis] (0,-0.4) -- (0,3.5) node[mp label, above] {$y$};
+
+    \coordinate (Z0) at (2.0,1.45);
+    \node[mp point c] at (Z0) {};
+    \node[mp label, above right] at (Z0) {$z_0$};
+
+    \draw[figteal, very thick, ->] (Z0) -- ++(1.2,0) node[mp label, right, figteal] {$\Delta z=\Delta x$};
+    \draw[figred, very thick, ->] (Z0) -- ++(0,1.2) node[mp label, above, figred] {$\Delta z=\mathrm{i}\Delta y$};
+
+    \node[mp label, figteal] at (3.1,1.78) {$u_x+\mathrm{i}v_x$};
+    \node[mp label, figred] at (1.15,2.55) {$v_y-\mathrm{i}u_y$};
+    \node[mp label, align=center] at (2.0,-0.95) {若导数存在，两个方向算出的差商必须一致};
+\end{tikzpicture}
+\caption{柯西--黎曼条件来自两个特殊方向的差商必须给出同一极限}
+\label{fig:ch02-cr-derivation}
+\end{figure}
 
 \begin{dingli}{柯西--黎曼条件的必要性}{}
 若
