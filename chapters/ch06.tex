@@ -1,0 +1,424 @@
+% 第六章：多值函数、支点与解析支（选学）
+
+\chapter{多值函数、支点与解析支（选学）}
+
+\begin{wulibj}[本章定位]
+前五章里，我们讨论的主角基本都是单值解析函数：在给定区域里，每个 $z$ 都对应唯一的函数值，围绕解析性、级数展开和留数理论展开的一整套方法，也都是在这样的对象上建立起来的。
+
+但当学生继续往前走时，很快就会遇到几个看似熟悉、其实又很不一样的对象：$\arg z$、$\log z$、$z^\alpha$、$\sqrt[n]{z}$。这些函数并不是简单地``再多记几个公式''就能处理，因为它们最根本的困难在于：\textbf{它们往往不能在整个区域里同时保持单值。}
+
+因此，本章真正要解决的问题，不是``介绍几个特殊函数''，而是帮助学生理解：
+\begin{enumerate}
+    \item 多值性到底从哪里来；
+    \item 为什么要引入主值、分支与支割；
+    \item 怎样把一个多值对象放到合适的区域上，当作单值解析函数来处理；
+    \item 为什么带多值函数的复积分题，往往必须先选支，再谈路径。
+\end{enumerate}
+
+从课程主线看，这一章一头连着前面的留数理论，一头又连着后面的保角映射与某些典型积分应用。它虽然标为选学，但对想真正把复变函数学明白的同学来说，是非常值得认真读的一章。
+\end{wulibj}
+
+\begin{tishi}[写作总原则]
+\begin{enumerate}
+    \item 本章应始终从``为什么会多值''讲起，而不要一上来就堆定义。
+    \item 要反复把本章和第二章的``单连通区域''、第五章的``围道积分''联系起来。
+    \item 黎曼面只保留直观说明，不展开成抽象理论主线。
+    \item 例题应优先服务于理解支、支点、支割和积分路径的关系，而不是单纯追求技巧性。
+    \item 图示要多，尤其要帮助学生看清``绕一圈为什么会变值''、``支割为什么要这样取''、``钥匙孔围道为什么长这样''。
+\end{enumerate}
+\end{tishi}
+
+\section{多值现象的出现：从辐角谈起}
+
+\begin{wulibj}[本节要解决的问题]
+学生第一次接触多值函数时，最容易把它理解成``定义写得不够严谨''。本节的任务，就是先把这个误解消掉。我们要让学生看到：多值性不是书写上的漏洞，而是复平面几何结构带来的客观现象，而最自然的入口就是辐角。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生回顾复数的极形式，并重新认识辐角并不唯一这一事实。
+    \item 让学生区分多值辐角 $\arg z$ 与主辐角 $\operatorname{Arg} z$。
+    \item 让学生理解``绕原点一圈，角度多出 $2\pi$''是后面一切多值现象的起点。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从极形式重新看复数的表示
+    \item 辐角为什么天然多值
+    \item 主辐角的引入与局限
+    \item 绕原点一圈时辐角如何变化
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 对任意 $z\neq 0$，若
+    \[
+        z = r\mathrm{e}^{\mathrm{i}\theta},
+    \]
+    则
+    \[
+        \arg z = \theta + 2k\pi,\qquad k\in\mathbb{Z}.
+    \]
+    这里的多值性不是附加出来的，而是极形式本身就带有的。
+    \item 主辐角 $\operatorname{Arg} z$ 只是从全部可能值中人为选出的一个代表值，常取
+    \[
+        -\pi < \operatorname{Arg} z \le \pi.
+    \]
+    \item 一旦沿着绕原点的闭路走一圈，辐角就会整体增加 $2\pi$，这正是后面 $\log z$ 与 $z^\alpha$ 多值性的根源。
+    \item 原点之所以特殊，不是因为它函数值算不出来，而是因为``绕原点''会导致角度结构发生根本变化。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{辐角与主辐角}{}
+写出 $1$、$-1$、$\mathrm{i}$、$-1+\mathrm{i}$ 的全部辐角与主辐角，并比较它们之间的区别。
+\end{lizi}
+
+\begin{lizi}{绕行导致辐角改变}{}
+设 $z=\mathrm{e}^{\mathrm{i}\theta}$ 沿单位圆逆时针转一周，说明为什么起点与终点虽然对应同一个复数，但辐角却增加了 $2\pi$。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 复平面上一点对应多组辐角的示意图。
+    \item 单位圆绕行一周时参数 $\theta$ 连续增加的示意图。
+    \item 主辐角取值区间与负实轴跳变位置的示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把 $\arg z$ 和 $\operatorname{Arg} z$ 混为一谈。
+    \item 不要以为主辐角是``唯一正确的辐角''；它只是常用的一种选法。
+    \item 不要忽略原点在整个多值理论中的特殊地位。
+\end{enumerate}
+\end{jinshi}
+
+\section{复对数函数与主值}
+
+\begin{wulibj}[本节要解决的问题]
+有了上一节的铺垫以后，学生会自然追问：如果辐角已经是多值的，那么由极形式定义出来的复对数会发生什么？本节的任务，就是让学生看到：复对数不是实对数的直接照搬，而是复分析中最基本、最典型的多值函数。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握复对数的定义来源。
+    \item 让学生理解 $\log z$ 与 $\operatorname{Log} z$ 的区别。
+    \item 让学生意识到主值对数虽然是单值写法，但它只能在合适区域上讨论。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从 $z=r\mathrm{e}^{\mathrm{i}\theta}$ 出发定义 $\log z$
+    \item 复对数的全部值
+    \item 主值对数 $\operatorname{Log} z$
+    \item 主值为什么会在支割处失去连续性
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 复对数定义为
+    \[
+        \log z = \ln|z| + \mathrm{i}\arg z.
+    \]
+    因为 $\arg z$ 多值，所以 $\log z$ 也多值。
+    \item 若取主辐角，则得到主值对数
+    \[
+        \operatorname{Log} z = \ln|z| + \mathrm{i}\operatorname{Arg} z.
+    \]
+    \item $\operatorname{Log} z$ 只是选定某一支后的写法，不等于``真正的复对数只有一个值''。
+    \item 只要辐角在某条射线两侧发生跳变，主值对数在那条射线附近就不能保持连续，这也就预示了后面必须讨论支割。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{复对数的全部值}{}
+求 $\log 1$、$\log(-1)$ 与 $\log \mathrm{i}$ 的全部值，并写出各自的主值。
+\end{lizi}
+
+\begin{lizi}{主值对数的连续性问题}{}
+说明为什么当 $z$ 从负实轴上方和下方逼近同一点时，$\operatorname{Log} z$ 的极限一般不同。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 以负实轴为支割时，$\operatorname{Log} z$ 的定义区域示意图。
+    \item 负实轴上下两侧主辐角取值突变的示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把 $\log z$ 和 $\operatorname{Log} z$ 混为一谈。
+    \item 不要以为写下主值以后，函数就在整个去心平面上自动解析。
+    \item 不要忘记复对数的多值性本质上来自辐角，而不是来自模长。
+\end{enumerate}
+\end{jinshi}
+
+\section{分支、解析支与支割}
+
+\begin{wulibj}[本节要解决的问题]
+前两节已经告诉我们：有些复函数天然多值。接下来最关键的问题是：既然它本来多值，我们怎样在某个合适区域上把它固定成单值对象，并继续用解析函数的方法处理它？这一节就是全章的概念核心。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解什么叫一支、什么叫解析支。
+    \item 让学生理解支割不是装饰性的几何线，而是为了让函数在剩余区域上单值解析。
+    \item 让学生把本章和第二章的``单连通区域''重新联系起来。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从主值对数重新理解``选一支''
+    \item 一般多值函数的一支与解析支
+    \item 支割的作用与选择
+    \item 单连通区域与解析支的关系
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 所谓一支，就是从多值函数的全部可能值中，在某个区域上按一致规则选出一个单值函数。
+    \item 所谓解析支，不只是选成单值，还要求该单值函数在所讨论区域里解析。
+    \item 支一定依赖于定义域。离开具体区域，空谈``这个函数的支''是不完整的。
+    \item 支割的作用，是把原来会因为绕行而变值的区域切开，使剩余区域尽量成为可以选取解析支的区域。
+    \item 第二章中的``单连通''在这里重新变得重要，因为很多多值问题的困难，本质上正来自于区域中允许绕支点转一圈。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{不同支割对应不同支}{}
+分别在去掉负实轴与去掉正实轴的区域上，为 $\log z$ 写出一个解析支，并比较它们的差异。
+\end{lizi}
+
+\begin{lizi}{为什么必须说明区域}{}
+说明为什么不能说``$\log z$ 有一个全局解析支''，而只能说``在某个去掉射线的区域上可以选出解析支''。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 负实轴支割、正实轴支割与一般射线支割的对比图。
+    \item 切开前后区域拓扑结构变化的示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把``支''理解成函数自己天然带着的一部分。
+    \item 不要把支割理解成唯一标准答案；它通常有多种合理选择。
+    \item 不要忽略``解析支''里的``解析''二字，它比单纯单值更强。
+\end{enumerate}
+\end{jinshi}
+
+\section{典型多值函数：幂函数与根式函数}
+
+\begin{wulibj}[本节要解决的问题]
+学生学到这里，最需要建立的是统一观点：很多看起来各不相同的多值函数，其实都源于复对数。本节就要把 $\log z$、$z^\alpha$ 和 $\sqrt[n]{z}$ 这几类最重要的例子串起来。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解 $z^\alpha$ 的定义为什么离不开 $\log z$。
+    \item 让学生理解整数幂、分数幂和无理幂在多值性上的区别。
+    \item 让学生掌握 $\sqrt[n]{z}$ 的常见分支与几何意义。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 复幂函数 $z^\alpha = \mathrm{e}^{\alpha \log z}$
+    \item $\alpha$ 取不同类型值时的多值差异
+    \item 根式函数 $\sqrt[n]{z}$ 的分支
+    \item 主值根式与几何直观
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 复幂函数定义为
+    \[
+        z^\alpha = \mathrm{e}^{\alpha \log z},
+    \]
+    因此它的多值性直接继承自 $\log z$。
+    \item 当 $\alpha$ 为整数时，$z^\alpha$ 退化成熟悉的单值函数；当 $\alpha$ 为非整数时，多值性一般无法避免。
+    \item 根式函数
+    \[
+        \sqrt[n]{z}=z^{1/n}
+    \]
+    是最适合帮助学生建立直观的一类对象，应重点讲清楚。
+    \item 主值根式的选法，本质上也是先选定对数的一支，再把它代入幂函数定义。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{平方根的主值支}{}
+在去掉负实轴的区域上写出 $\sqrt{z}$ 的主值支，并说明它为什么在该区域上解析。
+\end{lizi}
+
+\begin{lizi}{幂函数的全部值}{}
+求 $(-1)^{1/2}$、$(-1)^{1/3}$ 与 $\mathrm{i}^{1/2}$ 的全部值，并比较它们的分支结构。
+\end{lizi}
+
+\begin{lizi}{不同指数导致不同多值性}{}
+比较 $z^2$、$z^{1/2}$ 与 $z^{\sqrt{2}}$ 的多值行为，说明它们为什么性质差异很大。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item $z^{1/2}$ 将辐角减半的示意图。
+    \item $\sqrt{z}$ 的两叶直观图。
+    \item $\sqrt[n]{z}$ 与 $z^n$ 在角度映射上的对比图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把 $z^\alpha$ 机械地照搬实数范围内的经验。
+    \item 不要忘记根式函数的定义其实依赖于所选对数支。
+    \item 不要把整数幂和非整数幂混在同一层面讨论。
+\end{enumerate}
+\end{jinshi}
+
+\section{绕行现象、支点与多叶直观}
+
+\begin{wulibj}[本节要解决的问题]
+前面已经从公式上知道：多值性和绕原点有关。本节则要把这种现象真正讲成画面。学生如果只停留在公式层面，很容易会背定义却没有直观；而这一节正是帮助他们把``绕一圈为什么会换值''想清楚的关键。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解什么叫支点。
+    \item 让学生理解为什么绕支点一圈会跳到另一支。
+    \item 让学生通过多叶直观建立对对数函数和根式函数的几何感觉。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 支点的概念与最典型例子
+    \item 对数函数绕原点一圈后的变化
+    \item 根式函数绕原点一圈后的变化
+    \item 多叶图像的直观解释
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 支点并不是普通意义下的孤立奇点，它更像是``一绕就会变值''的拓扑敏感点。
+    \item 对 $\log z$ 来说，绕原点一圈会多出 $2\pi\mathrm{i}$。
+    \item 对 $\sqrt{z}$ 来说，绕原点一圈会跳到另一叶，再绕一圈才回到原支。
+    \item 多叶图像的引入，只是帮助建立直观，不必在本讲义里正式展开黎曼面理论。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{对数函数的绕行效应}{}
+设 $z$ 沿包围原点的闭路逆时针转一周，说明 $\log z$ 为什么会整体增加 $2\pi \mathrm{i}$。
+\end{lizi}
+
+\begin{lizi}{平方根的换支现象}{}
+说明 $\sqrt{z}$ 绕原点一周后为什么会变号，并解释这意味着什么。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 绕原点闭路及辐角连续增长示意图。
+    \item $\sqrt{z}$ 两叶结构示意图。
+    \item $\log z$ 多层结构的直观图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把支点和极点、可去奇点简单混为一谈。
+    \item 不要误以为绕一圈以后``函数写法没变，所以函数值也应不变''。
+    \item 多叶图只是直观工具，不必把它误读成正式证明。
+\end{enumerate}
+\end{jinshi}
+
+\section{支割路径与复积分方法}
+
+\begin{wulibj}[本节要解决的问题]
+前几节主要在搭建多值函数的概念世界。本节则要回答学生最关心的应用问题：既然函数本身会多值，那第五章里的围道积分方法还怎么用？答案是：留数定理本身并没有失效，但做题时必须先选支，再选路径，尤其要认真处理支割两侧的函数值差异。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解带多值函数的积分为什么必须先说明分支。
+    \item 让学生掌握钥匙孔围道这类典型路径的构造思想。
+    \item 让学生知道支割上下两岸函数值的关系，往往正是积分成功的关键。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 多值函数积分中的基本步骤：先选支，再选路径
+    \item 支割两侧函数值的比较
+    \item 钥匙孔围道与典型应用
+    \item 含 $\log x$、$x^\alpha$、$\sqrt{x}$ 的积分示例
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 留数定理本身并没有改变；变化的是：函数必须先在所选围道内成为单值解析对象。
+    \item 支割不能随便画，它必须和积分路径设计、奇点位置以及题目目标配合起来。
+    \item 钥匙孔围道特别适合处理支点在原点和无穷远点、支割沿正实轴或负实轴延伸的积分问题。
+    \item 做这类题时，最关键的往往不是残数本身，而是先看清支割上下两侧函数值如何对应。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{含幂函数的典型积分}{}
+用钥匙孔围道讨论
+\[
+    \int_0^{\infty} \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x
+\]
+这一类积分，并说明为什么必须先固定 $x^{\alpha-1}$ 的支。
+\end{lizi}
+
+\begin{lizi}{含对数函数的典型积分}{}
+选择合适的对数支，说明如何处理一类含 $\log x$ 的无穷积分，并指出围道各段的作用分工。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 钥匙孔围道示意图。
+    \item 支割上下两岸函数值不同的示意图。
+    \item 小圆弧、外大圆弧与实轴两侧积分对应关系图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要在未说明分支的情况下直接写留数或路径积分。
+    \item 不要把支割上下两岸的函数值错当成相同。
+    \item 不要只顾套用现成围道，而不先判断题目中的支点结构。
+\end{enumerate}
+\end{jinshi}
+
+\section{本章小结}
+
+\begin{tishi}[一句话回看本章]
+本章的核心思想可以压缩成一句话：\textbf{多值函数的问题，关键不在于强行把它变成全局单值，而在于学会在合适区域上选出解析支，再据此设计路径和方法。}
+\end{tishi}
+
+\subsection*{建议在正式写作时重点回顾的主线}
+\begin{itemize}
+    \item 多值现象从辐角开始，而不是从技巧性积分开始。
+    \item 复对数是最基本的多值函数，幂函数和根式函数都和它直接相关。
+    \item 支、解析支和支割的引入，是为了把多值问题转化为某个区域上的单值解析问题。
+    \item 一旦进入积分应用，思路顺序应当是：判断支点 $\rightarrow$ 选支割 $\rightarrow$ 选路径 $\rightarrow$ 再做计算。
+\end{itemize}
+
+\subsection*{建议正式小结中安排的功能块}
+\begin{itemize}
+    \item 用一幅流程图回顾``辐角 $\rightarrow$ 对数 $\rightarrow$ 分支 $\rightarrow$ 幂函数 $\rightarrow$ 支割积分''这条主线。
+    \item 用一个 `jinshi` 框集中提醒本章最容易混淆的概念：$\arg z$ 与 $\operatorname{Arg} z$、$\log z$ 与 $\operatorname{Log} z$、支点与极点、单值与解析支。
+    \item 用一个 `tishi` 框总结带多值函数积分时的判断顺序和常见路径模板。
+\end{itemize}
+
+\section{习题安排建议}
+
+\subsection*{基础题}
+\begin{itemize}
+    \item 写出若干给定复数的全部辐角与主辐角。
+    \item 求 $\log z$、$z^{1/2}$、$z^{1/3}$ 在指定点的全部值与主值。
+    \item 判断某个给定区域上能否为 $\log z$ 或 $\sqrt{z}$ 选出解析支。
+\end{itemize}
+
+\subsection*{综合题}
+\begin{itemize}
+    \item 比较不同支割下 $\operatorname{Log} z$ 的表达式及适用区域。
+    \item 说明 $\sqrt{z}$ 绕原点一周后为何变号，并推广到 $\sqrt[n]{z}$。
+    \item 在指定区域上构造 $z^\alpha$ 的一个解析支，并写出明确表达式。
+\end{itemize}
+
+\subsection*{挑战题}
+\begin{itemize}
+    \item 设计一条适合某个多值函数的支割，并说明为什么这样选有利于积分处理。
+    \item 用钥匙孔围道完成一类含 $x^\alpha$ 或 $\log x$ 的典型实积分。
+    \item 说明为什么某些区域上不可能为 $\log z$ 选出全局解析支。
+\end{itemize}
