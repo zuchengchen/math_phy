@@ -13,17 +13,17 @@
     \begin{tikzpicture}[remember picture, overlay]
         % 背景与结构色块
         \fill[coverpaper] (current page.south west) rectangle (current page.north east);
-        \fill[covernavy] (current page.south west) rectangle ([xshift=4.25cm]current page.north west);
-        \fill[covergold] ([xshift=4.25cm, yshift=-1.28cm]current page.north west)
+        \fill[covernavy] (current page.south west) rectangle ([xshift=4.4cm]current page.north west);
+        \fill[covergold] ([xshift=4.4cm, yshift=-1.28cm]current page.north west)
             rectangle ([yshift=-1.06cm]current page.north east);
 
         % 左侧竖向辅助线
         \draw[white!18, line width=0.5pt]
-            ([xshift=3.02cm, yshift=1.4cm]current page.south west) --
-            ([xshift=3.02cm, yshift=-1.4cm]current page.north west);
+            ([xshift=2.86cm, yshift=2.15cm]current page.south west) --
+            ([xshift=2.86cm, yshift=-1.4cm]current page.north west);
         \draw[white!18, line width=0.5pt]
-            ([xshift=3.46cm, yshift=1.4cm]current page.south west) --
-            ([xshift=3.46cm, yshift=-1.4cm]current page.north west);
+            ([xshift=3.76cm, yshift=2.15cm]current page.south west) --
+            ([xshift=3.76cm, yshift=-1.4cm]current page.north west);
 
         % 左侧信息带
         \node[
@@ -44,24 +44,25 @@
             anchor=west,
             rotate=90,
             text=white!58,
-            font=\fontsize{9.2pt}{11.2pt}\selectfont
-        ] at ([xshift=3.18cm, yshift=3.0cm]current page.south west)
+            font=\fontsize{8.9pt}{10.8pt}\selectfont
+        ] at ([xshift=3.31cm, yshift=3.0cm]current page.south west)
             {复变函数 / 积分变换 / 数理方程 / 特殊函数};
 
         \node[
             anchor=south west,
             text=white,
             align=left,
-            font=\fontsize{11pt}{13pt}\selectfont\bfseries
-        ] at ([xshift=0.8cm, yshift=1.35cm]current page.south west)
-            {物理与电子科学学院};
+            text width=3.05cm,
+            font=\fontsize{10.2pt}{12.3pt}\selectfont\bfseries
+        ] at ([xshift=0.72cm, yshift=0.98cm]current page.south west)
+            {物理与电子\\科学学院};
         \node[
             anchor=south west,
             text=white!68,
             align=left,
-            text width=2.75cm,
+            text width=3.05cm,
             font=\fontsize{8.6pt}{10pt}\selectfont
-        ] at ([xshift=0.8cm, yshift=0.28cm]current page.south west)
+        ] at ([xshift=0.72cm, yshift=0.14cm]current page.south west)
             {School of Physics\\and Electronics};
 
         % 右上角圆环与坐标感元素
