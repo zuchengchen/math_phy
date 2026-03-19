@@ -31,6 +31,12 @@
 % ========== 第一节 ==========
 \section{复积分的定义、参数化与基本性质}
 
+\begin{wulibj}[为什么会出现沿曲线的积分]
+在实变函数里，我们最熟悉的是沿区间积分，因为自变量只在一条数轴上变化。但到了复平面里，很多对象天然就是沿曲线或边界出现的：例如二维势场中的边界环流、沿闭合边界累加场的贡献，以及后面要看到的``边界决定内部''现象，都要求我们把积分对象放到一条有向曲线上去看。
+
+这时有一个很重要的变化：我们不只关心曲线经过了哪些点，还关心它是按什么方向走过去的。也正因为如此，复积分里出现的是 $\Delta z$ 或 $\mathrm{d}z$，而不是单纯的弧长元 $\mathrm{d}s$。前者保留了方向信息，后者只保留长度信息；这也是复积分会表现出比普通弧长积分更丰富结构的原因。
+\end{wulibj}
+
 \subsection{复积分的定义}
 
 \begin{dingliyi}{复积分}{}
@@ -43,6 +49,10 @@
     \int_C f(z)\,\mathrm{d}z = \lim_{\max|\Delta z_k| \to 0} \sum_{k=1}^{n} f(\zeta_k)\Delta z_k
 \end{equation}
 \end{dingliyi}
+
+\begin{zhu}{}{}
+这里最容易忽略的一点是：和式里出现的是 $\Delta z_k$，而不是 $|\Delta z_k|$。这不是记号上的小差别，而是定义本身的关键。若写成 $|\Delta z_k|$，记录的只是小弧段的长度；而写成 $\Delta z_k$，记录的则是复平面中的位移，因此方向信息也被一起保留下来了。后面闭路积分会不会为零、改方向后为什么会变号，都和这件事直接相关。
+\end{zhu}
 
 \begin{figure}[htbp]
 \centering
@@ -70,6 +80,20 @@
 \end{figure}
 
 \subsection{复积分的参数化与计算}
+
+真正计算复积分时，最常用的入口不是直接回到黎曼和定义，而是先把曲线参数化。设
+\[
+    z=z(t),\qquad a\le t\le b,
+\]
+其中 $z(a)$ 是曲线起点，$z(b)$ 是曲线终点。则
+\[
+    \mathrm{d}z = z'(t)\,\mathrm{d}t,
+\]
+从而
+\[
+    \int_C f(z)\,\mathrm{d}z = \int_a^b f(z(t))z'(t)\,\mathrm{d}t.
+\]
+这条公式非常重要，因为它把``沿复平面中的曲线积分''改写成了熟悉的实变量积分。后面不论是直接计算，还是证明各种性质，几乎都要从这里出发。
 
 设 $f(z) = u(x, y) + \mathrm{i}v(x, y)$，$z = x + \mathrm{i}y$，$\mathrm{d}z = \mathrm{d}x + \mathrm{i}\mathrm{d}y$。则
 \begin{align}
@@ -195,6 +219,8 @@
 
 \begin{wulibj}[为什么这里先谈路径无关]
 上一节我们已经看到，复积分的定义本身是沿曲线作和，因此对一般函数来说，积分自然会依赖路径。可一旦某个函数存在原函数，积分就会突然变得和实变积分很像：它只和起点、终点有关，而与中间具体怎样走无关。
+
+如果你学过普通物理里``保守力做功与路径无关''这件事，就会觉得这里很眼熟：做功只由始末位置决定，本质上正是因为存在势函数。复积分里的``原函数''扮演的就是类似角色。
 
 这一节先把这种``如果有原函数，就会路径无关''的思路讲清楚。下一节再用柯西积分定理说明：为什么在单连通区域里，解析函数恰好会拥有这种特殊性质。
 \end{wulibj}
@@ -326,7 +352,6 @@
 
 \subsection{定理的陈述}
 
-设 $f(z)$ 在\keyword{单连通区域} $D$ 内解析，$C$ 是 $D$ 内任意一条简单闭曲线，则
 \begin{dingli}{柯西积分定理}{}
 设 $f(z)$ 在单连通区域 $D$ 内解析，$C$ 是 $D$ 内任意一条简单闭曲线，则
 \[
@@ -360,21 +385,53 @@
 \subsection{定理的证明（格林公式方法）}
 
 \begin{proof}
-设 $f(z) = u + \mathrm{i}v$，则
-\begin{equation}
-    \oint_C f(z)\,\mathrm{d}z = \oint_C (u\,\mathrm{d}x - v\,\mathrm{d}y) + \mathrm{i}\oint_C (v\,\mathrm{d}x + u\,\mathrm{d}y)
-\end{equation}
+记 $\Omega$ 为简单闭曲线 $C$ 所围成的区域。由于 $D$ 是单连通区域，而且 $C$ 完全落在 $D$ 内，所以 $C$ 的内部区域 $\Omega$ 也全部包含在 $D$ 中；这正是单连通条件在这里发挥作用的地方。下面先默认 $C$ 取正向（逆时针方向）；若取反向，积分只差一个负号，而零乘以 $-1$ 仍然是零。
 
-由格林公式：
+把 $f$ 写成
+\[
+    f(z)=u(x,y)+\mathrm{i}v(x,y).
+\]
+则
 \begin{align}
-    \oint_C (u\,\mathrm{d}x - v\,\mathrm{d}y) &= \iint_D \left(-\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}\right)\mathrm{d}x\mathrm{d}y \\
-    \oint_C (v\,\mathrm{d}x + u\,\mathrm{d}y) &= \iint_D \left(\frac{\partial u}{\partial x} - \frac{\partial v}{\partial y}\right)\mathrm{d}x\mathrm{d}y
+    \oint_C f(z)\,\mathrm{d}z
+    &= \oint_C (u+\mathrm{i}v)(\mathrm{d}x+\mathrm{i}\,\mathrm{d}y) \\
+    &= \oint_C (u\,\mathrm{d}x-v\,\mathrm{d}y)
+    + \mathrm{i}\oint_C (v\,\mathrm{d}x+u\,\mathrm{d}y).
 \end{align}
 
-由 C-R 条件：$u_x = v_y$，$u_y = -v_x$。因此两个积分的被积函数都为零，故
-\begin{equation}
-    \oint_C f(z)\,\mathrm{d}z = 0
-\end{equation}
+现在把实部和虚部分开处理。对第一个积分，在格林公式里取
+\[
+    P=u,\qquad Q=-v,
+\]
+便得到
+\begin{align}
+    \oint_C (u\,\mathrm{d}x-v\,\mathrm{d}y)
+    &= \iint_{\Omega}\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\,\mathrm{d}x\mathrm{d}y \\
+    &= \iint_{\Omega}\left(-\frac{\partial v}{\partial x}-\frac{\partial u}{\partial y}\right)\,\mathrm{d}x\mathrm{d}y.
+\end{align}
+
+对第二个积分，在格林公式里取
+\[
+    P=v,\qquad Q=u,
+\]
+便得到
+\[
+    \oint_C (v\,\mathrm{d}x+u\,\mathrm{d}y)
+    = \iint_{\Omega}\left(\frac{\partial u}{\partial x}-\frac{\partial v}{\partial y}\right)\,\mathrm{d}x\mathrm{d}y.
+\]
+
+由于 $f$ 在 $D$ 内解析，在本章采用的证明框架下，$u,v$ 满足柯西--黎曼条件
+\[
+    u_x=v_y,\qquad u_y=-v_x.
+\]
+于是
+\[
+    -v_x-u_y=0,\qquad u_x-v_y=0.
+\]
+因此上面两个面积分都等于零，从而
+\[
+    \oint_C f(z)\,\mathrm{d}z = 0.
+\]
 \end{proof}
 
 \begin{zhu}{}{}
@@ -413,11 +470,21 @@
     \frac{F(z+h)-F(z)}{h}
     = \int_0^1 f(z+th)\,\mathrm{d}t.
 \]
-当 $h\to 0$ 时，对每个 $t\in[0,1]$ 都有 $z+th\to z$。又因为 $f$ 在 $z$ 处连续，所以
+由于 $f$ 在 $z$ 处连续，对任意 $\varepsilon>0$，存在 $\eta>0$，只要 $|w-z|<\eta$，就有
 \[
-    f(z+th)\to f(z).
+    |f(w)-f(z)|<\varepsilon.
 \]
-于是
+当 $|h|<\eta$ 时，对所有 $t\in[0,1]$ 都有
+\[
+    |z+th-z|=t|h|\le |h|<\eta,
+\]
+所以整条小线段上的函数值都会同时靠近 $f(z)$。于是
+\begin{align}
+    \left|\int_0^1 f(z+th)\,\mathrm{d}t-\int_0^1 f(z)\,\mathrm{d}t\right|
+    &\le \int_0^1 |f(z+th)-f(z)|\,\mathrm{d}t \\
+    &\le \int_0^1 \varepsilon\,\mathrm{d}t=\varepsilon.
+\end{align}
+因此
 \[
     \lim_{h\to 0}\frac{F(z+h)-F(z)}{h}
     = \int_0^1 f(z)\,\mathrm{d}t
@@ -449,6 +516,8 @@
     \frac{1}{z-z_0}.
 \]
 它除了 $z_0$ 以外处处解析，可一旦曲线把 $z_0$ 围住，闭路积分就不再是零。
+
+从物理直觉上说，这就像区域里出现了一个不能穿过去的障碍物、导体孔洞或被挖去的点。此时你沿边界绕行一圈所累加出来的信息，可能会记住``到底有没有绕住那个洞''，而不再像单连通情形那样可以随意缩成一点。
 
 这一节的任务，就是让大家真正看见：区域里的``洞''会怎样改变积分行为。
 \end{wulibj}
@@ -599,21 +668,26 @@
 
 第一项等于 $f(z_0) \cdot 2\pi\mathrm{i}$。
 
-对于第二项，由于 $f(z)$ 连续，对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $|z - z_0| < \delta$ 时，$|f(z) - f(z_0)| < \varepsilon$。
+对于第二项，由于 $f(z)$ 在 $z_0$ 处连续，对于任意 $\varepsilon > 0$，存在 $\delta > 0$，当 $|z - z_0| < \delta$ 时，$|f(z) - f(z_0)| < \varepsilon$。
 
 取 $r < \delta$，则
-\begin{equation}
-    \left|\oint_{C_r} \frac{f(z) - f(z_0)}{z - z_0}\,\mathrm{d}z\right| \leq \frac{\varepsilon}{r} \cdot 2\pi r = 2\pi\varepsilon
-\end{equation}
+\begin{align}
+    \left|\oint_{C_r} \frac{f(z) - f(z_0)}{z - z_0}\,\mathrm{d}z\right|
+    &\leq \oint_{C_r} \left|\frac{f(z) - f(z_0)}{z - z_0}\right|\,\mathrm{d}s \\
+    &\leq \max_{z\in C_r}\left|\frac{f(z)-f(z_0)}{z-z_0}\right|\cdot 2\pi r \\
+    &\leq \frac{\varepsilon}{r}\cdot 2\pi r = 2\pi\varepsilon.
+\end{align}
 
-由 $\varepsilon$ 的任意性，第二项为零。因此
+这说明第二项的绝对值可以做得任意小，因此它必须等于零。于是
 \begin{equation}
     \oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z = 2\pi\mathrm{i} f(z_0)
 \end{equation}
 \end{proof}
 
 \begin{wulibj}[物理意义：平均值性质]
-柯西积分公式表明：解析函数\index{解析函数}在一点的值等于它在该点周围边界上的``平均值''（加权积分）。这说明解析函数\index{解析函数}的值由边界值完全确定，体现了解析函数\index{解析函数}的``刚性''。
+柯西积分公式表明：解析函数\index{解析函数}在一点的值等于它在该点周围边界上的``平均值''（加权积分）。这和第二章里调和函数的平均值性质，其实属于同一条直觉：在没有源的二维区域里，内部一点的状态不能脱离边界而任意摆动。
+
+换句话说，边界一旦固定，内部就会受到整体约束。把这种想法放回物理图景里看，它意味着二维势场、稳恒温度场这类无源问题中，内部信息不是独立自由的，而是被边界数据锁定的。这正是解析函数\index{解析函数}``刚性''的一个非常直观的表现。
 \end{wulibj}
 
 \begin{figure}[htbp]
@@ -695,6 +769,10 @@
 
 \subsection{高阶导数公式}
 
+柯西积分公式已经告诉我们：边界积分可以恢复内部一点的函数值。一个更进一步的问题自然会出现：如果我们想恢复的不只是函数值，而是这一点附近更细的局部变化信息，例如一阶导数、二阶导数，甚至更高阶导数，该怎么办？
+
+答案是：只要把分母里的幂次提高，边界积分就会对 $z_0$ 附近的行为变得更敏感，从而把更高阶的局部信息提取出来。下面的公式正是在回答这个问题。
+
 \begin{dingli}{高阶导数公式}{}
 在柯西积分公式的条件下，$f(z)$ 在 $D$ 内有\keyword{任意阶导数}，且
 \[
@@ -756,7 +834,19 @@
 \[
     \frac{f(z)}{(z-z_0)^2},
 \]
-因此可以把极限移入积分号内，得到
+这一点要稍微说明一下。对任意 $z\in C$，由 $|z-z_0|\ge d$ 以及 $|h|<d/2$ 可知
+\[
+    |z-z_0-h|\ge |z-z_0|-|h| \ge \frac{d}{2}.
+\]
+于是
+\begin{align}
+    \left|
+    \frac{f(z)}{(z-z_0-h)(z-z_0)} - \frac{f(z)}{(z-z_0)^2}
+    \right|
+    &= |f(z)|\left|\frac{h}{(z-z_0-h)(z-z_0)^2}\right| \\
+    &\le \max_{\zeta\in C}|f(\zeta)|\cdot \frac{2|h|}{d^3}.
+\end{align}
+右端与 $z$ 无关，并且当 $h\to 0$ 时趋于零，所以这里确实是一致收敛。于是可以把极限移入积分号内，得到
 \[
     f'(z_0)=\frac{1}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{(z-z_0)^2}\,\mathrm{d}z.
 \]
@@ -896,7 +986,11 @@
 图~\ref{fig:morera-intuition} 画出了莫雷拉定理背后的直观想法：如果围成区域的小闭路积分都为零，那么把这片区域切成很多小块以后，内部边界会两两抵消，最后就会导向路径无关。
 
 \begin{proof}
-固定一点 $z_0\in D$。由条件知：$D$ 内任意闭曲线上的积分都为零，因此两点之间的积分与路径无关。于是可以定义
+固定一点 $z_0\in D$。先说明为什么两点之间的积分与路径无关。设 $C_1,C_2$ 是 $D$ 内两条从 $z_0$ 到 $z$ 的分段光滑曲线。把 $C_2$ 反向后与 $C_1$ 拼起来，就得到一条闭路。若这条闭路有自交点，可以像图~\ref{fig:morera-intuition} 所示那样，把它分解成有限条简单闭曲线；由于条件保证每一条简单闭曲线上的积分都为零，而内部公共边界又会两两抵消，所以最终得到
+\[
+    \int_{C_1} f(\zeta)\,\mathrm{d}\zeta-\int_{C_2} f(\zeta)\,\mathrm{d}\zeta = 0.
+\]
+这就说明两点之间的积分与路径无关。于是可以定义
 \[
     F(z) = \int_{z_0}^z f(\zeta)\,\mathrm{d}\zeta.
 \]
@@ -918,10 +1012,20 @@
     \frac{F(z+h)-F(z)}{h}
     = \int_0^1 f(z+th)\,\mathrm{d}t.
 \]
-当 $h\to 0$ 时，由 $f$ 的连续性，
+由于 $f$ 在 $z$ 处连续，对任意 $\varepsilon>0$，存在 $\eta>0$，当 $|w-z|<\eta$ 时就有
 \[
-    f(z+th)\to f(z)\qquad (0\le t\le 1),
+    |f(w)-f(z)|<\varepsilon.
 \]
+当 $|h|<\eta$ 时，对所有 $t\in[0,1]$ 都有
+\[
+    |z+th-z|=t|h|\le |h|<\eta,
+\]
+所以整条小线段上的函数值都会同时靠近 $f(z)$。于是
+\begin{align}
+    \left|\int_0^1 f(z+th)\,\mathrm{d}t-\int_0^1 f(z)\,\mathrm{d}t\right|
+    &\le \int_0^1 |f(z+th)-f(z)|\,\mathrm{d}t \\
+    &\le \int_0^1 \varepsilon\,\mathrm{d}t = \varepsilon.
+\end{align}
 因此
 \[
     \lim_{h\to 0}\frac{F(z+h)-F(z)}{h}
