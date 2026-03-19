@@ -1716,7 +1716,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \node[gray!70] at (4.7,-0.55) {复平面};
 
     % image line on plane
-    \draw[orange!90!black, line width=1.4pt] (-4.8,-1.05) -- (2.4,0.05);
+    \draw[orange!90!black, line width=1.4pt] (-4.8,-0.92) -- (2.4,0.16);
     \node[orange!90!black, below] at (-1.2,-0.55) {$\ell$};
 
     % sphere
@@ -1736,7 +1736,8 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \node[right, gray!80!black] at ($(N)+(1.0,0.1)$) {$N\leftrightarrow \infty$};
 
     % highlighted circle through N and S
-    \draw[orange!90!black, line width=1.4pt] (O) ellipse[x radius=0.82, y radius=1.55];
+    \draw[orange!90!black, line width=1.4pt] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
+    \draw[orange!90!black, line width=1.1pt, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
     \node[orange!90!black] at ($(O)+(-1.1,1.0)$) {$C$};
 
     % sample points on the circle
@@ -1748,9 +1749,9 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \fill[black] (P3) circle (2pt) node[left] {$P_3$};
 
     % image points on plane line
-    \coordinate (Z1) at (-3.42725,-0.84027);
-    \coordinate (Z2) at (-1.26304,-0.50963);
-    \coordinate (Z3) at (-0.46607,-0.38787);
+    \coordinate (Z1) at (-3.29320,-0.69398);
+    \coordinate (Z2) at (-1.21591,-0.38239);
+    \coordinate (Z3) at (-0.44898,-0.26735);
     \fill[black] (Z1) circle (2pt);
     \fill[black] (Z2) circle (2pt);
     \fill[black] (Z3) circle (2pt);
