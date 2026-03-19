@@ -1,0 +1,766 @@
+% 第五章：留数理论（详细提纲）
+
+\chapter{留数理论}
+
+\begin{wulibj}[本章定位]
+上一章的核心任务，是让学生学会用泰勒展开与洛朗展开去理解解析函数和奇点的局部结构；这一章则要再往前走一步：把奇点附近最关键的一项信息抽出来，并把它变成计算闭路积分与实积分的强有力工具。
+
+从内容主线看，本章可以概括为：
+\[
+    \text{洛朗展开中的 } c_{-1}
+    \Longrightarrow
+    \text{留数}
+    \Longrightarrow
+    \text{留数定理}
+    \Longrightarrow
+    \text{闭路积分与实积分计算}
+    \Longrightarrow
+    \text{零点与极点计数}
+\]
+
+因此，本章不能写成若干技巧的堆砌。真正需要建立起来的，是这样一条清晰认识：留数不是凭空出现的新符号，而是从局部展开自然长出来的；留数定理也不是孤立公式，而是把局部信息转化为整体积分的桥梁；至于后面各种实积分题型，则都是这座桥梁的不同用法。
+\end{wulibj}
+
+\begin{tishi}[写作总原则]
+\begin{enumerate}
+    \item 本章开头要明确承接第四章，强调留数来自洛朗展开中的一阶负幂项，而不是突然定义一个新名词。
+    \item 公式要少而精，重点是帮助学生判断``什么时候该用什么方法''，而不是把所有留数公式一股脑堆出来。
+    \item 实积分应用要按难度递进：先单位圆方法，再有理型无穷积分，最后再讲含 $\mathrm{e}^{\mathrm{i}ax}$ 的振荡积分。
+    \item 辐角原理与鲁歇定理可以保留，但宜明确标为选读，以免打断本章``留数作为积分工具''的主线。
+\end{enumerate}
+\end{tishi}
+
+\section{第一节\quad 从局部展开到留数}
+
+\begin{wulibj}[本节要解决的问题]
+学生在上一章结尾已经看到：围绕奇点的小圆积分会把绝大多数幂次项都``筛掉''，只留下
+\[
+    \frac{c_{-1}}{z-z_0}
+\]
+这一项。本节要做的，就是把这个现象重新整理成一个清楚的概念起点：为什么这一项特殊、为什么它值得单独命名、它到底在记录奇点附近的什么信息。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生从第四章的洛朗展开自然过渡到留数概念。
+    \item 让学生理解留数就是洛朗展开中的 $c_{-1}$，不是额外附加的新对象。
+    \item 让学生意识到：留数抓住的并不是奇点的全部信息，而是对围道积分最关键的那一部分局部信息。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 回顾：为什么只有一阶负幂项会留下来
+    \item 留数的定义
+    \item 留数所记录的局部信息
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 若
+    \[
+        f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n,
+    \]
+    则 $c_{-1}$ 是唯一会在小圆积分中留下贡献的系数。
+    \item 因而称 $c_{-1}$ 为 $f$ 在 $z_0$ 处的留数，记作
+    \[
+        \operatorname{Res}[f(z),z_0].
+    \]
+    \item 留数为零并不意味着该点一定是解析点；例如 $\dfrac{1}{(z-z_0)^2}$ 在 $z_0$ 处留数为零，但仍是极点。
+    \item 留数总是相对于某个孤立奇点而言的，不能脱离奇点位置空谈``函数的留数''。
+\end{itemize}
+
+\subsection*{建议使用的定义与结论}
+\begin{dingliyi}{留数}{}
+设 $z_0$ 是 $f(z)$ 的孤立奇点，且在 $z_0$ 的穿孔邻域内有洛朗展开
+\[
+    f(z)=\sum_{n=-\infty}^{\infty} c_n (z-z_0)^n.
+\]
+称系数 $c_{-1}$ 为 $f(z)$ 在 $z_0$ 处的\textbf{留数}，记作
+\[
+    \operatorname{Res}[f(z),z_0]=c_{-1}.
+\]
+\end{dingliyi}
+
+\begin{tuilun}{小圆积分与留数}{}
+若 $C_\rho$ 是以 $z_0$ 为中心、半径为 $\rho$ 的正向小圆，且洛朗展开在该圆周上成立，则
+\[
+    \oint_{C_\rho} f(z)\,\mathrm{d}z = 2\pi \mathrm{i}\,\operatorname{Res}[f(z),z_0].
+\]
+\end{tuilun}
+
+\subsection*{建议例题}
+\begin{lizi}{读取留数}{}
+求 $f(z)=\dfrac{\cos z}{z^3}$ 在 $z=0$ 处的留数。
+\end{lizi}
+
+\begin{lizi}{留数为零但仍有奇点}{}
+说明 $f(z)=\dfrac{1}{z^2}$ 在 $z=0$ 处的留数为零，但 $z=0$ 并不是解析点。
+\end{lizi}
+
+\begin{lizi}{不同奇点各看各的局部展开}{}
+求 $f(z)=\dfrac{\mathrm{e}^z}{z(z-1)}$ 在 $z=0$ 与 $z=1$ 处的留数，并比较这两个留数的含义。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一幅小圆围道示意图，配合标出洛朗展开中的几类项，突出 $(z-z_0)^{-1}$ 项被积分``筛出''。
+    \item 一幅``留数不是全部主部''的提示图，说明主部中不同负幂项所扮演的角色并不相同。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把留数理解成``奇点的全部信息''；它只是围道积分最敏感的那一个系数。
+    \item 不要把``留数为零''误读成``没有奇点''。
+    \item 不要忘记留数的定义建立在孤立奇点和洛朗展开基础上。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：由给定洛朗展开直接读取留数。
+    \item 综合题：判断若干函数在不同奇点处的留数是否相同，并解释原因。
+    \item 挑战题：证明若 $f$ 在 $z_0$ 处是可去奇点，则其留数必为零。
+\end{itemize}
+
+\section{第二节\quad 留数的定义与常用计算法}
+
+\begin{wulibj}[本节要解决的问题]
+知道留数是什么以后，学生马上会问：做题时到底该怎么求它？这一节的任务，就是把最常用的几种求留数方法系统整理出来，并且帮助学生建立``先分类，再选法''的习惯，而不是一看到题就盲目展开或机械套公式。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握由洛朗展开直接读取留数的方法。
+    \item 让学生掌握一阶极点、高阶极点和有理函数简单极点的常用留数公式。
+    \item 让学生知道不同题型下应优先选择哪种方法最省力。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 由洛朗展开直接读取
+    \item 一阶极点的留数公式
+    \item 有理函数简单极点的快捷公式
+    \item 高阶极点的留数公式
+    \item 求留数时怎样选方法
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 从概念上说，留数总可以通过洛朗展开读取；但从计算效率上说，未必每题都应先做展开。
+    \item 若 $z_0$ 是一阶极点，则
+    \[
+        \operatorname{Res}[f(z),z_0]
+        =
+        \lim_{z\to z_0}(z-z_0)f(z).
+    \]
+    \item 若
+    \[
+        f(z)=\frac{P(z)}{Q(z)},\qquad Q(z_0)=0,\qquad Q'(z_0)\neq 0,
+    \]
+    则
+    \[
+        \operatorname{Res}[f(z),z_0]=\frac{P(z_0)}{Q'(z_0)}.
+    \]
+    这里必须强调：这只适用于\textbf{简单极点}。
+    \item 若 $z_0$ 是 $m$ 阶极点，则
+    \[
+        \operatorname{Res}[f(z),z_0]
+        =
+        \frac{1}{(m-1)!}
+        \lim_{z\to z_0}
+        \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}}
+        \left[(z-z_0)^m f(z)\right].
+    \]
+    \item 真正重要的不只是记住公式，而是会判断：这道题该展开、该取极限，还是该用导数公式。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingli}{一阶极点的留数公式}{}
+若 $z_0$ 是 $f(z)$ 的一阶极点，则
+\[
+    \operatorname{Res}[f(z),z_0]
+    =
+    \lim_{z\to z_0}(z-z_0)f(z).
+\]
+\end{dingli}
+
+\begin{dingli}{有理函数简单极点的快捷公式}{}
+若
+\[
+    f(z)=\frac{P(z)}{Q(z)},
+\]
+其中 $P,Q$ 在 $z_0$ 附近解析，且 $Q(z_0)=0$、$Q'(z_0)\neq 0$，则
+\[
+    \operatorname{Res}[f(z),z_0]=\frac{P(z_0)}{Q'(z_0)}.
+\]
+\end{dingli}
+
+\begin{dingli}{高阶极点的留数公式}{}
+若 $z_0$ 是 $f(z)$ 的 $m$ 阶极点，则
+\[
+    \operatorname{Res}[f(z),z_0]
+    =
+    \frac{1}{(m-1)!}
+    \lim_{z\to z_0}
+    \frac{\mathrm{d}^{m-1}}{\mathrm{d}z^{m-1}}
+    \left[(z-z_0)^m f(z)\right].
+\]
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{一阶极点的留数}{}
+求 $f(z)=\dfrac{z}{z^2-1}$ 在 $z=1$ 处的留数。
+\end{lizi}
+
+\begin{lizi}{高阶极点的留数}{}
+求 $f(z)=\dfrac{1}{(z-1)^3}$ 在 $z=1$ 处的留数，并解释为什么高阶极点的留数可以为零。
+\end{lizi}
+
+\begin{lizi}{两种方法对比}{}
+分别用洛朗展开法与高阶极点公式求 $f(z)=\dfrac{\cos z}{z^3}$ 在 $z=0$ 处的留数，并比较哪种方法更直接。
+\end{lizi}
+
+\begin{lizi}{先分类再选法}{}
+求
+\[
+    f(z)=\frac{z^2+1}{(z-1)^2(z+2)}
+\]
+在各个有限奇点处的留数，并说明每个奇点为何选用当前方法。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一张``求留数方法选择图''：先判断奇点类型，再选取展开法、极限法或导数法。
+\end{itemize}
+
+\begin{tishi}[本节最想让学生形成的习惯]
+看到求留数的题，不要一上来就做洛朗展开。更稳妥的顺序是：
+\begin{enumerate}
+    \item 先判断奇点类型；
+    \item 再看是否是简单极点；
+    \item 若是简单极点，优先想极限法或 $\dfrac{P(z_0)}{Q'(z_0)}$；
+    \item 若不是简单极点，再考虑展开法或导数公式。
+\end{enumerate}
+\end{tishi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把 $\dfrac{P(z_0)}{Q'(z_0)}$ 公式误用于高阶极点。
+    \item 不要忘记公式成立的前提是奇点孤立且分母在该点为单零点。
+    \item 不要把``求主部''和``求留数''混成一回事；很多时候只需读出 $c_{-1}$ 即可。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：分别用不同方法求若干函数的留数。
+    \item 综合题：比较同一道题用展开法与公式法的优劣。
+    \item 挑战题：设计一题需要先拆分部分分式或变形后才能方便求留数。
+\end{itemize}
+
+\section{第三节\quad 留数定理}
+
+\begin{wulibj}[本节要解决的问题]
+到目前为止，我们只知道单个奇点附近的小圆积分与留数有关；但真正有威力的问题通常不是围着一个极小圆转，而是沿着一个较大的闭曲线积分。本节的任务，就是说明：只要曲线内部只有有限个孤立奇点，那么整个闭路积分就等于这些奇点留数的总和乘上 $2\pi \mathrm{i}$。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解留数定理是如何把局部信息变成整体积分的。
+    \item 让学生掌握留数定理的条件、结论与证明思路。
+    \item 让学生意识到：后面几乎所有经典积分技巧都建立在这个定理上。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从一个奇点到多个奇点
+    \item 留数定理的表述
+    \item 留数定理的证明
+    \item 留数定理为什么重要
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 若 $f$ 在简单闭曲线 $C$ 上及其内部除有限个孤立奇点 $z_1,\dots,z_n$ 外解析，则
+    \[
+        \oint_C f(z)\,\mathrm{d}z
+        =
+        2\pi \mathrm{i}\sum_{k=1}^{n}\operatorname{Res}[f(z),z_k].
+    \]
+    \item 留数定理的核心思想，是把大围道积分拆成若干个小围道积分之和。
+    \item 证明中真正用到的前提有两层：一是多连通区域上的柯西积分定理，二是单个奇点小圆积分等于 $2\pi \mathrm{i}$ 乘留数。
+    \item 曲线上不能有奇点；这一点必须反复提醒学生。
+\end{itemize}
+
+\subsection*{建议使用的定理}
+\begin{zhongyao}[留数定理]
+设 $f(z)$ 在简单闭曲线 $C$ 及其内部区域内除有限个孤立奇点 $z_1,z_2,\dots,z_n$ 外解析，且在曲线 $C$ 上连续，则
+\[
+    \oint_C f(z)\,\mathrm{d}z
+    =
+    2\pi \mathrm{i}\sum_{k=1}^{n}\operatorname{Res}[f(z),z_k].
+\]
+\end{zhongyao}
+
+\subsection*{建议证明结构}
+\begin{enumerate}
+    \item 以每个奇点为中心取互不相交的小圆 $C_k$，并保证都落在大围道内部。
+    \item 将小圆盘从原区域中挖去，得到一个多连通区域。
+    \item 在这个多连通区域内，$f$ 解析。
+    \item 由柯西积分定理，大围道积分等于各小围道积分之和。
+    \item 再由单个小围道的留数公式，把每一项写成 $2\pi \mathrm{i}$ 乘以对应留数。
+\end{enumerate}
+
+\subsection*{建议例题}
+\begin{lizi}{多个奇点的闭路积分}{}
+计算
+\[
+    \oint_{|z|=2}\frac{z+1}{z^2-1}\,\mathrm{d}z.
+\]
+\end{lizi}
+
+\begin{lizi}{围道内外奇点的区别}{}
+计算
+\[
+    \oint_{|z|=1}\frac{\mathrm{e}^z}{z(z-2)}\,\mathrm{d}z,
+\]
+并强调为什么只需计算围道内部奇点的留数。
+\end{lizi}
+
+\begin{lizi}{不能直接套用的情形}{}
+举一个围道上有奇点的例子，说明此时为什么不能直接应用留数定理。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一张``大围道减去若干小圆''的图，清楚标出外边界与内边界的方向。
+    \item 一张多个奇点分别贡献局部留数的示意图，帮助学生理解``整体积分等于局部贡献之和''。
+\end{itemize}
+
+\begin{tishi}[本节的思想重点]
+留数定理最值得强调的，不是最后那条公式本身，而是它背后的思维方式：整体闭路积分看似复杂，但真正起作用的只是每个奇点附近的局部信息。复分析里``局部决定整体''的味道，在这里体现得最明显。
+\end{tishi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把围道外的奇点也算进去。
+    \item 不要忘记检查围道上是否有奇点。
+    \item 不要把``多留数相加''理解成经验法则；这是一条严格定理，其证明依赖柯西积分定理。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：计算若干标准闭路积分。
+    \item 综合题：改变围道半径，讨论积分值何时改变、何时不变。
+    \item 挑战题：用留数定理重新证明某个第三章已做过的闭路积分结论。
+\end{itemize}
+
+\section{第四节\quad 留数法计算积分的一般步骤}
+
+\begin{wulibj}[本节要解决的问题]
+很多学生真正卡住的地方，不是在定理本身，而是在题目前：拿到一道积分题后，不知道先看什么、先判什么、先选什么路径。本节的任务，就是把留数法做题时最常见的判断步骤整理出来，帮助学生形成一套稳定的解题流程。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 帮助学生把留数法从``记住几个例题''提升为``会自己判断题型''。
+    \item 让学生学会围道的基本选择原则。
+    \item 让学生养成检查附加弧积分和回收原积分的习惯。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 先判断题目属于哪一类
+    \item 怎样找奇点与选围道
+    \item 怎样检查附加路径积分
+    \item 怎样把闭路积分还原成原积分
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 不是所有积分都适合直接上留数法；首先要判断题型。
+    \item 选围道时要围绕原积分服务，而不是凭习惯机械选上半圆。
+    \item 大圆弧积分是否趋于零，必须根据被积函数的衰减性质具体分析。
+    \item 复积分算完以后，还要仔细回到原问题：是取实部、取虚部，还是利用对称性减半。
+\end{itemize}
+
+\subsection*{建议写成的做题流程}
+\begin{enumerate}
+    \item \textbf{先归类：}这是闭路积分、单位圆积分、实轴无穷积分，还是带振荡因子的积分？
+    \item \textbf{再找奇点：}奇点在哪里？是几阶？哪些落在围道内部？
+    \item \textbf{再选围道：}单位圆、上半圆、下半圆，还是别的路径更合适？
+    \item \textbf{再算留数：}尽量选最省力的方法。
+    \item \textbf{再检查附加弧：}不能默认它一定趋于零。
+    \item \textbf{最后回原题：}注意各种系数、方向、实部或虚部。
+\end{enumerate}
+
+\subsection*{建议例题}
+\begin{lizi}{流程演示：单位圆路线}{}
+对积分
+\[
+    \int_0^{2\pi}\frac{1}{2+\cos\theta}\,\mathrm{d}\theta,
+\]
+先不急着算，而是先完整说明题型判断、换元、围道选择与留数计算步骤。
+\end{lizi}
+
+\begin{lizi}{流程演示：半圆围道路线}{}
+对积分
+\[
+    \int_{-\infty}^{+\infty}\frac{1}{x^2+a^2}\,\mathrm{d}x,
+\]
+按``找奇点 $\to$ 选围道 $\to$ 检查大圆弧 $\to$ 用留数定理''的顺序完整组织解题。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一张留数法总流程图：
+    \[
+        \text{题型判断}
+        \Longrightarrow
+        \text{找奇点}
+        \Longrightarrow
+        \text{选围道}
+        \Longrightarrow
+        \text{算留数}
+        \Longrightarrow
+        \text{检查附加弧}
+        \Longrightarrow
+        \text{回到原积分}.
+    \]
+    \item 一张单位圆法与半圆围道法的对照示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把选围道看成``做习题时背模板''，要让它服从原积分的结构。
+    \item 不要忘记附加弧积分这一步；很多错误正出在这里。
+    \item 不要在复积分算完以后忘记把答案转回原实积分。
+    \item 单位圆代换时，最容易漏掉的是
+    \[
+        \mathrm{d}\theta=\frac{\mathrm{d}z}{\mathrm{i}z}.
+    \]
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：给定几个积分，只要求学生判断题型与建议围道，不必立即算完。
+    \item 综合题：同一道积分分别尝试不同围道，比较哪种方案更自然。
+    \item 挑战题：给出一题不适合直接用留数法的积分，让学生说明障碍在哪里。
+\end{itemize}
+
+\section{第五节\quad 留数在实积分中的典型应用}
+
+\begin{wulibj}[本节要解决的问题]
+前面几节完成的是工具准备，本节则要让学生真正看到留数理论的计算威力。为了降低理解门槛，应用部分最好按难度递进：先讲单位圆方法处理三角积分，再讲半圆围道处理有理型无穷积分，最后再讲带振荡因子的积分和约当引理。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握三类最典型的留数法实积分题型。
+    \item 让学生理解不同题型对应不同围道，而不是一套方法通吃所有问题。
+    \item 让学生把前一节的一般步骤真正落实到完整算例中。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 三角积分与单位圆方法
+    \item 有理型无穷积分
+    \item 含振荡因子的无穷积分与约当引理
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 对
+    \[
+        \int_0^{2\pi} R(\cos\theta,\sin\theta)\,\mathrm{d}\theta,
+    \]
+    最自然的路线是令 $z=\mathrm{e}^{\mathrm{i}\theta}$，把问题转成单位圆上的围道积分。
+    \item 对
+    \[
+        \int_{-\infty}^{+\infty} R(x)\,\mathrm{d}x,
+    \]
+    常通过上半平面或下半平面的大半圆围道来处理，但必须检查大圆弧上的衰减。
+    \item 对
+    \[
+        \int_{-\infty}^{+\infty} R(x)\mathrm{e}^{\mathrm{i}ax}\,\mathrm{d}x,
+    \]
+    约当引理的作用是保证附加弧上的积分消失，并且围道选上半平面还是下半平面与 $a$ 的符号有关。
+\end{itemize}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{约当引理}{}
+若 $f(z)$ 在上半平面（除有限个点外）连续，并且当 $|z|\to \infty$ 时满足适当衰减条件，则对 $a>0$，
+\[
+    \lim_{R\to\infty}\int_{C_R} f(z)\mathrm{e}^{\mathrm{i}az}\,\mathrm{d}z = 0,
+\]
+其中 $C_R$ 为上半平面半径为 $R$ 的大半圆。
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{单位圆方法的标准例题}{}
+计算
+\[
+    \int_0^{2\pi}\frac{1}{1+a\cos\theta}\,\mathrm{d}\theta
+    \qquad (|a|<1).
+\]
+\end{lizi}
+
+\begin{lizi}{有理型无穷积分}{}
+计算
+\[
+    \int_{-\infty}^{+\infty}\frac{1}{x^2+a^2}\,\mathrm{d}x
+    \qquad (a>0).
+\]
+\end{lizi}
+
+\begin{lizi}{稍复杂的有理型无穷积分}{}
+计算
+\[
+    \int_{-\infty}^{+\infty}\frac{x^2}{x^4+1}\,\mathrm{d}x.
+\]
+\end{lizi}
+
+\begin{lizi}{振荡积分}{}
+计算
+\[
+    \int_0^{+\infty}\frac{\cos x}{x^2+1}\,\mathrm{d}x.
+\]
+\end{lizi}
+
+\begin{lizi}{取实部或虚部的训练}{}
+计算
+\[
+    \int_0^{+\infty}\frac{x\sin x}{x^2+1}\,\mathrm{d}x.
+\]
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 单位圆围道图，标出由 $\theta$ 变为 $z=\mathrm{e}^{\mathrm{i}\theta}$ 后的路径。
+    \item 上半平面大半圆围道图，标出内部极点位置与积分方向。
+    \item 约当引理常用围道图，突出指数因子在上半平面的衰减效果。
+\end{itemize}
+
+\begin{tishi}[这一节的教学节奏建议]
+应用部分不要一开始就上最难的振荡积分。更稳妥的顺序是：
+\begin{enumerate}
+    \item 先让学生熟悉单位圆代换；
+    \item 再做不带指数因子的有理型无穷积分；
+    \item 最后再引入约当引理与 $\mathrm{e}^{\mathrm{i}ax}$ 型积分。
+\end{enumerate}
+这样学生对``选围道''的理解会更扎实，不容易只记住局部技巧。
+\end{tishi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要在单位圆代换后忘记极点究竟在圆内还是圆外。
+    \item 不要在有理型无穷积分中默认大圆弧积分一定消失，必须看次数差与衰减速度。
+    \item 不要把 $\cos ax$、$\sin ax$ 题直接硬算；更自然的是先考虑 $\mathrm{e}^{\mathrm{i}ax}$，再取实部或虚部。
+    \item 对含振荡因子的积分，要特别提醒学生：围道选哪一侧与 $a$ 的符号相关。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：若干标准三角积分与有理型无穷积分。
+    \item 综合题：需要同时判断极点位置、弧积分消失和实部虚部回收的题目。
+    \item 挑战题：给出一道需要较精细估计的振荡积分，训练学生对约当引理条件的理解。
+\end{itemize}
+
+\section{第六节\quad 对数留数、辐角原理与鲁歇定理（选读）}
+
+\begin{wulibj}[本节要解决的问题]
+前几节强调的是留数在积分计算中的作用；本节则要让学生看到，留数还可以用来研究另一个看似完全不同的问题：一个区域里究竟有多少个零点和极点。这里的关键对象是
+\[
+    \frac{f'(z)}{f(z)}.
+\]
+它会把零点和极点的重数直接转化为留数，从而把``数根问题''变成积分问题。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解为什么考虑 $\dfrac{f'(z)}{f(z)}$。
+    \item 让学生理解零点与极点的重数如何通过留数读出。
+    \item 让学生初步掌握辐角原理与鲁歇定理的用途。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 为什么考虑 $\dfrac{f'(z)}{f(z)}$
+    \item 对数留数与零点、极点的重数
+    \item 辐角原理
+    \item 鲁歇定理
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 若 $z_0$ 是 $f$ 的 $m$ 阶零点，则
+    \[
+        \frac{f'(z)}{f(z)}
+        =
+        \frac{m}{z-z_0}+\text{解析项},
+    \]
+    因而其留数为 $m$。
+    \item 若 $z_0$ 是 $f$ 的 $m$ 阶极点，则 $\dfrac{f'(z)}{f(z)}$ 在该点的留数为 $-m$。
+    \item 因而
+    \[
+        \frac{1}{2\pi \mathrm{i}}\oint_C \frac{f'(z)}{f(z)}\,\mathrm{d}z
+    \]
+    会给出围道内部零点总重数减去极点总重数。
+    \item 鲁歇定理的思想，是在边界上用一个``主导函数''去控制另一个函数的零点个数。
+\end{itemize}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{对数留数}{}
+设 $f$ 在简单闭曲线 $C$ 上不为零，且在 $C$ 内部只有有限个零点与极点，则
+\[
+    \frac{1}{2\pi \mathrm{i}}\oint_C \frac{f'(z)}{f(z)}\,\mathrm{d}z
+\]
+称为 $f$ 关于曲线 $C$ 的对数留数。
+\end{dingliyi}
+
+\begin{dingli}{辐角原理}{}
+设 $f$ 在简单闭曲线 $C$ 上解析且不为零，在 $C$ 内部有 $N$ 个零点（计重数）和 $P$ 个极点（计重数），则
+\[
+    \frac{1}{2\pi \mathrm{i}}\oint_C \frac{f'(z)}{f(z)}\,\mathrm{d}z
+    =
+    N-P.
+\]
+\end{dingli}
+
+\begin{dingli}{鲁歇定理}{}
+设 $f$ 与 $g$ 在简单闭曲线 $C$ 上及其内部解析，且在 $C$ 上满足
+\[
+    |f(z)|>|g(z)|,
+\]
+则 $f$ 与 $f+g$ 在 $C$ 内部有相同数目的零点（按重数计）。
+\end{dingli}
+
+\subsection*{建议例题}
+\begin{lizi}{重数如何变成留数}{}
+设 $f(z)=(z-z_0)^m g(z)$，其中 $g(z_0)\neq 0$。证明 $\dfrac{f'(z)}{f(z)}$ 在 $z_0$ 处的留数为 $m$。
+\end{lizi}
+
+\begin{lizi}{辐角原理的基本应用}{}
+利用辐角原理说明某个给定闭曲线内部零点总数与极点总数的差。
+\end{lizi}
+
+\begin{lizi}{鲁歇定理数根}{}
+证明方程
+\[
+    z^8-5z^5-2z+1=0
+\]
+在单位圆内有 $5$ 个根。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一张映射图：当 $z$ 沿曲线 $C$ 走一圈时，$w=f(z)$ 在像平面中绕原点的圈数示意。
+    \item 一张鲁歇定理直观图，突出``边界上主项压过扰动项''这一思想。
+\end{itemize}
+
+\begin{tishi}[为什么这一节宜标为选读]
+这一节在逻辑上是自然延伸，但它的学习重心已经从``算积分''转向``数零点''。若课程主线更强调计算与应用，可将本节标为选读；若后面准备较系统地讲映射理论，则这一节又会成为很重要的桥梁。
+\end{tishi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把零点个数和零点重数混淆。
+    \item 使用辐角原理前，必须确认边界上没有零点或极点。
+    \item 使用鲁歇定理时，比较不等式必须在边界上成立，而不是在区域内部凭感觉判断。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：由 $\dfrac{f'}{f}$ 读取零点和极点的重数。
+    \item 综合题：用辐角原理求某区域内零点个数。
+    \item 挑战题：用鲁歇定理证明多项式在单位圆内或圆外的根数。
+\end{itemize}
+
+\section{本章小结}
+
+\begin{wulibj}[一句话回看本章]
+本章最核心的事情，是把奇点附近的局部展开进一步压缩成一个关键系数，并说明这个系数如何控制闭路积分、实积分，乃至零点与极点的计数。换句话说，本章真正建立起来的，是``局部信息如何进入整体计算''的眼光。
+\end{wulibj}
+
+\subsection*{知识主线建议}
+\begin{itemize}
+    \item 先由洛朗展开看见 $(z-z_0)^{-1}$ 项的特殊地位；
+    \item 再把这个系数正式定义为留数；
+    \item 接着用留数定理把局部信息变成整体积分；
+    \item 然后把它应用到闭路积分、三角积分和无穷积分；
+    \item 最后再通过 $\dfrac{f'}{f}$ 走向零点和极点计数。
+\end{itemize}
+
+\subsection*{本章主要结论建议}
+\begin{zhongyao}[本章主要结论]
+\raggedright
+\begin{enumerate}
+    \item \textbf{留数就是洛朗展开中 $(z-z_0)^{-1}$ 的系数：}它不是附加定义，而是局部展开中自然挑出来的最关键对象。
+    \item \textbf{小圆积分只保留留数项：}若围绕孤立奇点做小圆积分，则
+    \[
+        \oint f(z)\,\mathrm{d}z = 2\pi \mathrm{i}\,\operatorname{Res}.
+    \]
+    这说明围道积分会自动筛掉绝大多数局部幂次项。
+    \item \textbf{留数定理把整体积分化成局部贡献之和：}对有限个孤立奇点，闭路积分等于内部留数总和乘上 $2\pi \mathrm{i}$。
+    \item \textbf{求留数时关键在于先分类、再选法：}简单极点优先极限法或 $\dfrac{P(z_0)}{Q'(z_0)}$，高阶极点再考虑导数公式或展开法。
+    \item \textbf{留数法处理实积分时，围道选择是核心：}单位圆方法适合三角积分，半圆围道适合有理型无穷积分，带指数因子的积分则要结合约当引理。
+    \item \textbf{$\dfrac{f'}{f}$ 的留数能读出零点与极点的重数：}这使留数思想从积分计算自然延伸到辐角原理与鲁歇定理。
+\end{enumerate}
+\end{zhongyao}
+
+\subsection*{做题时的判断思路建议}
+\begin{tishi}[做题时的判断思路]
+\begin{enumerate}
+    \item 看到孤立奇点，先想：题目需要的是主部、留数，还是整个积分？
+    \item 看到求留数的题，先分类：解析点、可去奇点、简单极点、高阶极点、本性奇点。
+    \item 看到闭路积分，先看围道内部究竟有哪些奇点，再决定能否直接套留数定理。
+    \item 看到三角积分，优先问自己能否用 $z=\mathrm{e}^{\mathrm{i}\theta}$ 把它变成单位圆围道积分。
+    \item 看到实轴无穷积分，先判断半圆围道是否合适，以及附加弧积分会不会消失。
+    \item 看到零点计数问题，则应想到 $\dfrac{f'}{f}$、辐角原理或鲁歇定理。
+\end{enumerate}
+\end{tishi}
+
+\subsection*{易错点提醒建议}
+\begin{jinshi}[本章最容易混淆的地方]
+\begin{enumerate}
+    \item 不要把留数看成奇点的全部信息；留数只是一项特殊系数。
+    \item 不要把``留数为零''误会成``函数在那里解析''。
+    \item 不要忘记留数定理要求围道上没有奇点。
+    \item 不要做实积分时只顾算留数，而忘了检查附加弧积分。
+    \item 不要在辐角原理和鲁歇定理中忘记``按重数计''。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{和前后内容的联系建议}
+\begin{tishi}[和前后内容的联系]
+回头看，本章并不是凭空开始的。第四章最后通过洛朗展开说明了一阶负幂项的特殊地位，本章只是把这一观察正式提升为留数概念，并进一步发展成留数定理。也就是说，本章的根扎在前一章的局部展开理论里。
+
+往后看，本章的实积分技术会在积分变换部分反复出现；而本章末尾的辐角原理、鲁歇定理又会把学生带向更几何、更整体的复分析视角。这样一来，留数理论恰好站在局部展开、积分计算和映射理论三者的交叉点上，是整段复变函数内容中承上启下的一章。
+\end{tishi}
+
+\section{习题}
+
+\subsection*{基础题}
+\begin{itemize}
+    \item 由给定洛朗展开直接读取留数。
+    \item 用极限法、快捷公式或导数公式求指定点处的留数。
+    \item 用留数定理计算简单闭路积分。
+\end{itemize}
+
+\subsection*{综合题}
+\begin{itemize}
+    \item 用单位圆方法计算若干三角积分。
+    \item 用半圆围道计算有理型无穷积分。
+    \item 用 $\mathrm{e}^{\mathrm{i}ax}$ 方法计算若干 $\cos ax$、$\sin ax$ 型积分。
+\end{itemize}
+
+\subsection*{挑战题}
+\begin{itemize}
+    \item 设计需要精细判断大圆弧积分是否消失的综合题。
+    \item 用辐角原理或鲁歇定理解决多项式根的分布问题。
+    \item 若课程节奏允许，可补一题连接后续积分变换内容的应用题。
+\end{itemize}
