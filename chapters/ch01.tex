@@ -2415,88 +2415,88 @@ x(t)=A\cos(\omega t+\varphi).
 
 设有两个同频振动
 \begin{equation}
-    x_1(t)=3\cos\omega t,\qquad x_2(t)=4\cos\left(\omega t-\frac{\pi}{2}\right).
+    x_1(t)=2\cos\omega t,\qquad x_2(t)=2\cos\left(\omega t-\frac{\pi}{2}\right).
 \end{equation}
 若直接用三角恒等式相加，会比较繁琐；而用相量法（phasor method）和复数表示就很清楚。
 
 把它们分别写成复振幅（complex amplitude）形式：
 \begin{equation}
-    x_1(t)=\operatorname{Re}\bigl(3e^{\mathrm{i}\omega t}\bigr),\qquad
-    x_2(t)=\operatorname{Re}\left(4e^{-\mathrm{i}\pi/2}e^{\mathrm{i}\omega t}\right).
+    x_1(t)=\operatorname{Re}\bigl(2e^{\mathrm{i}\omega t}\bigr),\qquad
+    x_2(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/2}e^{\mathrm{i}\omega t}\right).
 \end{equation}
 于是总振动可写成
 \begin{equation}
-    x(t)=\operatorname{Re}\bigl((3-4\mathrm{i})e^{\mathrm{i}\omega t}\bigr).
+    x(t)=\operatorname{Re}\bigl((2-2\mathrm{i})e^{\mathrm{i}\omega t}\bigr).
 \end{equation}
 
 现在问题变成了：把复振幅
 \[
-3-4\mathrm{i}
+2-2\mathrm{i}
 \]
 写成指数形式即可。
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.95]
-    \draw[mp axis] (-0.7,0) -- (4.3,0) node[mp label, right] {实部};
-    \draw[mp axis] (0,-4.9) -- (0,1.5) node[mp label, above] {虚部};
-    \coordinate (A) at (3,0);
-    \coordinate (B) at (0,-4);
-    \coordinate (C) at (3,-4);
+\begin{tikzpicture}[scale=1.05]
+    \draw[mp axis] (-0.7,0) -- (3.2,0) node[mp label, right] {实部};
+    \draw[mp axis] (0,-3.2) -- (0,1.5) node[mp label, above] {虚部};
+    \coordinate (A) at (2,0);
+    \coordinate (B) at (0,-2);
+    \coordinate (C) at (2,-2);
     \draw[mp vector] (0,0) -- (A);
     \draw[mp vector d] (0,0) -- (B);
     \draw[mp vector c] (0,0) -- (C);
     \draw[mp helper] (A) -- (C);
     \draw[mp helper] (B) -- (C);
     \node[mp point c] at (C) {};
-    \node[mp label, text=figblue] at ($(0,0)!0.53!(A)+(0,0.18)$) {$3$};
-    \node[mp label, text=figred] at ($(0,0)!0.5!(B)+(-0.28,0)$) {$-4\mathrm{i}$};
-    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at ($(0,0)!0.55!(C)+(0.22,-0.12)$) {$3-4\mathrm{i}$};
+    \node[mp label, text=figblue] at ($(0,0)!0.5!(A)+(0,0.18)$) {$2$};
+    \node[mp label, text=figred] at ($(0,0)!0.5!(B)+(-0.28,0)$) {$-2\mathrm{i}$};
+    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at ($(0,0)!0.52!(C)+(0.28,-0.08)$) {$2-2\mathrm{i}$};
     \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
-\caption{相量叠加：$3+(-4\mathrm{i})=3-4\mathrm{i}$}
+\caption{相量叠加：$2+(-2\mathrm{i})=2-2\mathrm{i}$}
 \label{fig:phasor-addition}
 \end{figure}
 
 \begin{lizi}{两个同频振动的叠加}{}
 求
 \[
-x(t)=3\cos\omega t+4\cos\left(\omega t-\frac{\pi}{2}\right)
+x(t)=2\cos\omega t+2\cos\left(\omega t-\frac{\pi}{2}\right)
 \]
 的振幅和初相。
 
 \begin{jie}
 由上面的分析，只需求复振幅
 \[
-3-4\mathrm{i}
+2-2\mathrm{i}
 \]
 的模和辐角。
 
 其模为
 \[
-|3-4\mathrm{i}|=5,
+|2-2\mathrm{i}|=2\sqrt{2},
 \]
 主辐角为
 \[
-\operatorname{Arg}(3-4\mathrm{i})=-\arctan\frac{4}{3}.
+\operatorname{Arg}(2-2\mathrm{i})=-\frac{\pi}{4}.
 \]
 因此
 \[
-3-4\mathrm{i}=5e^{-\mathrm{i}\arctan(4/3)}.
+2-2\mathrm{i}=2\sqrt{2}\,e^{-\mathrm{i}\pi/4}.
 \]
 
 于是
 \[
-x(t)=\operatorname{Re}\left(5e^{-\mathrm{i}\arctan(4/3)}e^{\mathrm{i}\omega t}\right)
-=5\cos\left(\omega t-\arctan\frac{4}{3}\right).
+x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t}\right)
+=2\sqrt{2}\cos\left(\omega t-\frac{\pi}{4}\right).
 \]
 所以总振动的振幅为
 \[
-5,
+2\sqrt{2},
 \]
 初相为
 \[
--\arctan\frac{4}{3}.
+-\frac{\pi}{4}.
 \]
 \end{jie}
 \end{lizi}
