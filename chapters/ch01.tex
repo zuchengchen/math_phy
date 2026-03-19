@@ -1659,22 +1659,44 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.05]
-    \draw[thick] (-3.0,0) -- (3.0,0) node[right] {复平面};
-    \draw[thick, blue] (0,1) circle (1);
-    \coordinate (N) at (0,2);
-    \coordinate (S) at (0,0);
-    \coordinate (P) at (1,1);
-    \coordinate (Z) at (2,0);
-    \draw[thick, red!75!black] (N) -- (Z);
-    \fill[blue] (N) circle (2pt) node[above] {$N$};
-    \fill[blue] (S) circle (2pt) node[below left] {$S$};
-    \fill[red!75!black] (P) circle (2pt) node[above] {$P$};
-    \fill[red!75!black] (Z) circle (2pt) node[below] {$z$};
-    \node[left] at (-1,1) {球面截面};
-    \node[right] at (2.4,1.8) {$N\leftrightarrow \infty$};
+\begin{tikzpicture}[scale=0.95]
+    % plane
+    \coordinate (A) at (-4.2,-1.55);
+    \coordinate (B) at (3.7,-1.55);
+    \coordinate (C) at (5.1,0.15);
+    \coordinate (D) at (-2.8,0.15);
+    \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
+    \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
+    \node[gray!70] at (4.55,-0.45) {复平面};
+
+    % sphere
+    \coordinate (O) at (0,1.35);
+    \fill[gray!10] (O) circle (1.55);
+    \draw[gray!80!black, thick] (O) circle (1.55);
+    \draw[gray!70, thin] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
+    \draw[gray!70, thin, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
+    \draw[gray!70, thin] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.42,y radius=1.55];
+    \draw[gray!70, thin, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=90,x radius=0.42,y radius=1.55];
+
+    % north/south and sample point
+    \coordinate (N) at ($(O)+(0,1.55)$);
+    \coordinate (S) at ($(O)+(0,-1.55)$);
+    \coordinate (P) at (0.75,1.90);
+    \coordinate (Z) at (2.63,-0.60);
+
+    % projection line
+    \draw[orange!90!black, line width=1.2pt] (N) -- (Z);
+
+    % points
+    \fill[gray!80!black] (N) circle (2pt) node[above] {$N$};
+    \fill[gray!80!black] (S) circle (2pt) node[below right] {$S$};
+    \fill[orange!90!black] (P) circle (2pt) node[above right] {$P$};
+    \fill[orange!90!black] (Z) circle (2pt) node[below] {$z$};
+
+    % labels
+    \node[right, gray!80!black] at ($(N)+(1.0,0.05)$) {$N\leftrightarrow \infty$};
 \end{tikzpicture}
-\caption{球极投影示意图：北极对应无穷远点}
+\caption{球极投影的立体示意：球面点 $P$ 沿过北极 $N$ 的直线投到复平面上的点 $z$}
 \label{fig:stereographic-projection}
 \end{figure}
 
