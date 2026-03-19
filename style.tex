@@ -77,6 +77,11 @@
 \colorlet{figbrown}{physicsbrown!88!black}
 \colorlet{figgold}{notebrown!85!black}
 \colorlet{figsoftfill}{black!2}
+\colorlet{figbluefill}{figblue!7}
+\colorlet{figtealfill}{figteal!7}
+\colorlet{figpurplefill}{figpurple!7}
+\colorlet{figredfill}{figred!7}
+\colorlet{figbrownfill}{figbrown!12}
 
 \tikzset{
   mp axis/.style={-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.85pt, draw=figaxis},
@@ -89,10 +94,16 @@
   mp vector b/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.05pt, draw=figteal},
   mp vector c/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.1pt, draw=figpurple},
   mp vector d/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.05pt, draw=figred},
+  mp vector b dashed/.style={mp vector b, dash pattern=on 3.4pt off 2.1pt},
+  mp vector d dashed/.style={mp vector d, dash pattern=on 3.2pt off 2.0pt},
   mp point/.style={circle, fill=figblue, inner sep=1.7pt},
   mp point b/.style={circle, fill=figteal, inner sep=1.7pt},
   mp point c/.style={circle, fill=figpurple, inner sep=1.7pt},
   mp point d/.style={circle, fill=figred, inner sep=1.7pt},
+  mp area blue/.style={fill=figbluefill, draw=none},
+  mp area teal/.style={fill=figtealfill, draw=none},
+  mp area purple/.style={fill=figpurplefill, draw=none},
+  mp area red/.style={fill=figredfill, draw=none},
   mp label/.style={font=\small},
   mp small/.style={font=\footnotesize},
   mp card/.style={
