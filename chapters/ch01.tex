@@ -1651,9 +1651,9 @@ F(w)=f\!\left(\frac{1}{w}\right),
 再转而研究 $w=0$ 附近的行为。也就是说，无穷远点的问题常常会被拉回到原点附近来处理。
 \end{tishi}
 
-\subsection[球极投影与复球面]{球极投影（stereographic projection）与复球面（Riemann sphere）}
+\subsection[球极投影与复球面]{球极投影与复球面}
 
-无穷远点的引入不仅是分析上的方便，也有一个非常优美的几何模型：\textbf{复球面（Riemann sphere）}。理解这个模型的关键，是球极投影（stereographic projection）。
+无穷远点的引入不仅是分析上的方便，也有一个非常优美的几何模型：\textbf{复球面}。理解这个模型的关键，是球极投影（stereographic projection）。
 
 想象一个单位球与复平面在南极点处相切。取球面北极 $N$，对球面上除北极外任一点 $P$，连结 $N$ 和 $P$ 的直线，它会与复平面相交于一点 $z$。这样就建立了球面与复平面之间的一一对应。北极 $N$ 本身则对应于无穷远点 $\infty$。
 
@@ -1667,7 +1667,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \coordinate (D) at (-2.8,0.15);
     \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
     \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
-    \node[gray!70] at (4.55,-0.45) {复平面};
+    \node[gray!70] at (4,-0.15) {复平面};
 
     % sphere
     \coordinate (O) at (0,1.35);
@@ -1695,18 +1695,18 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \fill[orange!90!black] (Z) circle (2pt) node[below] {$z$};
 
     % labels
-    \node[right, gray!80!black] at ($(N)+(1.0,0.05)$) {$N\leftrightarrow \infty$};
+    \node[right, gray!80!black] at ($(N)+(0.5,0.2)$) {$N\leftrightarrow \infty$};
 \end{tikzpicture}
 \caption{球极投影的立体示意：球面点 $P$ 沿过北极 $N$ 的直线投到复平面上的点 $z$}
 \label{fig:stereographic-projection}
 \end{figure}
 
-\begin{dingliyi}{复球面（Riemann sphere）}{}
-把扩充复平面 $\hat{\mathbb{C}}$ 通过球极投影（stereographic projection）与球面建立对应后，这个球面模型称为\textbf{复球面}，也常称为\textbf{黎曼球面}。
+\begin{dingliyi}{复球面}{}
+把扩充复平面 $\hat{\mathbb{C}}$ 通过球极投影与球面建立对应后，这个球面模型称为\textbf{复球面}，也常称为\textbf{黎曼球面}（Riemann sphere）。
 \end{dingliyi}
 
 \begin{zhu}{}{}
-从几何上看，复平面本来是``无边无际''的；但加上无穷远点以后，它就可以被看成一个封闭的球面。这个观点在后面讨论 Möbius 变换（Möbius transformation）时尤其自然。
+从几何上看，复平面本来是``无边无际''的；但加上无穷远点以后，它就可以被看成一个封闭的球面。这个观点在后面讨论 Möbius 变换时尤其自然。
 \end{zhu}
 
 \subsection{直线与圆的统一观点}
