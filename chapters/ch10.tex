@@ -1,388 +1,544 @@
-% 第十章：行波法
+% 第九章：数学物理方程的导出与分类
 
-\chapter{行波法}
+\chapter{数学物理方程的导出与分类}
 
 \begin{wulibj}[本章导读]
-行波法是求解波动方程初值问题的直接方法。它利用波动方程的特征线，将偏微分方程转化为常微分方程，从而得到解的显式表达式——达朗贝尔公式。这种方法不仅给出了解的具体形式，还清晰地揭示了波的传播特性。
+数学物理方程是描述物理规律的数学语言。本章我们将从物理定律出发，推导出三类典型方程：波动方程、热传导方程和拉普拉斯方程，并学习它们的分类方法。理解方程的物理背景对于掌握求解方法至关重要。
 \end{wulibj}
 
 % ========== 第一节 ==========
-\section{达朗贝尔公式}
+\section{典型方程的导出}
 
-\subsection{一维波动方程的初值问题}
+\subsection{弦振动方程（波动方程）}
 
-考虑无限长弦的自由振动：
+\textbf{物理背景}：考虑一根均匀柔软的弦在平面内作横向小振动。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 弦
+    \draw[blue, thick] plot[smooth, domain=0:6] (\x, {0.3*sin(3*\x r)});
+    
+    % 微元
+    \draw[red, very thick] plot[smooth, domain=1.5:2.5] (\x, {0.3*sin(3*\x r)});
+    
+    % 张力
+    \draw[->, green!60!black, thick] (1.5, {0.3*sin(4.5 r)}) -- (0.8, {0.3*sin(4.5 r)+0.8});
+    \draw[->, green!60!black, thick] (2.5, {0.3*sin(7.5 r)}) -- (3.2, {0.3*sin(7.5 r)+0.6});
+    
+    \node[green!60!black] at (0.5, 1.2) {$T_1$};
+    \node[green!60!black] at (3.5, 1) {$T_2$};
+    
+    % 坐标轴
+    \draw[->, gray] (0, -0.5) -- (7, -0.5) node[right] {$x$};
+    \draw[->, gray] (0, -0.5) -- (0, 1.5) node[above] {$u$};
+    
+    % 微元标注
+    \draw[<->, gray] (1.5, -0.8) -- (2.5, -0.8) node[midway, below] {$\mathrm{d}x$};
+    
+    \node at (3, -1.5) {弦的横向振动};
+\end{tikzpicture}
+\caption{弦振动模型}
+\label{fig:string-vibration}
+\end{figure}
+
+\textbf{假设}：
+\begin{enumerate}
+    \item 弦是柔软的，只有张力作用
+    \item 振动是微小的，$\frac{\partial u}{\partial x} \ll 1$
+    \item 弦的重量忽略不计
+\end{enumerate}
+
+\textbf{推导}：
+
+取弦上一小段 $[x, x+\mathrm{d}x]$，长度约为 $\mathrm{d}x$（因为振动小）。
+
+设张力为 $T$，密度为 $\rho$。
+
+$T$ 在 $x$ 方向分量：
 \begin{equation}
-    \begin{cases}
-        \dfrac{\partial^2 u}{\partial t^2} = a^2\dfrac{\partial^2 u}{\partial x^2}, & x \in \mathbb{R}, \; t > 0 \\
-        u(x, 0) = \varphi(x), & x \in \mathbb{R} \\
-        \dfrac{\partial u}{\partial t}(x, 0) = \psi(x), & x \in \mathbb{R}
-    \end{cases}
+    T\cos\theta_1 - T\cos\theta_2 \approx T - T = 0
 \end{equation}
 
-\subsection{特征坐标变换}
-
-关键思想：引入特征坐标，将方程化简。
-
-特征线方程：$\frac{\mathrm{d}x}{\mathrm{d}t} = \pm a$，即 $x \mp at = C$。
-
-令
+$T$ 在 $u$ 方向分量：
 \begin{equation}
-    \xi = x - at, \quad \eta = x + at
+    T\sin\theta_2 - T\sin\theta_1 \approx T\left(\tan\theta_2 - \tan\theta_1\right) = T\left(\frac{\partial u}{\partial x}\Big|_{x+\mathrm{d}x} - \frac{\partial u}{\partial x}\Big|_x\right) = T\frac{\partial^2 u}{\partial x^2}\mathrm{d}x
 \end{equation}
 
-则
-\begin{align}
-    \frac{\partial u}{\partial x} &= \frac{\partial u}{\partial\xi}\frac{\partial\xi}{\partial x} + \frac{\partial u}{\partial\eta}\frac{\partial\eta}{\partial x} = \frac{\partial u}{\partial\xi} + \frac{\partial u}{\partial\eta} \\
-    \frac{\partial^2 u}{\partial x^2} &= \frac{\partial^2 u}{\partial\xi^2} + 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}
-\end{align}
-
-类似地
+由牛顿第二定律：
 \begin{equation}
-    \frac{\partial^2 u}{\partial t^2} = a^2\left(\frac{\partial^2 u}{\partial\xi^2} - 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}\right)
+    \rho\mathrm{d}x \cdot \frac{\partial^2 u}{\partial t^2} = T\frac{\partial^2 u}{\partial x^2}\mathrm{d}x
 \end{equation}
 
-代入波动方程：
+\begin{zhongyao}[一维波动方程]
+\[
+    \frac{\partial^2 u}{\partial t^2} = a^2\frac{\partial^2 u}{\partial x^2}, \quad a^2 = \frac{T}{\rho}
+\]
+\end{zhongyao}
+\begin{wulibj}[物理意义]
+$a = \sqrt{T/\rho}$ 是波在弦上传播的速度。张力越大、线密度越小，波速越快。
+\end{wulibj}
+
+\subsection{热传导方程}
+
+\textbf{物理背景}：热量从高温区向低温区传导。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % 区域
+    \fill[red!30] (0, 0) rectangle (1, 3);
+    \fill[orange!30] (1, 0) rectangle (2, 3);
+    \fill[yellow!30] (2, 0) rectangle (3, 3);
+    \fill[green!30] (3, 0) rectangle (4, 3);
+    \fill[blue!30] (4, 0) rectangle (5, 3);
+    
+    \draw[thick] (0, 0) rectangle (5, 3);
+    
+    % 热流箭头
+    \foreach \x in {0.5, 1.5, 2.5, 3.5, 4.5} {
+        \draw[->, red, thick] (\x, 1.5) -- (\x+0.6, 1.5);
+    }
+    
+    % 温度标注
+    \node at (0.5, -0.5) {高温};
+    \node at (4.5, -0.5) {低温};
+    
+    \node at (2.5, 4) {温度分布 $u(x, t)$};
+    \draw[->, gray] (0, 3.3) -- (5.5, 3.3) node[right] {$x$};
+    
+    \node at (2.5, -1.5) {热传导过程};
+\end{tikzpicture}
+\caption{热传导模型}
+\label{fig:heat-conduction}
+\end{figure}
+
+\textbf{傅里叶热传导定律}：热流密度与温度梯度成正比
 \begin{equation}
-    a^2\left(\frac{\partial^2 u}{\partial\xi^2} - 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}\right) = a^2\left(\frac{\partial^2 u}{\partial\xi^2} + 2\frac{\partial^2 u}{\partial\xi\partial\eta} + \frac{\partial^2 u}{\partial\eta^2}\right)
+    \boldsymbol{q} = -k\nabla u
+\end{equation}
+其中 $k$ 是热导率，负号表示热量从高温流向低温。
+
+\textbf{推导}：
+
+考虑一维情形，取小段 $[x, x+\mathrm{d}x]$。
+
+流入的热量：
+\begin{equation}
+    Q_{\text{in}} = q(x)A\mathrm{d}t = -kA\frac{\partial u}{\partial x}\Big|_x\mathrm{d}t
 \end{equation}
 
-化简得
+流出的热量：
 \begin{equation}
-    \frac{\partial^2 u}{\partial\xi\partial\eta} = 0
+    Q_{\text{out}} = -kA\frac{\partial u}{\partial x}\Big|_{x+\mathrm{d}x}\mathrm{d}t
 \end{equation}
 
-\subsection{通解与达朗贝尔公式}
-
-\begin{dingli}{波动方程的通解}{}
-一维波动方程 $\frac{\partial^2 u}{\partial t^2} = a^2\frac{\partial^2 u}{\partial x^2}$ 的通解为
+净热量：
 \begin{equation}
-    u(x, t) = f(x - at) + g(x + at)
+    Q = Q_{\text{in}} - Q_{\text{out}} = kA\left(\frac{\partial u}{\partial x}\Big|_{x+\mathrm{d}x} - \frac{\partial u}{\partial x}\Big|_x\right)\mathrm{d}t = kA\frac{\partial^2 u}{\partial x^2}\mathrm{d}x\mathrm{d}t
 \end{equation}
-其中 $f$ 和 $g$ 是任意二次可微函数。
 
-\begin{proof}
-由 $\frac{\partial^2 u}{\partial\xi\partial\eta} = 0$，先对 $\xi$ 积分：
+由能量守恒，净热量等于温度升高所需热量：
 \begin{equation}
-    \frac{\partial u}{\partial\eta} = h(\eta)
+    c\rho A\mathrm{d}x \cdot \frac{\partial u}{\partial t}\mathrm{d}t = kA\frac{\partial^2 u}{\partial x^2}\mathrm{d}x\mathrm{d}t
 \end{equation}
-再对 $\eta$ 积分：
-\begin{equation}
-    u = \int h(\eta)\,\mathrm{d}\eta + f(\xi) = g(\eta) + f(\xi) = g(x + at) + f(x - at)
-\end{equation}
-\end{proof}
-\end{dingli}
 
-\begin{tishi}[物理意义]
+\begin{zhongyao}[一维热传导方程]
+\[
+    \frac{\partial u}{\partial t} = a^2\frac{\partial^2 u}{\partial x^2}, \quad a^2 = \frac{k}{c\rho}
+\]
+\end{zhongyao}
+
+其中 $c$ 是比热容，$\rho$ 是密度。
+
+\begin{wulibj}[物理意义]
+$a^2 = k/(c\rho)$ 称为热扩散率，反映了热量在材料中扩散的快慢。
+\end{wulibj}
+
+\subsection{拉普拉斯方程与泊松方程}
+
+\textbf{物理背景}：如果一个物理量已经达到稳定状态，不再随时间变化，又没有源不断在区域内部产生或吸收它，那么它往往满足拉普拉斯方程。这类问题常称为\textbf{势场问题（potential problem）}；当场只依赖于两个空间变量时，就得到\textbf{二维势场问题（two-dimensional potential problem）}。
+
+\begin{wulibj}[为什么这一类问题在本课程中很重要]
 \begin{itemize}
-    \item $f(x - at)$：向右传播的波（右行波），波形 $f$ 以速度 $a$ 向右移动
-    \item $g(x + at)$：向左传播的波（左行波），波形 $g$ 以速度 $a$ 向左移动
+    \item \textbf{二维静电场}：无电荷区域内的电势满足拉普拉斯方程；
+    \item \textbf{稳态温度场（steady temperature field）}：薄板达到稳定温度分布后，温度满足拉普拉斯方程；
+    \item \textbf{不可压缩无旋流动}：速度势也满足拉普拉斯方程。
 \end{itemize}
-波动方程的解是左右行波的叠加！
+
+因此，后面不管我们说``矩形薄板的稳态温度''、``圆域内的电势''，还是``上半平面的势函数''，本质上都在求同一类边值问题。
+\end{wulibj}
+
+\begin{itemize}
+    \item 静电场：电势 $\phi$ 满足 $\nabla^2\phi = -\rho/\varepsilon_0$（泊松方程）
+    \item 稳定温度场：温度 $u$ 满足 $\nabla^2 u = 0$（拉普拉斯方程）
+    \item 不可压缩无旋流动：速度势 $\phi$ 满足 $\nabla^2\phi = 0$
+\end{itemize}
+
+\textbf{推导一：从静电场到泊松方程}
+
+由高斯定律：
+\begin{equation}
+    \nabla \cdot \boldsymbol{E} = \frac{\rho}{\varepsilon_0}
+\end{equation}
+
+电场与电势的关系：
+\begin{equation}
+    \boldsymbol{E} = -\nabla\phi
+\end{equation}
+
+代入得\textbf{泊松方程}：
+\begin{equation}
+    \boxed{\nabla^2\phi = -\frac{\rho}{\varepsilon_0}}
+\end{equation}
+
+当 $\rho = 0$（无电荷区域），得到\textbf{拉普拉斯方程}：
+\begin{equation}
+    \boxed{\nabla^2\phi = 0}
+\end{equation}
+
+这说明：\textbf{电荷分布是源，电荷消失以后，电势就在无源区域满足拉普拉斯方程。}
+
+\textbf{推导二：从稳态导热到拉普拉斯方程}
+
+设 $u(x, y)$ 为薄板的温度。稳态意味着温度不再随时间变化；若板内也没有热源，则任取一个小区域，流入与流出的热量必须平衡，所以
+\begin{equation}
+    \nabla \cdot \boldsymbol{q} = 0
+\end{equation}
+
+由傅里叶热传导定律（Fourier's law of heat conduction）
+\begin{equation}
+    \boldsymbol{q} = -k\nabla u
+\end{equation}
+得
+\begin{equation}
+    \nabla \cdot (-k\nabla u) = -k\nabla^2 u = 0
+\end{equation}
+即
+\begin{equation}
+    \boxed{\nabla^2 u = 0}
+\end{equation}
+
+\begin{tishi}[二维势场问题在后面各章中的角色]
+这一类问题是本书里非常重要的一条主线。
+\begin{itemize}
+    \item 在复变函数部分，我们已经看到解析函数的实部和虚部与平面势场之间有天然联系；
+    \item 在后面的分离变量法中，我们会学习如何在矩形域、圆域等标准区域上具体求解拉普拉斯方程；
+    \item 在格林函数法中，我们会进一步处理上半平面、无界区域和更一般的边值问题。
+\end{itemize}
+
+要特别注意：\textbf{拉普拉斯方程没有时间方向，所以它不是``给定初态后向前演化''的问题，而是``由边界条件决定整个区域内部平衡分布''的问题。}
 \end{tishi}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.8]
-    % 右行波
-    \begin{scope}
-        \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
-        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$u$};
-        
-        \draw[blue, thick, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-1)^2)});
-        \draw[red, thick, dashed, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-3)^2)});
-        
-        \draw[->, thick] (2, 1.5) -- (3, 1.5) node[midway, above] {$a$};
-        
-        \node[blue] at (1, -0.5) {$t=0$};
-        \node[red] at (3, -0.5) {$t=t_1$};
-        \node at (2.5, 2.3) {右行波 $f(x-at)$};
-    \end{scope}
-    
-    % 左行波
-    \begin{scope}[xshift=7cm]
-        \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
-        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$u$};
-        
-        \draw[blue, thick, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-3.5)^2)});
-        \draw[red, thick, dashed, domain=0:4.5, samples=50] plot (\x, {0.8*exp(-(\x-1.5)^2)});
-        
-        \draw[->, thick] (3, 1.5) -- (2, 1.5) node[midway, above] {$a$};
-        
-        \node[blue] at (3.5, -0.5) {$t=0$};
-        \node[red] at (1.5, -0.5) {$t=t_1$};
-        \node at (2.5, 2.3) {左行波 $g(x+at)$};
-    \end{scope}
-\end{tikzpicture}
-\caption{行波传播示意图}
-\label{fig:traveling-waves}
-\end{figure}
-
-\begin{dingli}{达朗贝尔公式}{}
-利用初始条件确定 $f$ 和 $g$：
-\begin{align}
-    u(x, 0) &= f(x) + g(x) = \varphi(x) \\
-    \frac{\partial u}{\partial t}(x, 0) &= -af'(x) + ag'(x) = \psi(x)
-\end{align}
-
-从第一式：$f(x) + g(x) = \varphi(x)$。
-
-对第二式积分：
-\begin{equation}
-    -af(x) + ag(x) = \int_0^x \psi(s)\,\mathrm{d}s + C
-\end{equation}
-
-解得
-\begin{align}
-    f(x) &= \frac{1}{2}\varphi(x) - \frac{1}{2a}\int_0^x \psi(s)\,\mathrm{d}s - \frac{C}{2a} \\
-    g(x) &= \frac{1}{2}\varphi(x) + \frac{1}{2a}\int_0^x \psi(s)\,\mathrm{d}s + \frac{C}{2a}
-\end{align}
-
-代入通解，常数 $C$ 被消去，得一维波动方程初值问题的解：
-\[
-    u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(s)\,\mathrm{d}s
-\]
-\end{dingli}
-
-\begin{wulibj}[达朗贝尔公式的物理意义]
-初始位移 $\varphi(x)$ 分裂成两半，分别向左右传播。初始速度 $\psi(x)$ 的影响区域是 $[x-at, x+at]$，表示速度对点 $(x, t)$ 的影响来自特征线内的所有点。
-\end{wulibj}
-
-\begin{lizi}{}{}
-求解无限长弦的振动问题：
-\begin{equation}
-    \begin{cases}
-        u_{tt} = a^2 u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
-        u(x, 0) = \mathrm{e}^{-x^2}, & x \in \mathbb{R} \\
-        u_t(x, 0) = 0, & x \in \mathbb{R}
-    \end{cases}
-\end{equation}
-
-\begin{jie}
-    这是典型的达朗贝尔公式应用。这里 $\varphi(x) = \mathrm{e}^{-x^2}$，$\psi(x) = 0$。
-
-    代入达朗贝尔公式：
-    \begin{equation}
-        u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(s)\,\mathrm{d}s
-    \end{equation}
-
-    由于 $\psi(x) = 0$，积分项为零：
-    \begin{equation}
-        u(x, t) = \frac{1}{2}\left[\mathrm{e}^{-(x-at)^2} + \mathrm{e}^{-(x+at)^2}\right]
-    \end{equation}
-
-    \textbf{物理意义}：初始时刻的高斯脉冲分裂成两个相同的脉冲，分别以速度 $a$ 向左右传播。每个脉冲的振幅是原来的一半。
-\end{jie}
-\end{lizi}
+\begin{jinshi}
+不要把``静电问题''和``拉普拉斯方程''完全画等号。只有在所研究区域内部没有电荷时，才是拉普拉斯方程；如果区域内还有源项，就应该写成泊松方程。同理，只有稳态且无热源的导热问题，才满足拉普拉斯方程。
+\end{jinshi}
 
 % ========== 第二节 ==========
-\section{依赖区间与影响区域}
+\section{定解条件}
 
-\subsection{依赖区间}
+偏微分方程本身描述了普遍规律，要确定具体解还需要定解条件。
 
-\begin{dingliyi}{依赖区间}{}
-点 $(x_0, t_0)$ 的\textbf{依赖区间}是 $x$ 轴上的区间 $[x_0 - at_0, x_0 + at_0]$，即过该点的两条特征线与 $x$ 轴的交点之间的区域。
+\subsection{初始条件}
+
+\begin{dingliyi}{初始条件}{}
+描述系统初始状态的条件。对于含有时间导数的方程，需要指定初始时刻的状态。
 \end{dingliyi}
 
-由达朗贝尔公式，$u(x_0, t_0)$ 完全由 $\varphi$ 和 $\psi$ 在依赖区间上的值决定。
+\begin{itemize}
+    \item \textbf{波动方程}（含二阶时间导数）：需要两个初始条件
+    \begin{equation}
+        u(x, 0) = \varphi(x), \quad \frac{\partial u}{\partial t}(x, 0) = \psi(x)
+    \end{equation}
+    分别表示初始位移和初始速度。
+    
+    \item \textbf{热传导方程}（含一阶时间导数）：需要一个初始条件
+    \begin{equation}
+        u(x, 0) = \varphi(x)
+    \end{equation}
+    表示初始温度分布。
+    
+    \item \textbf{拉普拉斯方程}（不含时间）：无初始条件。
+\end{itemize}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.0]
-    % 坐标轴
-    \draw[->, gray] (-0.5, 0) -- (5, 0) node[right] {$x$};
-    \draw[->, gray] (0, -0.3) -- (0, 3.5) node[above] {$t$};
-    
-    % 特征线
-    \draw[blue, thick] (1, 0) -- (3, 2);
-    \draw[blue, thick] (4, 0) -- (2, 2);
-    
-    % 点
-    \fill[red] (3, 2) circle (2pt) node[above right] {$(x_0, t_0)$};
-    
-    % 依赖区间
-    \draw[green!60!black, thick] (1, 0) -- (4, 0);
-    \fill[green!60!black, opacity=0.3] (1, 0) -- (3, 2) -- (4, 0) -- cycle;
-    
-    \fill (1, 0) circle (2pt) node[below] {$x_0-at_0$};
-    \fill (4, 0) circle (2pt) node[below] {$x_0+at_0$};
-    
-    \node[green!60!black] at (2.5, 0.8) {依赖区间};
-\end{tikzpicture}
-\caption{依赖区间}
-\label{fig:domain-of-dependence}
-\end{figure}
+\subsection{边界条件}
 
-\subsection{影响区域}
-
-\begin{dingliyi}{影响区域}{}
-初始时刻区间 $[x_1, x_2]$ 上的初始条件所影响的 $(x, t)$ 区域，称为\textbf{影响区域}。
+\begin{dingliyi}{边界条件}{}
+描述边界上物理状态的条件。
 \end{dingliyi}
 
-初始时刻区间 $[x_1, x_2]$ 的影响区域是由过 $x_1$ 的右行特征线和过 $x_2$ 的左行特征线围成的三角形区域。
+\textbf{第一类边界条件（Dirichlet 条件）}：直接给出边界上的函数值
+\begin{equation}
+    u|_{\partial\Omega} = g(\boldsymbol{x}, t)
+\end{equation}
 
-\begin{figure}[htbp]
+\begin{tishi}[物理场景举例]
+\begin{itemize}
+    \item \textbf{弦振动}：弦的两端固定在墙上，端点位移始终为零：$u(0, t) = u(l, t) = 0$。
+    \item \textbf{热传导}：物体表面与恒温热源接触，表面温度恒定：$u|_{\text{表面}} = T_0$。
+    \item \textbf{静电场}：导体表面电势已知（导体接地或带电）：$\phi|_{\text{导体}} = V_0$。
+\end{itemize}
+\end{tishi}
+
+\textbf{第二类边界条件（Neumann 条件）}：给出边界上的法向导数
+\begin{equation}
+    \frac{\partial u}{\partial n}\Big|_{\partial\Omega} = g(\boldsymbol{x}, t)
+\end{equation}
+
+\begin{tishi}[物理场景举例]
+\begin{itemize}
+    \item \textbf{热传导}：绝热边界，没有热量流过边界：$\frac{\partial u}{\partial n} = 0$。这是因为热流 $q = -k\frac{\partial u}{\partial n}$，绝热意味着 $q = 0$。
+    \item \textbf{弦振动}：自由端（无外力），端点可以自由移动：$\frac{\partial u}{\partial x} = 0$。这是因为端点张力沿弦方向，无垂直分量。
+    \item \textbf{电场}：对称边界（如导体表面法向电场已知）：$\frac{\partial \phi}{\partial n} = -\frac{\sigma}{\varepsilon_0}$。
+\end{itemize}
+\end{tishi}
+
+\textbf{第三类边界条件（Robin 条件）}：混合形式
+\begin{equation}
+    \left(\alpha u + \beta\frac{\partial u}{\partial n}\right)\Big|_{\partial\Omega} = g(\boldsymbol{x}, t)
+\end{equation}
+
+\begin{tishi}[物理场景举例]
+\textbf{牛顿冷却定律}：物体表面与周围介质有热交换，热流与温差成正比：
+\begin{equation}
+    -k\frac{\partial u}{\partial n} = h(u - u_{\infty})
+\end{equation}
+其中 $h$ 是对流换热系数，$u_{\infty}$ 是环境温度。整理得：
+\begin{equation}
+    h u + k\frac{\partial u}{\partial n} = h u_{\infty}
+\end{equation}
+这就是第三类边界条件的标准形式。当 $h$ 很大时，表面温度趋近于环境温度（接近第一类条件）；当 $h$ 很小时，接近绝热（接近第二类条件）。
+\end{tishi}
+
+\begin{table}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.0]
-    % 坐标轴
-    \draw[->, gray] (-0.5, 0) -- (6, 0) node[right] {$x$};
-    \draw[->, gray] (0, -0.3) -- (0, 3.5) node[above] {$t$};
-    
-    % 初始区间
-    \draw[green!60!black, thick] (1, 0) -- (3, 0);
-    \fill[green!60!black, opacity=0.3] (1, 0) -- (1, 0.1) -- (3, 0.1) -- (3, 0) -- cycle;
-    
-    % 特征线
-    \draw[blue, thick] (1, 0) -- (4, 3);
-    \draw[blue, thick] (3, 0) -- (0, 3);
-    
-    % 影响区域
-    \fill[red, opacity=0.2] (1, 0) -- (4, 3) -- (0, 3) -- (3, 0) -- cycle;
-    
-    \fill (1, 0) circle (2pt) node[below] {$x_1$};
-    \fill (3, 0) circle (2pt) node[below] {$x_2$};
-    
-    \node[red] at (2, 1.5) {影响区域};
-\end{tikzpicture}
-\caption{影响区域}
-\label{fig:range-of-influence}
-\end{figure}
+\begin{tabular}{llll}
+\toprule
+\textbf{类型} & \textbf{形式} & \textbf{物理意义} & \textbf{例子} \\
+\midrule
+第一类 & $u|_{\Gamma} = g$ & 边界值已知 & 固定端点 \\
+第二类 & $\frac{\partial u}{\partial n}|_{\Gamma} = g$ & 边界通量已知 & 绝热边界 \\
+第三类 & $\alpha u + \beta\frac{\partial u}{\partial n} = g$ & 混合条件 & 对流边界 \\
+\bottomrule
+\end{tabular}
+\caption{边界条件分类}
+\label{tab:boundary-conditions}
+\end{table}
 
-\subsection{波的有限传播速度}
+% ========== 第三节 ==========
+\section{二阶线性偏微分方程的分类}
 
-达朗贝尔公式揭示了波的一个重要性质：\textbf{有限传播速度}。
+\subsection{一般形式}
 
-\begin{dingli}{惠更斯原理（波的有限传播速度）}{}
-初始扰动只能在有限时间内传播有限距离。在时刻 $t$，初始时刻位于 $x_0$ 的扰动只能影响到 $|x - x_0| \leq at$ 的区域。
+考虑两个自变量的二阶线性偏微分方程：
+\begin{equation}
+    A\frac{\partial^2 u}{\partial x^2} + 2B\frac{\partial^2 u}{\partial x\partial y} + C\frac{\partial^2 u}{\partial y^2} + D\frac{\partial u}{\partial x} + E\frac{\partial u}{\partial y} + Fu = G
+\end{equation}
+其中 $A, B, C, D, E, F, G$ 是 $x, y$ 的函数。
+
+\subsection{判别式与分类}
+
+\begin{dingliyi}{判别式}{}
+\begin{equation}
+    \Delta = B^2 - AC
+\end{equation}
+\end{dingliyi}
+
+\begin{dingli}{方程分类}{}
+\begin{itemize}
+    \item $\Delta > 0$：\textbf{双曲型}（如波动方程）
+    \item $\Delta = 0$：\textbf{抛物型}（如热传导方程）
+    \end{itemize}
 \end{dingli}
 
 \begin{proof}
-由达朗贝尔公式
+二阶线性偏微分方程的标准形式为
 \begin{equation}
-    u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at} \psi(\xi)\,\mathrm{d}\xi
+    A\frac{\partial^2 u}{\partial x^2} + 2B\frac{\partial^2 u}{\partial x \partial y} + C\frac{\partial^2 u}{\partial y^2} + \text{低阶项} = 0
 \end{equation}
-解在点 $(x, t)$ 的值只依赖于初始数据在区间 $[x-at, x+at]$ 上的值。
+特征方程为 $A(\mathrm{d}y)^2 - 2B\,\mathrm{d}x\,\mathrm{d}y + C(\mathrm{d}x)^2 = 0$，其判别式为 $\Delta = B^2 - AC$。
 
-因此，初始时刻位于 $x_0$ 的扰动（即 $\varphi(x_0)$ 和 $\psi(x_0)$），只有在 $x_0 \in [x-at, x+at]$ 时才能影响 $u(x, t)$。等价地，
-\begin{equation}
-    x - at \leq x_0 \leq x + at \quad \Longleftrightarrow \quad |x - x_0| \leq at
-\end{equation}
-这就是惠更斯原理的数学表述。
+当 $\Delta > 0$ 时，有两族实特征线（双曲型）；$\Delta = 0$ 时，有一族实特征线（抛物型）；$\Delta < 0$ 时，无实特征线（椭圆型）。
 \end{proof}
 
+\subsection{典型方程的分类}
+
 \begin{lizi}{}{}
-设初始位移 $\varphi(x)$ 仅在区间 $[2, 4]$ 内非零，初始速度 $\psi(x) = 0$。求 $t = 1$ 时波动到达的区域（设波速 $a = 1$）。
+对波动方程 $\frac{\partial^2 u}{\partial t^2} = a^2\frac{\partial^2 u}{\partial x^2}$ 进行分类。
 
 \begin{jie}
-    由影响区域的定义，初始扰动在 $[x_1, x_2] = [2, 4]$ 内的影响区域是由过 $x_1 = 2$ 的右行特征线和过 $x_2 = 4$ 的左行特征线围成的区域。
-
-    特征线方程：$x - at = C$（右行），$x + at = C'$（左行）。
-
-    过 $x_1 = 2$ 的右行特征线：$x - t = 2$，即 $x = t + 2$。
+    改写为标准形式：
+    \begin{equation}
+        a^2\frac{\partial^2 u}{\partial x^2} - \frac{\partial^2 u}{\partial t^2} = 0
+    \end{equation}
     
-    过 $x_2 = 4$ 的左行特征线：$x + t = 4$，即 $x = 4 - t$。
-
-    当 $t = 1$ 时：
-    \begin{itemize}
-        \item 右行特征线到达 $x = 3$
-        \item 左行特征线到达 $x = 3$
-    \end{itemize}
+    对应 $A = a^2$，$B = 0$，$C = -1$。
     
-    因此，$t = 1$ 时波动到达的区域是 $x \in [1, 5]$。
-
-    \textbf{验证}：由达朗贝尔公式，$u(x, 1) = \frac{1}{2}[\varphi(x-1) + \varphi(x+1)]$。要使 $u(x, 1) \neq 0$，需要 $x-1 \in [2, 4]$ 或 $x+1 \in [2, 4]$，即 $x \in [1, 5]$。
+    判别式：$\Delta = 0 - a^2 \cdot (-1) = a^2 > 0$。
+    
+    所以波动方程是\textbf{双曲型}方程。
 \end{jie}
 \end{lizi}
 
-% ========== 第三节 ==========
-\section{半无界弦的振动}
-
-\subsection{延拓法}
-
-对于半无界问题 $x > 0$，边界条件 $u(0, t) = 0$（固定端），可以用\textbf{奇延拓}方法求解。
-
-\textbf{思路}：将半无界问题延拓为全无界问题，使边界条件自动满足。
-
-对于 $u(0, t) = 0$，将初始条件作奇延拓：
-\begin{equation}
-    \tilde{\varphi}(x) = \begin{cases}
-        \varphi(x), & x \geq 0 \\
-        -\varphi(-x), & x < 0
-    \end{cases}, \quad
-    \tilde{\psi}(x) = \begin{cases}
-        \psi(x), & x \geq 0 \\
-        -\psi(-x), & x < 0
-    \end{cases}
-\end{equation}
-
-然后用达朗贝尔公式求解。
-
 \begin{lizi}{}{}
-求解半无界弦振动问题：
-\begin{equation}
-    \begin{cases}
-        \dfrac{\partial^2 u}{\partial t^2} = a^2\dfrac{\partial^2 u}{\partial x^2}, & x > 0, \; t > 0 \\
-        u(x, 0) = \varphi(x), & x > 0 \\
-        \dfrac{\partial u}{\partial t}(x, 0) = 0, & x > 0 \\
-        u(0, t) = 0, & t > 0
-    \end{cases}
-\end{equation}
+对热传导方程 $\frac{\partial u}{\partial t} = a^2\frac{\partial^2 u}{\partial x^2}$ 进行分类。
 
 \begin{jie}
-    将初始条件作奇延拓：$\tilde{\varphi}(x) = \varphi(x)$（$x \geq 0$），$\tilde{\varphi}(x) = -\varphi(-x)$（$x < 0$）。
-    
-    由达朗贝尔公式：
+    引入新变量 $v = \frac{\partial u}{\partial t}$，方程变为
     \begin{equation}
-        u(x, t) = \frac{1}{2}[\tilde{\varphi}(x-at) + \tilde{\varphi}(x+at)]
+        a^2\frac{\partial^2 u}{\partial x^2} - v = 0
     \end{equation}
     
-    当 $x > at$ 时：
-    \begin{equation}
-        u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)]
-    \end{equation}
+    更直接地，把 $t$ 看作第二个自变量，只含一阶时间导数。
     
-    当 $0 < x < at$ 时：
-    \begin{equation}
-        u(x, t) = \frac{1}{2}[-\varphi(at-x) + \varphi(x+at)]
-    \end{equation}
+    对应 $A = a^2$，$B = 0$，$C = 0$。
+    
+    判别式：$\Delta = 0 - a^2 \cdot 0 = 0$。
+    
+    所以热传导方程是\textbf{抛物型}方程。
 \end{jie}
 \end{lizi}
 
-\subsection{反射波}
+\begin{lizi}{}{}
+对拉普拉斯方程 $\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0$ 进行分类。
 
-固定端的边界条件导致波的\textbf{反射}。入射波到达端点后，反射为一个相位相反的波。
+\begin{jie}
+    对应 $A = 1$，$B = 0$，$C = 1$。
+    
+    判别式：$\Delta = 0 - 1 \cdot 1 = -1 < 0$。
+    
+    所以拉普拉斯方程是\textbf{椭圆型}方程。
+\end{jie}
+\end{lizi}
 
-\begin{wulibj}[波的反射]
+\subsection{特征线}
+
+\begin{dingliyi}{特征方程}{}
+方程
+\begin{equation}
+    A\left(\frac{\mathrm{d}y}{\mathrm{d}x}\right)^2 - 2B\frac{\mathrm{d}y}{\mathrm{d}x} + C = 0
+\end{equation}
+称为原偏微分方程的\textbf{特征方程}，其解称为\textbf{特征线}。
+\end{dingliyi}
+
+特征线的性质：
 \begin{itemize}
-    \item 固定端（$u = 0$）：反射波与入射波相位相反
-    \item 自由端（$\frac{\partial u}{\partial x} = 0$）：反射波与入射波相位相同
+    \item 双曲型方程：有两族实特征线
+    \item 抛物型方程：有一族实特征线
+    \item 椭圆型方程：无实特征线
 \end{itemize}
-\end{wulibj}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    % 双曲型
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$t$};
+        
+        \draw[blue, thick] (0, 0) -- (2.5, 2.5);
+        \draw[blue, thick] (0, 1) -- (1.5, 2.5);
+        \draw[red, thick] (2.5, 0) -- (0, 2.5);
+        \draw[red, thick] (2.5, 1) -- (1, 2.5);
+        
+        \node at (1.25, -1) {双曲型};
+        \node[blue] at (2.2, 1.5) {$x+at=C_1$};
+        \node[red] at (0.3, 1.5) {$x-at=C_2$};
+    \end{scope}
+    
+    % 抛物型
+    \begin{scope}[xshift=5cm]
+        \draw[->, gray] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$t$};
+        
+        \draw[blue, thick] (0, 0) -- (0, 2.5);
+        \draw[blue, thick] (1, 0) -- (1, 2.5);
+        \draw[blue, thick] (2, 0) -- (2, 2.5);
+        
+        \node at (1.25, -1) {抛物型};
+        \node[blue] at (2.5, 1.5) {$t=C$};
+    \end{scope}
+    
+    % 椭圆型
+    \begin{scope}[xshift=10cm]
+        \draw[->, gray] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+        
+        \draw[blue, thick] (1.25, 1.25) circle (1);
+        \draw[blue, thick] (1.25, 1.25) circle (0.5);
+        
+        \node at (1.25, -1) {椭圆型};
+        \node[blue] at (2.8, 1.5) {无实特征线};
+    \end{scope}
+\end{tikzpicture}
+\caption{三类方程的特征线}
+\label{fig:characteristics}
+\end{figure}
 
 % ========== 第四节 ==========
-\section{有界弦的振动}
+\section{定解问题的适定性}
 
-对于有限长弦，需要考虑端点的多次反射。这类问题通常用分离变量法\index{分离变量法}求解更方便（下一章介绍）。
+\begin{dingliyi}{适定性}{}
+一个定解问题称为\textbf{适定的}，如果满足：
+\begin{enumerate}
+    \item \textbf{存在性}：解存在
+    \item \textbf{唯一性}：解唯一
+    \item \textbf{稳定性}：解连续依赖于定解条件
+\end{enumerate}
+\end{dingliyi}
 
-但也可以用行波叠加的思想理解：有界弦的振动可以看作初始波在两端点间来回反射叠加的结果。
+\begin{tishi}
+不是所有定解问题都是适定的。例如，拉普拉斯方程的柯西问题通常是不适定的——初始条件的小扰动会导致解的剧烈变化。
+\end{tishi}
 
+\begin{dingli}{三类典型方程的适定性}{}
+\begin{itemize}
+    \item \textbf{波动方程}：柯西问题和混合问题都是适定的
+    \item \textbf{热传导方程}：初值问题和混合问题都是适定的，但反向热传导问题不适定
+    \end{itemize}
+\end{dingli}
+
+\begin{proof}
+这是一个归纳性的结论，其证明需要后续章节的具体方法：
+
+\textbf{波动方程}：达朗贝尔公式给出了解的存在性和唯一性，解对初始条件的连续依赖性可通过公式直接验证。
+
+\textbf{热传导方程}：分离变量法和积分变换法可证明解的存在唯一性。但反向热传导（已知终值求初值）是不适定的，因为解对终值不连续依赖。
+
+\textbf{拉普拉斯方程}：格林函数法和分离变量法可证明边值问题的适定性。但柯西问题（给定边界曲线和边界值）是不适定的，这是因为调和函数的解析开拓问题。
+\end{proof}
 % ========== 本章小结 ==========
 \section{本章小结}
 
-\subsection{核心内容}
+\subsection{三类典型方程}
 
-\begin{enumerate}
-    \item \textbf{达朗贝尔公式}：$u(x, t) = \frac{1}{2}[\varphi(x-at) + \varphi(x+at)] + \frac{1}{2a}\int_{x-at}^{x+at}\psi(s)\,\mathrm{d}s$
-    \item \textbf{通解形式}：$u = f(x-at) + g(x+at)$（左、右行波叠加）
-    \item \textbf{特征线}：$x \mp at = C$
-\end{enumerate}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llll}
+\toprule
+\textbf{方程} & \textbf{类型} & \textbf{物理背景} & \textbf{特点} \\
+\midrule
+波动方程 & 双曲型 & 振动、波动 & 有两条特征线 \\
+热传导方程 & 抛物型 & 热传导、扩散 & 不可逆过程 \\
+拉普拉斯方程 & 椭圆型 & 稳定场 & 无实特征线 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsection{关键概念}
+\subsection{定解条件}
 
 \begin{itemize}
-    \item 依赖区间：$(x, t)$ 处的解依赖于初始条件在 $[x-at, x+at]$ 上的值
-    \item 影响区域：初始扰动影响的时空区域
-    \item 有限传播速度：波以速度 $a$ 传播
+    \item 初始条件：描述初始状态
+    \item 边界条件：第一类（Dirichlet）、第二类（Neumann）、第三类（Robin）
+\end{itemize}
+
+\subsection{分类依据}
+
+判别式 $\Delta = B^2 - AC$：
+\begin{itemize}
+    \item $\Delta > 0$：双曲型
+    \item $\Delta = 0$：抛物型
+    \item $\Delta < 0$：椭圆型
 \end{itemize}
 
 % ========== 习题 ==========
@@ -391,49 +547,37 @@
 \textbf{基础题}
 
 \begin{enumerate}
-    \item 用达朗贝尔公式求解：
+    \item 从物理定律出发，推导二维波动方程
     \begin{equation}
-        \begin{cases}
-            u_{tt} = 4u_{xx} \\
-            u(x, 0) = \sin x, \quad u_t(x, 0) = 0
-        \end{cases}
+        \frac{\partial^2 u}{\partial t^2} = a^2\left(\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}\right)
     \end{equation}
     
-    \item 验证 $u(x, t) = f(x-at) + g(x+at)$ 满足波动方程。
+    \item 推导三维热传导方程
+    \begin{equation}
+        \frac{\partial u}{\partial t} = a^2\nabla^2 u
+    \end{equation}
     
-    \item 设初始位移 $\varphi(x)$ 只在 $[a, b]$ 内非零，求 $u(x, t)$ 非零的时空区域。
+    \item 判断下列方程的类型：
+    \begin{enumerate}
+        \item $\frac{\partial^2 u}{\partial x^2} + 2\frac{\partial^2 u}{\partial x\partial y} + \frac{\partial^2 u}{\partial y^2} = 0$
+        \item $x\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0$（分区域讨论）
+    \end{enumerate}
 \end{enumerate}
 
 \textbf{综合题}
 
 \begin{enumerate}[resume]
-    \item 求解半无界问题：
-    \begin{equation}
-        \begin{cases}
-            u_{tt} = a^2 u_{xx}, & x > 0, \; t > 0 \\
-            u(x, 0) = \mathrm{e}^{-x}, \quad u_t(x, 0) = 0 \\
-            u_x(0, t) = 0 \quad \text{（自由端）}
-        \end{cases}
-    \end{equation}
+    \item 考虑长为 $l$ 的均匀细杆，一端固定，另一端受弹性支撑。写出定解问题。
     
-    \item 设弦在 $t = 0$ 时静止，初始位移为三角形脉冲：
-    \begin{equation}
-        \varphi(x) = \begin{cases}
-            x, & 0 \leq x \leq 1 \\
-            2-x, & 1 < x \leq 2 \\
-            0, & \text{其他}
-        \end{cases}
-    \end{equation}
-    求 $u(x, t)$ 并画出 $t = 0, \frac{1}{a}, \frac{2}{a}, \frac{3}{a}$ 时的波形。
+    \item 考虑半径为 $R$ 的圆形薄膜的振动，写出定解问题（使用极坐标）。
+    
+    \item 设杆的侧面与周围介质有热交换（牛顿冷却定律），推导杆的温度分布方程。
 \end{enumerate}
 
 \textbf{挑战题}
 
 \begin{enumerate}[resume]
-    \item 推导三维波动方程初值问题的解（泊松公式或基尔霍夫公式）：
-    \begin{equation}
-        u(\boldsymbol{x}, t) = \frac{1}{4\pi a}\frac{\partial}{\partial t}\left[\frac{1}{t}\int_{|\boldsymbol{y}|=at} \varphi(\boldsymbol{x}+\boldsymbol{y})\,\mathrm{d}S\right] + \frac{1}{4\pi at}\int_{|\boldsymbol{y}|=at} \psi(\boldsymbol{x}+\boldsymbol{y})\,\mathrm{d}S
-    \end{equation}
+    \item 证明：对于椭圆型方程，如果给定柯西条件（边界上的函数值和法向导数），问题通常是不适定的。
     
-    \item 比较一维、二维、三维波动方程解的性质差异（如惠更斯原理的强弱形式）。
+    \item 研究方程 $\frac{\partial^2 u}{\partial x^2} + y\frac{\partial^2 u}{\partial y^2} = 0$ 的类型，并讨论在不同区域的特征线。
 \end{enumerate}

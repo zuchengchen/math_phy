@@ -1,544 +1,795 @@
-% 第七章：傅里叶变换\index{傅里叶变换}
+% 第六章：保角映射初步（选学）
 
-\chapter{傅里叶变换\index{傅里叶变换}}
+\chapter{保角映射初步（选学）}
 
 \begin{wulibj}[本章导读]
-傅里叶变换\index{傅里叶变换}是分析周期和非周期信号的有力工具。它将时域问题转化为频域问题，使我们能够从新的角度理解和处理物理问题。本章我们将学习傅里叶级数、傅里叶变换\index{傅里叶变换}及其性质，以及在求解微分方程中的应用。
+本章是复变函数部分的选学内容。第二章里，我们已经知道：解析函数\index{解析函数}在导数不为零的点附近局部保角。本章在这个基础上再往前走一步，学习如何用具体映射把复杂区域变成简单区域，并介绍分式线性变换以及若干常见的保角映射。这些内容在二维势场、流体力学和电磁学中很有启发性。
+
+如果你当前更关心课程主线，也可以先把本章看作``二维势场问题的几何方法预告''：后面在数理方程部分，我们会先用分离变量法和格林函数法系统求解拉普拉斯方程的边值问题；再回头看本章，就会更清楚保角映射的价值在于\textbf{把复杂边界变成标准边界}。因此，本章是加深理解的工具，而不是后续各章的前置门槛；如果暂时跳过，也不会影响后文主线。
 \end{wulibj}
 
 % ========== 第一节 ==========
-\section{傅里叶级数回顾}
+\section{保角映射的概念}
 
-\subsection{周期函数的傅里叶展开}
+\subsection{解析函数\index{解析函数}的几何意义}
 
-\begin{dingliyi}{傅里叶级数}{}
-设 $f(x)$ 是周期为 $2\pi$ 的函数，在一定条件下可以展开为
-\begin{equation}
-    f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}(a_n\cos nx + b_n\sin nx)
-\end{equation}
-其中
-\begin{align}
-    a_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos nx\,\mathrm{d}x, \quad n = 0, 1, 2, \ldots \\
-    b_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin nx\,\mathrm{d}x, \quad n = 1, 2, 3, \ldots
-\end{align}
-\end{dingliyi}
+设 $w = f(z)$ 是区域 $D$ 内的解析函数\index{解析函数}，$z_0 \in D$，$f'(z_0) \neq 0$。
 
-\subsection{复数\index{复数}形式的傅里叶级数}
+考虑 $z$ 平面上通过 $z_0$ 的曲线 $C$：$z = z(t)$，$z(t_0) = z_0$。其在 $w$ 平面上的像曲线为 $w = f(z(t))$。
 
-利用欧拉公式，傅里叶级数可以写成更简洁的复数\index{复数}形式：
+切向量：
+\begin{itemize}
+    \item $C$ 在 $z_0$ 处的切向量：$z'(t_0)$
+    \item 像曲线在 $w_0 = f(z_0)$ 处的切向量：$w'(t_0) = f'(z_0)z'(t_0)$
+\end{itemize}
 
-\begin{dingli}{复数形式傅里叶级数}{}
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}nx}
-\end{equation}
-其中
-\begin{equation}
-    c_n = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)\mathrm{e}^{-\mathrm{i}nx}\,\mathrm{d}x
-\end{equation}
-\end{dingli}
+\subsection{保角性的证明}
+
+\begin{dingli}{保角映射}{}
+设 $w = f(z)$ 在 $z_0$ 处解析且 $f'(z_0) \neq 0$。则：
+\begin{enumerate}
+    \item \textbf{伸缩率}：像曲线与原曲线长度之比为 $|f'(z_0)|$
+    \item \textbf{旋转角}：像曲线的切线相对于原曲线旋转了 $\arg f'(z_0)$
+    \item \textbf{保角性}：通过 $z_0$ 的任意两条曲线的夹角在映射后保持不变
+\end{enumerate}
 
 \begin{proof}
-由欧拉公式：
-\begin{align}
-    \cos nx &= \frac{\mathrm{e}^{\mathrm{i}nx} + \mathrm{e}^{-\mathrm{i}nx}}{2} \\
-    \sin nx &= \frac{\mathrm{e}^{\mathrm{i}nx} - \mathrm{e}^{-\mathrm{i}nx}}{2\mathrm{i}}
-\end{align}
+设两条曲线 $C_1$ 和 $C_2$ 在 $z_0$ 处相交，切向量分别为 $z_1'(t_0)$ 和 $z_2'(t_0)$。
 
-代入傅里叶级数：
+像曲线的切向量分别为 $w_1'(t_0) = f'(z_0)z_1'(t_0)$ 和 $w_2'(t_0) = f'(z_0)z_2'(t_0)$。
+
+设 $C_1$ 和 $C_2$ 的夹角为 $\alpha$，则
 \begin{equation}
-    f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\left[a_n\frac{\mathrm{e}^{\mathrm{i}nx} + \mathrm{e}^{-\mathrm{i}nx}}{2} + b_n\frac{\mathrm{e}^{\mathrm{i}nx} - \mathrm{e}^{-\mathrm{i}nx}}{2\mathrm{i}}\right]
+    \cos\alpha = \frac{\mathrm{Re}(z_1' \overline{z_2'})}{|z_1'||z_2'|}
 \end{equation}
 
-整理得
+像曲线的夹角 $\beta$：
 \begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}nx}
+    \cos\beta = \frac{\mathrm{Re}(w_1' \overline{w_2'})}{|w_1'||w_2'|} = \frac{\mathrm{Re}(f'(z_0)z_1' \cdot \overline{f'(z_0)z_2'})}{|f'(z_0)||z_1'| \cdot |f'(z_0)||z_2'|}
 \end{equation}
-其中 $c_0 = a_0/2$，$c_n = (a_n - \mathrm{i}b_n)/2$（$n > 0$），$c_{-n} = (a_n + \mathrm{i}b_n)/2$。
+
+由于 $\overline{f'(z_0)z_2'} = \overline{f'(z_0)}\overline{z_2'}$，有
+\begin{equation}
+    \cos\beta = \frac{|f'(z_0)|^2 \mathrm{Re}(z_1'\overline{z_2'})}{|f'(z_0)|^2|z_1'||z_2'|} = \cos\alpha
+\end{equation}
+
+所以 $\beta = \alpha$，夹角保持不变。
 \end{proof}
-
-\subsection{一般周期的傅里叶级数}
-
-对于周期为 $2L$ 的函数：
-
-\begin{dingli}{周期 $2L$ 的傅里叶级数}{}
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}n\pi x/L}
-\end{equation}
-其中
-\begin{equation}
-    c_n = \frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x
-\end{equation}
 \end{dingli}
 
-\begin{proof}
-作变量替换 $x = Lt/\pi$，则 $t \in [-\pi, \pi]$。设 $g(t) = f(Lt/\pi)$，则 $g(t)$ 是周期 $2\pi$ 的函数。由傅里叶级数公式：
-\begin{equation}
-    g(t) = \sum_{n=-\infty}^{\infty} c_n' \mathrm{e}^{\mathrm{i}nt}, \quad c_n' = \frac{1}{2\pi}\int_{-\pi}^{\pi} g(t)\mathrm{e}^{-\mathrm{i}nt}\,\mathrm{d}t
-\end{equation}
-代回 $x = Lt/\pi$，得 $\mathrm{d}t = \pi\,\mathrm{d}x/L$，$t = \pi x/L$：
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L}, \quad c_n = \frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x
-\end{equation}
-\end{proof}
-% ========== 第二节 ==========
-\section{傅里叶变换\index{傅里叶变换}}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % z平面
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (3, 0);
+        \draw[->, gray] (0, -0.5) -- (0, 3);
+        \node at (3.2, 0) {$x$};
+        \node at (0, 3.2) {$y$};
+        
+        % 曲线
+        \draw[blue, thick] plot[smooth] coordinates {(0.5, 1) (1.5, 1.5) (2.5, 1)};
+        \draw[red, thick] plot[smooth] coordinates {(1.5, 0.5) (1.5, 1.5) (1.2, 2.5)};
+        
+        % 点和角度
+        \fill (1.5, 1.5) circle (2pt) node[right] {$z_0$};
+        \draw[green!60!black, thick] (1.5, 1.5) -- (2.0, 1.6);
+        \draw[green!60!black, thick] (1.5, 1.5) -- (1.4, 2.0);
+        \draw[green!60!black] (1.5, 1.5) ++(10:0.5) arc (10:70:0.5);
+        \node[green!60!black] at (1.8, 1.9) {$\alpha$};
+        
+        \node at (1.5, -0.5) {$z$ 平面};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (3.5, 1.5) -- (4.5, 1.5) node[midway, above] {$w = f(z)$};
+    
+    % w平面
+    \begin{scope}[xshift=5.5cm]
+        \draw[->, gray] (-0.5, 0) -- (3, 0);
+        \draw[->, gray] (0, -0.5) -- (0, 3);
+        \node at (3.2, 0) {$u$};
+        \node at (0, 3.2) {$v$};
+        
+        % 曲线
+        \draw[blue, thick] plot[smooth] coordinates {(0.3, 0.8) (1.3, 1.8) (2.3, 1.2)};
+        \draw[red, thick] plot[smooth] coordinates {(1.0, 1.2) (1.3, 1.8) (1.0, 2.8)};
+        
+        % 点和角度
+        \fill (1.3, 1.8) circle (2pt) node[right] {$w_0$};
+        \draw[green!60!black, thick] (1.3, 1.8) -- (1.8, 2.0);
+        \draw[green!60!black, thick] (1.3, 1.8) -- (1.2, 2.3);
+        \draw[green!60!black] (1.3, 1.8) ++(15:0.5) arc (15:75:0.5);
+        \node[green!60!black] at (1.6, 2.2) {$\alpha$};
+        
+        \node at (1.5, -0.5) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{保角映射：夹角保持不变}
+\label{fig:conformal-mapping}
+\end{figure}
 
-\subsection{从傅里叶级数到傅里叶变换\index{傅里叶变换}}
+\subsection{保角映射的定义}
 
-当周期 $2L \to \infty$ 时，周期函数变成非周期函数，离散谱变成连续谱。
+\begin{dingliyi}{保角映射}{}
+设 $w = f(z)$ 将区域 $D$ 映射到区域 $G$。若 $f(z)$ 在 $D$ 内解析且 $f'(z) \neq 0$，则称此映射为\textbf{保角映射}或\textbf{共形映射}。
 
-这个极限过程有非常直观的物理意义，让我们先理解一下：
-
-\begin{tishi}[物理直观：从离散谱到连续谱]
-设想一个周期信号，比如一个不断重复的脉冲。当我们用傅里叶级数展开它时，得到的是一系列离散的频率成分：$\omega = \frac{\pi}{L}, \frac{2\pi}{L}, \frac{3\pi}{L}, \ldots$。相邻频率的间隔是 $\Delta\omega = \frac{\pi}{L}$。
-
-现在，让周期 $L$ 变大。信号还是重复，但两次重复之间的间隔变长了。结果是什么？频率谱变密了！因为 $\Delta\omega = \frac{\pi}{L}$ 变小了。
-
-当 $L \to \infty$ 时，信号变成了真正的非周期信号（只出现一次）。频率间隔趋于零，离散的谱线变成了一条连续的曲线。原来每个整数 $n$ 对应的系数 $c_n$，现在变成了连续变量 $\omega$ 对应的函数 $\hat{f}(\omega)$。
-
-这就是傅里叶变换的物理本质：\textbf{非周期信号具有连续的频率谱}。
+\begin{tishi}
+保角映射保持：
+\begin{itemize}
+    \item 角度的大小和方向
+    \item 无穷小图形的相似性
+\end{itemize}
+但不保持距离和面积！
 \end{tishi}
 
-令 $\omega_n = n\pi/L$，$\Delta\omega = \pi/L$，则
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}\omega_n x} = \frac{1}{2\pi}\sum_{n=-\infty}^{\infty} \hat{f}(\omega_n)\mathrm{e}^{\mathrm{i}\omega_n x}\Delta\omega
-\end{equation}
-
-当 $L \to \infty$，求和变成积分：
-
-\begin{dingliyi}{傅里叶变换}{}
-设 $f(x)$ 在 $(-\infty, +\infty)$ 上绝对可积。定义
-\begin{equation}
-    \hat{f}(\omega) = \mathcal{F}[f(x)] = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-\end{equation}
-为 $f(x)$ 的\textbf{傅里叶变换\index{傅里叶变换}}（或频谱）。
 \end{dingliyi}
 
-\begin{dingliyi}{傅里叶逆变换}{}
+% ========== 第二节 ==========
+\section{分式线性变换}
+
+\subsection{分式线性变换的定义}
+
+\begin{dingliyi}{分式线性变换}{}
+形如
 \begin{equation}
-    f(x) = \mathcal{F}^{-1}[\hat{f}(\omega)] = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
+    w = \frac{az + b}{cz + d}, \quad ad - bc \neq 0
 \end{equation}
+的变换称为\textbf{分式线性变换}或\textbf{莫比乌斯变换}。
+
+分式线性变换可以分解为三种基本变换：
+\begin{enumerate}
+    \item 平移：$w = z + b$
+    \item 旋转与伸缩：$w = az$
+    \item 反演：$w = 1/z$
+\end{enumerate}
 \end{dingliyi}
 
-\begin{tishi}[物理意义]
-傅里叶变换\index{傅里叶变换}将信号从\textbf{时域}（$x$ 空间）转换到\textbf{频域}（$\omega$ 空间）。$\hat{f}(\omega)$ 表示信号中频率为 $\omega$ 的成分的强度。
+\subsection{直线与圆的统一观点}
+
+在第一章里，我们已经引入了扩充复平面和黎曼球面。现在讨论分式线性变换时，这个几何模型会立刻派上用场。因为要理解分式线性变换为什么会把圆映成圆、把直线映成直线，最关键的一步正是先明白：在扩充复平面的视角下，直线和圆本来就不是彼此孤立的两类对象。
+
+在普通复平面里，直线和圆看起来完全不像同一类对象：圆是封闭的，直线却一直向两端延伸，好像永远也不会``绕回来''。所以``直线可以看作经过无穷远点的圆''这句话，第一次看到时往往会觉得很突然。
+
+真正的关键在于：这里说的不是普通复平面，而是\textbf{扩充复平面}。一旦把无穷远点 $\infty$ 补进去，很多原来看起来分开的对象，就会在更高一级的视角下统一起来。
+
+\begin{tishi}[直线可以看作经过无穷远点的圆]
+这件事可以分三步理解：
+\begin{enumerate}
+    \item 在黎曼球面上，我们面对的本来就是球面上的圆；
+    \item 球面上的圆经过球极投影后，若不经过北极 $N$，就在复平面上投成普通圆；若经过北极 $N$，就在复平面上投成直线；
+    \item 而北极 $N$ 对应的正是无穷远点 $\infty$，所以那些投影成直线的球面圆，本质上就是``经过无穷远点的圆''。
+\end{enumerate}
+
+换句话说，直线之所以在普通复平面里看起来不像圆，只是因为它的``两端''都跑到了无穷远处；在扩充复平面里把这个点补上以后，它也可以被看成一个闭合的几何对象。
 \end{tishi}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.7]
-    % 时域信号
-    \begin{scope}[shift={(-4,0)}]
-        \draw[->, gray] (-0.3, 0) -- (3.5, 0) node[right] {$x$};
-        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$f(x)$};
-        \draw[blue, thick, domain=0:3.2, samples=100] plot (\x, {0.8*exp(-(\x-1.5)*(\x-1.5)/0.5)*cos(deg(4*\x))});
-        \node at (1.5, -1) {时域信号};
-    \end{scope}
-    
-    % 箭头
-    \draw[->, very thick, red] (0, 0.7) -- (1.5, 0.7);
-    \node[red, above] at (0.75, 0.7) {$\mathcal{F}$};
-    
-    % 频域信号
-    \begin{scope}[shift={(3,0)}]
-        \draw[->, gray] (-0.3, 0) -- (3.5, 0) node[right] {$\omega$};
-        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$\hat{f}(\omega)$};
-        \draw[green!60!black, thick, domain=0:3.2, samples=100] plot (\x, {1.2*exp(-(\x-1.2)*(\x-1.2)/0.3)});
-        \node at (1.5, -1) {频域信号};
-    \end{scope}
-    
-    % 逆变换
-    \draw[->, very thick, blue] (4.5, 0.7) -- (3, 0.7);
-    \node[blue, below] at (3.75, 0.5) {$\mathcal{F}^{-1}$};
+\begin{tikzpicture}[scale=0.95]
+    % plane
+    \coordinate (A) at (-5.6,-1.55);
+    \coordinate (B) at (3.4,-1.55);
+    \coordinate (C) at (5.3,0.30);
+    \coordinate (D) at (-3.7,0.30);
+    \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
+    \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
+    \node[gray] at (4,-0.0) {复平面};
+
+    % image line on plane
+    \draw[orange!90!black, line width=1.4pt] (-4.8,-0.92) -- (2.4,0.16);
+    \node[orange!90!black, below] at (1.5,0.1) {$\ell$};
+
+    % sphere
+    \coordinate (O) at (0,1.35);
+    \fill[gray!10] (O) circle (1.55);
+    \draw[gray!80!black, thick] (O) circle (1.55);
+    \draw[gray!80!black, thick] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
+    \draw[gray!80!black, thick, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
+
+    % north/south
+    \coordinate (N) at ($(O)+(0,1.55)$);
+    \coordinate (S) at ($(O)+(0,-1.55)$);
+    \fill[gray!80!black] (N) circle (2pt) node[above] {$N$};
+    \fill[gray!80!black] (S) circle (2pt) node[below] {$S$};
+    \node[right, gray!80!black] at ($(N)+(0.5,0.2)$) {$N\leftrightarrow \infty$};
+
+    % highlighted circle through N and S
+    \draw[orange!90!black, line width=1.4pt] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
+    \draw[orange!90!black, line width=1.1pt, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
+    \node[orange!90!black] at ($(O)+(-1.05,0.01)$) {$C$};
+
+    % sample points on the circle
+    \coordinate (P1) at ($(O)+(-0.71014,0.775)$);
+    \coordinate (P2) at ($(O)+(-0.77055,-0.53013)$);
+    \coordinate (P3) at ($(O)+(-0.41000,-1.34234)$);
+    \fill[blue] (P1) circle (2pt) node[left] {$P_1$};
+    \fill[blue] (P2) circle (2pt) node[left] {$P_2$};
+    \fill[blue] (P3) circle (2pt) node[above right, xshift=-1.5pt, yshift=-4pt] {$P_3$};
+
+    % image points on plane line
+    \coordinate (Z1) at (-3.29320,-0.69398);
+    \coordinate (Z2) at (-1.21591,-0.38239);
+    \coordinate (Z3) at (-0.44898,-0.26735);
+    \fill[blue] (Z1) circle (2pt);
+    \fill[blue] (Z2) circle (2pt);
+    \fill[blue] (Z3) circle (2pt);
+    \node[below, blue] at (Z1) {$z_1$};
+    \node[below, blue] at (Z2) {$z_2$};
+    \node[below, blue] at (Z3) {$z_3$};
+
+    % lines from the north pole to points on the sphere
+    \draw[blue, dashed] (N) -- (P1);
+    \draw[blue, dashed] (N) -- (P2);
+    \draw[blue, dashed] (N) -- (P3);
+
+    % correspondence lines
+    \draw[blue] (P1) -- (Z1);
+    \draw[blue] (P2) -- (Z2);
+    \draw[blue] (P3) -- (Z3);
 \end{tikzpicture}
-\caption{傅里叶变换的时域-频域转换}
-\label{fig:fourier-transform-domain}
+\caption{球极投影把橙色球面圆 $C$ 对应到平面上的橙色直线 $\ell$}
+\label{fig:line-from-circle-projection-3d}
 \end{figure}
 
-\subsection{傅里叶变换\index{傅里叶变换}的存在条件}
+图 \ref{fig:line-from-circle-projection-3d} 给出空间关系的总览：球面圆 $C$ 经过北极 $N$，而它在复平面上的像是一条直线 $\ell$。图中从北极 $N$ 向圆上各点 $P_1,P_2,P_3$ 引出的投影线，分别与复平面交于 $z_1,z_2,z_3$；这三个像点都落在同一条直线 $\ell$ 上，于是我们就能直接看出``经过北极的球面圆投影成直线''的几何原因。
 
-\begin{dingli}{狄利克雷（Dirichlet）条件}{}
-\index{狄利克雷@狄利克雷（Dirichlet）}
-若 $f(x)$ 满足：
-\begin{enumerate}
-    \item 在任意有限区间上至多有有限个第一类间断点
-    \item 在任意有限区间上至多有有限个极值点
-    \item 绝对可积：$\int_{-\infty}^{+\infty} |f(x)|\,\mathrm{d}x < \infty$
-\end{enumerate}
-则 $f(x)$ 的傅里叶变换\index{傅里叶变换}存在。
+于是，当点 $P$ 沿着整个圆 $C$ 移动时，它的像点 $z$ 就会沿着一条直线移动。这就是``经过无穷远点的球面圆投影成直线''的更具体的几何图像。
+
+\begin{zhu}{}{}
+这里所说的\textbf{广义圆}（generalized circle），并不是指一种新的特殊曲线，而是把``普通圆''和``直线''放在扩充复平面的框架下统一起来后的总称。更具体地说，在黎曼球面上，任取一个平面去截球面，只要确实相交，交线就是一个球面圆；这里的平面既可以上下移动，也可以倾斜，所以并不只是水平截面。这样的球面圆若不经过北极 $N$，球极投影到复平面后得到普通圆；若经过北极 $N$，球极投影后得到直线。由于北极 $N$ 对应的正是无穷远点 $\infty$，所以直线就可以看成``经过 $\infty$ 的圆''。
+
+要特别注意：这里说的是球极投影后的实际像，它只可能是圆或直线，不会是椭圆。若我们在立体示意图里看到球面上的某个圆画出来像椭圆，那只是三维图形画到纸面上时产生的视觉效果，并不是它在复平面中的像。正因为有了这个统一观点，很多关于圆与直线的几何结论都会显得自然得多。
+\end{zhu}
+
+\subsection{分式线性变换的性质}
+
+\begin{zhongyao}[保圆性]
+分式线性变换将圆周映射为圆周（直线视为通过无穷远点的圆周）。
+\end{zhongyao}
+
+\begin{proof}
+只对反演 $w = 1/z$ 证明（其他变换显然保圆）。
+
+圆周（或直线）的一般方程为 $A|z|^2 + Bx + Cy + D = 0$。
+
+令 $z = x + \mathrm{i}y = \frac{1}{w} = \frac{\bar{w}}{|w|^2}$，则
+\begin{equation}
+    x = \frac{u}{u^2 + v^2}, \quad y = \frac{v}{u^2 + v^2}, \quad |z|^2 = \frac{1}{u^2 + v^2}
+\end{equation}
+
+代入圆周方程：
+\begin{equation}
+    \frac{A}{u^2 + v^2} + \frac{Bu}{u^2 + v^2} + \frac{Cv}{u^2 + v^2} + D = 0
+\end{equation}
+
+整理得 $D(u^2 + v^2) + Bu + Cv + A = 0$，仍是圆周（或直线）。
+\end{proof}
+
+\begin{dingli}{保对称性}{}
+若点 $z_1$ 和 $z_2$ 关于圆周 $C$ 对称，则在分式线性变换下，它们的像 $w_1$ 和 $w_2$ 关于像圆周 $C'$ 对称。
 \end{dingli}
 
 \begin{proof}
-由黎曼积分理论，条件（1）（2）保证傅里叶系数积分存在。条件（3）保证积分 $\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x$ 绝对收敛，从而傅里叶变换存在。
+设分式线性变换为 $w = T(z)$，圆周 $C$ 映射为 $C' = T(C)$。
 
-具体地，由 $|f(x)\mathrm{e}^{-\mathrm{i}\omega x}| = |f(x)|$，得
+由对称点的定义，$z_1$ 和 $z_2$ 关于圆周 $C$ 对称当且仅当任意过 $z_1$ 和 $z_2$ 的圆周与 $C$ 正交。
+
+设 $\Gamma$ 是任意过 $z_1$ 和 $z_2$ 的圆周。由分式线性变换保圆性，$T(\Gamma)$ 是过 $w_1$ 和 $w_2$ 的圆周。
+
+由于分式线性变换保角，$T(\Gamma)$ 与 $C' = T(C)$ 正交。
+
+因此，任意过 $w_1$ 和 $w_2$ 的圆周都与 $C'$ 正交，即 $w_1$ 和 $w_2$ 关于 $C'$ 对称。
+
+\textbf{另一证法}：利用对称点的解析表达式。
+
+设圆周为 $|z - z_0| = R$，对称条件为
 \begin{equation}
-    \left|\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x\right| \leq \int_{-\infty}^{+\infty} |f(x)|\,\mathrm{d}x < \infty
+    (z_1 - z_0)\overline{(z_2 - z_0)} = R^2
 \end{equation}
-故傅里叶变换积分收敛。
+
+对于反演 $w = 1/z$（其他情况可化为此情形），有
+\begin{equation}
+    w_1 = \frac{1}{z_1}, \quad w_2 = \frac{1}{z_2}
+\end{equation}
+
+像圆周的圆心和半径需满足相应的关系式，验证即得对称性成立。
 \end{proof}
-\subsection{常用函数的傅里叶变换\index{傅里叶变换}}
+
+\begin{dingliyi}{对称点}{}
+点 $z_1$ 和 $z_2$ 关于圆周 $|z - z_0| = R$ 对称，当且仅当
+\begin{equation}
+    (z_1 - z_0)\overline{(z_2 - z_0)} = R^2
+\end{equation}
+或等价地
+\begin{equation}
+    z_2 - z_0 = \frac{R^2}{\overline{z_1 - z_0}}
+\end{equation}
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 圆周
+    \draw[blue, thick] (2, 2) circle (1.5);
+    \fill[blue!10, opacity=0.3] (2, 2) circle (1.5);
+    
+    % 圆心
+    \fill[red] (2, 2) circle (2pt) node[above right] {$z_0$};
+    
+    % 对称点
+    \fill[green!60!black] (2.5, 2.3) circle (2pt) node[right] {$z_1$};
+    \fill[green!60!black] (1.0, 1.6) circle (2pt) node[left] {$z_2$};
+    
+    % 连线和半径
+    \draw[dashed] (2, 2) -- (2.5, 2.3);
+    \draw[dashed] (2, 2) -- (1.0, 1.6);
+    
+    % 标注
+    \node at (2, -0.5) {$z_1$ 与 $z_2$ 关于圆周对称};
+\end{tikzpicture}
+\caption{关于圆周的对称点}
+\label{fig:symmetric-points}
+\end{figure}
+
+\subsection{确定分式线性变换}
+
+\begin{dingli}{三点确定分式线性变换}{}
+将三个不同点 $z_1, z_2, z_3$ 映射到三个不同点 $w_1, w_2, w_3$ 的分式线性变换是唯一的，可由
+\begin{equation}
+    \frac{w - w_1}{w - w_2} : \frac{w_3 - w_1}{w_3 - w_2} = \frac{z - z_1}{z - z_2} : \frac{z_3 - z_1}{z_3 - z_2}
+\end{equation}
+确定。这称为\textbf{交比不变式}。
+\end{dingli}
+
+\begin{proof}
+\textbf{第一步：引入交比}。
+
+定义四点的\textbf{交比}：
+\begin{equation}
+    (z, z_1; z_2, z_3) = \frac{z - z_1}{z - z_2} : \frac{z_3 - z_1}{z_3 - z_2} = \frac{(z - z_1)(z_3 - z_2)}{(z - z_2)(z_3 - z_1)}
+\end{equation}
+
+\textbf{第二步：交比在分式线性变换下不变}。
+
+设 $w = T(z) = \frac{az + b}{cz + d}$ 是分式线性变换。直接计算验证：
+\begin{equation}
+    (T(z), T(z_1); T(z_2), T(z_3)) = (z, z_1; z_2, z_3)
+\end{equation}
+
+这是因为
+\begin{equation}
+    T(z) - T(z_1) = \frac{(ad - bc)(z - z_1)}{(cz + d)(cz_1 + d)}
+\end{equation}
+代入交比定义式，分母分子中的 $(ad - bc)$ 与 $(cz + d)$ 等因子恰好约去。
+
+\textbf{第三步：存在性与唯一性}。
+
+设 $w = T(z)$ 将 $z_1, z_2, z_3$ 分别映射到 $w_1, w_2, w_3$。由交比不变性：
+\begin{equation}
+    (w, w_1; w_2, w_3) = (z, z_1; z_2, z_3)
+\end{equation}
+
+这给出了 $w$ 与 $z$ 的关系，即交比不变式。
+
+\textbf{唯一性}：若有另一变换 $T'$ 也满足条件，则 $T^{-1} \circ T'$ 固定三点 $z_1, z_2, z_3$。分式线性变换若固定三点，必为恒等变换，故 $T = T'$。
+\end{proof}
 
 \begin{lizi}{}{}
-求矩形函数 $f(x) = \begin{cases} 1, & |x| < a \\ 0, & |x| > a \end{cases}$ 的傅里叶变换\index{傅里叶变换}。
+求将 $z_1 = 0$, $z_2 = 1$, $z_3 = \infty$ 映射到 $w_1 = -1$, $w_2 = 0$, $w_3 = 1$ 的分式线性变换。
 
 \begin{jie}
+    由交比不变式，当 $z_3 = \infty$ 时，$\frac{z_3 - z_1}{z_3 - z_2} = 1$。所以
     \begin{equation}
-        \hat{f}(\omega) = \int_{-a}^{a} \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \frac{\mathrm{e}^{-\mathrm{i}\omega a} - \mathrm{e}^{\mathrm{i}\omega a}}{-\mathrm{i}\omega} = \frac{2\sin\omega a}{\omega}
+        \frac{w - (-1)}{w - 0} : \frac{1 - (-1)}{1 - 0} = \frac{z - 0}{z - 1} : 1
     \end{equation}
     
-    这说明矩形函数的频谱是 $\mathrm{sinc}$ 函数。
+    即
+    \begin{equation}
+        \frac{w + 1}{w} \cdot \frac{1}{2} = \frac{z}{z - 1}
+    \end{equation}
+    
+    整理得
+    \begin{equation}
+        w = \frac{z}{z - 1} \cdot \frac{z - 1}{1 - z} \cdot 2 - 1 = \frac{z - 1}{2z - 1}
+    \end{equation}
+    
+    更直接地，解方程 $\frac{w + 1}{2w} = \frac{z}{z - 1}$：
+    \begin{equation}
+        (w + 1)(z - 1) = 2wz \implies wz - w + z - 1 = 2wz \implies w(-z - 1) = 1 - z
+    \end{equation}
+    
+    所以 $w = \frac{z - 1}{z + 1}$。
 \end{jie}
 \end{lizi}
 
+\subsection{将上半平面映射到单位圆}
+
+\begin{zhongyao}[上半平面到单位圆的映射]
+将上半平面 $\mathrm{Im}(z) > 0$ 映射到单位圆 $|w| < 1$ 的分式线性变换为
+\[
+    w = \mathrm{e}^{\mathrm{i}\theta}\frac{z - z_0}{z - \overline{z_0}}
+\]
+其中 $z_0$ 是上半平面内任意一点，$\theta$ 是实数。
+\end{zhongyao}
+
+\begin{proof}
+设 $z_0$ 在上半平面。要使 $z_0$ 映射到原点，取 $w = k\frac{z - z_0}{z - \overline{z_0}}$（$k$ 待定）。
+
+对于实轴上的点 $z = x$：
+\begin{equation}
+    |w| = |k|\left|\frac{x - z_0}{x - \overline{z_0}}\right| = |k|\frac{|x - z_0|}{|x - \overline{z_0}|}
+\end{equation}
+
+由于 $z_0$ 在上半平面，$\overline{z_0}$ 在下半平面，$\overline{x - z_0} = x - \overline{z_0}$，所以
+\begin{equation}
+    |x - \overline{z_0}| = |\overline{x - z_0}| = |x - z_0|
+\end{equation}
+
+因此 $|w| = |k|$。要使实轴映射到单位圆周，取 $|k| = 1$，即 $k = \mathrm{e}^{\mathrm{i}\theta}$。
+\end{proof}
+
 \begin{lizi}{}{}
-求高斯函数 $f(x) = \mathrm{e}^{-ax^2}$（$a > 0$）的傅里叶变换\index{傅里叶变换}。
+求将上半平面 $\mathrm{Im}(z) > 0$ 映射到单位圆 $|w| < 1$ 的变换，使得 $z = \mathrm{i}$ 映射到 $w = 0$，且 $z = 1$ 映射到 $w = -1$。
 
 \begin{jie}
-    \begin{equation}
-        \hat{f}(\omega) = \int_{-\infty}^{+\infty} \mathrm{e}^{-ax^2}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-    \end{equation}
-    
-    配方：$-ax^2 - \mathrm{i}\omega x = -a(x + \frac{\mathrm{i}\omega}{2a})^2 - \frac{\omega^2}{4a}$。
-    
-    \begin{equation}
-        \hat{f}(\omega) = \mathrm{e}^{-\omega^2/4a}\int_{-\infty}^{+\infty} \mathrm{e}^{-a(x + \mathrm{i}\omega/2a)^2}\,\mathrm{d}x
-    \end{equation}
-    
-    利用复变函数的柯西定理，积分路径可以平移：
-    \begin{equation}
-        \hat{f}(\omega) = \mathrm{e}^{-\omega^2/4a}\sqrt{\frac{\pi}{a}}
-    \end{equation}
-    
-    高斯函数的傅里叶变换\index{傅里叶变换}仍是高斯函数！
-\end{jie}
-\end{lizi}
+    由公式 $w = \mathrm{e}^{\mathrm{i}\theta}\frac{z - z_0}{z - \overline{z_0}}$，已知 $z_0 = \mathrm{i}$（因为 $z_0$ 映射到原点）。
 
-\begin{lizi}{}{}
-求 $\delta$ 函数的傅里叶变换\index{傅里叶变换}。
-
-\begin{jie}
+    由于 $\overline{z_0} = -\mathrm{i}$，代入得
     \begin{equation}
-        \hat{\delta}(\omega) = \int_{-\infty}^{+\infty} \delta(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \mathrm{e}^{-\mathrm{i}\omega \cdot 0} = 1
+        w = \mathrm{e}^{\mathrm{i}\theta}\frac{z - \mathrm{i}}{z + \mathrm{i}}
     \end{equation}
-    
-    $\delta$ 函数的傅里叶变换\index{傅里叶变换}是常数 $1$，即所有频率成分强度相同。
+
+    利用 $z = 1$ 映射到 $w = -1$ 的条件：
+    \begin{equation}
+        -1 = \mathrm{e}^{\mathrm{i}\theta}\frac{1 - \mathrm{i}}{1 + \mathrm{i}} = \mathrm{e}^{\mathrm{i}\theta}\frac{(1 - \mathrm{i})^2}{(1 + \mathrm{i})(1 - \mathrm{i})} = \mathrm{e}^{\mathrm{i}\theta}\frac{-2\mathrm{i}}{2} = -\mathrm{i}\mathrm{e}^{\mathrm{i}\theta}
+    \end{equation}
+
+    所以 $\mathrm{e}^{\mathrm{i}\theta} = -\mathrm{i} = \mathrm{e}^{-\mathrm{i}\pi/2}$，即 $\theta = -\frac{\pi}{2}$。
+
+    所求变换为
+    \begin{equation}
+        w = -\mathrm{i}\frac{z - \mathrm{i}}{z + \mathrm{i}} = \frac{1 - \mathrm{i}z}{z + \mathrm{i}}
+    \end{equation}
 \end{jie}
 \end{lizi}
 
 % ========== 第三节 ==========
-\section{傅里叶变换\index{傅里叶变换}的性质}
+\section{常见保角映射}
 
-\subsection{基本性质}
+\subsection{幂函数 \texorpdfstring{$w = z^n$}{w = z\textasciicircum n}}
 
-\begin{dingli}{线性性质}{}
-若 $\mathcal{F}[f(x)] = \hat{f}(\omega)$，$\mathcal{F}[g(x)] = \hat{g}(\omega)$，则
-\begin{equation}
-    \mathcal{F}[\alpha f(x) + \beta g(x)] = \alpha\hat{f}(\omega) + \beta\hat{g}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-由积分的线性性：
-\begin{equation}
-    \mathcal{F}[\alpha f(x) + \beta g(x)] = \int_{-\infty}^{+\infty} [\alpha f(x) + \beta g(x)]\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \alpha\hat{f}(\omega) + \beta\hat{g}(\omega)
-\end{equation}
-\end{proof}
-\begin{dingli}{平移性质}{}
-\begin{equation}
-    \mathcal{F}[f(x - a)] = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-\begin{equation}
-    \mathcal{F}[f(x-a)] = \int_{-\infty}^{+\infty} f(x-a)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \mathrm{e}^{-\mathrm{i}\omega a}\int_{-\infty}^{+\infty} f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,\mathrm{d}t = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega)
-\end{equation}
-\end{proof}
-
-\begin{dingli}{频移性质}{}
-\begin{equation}
-    \mathcal{F}[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)] = \hat{f}(\omega - \omega_0)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-\begin{equation}
-    \mathcal{F}[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)] = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{\mathrm{i}\omega_0 x}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}(\omega-\omega_0) x}\,\mathrm{d}x = \hat{f}(\omega - \omega_0)
-\end{equation}
-\end{proof}
-\begin{dingli}{伸缩性质}{}
-\begin{equation}
-    \mathcal{F}[f(ax)] = \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right), \quad a \neq 0
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-设 $a > 0$：
-\begin{equation}
-    \mathcal{F}[f(ax)] = \int_{-\infty}^{+\infty} f(ax)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \frac{1}{a}\int_{-\infty}^{+\infty} f(t)\mathrm{e}^{-\mathrm{i}\frac{\omega}{a}t}\,\mathrm{d}t = \frac{1}{a}\hat{f}\left(\frac{\omega}{a}\right)
-\end{equation}
-\end{proof}
-
-\subsection{微分性质}
-
-\begin{dingli}{时域微分}{}
-若 $f(x)$ 及其导数满足傅里叶变换\index{傅里叶变换}条件，则
-\begin{equation}
-    \mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-\begin{equation}
-    \mathcal{F}[f'(x)] = \int_{-\infty}^{+\infty} f'(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = f(x)\mathrm{e}^{-\mathrm{i}\omega x}\Big|_{-\infty}^{+\infty} + \mathrm{i}\omega\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-\end{equation}
-
-由于 $f(x) \to 0$（$|x| \to \infty$），第一项为零，故
-\begin{equation}
-    \mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)
-\end{equation}
-\end{proof}
-
-\begin{dingli}{频域微分}{}
-\begin{equation}
-    \mathcal{F}[xf(x)] = \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-由傅里叶变换的定义：
-\begin{equation}
-    \hat{f}(\omega) = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-\end{equation}
-对 $\omega$ 求导：
-\begin{equation}
-    \frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega) = \int_{-\infty}^{+\infty} f(x) \cdot (-\mathrm{i}x) \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = -\mathrm{i}\mathcal{F}[xf(x)]
-\end{equation}
-故 $\mathcal{F}[xf(x)] = \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)$。
-\end{proof}
-\begin{dingli}{高阶导数}{}
-\begin{equation}
-    \mathcal{F}[f^{(n)}(x)] = (\mathrm{i}\omega)^n\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-由时域微分性质，用数学归纳法：
+\begin{dingli}{幂函数映射}{}
+$w = z^n$（$n \geq 2$）将：
 \begin{itemize}
-    \item $n=1$ 时，$\mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)$，已证。
-    \item 设 $\mathcal{F}[f^{(k)}(x)] = (\mathrm{i}\omega)^k\hat{f}(\omega)$，则
-    \begin{equation}
-        \mathcal{F}[f^{(k+1)}(x)] = \mathcal{F}[(f^{(k)}(x))'] = \mathrm{i}\omega \cdot (\mathrm{i}\omega)^k\hat{f}(\omega) = (\mathrm{i}\omega)^{k+1}\hat{f}(\omega)
-    \end{equation}
+    \item 角形域 $0 < \arg z < \alpha$ 映射到 $0 < \arg w < n\alpha$
+    \item 特别地，将角形域 $0 < \arg z < \frac{\pi}{n}$ 映射到上半平面
 \end{itemize}
-由归纳法，结论对任意正整数 $n$ 成立。
-\end{proof}
-\subsection{卷积定理}
-
-\begin{dingliyi}{卷积}{}
-两个函数 $f(x)$ 和 $g(x)$ 的\textbf{卷积}定义为
-\begin{equation}
-    (f * g)(x) = \int_{-\infty}^{+\infty} f(\tau)g(x - \tau)\,\mathrm{d}\tau
-\end{equation}
-\end{dingliyi}
-
-\begin{zhongyao}[卷积定理]
-\[
-    \mathcal{F}[f * g] = \hat{f}(\omega)\hat{g}(\omega)
-\]
-\[
-    \mathcal{F}[f \cdot g] = \frac{1}{2\pi}\hat{f} * \hat{g}
-\]
-\end{zhongyao}
-
-\begin{proof}
-\begin{align}
-    \mathcal{F}[f * g] &= \int_{-\infty}^{+\infty}\left[\int_{-\infty}^{+\infty} f(\tau)g(x-\tau)\,\mathrm{d}\tau\right]\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
-    &= \int_{-\infty}^{+\infty} f(\tau)\left[\int_{-\infty}^{+\infty} g(x-\tau)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x\right]\mathrm{d}\tau \\
-    &= \int_{-\infty}^{+\infty} f(\tau)\mathrm{e}^{-\mathrm{i}\omega\tau}\hat{g}(\omega)\,\mathrm{d}\tau \\
-    &= \hat{f}(\omega)\hat{g}(\omega)
-\end{align}
-\end{proof}
-
-\begin{tishi}[卷积定理的意义]
-卷积定理把卷积运算（积分）转化为乘法运算，大大简化了计算。这是傅里叶变换\index{傅里叶变换}在信号处理中的核心应用。
-\end{tishi}
-
-\subsection{帕塞瓦尔等式}
-
-\begin{dingli}{帕塞瓦尔等式}{}
-\begin{equation}
-    \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x = \frac{1}{2\pi}\int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega
-\end{equation}
 \end{dingli}
 
 \begin{proof}
-由傅里叶逆变换：
-\begin{equation}
-    f(x) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
-\end{equation}
+设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，则 $w = z^n = r^n\mathrm{e}^{\mathrm{i}n\theta}$。
 
-两边乘以 $\overline{f(x)}$ 并积分：
-\begin{align}
-    \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x &= \frac{1}{2\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \hat{f}(\omega)\overline{f(x)}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega\,\mathrm{d}x \\
-    &= \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\overline{\hat{f}(\omega)}\,\mathrm{d}\omega \\
-    &= \frac{1}{2\pi}\int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega
-\end{align}
+\begin{itemize}
+    \item 当 $z$ 在角形域 $0 < \arg z = \theta < \alpha$ 内时，$w$ 的辐角 $\arg w = n\theta$ 满足 $0 < \arg w < n\alpha$。
+    \item 特别地，若 $0 < \theta < \frac{\pi}{n}$，则 $0 < n\theta < \pi$，即 $w$ 在上半平面。
+\end{itemize}
+
+注意：$w = z^n$ 是 $n$ 对 $1$ 的映射，角形域 $0 < \arg z < \frac{2\pi}{n}$ 被映射到整个 $w$ 平面（去掉原点和正实轴）。
 \end{proof}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % z平面
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (3.5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$y$};
+        
+        % 角形域
+        \fill[blue!20, opacity=0.5] (0, 0) -- (3, 0) -- (30:3) -- cycle;
+        \draw[blue, thick] (0, 0) -- (3, 0);
+        \draw[blue, thick] (0, 0) -- (30:3);
+        
+        \draw[blue] (0.8, 0) arc (0:30:0.8);
+        \node[blue] at (0.6, 0.3) {$\alpha$};
+        
+        \node at (1.5, -0.8) {$z$ 平面};
+    \end{scope}
+    
+    % 箭头
+    \draw[->, very thick] (4, 1.2) -- (5, 1.2) node[midway, above] {$w = z^n$};
+    
+    % w平面
+    \begin{scope}[xshift=6cm]
+        \draw[->, gray] (-0.5, 0) -- (3.5, 0) node[right] {$u$};
+        \draw[->, gray] (0, -0.5) -- (0, 3) node[above] {$v$};
+        
+        % 角形域
+        \fill[blue!20, opacity=0.5] (0, 0) -- (3, 0) -- (90:3) -- cycle;
+        \draw[blue, thick] (0, 0) -- (3, 0);
+        \draw[blue, thick] (0, 0) -- (90:3);
+        
+        \draw[blue] (0.8, 0) arc (0:90:0.8);
+        \node[blue] at (0.6, 0.6) {$n\alpha$};
+        
+        \node at (1.5, -0.8) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{幂函数将角形域扩大 $n$ 倍}
+\label{fig:power-mapping}
+\end{figure}
 
-\begin{wulibj}[物理意义]
-帕塞瓦尔等式说明：信号在时域的总能量等于频域的总能量（差常数因子）。这体现了能量守恒。
-\end{wulibj}
-
-% ========== 第四节 ==========
-\section{傅里叶变换\index{傅里叶变换}的应用}
-
-\subsection{求解微分方程}
-
-傅里叶变换\index{傅里叶变换}可以将微分方程转化为代数方程，大大简化求解过程。
+\begin{jinshi}
+$w = z^n$ 在 $z = 0$ 处不保角！$z = 0$ 是 $n-1$ 阶支点。
+\end{jinshi}
 
 \begin{lizi}{}{}
-求解热传导方程的初值问题：
-\begin{equation}
-    \begin{cases}
-        u_t = a^2 u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
-        u(x, 0) = \varphi(x), & x \in \mathbb{R}
-    \end{cases}
-\end{equation}
+求将角形域 $D = \{z : 0 < \arg z < \frac{\pi}{4}\}$ 映射到上半平面的变换。
 
 \begin{jie}
-    对 $x$ 进行傅里叶变换\index{傅里叶变换}，设 $\hat{u}(\omega, t) = \mathcal{F}[u(x, t)]$。
-    
-    方程变为：
+    幂函数 $w = z^n$ 将角形域 $0 < \arg z < \alpha$ 映射到 $0 < \arg w < n\alpha$。
+
+    要将角形域 $0 < \arg z < \frac{\pi}{4}$ 映射到上半平面 $0 < \arg w < \pi$，需要
     \begin{equation}
-        \frac{\partial\hat{u}}{\partial t} = a^2(\mathrm{i}\omega)^2\hat{u} = -a^2\omega^2\hat{u}
+        n \cdot \frac{\pi}{4} = \pi \implies n = 4
     \end{equation}
-    
-    这是关于 $t$ 的常微分方程，解为
+
+    所以所求变换为 $w = z^4$。
+
+    \textbf{验证}：设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，其中 $0 < \theta < \frac{\pi}{4}$，则
     \begin{equation}
-        \hat{u}(\omega, t) = \hat{u}(\omega, 0)\mathrm{e}^{-a^2\omega^2 t} = \hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}
+        w = z^4 = r^4\mathrm{e}^{\mathrm{i}4\theta}
     \end{equation}
-    
-    由逆变换和卷积定理：
-    \begin{equation}
-        u(x, t) = \varphi(x) * \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}]
-    \end{equation}
-    
-    计算逆变换：
-    \begin{equation}
-        \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}] = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \mathrm{e}^{-a^2\omega^2 t}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega = \frac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/4a^2 t}
-    \end{equation}
-    
-    因此
-    \begin{equation}
-        \boxed{u(x, t) = \frac{1}{2a\sqrt{\pi t}}\int_{-\infty}^{+\infty} \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/4a^2 t}\,\mathrm{d}\xi}
-    \end{equation}
+    由于 $0 < 4\theta < \pi$，所以 $w$ 确实在上半平面。
 \end{jie}
 \end{lizi}
 
-\subsection{信号处理}
+\subsection{指数函数 \texorpdfstring{$w = \mathrm{e}^z$}{w = e\textasciicircum z}}
 
-\begin{wulibj}[滤波器设计]
-信号处理中，傅里叶变换\index{傅里叶变换}用于：
+\begin{dingli}{指数函数映射}{}
+$w = \mathrm{e}^z$ 将：
 \begin{itemize}
-    \item \textbf{低通滤波}：去除高频噪声
-    \item \textbf{高通滤波}：提取边缘和细节
-    \item \textbf{带通滤波}：选择特定频率范围
+    \item 水平带形域 $0 < \mathrm{Im}(z) < \pi$ 映射到上半平面
+    \item 垂直线 $\mathrm{Re}(z) = c$ 映射到圆周 $|w| = \mathrm{e}^c$
+    \item 水平线 $\mathrm{Im}(z) = \theta_0$ 映射到射线 $\arg w = \theta_0$
 \end{itemize}
+\end{dingli}
 
-设输入信号 $f(t)$，滤波器冲激响应为 $h(t)$，则输出为卷积 $f * h$。在频域，输出频谱为 $\hat{f}(\omega)\hat{h}(\omega)$。
+\begin{proof}
+设 $z = x + \mathrm{i}y$，则 $w = \mathrm{e}^z = \mathrm{e}^x\mathrm{e}^{\mathrm{i}y}$。
+
+\begin{itemize}
+    \item $|w| = \mathrm{e}^x$，$\arg w = y$。
+    \item 当 $0 < y < \pi$ 时，$0 < \arg w < \pi$，即上半平面。
+    \item 当 $x = c$ 为常数时，$|w| = \mathrm{e}^c$ 为常数，即圆周。
+    \item 当 $y = \theta_0$ 为常数时，$\arg w = \theta_0$ 为常数，即射线。
+\end{itemize}
+\end{proof}
+
+\begin{lizi}{}{}
+求将水平带形域 $D = \{z : 0 < \mathrm{Im}(z) < \frac{\pi}{2}\}$ 映射到第一象限的变换。
+
+\begin{jie}
+    指数函数 $w = \mathrm{e}^z$ 将水平带形域 $0 < \mathrm{Im}(z) < \alpha$ 映射到角形域 $0 < \arg w < \alpha$。
+
+    对于带形域 $0 < \mathrm{Im}(z) < \frac{\pi}{2}$，直接用 $w = \mathrm{e}^z$：
+    \begin{equation}
+        w = \mathrm{e}^z = \mathrm{e}^x \cdot \mathrm{e}^{\mathrm{i}y}
+    \end{equation}
+
+    当 $0 < y < \frac{\pi}{2}$ 时，$0 < \arg w < \frac{\pi}{2}$，即第一象限。
+
+    \textbf{验证}：
+    \begin{itemize}
+        \item 实轴 $\mathrm{Im}(z) = 0$ 映射到正实轴 $\arg w = 0$
+        \item 直线 $\mathrm{Im}(z) = \frac{\pi}{2}$ 映射到正虚轴 $\arg w = \frac{\pi}{2}$
+        \item 带形域内部映射到第一象限内部
+    \end{itemize}
+\end{jie}
+\end{lizi}
+
+\subsection{儒可夫斯基变换}
+
+\begin{dingliyi}{儒可夫斯基变换}{}
+变换
+\begin{equation}
+    w = \frac{1}{2}\left(z + \frac{1}{z}\right)
+\end{equation}
+称为\textbf{儒可夫斯基变换}。
+\end{dingliyi}
+
+\begin{dingli}{儒可夫斯基变换的性质}{}
+\begin{enumerate}
+    \item 将单位圆 $|z| = 1$ 映射到线段 $[-1, 1]$
+    \item 将圆周 $|z| = r$（$r \neq 1$）映射到椭圆
+    \item 将射线 $\arg z = \theta$ 映射到双曲线
+\end{enumerate}
+\end{dingli}
+
+\begin{proof}
+设 $z = r\mathrm{e}^{\mathrm{i}\theta}$，则
+\begin{equation}
+    w = \frac{1}{2}\left(z + \frac{1}{z}\right) = \frac{1}{2}\left(r\mathrm{e}^{\mathrm{i}\theta} + \frac{1}{r}\mathrm{e}^{-\mathrm{i}\theta}\right) = \frac{1}{2}\left(r + \frac{1}{r}\right)\cos\theta + \mathrm{i}\frac{1}{2}\left(r - \frac{1}{r}\right)\sin\theta
+\end{equation}
+
+设 $w = u + \mathrm{i}v$，则
+\begin{align}
+    u &= \frac{1}{2}\left(r + \frac{1}{r}\right)\cos\theta \\
+    v &= \frac{1}{2}\left(r - \frac{1}{r}\right)\sin\theta
+\end{align}
+
+\textbf{（1）单位圆}：当 $r = 1$ 时，$v = 0$，$u = \cos\theta \in [-1, 1]$，故映射到线段 $[-1, 1]$。
+
+\textbf{（2）椭圆}：当 $r = r_0 > 0$ 为常数且 $r_0 \neq 1$ 时，
+\begin{equation}
+    \frac{u^2}{\left[\frac{1}{2}(r_0 + 1/r_0)\right]^2} + \frac{v^2}{\left[\frac{1}{2}(r_0 - 1/r_0)\right]^2} = \cos^2\theta + \sin^2\theta = 1
+\end{equation}
+这是以原点为中心、长轴在 $u$ 轴上的椭圆。
+
+\textbf{（3）双曲线}：当 $\theta = \theta_0$ 为常数且 $\theta_0 \neq 0, \pi$ 时，
+\begin{equation}
+    \frac{u^2}{\cos^2\theta_0} - \frac{v^2}{\sin^2\theta_0} = \frac{1}{4}\left[\left(r + \frac{1}{r}\right)^2 - \left(r - \frac{1}{r}\right)^2\right] = 1
+\end{equation}
+这是以原点为中心、焦点在 $u$ 轴上的双曲线。
+\end{proof}
+\begin{wulibj}[应用：机翼绕流]
+儒可夫斯基变换是飞机机翼设计的理论基础。通过将圆变换为机翼形状，可以把绕圆柱的简单流动问题转化为绕机翼的复杂流动问题。这在空气动力学中具有重要意义。
 \end{wulibj}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.8]
-    % 时域
+\begin{tikzpicture}[scale=0.7]
+    % z平面：圆
     \begin{scope}
-        \draw[->, gray] (-0.5, 0) -- (4, 0) node[right] {$t$};
-        \draw[->, gray] (0, -1.5) -- (0, 1.5) node[above] {$f(t)$};
-        
-        % 信号
-        \draw[blue, thick, domain=0:3.5, samples=100] plot (\x, {sin(5*\x r)*exp(-0.3*\x) + 0.3*sin(30*\x r)});
-        
-        \node at (1.8, -2) {时域：信号+噪声};
+        \draw[->, gray] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+        \draw[->, gray] (0, -2.5) -- (0, 2.5) node[above] {$y$};
+        \draw[blue, thick] (0, 0) circle (1.5);
+        \fill[blue!20, opacity=0.5] (0, 0) circle (1.5);
+        \node at (0, -3) {$z$ 平面：圆};
     \end{scope}
     
     % 箭头
-    \draw[->, very thick] (4.5, 0) -- (5.5, 0) node[midway, above] {$\mathcal{F}$};
+    \draw[->, very thick] (3, 0) -- (4.5, 0) node[midway, above] {$w = \frac{z + 1/z}{2}$};
     
-    % 频域
+    % w平面：机翼形状
     \begin{scope}[xshift=6.5cm]
-        \draw[->, gray] (-0.5, 0) -- (4, 0) node[right] {$\omega$};
-        \draw[->, gray] (0, -0.5) -- (0, 1.5) node[above] {$\hat{f}(\omega)$};
+        \draw[->, gray] (-2.5, 0) -- (2.5, 0) node[right] {$u$};
+        \draw[->, gray] (0, -2, 0) -- (0, 2) node[above] {$v$};
         
-        % 频谱（低频+高频）
-        \draw[red, thick, domain=0:3.5, samples=100] plot (\x, {0.8*exp(-(\x-1)^2/0.3) + 0.3*exp(-(\x-3)^2/0.1)});
-        
-        % 滤波器
-        \draw[green!60!black, thick, dashed, domain=0:2.5, samples=50] plot (\x, {1});
-        \draw[green!60!black, thick, dashed, domain=2.5:3.5, samples=50] plot (\x, {0});
-        
-        \node at (1.8, -2) {频域：低频信号+高频噪声};
-        \node[green!60!black] at (3, 1.2) {滤波器};
+        % 机翼轮廓（简化）
+        \draw[red, thick] plot[smooth] coordinates {
+            (-1.5, 0) (-1, 0.3) (0, 0.5) (1, 0.3) (1.5, 0)
+            (1, -0.2) (0, -0.3) (-1, -0.2) (-1.5, 0)
+        };
+        \fill[red!20, opacity=0.5] plot[smooth] coordinates {
+            (-1.5, 0) (-1, 0.3) (0, 0.5) (1, 0.3) (1.5, 0)
+            (1, -0.2) (0, -0.3) (-1, -0.2) (-1.5, 0)
+        };
+        \node at (0, -2.5) {$w$ 平面：机翼形状};
     \end{scope}
 \end{tikzpicture}
-\caption{傅里叶变换\index{傅里叶变换}在信号滤波中的应用}
-\label{fig:fft-filter}
+\caption{儒可夫斯基变换：从圆到机翼}
+\label{fig:zhukovsky}
 \end{figure}
 
-% ========== 第五节 ==========
-\section{多维傅里叶变换\index{傅里叶变换}}
+\subsection{施瓦茨-克里斯托费尔变换}
 
-\subsection{二维傅里叶变换\index{傅里叶变换}}
+对于多边形区域的映射，需要用更一般的施瓦茨-克里斯托费尔变换。
 
-\begin{dingliyi}{二维傅里叶变换}{}
+\begin{dingliyi}{施瓦茨-克里斯托费尔变换}{}
+将上半平面映射到多边形的变换具有形式
 \begin{equation}
-    \hat{f}(\omega_1, \omega_2) = \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f(x_1, x_2)\mathrm{e}^{-\mathrm{i}(\omega_1 x_1 + \omega_2 x_2)}\,\mathrm{d}x_1\mathrm{d}x_2
+    w = A\int_0^z (z - x_1)^{\alpha_1 - 1}(z - x_2)^{\alpha_2 - 1}\cdots(z - x_n)^{\alpha_n - 1}\,\mathrm{d}z + B
 \end{equation}
+其中 $x_1, \ldots, x_n$ 是实轴上对应多边形顶点的点，$\alpha_k\pi$ 是多边形第 $k$ 个内角。
 \end{dingliyi}
 
-\begin{dingliyi}{二维傅里叶逆变换}{}
-\begin{equation}
-    f(x_1, x_2) = \frac{1}{(2\pi)^2}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \hat{f}(\omega_1, \omega_2)\mathrm{e}^{\mathrm{i}(\omega_1 x_1 + \omega_2 x_2)}\,\mathrm{d}\omega_1\mathrm{d}\omega_2
-\end{equation}
-\end{dingliyi}
+% ========== 第四节 ==========
+\section{保角映射的应用}
 
-\begin{wulibj}[应用：图像处理]
-二维傅里叶变换\index{傅里叶变换}在图像处理中有广泛应用：
-\begin{itemize}
-    \item 图像压缩（JPEG 等）
-    \item 图像去噪
-    \item 边缘检测
-    \item 图像配准
-\end{itemize}
+\subsection{拉普拉斯方程的边值问题}
+
+前面在第二章，我们已经从复势看过二维势场与解析函数的联系；到后面的数理方程部分，矩形域和圆域的问题会分别用分离变量法求解。本节想强调另一件事：当区域边界不再是矩形或圆，而是某种弯曲边界时，保角映射提供了一条几何化的思路。
+
+保角映射的一个重要应用是求解二维拉普拉斯方程。关键原理是：在保角映射下，拉普拉斯方程保持不变。
+
+\begin{dingli}{调和函数的不变性}{}
+设 $w = f(z)$ 是保角映射，$\phi(u, v)$ 是调和函数，则 $\phi \circ f$ 也是调和函数。
+\end{dingli}
+
+\begin{proof}
+设 $w = u(x, y) + \mathrm{i}v(x, y)$ 是解析函数\index{解析函数}。由 C-R 条件：
+\begin{equation}
+    u_x = v_y, \quad u_y = -v_x
+\end{equation}
+
+可以证明：
+\begin{equation}
+    \frac{\partial^2\phi}{\partial x^2} + \frac{\partial^2\phi}{\partial y^2} = |f'(z)|^2\left(\frac{\partial^2\phi}{\partial u^2} + \frac{\partial^2\phi}{\partial v^2}\right)
+\end{equation}
+
+若 $\phi_{uu} + \phi_{vv} = 0$，则 $\phi_{xx} + \phi_{yy} = 0$。
+\end{proof}
+
+\begin{wulibj}[应用：静电场与稳定温度场]
+二维静电场的电势和稳定温度场的温度都满足拉普拉斯方程。通过保角映射，可以把复杂边界的问题变换为简单边界的问题求解。
 \end{wulibj}
+
+\begin{lizi}{}{}
+求扇形区域
+\begin{equation}
+    0 < \arg z < \frac{\pi}{2}
+\end{equation}
+内的拉普拉斯方程解，满足边界条件
+\begin{equation}
+    u(r, 0) = 0, \quad u\left(r, \frac{\pi}{2}\right) = 1
+\end{equation}
+并要求解在原点附近有界。
+
+\begin{jie}
+这个区域的边界是两条射线。若直接求解，可以用极坐标分离变量；但这里我们想展示保角映射的思路。
+
+取映射
+\begin{equation}
+    \zeta = z^2
+\end{equation}
+它把扇形区域 $0 < \arg z < \frac{\pi}{2}$ 映射到上半平面 $\mathrm{Im}(\zeta) > 0$。
+
+在 $\zeta$ 平面上，我们要求一个调和函数，使它在正实轴上取值为 $0$，在负实轴上取值为 $1$。一个最自然的选择是
+\begin{equation}
+    U(\zeta) = \frac{1}{\pi}\arg \zeta, \quad 0 < \arg \zeta < \pi
+\end{equation}
+
+把它拉回 $z$ 平面，得到
+\begin{equation}
+    u(z) = U(z^2) = \frac{1}{\pi}\arg(z^2) = \frac{2}{\pi}\arg z
+\end{equation}
+因此
+\begin{equation}
+    \boxed{u(r, \theta) = \frac{2\theta}{\pi}}, \quad 0 < \theta < \frac{\pi}{2}
+\end{equation}
+
+这个解与半径 $r$ 无关，说明在这个扇形中，势函数只由角度决定。
+\end{jie}
+\end{lizi}
+
+\subsection{黎曼映射定理}
+
+\begin{dingli}{黎曼映射定理}{}
+任意单连通区域（除去整个复平面和整个复平面挖去一点）都可以保角映射到单位圆内部。
+\end{dingli}
+
+\begin{tishi}
+黎曼映射定理保证了保角映射的存在性，但没有给出具体的变换公式。实际应用中，需要根据具体问题构造适当的变换。
+
+\textbf{证明思路}（超出本课程范围）：
+\begin{enumerate}
+    \item 构造一族将区域映射到单位圆内部的解析函数
+    \item 利用蒙泰尔定理（正规族理论）证明存在收敛子列
+    \item 验证极限函数即为所求的保角映射
+\end{enumerate}
+
+证明需要用到解析函数正规族、调和函数边界值等较深的理论。
+\end{tishi}
 
 % ========== 本章小结 ==========
 \section{本章小结}
 
-\subsection{核心公式}
+\subsection{核心概念}
 
-\begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{变换} & \textbf{公式} \\
-\midrule
-傅里叶变换\index{傅里叶变换} & $\hat{f}(\omega) = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x$ \\
-逆变换 & $f(x) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega$ \\
-微分性质 & $\mathcal{F}[f'] = \mathrm{i}\omega\hat{f}$ \\
-卷积定理 & $\mathcal{F}[f*g] = \hat{f}\hat{g}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{enumerate}
+    \item \textbf{保角映射}：保持角度不变的解析映射
+    \item \textbf{分式线性变换}：$w = \frac{az+b}{cz+d}$，保圆性、保对称性
+    \item \textbf{常见保角映射}：幂函数、指数函数、儒可夫斯基变换
+\end{enumerate}
 
-\subsection{关键性质}
+\subsection{关键结论}
 
 \begin{itemize}
-    \item 线性、平移、伸缩、微分
-    \item 卷积定理：时域卷积 $\leftrightarrow$ 频域乘积
-    \item 帕塞瓦尔等式：能量守恒
+    \item 解析函数\index{解析函数}在导数非零处保角
+    \item 分式线性变换将圆周映射为圆周
+    \item 三点唯一确定分式线性变换
+    \item 调和函数在保角映射下保持调和性
 \end{itemize}
 
 % ========== 习题 ==========
@@ -547,33 +798,44 @@
 \textbf{基础题}
 
 \begin{enumerate}
-    \item 计算下列函数的傅里叶变换\index{傅里叶变换}：
-    \begin{enumerate}
-        \item $f(x) = \mathrm{e}^{-a|x|}$（$a > 0$）
-        \item $f(x) = \mathrm{e}^{-ax}\sin\omega_0 x$（$x > 0$），$f(x) = 0$（$x < 0$）
-    \end{enumerate}
+    \item 证明：分式线性变换可以分解为平移、旋转伸缩和反演的组合。
     
-    \item 利用傅里叶变换\index{傅里叶变换}的性质，由 $\mathcal{F}[\mathrm{e}^{-ax^2}] = \sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/4a}$ 推导 $\mathcal{F}[x^2\mathrm{e}^{-ax^2}]$。
+    \item 求将 $z_1 = 1$, $z_2 = \mathrm{i}$, $z_3 = -1$ 映射到 $w_1 = 0$, $w_2 = 1$, $w_3 = \infty$ 的分式线性变换。
+    
+    \item 证明：分式线性变换保持交比不变。
 \end{enumerate}
 
 \textbf{综合题}
 
 \begin{enumerate}[resume]
-    \item 利用傅里叶变换\index{傅里叶变换}求解：
-    \begin{equation}
-        \begin{cases}
-            u_t = u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
-            u(x, 0) = \mathrm{e}^{-x^2}, & x \in \mathbb{R}
-        \end{cases}
-    \end{equation}
+    \item 求将上半平面 $\mathrm{Im}(z) > 0$ 映射到圆 $|w - 1| < 1$ 的保角映射。
     
-    \item 证明：若 $f(x)$ 是实函数，则 $|\hat{f}(\omega)|$ 是偶函数，$\arg\hat{f}(\omega)$ 是奇函数。
+    \item 求将角形域 $0 < \arg z < \frac{\pi}{4}$ 映射到上半平面的保角映射。
+    
+    \item 设 $w = \frac{z - \mathrm{i}}{z + \mathrm{i}}$，问此变换将上半平面映射为什么区域？
 \end{enumerate}
 
 \textbf{挑战题}
 
 \begin{enumerate}[resume]
-    \item 设 $f(x)$ 满足 $f(x) = f(x-1)$（周期为1）。证明 $f(x)$ 的傅里叶变换\index{傅里叶变换}是离散的，即 $\hat{f}(\omega) = \sum_{n=-\infty}^{\infty} c_n\delta(\omega - 2\pi n)$。
+    \item 求将带形域 $0 < \mathrm{Im}(z) < \pi$ 映射到单位圆 $|w| < 1$ 的保角映射。
     
-    \item 利用傅里叶变换\index{傅里叶变换}计算积分 $\int_0^{+\infty} \frac{\sin ax}{x}\,\mathrm{d}x$（$a > 0$）。
+    \item 利用保角映射求解：在半无限条形区域 $x > 0$, $0 < y < \pi$ 内，边界 $y = 0$ 和 $y = \pi$ 上温度为 $0$，边界 $x = 0$ 上温度为 $1$，求稳定温度分布。
 \end{enumerate}
+
+% ========== 第一篇小结 ==========
+\section*{第一篇小结：复变函数}
+
+\begin{tishi}[从复变函数到积分变换]
+    至此，我们完成了复变函数基础理论的学习。从复数的几何表示出发，我们建立了解析函数\index{解析函数}理论，学习了柯西积分定理\index{柯西积分定理}和留数理论这两个核心工具。这些内容不仅是数学理论的精华，更是下一篇积分变换的理论基础。
+    
+    \textbf{核心回顾}：
+    \begin{itemize}
+        \item 解析性是复变函数的本质特征，柯西-黎曼条件\index{柯西-黎曼条件}是其判别准则
+        \item 柯西积分公式揭示了解析函数\index{解析函数}的内在结构
+        \item 留数定理\index{留数定理}将积分问题转化为代数问题
+        \item 保角映射提供了解决二维势问题的几何方法
+    \end{itemize}
+    
+    \textbf{与积分变换的联系}：傅里叶变换\index{傅里叶变换}和拉普拉斯变换\index{拉普拉斯变换}都可以用复变函数理论来研究——傅里叶变换\index{傅里叶变换}本质上是在虚轴上的拉普拉斯变换\index{拉普拉斯变换}，而逆变换则涉及复平面的围道积分。掌握复变函数，将使积分变换的学习事半功倍。
+\end{tishi}

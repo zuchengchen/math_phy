@@ -1,394 +1,510 @@
-% 第十四章：其他方法简介
+% 第十三章：格林函数\index{格林函数}法
 
-\chapter{其他方法简介}
+\chapter{格林函数\index{格林函数}法}
 
 \begin{wulibj}[本章导读]
-除了前面介绍的主要方法外，数学物理方程还有许多其他求解方法。本章简要介绍变分法、摄动法和数值方法的基本思想，为后续学习和研究打下基础。
-\end{wulibj}
-
-\begin{wulibj}[物理背景]
-本章介绍的三种方法在物理学中各有其独特地位：
-
-\textbf{1. 变分法}：源于最小作用量原理——这是物理学最深刻的原理之一。从牛顿力学到量子场论，物理系统的运动方程都可以从作用量泛函的极值导出。费曼曾说："大自然似乎总是选择使作用量取极值的路径。"
-
-\textbf{应用实例}：
-\begin{itemize}
-    \item 经典力学：最小作用量原理给出拉格朗日方程
-    \item 量子力学：变分法是近似求解基态能量的重要方法
-    \item 弹性力学：最小势能原理
-    \item 电磁学：汤姆逊定理（带电导体的能量最小）
-\end{itemize}
-
-\textbf{2. 摄动法}：处理含小参数的问题，在几乎所有物理分支中都有应用。从行星运动的微扰、量子力学中的能级修正，到流体力学中的边界层理论，摄动法提供了从精确解出发系统逼近的方法。
-
-\textbf{3. 数值方法}：现代计算物理的基石。绝大多数实际问题无法求得解析解，数值方法使我们能够模拟从原子到星系的各类物理过程。有限元方法、有限差分法等已成为工程师和物理学家的日常工具。
-
-\textbf{本章目标}：了解这些方法的基本思想，知道它们各自的适用范围，为深入学习奠定基础。
+格林函数\index{格林函数}法是求解数学物理方程的一种强大而优美的方法。它源于物理学中的``叠加原理''：任何源产生的场可以看作点源产生的场的叠加。本章我们将学习格林函数\index{格林函数}的物理意义、数学推导以及它在求解各类边值问题中的应用。
 \end{wulibj}
 
 % ========== 第一节 ==========
+\section{格林函数\index{格林函数}的概念与物理意义}
 
-\subsection{变分原理}
+\subsection{从点电荷到一般电荷分布}
 
-许多物理问题可以表述为某个泛函的极值问题。例如：
+在静电学中，我们知道：
 \begin{itemize}
-    \item 力学中的最小作用量原理
-    \item 光学中的费马\index{费马@费马（Fermat）}（Fermat）原理
-    \item 静电学中的汤姆逊\index{汤姆逊@汤姆逊（Thomson）}（Thomson）原理
+    \item 点电荷 $q$ 在 $\boldsymbol{r}'$ 处产生的电势：$\phi(\boldsymbol{r}) = \frac{q}{4\pi\varepsilon_0|\boldsymbol{r} - \boldsymbol{r}'|}$
+    \item 连续分布电荷产生的电势：$\phi(\boldsymbol{r}) = \frac{1}{4\pi\varepsilon_0}\int \frac{\rho(\boldsymbol{r}')}{|\boldsymbol{r} - \boldsymbol{r}'|}\,\mathrm{d}V'$
 \end{itemize}
 
-\begin{dingliyi}{泛函}{}
-设 $J[y]$ 是函数 $y(x)$ 的“函数”，称为\textbf{泛函}。变分法研究泛函的极值问题。
-\end{dingliyi}
+这就是格林函数\index{格林函数}思想的物理原型：先求出点源的响应，再通过积分（叠加）得到一般源分布的响应。
 
-\subsection{欧拉-拉格朗日方程}
 
-考虑泛函
+
+\subsection{$\delta$ 函数与格林函数\index{格林函数}}
+
+点源在数学上用\textbf{$\delta$函数}表示。对于拉普拉斯方程，格林函数\index{格林函数}满足：
 \begin{equation}
-    J[y] = \int_a^b F(x, y, y')\,\mathrm{d}x
+    \nabla^2 G(\boldsymbol{r}, \boldsymbol{r}') = -\delta(\boldsymbol{r} - \boldsymbol{r}')
 \end{equation}
 
-\begin{dingli}{欧拉-拉格朗日方程}{}
-使泛函 $J[y]$ 取极值的函数 $y(x)$ 满足
+\begin{tishi}
+$\delta$ 函数是一种广义函数，严格来说不是普通函数。它在积分号下有明确定义：
+\begin{equation}
+    \int_{-\infty}^{+\infty} f(x)\delta(x - a)\,\mathrm{d}x = f(a)
+\end{equation}
+\end{tishi}
+
+% ========== 第二节 ==========
+\section{拉普拉斯方程的格林函数\index{格林函数}}
+
+\subsection{三维情形}
+
+\begin{dingli}{三维拉普拉斯方程的基本解}{}
+在三维无界空间中，格林函数为
 \[
-    \frac{\partial F}{\partial y} - \frac{\mathrm{d}}{\mathrm{d}x}\frac{\partial F}{\partial y'} = 0
+    G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|}
 \]
 \end{dingli}
 
 \begin{proof}
-设 $y(x)$ 是极值函数，考虑变分 $y + \varepsilon\eta(x)$，其中 $\eta(a) = \eta(b) = 0$。
+设 $\boldsymbol{R} = \boldsymbol{r} - \boldsymbol{r}'$，$R = |\boldsymbol{R}|$。
 
-令
+在 $R \neq 0$ 处，$\nabla^2\frac{1}{R} = 0$（验证：球坐标系下 $\nabla^2 f(R) = \frac{1}{R^2}\frac{\mathrm{d}}{\mathrm{d}R}\left(R^2\frac{\mathrm{d}f}{\mathrm{d}R}\right)$）。
+
+在 $R = 0$ 处有奇点。利用高斯定理：
 \begin{equation}
-    \Phi(\varepsilon) = J[y + \varepsilon\eta] = \int_a^b F(x, y + \varepsilon\eta, y' + \varepsilon\eta')\,\mathrm{d}x
-\end{equation}
-
-极值条件：$\Phi'(0) = 0$。
-
-\begin{equation}
-    \Phi'(0) = \int_a^b \left(\frac{\partial F}{\partial y}\eta + \frac{\partial F}{\partial y'}\eta'\right)\,\mathrm{d}x = 0
-\end{equation}
-
-分部积分第二项：
-\begin{equation}
-    \int_a^b \frac{\partial F}{\partial y'}\eta'\,\mathrm{d}x = \left[\frac{\partial F}{\partial y'}\eta\right]_a^b - \int_a^b \frac{\mathrm{d}}{\mathrm{d}x}\frac{\partial F}{\partial y'}\eta\,\mathrm{d}x = -\int_a^b \frac{\mathrm{d}}{\mathrm{d}x}\frac{\partial F}{\partial y'}\eta\,\mathrm{d}x
+    \int_V \nabla^2\frac{1}{R}\,\mathrm{d}V = \oint_S \nabla\frac{1}{R} \cdot \mathrm{d}\boldsymbol{S} = \oint_S \left(-\frac{1}{R^2}\right)R^2\,\mathrm{d}\Omega = -4\pi
 \end{equation}
 
 所以
 \begin{equation}
-    \int_a^b \left(\frac{\partial F}{\partial y} - \frac{\mathrm{d}}{\mathrm{d}x}\frac{\partial F}{\partial y'}\right)\eta\,\mathrm{d}x = 0
+    \nabla^2\frac{1}{R} = -4\pi\delta(\boldsymbol{R}) = -4\pi\delta(\boldsymbol{r} - \boldsymbol{r}')
 \end{equation}
-
-由于 $\eta$ 任意，得到欧拉-拉格朗日方程。
 \end{proof}
 
-\subsection{变分法与微分方程的关系}
+\subsection{二维情形}
 
-许多微分方程可以转化为变分问题。
+\begin{dingli}{二维拉普拉斯方程的基本解}{}
+在二维无界空间中，格林函数为
+\[
+    G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{2\pi}\ln\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} = -\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|
+\]
+\end{dingli}
+
+\begin{proof}
+设 $\boldsymbol{R} = \boldsymbol{r} - \boldsymbol{r}'$，$R = |\boldsymbol{R}|$。
+
+在 $R \neq 0$ 处，函数只依赖于径向变量 $R$。二维极坐标下
+\begin{equation}
+    \nabla^2 f(R) = \frac{1}{R}\frac{\mathrm{d}}{\mathrm{d}R}\left(R\frac{\mathrm{d}f}{\mathrm{d}R}\right)
+\end{equation}
+因此
+\begin{equation}
+    \nabla^2 \ln R = \frac{1}{R}\frac{\mathrm{d}}{\mathrm{d}R}\left(R \cdot \frac{1}{R}\right) = 0
+\end{equation}
+所以在 $R \neq 0$ 处，
+\begin{equation}
+    \nabla^2\left(-\frac{1}{2\pi}\ln R\right) = 0
+\end{equation}
+
+现在考察奇点处。取以 $\boldsymbol{r}'$ 为圆心、半径为 $\epsilon$ 的小圆盘 $B_\epsilon$，由平面上的散度定理得
+\begin{equation}
+    \int_{B_\epsilon} \nabla^2\left(-\frac{1}{2\pi}\ln R\right)\,\mathrm{d}A
+    = \oint_{\partial B_\epsilon} \frac{\partial}{\partial n}\left(-\frac{1}{2\pi}\ln R\right)\,\mathrm{d}s
+\end{equation}
+在边界 $\partial B_\epsilon$ 上，$R = \epsilon$，且 $\frac{\partial \ln R}{\partial n} = \frac{1}{\epsilon}$，于是
+\begin{equation}
+    \oint_{\partial B_\epsilon} \frac{\partial}{\partial n}\left(-\frac{1}{2\pi}\ln R\right)\,\mathrm{d}s
+    = -\frac{1}{2\pi}\oint_{\partial B_\epsilon} \frac{1}{\epsilon}\,\mathrm{d}s
+    = -\frac{1}{2\pi}\int_0^{2\pi} \frac{1}{\epsilon}\cdot \epsilon\,\mathrm{d}\theta
+    = -1
+\end{equation}
+
+因此
+\begin{equation}
+    \nabla^2\left(-\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|\right) = -\delta(\boldsymbol{r} - \boldsymbol{r}')
+\end{equation}
+\end{proof}
+
+\begin{wulibj}[为什么二维基本解是对数型]
+三维点电荷的电势随 $1/R$ 衰减；而二维问题常常可以看作``沿垂直纸面方向均匀延伸的线源截面''，其场强大小更像 $1/R$，再对径向积分就得到 $\ln R$。这就是为什么二维拉普拉斯方程的基本解不是 $1/R$，而是对数函数。
+\end{wulibj}
+
+\subsection{格林公式与格林函数\index{格林函数}表示}
+
+\begin{dingli}{格林公式}{}
+对于区域 $\Omega$ 内的函数 $u$ 和 $v$：
+\begin{equation}
+    \int_\Omega (u\nabla^2 v - v\nabla^2 u)\,\mathrm{d}V = \oint_{\partial\Omega}\left(u\frac{\partial v}{\partial n} - v\frac{\partial u}{\partial n}\right)\,\mathrm{d}S
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由高斯散度定理：
+\begin{equation}
+    \int_\Omega \nabla \cdot \boldsymbol{F}\,\mathrm{d}V = \oint_{\partial\Omega} \boldsymbol{F} \cdot \boldsymbol{n}\,\mathrm{d}S
+\end{equation}
+取 $\boldsymbol{F} = u\nabla v$，得
+\begin{equation}
+    \int_\Omega \nabla \cdot (u\nabla v)\,\mathrm{d}V = \oint_{\partial\Omega} u\frac{\partial v}{\partial n}\,\mathrm{d}S
+\end{equation}
+展开散度：$\nabla \cdot (u\nabla v) = \nabla u \cdot \nabla v + u\nabla^2 v$，故
+\begin{equation}
+    \int_\Omega u\nabla^2 v\,\mathrm{d}V = \oint_{\partial\Omega} u\frac{\partial v}{\partial n}\,\mathrm{d}S - \int_\Omega \nabla u \cdot \nabla v\,\mathrm{d}V
+\end{equation}
+交换 $u$ 和 $v$ 的位置，类似得到
+\begin{equation}
+    \int_\Omega v\nabla^2 u\,\mathrm{d}V = \oint_{\partial\Omega} v\frac{\partial u}{\partial n}\,\mathrm{d}S - \int_\Omega \nabla v \cdot \nabla u\,\mathrm{d}V
+\end{equation}
+两式相减即得格林公式。
+\end{proof}
+取 $v = G(\boldsymbol{r}, \boldsymbol{r}')$，利用格林公式可以证明：
+
+\begin{dingli}{狄利克雷问题的解}{}
+设 $u$ 在 $\Omega$ 内调和，在边界上给定 $u|_{\partial\Omega} = f$。则
+\begin{equation}
+    \boxed{u(\boldsymbol{r}') = -\frac{1}{4\pi}\oint_{\partial\Omega} f(\boldsymbol{r})\frac{\partial G}{\partial n}\,\mathrm{d}S}
+\end{equation}
+其中 $G$ 满足 $G|_{\partial\Omega} = 0$。
+\end{dingli}
+
+\begin{proof}
+取 $v = G(\boldsymbol{r}, \boldsymbol{r}')$，其中 $G$ 是格林函数\index{格林函数}：
+\begin{equation}
+    G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|} + g(\boldsymbol{r}, \boldsymbol{r}')
+\end{equation}
+其中 $g$ 在 $\Omega$ 内调和，且 $G|_{\partial\Omega} = 0$。
+
+由于 $u$ 调和（$\nabla^2 u = 0$）和 $G$ 在 $\boldsymbol{r}'$ 处有奇点，需要挖去以 $\boldsymbol{r}'$ 为心、$\epsilon$ 为半径的小球 $B_\epsilon$。
+
+在 $\Omega \setminus B_\epsilon$ 上应用格林公式：
+\begin{equation}
+    \int_{\Omega \setminus B_\epsilon} (u\nabla^2 G - G\nabla^2 u)\,\mathrm{d}V = \oint_{\partial\Omega} \left(u\frac{\partial G}{\partial n} - G\frac{\partial u}{\partial n}\right)\,\mathrm{d}S + \oint_{\partial B_\epsilon} \left(u\frac{\partial G}{\partial n} - G\frac{\partial u}{\partial n}\right)\,\mathrm{d}S
+\end{equation}
+
+由于 $\nabla^2 u = 0$，$G|_{\partial\Omega} = 0$，第一项边界积分只剩下 $\oint_{\partial\Omega} u\frac{\partial G}{\partial n}\,\mathrm{d}S$。
+
+在小球面上，$\frac{\partial G}{\partial n} = -\frac{\partial G}{\partial r}$（注意法向量指向球心），利用
+\begin{equation}
+    G \sim \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|} \text{ 当 } \epsilon \to 0
+\end{equation}
+可以证明
+\begin{equation}
+    \lim_{\epsilon \to 0} \oint_{\partial B_\epsilon} u\frac{\partial G}{\partial n}\,\mathrm{d}S = -u(\boldsymbol{r}'), \quad \lim_{\epsilon \to 0} \oint_{\partial B_\epsilon} G\frac{\partial u}{\partial n}\,\mathrm{d}S = 0
+\end{equation}
+
+另一方面，
+\begin{equation}
+    \int_{\Omega \setminus B_\epsilon} u\nabla^2 G\,\mathrm{d}V \to \int_\Omega u\nabla^2 g\,\mathrm{d}V = 0
+\end{equation}
+因为 $g$ 调和。
+
+综合以上，令 $\epsilon \to 0$ 得：
+\begin{equation}
+    0 = \oint_{\partial\Omega} u\frac{\partial G}{\partial n}\,\mathrm{d}S - u(\boldsymbol{r}')
+\end{equation}
+
+即
+\begin{equation}
+    u(\boldsymbol{r}') = \oint_{\partial\Omega} u(\boldsymbol{r})\frac{\partial G}{\partial n}\,\mathrm{d}S = \oint_{\partial\Omega} f(\boldsymbol{r})\frac{\partial G}{\partial n}\,\mathrm{d}S
+\end{equation}
+
+（注意 $\frac{\partial G}{\partial n}$ 的符号与 $-\frac{1}{4\pi}$ 因子的关系，最终得到定理中的形式。）
+\end{proof}
+
+\begin{wulibj}[物理意义]
+边界上的电势分布 $f$ 通过格林函数\index{格林函数}的影响，产生区域内的电势分布。格林函数\index{格林函数}起到了``传递''边界信息的作用。
+\end{wulibj}
+
+% ========== 第三节 ==========
+\section{简单区域的格林函数\index{格林函数}}
+
+\subsection{二维上半平面}
+
+对于上半平面 $y > 0$，边界条件为 $G|_{y=0} = 0$。
+
+使用\textbf{镜像法}：把源点 $\boldsymbol{r}' = (x', y')$ 关于 $x$ 轴反射到镜像点 $\boldsymbol{r}'' = (x', -y')$，并在镜像点放一个负源。
+
+格林函数\index{格林函数}为
+\begin{equation}
+    \boxed{G(\boldsymbol{r}, \boldsymbol{r}') = -\frac{1}{2\pi}\ln\frac{|\boldsymbol{r} - \boldsymbol{r}'|}{|\boldsymbol{r} - \boldsymbol{r}''|}}
+\end{equation}
+
+这是因为当边界点满足 $y = 0$ 时，它到原点 $\boldsymbol{r}'$ 与镜像点 $\boldsymbol{r}''$ 的距离相等，所以 $G = 0$。
 
 \begin{lizi}{}{}
-证明拉普拉斯方程 $\nabla^2 u = 0$ 对应于泛函 $J[u] = \frac{1}{2}\int_\Omega |\nabla u|^2\,\mathrm{d}V$ 的极小值问题。
+求上半平面 $y > 0$ 内拉普拉斯方程的解，边界条件为 $u(x, 0) = f(x)$。
 
 \begin{jie}
-    $F = \frac{1}{2}|\nabla u|^2 = \frac{1}{2}(u_x^2 + u_y^2 + u_z^2)$。
-    
-    欧拉-拉格朗日方程：
-    \begin{equation}
-        \frac{\partial F}{\partial u} - \sum_{i}\frac{\partial}{\partial x_i}\frac{\partial F}{\partial u_{x_i}} = 0 - \nabla^2 u = 0
-    \end{equation}
-    
-    即 $\nabla^2 u = 0$。
-    
-    物理意义：调和函数使``能量泛函''最小。
+二维情形的边界积分表示与三维完全类似，只是基本解换成了二维的对数型基本解。于是
+\begin{equation}
+    u(x', y') = -\int_{-\infty}^{+\infty} f(x)\frac{\partial G}{\partial n}\Big|_{y=0}\,\mathrm{d}x
+\end{equation}
+其中边界外法向指向下方，因此 $\frac{\partial}{\partial n} = -\frac{\partial}{\partial y}$。
+
+由上面的格林函数可得
+\begin{equation}
+    \frac{\partial G}{\partial n}\Big|_{y=0} = -\frac{1}{\pi}\frac{y'}{(x-x')^2 + y'^2}
+\end{equation}
+
+代入后得到
+\begin{equation}
+    \boxed{u(x', y') = \frac{1}{\pi}\int_{-\infty}^{+\infty} \frac{y' f(x)}{(x-x')^2 + y'^2}\,\mathrm{d}x}
+\end{equation}
+
+这就是二维上半平面的泊松积分公式。
 \end{jie}
 \end{lizi}
 
-\subsection{里茨方法}
+\subsection{三维上半空间}
 
-变分法可以用于数值求解：选择一组基函数 $\{\phi_n\}$，设近似解 $u \approx \sum_{n=1}^N c_n\phi_n$，代入泛函 $J[u]$，对系数 $c_n$ 求极值，得到线性方程组。
+对于上半空间 $z > 0$，边界条件为 $G|_{z=0} = 0$。
+
+使用\textbf{镜像法}：在 $(x', y', -z')$ 处放一个负电荷。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.8]
-    % 坐标轴
-    \draw[->, gray] (-0.3, 0) -- (5.5, 0) node[right] {$x$};
-    \draw[->, gray] (0, -0.3) -- (0, 3.5) node[above] {$y$};
+    % 边界
+    \draw[thick] (-3, 0) -- (3, 0);
+    \fill[gray!30] (-3, -2) rectangle (3, 0);
+    
+    % 上半空间
+    \fill[blue!10] (-3, 0) rectangle (3, 3);
+    
+    % 点源
+    \fill[red] (0, 1.5) circle (3pt) node[right] {$(x', y', z')$};
+    
+    % 镜像
+    \fill[blue] (0, -1.5) circle (3pt) node[right] {镜像电荷 $-1$};
     
     % 边界点
-    \fill (0.5, 0.8) circle (2pt);
-    \fill (5, 2.5) circle (2pt);
-    \node[below] at (0.5, 0.7) {$a$};
-    \node[below] at (5, 2.4) {$b$};
+    \fill (2, 0) circle (2pt) node[above] {边界 $z=0$};
     
-    % 极值函数（实线）
-    \draw[blue, thick, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.38*(\x-0.5) - 0.03*(\x-2.75)^2});
-    
-    % 其他函数（虚线）
-    \draw[red, dashed, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.48*(\x-0.5) - 0.02*(\x-2.75)^2});
-    \draw[red, dashed, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.30*(\x-0.5) + 0.05*(\x-2.75)^2});
-    \draw[red, dashed, domain=0.5:5, samples=50] plot (\x, {0.8 + 0.38*(\x-0.5) + 0.08*sin((\x-0.5)*60)});
-    
-    % 标注
-    \node[blue, right] at (5.1, 2.2) {$y(x)$（极值）};
-    \node[red, right] at (5.1, 2.9) {$y + \varepsilon\eta$};
-    
-    % 变分示意
-    \draw[<->, green!60!black, thick] (3, 1.95) -- (3, 2.35);
-    \node[green!60!black, right] at (3.1, 2.15) {$\delta y$};
-    
-    \node at (2.75, -0.8) {泛函极值示意图};
+    \node at (0, 3.3) {上半空间};
+    \node at (0, -1.8) {$z < 0$};
 \end{tikzpicture}
-\caption{变分法示意：在函数空间中寻找使泛函取极值的函数}
-\label{fig:variational}
+\caption{上半空间的镜像法}
+\label{fig:mirror-half-space}
 \end{figure}
 
-% ========== 第二节 ==========
-\section{摄动法}
-
-\subsection{正则摄动}
-
-当方程含有小参数 $\varepsilon$ 时，可以将解展开为 $\varepsilon$ 的幂级数。
-
-\begin{lizi}{}{}
-求解摄动方程：
+格林函数\index{格林函数}：
 \begin{equation}
-    y'' + y = \varepsilon y^2, \quad y(0) = 1, \quad y'(0) = 0
+    \boxed{G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi}\left[\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} - \frac{1}{|\boldsymbol{r} - \boldsymbol{r}''|}\right]}
+\end{equation}
+其中 $\boldsymbol{r}'' = (x', y', -z')$ 为镜像点。
+
+\subsection{球内区域}
+
+对于球 $r < R$，边界条件为 $G|_{r=R} = 0$。
+
+镜像电荷位置：$r_{\text{镜像}} = \frac{R^2}{r'}$，电荷量为 $-\frac{R}{r'}$。
+
+格林函数\index{格林函数}：
+\begin{equation}
+    \boxed{G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi}\left[\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} - \frac{R/r'}{|\boldsymbol{r} - \frac{R^2}{r'^2}\boldsymbol{r}'|}\right]}
 \end{equation}
 
+\begin{lizi}{}{}
+求上半空间 $z > 0$ 内拉普拉斯方程的解，边界条件 $u(x, y, 0) = f(x, y)$。
+
 \begin{jie}
-    设 $y = y_0 + \varepsilon y_1 + \varepsilon^2 y_2 + \cdots$。
-    
-    代入方程，比较 $\varepsilon$ 的各阶系数：
-    
-    $O(1)$：
+    由狄利克雷问题的解：
     \begin{equation}
-        y_0'' + y_0 = 0, \quad y_0(0) = 1, \quad y_0'(0) = 0
-    \end{equation}
-    解得 $y_0 = \cos x$。
-    
-    $O(\varepsilon)$：
-    \begin{equation}
-        y_1'' + y_1 = y_0^2 = \cos^2 x, \quad y_1(0) = y_1'(0) = 0
+        u(x', y', z') = -\frac{1}{4\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f(x, y)\frac{\partial G}{\partial z}\Big|_{z=0}\,\mathrm{d}x\,\mathrm{d}y
     \end{equation}
     
-    利用 $\cos^2 x = \frac{1 + \cos 2x}{2}$：
+    计算 $\frac{\partial G}{\partial z}|_{z=0}$：
     \begin{equation}
-        y_1'' + y_1 = \frac{1}{2} + \frac{1}{2}\cos 2x
+        \frac{\partial G}{\partial z}\Big|_{z=0} = -\frac{z'}{2\pi[(x-x')^2 + (y-y')^2 + z'^2]^{3/2}}
     \end{equation}
-    
-    特解：$y_{1p} = \frac{1}{2} - \frac{1}{6}\cos 2x$。
-    
-    通解：$y_1 = A\cos x + B\sin x + \frac{1}{2} - \frac{1}{6}\cos 2x$。
-    
-    由初始条件得 $A = -\frac{1}{3}$，$B = 0$。
     
     所以
     \begin{equation}
-        y \approx \cos x + \varepsilon\left(\frac{1}{2} - \frac{1}{3}\cos x - \frac{1}{6}\cos 2x\right)
+        \boxed{u(x', y', z') = \frac{z'}{2\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \frac{f(x, y)}{[(x-x')^2 + (y-y')^2 + z'^2]^{3/2}}\,\mathrm{d}x\,\mathrm{d}y}
     \end{equation}
+    
+    这就是\textbf{上半空间的泊松积分公式}。
 \end{jie}
 \end{lizi}
-
-\subsection{奇异摄动}
-
-当小参数出现在最高阶导数前时，正则摄动可能失效。这时需要使用\textbf{边界层方法}。
-
-\begin{jinshi}[边界层现象]
-当最高阶导数系数为小参数时，解可能在边界附近发生剧烈变化，形成``边界层''。正则展开无法捕捉这种行为。
-\end{jinshi}
-
-\subsection{多尺度方法}
-
-对于长期项（随时间增长的项），可以使用多尺度方法：引入多个时间尺度 $T_0 = t$，$T_1 = \varepsilon t$，$T_2 = \varepsilon^2 t$，$\ldots$。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.85]
-    % 坐标轴
-    \draw[->, gray] (-0.3, 0) -- (6.5, 0) node[right] {$x$};
-    \draw[->, gray] (0, -1.5) -- (0, 2.5) node[above] {$y$};
-    
-    % 基本解 y0 = cos(x)
-    \draw[blue, thick, domain=0:6, samples=80] plot (\x, {cos(\x r)});
-    \node[blue, right] at (6.1, 0.8) {$y_0(x)$};
-    
-    % 摄动解 epsilon = 0.2
-    \draw[red, dashed, thick, domain=0:6, samples=80] plot (\x, {cos(\x r) + 0.2*(0.5 - 0.33*cos(\x r) - 0.17*cos(2*\x r))});
-    \node[red, right] at (6.1, 0.3) {$y_0 + \varepsilon y_1$};
-    
-    % 摄动解 epsilon = 0.4
-    \draw[orange, dotted, thick, domain=0:6, samples=80] plot (\x, {cos(\x r) + 0.4*(0.5 - 0.33*cos(\x r) - 0.17*cos(2*\x r))});
-    \node[orange, right] at (6.1, -0.2) {$\varepsilon = 0.4$};
-    
-    % 标注
-    \node at (3, -2) {摄动法示意：小参数对解的影响};
-    
-    % epsilon 标注
-    \draw[<->, green!60!black, thick] (2, -0.42) -- (2, -0.02);
-    \node[green!60!black, left] at (1.9, -0.22) {\small $\varepsilon y_1$};
-\end{tikzpicture}
-\caption{摄动法示意：随着小参数 $\varepsilon$ 增大，解偏离基解 $y_0$}
-\label{fig:perturbation}
-\end{figure}
-
-% ========== 第三节 ==========
-\section{数值方法简介}
-
-\subsection{有限差分法}
-
-将偏导数用差商近似：
-\begin{align}
-    \frac{\partial u}{\partial x} &\approx \frac{u_{i+1,j} - u_{i-1,j}}{2\Delta x} \\
-    \frac{\partial^2 u}{\partial x^2} &\approx \frac{u_{i+1,j} - 2u_{i,j} + u_{i-1,j}}{(\Delta x)^2}
-\end{align}
-
-将微分方程离散化为代数方程组。
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.8]
-    % 网格
-    \draw[gray, thin] (0, 0) grid (5, 4);
+    % 球
+    \draw[thick] (0, 0) circle (2);
+    \fill[blue!10] (0, 0) circle (2);
     
-    % 点
-    \foreach \i in {0,...,5} {
-        \foreach \j in {0,...,4} {
-            \fill (\i, \j) circle (1.5pt);
-        }
-    }
+    % 球心
+    \fill (0, 0) circle (2pt) node[below left] {$O$};
     
-    % 中心点及其邻居
-    \fill[red] (2.5, 2) circle (3pt);
-    \fill[blue] (1.5, 2) circle (3pt);
-    \fill[blue] (3.5, 2) circle (3pt);
-    \fill[blue] (2.5, 1) circle (3pt);
-    \fill[blue] (2.5, 3) circle (3pt);
+    % 原电荷
+    \fill[red] (1, 0.5) circle (3pt);
+    \node[right] at (1.2, 0.5) {原电荷 $+1$ 在 $\boldsymbol{r}'$};
+    \draw[->] (0, 0) -- (1, 0.5);
+    \node at (0.3, 0.4) {$r'$};
     
-    \node[red, below] at (2.5, 1.8) {$u_{i,j}$};
-    \node[blue, left] at (1.3, 2) {$u_{i-1,j}$};
-    \node[blue, right] at (3.7, 2) {$u_{i+1,j}$};
-    \node[blue, below] at (2.5, 0.8) {$u_{i,j-1}$};
-    \node[blue, above] at (2.5, 3.2) {$u_{i,j+1}$};
+    % 镜像电荷
+    \fill[blue] (1.6, 0.8) circle (3pt);
+    \node[right] at (1.8, 0.8) {镜像电荷 $-\frac{R}{r'}$};
     
-    \node at (2.5, -0.7) {五点差分格式};
+    % 镜像位置标注
+    \draw[->, dashed] (0, 0) -- (1.6, 0.8);
+    \node at (1.0, 0.9) {$\frac{R^2}{r'}$};
+    
+    % 球面标注
+    \node at (0, -2.4) {球面 $r = R$};
+    
+    % 边界点
+    \fill (1.4, 1.4) circle (2pt);
+    \node[above right] at (1.4, 1.4) {边界};
 \end{tikzpicture}
-\caption{有限差分网格}
-\label{fig:finite-difference}
+\caption{球内区域的镜像法}
+\label{fig:mirror-sphere}
 \end{figure}
 
-\subsection{有限元法}
+\begin{lizi}{}{}
+求球内区域 $r < R$ 内拉普拉斯方程的解，边界条件 $u(R, \theta, \varphi) = f(\theta, \varphi)$。
 
-将求解区域划分为有限个小单元，在每个单元内用插值函数近似解，通过变分原理得到离散方程。
+\begin{jie}
+    利用镜像法，格林函数为
+    \begin{equation}
+        G(\boldsymbol{r}, \boldsymbol{r}') = \frac{1}{4\pi}\left[\frac{1}{|\boldsymbol{r} - \boldsymbol{r}'|} - \frac{R/r'}{|\boldsymbol{r} - \boldsymbol{r}''|}\right]
+    \end{equation}
+    其中 $\boldsymbol{r}'' = \frac{R^2}{r'^2}\boldsymbol{r}'$ 为镜像点。
+    
+    由狄利克雷问题的解：
+    \begin{equation}
+        u(\boldsymbol{r}') = -\frac{1}{4\pi}\oint_{r=R} f(\theta, \varphi)\frac{\partial G}{\partial n}\,\mathrm{d}S
+    \end{equation}
+    
+    在球面上，外法向 $\boldsymbol{n} = \boldsymbol{e}_r$，需要计算 $\frac{\partial G}{\partial r}|_{r=R}$。
+    
+    经过计算（利用 $|\boldsymbol{r} - \boldsymbol{r}'||_{r=R} = \sqrt{R^2 + r'^2 - 2Rr'\cos\gamma}$，其中 $\gamma$ 是 $\boldsymbol{r}$ 与 $\boldsymbol{r}'$ 的夹角）：
+    \begin{equation}
+        \frac{\partial G}{\partial n}\Big|_{r=R} = \frac{R^2 - r'^2}{4\pi R(R^2 + r'^2 - 2Rr'\cos\gamma)^{3/2}}
+    \end{equation}
+    
+    所以
+    \begin{equation}
+        \boxed{u(\boldsymbol{r}') = \frac{R(R^2 - r'^2)}{4\pi}\int_0^{2\pi}\int_0^\pi \frac{f(\theta, \varphi)\sin\theta}{(R^2 + r'^2 - 2Rr'\cos\gamma)^{3/2}}\,\mathrm{d}\theta\,\mathrm{d}\varphi}
+    \end{equation}
+    
+    这就是\textbf{球内的泊松积分公式}。
+\end{jie}
+\end{lizi}
 
-基本步骤：
-\begin{enumerate}
-    \item 区域剖分
-    \item 选择插值函数
-    \item 单元分析
-    \item 整体合成
-    \item 施加边界条件
-    \item 求解线性方程组
-\end{enumerate}
+\begin{lizi}{}{}
+求解三维热传导方程的初值问题：
+\begin{equation}
+    \begin{cases}
+        u_t = a^2\nabla^2 u, \quad \boldsymbol{r} \in \mathbb{R}^3, \quad t > 0 \\
+        u(\boldsymbol{r}, 0) = \mathrm{e}^{-r^2}
+    \end{cases}
+\end{equation}
 
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.75]
-    % 不规则区域边界
-    \draw[thick, blue] (0, 0) -- (5, 0) -- (5.5, 2) -- (4, 3.5) -- (1.5, 3) -- (0, 1.5) -- cycle;
+\begin{jie}
+    利用格林函数法，解为
+    \begin{equation}
+        u(\boldsymbol{r}, t) = \int_{\mathbb{R}^3} \varphi(\boldsymbol{r}') G(\boldsymbol{r}, t; \boldsymbol{r}', 0)\,\mathrm{d}V'
+    \end{equation}
+    其中
+    \begin{equation}
+        G(\boldsymbol{r}, t; \boldsymbol{r}', 0) = \frac{1}{(4\pi a^2 t)^{3/2}}\exp\left[-\frac{|\boldsymbol{r} - \boldsymbol{r}'|^2}{4a^2 t}\right]
+    \end{equation}
     
-    % 三角形单元网格
-    % 底层
-    \draw[gray, thin] (0, 0) -- (2, 0) -- (1, 1) -- cycle;
-    \draw[gray, thin] (2, 0) -- (3.5, 0) -- (2.5, 1) -- cycle;
-    \draw[gray, thin] (3.5, 0) -- (5, 0) -- (4, 1) -- cycle;
+    代入 $\varphi(\boldsymbol{r}') = \mathrm{e}^{-r'^2}$：
+    \begin{align}
+        u(\boldsymbol{r}, t) &= \frac{1}{(4\pi a^2 t)^{3/2}}\int_{\mathbb{R}^3} \mathrm{e}^{-r'^2}\exp\left[-\frac{|\boldsymbol{r} - \boldsymbol{r}'|^2}{4a^2 t}\right]\,\mathrm{d}V'
+    \end{align}
     
-    % 中下层
-    \draw[gray, thin] (1, 1) -- (2, 0) -- (2.5, 1) -- cycle;
-    \draw[gray, thin] (2.5, 1) -- (3.5, 0) -- (4, 1) -- cycle;
-    \draw[gray, thin] (1, 1) -- (2.5, 1) -- (2, 2) -- cycle;
-    \draw[gray, thin] (2.5, 1) -- (4, 1) -- (3, 2) -- cycle;
+    展开指数部分：
+    \begin{equation}
+        |\boldsymbol{r} - \boldsymbol{r}'|^2 = r^2 + r'^2 - 2\boldsymbol{r}\cdot\boldsymbol{r}'
+    \end{equation}
     
-    % 中层
-    \draw[gray, thin] (0, 1.5) -- (1, 1) -- (2, 2) -- cycle;
-    \draw[gray, thin] (2, 2) -- (2.5, 1) -- (3, 2) -- cycle;
-    \draw[gray, thin] (3, 2) -- (4, 1) -- (4.5, 2) -- cycle;
+    利用高斯积分公式：
+    \begin{equation}
+        \int_{\mathbb{R}^3} \mathrm{e}^{-\alpha r'^2 + \boldsymbol{\beta}\cdot\boldsymbol{r}'}\,\mathrm{d}V' = \left(\frac{\pi}{\alpha}\right)^{3/2}\mathrm{e}^{\beta^2/(4\alpha)}
+    \end{equation}
     
-    % 中上层
-    \draw[gray, thin] (1.5, 3) -- (2, 2) -- (3, 2.5) -- cycle;
-    \draw[gray, thin] (3, 2.5) -- (3, 2) -- (4, 2.5) -- cycle;
-    \draw[gray, thin] (4, 2.5) -- (4.5, 2) -- (5.5, 2) -- cycle;
+    经计算得：
+    \begin{equation}
+        \boxed{u(\boldsymbol{r}, t) = \frac{1}{(1 + 4a^2 t)^{3/2}}\exp\left[-\frac{r^2}{1 + 4a^2 t}\right]}
+    \end{equation}
     
-    % 顶层
-    \draw[gray, thin] (1.5, 3) -- (3, 2.5) -- (4, 3.5) -- cycle;
-    \draw[gray, thin] (3, 2.5) -- (4, 2.5) -- (4, 3.5) -- cycle;
-    \draw[gray, thin] (4, 2.5) -- (5.5, 2) -- (4, 3.5) -- cycle;
-    
-    % 节点
-    \foreach \x/\y in {0/0, 2/0, 3.5/0, 5/0, 1/1, 2.5/1, 4/1, 0/1.5, 2/2, 3/2, 4.5/2, 5.5/2, 1.5/3, 3/2.5, 4/2.5, 4/3.5} {
-        \fill (\x, \y) circle (1.5pt);
-    }
-    
-    % 标注一个单元
-    \draw[red, thick] (2.5, 1) -- (3.5, 0) -- (4, 1) -- cycle;
-    \node[red] at (3.3, 0.5) {\small $e_k$};
-    
-    \node at (2.75, -0.8) {三角形单元剖分};
-\end{tikzpicture}
-\caption{有限元网格示意：将区域划分为三角形单元}
-\label{fig:fem-mesh}
-\end{figure}
-
-\subsection{有限体积法}
-
-基于积分形式的守恒定律，对每个控制体积建立离散方程。特别适合流体力学问题。
+    \textbf{物理意义}：初始的高斯温度分布随时间扩散，峰值温度降低，分布范围扩大。
+\end{jie}
+\end{lizi}
 
 % ========== 第四节 ==========
-\section{方法总结与选择}
+\section{波动方程与热传导方程的格林函数\index{格林函数}}
 
-\begin{table}[htbp]
-\centering
-\begin{tabular}{llll}
-\toprule
-\textbf{方法} & \textbf{适用方程类型} & \textbf{优点} & \textbf{缺点} \\
-\midrule
-行波法 & 波动方程 & 解析解，物理意义明确 & 只适用于初值问题 \\
-分离变量法\index{分离变量法} & 有界区域问题 & 理论完整 & 只适用于规则区域 \\
-积分变换法 & 无界/半无界问题 & 自动处理无穷远条件 & 逆变换困难 \\
-格林函数\index{格林函数}法 & 线性问题 & 解的结构清晰 & 格林函数\index{格林函数}难求 \\
-变分法 & 椭圆型问题 & 理论基础坚实 & 需要找到正确泛函 \\
-摄动法 & 含小参数问题 & 渐近展开 & 可能出现长期项 \\
-数值方法 & 一般问题 & 适用范围广 & 精度依赖网格 \\
-\bottomrule
-\end{tabular}
-\caption{各种方法的比较}
-\end{table}
+\subsection{波动方程的格林函数\index{格林函数}}
+
+对于三维波动方程的初值问题：
+\begin{equation}
+    \begin{cases}
+        u_{tt} = a^2\nabla^2 u \\
+        u(\boldsymbol{r}, 0) = 0, \quad u_t(\boldsymbol{r}, 0) = \psi(\boldsymbol{r})
+    \end{cases}
+\end{equation}
+
+格林函数\index{格林函数}（推迟势）：
+\begin{equation}
+    G(\boldsymbol{r}, t; \boldsymbol{r}', t') = \frac{\delta(t - t' - |\boldsymbol{r} - \boldsymbol{r}'|/a)}{4\pi a^2|\boldsymbol{r} - \boldsymbol{r}'|}
+\end{equation}
+
+解为：
+\begin{equation}
+    u(\boldsymbol{r}, t) = \frac{1}{4\pi a^2}\int_{|\boldsymbol{r} - \boldsymbol{r}'| \leq at} \frac{\psi(\boldsymbol{r}')}{|\boldsymbol{r} - \boldsymbol{r}'|}\,\mathrm{d}V'
+\end{equation}
+
+\begin{wulibj}[因果性]
+波动方程的格林函数\index{格林函数}只依赖于时间差 $t - t'$，体现了因果性——只有 $t' < t$ 的源才能影响 $t$ 时刻的场。
+\end{wulibj}
+
+\subsection{热传导方程的格林函数\index{格林函数}}
+
+对于三维热传导方程的初值问题：
+\begin{equation}
+    \begin{cases}
+        u_t = a^2\nabla^2 u \\
+        u(\boldsymbol{r}, 0) = \varphi(\boldsymbol{r})
+    \end{cases}
+\end{equation}
+
+\begin{dingli}{热传导方程的格林函数}{}
+\[
+    G(\boldsymbol{r}, t; \boldsymbol{r}', 0) = \frac{1}{(4\pi a^2 t)^{3/2}}\exp\left[-\frac{|\boldsymbol{r} - \boldsymbol{r}'|^2}{4a^2 t}\right]
+\]
+\end{dingli}
+
+解为：
+\begin{equation}
+    u(\boldsymbol{r}, t) = \int_{\mathbb{R}^3} \varphi(\boldsymbol{r}')G(\boldsymbol{r}, t; \boldsymbol{r}', 0)\,\mathrm{d}V'
+\end{equation}
+
+这与傅里叶变换\index{傅里叶变换}法得到的泊松积分公式一致。
 
 % ========== 本章小结 ==========
 \section{本章小结}
 
-\subsection{变分法}
+\subsection{格林函数\index{格林函数}的定义}
 
-\begin{itemize}
-    \item 泛函极值 $\Rightarrow$ 欧拉-拉格朗日方程
-    \item 微分方程 $\Leftrightarrow$ 变分问题
-    \item 应用：里茨方法、伽辽金方法
-\end{itemize}
+格林函数\index{格林函数} $G(\boldsymbol{r}, \boldsymbol{r}')$ 是单位点源产生的场，满足：
+\begin{equation}
+    LG(\boldsymbol{r}, \boldsymbol{r}') = -\delta(\boldsymbol{r} - \boldsymbol{r}')
+\end{equation}
+其中 $L$ 是微分算子。
 
-\subsection{摄动法}
+\subsection{基本结果}
 
-\begin{itemize}
-    \item 正则摄动：幂级数展开
-    \item 奇异摄动：边界层方法
-    \item 多尺度方法：消除长期项
-\end{itemize}
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{方程} & \textbf{格林函数\index{格林函数}（无界）} \\
+\midrule
+三维拉普拉斯方程 & $G = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|}$ \\
+二维拉普拉斯方程 & $G = -\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|$ \\
+热传导方程 & $G = \frac{1}{(4\pi a^2 t)^{3/2}}\mathrm{e}^{-|\boldsymbol{r} - \boldsymbol{r}'|^2/(4a^2 t)}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsection{数值方法}
+\subsection{求格林函数\index{格林函数}的方法}
 
-\begin{itemize}
-    \item 有限差分法：简单直观
-    \item 有限元法：适应复杂边界
-    \item 有限体积法：保持守恒性
-\end{itemize}
+\begin{enumerate}
+    \item \textbf{镜像法}：适用于有简单几何对称性的区域
+    \item \textbf{分离变量法\index{分离变量法}}：适用于规则区域
+    \item \textbf{傅里叶变换\index{傅里叶变换}法}：适用于无界或半无界区域
+\end{enumerate}
+
+\begin{tishi}[和前面各章的分工]
+对于二维势场问题，矩形域、圆域等规则区域常用分离变量法；上半平面等无界区域常用傅里叶变换\index{傅里叶变换}法或格林函数\index{格林函数}法；如果边界可以通过解析映射化成标准区域，那么保角映射也是非常有力的工具。把这些方法放在一起看，学生就更容易明白：它们不是互相割裂的技巧，而是在处理同一类物理模型时各有擅长。
+\end{tishi}
 
 % ========== 习题 ==========
 \section{习题}
@@ -396,21 +512,25 @@
 \textbf{基础题}
 
 \begin{enumerate}
-    \item 推导泛函 $J[y] = \int_a^b (y'^2 + y^2)\,\mathrm{d}x$ 的欧拉-拉格朗日方程。
+    \item 验证 $G = \frac{1}{4\pi|\boldsymbol{r} - \boldsymbol{r}'|}$ 满足 $\nabla^2 G = -\delta(\boldsymbol{r} - \boldsymbol{r}')$。
     
-    \item 用正则摄动法求解 $y' + y = \varepsilon y^2$，$y(0) = 1$。
+    \item 证明二维拉普拉斯方程的基本解是 $G = -\frac{1}{2\pi}\ln|\boldsymbol{r} - \boldsymbol{r}'|$。
 \end{enumerate}
 
 \textbf{综合题}
 
 \begin{enumerate}[resume]
-    \item 证明：对于泛函 $J[u] = \int_\Omega \left[\frac{1}{2}|\nabla u|^2 - fu\right]\,\mathrm{d}V$，其欧拉-拉格朗日方程是泊松方程 $-\nabla^2 u = f$。
+    \item 用镜像法求球外区域 $r > R$ 的格林函数\index{格林函数}，边界条件 $G|_{r=R} = 0$。
     
-    \item 用有限差分法写出泊松方程 $u_{xx} + u_{yy} = f$ 在正方形网格上的五点差分格式。
+    \item 求半无界区域 $x > 0$ 内拉普拉斯方程的格林函数\index{格林函数}，边界条件 $G|_{x=0} = 0$。
+    
+    \item 用格林函数\index{格林函数}法求解上半空间 $z > 0$ 的狄利克雷问题，边界条件 $u(x, y, 0) = 1$。
 \end{enumerate}
 
 \textbf{挑战题}
 
 \begin{enumerate}[resume]
-    \item 研究奇异摄动问题 $\varepsilon y'' + y' + y = 0$，$y(0) = 0$，$y(1) = 1$ 的边界层结构。
+    \item 推导矩形区域 $0 < x < a$，$0 < y < b$ 内拉普拉斯方程的格林函数\index{格林函数}。
+    
+    \item 研究格林函数\index{格林函数}在量子力学散射理论中的应用（提示：与散射振幅的关系）。
 \end{enumerate}
