@@ -1182,7 +1182,7 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2},
 \end{equation}
 从而
 \begin{equation}
-    |z_1z_2|=|z_1||z_2|,\qquad \arg(z_1z_2)=\arg z_1+\arg z_2.
+    |z_1z_2|=|z_1||z_2|,\qquad \arg(z_1z_2)\equiv \arg z_1+\arg z_2 \pmod{2\pi}.
 \end{equation}
 \end{dingli}
 
@@ -1192,16 +1192,57 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2},
 z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr)
 =r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)}.
 \]
-这就得到 \eqref{eq:complex-multiply-polar}。于是乘积的模等于模的乘积，乘积的辐角等于辐角的和。
+这就得到 \eqref{eq:complex-multiply-polar}。于是乘积的模等于模的乘积，而辐角等于原来两辐角之和；如果相差一个 $2\pi$ 的整数倍，我们仍把它看成同一方向。
 \end{proof}
 
+如果把公式 \eqref{eq:complex-multiply-polar} 放到复平面上看，图 \ref{fig:complex-multiplication} 的意思就很直观了：蓝色向量 $z_1$ 原来长度为 $r_1$，方向为 $\theta_1$；乘上 $z_2=r_2e^{\mathrm{i}\theta_2}$ 以后，长度变成原来的 $r_2$ 倍，所以从 $r_1$ 变成 $r_1r_2$；方向则再转过一个 $\theta_2$，于是从 $\theta_1$ 变成 $\theta_1+\theta_2$。这正是``模相乘，辐角相加''的几何含义。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+    \draw[->] (-0.6,0) -- (4.8,0) node[right] {$\operatorname{Re}z$};
+    \draw[->] (0,-0.6) -- (0,4.1) node[above] {$\operatorname{Im}z$};
+
+    \coordinate (Z1) at (30:2);
+    \coordinate (Z2) at (40:1.6);
+    \coordinate (P) at (70:3.2);
+
+    \draw[dashed, gray!65] (0,0) circle (2);
+    \draw[dashed, gray!65] (0,0) circle (3.2);
+
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z2);
+    \draw[->, very thick, purple!85!black, shorten >=2.5pt] (0,0) -- (P);
+
+    \fill[blue!80!black] (Z1) circle (2pt);
+    \fill[red!75!black] (Z2) circle (2pt);
+    \fill[purple!85!black] (P) circle (2pt);
+
+    \draw[thick, blue!80!black] (0.55,0) arc[start angle=0,end angle=30,radius=0.55];
+    \node[blue!80!black] at (0.83,0.22) {$\theta_1$};
+
+    \draw[thick, red!75!black] (30:0.95) arc[start angle=30,end angle=70,radius=0.95];
+    \node[red!75!black] at (1.03,0.78) {$\theta_2$};
+
+    \node[below right] at (Z1) {$z_1$};
+    \node[right] at (Z2) {$z_2$};
+    \node[above left] at (P) {$z_1z_2$};
+
+    \node[gray!70] at (150:2.15) {$|z_1|=r_1$};
+    \node[gray!70] at (125:3.35) {$|z_1z_2|=r_1r_2$};
+    \node[above left] at (0,0) {$O$};
+\end{tikzpicture}
+\caption{复数乘法对应``长度乘上去、方向转过去''}
+\label{fig:complex-multiplication}
+\end{figure}
+
 \begin{tishi}[乘法的几何意义]
-把一个复数乘上另一个复数$|z_2|$，本质上是在做两件事：
+把一个复数乘上另一个复数 $z_2$，本质上是在做两件事：
 \begin{enumerate}
     \item 把长度按比例 $|z_2|$ 放大或缩小；
     \item 把方向额外旋转 $\arg z_2$。
 \end{enumerate}
-所以，复数乘法就是``伸缩 + 旋转''的组合。
+图 \ref{fig:complex-multiplication} 画的正是这个过程。这里说``辐角相加''时，要理解为模 $2\pi$ 的意义下相加。所以，复数乘法就是``伸缩 + 旋转''的组合。
 \end{tishi}
 
 \begin{lizi}{用指数形式做乘法}{}
