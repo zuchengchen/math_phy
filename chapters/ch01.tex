@@ -2503,27 +2503,80 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \subsection{知识主线回顾}
 
 本章的主线可以概括为：
-\[
-\begin{aligned}
-    &\text{为什么要引入复数}
-    \Longrightarrow
-    \text{代数形式与四则运算}
-    \Longrightarrow
-    \text{复平面、模、辐角、共轭} \\
-    &\Longrightarrow
-    \text{三角形式与指数形式}
-    \Longrightarrow
-    \text{乘法、除法与旋转伸缩}
-    \Longrightarrow
-    \text{乘方、开方与单位根} \\
-    &\Longrightarrow
-    \text{扩充复平面与复球面}
-    \Longrightarrow
-    \text{物理中的振动、相位与叠加}.
-\end{aligned}
-\]
 
-这条主线的关键，不是多记几个公式，而是逐步建立一种新的眼光：\textbf{复数既可以按代数形式计算，也可以按几何图像理解；同一个对象，在不同表示下会把不同问题讲得更清楚。}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    node distance=1.1cm and 0.95cm,
+    foundation/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=mainblue!72!black,
+        fill=mainblue!4,
+        text width=3.3cm,
+        minimum height=0.95cm,
+        align=center,
+        font=\small
+    },
+    pivot/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=defteal!75!black,
+        fill=defteal!6,
+        text width=3.3cm,
+        minimum height=0.95cm,
+        align=center,
+        font=\small
+    },
+    branch/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=notebrown!78!black,
+        fill=notebrown!6,
+        text width=3.3cm,
+        minimum height=0.95cm,
+        align=center,
+        font=\small
+    },
+    outcome/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=physicsbrown!80!black,
+        fill=physicsbrown!6,
+        text width=3.5cm,
+        minimum height=0.95cm,
+        align=center,
+        font=\small
+    },
+    arrow/.style={-{Stealth[length=2.6mm]}, thick, draw=black!68}
+]
+\node[foundation] (a) {为什么要引入复数};
+\node[foundation, right=of a] (b) {代数形式与四则运算};
+\node[foundation, right=of b] (c) {复平面、模、辐角、共轭};
+
+\node[pivot, below=1.25cm of b] (d) {三角形式与指数形式};
+\node[branch, below left=1.25cm and 1.0cm of d] (e) {乘法、除法与旋转伸缩};
+\node[branch, below right=1.25cm and 1.0cm of d] (f) {乘方、开方与单位根};
+
+\node[outcome, below=1.35cm of d] (g) {扩充复平面与复球面};
+\node[outcome, below=1.15cm of g] (h) {物理中的振动、相位与叠加};
+
+\draw[arrow] (a) -- (b);
+\draw[arrow] (b) -- (c);
+\draw[arrow] (c.south) |- (d.east);
+\draw[arrow] (d) -- (e);
+\draw[arrow] (d) -- (f);
+\draw[arrow] (e.south) |- (g.west);
+\draw[arrow] (f.south) |- (g.east);
+\draw[arrow] (g) -- (h);
+\end{tikzpicture}
+\caption{第一章知识主线：从数系扩张出发，经由几何表示与形式切换，最终走向更完整的复平面视角和物理应用}
+\label{fig:ch01-summary-map}
+\end{figure}
+
+这张图里，前半段是在建立复数的基本语言：先说明为什么要引入复数，再掌握代数形式和复平面表示。真正的转折点是三角形式与指数形式，因为从这里开始，复数就不再只是``能算''，而开始显出它和方向、旋转、周期、相位之间的深层联系。
+
+再往后，两条线索分别展开：一条走向乘法、除法及其几何意义，另一条走向乘方、开方和单位根；最后它们又一起把我们带到扩充复平面、复球面以及物理应用中去。也就是说，本章不是几块零散内容的拼接，而是在一步一步把复数塑造成后面整门课程都要使用的统一语言。
 
 \subsection{本章最重要的结论}
 
