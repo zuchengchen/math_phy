@@ -561,7 +561,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \draw[->] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
         \draw[->] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
         \coordinate (O) at (0,0);
-        \coordinate (A) at (1.9,0.8);
+        \coordinate (A) at (2.5,0.8);
         \coordinate (B) at (3.2,2.45);
         \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
         \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (A);
@@ -573,7 +573,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
         \node[below right] at (A) {$A$};
         \node[above right] at (B) {$B$};
         \node[text=blue!80!black, rotate=25, font=\small] at ($(O)!0.5!(A)+(0.3,-0.1)$) {$z_1$};
-        \node[text=green!55!black, rotate=68, font=\small] at ($(A)!0.50!(B)+(0.10,-0.2)$) {$z_2$};
+        \node[text=green!55!black, rotate=80, font=\small] at ($(A)!0.50!(B)+(0.15,-0.2)$) {$z_2$};
         \node[text=red!75!black, rotate=37, font=\small] at ($(O)!0.5!(B)+(0.0,+0.28)$) {$z_1+z_2$};
         \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
@@ -1767,7 +1767,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \coordinate (P3) at ($(O)+(-0.41000,-1.34234)$);
     \fill[blue] (P1) circle (2pt) node[left] {$P_1$};
     \fill[blue] (P2) circle (2pt) node[left] {$P_2$};
-    \fill[blue] (P3) circle (2pt) node[above right] {$P_3$};
+    \fill[blue] (P3) circle (2pt) node[left] {$P_3$};
 
     % image points on plane line
     \coordinate (Z1) at (-3.29320,-0.69398);
