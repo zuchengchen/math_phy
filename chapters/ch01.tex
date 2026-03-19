@@ -144,49 +144,42 @@ z_4=0
 
 \subsection{复数的四则运算}
 
-前面我们已经知道，复数可以写成
-\[
-z=x+\mathrm{i}y.
-\]
-但``会写出来''还不够。后面无论是讨论复平面上的几何意义，还是把复数真正用于物理计算，我们都必须先弄清楚两个复数怎样相加、相减、相乘、相除。这里最重要的原则是：\textbf{每次运算结束后，都要把结果整理成}
-\[
-x+\mathrm{i}y
-\]
-\textbf{这样的标准形式}，这样实部和虚部才清楚，后续讨论也才方便。
+前面我们已经知道，复数可以写成代数形式 $z=x+\mathrm{i}y$。但``会写出来''还不够。后面无论是讨论复平面上的几何意义，还是把复数真正用于物理计算，我们都必须先弄清楚两个复数怎样相加、相减、相乘、相除。这里最重要的原则是：\textbf{每次运算结束后，都要把结果整理成标准形式 $x+\mathrm{i}y$}，这样实部和虚部才清楚，后续讨论也才方便。
 
 设有两个复数，分别为
 \[
 z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \]
 
-加法（addition）和减法（subtraction）最自然：实部与实部分别相加减，虚部与虚部分别相加减，因此
+\noindent\textbf{加法（addition）与减法（subtraction）} 实部与实部分别相加减，虚部与虚部分别相加减，因此
 \begin{align}
     z_1+z_2&=(x_1+x_2)+\mathrm{i}(y_1+y_2),\label{eq:complex-addition-algebraic}\\
     z_1-z_2&=(x_1-x_2)+\mathrm{i}(y_1-y_2).\label{eq:complex-subtraction-algebraic}
 \end{align}
 
+\Needspace{10\baselineskip}
 \begin{lizi}{复数的加法与减法}{}
 计算
 \[
-(2+3\mathrm{i})+(-1+4\mathrm{i}),\qquad (2+3\mathrm{i})-(-1+4\mathrm{i}).
+\begin{aligned}
+    &(2+3\mathrm{i})+(-1+4\mathrm{i}),\\
+    &(2+3\mathrm{i})-(-1+4\mathrm{i}).
+\end{aligned}
 \]
 
 \begin{jie}
 分别对实部、虚部做运算即可：
-\[
-(2+3\mathrm{i})+(-1+4\mathrm{i})=(2-1)+\mathrm{i}(3+4)=1+7\mathrm{i},
-\]
-\[
-(2+3\mathrm{i})-(-1+4\mathrm{i})=(2+1)+\mathrm{i}(3-4)=3-\mathrm{i}.
-\]
+\begin{align*}
+    (2+3\mathrm{i})+(-1+4\mathrm{i})
+    &=(2-1)+\mathrm{i}(3+4)=1+7\mathrm{i},\\
+    (2+3\mathrm{i})-(-1+4\mathrm{i})
+    &=(2+1)+\mathrm{i}(3-4)=3-\mathrm{i}.
+\end{align*}
 \end{jie}
 \end{lizi}
 
-乘法（multiplication）就要更小心一些。它不能简单理解成``实部乘实部，虚部乘虚部''，而必须按照普通代数的展开规则来做，并在最后用
-\[
-\mathrm{i}^2=-1
-\]
-化简：
+\medskip
+\noindent\textbf{乘法（multiplication）} 要更小心一些。它不能简单理解成``实部乘实部，虚部乘虚部''，而必须按照普通代数的展开规则来做，并在最后用 $\mathrm{i}^2=-1$ 化简：
 \begin{align*}
     z_1z_2
     &=(x_1+\mathrm{i}y_1)(x_2+\mathrm{i}y_2)\\
@@ -198,6 +191,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
     z_1z_2=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
 \end{equation}
 
+\Needspace{10\baselineskip}
 \begin{lizi}{复数的乘法}{}
 计算
 \[
@@ -214,7 +208,8 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{jie}
 \end{lizi}
 
-除法（division）更需要把步骤看清楚。若 $z_2\neq 0$，我们想把
+\medskip
+\noindent\textbf{除法（division）} 更需要把步骤看清楚。若 $z_2\neq 0$，我们想把
 \[
 \frac{z_1}{z_2}=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}
 \]
@@ -246,6 +241,7 @@ x_2-\mathrm{i}y_2.
     =\frac{(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2)}{x_2^2+y_2^2}.
 \end{equation}
 
+\Needspace{11\baselineskip}
 \begin{lizi}{复数的除法}{}
 计算
 \[
@@ -265,6 +261,7 @@ x_2-\mathrm{i}y_2.
 \end{jie}
 \end{lizi}
 
+\Needspace{12\baselineskip}
 \begin{jinshi}[乘法与除法最容易错的地方]
 \begin{itemize}
     \item 不要把乘法误写成``实部乘实部，虚部乘虚部''，因为展开后一定会出现交叉项。
