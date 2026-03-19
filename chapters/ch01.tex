@@ -1707,24 +1707,24 @@ F(w)=f\!\left(\frac{1}{w}\right),
 \centering
 \begin{tikzpicture}[scale=0.95]
     % plane
-    \coordinate (A) at (-5.4,-1.55);
-    \coordinate (B) at (3.6,-1.55);
-    \coordinate (C) at (5.2,-0.2);
-    \coordinate (D) at (-3.8,-0.2);
+    \coordinate (A) at (-5.6,-1.55);
+    \coordinate (B) at (3.4,-1.55);
+    \coordinate (C) at (5.3,0.30);
+    \coordinate (D) at (-3.7,0.30);
     \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
     \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
     \node[gray!70] at (4.7,-0.55) {复平面};
 
     % image line on plane
-    \draw[orange!90!black, line width=1.4pt] (-5.0,-1.25) -- (2.3,-0.25);
-    \node[orange!90!black, below] at (-1.4,-0.76) {$\ell$};
+    \draw[orange!90!black, line width=1.4pt] (-4.8,-1.05) -- (2.4,0.05);
+    \node[orange!90!black, below] at (-1.2,-0.55) {$\ell$};
 
     % sphere
     \coordinate (O) at (0,1.35);
     \fill[gray!10] (O) circle (1.55);
     \draw[gray!80!black, thick] (O) circle (1.55);
-    \draw[gray!70, thin] ($(O)+(-1.1,0)$) arc[start angle=180,end angle=360,x radius=1.1,y radius=0.38];
-    \draw[gray!70, thin, dashed] ($(O)+(1.1,0)$) arc[start angle=0,end angle=180,x radius=1.1,y radius=0.38];
+    \draw[gray!70, thin] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
+    \draw[gray!70, thin, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
     \draw[gray!70, thin] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.42,y radius=1.55];
     \draw[gray!70, thin, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=90,x radius=0.42,y radius=1.55];
 
@@ -1748,9 +1748,9 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \fill[black] (P3) circle (2pt) node[left] {$P_3$};
 
     % image points on plane line
-    \coordinate (Z1) at (-3.63082,-1.06244);
-    \coordinate (Z2) at (-1.35219,-0.75030);
-    \coordinate (Z3) at (-0.50091,-0.63369);
+    \coordinate (Z1) at (-3.42725,-0.84027);
+    \coordinate (Z2) at (-1.26304,-0.50963);
+    \coordinate (Z3) at (-0.46607,-0.38787);
     \fill[black] (Z1) circle (2pt);
     \fill[black] (Z2) circle (2pt);
     \fill[black] (Z3) circle (2pt);
