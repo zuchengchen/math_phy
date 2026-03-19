@@ -443,34 +443,40 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[x=0.8cm,y=1cm]
-    \draw[->, thick] (0,0) -- (15.8,0) node[right] {时间};
+\begin{tikzpicture}[x=0.86cm,y=1cm]
+    \draw[mp axis] (0.2,0) -- (15.6,0) node[mp label, right] {时间};
 
-    \fill[blue!75!black] (1.0,0) circle (2.2pt);
-    \draw[gray!70] (1.0,0) -- (1.0,1.15);
-    \node[above, align=center, text width=2.5cm] at (1.0,1.15) {\small 1545\\卡尔达诺发表\\三次方程公式};
+    \fill[figblue] (0.9,0) circle (2.3pt);
+    \draw[mp helper] (0.9,0) -- (0.9,1.35);
+    \node[mp card, mp small, text width=2.45cm, anchor=south] at (0.9,1.48)
+        {{\bfseries 1545}\\卡尔达诺发表\\三次方程公式};
 
-    \fill[blue!75!black] (4.0,0) circle (2.2pt);
-    \draw[gray!70] (4.0,0) -- (4.0,-1.25);
-    \node[below, align=center, text width=2.7cm] at (4.0,-1.25) {\small 1572\\邦贝利系统整理\\复数运算规则};
+    \fill[figblue] (3.7,0) circle (2.3pt);
+    \draw[mp helper] (3.7,0) -- (3.7,-1.45);
+    \node[mp card, mp small, text width=2.75cm, anchor=north] at (3.7,-1.58)
+        {{\bfseries 1572}\\邦贝利系统整理\\复数运算规则};
 
-    \fill[blue!75!black] (7.0,0) circle (2.2pt);
-    \draw[gray!70] (7.0,0) -- (7.0,1.15);
-    \node[above, align=center, text width=2.5cm] at (7.0,1.15) {\small 1637\\笛卡尔提出\\``虚数''名称};
+    \fill[figblue] (6.6,0) circle (2.3pt);
+    \draw[mp helper] (6.6,0) -- (6.6,1.35);
+    \node[mp card, mp small, text width=2.45cm, anchor=south] at (6.6,1.48)
+        {{\bfseries 1637}\\笛卡尔提出\\``虚数''名称};
 
-    \fill[blue!75!black] (10.0,0) circle (2.2pt);
-    \draw[gray!70] (10.0,0) -- (10.0,-1.25);
-    \node[below, align=center, text width=2.8cm] at (10.0,-1.25) {\small 18 世纪\\欧拉推广\\$\mathrm{i}$ 的记号};
+    \fill[figblue] (9.5,0) circle (2.3pt);
+    \draw[mp helper] (9.5,0) -- (9.5,-1.45);
+    \node[mp card, mp small, text width=2.65cm, anchor=north] at (9.5,-1.58)
+        {{\bfseries 18 世纪}\\欧拉推广\\$\mathrm{i}$ 的记号};
 
-    \fill[blue!75!black] (13.0,0) circle (2.2pt);
-    \draw[gray!70] (13.0,0) -- (13.0,1.15);
-    \node[above, align=center, text width=2.9cm] at (13.0,1.15) {\small 1799--1806\\韦塞尔、阿甘德\\推进几何表示};
+    \fill[figblue] (12.4,0) circle (2.3pt);
+    \draw[mp helper] (12.4,0) -- (12.4,1.35);
+    \node[mp card, mp small, text width=2.85cm, anchor=south] at (12.4,1.48)
+        {{\bfseries 1799--1806}\\韦塞尔、阿甘德\\推进几何表示};
 
-    \fill[blue!75!black] (15.2,0) circle (2.2pt);
-    \draw[gray!70] (15.2,0) -- (15.2,-1.25);
-    \node[below, align=center, text width=3.1cm] at (15.2,-1.25) {\small 19 世纪\\高斯、柯西、黎曼\\推动理论成熟与应用};
+    \fill[figblue] (14.6,0) circle (2.3pt);
+    \draw[mp helper] (14.6,0) -- (14.6,-1.45);
+    \node[mp card, mp small, text width=3.05cm, anchor=north] at (14.6,-1.58)
+        {{\bfseries 19 世纪}\\高斯、柯西、黎曼\\推动理论成熟与应用};
 \end{tikzpicture}
-\caption{复数从三次方程问题走向几何化与现代应用的大致历史线索}
+\caption{复数发展的大致历史线索}
 \label{fig:complex-history-timeline}
 \end{figure}
 
@@ -496,18 +502,18 @@ z=x+\mathrm{i}y.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.15]
-    \draw[->, thick] (-0.6,0) -- (4.3,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-0.6) -- (0,3.4) node[above] {$\operatorname{Im}z$};
+\begin{tikzpicture}[scale=1.12]
+    \draw[mp axis] (-0.7,0) -- (4.4,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.7) -- (0,3.5) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
-    \fill[blue!80!black] (Z) circle (2pt);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
-    \draw[dashed, gray] (Z) -- (3,0);
-    \draw[dashed, gray] (Z) -- (0,2);
-    \node[above right] at (Z) {$z=x+\mathrm{i}y$};
-    \node[below] at (3,0) {$x$};
-    \node[left] at (0,2) {$y$};
-    \node[below left] at (0,0) {$O$};
+    \draw[mp helper] (Z) -- (3,0);
+    \draw[mp helper] (Z) -- (0,2);
+    \draw[mp vector] (0,0) -- (Z);
+    \node[mp point] at (Z) {};
+    \node[mp label, above right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[mp label, below] at (3,0) {$x$};
+    \node[mp label, left] at (0,2) {$y$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数在复平面上的点表示与向量表示}
 \label{fig:complex-plane-basic}
@@ -591,18 +597,18 @@ z=x+\mathrm{i}y,
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.1]
-    \draw[->, thick] (-0.6,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-2.7) -- (0,2.7) node[above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (4.2,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.8) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (Z) at (2.8,1.8);
     \coordinate (ZB) at (2.8,-1.8);
-    \fill[blue!80!black] (Z) circle (2pt);
-    \fill[red!75!black] (ZB) circle (2pt);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (ZB);
-    \draw[dashed, gray] (Z) -- (ZB);
-    \node[above right] at (Z) {$z=x+\mathrm{i}y$};
-    \node[below right] at (ZB) {$\bar z=x-\mathrm{i}y$};
-    \node[below left] at (0,0) {$O$};
+    \draw[mp helper] (Z) -- (ZB);
+    \draw[mp vector] (0,0) -- (Z);
+    \draw[mp vector d] (0,0) -- (ZB);
+    \node[mp point] at (Z) {};
+    \node[mp point d] at (ZB) {};
+    \node[mp label, above right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[mp label, below right] at (ZB) {$\bar z=x-\mathrm{i}y$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{共轭复数关于实轴对称}
 \label{fig:complex-conjugate}
@@ -683,45 +689,45 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \centering
 \begin{tikzpicture}[scale=1.0]
     \begin{scope}
-        \draw[->] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
-        \draw[->] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
+        \draw[mp thin axis] (-0.7,0) -- (4.5,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp thin axis] (0,-0.7) -- (0,3.6) node[mp label, above] {$\operatorname{Im}z$};
         \coordinate (O) at (0,0);
         \coordinate (A) at (2.5,0.8);
         \coordinate (B) at (3.2,2.45);
-        \draw[gray!65, dashed] (O) -- (A) -- (B) -- cycle;
-        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (A);
-        \draw[->, thick, green!55!black, shorten >=2.5pt] (A) -- (B);
-        \draw[->, thick, red!75!black, shorten >=2.5pt] (O) -- (B);
-        \fill[blue!80!black] (A) circle (2pt);
-        \fill[red!75!black] (B) circle (2pt);
-        \node[below left] at (O) {$O$};
-        \node[below right] at (A) {$A$};
-        \node[above right] at (B) {$B$};
-        \node[text=blue!80!black, rotate=25, font=\small] at ($(O)!0.5!(A)+(0.3,-0.1)$) {$z_1$};
-        \node[text=green!55!black, rotate=80, font=\small] at ($(A)!0.50!(B)+(0.15,-0.2)$) {$z_2$};
-        \node[text=red!75!black, rotate=37, font=\small] at ($(O)!0.5!(B)+(0.0,+0.28)$) {$z_1+z_2$};
-        \node[below] at (1.7,-0.85) {$|z_1+z_2|\le |z_1|+|z_2|$};
+        \draw[mp helper] (O) -- (A) -- (B) -- cycle;
+        \draw[mp vector] (O) -- (A);
+        \draw[mp vector b] (A) -- (B);
+        \draw[mp vector c] (O) -- (B);
+        \node[mp point] at (A) {};
+        \node[mp point c] at (B) {};
+        \node[mp label, below left] at (O) {$O$};
+        \node[mp label, below right] at (A) {$A$};
+        \node[mp label, above right] at (B) {$B$};
+        \node[mp small, text=figblue, rotate=25] at ($(O)!0.5!(A)+(0.32,-0.1)$) {$z_1$};
+        \node[mp small, text=figteal, rotate=80] at ($(A)!0.52!(B)+(0.16,-0.18)$) {$z_2$};
+        \node[mp small, text=figpurple, rotate=37] at ($(O)!0.5!(B)+(0.0,0.3)$) {$z_1+z_2$};
+        \node[mp small] at (1.7,-0.95) {$|z_1+z_2|\le |z_1|+|z_2|$};
     \end{scope}
 
     \begin{scope}[xshift=7.2cm]
-        \draw[->] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
-        \draw[->] (0,-0.6) -- (0,3.5) node[above] {$\operatorname{Im}z$};
+        \draw[mp thin axis] (-0.7,0) -- (4.5,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp thin axis] (0,-0.7) -- (0,3.6) node[mp label, above] {$\operatorname{Im}z$};
         \coordinate (O2) at (0,0);
         \coordinate (P) at (3.1,1.0);
         \coordinate (Q) at (1.35,2.45);
-        \draw[gray!65, dashed] (O2) -- (P) -- (Q) -- cycle;
-        \draw[->, thick, blue!80!black, shorten >=2.5pt] (O2) -- (P);
-        \draw[->, thick, green!55!black, shorten >=2.5pt] (O2) -- (Q);
-        \draw[->, thick, red!75!black, shorten >=2.5pt] (Q) -- (P);
-        \fill[blue!80!black] (P) circle (2pt);
-        \fill[green!55!black] (Q) circle (2pt);
-        \node[below left] at (O2) {$O$};
-        \node[below right] at (P) {$P$};
-        \node[above left] at (Q) {$Q$};
-        \node[text=blue!80!black, rotate=28, font=\small] at ($(O2)!0.5!(P)+(0.08,-0.22)$) {$z_1$};
-        \node[text=green!55!black, rotate=80, font=\small] at ($(O2)!0.58!(Q)+(-0.16,0.04)$) {$z_2$};
-        \node[text=red!75!black, rotate=-38, font=\small] at ($(Q)!0.54!(P)+(0.14,0.16)$) {$z_1-z_2$};
-        \node[below] at (1.7,-0.85) {$\bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|$};
+        \draw[mp helper] (O2) -- (P) -- (Q) -- cycle;
+        \draw[mp vector] (O2) -- (P);
+        \draw[mp vector b] (O2) -- (Q);
+        \draw[mp vector d] (Q) -- (P);
+        \node[mp point] at (P) {};
+        \node[mp point b] at (Q) {};
+        \node[mp label, below left] at (O2) {$O$};
+        \node[mp label, below right] at (P) {$P$};
+        \node[mp label, above left] at (Q) {$Q$};
+        \node[mp small, text=figblue, rotate=28] at ($(O2)!0.5!(P)+(0.08,-0.22)$) {$z_1$};
+        \node[mp small, text=figteal, rotate=80] at ($(O2)!0.58!(Q)+(-0.16,0.04)$) {$z_2$};
+        \node[mp small, text=figred, rotate=-38] at ($(Q)!0.54!(P)+(0.14,0.16)$) {$z_1-z_2$};
+        \node[mp small] at (1.7,-0.95) {$\bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|$};
     \end{scope}
 \end{tikzpicture}
 \caption{三角不等式与反三角不等式的几何图像}
@@ -824,14 +830,15 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[->, thick] (-0.8,0) -- (4.1,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, thick] (0,-0.8) -- (0,3.2) node[above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.8,0) -- (4.2,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.8) -- (0,3.3) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- node[midway, above, sloped, text=blue!80!black] {$r=|z|$} (Z);
-    \fill[blue!80!black] (Z) circle (2pt) node[above right] {$z$};
-    \draw[thick, green!60!black] (1,0) arc[start angle=0,end angle=33.69,radius=1];
-    \node[green!50!black] at (1.45,0.42) {$\theta$};
-    \node[below left] at (0,0) {$O$};
+    \draw[mp vector] (0,0) -- node[midway, above, sloped, text=figblue, fill=white, inner sep=1pt] {$r=|z|$} (Z);
+    \node[mp point] at (Z) {};
+    \node[mp label, above right] at (Z) {$z$};
+    \draw[mp angle] (0.95,0) arc[start angle=0,end angle=33.69,radius=0.95];
+    \node[mp label, text=figbrown] at (1.35,0.42) {$\theta$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数的模$r=|z|$与辐角$\theta$}
 \label{fig:modulus-argument}
@@ -893,39 +900,39 @@ e^{\mathrm{i}(\theta+2k\pi)/n}=e^{\mathrm{i}\theta/n}e^{2k\pi \mathrm{i}/n},
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[->, gray] (-4,0) -- (4,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, gray] (0,-2.6) -- (0,2.6) node[above] {$\operatorname{Im}z$};
+    \draw[mp thin axis] (-4.1,0) -- (4.1,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp thin axis] (0,-2.7) -- (0,2.7) node[mp label, above] {$\operatorname{Im}z$};
 
-    \node[gray] at (3,1.7) {第一象限};
-    \node[gray] at (-3,1.7) {第二象限};
-    \node[gray] at (-3,-1.8) {第三象限};
-    \node[gray] at (3,-1.8) {第四象限};
+    \node[mp small, text=black!42] at (3,1.7) {第一象限};
+    \node[mp small, text=black!42] at (-3,1.7) {第二象限};
+    \node[mp small, text=black!42] at (-3,-1.8) {第三象限};
+    \node[mp small, text=black!42] at (3,-1.8) {第四象限};
 
     \coordinate (Z1) at (1,1.732);
     \coordinate (Z2) at (-1,1);
     \coordinate (Z3) at (0,-2);
 
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z2);
-    \draw[->, thick, green!60!black, shorten >=2.5pt] (0,0) -- (Z3);
+    \draw[mp vector] (0,0) -- (Z1);
+    \draw[mp vector d] (0,0) -- (Z2);
+    \draw[mp vector b] (0,0) -- (Z3);
 
-    \fill[blue!80!black] (Z1) circle (2pt);
-    \fill[red!75!black] (Z2) circle (2pt);
-    \fill[green!60!black] (Z3) circle (2pt);
+    \node[mp point] at (Z1) {};
+    \node[mp point d] at (Z2) {};
+    \node[mp point b] at (Z3) {};
 
-    \node[above right, text=blue!80!black] at (Z1) {$z_1$};
-    \node[above left, text=red!75!black] at (Z2) {$z_2$};
-    \node[right, text=green!60!black] at (Z3) {$z_3$};
-    \node[below left] at (0,0) {$O$};
+    \node[mp label, above right, text=figblue] at (Z1) {$z_1$};
+    \node[mp label, above left, text=figred] at (Z2) {$z_2$};
+    \node[mp label, right, text=figteal] at (Z3) {$z_3$};
+    \node[mp label, below left] at (0,0) {$O$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, blue!60!black] (0.9,0) arc[start angle=0,end angle=60,radius=0.9];
-    \node[blue!60!black] at (1,0.5) {$\frac{\pi}{3}$};
+    \draw[mp angle, -{Stealth[length=1.9mm,width=1.4mm]}] (0.92,0) arc[start angle=0,end angle=60,radius=0.92];
+    \node[mp label, text=figbrown] at (1.02,0.53) {$\frac{\pi}{3}$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, red!75!black] (0.6,0) arc[start angle=0,end angle=135,radius=0.6];
-    \node[red!75!black] at (-0.3,0.9) {$\frac{3\pi}{4}$};
+    \draw[mp angle, -{Stealth[length=1.9mm,width=1.4mm]}] (0.62,0) arc[start angle=0,end angle=135,radius=0.62];
+    \node[mp label, text=figbrown] at (-0.32,0.92) {$\frac{3\pi}{4}$};
 
-    \draw[-{Stealth[length=1.8mm]}, thick, green!60!black] (0.7,0) arc[start angle=0,end angle=-90,radius=0.7];
-    \node[green!60!black] at (0.75,-0.75) {$-\frac{\pi}{2}$};
+    \draw[mp angle, -{Stealth[length=1.9mm,width=1.4mm]}] (0.72,0) arc[start angle=0,end angle=-90,radius=0.72];
+    \node[mp label, text=figbrown] at (0.8,-0.8) {$-\frac{\pi}{2}$};
 \end{tikzpicture}
 \caption{三个复数所在的象限与对应的主辐角}
 \label{fig:arg-example-quadrants}
@@ -997,29 +1004,29 @@ r=|z|,\qquad \theta\in \arg z.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.1]
-    \draw[->] (-0.7,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
-    \draw[->] (0,-0.7) -- (0,3.4) node[above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.8,0) -- (4.5,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.8) -- (0,3.5) node[mp label, above] {$\operatorname{Im}z$};
 
     \coordinate (O) at (0,0);
     \coordinate (X) at (3,0);
     \coordinate (Z) at (3,2);
 
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (O) -- (Z);
-    \fill[blue!80!black] (Z) circle (2pt);
+    \draw[mp vector] (O) -- (Z);
+    \node[mp point] at (Z) {};
 
-    \draw[dashed, gray] (Z) -- (X);
-    \draw[dashed, gray] (X) -- (O);
+    \draw[mp helper] (Z) -- (X);
+    \draw[mp helper] (X) -- (O);
 
-    \draw[thick, green!60!black] (0.8,0) arc[start angle=0,end angle=33.69,radius=0.8];
-    \node[green!50!black] at (1.03,0.33) {$\theta$};
+    \draw[mp angle] (0.82,0) arc[start angle=0,end angle=33.69,radius=0.82];
+    \node[mp label, text=figbrown] at (1.05,0.35) {$\theta$};
 
-    \draw[gray!70, thick] (2.78,0) -- (2.78,0.22) -- (3,0.22);
+    \draw[mp soft] (2.78,0) -- (2.78,0.22) -- (3,0.22);
 
-    \node[below] at ($(O)!0.5!(X)$) {$x$};
-    \node[right] at ($(X)!0.5!(Z)$) {$y$};
-    \node[above left, text=blue!80!black] at ($(O)!0.52!(Z)$) {$r$};
-    \node[above right] at (Z) {$z=x+\mathrm{i}y$};
-    \node[below left] at (O) {$O$};
+    \node[mp label, below] at ($(O)!0.5!(X)$) {$x$};
+    \node[mp label, right] at ($(X)!0.5!(Z)$) {$y$};
+    \node[mp label, above left, text=figblue] at ($(O)!0.52!(Z)$) {$r$};
+    \node[mp label, above right] at (Z) {$z=x+\mathrm{i}y$};
+    \node[mp label, below left] at (O) {$O$};
 \end{tikzpicture}
 \caption{复数的直角坐标与极坐标关系}
 \label{fig:cartesian-polar-relation}
@@ -1167,16 +1174,16 @@ z=re^{\mathrm{i}\theta}
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.25]
-    \draw[->, gray] (-1.5,0) -- (1.7,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, gray] (0,-1.4) -- (0,1.5) node[above] {$\operatorname{Im}z$};
-    \draw[thick, blue] (0,0) circle (1);
+    \draw[mp axis] (-1.55,0) -- (1.75,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-1.45) -- (0,1.55) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp circle] (0,0) circle (1);
     \coordinate (Z) at ({cos(50)},{sin(50)});
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z);
-    \fill[red!75!black] (Z) circle (2pt);
-    \draw[thick, green!60!black] (0.35,0) arc[start angle=0,end angle=50,radius=0.35];
-    \node[green!50!black] at (0.55,0.23) {$\theta$};
-    \node[above right] at (Z) {$e^{\mathrm{i}\theta}$};
-    \node[below left] at (0,0) {$O$};
+    \draw[mp vector d] (0,0) -- (Z);
+    \node[mp point d] at (Z) {};
+    \draw[mp angle] (0.36,0) arc[start angle=0,end angle=50,radius=0.36];
+    \node[mp label, text=figbrown] at (0.57,0.24) {$\theta$};
+    \node[mp label, above right] at (Z) {$e^{\mathrm{i}\theta}$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{单位圆上的 $e^{\mathrm{i}\theta}$：它给出方向，乘上 $r$ 后得到一般的 $re^{\mathrm{i}\theta}$}
 \label{fig:euler-unit-circle}
@@ -1291,19 +1298,23 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[->] (-0.6,0) -- (5.5,0) node[right] {$\operatorname{Re}z$};
-    \draw[->] (0,-0.6) -- (0,4) node[above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (5.6,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.7) -- (0,4.1) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (A) at (2,1);
     \coordinate (B) at (1.5,2);
     \coordinate (C) at (3.5,3);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (A) node[midway, below right] {$z_1$};
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (B) node[midway, left] {$z_2$};
-    \draw[->, thick, purple!85!black, shorten >=2.5pt] (0,0) -- node[midway, above, sloped, fill=white, inner sep=1pt] {$z_1+z_2$} (C);
-    \draw[dashed, gray] (A) -- (C);
-    \draw[dashed, gray] (B) -- (C);
-    \fill[blue!80!black] (A) circle (2pt);
-    \fill[red!75!black] (B) circle (2pt);
-    \fill[purple!85!black] (C) circle (2pt);
+    \draw[mp vector] (0,0) -- (A);
+    \draw[mp vector b] (0,0) -- (B);
+    \draw[mp vector c] (0,0) -- (C);
+    \draw[mp helper] (A) -- (C);
+    \draw[mp helper] (B) -- (C);
+    \node[mp point] at (A) {};
+    \node[mp point b] at (B) {};
+    \node[mp point c] at (C) {};
+    \node[mp label, text=figblue] at ($(0,0)!0.52!(A)+(0.22,-0.1)$) {$z_1$};
+    \node[mp label, text=figteal] at ($(0,0)!0.5!(B)+(-0.24,0.04)$) {$z_2$};
+    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at ($(0,0)!0.55!(C)+(0.05,0.18)$) {$z_1+z_2$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数加法对应平行四边形法则}
 \label{fig:complex-addition}
@@ -1359,35 +1370,35 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[->, gray!70] (-0.6,0) -- (4.8,0) node[right, black] {$\operatorname{Re}z$};
-    \draw[->, gray!70] (0,-0.6) -- (0,4.1) node[above, black] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (4.9,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.7) -- (0,4.2) node[mp label, above] {$\operatorname{Im}z$};
 
     \coordinate (Z1) at (30:2);
     \coordinate (Z2) at (40:1.6);
     \coordinate (P) at (70:3.2);
 
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
-    \draw[->, thick, orange!85!black, shorten >=2.5pt] (0,0) -- (Z2);
-    \draw[->, very thick, purple!85!black, shorten >=2.5pt] (0,0) -- (P);
+    \draw[mp vector] (0,0) -- (Z1);
+    \draw[mp vector b] (0,0) -- (Z2);
+    \draw[mp vector c] (0,0) -- (P);
 
-    \fill[blue!80!black] (Z1) circle (2pt);
-    \fill[orange!85!black] (Z2) circle (2pt);
-    \fill[purple!85!black] (P) circle (2pt);
+    \node[mp point] at (Z1) {};
+    \node[mp point b] at (Z2) {};
+    \node[mp point c] at (P) {};
 
-    \draw[thick, blue!80!black] (0.55,0) arc[start angle=0,end angle=30,radius=0.55];
-    \node[blue!80!black] at (0.83,0.22) {$\theta_1$};
+    \draw[mp angle] (0.55,0) arc[start angle=0,end angle=30,radius=0.55];
+    \node[mp label, text=figbrown] at (0.83,0.23) {$\theta_1$};
 
-    \draw[thick, orange!85!black] (30:0.95) arc[start angle=30,end angle=70,radius=0.95];
-    \node[orange!85!black] at (1.03,0.78) {$\theta_2$};
+    \draw[mp angle] (30:0.95) arc[start angle=30,end angle=70,radius=0.95];
+    \node[mp label, text=figbrown] at (1.06,0.8) {$\theta_2$};
 
-    \node[below right, blue!80!black] at (Z1) {$z_1$};
-    \node[right, orange!85!black] at (Z2) {$z_2$};
-    \node[above left, purple!85!black] at (P) {$z_1z_2$};
+    \node[mp label, below right, text=figblue] at (Z1) {$z_1$};
+    \node[mp label, right, text=figteal] at (Z2) {$z_2$};
+    \node[mp label, above left, text=figpurple] at (P) {$z_1z_2$};
 
-    \node[blue!80!black] at (145:1.95) {$|z_1|=r_1$};
-    \node[orange!85!black] at (28:1.25) {$|z_2|=r_2$};
-    \node[purple!85!black] at (112:3.15) {$|z_1z_2|=r_1r_2$};
-    \node[above left] at (0,0) {$O$};
+    \node[mp label, text=figblue] at (145:1.95) {$|z_1|=r_1$};
+    \node[mp label, text=figteal] at (28:1.25) {$|z_2|=r_2$};
+    \node[mp label, text=figpurple] at (112:3.15) {$|z_1z_2|=r_1r_2$};
+    \node[mp label, above left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数乘法对应``长度乘上去、方向转过去''}
 \label{fig:complex-multiplication}
@@ -1459,38 +1470,38 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[->, gray!70] (-0.7,0) -- (4.9,0) node[right, black] {$\operatorname{Re}z$};
-    \draw[->, gray!70] (0,-0.7) -- (0,4.4) node[above, black] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (4.9,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-0.7) -- (0,4.4) node[mp label, above] {$\operatorname{Im}z$};
 
     \coordinate (Q) at (30:2.1);
     \coordinate (Z2) at (42:1.55);
     \coordinate (Z1) at (72:3.1);
 
-    \draw[->, thick, purple!85!black, shorten >=2.5pt] (0,0) -- (Q);
-    \draw[->, thick, orange!85!black, shorten >=2.5pt] (0,0) -- (Z2);
-    \draw[->, very thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
+    \draw[mp vector c] (0,0) -- (Q);
+    \draw[mp vector b] (0,0) -- (Z2);
+    \draw[mp vector] (0,0) -- (Z1);
 
-    \fill[purple!85!black] (Q) circle (2pt);
-    \fill[orange!85!black] (Z2) circle (2pt);
-    \fill[blue!80!black] (Z1) circle (2pt);
+    \node[mp point c] at (Q) {};
+    \node[mp point b] at (Z2) {};
+    \node[mp point] at (Z1) {};
 
-    \draw[thick, purple!85!black] (0.65,0) arc[start angle=0,end angle=30,radius=0.65];
-    \node[purple!85!black] at (0.95,0.23) {$\theta_1-\theta_2$};
+    \draw[mp angle] (0.65,0) arc[start angle=0,end angle=30,radius=0.65];
+    \node[mp label, text=figbrown] at (0.98,0.22) {$\theta_1-\theta_2$};
 
-    \draw[thick, orange!85!black] (1.0,0) arc[start angle=0,end angle=42,radius=1.0];
-    \node[orange!85!black] at (1.34,0.55) {$\theta_2$};
+    \draw[mp angle] (1.0,0) arc[start angle=0,end angle=42,radius=1.0];
+    \node[mp label, text=figbrown] at (1.36,0.56) {$\theta_2$};
 
-    \draw[thick, blue!80!black] (1.35,0) arc[start angle=0,end angle=72,radius=1.35];
-    \node[blue!80!black] at (1.1,1.18) {$\theta_1$};
+    \draw[mp angle] (1.35,0) arc[start angle=0,end angle=72,radius=1.35];
+    \node[mp label, text=figbrown] at (1.08,1.18) {$\theta_1$};
 
-    \node[right, purple!85!black] at (Q) {$\dfrac{z_1}{z_2}$};
-    \node[right, orange!85!black] at (Z2) {$z_2$};
-    \node[above left, blue!80!black] at (Z1) {$z_1$};
+    \node[mp label, right, text=figpurple] at (Q) {$\dfrac{z_1}{z_2}$};
+    \node[mp label, right, text=figteal] at (Z2) {$z_2$};
+    \node[mp label, above left, text=figblue] at (Z1) {$z_1$};
 
-    \node[purple!85!black] at (145:1.55) {$\left|\dfrac{z_1}{z_2}\right|=\dfrac{r_1}{r_2}$};
-    \node[orange!85!black] at (20:1.1) {$|z_2|=r_2$};
-    \node[blue!80!black] at (104:2.9) {$|z_1|=r_1$};
-    \node[above left] at (0,0) {$O$};
+    \node[mp label, text=figpurple] at (145:1.55) {$\left|\dfrac{z_1}{z_2}\right|=\dfrac{r_1}{r_2}$};
+    \node[mp label, text=figteal] at (20:1.1) {$|z_2|=r_2$};
+    \node[mp label, text=figblue] at (104:2.9) {$|z_1|=r_1$};
+    \node[mp label, above left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数除法对应``长度除下来、方向减回去''}
 \label{fig:complex-division}
@@ -1568,16 +1579,19 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[->, gray] (-3,0) -- (3.2,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, gray] (0,-2.3) -- (0,3.3) node[above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-3.1,0) -- (3.3,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.4) -- (0,3.4) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (Z) at (2,1);
     \coordinate (IZ) at (-1,2);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z);
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (IZ);
-    \fill[blue!80!black] (Z) circle (2pt) node[below right] {$z$};
-    \fill[red!75!black] (IZ) circle (2pt) node[above left] {$\mathrm{i}z$};
-    \draw[thick, green!60!black] (0.55,0.28) arc[start angle=26.565,end angle=116.565,radius=0.62];
-    \node[green!50!black] at (0.35,0.9) {$\pi/2$};
+    \draw[mp vector] (0,0) -- (Z);
+    \draw[mp vector d] (0,0) -- (IZ);
+    \node[mp point] at (Z) {};
+    \node[mp point d] at (IZ) {};
+    \node[mp label, below right] at (Z) {$z$};
+    \node[mp label, above left] at (IZ) {$\mathrm{i}z$};
+    \draw[mp angle] (0.55,0.28) arc[start angle=26.565,end angle=116.565,radius=0.62];
+    \node[mp label, text=figbrown] at (0.35,0.9) {$\pi/2$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{乘以 $\mathrm{i}$ 相当于逆时针旋转 $\pi/2$}
 \label{fig:multiply-by-i}
@@ -1644,29 +1658,30 @@ e_2=
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[->, gray!70] (-1.0,0) -- (3.8,0) node[right, black] {$x$};
-    \draw[->, gray!70] (0,-0.8) -- (0,3.8) node[above, black] {$y$};
+    \draw[mp axis] (-1.05,0) -- (3.95,0) node[mp label, right] {$x$};
+    \draw[mp axis] (0,-0.85) -- (0,3.95) node[mp label, above] {$y$};
 
-    \draw[->, thick, gray!85!black, shorten >=2.5pt] (0,0) -- (1,0);
-    \draw[->, thick, gray!85!black, shorten >=2.5pt] (0,0) -- (0,1);
-    \node[below] at (1,0) {$e_1$};
-    \node[left] at (0,1) {$e_2$};
+    \draw[mp thin axis] (0,0) -- (1,0);
+    \draw[mp thin axis] (0,0) -- (0,1);
+    \node[mp label, below] at (1,0) {$e_1$};
+    \node[mp label, left] at (0,1) {$e_2$};
 
     \coordinate (AeOne) at (2.1,1.2);
     \coordinate (AeTwo) at (-1.2,2.1);
 
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (AeOne);
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (AeTwo);
-    \fill[blue!80!black] (AeOne) circle (2pt);
-    \fill[red!75!black] (AeTwo) circle (2pt);
+    \draw[mp vector] (0,0) -- (AeOne);
+    \draw[mp vector d] (0,0) -- (AeTwo);
+    \node[mp point] at (AeOne) {};
+    \node[mp point d] at (AeTwo) {};
 
-    \node[below right, text=blue!80!black] at (AeOne) {$\alpha e_1=(a,b)$};
-    \node[above left, text=red!75!black] at (AeTwo) {$\alpha e_2=(-b,a)$};
+    \node[mp label, below right, text=figblue] at (AeOne) {$\alpha e_1=(a,b)$};
+    \node[mp label, above left, text=figred] at (AeTwo) {$\alpha e_2=(-b,a)$};
 
-    \draw[dashed, gray] (AeOne) -- (2.1,0);
-    \draw[dashed, gray] (AeOne) -- (0,1.2);
-    \draw[dashed, gray] (AeTwo) -- (-1.2,0);
-    \draw[dashed, gray] (AeTwo) -- (0,2.1);
+    \draw[mp helper] (AeOne) -- (2.1,0);
+    \draw[mp helper] (AeOne) -- (0,1.2);
+    \draw[mp helper] (AeTwo) -- (-1.2,0);
+    \draw[mp helper] (AeTwo) -- (0,2.1);
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{乘以复数 $\alpha=a+\mathrm{i}b$ 时，基向量 $e_1,e_2$ 的像正好给出矩阵的两列}
 \label{fig:complex-multiplication-basis}
@@ -1959,9 +1974,9 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[->, gray] (-2.7,0) -- (2.9,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, gray] (0,-2.6) -- (0,2.8) node[above] {$\operatorname{Im}z$};
-    \draw[blue, thick] (0,0) circle (2);
+    \draw[mp axis] (-2.8,0) -- (3.0,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.7) -- (0,2.9) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp circle] (0,0) circle (2);
 
     \coordinate (P0) at ({sqrt(2)},{sqrt(2)});
     \coordinate (P1) at ({-sqrt(2)},{sqrt(2)});
@@ -1969,18 +1984,19 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
     \coordinate (P3) at ({sqrt(2)},{-sqrt(2)});
 
     \foreach \P in {P0,P1,P2,P3} {
-        \draw[dashed, gray] (0,0) -- (\P);
-        \fill[red!80!black] (\P) circle (1.5pt);
+        \draw[mp helper] (0,0) -- (\P);
+        \node[mp point d] at (\P) {};
     }
 
-    \node[above right] at (P0) {$z_0$};
-    \node[above left] at (P1) {$z_1$};
-    \node[below left] at (P2) {$z_2$};
-    \node[below right] at (P3) {$z_3$};
+    \node[mp label, above right] at (P0) {$z_0$};
+    \node[mp label, above left] at (P1) {$z_1$};
+    \node[mp label, below left] at (P2) {$z_2$};
+    \node[mp label, below right] at (P3) {$z_3$};
 
-    \draw[orange!85!black, thick, ->] (0.8,0) arc[start angle=0,end angle=45,radius=0.8];
-    \node[orange!85!black] at (1.02,0.34) {$\pi/4$};
-    \node[blue] at (1.45,-0.5) {$|z|=2$};
+    \draw[mp angle, -{Stealth[length=1.9mm,width=1.4mm]}] (0.82,0) arc[start angle=0,end angle=45,radius=0.82];
+    \node[mp label, text=figbrown] at (1.05,0.35) {$\pi/4$};
+    \node[mp label, text=figblue] at (1.45,-0.5) {$|z|=2$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{方程 $z^4=-16$ 的四个根在复平面上的位置}
 \label{fig:fourth-roots-minus16}
@@ -2004,19 +2020,20 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.7]
-    \draw[->, gray] (-1.4,0) -- (1.4,0) node[right] {$\operatorname{Re}z$};
-    \draw[->, gray] (0,-1.35) -- (0,1.35) node[above] {$\operatorname{Im}z$};
-    \draw[blue, thick] (0,0) circle (1);
+    \draw[mp axis] (-1.45,0) -- (1.45,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-1.4) -- (0,1.4) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp circle] (0,0) circle (1);
     \foreach \k in {0,1,2,3,4,5} {
         \coordinate (P\k) at ({cos(60*\k)},{sin(60*\k)});
-        \fill[red!80!black] (P\k) circle (1.4pt);
+        \node[mp point d] at (P\k) {};
     }
-    \node[right] at (1,0) {$1$};
-    \node[above right] at ({cos(60)},{sin(60)}) {$\omega$};
-    \node[above left] at ({cos(120)},{sin(120)}) {$\omega^2$};
-    \node[left] at (-1,0) {$\omega^3$};
-    \node[below left] at ({cos(240)},{sin(240)}) {$\omega^4$};
-    \node[below right] at ({cos(300)},{sin(300)}) {$\omega^5$};
+    \node[mp label, right] at (1,0) {$1$};
+    \node[mp label, above right] at ({cos(60)},{sin(60)}) {$\omega$};
+    \node[mp label, above left] at ({cos(120)},{sin(120)}) {$\omega^2$};
+    \node[mp label, left] at (-1,0) {$\omega^3$};
+    \node[mp label, below left] at ({cos(240)},{sin(240)}) {$\omega^4$};
+    \node[mp label, below right] at ({cos(300)},{sin(300)}) {$\omega^5$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{六次单位根在单位圆上的均匀分布}
 \label{fig:roots-of-unity}
@@ -2169,43 +2186,41 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.95]
-    % plane
-    \coordinate (A) at (-4.2,-1.55);
-    \coordinate (B) at (3.7,-1.55);
-    \coordinate (C) at (5.1,0.15);
-    \coordinate (D) at (-2.8,0.15);
-    \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
-    \draw[gray] (A) -- (B) -- (C) -- (D) -- cycle;
-    \node[gray] at (4,-0.15) {复平面};
+\begin{tikzpicture}[scale=0.98]
+    \coordinate (A) at (-4.5,-1.7);
+    \coordinate (B) at (3.6,-1.7);
+    \coordinate (C) at (5.15,-0.02);
+    \coordinate (D) at (-2.95,-0.02);
+    \fill[black!2] (A) -- (B) -- (C) -- (D) -- cycle;
+    \draw[black!26, line width=0.6pt] (A) -- (B) -- (C) -- (D) -- cycle;
+    \node[mp label, text=black!45] at (4.05,-0.12) {复平面};
 
-    % sphere
-    \coordinate (O) at (0.45,0.85);
-    \fill[gray!10] (O) circle (1.55);
-    \draw[gray!80!black] (O) circle (1.55);
-    \draw[gray] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
-    \draw[gray, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
-    \draw[gray!85!black] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
-    \draw[gray, dash pattern=on 2.2pt off 1.6pt] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
+    \coordinate (O) at (0.35,0.92);
+    \fill[black!3] (O) circle (1.58);
+    \draw[black!42, line width=0.8pt] (O) circle (1.58);
+    \draw[black!32, line width=0.65pt] ($(O)+(-1.58,0)$)
+        arc[start angle=180,end angle=360,x radius=1.58,y radius=0.5];
+    \draw[black!24, dash pattern=on 2.3pt off 1.7pt, line width=0.6pt] ($(O)+(1.58,0)$)
+        arc[start angle=0,end angle=180,x radius=1.58,y radius=0.5];
+    \draw[black!34, line width=0.65pt] ($(O)+(0,1.58)$)
+        arc[start angle=90,end angle=270,x radius=0.84,y radius=1.58];
+    \draw[black!24, dash pattern=on 2.3pt off 1.7pt, line width=0.6pt] ($(O)+(0,-1.58)$)
+        arc[start angle=270,end angle=450,x radius=0.84,y radius=1.58];
 
-    % north/south and sample point
-    \coordinate (N) at ($(O)+(0,1.55)$);
-    \coordinate (S) at ($(O)+(0,-1.55)$);
-    \coordinate (P) at (1.31,1.48);
-    \coordinate (Z) at (3.72174,-1.10);
+    \coordinate (N) at ($(O)+(0,1.58)$);
+    \coordinate (S) at ($(O)+(0,-1.58)$);
+    \coordinate (P) at (1.2,1.52);
+    \coordinate (Z) at (3.82,-1.16);
 
-    % projection line
-    \draw[orange!90!black, line width=1.1pt, dash pattern=on 2.2pt off 1.6pt] (N) -- (P);
-    \draw[orange!90!black, line width=1.2pt] (P) -- (Z);
+    \draw[figgold, line width=1pt, dash pattern=on 2.2pt off 1.7pt] (N) -- (P);
+    \draw[figgold, line width=1.15pt] (P) -- (Z);
 
-    % points
-    \fill[gray!80!black] (N) circle (2pt) node[above] {$N$};
-    \fill[gray!80!black] (S) circle (2pt) node[below] {$S$};
-    \fill[orange!90!black] (P) circle (2pt) node[above right] {$P$};
-    \fill[orange!90!black] (Z) circle (2pt) node[below] {$z$};
+    \fill[black!55] (N) circle (2pt) node[mp label, above] {$N$};
+    \fill[black!55] (S) circle (2pt) node[mp label, below] {$S$};
+    \fill[figpurple] (P) circle (2pt) node[mp label, above right, text=figpurple] {$P$};
+    \fill[figgold] (Z) circle (2pt) node[mp label, below right, text=figgold] {$z$};
 
-    % labels
-    \node[right, gray!80!black] at ($(N)+(0.5,0.2)$) {$N\leftrightarrow \infty$};
+    \node[mp label, text=black!52] at ($(N)+(0.72,0.18)$) {$N\leftrightarrow \infty$};
 \end{tikzpicture}
 \caption{球极投影的立体示意：球面点 $P$ 沿过北极 $N$ 的直线投到复平面上的点 $z$}
 \label{fig:stereographic-projection}
@@ -2355,33 +2370,34 @@ F(w)=f\!\left(\frac{1}{w}\right),
 \centering
 \begin{tikzpicture}[scale=0.95]
     \begin{scope}
-        \draw[->, gray!70] (-2.6,0) -- (2.8,0) node[right, black] {$\operatorname{Re}$};
-        \draw[->, gray!70] (0,-2.4) -- (0,2.6) node[above, black] {$\operatorname{Im}$};
-        \draw[blue, thick] (0,0) circle (2);
+        \draw[mp axis] (-2.65,0) -- (2.9,0) node[mp label, right] {$\operatorname{Re}$};
+        \draw[mp axis] (0,-2.45) -- (0,2.7) node[mp label, above] {$\operatorname{Im}$};
+        \draw[mp circle] (0,0) circle (2);
         \coordinate (P) at ({2*cos(45)},{2*sin(45)});
         \coordinate (X) at ({2*cos(45)},0);
-        \draw[->, very thick, red!75!black, shorten >=2.5pt] (0,0) -- (P);
-        \draw[dashed, gray] (P) -- (X);
-        \fill[red!75!black] (P) circle (2pt);
-        \fill[blue!80!black] (X) circle (2pt);
-        \draw[thick, green!60!black] (0.55,0) arc[start angle=0,end angle=45,radius=0.55];
-        \node[green!50!black] at (0.78,0.28) {$\omega t+\varphi$};
-        \node[above right, text=red!75!black] at (P) {$Ae^{\mathrm{i}(\omega t+\varphi)}$};
-        \node[below, text=blue!80!black] at (X) {$x(t)$};
-        \node[blue] at (1.12,-0.45) {投影到实轴};
-        \node[below left] at (0,0) {$O$};
+        \draw[mp vector d] (0,0) -- (P);
+        \draw[mp helper] (P) -- (X);
+        \node[mp point d] at (P) {};
+        \node[mp point] at (X) {};
+        \draw[mp angle] (0.55,0) arc[start angle=0,end angle=45,radius=0.55];
+        \node[mp small, text=figbrown] at (0.82,0.27) {$\omega t+\varphi$};
+        \node[mp label, above right, text=figred] at (P) {$Ae^{\mathrm{i}(\omega t+\varphi)}$};
+        \node[mp label, below, text=figblue] at (X) {$x(t)$};
+        \node[mp small, text=figblue] at (1.12,-0.45) {投影到实轴};
+        \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 
-    \draw[->, thick, gray!70] (3.4,0.45) -- (5.1,0.45);
-    \node[gray!70] at (4.25,0.72) {随时间转动};
+    \draw[mp thin axis] (3.45,0.45) -- (5.15,0.45);
+    \node[mp small, text=black!48] at (4.28,0.72) {随时间转动};
 
     \begin{scope}[xshift=6.1cm]
-        \draw[->, gray!70] (0,0) -- (4.9,0) node[right, black] {$t$};
-        \draw[->, gray!70] (0,-2.3) -- (0,2.3) node[above, black] {$x$};
-        \draw[blue!80!black, thick, domain=0:4.4, smooth, variable=\t] plot ({\t},{2*cos(45-55*\t)});
-        \fill[red!75!black] (1.4,{2*cos(45-55*1.4)}) circle (2pt);
-        \draw[dashed, gray] (1.4,0) -- (1.4,{2*cos(45-55*1.4)});
-        \node[above right, text=blue!80!black] at (2.6,1.45) {$x(t)=A\cos(\omega t+\varphi)$};
+        \draw[mp axis] (0,0) -- (4.95,0) node[mp label, right] {$t$};
+        \draw[mp axis] (0,-2.35) -- (0,2.35) node[mp label, above] {$x$};
+        \draw[figblue, line width=1.05pt, domain=0:4.4, smooth, variable=\t]
+            plot ({\t},{2*cos(45-55*\t)});
+        \node[mp point d] at (1.4,{2*cos(45-55*1.4)}) {};
+        \draw[mp helper] (1.4,0) -- (1.4,{2*cos(45-55*1.4)});
+        \node[mp label, above right, text=figblue] at (2.62,1.48) {$x(t)=A\cos(\omega t+\varphi)$};
     \end{scope}
 \end{tikzpicture}
 \caption{旋转相量在实轴上的投影给出简谐振动}
@@ -2425,17 +2441,21 @@ x(t)=A\cos(\omega t+\varphi).
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.95]
-    \draw[->, thick] (-0.6,0) -- (4.2,0) node[right] {实部};
-    \draw[->, thick] (0,-4.8) -- (0,1.4) node[above] {虚部};
+    \draw[mp axis] (-0.7,0) -- (4.3,0) node[mp label, right] {实部};
+    \draw[mp axis] (0,-4.9) -- (0,1.5) node[mp label, above] {虚部};
     \coordinate (A) at (3,0);
     \coordinate (B) at (0,-4);
     \coordinate (C) at (3,-4);
-    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (A) node[midway, above] {$3$};
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (B) node[midway, left] {$-4\mathrm{i}$};
-    \draw[->, thick, purple!85!black, shorten >=2.5pt] (0,0) -- node[midway, right, sloped, fill=white, inner sep=1pt] {$3-4\mathrm{i}$} (C);
-    \draw[dashed, gray] (A) -- (C);
-    \draw[dashed, gray] (B) -- (C);
-    \fill[purple!85!black] (C) circle (2pt);
+    \draw[mp vector] (0,0) -- (A);
+    \draw[mp vector d] (0,0) -- (B);
+    \draw[mp vector c] (0,0) -- (C);
+    \draw[mp helper] (A) -- (C);
+    \draw[mp helper] (B) -- (C);
+    \node[mp point c] at (C) {};
+    \node[mp label, text=figblue] at ($(0,0)!0.53!(A)+(0,0.18)$) {$3$};
+    \node[mp label, text=figred] at ($(0,0)!0.5!(B)+(-0.28,0)$) {$-4\mathrm{i}$};
+    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at ($(0,0)!0.55!(C)+(0.22,-0.12)$) {$3-4\mathrm{i}$};
+    \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{相量叠加：$3+(-4\mathrm{i})=3-4\mathrm{i}$}
 \label{fig:phasor-addition}

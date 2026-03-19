@@ -65,6 +65,44 @@
 \definecolor{keyblue}{RGB}{30, 100, 180}           % 关键词蓝色
 \definecolor{importantred}{RGB}{200, 50, 50}       % 重要内容红色
 
+% ========== 配图统一样式 ==========
+\colorlet{figaxis}{black!78}
+\colorlet{figguide}{black!28}
+\colorlet{figblue}{mainblue!92!black}
+\colorlet{figteal}{defteal!88!black}
+\colorlet{figpurple}{examplepurple!92!black}
+\colorlet{figred}{alertred!88!black}
+\colorlet{figbrown}{physicsbrown!88!black}
+\colorlet{figgold}{notebrown!85!black}
+\colorlet{figsoftfill}{black!2}
+
+\tikzset{
+  mp axis/.style={-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.85pt, draw=figaxis},
+  mp thin axis/.style={-{Stealth[length=2.2mm,width=1.5mm]}, line width=0.75pt, draw=figaxis},
+  mp helper/.style={draw=figguide, dash pattern=on 2.2pt off 1.8pt, line width=0.55pt},
+  mp soft/.style={draw=black!18, line width=0.5pt},
+  mp circle/.style={draw=figblue, line width=0.9pt},
+  mp angle/.style={draw=figbrown, line width=0.9pt},
+  mp vector/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.05pt, draw=figblue},
+  mp vector b/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.05pt, draw=figteal},
+  mp vector c/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.1pt, draw=figpurple},
+  mp vector d/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=1.05pt, draw=figred},
+  mp point/.style={circle, fill=figblue, inner sep=1.7pt},
+  mp point b/.style={circle, fill=figteal, inner sep=1.7pt},
+  mp point c/.style={circle, fill=figpurple, inner sep=1.7pt},
+  mp point d/.style={circle, fill=figred, inner sep=1.7pt},
+  mp label/.style={font=\small},
+  mp small/.style={font=\footnotesize},
+  mp card/.style={
+    rounded corners=2pt,
+    draw=black!16,
+    fill=figsoftfill,
+    line width=0.5pt,
+    inner sep=4pt,
+    align=center
+  }
+}
+
 % ========== 定理环境（使用 newtcbtheorem，标题独立色块）==========
 
 % 定理环境（蓝色）
