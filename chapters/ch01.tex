@@ -1707,17 +1707,17 @@ F(w)=f\!\left(\frac{1}{w}\right),
 \centering
 \begin{tikzpicture}[scale=0.95]
     % plane
-    \coordinate (A) at (-3.5,-1.4);
-    \coordinate (B) at (3.7,-1.4);
+    \coordinate (A) at (-5.4,-1.55);
+    \coordinate (B) at (3.6,-1.55);
     \coordinate (C) at (5.2,-0.2);
-    \coordinate (D) at (-2.0,-0.2);
+    \coordinate (D) at (-3.8,-0.2);
     \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
     \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
     \node[gray!70] at (4.7,-0.55) {复平面};
 
     % image line on plane
-    \draw[orange!90!black, line width=1.4pt] (-2.7,-0.95) -- (3.6,-0.95);
-    \node[orange!90!black, below] at (0.1,-0.95) {$\ell$};
+    \draw[orange!90!black, line width=1.4pt] (-5.0,-1.25) -- (2.3,-0.25);
+    \node[orange!90!black, below] at (-1.4,-0.76) {$\ell$};
 
     % sphere
     \coordinate (O) at (0,1.35);
@@ -1735,37 +1735,35 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \fill[gray!80!black] (S) circle (2pt) node[below right] {$S$};
     \node[right, gray!80!black] at ($(N)+(1.0,0.1)$) {$N\leftrightarrow \infty$};
 
-    % circle through N on sphere
-    \draw[orange!90!black, line width=1.4pt] ($(O)+(0,1.55)$) .. controls ($(O)+(-1.15,0.7)$) and ($(O)+(-1.05,-0.55)$) .. ($(O)+(-0.15,-1.18)$)
-        .. controls ($(O)+(0.55,-0.6)$) and ($(O)+(0.55,0.65)$) .. ($(O)+(0,1.55)$);
-    \node[orange!90!black] at ($(O)+(-1.35,1.0)$) {$C$};
-    \draw[orange!90!black, ->, thin] ($(O)+(-1.7,1.15)$) -- ($(O)+(-1.0,0.95)$);
+    % highlighted circle through N and S
+    \draw[orange!90!black, line width=1.4pt] (O) ellipse[x radius=0.82, y radius=1.55];
+    \node[orange!90!black] at ($(O)+(-1.1,1.0)$) {$C$};
 
     % sample points on the circle
-    \coordinate (P1) at ($(O)+(-0.82,0.64)$);
-    \coordinate (P2) at ($(O)+(-1.02,-0.08)$);
-    \coordinate (P3) at ($(O)+(-0.42,-1.0)$);
-    \fill[orange!90!black] (P1) circle (2pt) node[left] {$P_1$};
-    \fill[orange!90!black] (P2) circle (2pt) node[left] {$P_2$};
-    \fill[orange!90!black] (P3) circle (2pt) node[left] {$P_3$};
+    \coordinate (P1) at ($(O)+(-0.71014,0.775)$);
+    \coordinate (P2) at ($(O)+(-0.77055,-0.53013)$);
+    \coordinate (P3) at ($(O)+(-0.41000,-1.34234)$);
+    \fill[black] (P1) circle (2pt) node[left] {$P_1$};
+    \fill[black] (P2) circle (2pt) node[left] {$P_2$};
+    \fill[black] (P3) circle (2pt) node[left] {$P_3$};
 
     % image points on plane line
-    \coordinate (Z1) at (-2.0,-0.95);
-    \coordinate (Z2) at (-0.4,-0.95);
-    \coordinate (Z3) at (1.6,-0.95);
-    \fill[orange!90!black] (Z1) circle (2pt);
-    \fill[orange!90!black] (Z2) circle (2pt);
-    \fill[orange!90!black] (Z3) circle (2pt);
-    \node[below, orange!90!black] at (Z1) {$z_1$};
-    \node[below, orange!90!black] at (Z2) {$z_2$};
-    \node[below, orange!90!black] at (Z3) {$z_3$};
+    \coordinate (Z1) at (-3.63082,-1.06244);
+    \coordinate (Z2) at (-1.35219,-0.75030);
+    \coordinate (Z3) at (-0.50091,-0.63369);
+    \fill[black] (Z1) circle (2pt);
+    \fill[black] (Z2) circle (2pt);
+    \fill[black] (Z3) circle (2pt);
+    \node[below] at (Z1) {$z_1$};
+    \node[below] at (Z2) {$z_2$};
+    \node[below] at (Z3) {$z_3$};
 
     % projection lines
     \draw[gray!70, dashed] (N) -- (Z1);
     \draw[gray!70, dashed] (N) -- (Z2);
     \draw[gray!70, dashed] (N) -- (Z3);
 \end{tikzpicture}
-\caption{球极投影的立体示意：经过北极的球面圆投成平面上的直线}
+\caption{球极投影的立体示意：橙色球面圆 $C$ 经球极投影对应平面上的橙色直线 $\ell$}
 \label{fig:line-from-circle-projection-3d}
 \end{figure}
 
