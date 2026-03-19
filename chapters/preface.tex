@@ -17,43 +17,47 @@
 
 如果把物理专业的学习过程看成一条不断向前延伸的链条，那么数学物理方法往往处在一个十分关键的位置。它向前承接高等数学和普通物理，向后连接理论力学、电动力学、量子力学、热力学与统计物理等课程，因此常被视为一门典型的桥梁课程。
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    course/.style={rectangle, draw, rounded corners=3pt, minimum width=1.9cm, minimum height=0.75cm, align=center, font=\small, line width=0.8pt},
-    arrow/.style={->, >=stealth, line width=0.9pt}
+    basic/.style={rectangle, draw=black!75, rounded corners=4pt, minimum width=2.15cm, minimum height=0.82cm, text width=2.15cm, align=center, font=\small, line width=0.95pt, fill=blue!6},
+    bridge/.style={rectangle, draw=black!80, rounded corners=4pt, minimum width=3.15cm, minimum height=1.18cm, text width=3.15cm, align=center, font=\small\bfseries, line width=1.0pt, fill=orange!14},
+    related/.style={rectangle, draw=black!75, rounded corners=4pt, minimum width=2.75cm, minimum height=0.82cm, text width=2.75cm, align=center, font=\small, line width=0.95pt, fill=green!7},
+    group/.style={font=\small\bfseries},
+    inarrow/.style={->, >=stealth, line width=1.0pt, draw=blue!65!black},
+    outarrow/.style={->, >=stealth, line width=1.0pt, draw=green!55!black}
 ]
     % 前置课程（左侧）
-    \node[course, fill=blue!8] (calc) at (-5, 3) {高等数学};
-    \node[course, fill=blue!8] (mech) at (-5, 2) {力学};
-    \node[course, fill=blue!8] (thermo) at (-5, 1) {热学};
-    \node[course, fill=blue!8] (optics) at (-5, 0) {光学};
-    \node[course, fill=blue!8] (em) at (-5, -1) {电磁学};
-    \node[font=\footnotesize\bfseries, blue!60!gray] at (-5, 3.8) {基础课程};
+    \node[basic] (calc) at (-4.8, 3.0) {高等数学};
+    \node[basic] (mech) at (-4.8, 2.0) {力学};
+    \node[basic] (thermo) at (-4.8, 1.0) {热学};
+    \node[basic] (optics) at (-4.8, 0.0) {光学};
+    \node[basic] (em) at (-4.8, -1.0) {电磁学};
+    \node[group, text=blue!70!black] at (-4.8, 3.82) {基础课程};
     
     % 本课程（中间）
-    \node[course, fill=orange!20, minimum width=2.8cm, minimum height=1.2cm, font=\small\bfseries] (mathphy) at (0, 1) {数学物理方法};
-    \node[font=\footnotesize\bfseries, orange!60!gray] at (0, 2.2) {桥梁课程};
+    \node[bridge] (mathphy) at (0, 1.0) {数学物理方法};
+    \node[group, text=orange!75!black] at (0, 2.18) {桥梁课程};
     
     % 后置课程（右侧）
-    \node[course, fill=green!10] (tmech) at (5, 2.5) {理论力学};
-    \node[course, fill=green!10] (edyn) at (5, 1.5) {电动力学};
-    \node[course, fill=green!10] (qm) at (5, 0.5) {量子力学};
-    \node[course, fill=green!10] (stat) at (5, -0.5) {热力学与统计物理};
-    \node[font=\footnotesize\bfseries, green!50!gray] at (5, 3.3) {相关课程};
+    \node[related] (tmech) at (4.75, 2.5) {理论力学};
+    \node[related] (edyn) at (4.75, 1.5) {电动力学};
+    \node[related] (qm) at (4.75, 0.5) {量子力学};
+    \node[related] (stat) at (4.75, -0.5) {热力学与统计物理};
+    \node[group, text=green!50!black] at (4.75, 3.3) {相关课程};
     
     % 箭头：前置 → 本课程
-    \draw[arrow, blue!45] (calc.east) -- (mathphy.west);
-    \draw[arrow, blue!45] (mech.east) -- (mathphy.west);
-    \draw[arrow, blue!45] (thermo.east) -- (mathphy.west);
-    \draw[arrow, blue!45] (optics.east) -- (mathphy.west);
-    \draw[arrow, blue!45] (em.east) -- (mathphy.west);
+    \draw[inarrow] (calc.east) -- (mathphy.west);
+    \draw[inarrow] (mech.east) -- (mathphy.west);
+    \draw[inarrow] (thermo.east) -- (mathphy.west);
+    \draw[inarrow] (optics.east) -- (mathphy.west);
+    \draw[inarrow] (em.east) -- (mathphy.west);
     
     % 箭头：本课程 → 后置
-    \draw[arrow, green!55!gray] (mathphy.east) -- (tmech.west);
-    \draw[arrow, green!55!gray] (mathphy.east) -- (edyn.west);
-    \draw[arrow, green!55!gray] (mathphy.east) -- (qm.west);
-    \draw[arrow, green!55!gray] (mathphy.east) -- (stat.west);
+    \draw[outarrow] (mathphy.east) -- (tmech.west);
+    \draw[outarrow] (mathphy.east) -- (edyn.west);
+    \draw[outarrow] (mathphy.east) -- (qm.west);
+    \draw[outarrow] (mathphy.east) -- (stat.west);
 \end{tikzpicture}
 \caption{数学物理方法在课程体系中的位置}
 \label{fig:course-position}
@@ -77,30 +81,31 @@
 
 本课程大致可以分为四个彼此联系的部分：
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    card/.style={draw, rounded corners=10pt, line width=0.9pt, minimum height=1.45cm, align=center, inner sep=7pt},
-    arrow/.style={->, >=stealth, line width=0.95pt}
+    tool/.style={draw=black!75, rounded corners=8pt, line width=1.0pt, minimum height=1.7cm, align=center, inner sep=8pt, font=\small},
+    core/.style={draw=black!80, rounded corners=8pt, line width=1.0pt, minimum height=1.85cm, align=center, inner sep=8pt, font=\small},
+    arrow/.style={->, >=stealth, line width=1.0pt}
 ]
     % 顶部两个工具
-    \node[card, fill=blue!8, draw=blue!45!black, text width=2.9cm] (complex) at (-2.8, 2.45)
-    {\textbf{\large 复变函数}\\[2pt]\small 解析函数、级数展开、留数};
-    \node[card, fill=green!8, draw=green!45!black, text width=2.9cm] (transform) at (2.8, 2.45)
-    {\textbf{\large 积分变换}\\[2pt]\small 傅里叶变换、拉普拉斯变换};
+    \node[tool, fill=blue!6, draw=blue!65!black, text width=3.35cm] (complex) at (-3.0, 2.55)
+    {\textbf{\large 复变函数}\\[4pt]解析函数、级数\\展开、留数};
+    \node[tool, fill=green!6, draw=green!55!black, text width=3.35cm] (transform) at (3.0, 2.55)
+    {\textbf{\large 积分变换}\\[4pt]傅里叶变换\\拉普拉斯变换};
 
     % 中间核心
-    \node[card, fill=orange!12, draw=orange!60!black, text width=4.7cm, minimum height=1.65cm] (pde) at (0, -0.05)
-    {\textbf{\large 数理方程}\\[3pt]\small 三类方程的建立与求解};
+    \node[core, fill=orange!12, draw=orange!70!black, text width=5.1cm] (pde) at (0, -0.05)
+    {\textbf{\large 数理方程}\\[4pt]三类方程的建立与求解};
 
     % 底部产物
-    \node[card, fill=purple!8, draw=purple!45!black, text width=4.8cm, minimum height=1.55cm] (special) at (0, -2.55)
-    {\textbf{\large 特殊函数}\\[2pt]\small 勒让德、贝塞尔};
+    \node[tool, fill=red!6, draw=red!55!black, text width=5.1cm, minimum height=1.7cm] (special) at (0, -2.7)
+    {\textbf{\large 特殊函数}\\[4pt]勒让德、贝塞尔};
 
     % 连接箭头
-    \draw[arrow, blue!45] ([xshift=0.55cm]complex.south) -- ([xshift=-1.1cm]pde.north);
+    \draw[arrow, blue!65!black] ([xshift=0.55cm]complex.south) -- ([xshift=-1.1cm]pde.north);
     \draw[arrow, green!55!black] ([xshift=-0.55cm]transform.south) -- ([xshift=1.1cm]pde.north);
-    \draw[arrow, purple!55!black] (pde.south) -- (special.north);
+    \draw[arrow, red!55!black] (pde.south) -- (special.north);
 \end{tikzpicture}
 \caption{课程四部分的逻辑关系}
 \label{fig:course-structure}
