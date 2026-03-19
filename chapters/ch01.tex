@@ -122,6 +122,31 @@ a=2,\qquad b=0.
 	\item 若 $x\neq 0$ 且 $y\neq 0$，则称为一般复数。
 \end{itemize}
 
+如果把这些类型放到复平面上看，分类会更清楚：实数落在实轴上，纯虚数落在虚轴上，而一般复数对应那些不在坐标轴上的点；原点 $0$ 则正好是这几种情况相交的特殊位置。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.06]
+    \draw[mp axis] (-3.6,0) -- (3.9,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-3.2) -- (0,3.4) node[mp label, above] {$\operatorname{Im}z$};
+
+    \draw[figblue, line width=1.15pt] (-3.2,0) -- (3.2,0);
+    \draw[figteal, line width=1.15pt] (0,-2.9) -- (0,2.9);
+
+    \coordinate (Z) at (2.1,1.55);
+    \node[mp point c] at (Z) {};
+    \node[mp label, above right, text=figpurple] at (Z) {$x+\mathrm{i}y$};
+
+    \node[mp label, text=figblue] at (2.25,-0.42) {实数：$y=0$};
+    \node[mp label, text=figteal, rotate=90] at (-0.42,2.0) {纯虚数：$x=0$};
+    \node[mp small, text=figpurple, align=center] at (-2.1,1.7) {一般复数\\$x\neq 0,\ y\neq 0$};
+    \node[mp label, below left] at (0,0) {$0$};
+    \node[mp small, text=black!46, align=center] at (-2.25,-1.95) {不在坐标轴上的点\\都对应一般复数};
+\end{tikzpicture}
+\caption{实数、纯虚数与一般复数在复平面上的位置}
+\label{fig:complex-classification-plane}
+\end{figure}
+
 \begin{lizi}{判断复数的类型}{}
 判断下列各数属于哪一类复数：
 \[
@@ -443,7 +468,7 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[x=0.86cm,y=1cm]
+\begin{tikzpicture}[x=0.84cm,y=1cm]
     \draw[mp axis] (0.2,0) -- (15.6,0) node[mp label, right] {时间};
 
     \fill[figblue] (0.9,0) circle (2.3pt);
@@ -860,6 +885,36 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \begin{equation}
     \arg z=\operatorname{Arg}z+2k\pi,\qquad k\in\mathbb{Z}.
 \end{equation}
+
+图 \ref{fig:arg-multivalued} 画出了这里最核心的几何事实：终点还是同一个点 $z$，只是从正实轴出发时，中间可以额外多转若干整圈。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.08]
+    \draw[mp axis] (-2.2,0) -- (4.4,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.1) -- (0,3.5) node[mp label, above] {$\operatorname{Im}z$};
+
+    \coordinate (Z) at (3.0,2.1);
+    \draw[mp vector] (0,0) -- (Z);
+    \node[mp point] at (Z) {};
+    \node[mp label, above right] at (Z) {$z$};
+    \node[mp label, below left] at (0,0) {$O$};
+
+    \draw[mp angle, -{Stealth[length=2.0mm,width=1.4mm]}] (0.72,0)
+        arc[start angle=0,end angle=35,radius=0.72];
+    \node[mp label, text=figbrown] at (1.08,0.34) {$\theta$};
+
+    \draw[figred, line width=0.9pt, dash pattern=on 2.2pt off 1.8pt,
+        -{Stealth[length=2.2mm,width=1.5mm]}] (1.22,0)
+        arc[start angle=0,end angle=395,radius=1.22];
+    \node[mp label, text=figred] at (-0.98,1.28) {$\theta+2\pi$};
+
+    \node[mp small, text=black!46, align=center] at (2.1,-1.35)
+        {终点没有变，\\只是中间多转了一整圈};
+\end{tikzpicture}
+\caption{同一个复数可以对应 $\theta,\theta+2\pi,\theta+4\pi,\dots$ 这一整族辐角}
+\label{fig:arg-multivalued}
+\end{figure}
 
 \begin{tishi}[辐角的多值性为什么会带来函数的多值]
 这一点现在先轻轻记住，后面会越来越重要。把非零复数写成极形式时，我们常写成
@@ -2110,6 +2165,45 @@ x\to +\infty,\qquad x\to -\infty.
     w=\frac{1}{z}.
 \end{equation}
 它会把远离原点的大点，送到靠近原点的小点。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.98]
+    \begin{scope}
+        \draw[mp axis] (-2.9,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp circle] (0,0) circle (2.05);
+        \coordinate (Z) at ({2.05*cos(38)},{2.05*sin(38)});
+        \draw[mp vector] (0,0) -- (Z);
+        \node[mp point] at (Z) {};
+        \node[mp label, above right, text=figblue] at (Z) {$z=re^{\mathrm{i}\theta}$};
+        \draw[mp angle] (0.7,0) arc[start angle=0,end angle=38,radius=0.7];
+        \node[mp label, text=figbrown] at (1.02,0.32) {$\theta$};
+        \node[mp small, text=figblue] at (1.45,-1.35) {$|z|=r$，离原点较远};
+        \node[mp small, text=black!46] at (0,-2.15) {$z$ 平面};
+    \end{scope}
+
+    \draw[-{Stealth[length=2.8mm,width=1.8mm]}, line width=0.9pt, draw=black!58]
+        (3.7,0.15) -- (4.95,0.15);
+    \node[mp label] at (4.32,0.52) {$w=\dfrac{1}{z}$};
+
+    \begin{scope}[xshift=7.3cm]
+        \draw[mp axis] (-2.9,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}w$};
+        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}w$};
+        \draw[mp circle, draw=figteal] (0,0) circle (0.5);
+        \coordinate (W) at ({0.5*cos(-38)},{0.5*sin(-38)});
+        \draw[mp vector b] (0,0) -- (W);
+        \node[mp point b] at (W) {};
+        \node[mp label, below right, text=figteal] at (W) {$w=r^{-1}e^{-\mathrm{i}\theta}$};
+        \draw[mp angle] (0.68,0) arc[start angle=0,end angle=-38,radius=0.68];
+        \node[mp label, text=figbrown] at (1.0,-0.34) {$-\theta$};
+        \node[mp small, text=figteal] at (1.35,1.35) {$|w|=\dfrac{1}{r}$，靠近原点};
+        \node[mp small, text=black!46] at (0,-2.15) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{在变换 $w=1/z$ 下，远处的大点被送到原点附近}
+\label{fig:inverse-map-geometry}
+\end{figure}
 
 \begin{dingli}{无穷远点与原点的对应}{}
 设 $z\neq 0$，令
