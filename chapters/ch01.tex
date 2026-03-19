@@ -940,6 +940,14 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \begin{align*}
     e^{\mathrm{i}\theta}
     &=\sum_{n=0}^{\infty}\frac{(\mathrm{i}\theta)^n}{n!} \\
+    &=1+\mathrm{i}\theta+\frac{(\mathrm{i}\theta)^2}{2!}+\frac{(\mathrm{i}\theta)^3}{3!}+\frac{(\mathrm{i}\theta)^4}{4!}+\cdots \\
+    &=1+\mathrm{i}\theta-\frac{\theta^2}{2!}-\mathrm{i}\frac{\theta^3}{3!}+\frac{\theta^4}{4!}+\mathrm{i}\frac{\theta^5}{5!}-\cdots \\
+    &=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)
+      +\mathrm{i}\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right).
+\end{align*}
+也就是说，把各项真正写开以后，实部恰好收集了所有偶次幂项，虚部恰好收集了所有奇次幂项。若再改写回求和符号，就是
+\begin{align*}
+    e^{\mathrm{i}\theta}
     &=\sum_{k=0}^{\infty}\frac{(\mathrm{i}\theta)^{2k}}{(2k)!}
       +\sum_{k=0}^{\infty}\frac{(\mathrm{i}\theta)^{2k+1}}{(2k+1)!} \\
     &=\sum_{k=0}^{\infty}(-1)^k\frac{\theta^{2k}}{(2k)!}
