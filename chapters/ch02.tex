@@ -267,7 +267,7 @@
 \end{figure}
 
 \begin{tishi}[映射的视角]
-用``映射''的视角看待复变函数，在后续学习保角映射时会非常重要。我们不仅关心函数在某点的值，还关心函数如何``变形''整个区域。
+用``映射''的视角看待复变函数，在后续若继续选学保角映射时会非常重要。我们不仅关心函数在某点的值，还关心函数如何``变形''整个区域。
 \end{tishi}
 
 % ========== 第三节 ==========
@@ -505,8 +505,14 @@
 设 $h(z) = f(z) \cdot g(z)$，则
 \begin{align}
     h'(z) &= \lim_{\Delta z \to 0} \frac{f(z+\Delta z)g(z+\Delta z) - f(z)g(z)}{\Delta z} \\
-           &= \lim_{\Delta z \to 0} \frac{f(z+\Delta z)g(z+\Delta z) - f(z)g(z+\Delta z) + f(z)g(z+\Delta z) - f(z)g(z)}{\Delta z} \\
-           &= \lim_{\Delta z \to 0} \left[ g(z+\Delta z)\frac{f(z+\Delta z) - f(z)}{\Delta z} + f(z)\frac{g(z+\Delta z) - g(z)}{\Delta z} \right] \\
+           &= \lim_{\Delta z \to 0} \frac{
+               f(z+\Delta z)g(z+\Delta z) - f(z)g(z+\Delta z)
+               + f(z)g(z+\Delta z) - f(z)g(z)
+               }{\Delta z} \\
+           &= \lim_{\Delta z \to 0} \Biggl[
+               g(z+\Delta z)\frac{f(z+\Delta z) - f(z)}{\Delta z}
+               + f(z)\frac{g(z+\Delta z) - g(z)}{\Delta z}
+               \Biggr] \\
            &= g(z)f'(z) + f(z)g'(z)
 \end{align}
 其中用到 $g(z)$ 可导则连续，故 $\lim_{\Delta z \to 0} g(z+\Delta z) = g(z)$。
@@ -682,88 +688,39 @@
 \end{lizi}
 
 % ========== 第六节 ==========
-\section{解析函数\index{解析函数}的几何意义：保角映射}
+\section{解析函数\index{解析函数}的几何意义：局部保角性}
 
-\subsection{导数的几何意义}
+前面在第一章讨论复数乘法时，我们已经知道：乘以一个非零复数，几何上对应着``伸缩加旋转''。现在自然会问：解析函数在一点附近，是否也有类似的几何作用？
 
-设 $w = f(z)$ 在点 $z_0$ 解析，且 $f'(z_0) \neq 0$。我们来研究映射 $w = f(z)$ 在点 $z_0$ 附近的行为。
+\subsection{导数的局部作用}
 
-设 $z$ 沿曲线 $C$ 趋近 $z_0$，对应的像点 $w$ 沿曲线 $C'$ 趋近 $w_0 = f(z_0)$。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.8]
-    % z 平面
-    \begin{scope}
-        \draw[->, thick] (-1, 0) -- (4, 0) node[right] {$x$};
-        \draw[->, thick] (0, -1) -- (0, 3) node[above] {$y$};
-        
-        % 曲线 C
-        \draw[blue, thick, domain=0:90] plot ({1 + 1.5*cos(\x)}, {1 + 1.5*sin(\x)});
-        \node[blue] at (0.5, 2.5) {$C$};
-        
-        % 点 z_0
-        \fill[red] (2.5, 1) circle (2pt) node[below] {$z_0$};
-        
-        % 切线方向
-        \draw[->, thick, green!60!black] (2.5, 1) -- (3.3, 1.5) node[above] {$\varphi$};
-        
-        \node at (1.5, -1.5) {$z$ 平面};
-    \end{scope}
-    
-    % 箭头
-    \draw[->, very thick] (5, 1) -- (6, 1) node[midway, above] {$w=f(z)$};
-    
-    % w 平面
-    \begin{scope}[xshift=8cm]
-        \draw[->, thick] (-1, 0) -- (4, 0) node[right] {$u$};
-        \draw[->, thick] (0, -1) -- (0, 3) node[above] {$v$};
-        
-        % 曲线 C'
-        \draw[blue, thick, domain=20:100] plot ({1 + 1.2*cos(\x)}, {1 + 1.2*sin(\x)});
-        \node[blue] at (0.3, 2) {$C'$};
-        
-        % 点 w_0
-        \fill[red] (1.13, 1.18) circle (2pt) node[below left] {$w_0$};
-        
-        % 切线方向
-        \draw[->, thick, green!60!black] (1.13, 1.18) -- (1.8, 2) node[above] {$\Phi$};
-        
-        \node at (1.5, -1.5) {$w$ 平面};
-    \end{scope}
-\end{tikzpicture}
-\caption{保角映射：曲线的切线方向被旋转}
-\label{fig:conformal}
-\end{figure}
-
-设曲线 $C$ 在 $z_0$ 处的切线与实轴正向的夹角为 $\varphi$，曲线 $C'$ 在 $w_0$ 处的切线与实轴正向的夹角为 $\Phi$。
-
-可以证明：
+设 $w = f(z)$ 在点 $z_0$ 解析，记 $w_0 = f(z_0)$。由导数的定义可知，当 $z$ 足够接近 $z_0$ 时，
 \begin{equation}
-    \Phi = \varphi + \arg f'(z_0)
+    f(z) - f(z_0) = f'(z_0)(z - z_0) + o(|z - z_0|)
 \end{equation}
 
-\textbf{几何意义}：映射 $w = f(z)$ 把曲线 $C$ 在 $z_0$ 处的切线方向旋转了 $\arg f'(z_0)$ 角。
+这句话的意思是：在很小的尺度上，映射 $w = f(z)$ 几乎就像一个线性变换。更具体地说，它近似等于``把向量 $z-z_0$ 乘以 $f'(z_0)$，再平移到点 $w_0$''。
 
-\subsection{保角性}
+若 $f'(z_0) \neq 0$，把
+\begin{equation}
+    f'(z_0) = \rho \mathrm{e}^{\mathrm{i}\theta}, \quad \rho = |f'(z_0)| > 0
+\end{equation}
+写成极形式，那么乘以 $f'(z_0)$ 的几何意义就很清楚了：
+\begin{itemize}
+    \item 长度被放大或缩小为原来的 $\rho$ 倍；
+    \item 方向统一旋转了 $\theta = \arg f'(z_0)$。
+\end{itemize}
 
-\begin{dingliyi}{保角映射}{}
-若映射 $w = f(z)$ 在点 $z_0$ 处满足：
-\begin{enumerate}
-    \item 保持角度大小不变
-    \item 保持角度方向（顺时针/逆时针）不变
-\end{enumerate}
-则称该映射在 $z_0$ 处是\textbf{保角的}。
-\end{dingliyi}
+所以，解析函数在一点附近虽然整体上可能很复杂，但只要把尺度缩小到足够小，它看起来就像一个``旋转加伸缩''的局部线性变换。
 
-\begin{dingli}{保角映射的判定}{}
-设 $f(z)$ 在点 $z_0$ 解析且 $f'(z_0) \neq 0$，则 $w = f(z)$ 在 $z_0$ 处是保角映射。
+\subsection{局部保角性}
+
+\begin{dingli}{解析函数的局部保角性}{}
+设 $f(z)$ 在点 $z_0$ 解析且 $f'(z_0) \neq 0$，则映射 $w = f(z)$ 在 $z_0$ 附近局部保持角度的大小和方向。
 \end{dingli}
 
 \begin{proof}
-设 $C_1$ 和 $C_2$ 是过 $z_0$ 的两条曲线，它们在 $z_0$ 处的切线夹角为 $\alpha$。
-
-映射后，两条曲线变为 $C_1'$ 和 $C_2'$，它们在 $w_0 = f(z_0)$ 处的切线都旋转了 $\arg f'(z_0)$ 角。因此，像曲线的夹角仍为 $\alpha$，且方向不变。
+在点 $z_0$ 附近，$f(z)$ 可以用一次线性部分 $f'(z_0)(z-z_0)$ 近似。乘以非零复数 $f'(z_0)$ 只会对所有方向同时施加同一个旋转，并乘上同一个伸缩因子，因此两条曲线的夹角大小不变，方向也不变。于是 $w=f(z)$ 在 $z_0$ 附近是局部保角的。
 \end{proof}
 
 \begin{figure}[htbp]
@@ -806,11 +763,19 @@
         \node[green!60!black] at (1.2, 2.4) {$\alpha$};
         
         \node at (1.25, -0.8) {映射后};
-    \end{scope}
+\end{scope}
 \end{tikzpicture}
-\caption{保角映射保持曲线夹角不变}
+\caption{解析函数在导数非零处局部保持曲线夹角}
 \label{fig:angle-preserve}
 \end{figure}
+
+\begin{jinshi}[别忽略导数为零的情形]
+条件 $f'(z_0) \neq 0$ 不能省略。如果 $f'(z_0)=0$，映射在这一点附近的主导项往往不再是一次项，局部图形可能被压扁、折叠或多重覆盖，此时一般就不能把它看成简单的``旋转加伸缩''。例如 $w = z^2$ 在 $z = 0$ 处就不是保角的。
+\end{jinshi}
+
+\begin{tishi}[这一节先抓住什么]
+这一节只需要先记住一句话：\textbf{解析函数在导数非零的点附近，局部上像乘以一个非零复数，因此会保持角度。}至于怎样系统构造具体的保角映射，属于后面的选学内容。
+\end{tishi}
 
 % ========== 第七节 ==========
 \section{初等解析函数\index{解析函数}}
@@ -983,7 +948,7 @@
     \item \textbf{复变函数}：$w = f(z) = u(x,y) + \mathrm{i}v(x,y)$
     \item \textbf{解析函数\index{解析函数}}：在区域内每一点都可导的函数
     \item \textbf{C-R 条件}：$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$，$\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$
-    \item \textbf{保角映射}：保持角度大小和方向的映射
+    \item \textbf{局部保角性}：解析函数在导数非零的点附近局部保持角度
 \end{enumerate}
 
 \subsection{重要公式}
@@ -997,6 +962,7 @@
 导数定义 & $f'(z) = \lim_{\Delta z \to 0} \frac{f(z+\Delta z) - f(z)}{\Delta z}$ \\
 C-R 条件 & $u_x = v_y$，$u_y = -v_x$ \\
 导数公式 & $f' = u_x + \mathrm{i}v_x = v_y - \mathrm{i}u_y$ \\
+局部线性近似 & $f(z)-f(z_0) = f'(z_0)(z-z_0) + o(|z-z_0|)$ \\
 指数函数 & $\mathrm{e}^z = \mathrm{e}^x(\cos y + \mathrm{i}\sin y)$ \\
 对数函数 & $\ln z = \ln|z| + \mathrm{i}(\arg z + 2k\pi)$ \\
 三角函数 & $\sin z = \frac{\mathrm{e}^{\mathrm{i}z} - \mathrm{e}^{-\mathrm{i}z}}{2\mathrm{i}}$ \\
@@ -1054,5 +1020,5 @@ C-R 条件 & $u_x = v_y$，$u_y = -v_x$ \\
 \begin{enumerate}[resume]
     \item 设 $f(z)$ 在区域 $D$ 内解析，且 $|f(z)|$ 在 $D$ 内为常数。证明 $f(z)$ 在 $D$ 内为常数。
     
-    \item 研究映射 $w = z + 1/z$ 的保角性质，讨论单位圆内部的像。
+    \item 研究映射 $w = z^2$ 在 $z_0 \neq 0$ 和 $z_0 = 0$ 处的局部几何作用：它分别对应怎样的旋转与伸缩？为什么在 $z = 0$ 处不再保角？
 \end{enumerate}
