@@ -536,6 +536,8 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 
 \subsection{三角不等式与反三角不等式}
 
+前面已经知道，模既可以表示向量的长度，也可以表示两点之间的距离。因此，一旦把复数放到复平面上，很多关于模的不等式都会带有非常直观的几何意义。本节先证明三角不等式，再把反三角不等式看成它的一个直接推论。
+
 \begin{dingli}{三角不等式（triangle inequality）}{}
 对任意复数 $z_1,z_2$，都有
 \begin{equation}\label{eq:triangle-inequality}
@@ -543,7 +545,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \end{equation}
 \end{dingli}
 
-如果只把式子 \eqref{eq:triangle-inequality} 当成一个代数结论来记，往往会觉得它有些突然。其实它背后的几何图像非常朴素：复数既可以看成向量，也可以看成点；而三角不等式与反三角不等式，本质上都在描述同一个三角形里的边长关系。
+如果只把式子 \eqref{eq:triangle-inequality} 当成一个代数结论来记，往往会觉得它有些突然。其实它背后的几何图像非常朴素。图 \ref{fig:triangle-geometry} 的左图对应三角不等式；右图我们先保留，等下面正式写出反三角不等式后再回来看。
 
 \begin{figure}[htbp]
 \centering
@@ -600,11 +602,7 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \]
 这时三角形 $OAB$ 的三条边长分别是 $|z_1|,|z_2|,|z_1+z_2|$，所以三角不等式说的就是：``从 $O$ 直接走到 $B$ 的路程，不会超过先从 $O$ 走到 $A$，再从 $A$ 走到 $B$ 的总路程。''
 
-右图中，$\overrightarrow{OP}=z_1$，$\overrightarrow{OQ}=z_2$，而
-\[
-\overrightarrow{QP}=\overrightarrow{OP}-\overrightarrow{OQ}=z_1-z_2.
-\]
-于是三角形 $OPQ$ 的三条边长分别是 $|z_1|,|z_2|,|z_1-z_2|$。这就说明两点到原点距离的差，不可能大于这两点之间的实际距离，也就是反三角不等式。
+几何图像已经说明了这个结论为什么是自然的。下面再给出一个代数证明。为了避免直接处理根号，我们先比较两边的平方。
 
 \begin{proof}
 设
@@ -662,6 +660,16 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|.
 \]
 \end{proof}
+
+现在再回头看图 \ref{fig:triangle-geometry} 的右图。设
+\[
+\overrightarrow{OP}=z_1,\qquad \overrightarrow{OQ}=z_2,
+\]
+则
+\[
+\overrightarrow{QP}=\overrightarrow{OP}-\overrightarrow{OQ}=z_1-z_2.
+\]
+于是三角形 $OPQ$ 的三条边长分别是 $|z_1|,|z_2|,|z_1-z_2|$。这就说明两点到原点距离的差，不可能大于这两点之间的实际距离，也就是反三角不等式。
 
 \begin{tishi}[几何理解]
 图 \ref{fig:triangle-geometry} 值得反复看。以后只要看到 $|a+b|$，就可以提醒自己：它对应的是``合位移不超过分段路程之和''；而看到 $|a-b|$ 时，就要想到：它对应的是``两点之间的距离，至少大于等于它们到原点距离之差''。后面无论是估计幂级数、证明极限，还是给复积分作上界，这两个几何直观都会不断出现。
