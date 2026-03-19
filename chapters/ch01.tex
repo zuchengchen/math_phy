@@ -1008,11 +1008,13 @@ e^{\mathrm{i}\pi}=-1
 
 \subsection{指数形式及其优点}
 
-由欧拉公式 \eqref{eq:euler-formula}，三角形式 \eqref{eq:trigonometric-form} 可以进一步写成
+三角形式已经把复数的长度和方向写得很清楚了，但如果后面要做乘法、除法、乘幂和开方，$\cos\theta$ 和 $\sin\theta$ 往往总是成对出现，写起来仍然比较笨重。欧拉公式 \eqref{eq:euler-formula} 恰好把这两个三角函数压缩成了一个复指数，所以三角形式 \eqref{eq:trigonometric-form} 还可以进一步写成
 \begin{equation}
     z=re^{\mathrm{i}\theta}.
 \end{equation}
-这称为复数的\textbf{指数形式}。
+这就是复数的\textbf{指数形式}。
+
+这里先讨论 $z\neq 0$ 的情形。因为非零复数既有长度，也有方向；而 $0$ 的模虽然是 $0$，但它没有确定的辐角。更具体地说，从代数上看，$0$ 的确可以写成 $0e^{\mathrm{i}\theta}$，但这时 $\theta$ 可以任意取值，这种写法并不能提供任何方向信息，所以指数形式主要是为\textbf{非零复数}准备的。
 
 \begin{dingliyi}{指数形式}{}
 设 $z\neq 0$，若
@@ -1025,6 +1027,16 @@ r=|z|,\qquad \theta\in \arg z,
 \end{equation}
 称为复数 $z$ 的\textbf{指数形式（exponential form）}。
 \end{dingliyi}
+
+先看最简单的情形 $r=1$。这时
+\[
+z=e^{\mathrm{i}\theta}
+\]
+表示单位圆上辐角为 $\theta$ 的点，如图 \ref{fig:euler-unit-circle} 所示。它只记录方向，不改变长度。一般的
+\[
+z=re^{\mathrm{i}\theta}
+\]
+则是在这个方向上再乘一个正数 $r$，也就是把单位圆上的点沿着同一条射线拉长或缩短到模为 $r$ 的位置。
 
 \begin{figure}[htbp]
 \centering
@@ -1040,18 +1052,19 @@ r=|z|,\qquad \theta\in \arg z,
     \node[above right] at (Z) {$e^{\mathrm{i}\theta}$};
     \node[below left] at (0,0) {$O$};
 \end{tikzpicture}
-\caption{单位圆上的 $e^{\mathrm{i}\theta}$}
+\caption{单位圆上的 $e^{\mathrm{i}\theta}$：它给出方向，乘上 $r$ 后得到一般的 $re^{\mathrm{i}\theta}$}
 \label{fig:euler-unit-circle}
 \end{figure}
 
-指数形式的优点在于：
+指数形式的优点可以先概括为下面三点：
 \begin{itemize}
-    \item 它把模和辐角压缩进一个紧凑表达式中；
-    \item 乘法、除法、乘幂和开方都能直接用它处理；
-    \item 对物理中的振动和相位问题特别自然。
+    \item 它把模 $r$ 和辐角 $\theta$ 压缩进一个紧凑表达式中，长度与方向一眼可见；
+    \item 后面处理乘法、除法、乘幂和开方时，公式会比三角形式整齐得多；
+    \item 在物理里，相位、振动和波动常写成复指数形式，因此它用起来特别自然。
 \end{itemize}
+所以，指数形式并不是把东西写得更花哨，而是把结构写得更清楚。
 
-由欧拉公式还可立刻得到
+反过来看，既然欧拉公式把 $\cos\theta$ 和 $\sin\theta$ 合并成了 $e^{\mathrm{i}\theta}$，我们也可以把它们再从复指数里拆出来：
 \begin{equation}
     \cos\theta=\frac{e^{\mathrm{i}\theta}+e^{-\mathrm{i}\theta}}{2},\qquad
     \sin\theta=\frac{e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}}{2\mathrm{i}}.
@@ -1077,7 +1090,7 @@ e^{\mathrm{i}\theta}+e^{-\mathrm{i}\theta}=2\cos\theta;
 e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}=2\mathrm{i}\sin\theta.
 \]
 于是两边分别除以 $2$ 和 $2\mathrm{i}$，就得到上面的两个公式。
-这两个公式以后在傅里叶分析中会频繁出现。
+这说明指数形式并没有丢掉原来三角形式中的信息，它只是把这些信息换成了一种更紧凑的写法。这两个公式以后在傅里叶分析中会频繁出现。
 
 \begin{lizi}{代数形式与指数形式互化}{}
 把
