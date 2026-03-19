@@ -1675,17 +1675,17 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \draw[gray!80!black, thick] (O) circle (1.55);
     \draw[gray!70, thin] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
     \draw[gray!70, thin, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
-    \draw[gray!85!black, line width=1.1pt] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.42,y radius=1.55];
-    \draw[gray!55, line width=1.1pt, dash pattern=on 2.2pt off 1.6pt] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=90,x radius=0.42,y radius=1.55];
+    \draw[gray!85!black, line width=1.1pt] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
+    \draw[gray!55, line width=1.1pt, dash pattern=on 2.2pt off 1.6pt] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
 
     % north/south and sample point
     \coordinate (N) at ($(O)+(0,1.55)$);
     \coordinate (S) at ($(O)+(0,-1.55)$);
-    \coordinate (P) at (0.75,1.90);
+    \coordinate (P) at (0.86,1.98);
     \coordinate (Z) at (2.63,-0.60);
 
     % projection line
-    \draw[orange!90!black, line width=1.1pt, dashed] (N) -- (P);
+    \draw[orange!90!black, line width=1.1pt, dash pattern=on 2.2pt off 1.6pt] (N) -- (P);
     \draw[orange!90!black, line width=1.2pt] (P) -- (Z);
 
     % points
