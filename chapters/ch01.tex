@@ -1213,36 +1213,34 @@ z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[->] (-0.6,0) -- (4.8,0) node[right] {$\operatorname{Re}z$};
-    \draw[->] (0,-0.6) -- (0,4.1) node[above] {$\operatorname{Im}z$};
+    \draw[->, gray!70] (-0.6,0) -- (4.8,0) node[right, black] {$\operatorname{Re}z$};
+    \draw[->, gray!70] (0,-0.6) -- (0,4.1) node[above, black] {$\operatorname{Im}z$};
 
     \coordinate (Z1) at (30:2);
     \coordinate (Z2) at (40:1.6);
     \coordinate (P) at (70:3.2);
 
-    \draw[dashed, gray!65] (0,0) circle (2);
-    \draw[dashed, gray!65] (0,0) circle (3.2);
-
     \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
-    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (Z2);
+    \draw[->, thick, orange!85!black, shorten >=2.5pt] (0,0) -- (Z2);
     \draw[->, very thick, purple!85!black, shorten >=2.5pt] (0,0) -- (P);
 
     \fill[blue!80!black] (Z1) circle (2pt);
-    \fill[red!75!black] (Z2) circle (2pt);
+    \fill[orange!85!black] (Z2) circle (2pt);
     \fill[purple!85!black] (P) circle (2pt);
 
     \draw[thick, blue!80!black] (0.55,0) arc[start angle=0,end angle=30,radius=0.55];
     \node[blue!80!black] at (0.83,0.22) {$\theta_1$};
 
-    \draw[thick, red!75!black] (30:0.95) arc[start angle=30,end angle=70,radius=0.95];
-    \node[red!75!black] at (1.03,0.78) {$\theta_2$};
+    \draw[thick, orange!85!black] (30:0.95) arc[start angle=30,end angle=70,radius=0.95];
+    \node[orange!85!black] at (1.03,0.78) {$\theta_2$};
 
-    \node[below right] at (Z1) {$z_1$};
-    \node[right] at (Z2) {$z_2$};
-    \node[above left] at (P) {$z_1z_2$};
+    \node[below right, blue!80!black] at (Z1) {$z_1$};
+    \node[right, orange!85!black] at (Z2) {$z_2$};
+    \node[above left, purple!85!black] at (P) {$z_1z_2$};
 
-    \node[gray!70] at (150:2.15) {$|z_1|=r_1$};
-    \node[gray!70] at (125:3.35) {$|z_1z_2|=r_1r_2$};
+    \node[blue!80!black] at (145:1.95) {$|z_1|=r_1$};
+    \node[orange!85!black] at (28:1.25) {$|z_2|=r_2$};
+    \node[purple!85!black] at (112:3.15) {$|z_1z_2|=r_1r_2$};
     \node[above left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数乘法对应``长度乘上去、方向转过去''}
@@ -1400,6 +1398,147 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
 \begin{jinshi}[不要把乘以 $\mathrm{i}$ 理解成``多写一个 $\mathrm{i}$'' ]
 乘以 $\mathrm{i}$ 不是在原来的复数后面``再挂一个符号''，而是在复平面上做了一个明确的几何变换：长度不变，方向逆时针转 $\pi/2$。以后学习解析函数导数的几何意义时，这一点会再次出现。
 \end{jinshi}
+
+\subsection{复数乘法与旋转矩阵}
+
+前面我们一直说：乘以一个复数，本质上是在做``伸缩 + 旋转''。这句话还可以换一种大家以后会越来越熟悉的语言来表达：\textbf{复数乘法对应着平面上的一个特殊矩阵变换}。
+
+这样写的好处是，复数、向量和线性变换这三种视角就真正连起来了。后面第二章学习解析函数的局部几何意义时，我们会看到：在很小的范围内，解析映射常常近似于``乘以一个复数''，也就是近似于这样一种特殊的矩阵变换。
+
+设
+\[
+z=x+\mathrm{i}y,\qquad \alpha=a+\mathrm{i}b.
+\]
+则
+\begin{align*}
+    \alpha z
+    &=(a+\mathrm{i}b)(x+\mathrm{i}y)\\
+    &=(ax-by)+\mathrm{i}(bx+ay).
+\end{align*}
+这说明：如果把复数 $z=x+\mathrm{i}y$ 看成平面向量
+\[
+\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix},
+\]
+那么乘以复数 $\alpha=a+\mathrm{i}b$ 的结果，就可以写成
+\begin{equation}\label{eq:complex-multiplication-matrix}
+    \begin{pmatrix}
+        \operatorname{Re}(\alpha z)\\
+        \operatorname{Im}(\alpha z)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        a & -b\\
+        b & a
+    \end{pmatrix}
+    \begin{pmatrix}
+        x\\
+        y
+    \end{pmatrix}.
+\end{equation}
+
+也就是说，复数乘法在坐标上对应的，是形如
+\[
+\begin{pmatrix}
+    a & -b\\
+    b & a
+\end{pmatrix}
+\]
+的二维实矩阵。
+
+前一小节中的特殊情形 $\alpha=\mathrm{i}$，正好对应
+\[
+\begin{pmatrix}
+    0 & -1\\
+    1 & 0
+\end{pmatrix},
+\]
+它把
+\[
+\begin{pmatrix}
+    x\\
+    y
+\end{pmatrix}
+\]
+变成
+\[
+\begin{pmatrix}
+    -y\\
+    x
+\end{pmatrix},
+\]
+这正是逆时针旋转 $\pi/2$ 的矩阵形式。
+
+如果再把 $\alpha$ 写成极形式
+\[
+\alpha=r(\cos\theta+\mathrm{i}\sin\theta),
+\]
+那么
+\[
+a=r\cos\theta,\qquad b=r\sin\theta.
+\]
+代入式 \eqref{eq:complex-multiplication-matrix} 中的矩阵，便得到
+\begin{equation}
+    \begin{pmatrix}
+        a & -b\\
+        b & a
+    \end{pmatrix}
+    =
+    r
+    \begin{pmatrix}
+        \cos\theta & -\sin\theta\\
+        \sin\theta & \cos\theta
+    \end{pmatrix}.
+\end{equation}
+右边第二个矩阵正是平面上逆时针旋转 $\theta$ 的旋转矩阵，而前面的 $r$ 表示把长度统一乘以 $r$。所以我们前面得到的结论
+\[
+\alpha z=r e^{\mathrm{i}\theta} z
+\]
+现在就有了完全一致的矩阵解释：\textbf{乘以复数 $\alpha$，就是先做等比例伸缩，再做旋转；或者反过来说，先旋转再等比例伸缩，效果也是一样的。}
+
+\begin{lizi}{把复数乘法写成旋转矩阵}{}
+考察乘以复数
+\[
+1+\mathrm{i}
+\]
+所对应的平面变换。
+
+\begin{jie}
+因为
+\[
+1+\mathrm{i}=\sqrt{2}\,e^{\mathrm{i}\pi/4},
+\]
+所以它的几何意义是：\textbf{把任意向量先逆时针旋转 $\pi/4$，再把长度放大到原来的 $\sqrt{2}$ 倍。}
+
+若从矩阵形式看，由 $a=1,b=1$ 可得对应矩阵为
+\[
+\begin{pmatrix}
+    1 & -1\\
+    1 & 1
+\end{pmatrix}
+=
+\sqrt{2}
+\begin{pmatrix}
+    \cos\frac{\pi}{4} & -\sin\frac{\pi}{4}\\
+    \sin\frac{\pi}{4} & \cos\frac{\pi}{4}
+\end{pmatrix}.
+\]
+这与前面的极形式解释完全一致。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[为什么这里只得到一类特殊矩阵]
+并不是每个二维实矩阵都能写成
+\[
+\begin{pmatrix}
+    a & -b\\
+    b & a
+\end{pmatrix}
+\]
+这种形式。复数乘法对应的，正是其中非常特殊的一类：它对所有方向施加\textbf{同样的伸缩因子}，并附加\textbf{同一个旋转角}，因此不会把一个小图形剪切歪掉。后面解析函数在导数非零的点附近之所以能保持角度，正和这种特殊结构直接相关。
+\end{tishi}
 
 \section{复数的乘方、开方与单位根}
 
