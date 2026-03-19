@@ -165,6 +165,35 @@
 ``与路径无关''不是一个定义性的空话，而是一个很强的性质。它的意思是：从同一点出发走到同一点终止时，中间绕不绕弯、沿哪条路走，都不会改变积分值。
 \end{zhu}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \fill[fill=figtealfill] plot[smooth cycle] coordinates {(-0.4, 0.2) (0.8, -0.4) (3.8, -0.3) (4.6, 0.8) (4.3, 2.3) (2.9, 2.8) (0.9, 2.5) (-0.6, 1.4)};
+    \draw[draw=figguide, line width=0.6pt] plot[smooth cycle] coordinates {(-0.4, 0.2) (0.8, -0.4) (3.8, -0.3) (4.6, 0.8) (4.3, 2.3) (2.9, 2.8) (0.9, 2.5) (-0.6, 1.4)};
+    \node[mp label] at (2.0, 1.3) {$D$};
+
+    \coordinate (A) at (0.55, 0.65);
+    \coordinate (B) at (4.0, 0.95);
+
+    \draw[draw=figblue, line width=1.1pt, ->] (A) .. controls (1.3, 2.05) and (3.0, 2.2) .. (B);
+    \node[mp label, text=figblue] at (2.2, 2.05) {$C_1$};
+
+    \draw[draw=figteal, line width=1.1pt, ->] (A) .. controls (1.45, -0.05) and (2.95, -0.05) .. (B);
+    \node[mp label, text=figteal] at (2.15, 0.1) {$C_2$};
+
+    \fill[fill=figred] (A) circle (2pt);
+    \fill[fill=figred] (B) circle (2pt);
+    \node[mp label] at ($(A)+(-0.25, -0.15)$) {$z_1$};
+    \node[mp label] at ($(B)+(0.25, -0.12)$) {$z_2$};
+
+    \node[mp small, align=center, fill=white, inner sep=1.5pt] at (2.45, 1.18) {$C_1 - C_2$\\构成闭路};
+\end{tikzpicture}
+\caption{路径无关的几何图像：两条不同路径连接同样的起点和终点}
+\label{fig:path-independence}
+\end{figure}
+
+图~\ref{fig:path-independence} 里最关键的观察是：若把 $C_2$ 反向，那么 $C_1$ 与 $-C_2$ 就拼成一条闭路。于是路径无关问题常常可以转化成``对应闭路积分是否为零''的问题。
+
 \subsection{原函数与复积分的基本公式}
 
 \begin{dingliyi}{原函数}{}
@@ -481,6 +510,34 @@
 \]
 \end{dingli}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.05]
+    \fill[fill=figbluefill] (0, 0) circle (2.15);
+    \fill[fill=white] (0.45, -0.1) circle (0.72);
+
+    \draw[draw=figblue, line width=1.15pt] (0, 0) circle (2.15);
+    \draw[draw=figpurple, line width=1.0pt] (0.45, -0.1) circle (0.72);
+
+    \draw[draw=figblue, line width=1.15pt, ->] (120:2.15) arc[start angle=120, end angle=175, radius=2.15];
+    \draw[draw=figpurple, line width=1.0pt, ->] ($(0.45,-0.1)+(25:0.72)$) arc[start angle=25, end angle=95, radius=0.72];
+
+    \fill[fill=figred] (0.45, -0.1) circle (2pt);
+    \node[mp label] at (0.8, -0.28) {$z_0$};
+
+    \draw[draw=figguide, dashed, line width=0.6pt] (0.45, -0.1) -- ($(0.45,-0.1)+(0:0.72)$);
+    \node[mp small, fill=white, inner sep=1pt] at (0.82, 0.08) {$r$};
+
+    \node[mp label, text=figblue] at (1.75, 1.55) {$C$};
+    \node[mp label, text=figpurple] at (1.58, -0.78) {$C_r$};
+    \node[mp small] at (-1.15, -1.45) {$D\setminus B(z_0,r)$};
+\end{tikzpicture}
+\caption{柯西积分公式的几何核心：把外边界上的积分缩到包围 $z_0$ 的小圆上}
+\label{fig:cauchy-formula-geometry}
+\end{figure}
+
+图~\ref{fig:cauchy-formula-geometry} 展示了证明里的核心操作：在去掉小圆 $C_r$ 之后得到一个环形区域，再利用多连通区域中的柯西积分定理，把外边界 $C$ 上的积分转移到小圆 $C_r$ 上。
+
 \begin{proof}
 考虑积分 $\displaystyle\oint_C \frac{f(z)}{z - z_0}\,\mathrm{d}z$。
 
@@ -566,6 +623,37 @@
     f^{(n)}(z_0) = \frac{n!}{2\pi\mathrm{i}}\oint_C \frac{f(z)}{(z - z_0)^{n+1}}\,\mathrm{d}z
 \]
 \end{dingli}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \fill[fill=figbluefill] (0, 0) circle (2.2);
+    \draw[draw=figblue, line width=1.1pt] (0, 0) circle (2.2);
+    \draw[draw=figblue, line width=1.1pt, ->] (125:2.2) arc[start angle=125, end angle=180, radius=2.2];
+
+    \coordinate (z0) at (0.2, -0.15);
+    \coordinate (zh) at (0.85, 0.28);
+    \coordinate (p) at (2.2, 0);
+
+    \fill[fill=figred] (z0) circle (2pt);
+    \fill[fill=figteal] (zh) circle (2pt);
+    \fill[fill=figblue] (p) circle (1.4pt);
+
+    \draw[draw=figpurple, line width=1.0pt, ->] (z0) -- (zh);
+    \draw[draw=figguide, dashed, line width=0.6pt] (z0) -- (p);
+
+    \node[mp label] at ($(z0)+(-0.25,-0.18)$) {$z_0$};
+    \node[mp label] at ($(zh)+(0.35,0.15)$) {$z_0+h$};
+    \node[mp small, fill=white, inner sep=1pt] at ($(z0)!0.52!(zh)+(0,0.16)$) {$h$};
+    \node[mp small, fill=white, inner sep=1pt] at ($(z0)!0.56!(p)+(0,-0.2)$) {$d$};
+    \node[mp label, text=figblue] at (1.85, 1.45) {$C$};
+    \node[mp small] at (-1.0, -1.45) {两点都保持在闭曲线内部};
+\end{tikzpicture}
+\caption{高阶导数公式中的差商几何：比较 $z_0$ 与 $z_0+h$ 在同一条闭曲线内部的积分表示}
+\label{fig:cauchy-derivative-geometry}
+\end{figure}
+
+图~\ref{fig:cauchy-derivative-geometry} 说明了证明里为什么要先限制 $|h|<d/2$：这样 $z_0$ 和 $z_0+h$ 都留在同一条闭曲线 $C$ 的内部，从而可以把两点的函数值都写成同一个边界积分的形式，再去做差商。
 
 \begin{proof}
 先证一阶导数公式。由于 $z_0$ 在闭曲线 $C$ 的内部，而 $C$ 是紧曲线，所以 $z_0$ 到 $C$ 的距离
@@ -662,6 +750,45 @@
 \begin{dingli}{莫雷拉定理}{}
 设 $f(z)$ 在区域 $D$ 内连续，且对于 $D$ 内任意简单闭曲线 $C$，有 $\oint_C f(z)\,\mathrm{d}z = 0$，则 $f(z)$ 在 $D$ 内解析。
 \end{dingli}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \coordinate (A0) at (0,0);
+    \coordinate (A1) at (1.0,0.85);
+    \coordinate (A2) at (2.1,1.0);
+    \coordinate (A3) at (3.15,0.85);
+    \coordinate (A4) at (4.2,0.45);
+
+    \coordinate (B0) at (0,0);
+    \coordinate (B1) at (1.0,-0.6);
+    \coordinate (B2) at (2.1,-0.4);
+    \coordinate (B3) at (3.15,-0.2);
+    \coordinate (B4) at (4.2,0.45);
+
+    \fill[fill=figtealfill] (A0) -- (A1) -- (A2) -- (A3) -- (A4) -- (B4) -- (B3) -- (B2) -- (B1) -- cycle;
+
+    \draw[draw=figblue, line width=1.05pt, ->] (A0) -- (A1) -- (A2) -- (A3) -- (A4);
+    \draw[draw=figteal, line width=1.05pt, ->] (B0) -- (B1) -- (B2) -- (B3) -- (B4);
+
+    \draw[draw=figguide, dashed, line width=0.6pt] (A1) -- (B1);
+    \draw[draw=figguide, dashed, line width=0.6pt] (A2) -- (B2);
+    \draw[draw=figguide, dashed, line width=0.6pt] (A3) -- (B3);
+
+    \fill[fill=figred] (A0) circle (2pt);
+    \fill[fill=figred] (A4) circle (2pt);
+
+    \node[mp label] at ($(A0)+(-0.25,-0.18)$) {$z_0$};
+    \node[mp label] at ($(A4)+(0.28,0.05)$) {$z$};
+    \node[mp label, text=figblue] at (2.25,1.28) {$C_1$};
+    \node[mp label, text=figteal] at (2.25,-0.82) {$C_2$};
+    \node[mp small, align=center, fill=white, inner sep=1.4pt] at (2.15,0.28) {分成许多小闭路\\内部边界相互抵消};
+\end{tikzpicture}
+\caption{莫雷拉定理的直观：两条路径围成的区域可分成许多小闭路，内部边界相互抵消}
+\label{fig:morera-intuition}
+\end{figure}
+
+图~\ref{fig:morera-intuition} 画出了莫雷拉定理背后的直观想法：如果围成区域的小闭路积分都为零，那么把这片区域切成很多小块以后，内部边界会两两抵消，最后就会导向路径无关。
 
 \begin{proof}
 固定一点 $z_0\in D$。由条件知：$D$ 内任意闭曲线上的积分都为零，因此两点之间的积分与路径无关。于是可以定义
