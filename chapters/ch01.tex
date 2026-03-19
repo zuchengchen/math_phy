@@ -1666,17 +1666,17 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \coordinate (C) at (5.1,0.15);
     \coordinate (D) at (-2.8,0.15);
     \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
-    \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
-    \node[gray!70] at (4,-0.15) {复平面};
+    \draw[gray] (A) -- (B) -- (C) -- (D) -- cycle;
+    \node[gray] at (4,-0.15) {复平面};
 
     % sphere
     \coordinate (O) at (0.45,0.85);
     \fill[gray!10] (O) circle (1.55);
-    \draw[gray!80!black, thick] (O) circle (1.55);
-    \draw[gray!70, thin] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
-    \draw[gray!70, thin, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
-    \draw[gray!85!black, line width=1.1pt] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
-    \draw[gray!55, line width=1.1pt, dash pattern=on 2.2pt off 1.6pt] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
+    \draw[gray!80!black] (O) circle (1.55);
+    \draw[gray] ($(O)+(-1.55,0)$) arc[start angle=180,end angle=360,x radius=1.55,y radius=0.48];
+    \draw[gray, dashed] ($(O)+(1.55,0)$) arc[start angle=0,end angle=180,x radius=1.55,y radius=0.48];
+    \draw[gray!85!black] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.82,y radius=1.55];
+    \draw[gray, dash pattern=on 2.2pt off 1.6pt] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=450,x radius=0.82,y radius=1.55];
 
     % north/south and sample point
     \coordinate (N) at ($(O)+(0,1.55)$);
@@ -1690,7 +1690,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
     % points
     \fill[gray!80!black] (N) circle (2pt) node[above] {$N$};
-    \fill[gray!80!black] (S) circle (2pt) node[below right] {$S$};
+    \fill[gray!80!black] (S) circle (2pt) node[below] {$S$};
     \fill[orange!90!black] (P) circle (2pt) node[above right] {$P$};
     \fill[orange!90!black] (Z) circle (2pt) node[below] {$z$};
 
@@ -1927,7 +1927,7 @@ x(t)=\operatorname{Re}\left(5e^{-\mathrm{i}\arctan(4/3)}e^{\mathrm{i}\omega t}\r
 \end{jie}
 \end{lizi}
 
-\subsection{交流电路（alternating-current circuit）中的相量思想}
+\subsection{交流电路中的相量思想}
 
 在交流电路（alternating-current circuit）里，电压和电流往往都是同频正弦量。若把它们写成复数形式，就可以把许多微分关系化成代数关系。例如，若电流写成
 \[
@@ -1950,7 +1950,7 @@ u_L(t)=L\frac{\mathrm{d}i}{\mathrm{d}t}
 原来需要处理的三角函数微分方程，在复数表示下往往会变成简单的代数乘法和除法。也正因为这样，复数方法在电路、振动和波动问题里极其常用。
 \end{tishi}
 
-\subsection{量子力学（quantum mechanics）中的复振幅（complex amplitude）}
+\subsection{量子力学中的波函数}
 
 在量子力学（quantum mechanics）里，波函数（wave function）一般写成复值函数。它的模平方与概率有关，而相位本身也携带重要信息。这再次说明：复数并不是数学家为了好看而引入的对象，它已经深深嵌入现代物理的表达方式中。
 
