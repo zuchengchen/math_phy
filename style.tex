@@ -355,21 +355,20 @@
 \newcommand{\important}[1]{\textcolor{importantred}{\textbf{#1}}}
 \newcommand{\formulaf}[1]{\boxed{\textcolor{theoremblue}{#1}}}
 
-% 解答环境（用于例题解答）
-% 带有紫色左边框和浅色背景，清晰区分解答内容
-\newtcolorbox{jie}{
-  enhanced,
-  colback=examplepurple!3!white,
-  colframe=examplepurple,
-  boxrule=0pt,
-  leftrule=3pt,
-  arc=0pt,
-  left=10pt, right=6pt, top=4pt, bottom=4pt,
-  before upper={\textcolor{examplepurple}{\bfseries 解：}\par\vspace{2pt}},
-  breakable,
-  before skip=0.3em,
-  after skip=0.5em
+% 解答环境（仿 proof 的行文式环境，避免盒子套盒子带来的分页留白）
+\makeatletter
+\newenvironment{jie}[1][解]{%
+  \par
+  \pushQED{\qed}%
+  \normalfont
+  \topsep=0.35em\partopsep=0pt\relax
+  \trivlist
+  \item[\hskip\labelsep\textcolor{examplepurple}{\bfseries #1：}]%
+  \ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
 }
+\makeatother
 
 % ========== 自定义环境 ==========
 % 警示框：常见错误（警示红）
