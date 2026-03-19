@@ -79,6 +79,52 @@
 
 这把复积分化为两个实线积分。
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \draw[mp thin axis] (-0.5, 0) -- (4.8, 0) node[right] {$x$};
+    \draw[mp thin axis] (0, -0.5) -- (0, 3.3) node[above] {$y$};
+
+    \coordinate (A) at (0.6, 0.45);
+    \coordinate (B) at (4.1, 2.45);
+
+    \draw[draw=figblue, line width=1.15pt, ->] (A) .. controls (1.6, 2.65) and (3.0, 0.25) .. (B);
+    \node[mp label, text=figblue] at (2.35, 2.35) {$C$};
+
+    \fill[fill=figred] (A) circle (2pt);
+    \fill[fill=figred] (B) circle (2pt);
+    \node[mp label] at ($(A)+(-0.18,-0.2)$) {$z(a)$};
+    \node[mp label] at ($(B)+(0.22,0.08)$) {$z(b)$};
+
+    \coordinate (P0) at (1.35,1.68);
+    \coordinate (P1) at (2.2,1.58);
+    \coordinate (P2) at (3.15,1.55);
+
+    \fill[fill=figteal] (P0) circle (1.8pt);
+    \fill[fill=figteal] (P1) circle (1.8pt);
+    \fill[fill=figteal] (P2) circle (1.8pt);
+
+    \node[mp small] at ($(P0)+(-0.18,0.28)$) {$z(t_1)$};
+    \node[mp small] at ($(P1)+(0,0.32)$) {$z(t_2)$};
+    \node[mp small] at ($(P2)+(0.1,0.3)$) {$z(t_3)$};
+
+    \draw[draw=figguide, dashed, line width=0.6pt] (P0) -- +(0,-1.68);
+    \draw[draw=figguide, dashed, line width=0.6pt] (P1) -- +(0,-1.58);
+    \draw[draw=figguide, dashed, line width=0.6pt] (P2) -- +(0,-1.55);
+
+    \node[mp small] at ($(P0)+(0,-1.9)$) {$t_1$};
+    \node[mp small] at ($(P1)+(0,-1.8)$) {$t_2$};
+    \node[mp small] at ($(P2)+(0,-1.78)$) {$t_3$};
+
+    \draw[draw=figpurple, line width=0.9pt, ->] (0.85, -0.12) -- (3.9, -0.12);
+    \node[mp small, text=figpurple] at (2.45, -0.35) {参数 $t$ 从 $a$ 走到 $b$};
+\end{tikzpicture}
+\caption{参数化的几何意义：用实参数 $t$ 沿曲线依次走过复平面中的点}
+\label{fig:parametrization-geometry}
+\end{figure}
+
+图~\ref{fig:parametrization-geometry} 想强调的是：参数化并不是把曲线``写成一个公式''这么简单，而是把沿曲线积分这件事改写成``随着参数 $t$ 前进而累加贡献''。这样一来，复积分就可以回到熟悉的实变量积分框架里去计算。
+
 \begin{lizi}{}{}
 计算 $\displaystyle\int_C z\,\mathrm{d}z$，其中 $C$ 是从 $0$ 到 $1 + \mathrm{i}$ 的直线段。
 
@@ -570,6 +616,38 @@
 柯西积分公式表明：解析函数\index{解析函数}在一点的值等于它在该点周围边界上的``平均值''（加权积分）。这说明解析函数\index{解析函数}的值由边界值完全确定，体现了解析函数\index{解析函数}的``刚性''。
 \end{wulibj}
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \fill[fill=figbluefill] (0,0) circle (2.2);
+    \draw[draw=figblue, line width=1.15pt] (0,0) circle (2.2);
+    \draw[draw=figblue, line width=1.15pt, ->] (130:2.2) arc[start angle=130,end angle=190,radius=2.2];
+
+    \fill[fill=figred] (0,0) circle (2.2pt);
+    \node[mp label] at (0.34,-0.22) {$z_0$};
+
+    \foreach \ang/\lab in {25/A,85/B,150/C,225/D,310/E} {
+        \coordinate (P\lab) at (\ang:2.2);
+        \fill[fill=figteal] (P\lab) circle (1.8pt);
+        \draw[draw=figpurple, line width=0.85pt, ->] (P\lab) -- ($(P\lab)!0.35!(0,0)$);
+    }
+
+    \node[mp small] at (1.55,1.18) {$f(A)$};
+    \node[mp small] at (0.18,2.55) {$f(B)$};
+    \node[mp small] at (-2.05,1.58) {$f(C)$};
+    \node[mp small] at (-1.75,-1.95) {$f(D)$};
+    \node[mp small] at (1.95,-1.42) {$f(E)$};
+    \node[mp label, text=figblue] at (2.62,1.7) {$C$};
+
+    \node[mp small, align=center, fill=white, inner sep=1.6pt] at (0,-2.8)
+    {边界各点的信息共同决定\\内部点 $z_0$ 的函数值};
+\end{tikzpicture}
+\caption{平均值性质的直观图像：边界上的函数值共同决定内部点 $z_0$}
+\label{fig:cauchy-mean-value}
+\end{figure}
+
+图~\ref{fig:cauchy-mean-value} 并不是在说把边界点简单做算术平均，而是在提醒大家：柯西积分公式中的边界积分把整条边界的信息综合起来，最后精确地恢复出内部一点的函数值。
+
 \begin{tishi}[做题时怎样想到柯西积分公式]
 看到
 \[
@@ -707,6 +785,33 @@
 \begin{tishi}[惊人结论]
 解析函数\index{解析函数}有任意阶导数！这是与实变函数的根本区别。一个实函数可以一阶可导但二阶不可导，但复变函数一旦可导就无穷次可导。
 \end{tishi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.82]
+    \draw[mp thin axis] (-0.15,0) -- (4.7,0) node[right] {$\rho=|z-z_0|$};
+    \draw[mp thin axis] (0,-0.15) -- (0,3.55) node[above] {核的大小};
+
+    \draw[draw=figteal, line width=1.0pt, domain=0.42:4.3, smooth, samples=120] plot (\x,{1.15/\x});
+    \draw[draw=figblue, line width=1.05pt, domain=0.42:4.3, smooth, samples=120] plot (\x,{1.55/(\x*\x)});
+    \draw[draw=figred, line width=1.05pt, domain=0.42:4.3, smooth, samples=120] plot (\x,{1.95/(\x*\x*\x)});
+
+    \draw[draw=figguide, dashed, line width=0.6pt] (0.75,0) -- (0.75,3.15);
+    \node[mp small] at (0.75,-0.22) {靠近 $z_0$};
+    \node[mp small] at (3.75,-0.22) {远离 $z_0$};
+
+    \node[mp small, text=figteal, fill=white, inner sep=1pt] at (3.6,0.55) {$\dfrac{1}{|z-z_0|}$};
+    \node[mp small, text=figblue, fill=white, inner sep=1pt] at (2.5,0.7) {$\dfrac{1}{|z-z_0|^2}$};
+    \node[mp small, text=figred, fill=white, inner sep=1pt] at (1.55,1.42) {$\dfrac{1}{|z-z_0|^3}$};
+
+    \node[mp small, align=center, fill=white, inner sep=1.5pt] at (2.7,2.7)
+    {幂次越高，核函数对\\$z_0$ 附近越敏感};
+\end{tikzpicture}
+\caption{高阶核函数的集中效应：幂次越高，对 $z_0$ 附近的贡献越敏感}
+\label{fig:cauchy-kernel-concentration}
+\end{figure}
+
+图~\ref{fig:cauchy-kernel-concentration} 只是一张概念图，但它很有助于理解高阶导数公式为什么会出现更高次的分母：幂次越高，边界积分对靠近 $z_0$ 的几何位置就越敏感，因此能提取出更精细的局部变化信息。
 
 \begin{tishi}[这条公式在题目里怎样使用]
 若闭路积分里出现
