@@ -2,423 +2,1124 @@
 
 \chapter{多值函数、支点与解析支（选学）}
 
-\begin{wulibj}[本章定位]
-前五章里，我们讨论的主角基本都是单值解析函数：在给定区域里，每个 $z$ 都对应唯一的函数值，围绕解析性、级数展开和留数理论展开的一整套方法，也都是在这样的对象上建立起来的。
+\begin{wulibj}[本章导读]
+第五章里，我们已经学会了一个很强的工具：只要函数在围道内除了若干孤立奇点外都是解析的，很多积分就能通过留数来计算。学到这里，很多同学会很自然地冒出一个想法：既然留数定理这么有力，那以后遇到复杂积分，是不是都只要围一条合适的路径，剩下就是算留数？
 
-但当学生继续往前走时，很快就会遇到几个看似熟悉、其实又很不一样的对象：$\arg z$、$\log z$、$z^\alpha$、$\sqrt[n]{z}$。这些函数并不是简单地``再多记几个公式''就能处理，因为它们最根本的困难在于：\textbf{它们往往不能在整个区域里同时保持单值。}
+真正往前走一步以后，就会发现事情没有这么简单。因为复分析里有一类非常自然、又非常常见的对象，它们并不能像前五章里的函数那样，在整个区域上老老实实地保持单值。最典型的例子就是
+\[
+    \arg z,\qquad \log z,\qquad z^\alpha,\qquad \sqrt[n]{z}.
+\]
+这些对象之所以特殊，不是因为它们公式更复杂，而是因为它们和复平面的``绕行''结构纠缠在一起：同一个点，沿不同方式绕一圈回来，函数值可能会变。
 
-因此，本章真正要解决的问题，不是``介绍几个特殊函数''，而是帮助学生理解：
+因此，本章真正要解决的问题不是``再介绍几个新函数''，而是回答下面四个更根本的问题：
 \begin{enumerate}
-    \item 多值性到底从哪里来；
-    \item 为什么要引入主值、分支与支割；
-    \item 怎样把一个多值对象放到合适的区域上，当作单值解析函数来处理；
-    \item 为什么带多值函数的复积分题，往往必须先选支，再谈路径。
+    \item 多值性到底从哪里来？
+    \item 为什么要引入主值、分支与支割？
+    \item 什么样的区域上可以把多值对象变成单值解析函数？
+    \item 带有多值函数的围道积分，为什么必须先选支，再谈路径？
 \end{enumerate}
 
-从课程主线看，这一章一头连着前面的留数理论，一头又连着后面的保角映射与某些典型积分应用。它虽然标为选学，但对想真正把复变函数学明白的同学来说，是非常值得认真读的一章。
+从课程主线看，这一章一头连着第二章的``单连通区域''，一头连着第五章的``围道积分''和后面的保角映射。它虽然标为选学，但对想真正把复变函数学明白的同学来说，是非常值得认真读的一章。因为只有把这一章想清楚，你才会真正理解：\textbf{复分析里最难缠的问题，往往不是算不出，而是先要搞清楚你到底在算哪一支。}
 \end{wulibj}
 
-\begin{tishi}[写作总原则]
-\begin{enumerate}
-    \item 本章应始终从``为什么会多值''讲起，而不要一上来就堆定义。
-    \item 要反复把本章和第二章的``单连通区域''、第五章的``围道积分''联系起来。
-    \item 黎曼面只保留直观说明，不展开成抽象理论主线。
-    \item 例题应优先服务于理解支、支点、支割和积分路径的关系，而不是单纯追求技巧性。
-    \item 图示要多，尤其要帮助学生看清``绕一圈为什么会变值''、``支割为什么要这样取''、``钥匙孔围道为什么长这样''。
-\end{enumerate}
-\end{tishi}
+\section{多值性从哪里来：先从辐角说起}
 
-\section{多值现象的出现：从辐角谈起}
+\begin{wulibj}[为什么本章先讲辐角]
+很多同学第一次听到``多值函数''这四个字时，会本能地觉得奇怪：函数不就是一个自变量只能对应一个函数值吗？如果一个对象有很多值，它怎么还能叫函数？
 
-\begin{wulibj}[本节要解决的问题]
-学生第一次接触多值函数时，最容易把它理解成``定义写得不够严谨''。本节的任务，就是先把这个误解消掉。我们要让学生看到：多值性不是书写上的漏洞，而是复平面几何结构带来的客观现象，而最自然的入口就是辐角。
+这个疑问很正常，也正因为如此，本章不能一上来就堆定义。我们要先把多值性的来源看清楚。对复分析来说，最自然的入口不是对数，也不是根式，而是辐角。因为辐角的多值性不是人为规定出来的，而是复平面几何结构本身就带着的。
 \end{wulibj}
 
-\subsection*{教学目标}
-\begin{itemize}
-    \item 让学生回顾复数的极形式，并重新认识辐角并不唯一这一事实。
-    \item 让学生区分多值辐角 $\arg z$ 与主辐角 $\operatorname{Arg} z$。
-    \item 让学生理解``绕原点一圈，角度多出 $2\pi$''是后面一切多值现象的起点。
-\end{itemize}
+\subsection{辐角为什么不是单值}
 
-\subsection*{建议小节安排}
-\begin{enumerate}
-    \item 从极形式重新看复数的表示
-    \item 辐角为什么天然多值
-    \item 主辐角的引入与局限
-    \item 绕原点一圈时辐角如何变化
-\end{enumerate}
+对非零复数 $z$，第一章已经学过它的极形式
+\[
+    z=r\mathrm{e}^{\mathrm{i}\theta},\qquad r=|z|>0.
+\]
+当时很多同学会把 $\theta$ 直接看成``这个点和正实轴的夹角''。这个直观本身没有问题，但现在必须把一个关键细节补上：\textbf{同一个方向，对应的不止一个角。}
 
-\subsection*{本节必须讲清的核心点}
-\begin{itemize}
-    \item 对任意 $z\neq 0$，若
-    \[
-        z = r\mathrm{e}^{\mathrm{i}\theta},
-    \]
-    则
-    \[
-        \arg z = \theta + 2k\pi,\qquad k\in\mathbb{Z}.
-    \]
-    这里的多值性不是附加出来的，而是极形式本身就带有的。
-    \item 主辐角 $\operatorname{Arg} z$ 只是从全部可能值中人为选出的一个代表值，常取
-    \[
-        -\pi < \operatorname{Arg} z \le \pi.
-    \]
-    \item 一旦沿着绕原点的闭路走一圈，辐角就会整体增加 $2\pi$，这正是后面 $\log z$ 与 $z^\alpha$ 多值性的根源。
-    \item 原点之所以特殊，不是因为它函数值算不出来，而是因为``绕原点''会导致角度结构发生根本变化。
-\end{itemize}
+例如，一个终边固定的角，如果先转到 $\theta$，再多转一整圈 $2\pi$，终边并不会变；再多转一圈，终边还是不变。所以只要
+\[
+    z=r\mathrm{e}^{\mathrm{i}\theta},
+\]
+那么也同样有
+\[
+    z=r\mathrm{e}^{\mathrm{i}(\theta+2k\pi)},\qquad k\in\mathbb{Z}.
+\]
+这说明：描述同一个非零复数时，角度本来就不是唯一的。
 
-\subsection*{建议例题}
+\begin{dingliyi}{辐角}{}
+设 $z\neq 0$。若实数 $\theta$ 满足
+\[
+    z=|z|\mathrm{e}^{\mathrm{i}\theta},
+\]
+则称 $\theta$ 为复数 $z$ 的一个\textbf{辐角}。所有这样的 $\theta$ 构成的全体记作
+\[
+    \arg z.
+\]
+\end{dingliyi}
+
+\begin{zhu}{}{}
+这里的 $\arg z$ 不是一个单独的数，而是一整族值。更准确地说，若 $\theta_0$ 是 $z$ 的一个辐角，那么
+\[
+    \arg z=\{\theta_0+2k\pi:k\in\mathbb{Z}\}.
+\]
+\end{zhu}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, gray] (-0.6,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-0.6) -- (0,3.4) node[above] {$\operatorname{Im}z$};
+
+    \coordinate (O) at (0,0);
+    \coordinate (P) at (3.1,1.8);
+
+    \draw[blue, line width=1.1pt] (O) -- (P);
+    \fill[blue] (P) circle (2pt);
+    \node[above right] at (P) {$z$};
+
+    \draw[gray!60, dashed] (O) circle (2.3);
+    \draw[orange!90!black, line width=0.9pt, ->] (1.1,0) arc[start angle=0,end angle=30,radius=1.1];
+    \node[orange!90!black] at (1.35,0.38) {$\theta$};
+
+    \draw[orange!90!black, line width=0.9pt, ->] (2.1,0) arc[start angle=0,end angle=390,radius=2.1];
+    \node[orange!90!black] at (2.72,2.66) {$\theta+2\pi$};
+\end{tikzpicture}
+\caption{同一个点对应的辐角并不唯一：多转一整圈以后，终边不变}
+\label{fig:ch06-arg-multivalued}
+\end{figure}
+
+图 \ref{fig:ch06-arg-multivalued} 想强调的，就是这个看似不起眼、其实会影响整章内容的事实：\textbf{同一点的几何位置只有一个，但描述它的角度可以差 $2\pi$ 的整数倍。}
+
+\begin{dingliyi}{主辐角}{}
+在所有辐角中，若取满足
+\[
+    -\pi<\Theta\le \pi
+\]
+的唯一一个值 $\Theta$，则称它为 $z$ 的\textbf{主辐角}，记作
+\[
+    \operatorname{Arg} z.
+\]
+\end{dingliyi}
+
+\begin{zhu}{}{}
+主辐角的作用，是从无限多个可能的辐角中挑出一个``代表值''，方便书写和计算。但要特别注意：主辐角只是\textbf{一支选法}，不是说别的辐角都错了。
+\end{zhu}
+
 \begin{lizi}{辐角与主辐角}{}
-写出 $1$、$-1$、$\mathrm{i}$、$-1+\mathrm{i}$ 的全部辐角与主辐角，并比较它们之间的区别。
+求下列各数的全部辐角与主辐角：
+\[
+    1,\qquad -1,\qquad \mathrm{i},\qquad -1+\mathrm{i}.
+\]
+
+\begin{jie}
+先逐个看它们在复平面上的位置。
+
+\textbf{1.} 对 $z=1$，它在正实轴上，因此
+\[
+    \arg 1 = 2k\pi,\qquad k\in\mathbb{Z}.
+\]
+满足 $-\pi<\Theta\le \pi$ 的那个值是
+\[
+    \operatorname{Arg}1=0.
+\]
+
+\textbf{2.} 对 $z=-1$，它在负实轴上，因此
+\[
+    \arg(-1)=\pi+2k\pi,\qquad k\in\mathbb{Z}.
+\]
+在主值区间里，对应的是
+\[
+    \operatorname{Arg}(-1)=\pi.
+\]
+
+\textbf{3.} 对 $z=\mathrm{i}$，它在正虚轴上，因此
+\[
+    \arg \mathrm{i}=\frac{\pi}{2}+2k\pi,\qquad k\in\mathbb{Z},
+\]
+于是
+\[
+    \operatorname{Arg}\mathrm{i}=\frac{\pi}{2}.
+\]
+
+\textbf{4.} 对 $z=-1+\mathrm{i}$，它位于第二象限，且与负实轴、正虚轴夹角相同，所以
+\[
+    \arg(-1+\mathrm{i})=\frac{3\pi}{4}+2k\pi,\qquad k\in\mathbb{Z}.
+\]
+因此
+\[
+    \operatorname{Arg}(-1+\mathrm{i})=\frac{3\pi}{4}.
+\]
+\end{jie}
 \end{lizi}
 
-\begin{lizi}{绕行导致辐角改变}{}
-设 $z=\mathrm{e}^{\mathrm{i}\theta}$ 沿单位圆逆时针转一周，说明为什么起点与终点虽然对应同一个复数，但辐角却增加了 $2\pi$。
-\end{lizi}
+\subsection{主辐角虽然单值，但要付出代价}
 
-\subsection*{建议图示}
-\begin{itemize}
-    \item 复平面上一点对应多组辐角的示意图。
-    \item 单位圆绕行一周时参数 $\theta$ 连续增加的示意图。
-    \item 主辐角取值区间与负实轴跳变位置的示意图。
-\end{itemize}
+看到主辐角的定义后，很多同学会产生一种错觉：既然 $\operatorname{Arg} z$ 已经帮我们从每个非零复数那里挑出了一个唯一角度，那是不是问题就已经解决了？
 
-\begin{jinshi}[本节易错点]
-\begin{enumerate}
-    \item 不要把 $\arg z$ 和 $\operatorname{Arg} z$ 混为一谈。
-    \item 不要以为主辐角是``唯一正确的辐角''；它只是常用的一种选法。
-    \item 不要忽略原点在整个多值理论中的特殊地位。
-\end{enumerate}
+还没有。因为主辐角虽然单值了，但它不可能在整个去心平面 $\mathbb{C}\setminus\{0\}$ 上保持连续。原因很简单：当点 $z$ 从负实轴上方逼近某个负实数时，主辐角接近 $\pi$；可如果从负实轴下方逼近同一个点，主辐角接近 $-\pi$。这两个极限不同，所以这里必然发生跳变。
+
+\begin{jinshi}[单值和连续往往不能同时保住]
+主辐角这件事特别值得反复体会：为了把辐角改造成单值对象，我们必须牺牲掉某条射线上的连续性。后面讲支割时，实际上就是在系统处理这一类现象。
 \end{jinshi}
 
-\section{复对数函数与主值}
+\subsection{为什么绕原点一圈会成为大问题}
 
-\begin{wulibj}[本节要解决的问题]
-有了上一节的铺垫以后，学生会自然追问：如果辐角已经是多值的，那么由极形式定义出来的复对数会发生什么？本节的任务，就是让学生看到：复对数不是实对数的直接照搬，而是复分析中最基本、最典型的多值函数。
+现在来看本章最关键的现象。考虑单位圆上的路径
+\[
+    z(t)=\mathrm{e}^{\mathrm{i}t},\qquad 0\le t\le 2\pi.
+\]
+当 $t$ 从 $0$ 连续变化到 $2\pi$ 时，点 $z(t)$ 从 $1$ 出发，沿单位圆逆时针转一周，又回到 $1$。如果你坚持让角度随路径连续变化，那么它的辐角就不是回到 $0$，而是从 $0$ 连续增长到了 $2\pi$。
+
+这说明了一个非常重要的事实：
+\begin{quote}
+同一个点的函数值如果想沿路径连续延拓，那么绕原点一圈以后，它未必还能回到原来的那一个值。
+\end{quote}
+
+这正是后面复对数、幂函数、根式函数会出现多值性的根本原因。
+
+\begin{lizi}{沿单位圆转一周时辐角怎样变化}{}
+设
+\[
+    z(t)=\mathrm{e}^{\mathrm{i}t},\qquad 0\le t\le 2\pi.
+\]
+说明：若要求辐角沿路径连续变化，那么在终点 $z(2\pi)=1$ 处，辐角应取 $2\pi$ 而不是 $0$。
+
+\begin{jie}
+对路径上的每一个点，都有
+\[
+    z(t)=\mathrm{e}^{\mathrm{i}t}.
+\]
+如果我们希望辐角随着点在圆上运动而连续变化，那么最自然的选择就是直接取
+\[
+    \theta(t)=t.
+\]
+这样从 $t=0$ 到 $t=2\pi$，辐角没有任何跳变。
+
+于是起点 $z(0)=1$ 对应的连续辐角是
+\[
+    \theta(0)=0,
+\]
+而终点虽然仍然是同一个点 $1$，但沿着这条连续变化的路径，辐角却变成了
+\[
+    \theta(2\pi)=2\pi.
+\]
+因此，\textbf{如果要求辐角沿路径连续延拓，那么同一点在不同绕行历史下可以对应不同值。} 这就是多值现象的最原始模型。
+\end{jie}
+\end{lizi}
+
+\section{复对数函数：最基本的多值函数}
+
+\begin{wulibj}[为什么复对数是本章主角]
+实数范围内的对数函数很熟悉：只要 $x>0$，$\ln x$ 就定义良好，而且单值。很多同学一开始会想当然地把复对数也理解成``把 $x$ 换成 $z$''。但真正的问题恰恰出在这里：复数除了模长，还有辐角；而辐角本身就是多值的。因此复对数天然就会继承这种多值性。
 \end{wulibj}
 
-\subsection*{教学目标}
-\begin{itemize}
-    \item 让学生掌握复对数的定义来源。
-    \item 让学生理解 $\log z$ 与 $\operatorname{Log} z$ 的区别。
-    \item 让学生意识到主值对数虽然是单值写法，但它只能在合适区域上讨论。
-\end{itemize}
+\subsection{由指数函数反过来定义对数}
 
-\subsection*{建议小节安排}
-\begin{enumerate}
-    \item 从 $z=r\mathrm{e}^{\mathrm{i}\theta}$ 出发定义 $\log z$
-    \item 复对数的全部值
-    \item 主值对数 $\operatorname{Log} z$
-    \item 主值为什么会在支割处失去连续性
-\end{enumerate}
+在实数范围里，对数是指数的反函数；复数范围里最自然的做法也一样。我们先问：哪些复数 $w$ 满足
+\[
+    \mathrm{e}^{w}=z?
+\]
+把 $w$ 写成
+\[
+    w=u+\mathrm{i}v,
+\]
+则
+\[
+    \mathrm{e}^{w}=\mathrm{e}^{u+\mathrm{i}v}
+    =\mathrm{e}^{u}(\cos v+\mathrm{i}\sin v).
+\]
+若要它等于
+\[
+    z=|z|\mathrm{e}^{\mathrm{i}\theta},
+\]
+就必须有
+\[
+    \mathrm{e}^{u}=|z|,\qquad v=\theta+2k\pi.
+\]
+也就是说
+\[
+    u=\ln|z|,\qquad v\in \arg z.
+\]
+于是得到复对数的全部值。
 
-\subsection*{本节必须讲清的核心点}
-\begin{itemize}
-    \item 复对数定义为
-    \[
-        \log z = \ln|z| + \mathrm{i}\arg z.
-    \]
-    因为 $\arg z$ 多值，所以 $\log z$ 也多值。
-    \item 若取主辐角，则得到主值对数
-    \[
-        \operatorname{Log} z = \ln|z| + \mathrm{i}\operatorname{Arg} z.
-    \]
-    \item $\operatorname{Log} z$ 只是选定某一支后的写法，不等于``真正的复对数只有一个值''。
-    \item 只要辐角在某条射线两侧发生跳变，主值对数在那条射线附近就不能保持连续，这也就预示了后面必须讨论支割。
-\end{itemize}
+\begin{dingliyi}{复对数}{}
+设 $z\neq 0$。满足
+\[
+    \mathrm{e}^{w}=z
+\]
+的所有复数 $w$ 的全体，称为 $z$ 的\textbf{复对数}，记作
+\[
+    \log z.
+\]
+它可写为
+\[
+    \log z=\ln|z|+\mathrm{i}\arg z.
+\]
+\end{dingliyi}
 
-\subsection*{建议例题}
+\begin{zhu}{}{}
+这里的 $\log z$ 和前面的 $\arg z$ 一样，都不是一个单独的复数，而是一整族值。若 $\theta_0$ 是 $z$ 的某个辐角，则
+\[
+    \log z=\ln|z|+\mathrm{i}(\theta_0+2k\pi),\qquad k\in\mathbb{Z}.
+\]
+\end{zhu}
+
 \begin{lizi}{复对数的全部值}{}
-求 $\log 1$、$\log(-1)$ 与 $\log \mathrm{i}$ 的全部值，并写出各自的主值。
+求 $\log 1$、$\log(-1)$ 与 $\log \mathrm{i}$。
+
+\begin{jie}
+\textbf{1.} 对 $z=1$，有
+\[
+    |1|=1,\qquad \arg 1=2k\pi.
+\]
+因此
+\[
+    \log 1=\ln 1+\mathrm{i}(2k\pi)=2k\pi \mathrm{i},\qquad k\in\mathbb{Z}.
+\]
+
+\textbf{2.} 对 $z=-1$，有
+\[
+    |-1|=1,\qquad \arg(-1)=\pi+2k\pi.
+\]
+于是
+\[
+    \log(-1)=\ln 1+\mathrm{i}(\pi+2k\pi)=(2k+1)\pi\mathrm{i}.
+\]
+
+\textbf{3.} 对 $z=\mathrm{i}$，有
+\[
+    |\mathrm{i}|=1,\qquad \arg \mathrm{i}=\frac{\pi}{2}+2k\pi.
+\]
+所以
+\[
+    \log \mathrm{i}
+    =\mathrm{i}\left(\frac{\pi}{2}+2k\pi\right),\qquad k\in\mathbb{Z}.
+\]
+\end{jie}
 \end{lizi}
 
-\begin{lizi}{主值对数的连续性问题}{}
-说明为什么当 $z$ 从负实轴上方和下方逼近同一点时，$\operatorname{Log} z$ 的极限一般不同。
-\end{lizi}
+\subsection{主值对数与主值支}
 
-\subsection*{建议图示}
-\begin{itemize}
-    \item 以负实轴为支割时，$\operatorname{Log} z$ 的定义区域示意图。
-    \item 负实轴上下两侧主辐角取值突变的示意图。
-\end{itemize}
+既然复对数有无穷多个值，那么在具体计算时，我们往往会想先挑一个最常用的代表值出来。最自然的做法，就是借助主辐角。
 
-\begin{jinshi}[本节易错点]
-\begin{enumerate}
-    \item 不要把 $\log z$ 和 $\operatorname{Log} z$ 混为一谈。
-    \item 不要以为写下主值以后，函数就在整个去心平面上自动解析。
-    \item 不要忘记复对数的多值性本质上来自辐角，而不是来自模长。
-\end{enumerate}
+\begin{dingliyi}{主值对数}{}
+在区域
+\[
+    D=\mathbb{C}\setminus(-\infty,0]
+\]
+上，定义
+\[
+    \operatorname{Log} z=\ln|z|+\mathrm{i}\operatorname{Arg} z,
+\qquad -\pi<\operatorname{Arg} z<\pi.
+\]
+这称为复对数的\textbf{主值对数}或\textbf{主值支}。
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.08]
+    \draw[->, gray] (-4.0,0) -- (4.2,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-3.0) -- (0,3.2) node[above] {$\operatorname{Im}z$};
+
+    \draw[red, line width=1.8pt] (-3.6,0) -- (0,0);
+    \fill[red] (0,0) circle (2pt);
+    \node[below, red] at (-1.8,0) {支割};
+    \node[below right] at (0,0) {$0$};
+
+    \coordinate (P1) at (2.6,1.3);
+    \coordinate (P2) at (-2.2,0.95);
+    \coordinate (P3) at (-2.2,-0.95);
+    \fill[blue] (P1) circle (2pt);
+    \fill[blue] (P2) circle (2pt);
+    \fill[blue] (P3) circle (2pt);
+    \node[right] at (P1) {$z$};
+    \node[left] at (P2) {$z_+$};
+    \node[left] at (P3) {$z_-$};
+
+    \draw[orange!90!black, ->] (1.0,0) arc[start angle=0,end angle=27,radius=1.0];
+    \node[orange!90!black] at (1.18,0.35) {$\operatorname{Arg} z$};
+
+    \draw[orange!90!black, dashed] (0,0) -- (P2);
+    \draw[orange!90!black, dashed] (0,0) -- (P3);
+    \node[orange!90!black] at (-1.1,1.55) {$\operatorname{Arg} z_+ \approx \pi$};
+    \node[orange!90!black] at (-1.2,-1.55) {$\operatorname{Arg} z_- \approx -\pi$};
+\end{tikzpicture}
+\caption{主值对数的典型支割：去掉负实轴以后，主辐角才能单值取在 $(-\pi,\pi)$ 内}
+\label{fig:ch06-principal-log}
+\end{figure}
+
+图 \ref{fig:ch06-principal-log} 说明了主值对数最关键的一点：它之所以能写成单值函数，并不是因为多值性 magically 消失了，而是因为我们把最麻烦的那条射线，也就是负实轴，明确地从定义域里删掉了。
+
+\begin{jinshi}[主值对数不是``全局正确答案'' ]
+$\operatorname{Log} z$ 只是一个最常用的分支。它方便，但并不神圣。只要题目需要，我们完全可以改沿正实轴作支割，或者沿任意一条从原点射出的半直线作支割，得到另一支解析函数。
 \end{jinshi}
+
+\subsection{主值对数为什么会在支割处跳变}
+
+为了更具体地看到问题出在哪里，不妨考察负实轴上的一个点，例如 $z=-a$，其中 $a>0$。若从上半平面逼近它，那么主辐角趋于 $\pi$；若从下半平面逼近它，那么主辐角趋于 $-\pi$。因此
+\[
+    \operatorname{Log}(-a+\mathrm{i}0)=\ln a+\pi\mathrm{i},
+\]
+而
+\[
+    \operatorname{Log}(-a-\mathrm{i}0)=\ln a-\pi\mathrm{i}.
+\]
+两者相差
+\[
+    2\pi\mathrm{i}.
+\]
+
+这个差值非常值得记住，因为它以后会反复出现：\textbf{主值支在支割两侧的跳变，本质上就是多值性的遗留痕迹。}
 
 \section{分支、解析支与支割}
 
-\begin{wulibj}[本节要解决的问题]
-前两节已经告诉我们：有些复函数天然多值。接下来最关键的问题是：既然它本来多值，我们怎样在某个合适区域上把它固定成单值对象，并继续用解析函数的方法处理它？这一节就是全章的概念核心。
+\begin{wulibj}[为什么这一节是全章核心]
+到这里为止，我们已经看到了两个事实：第一，像 $\arg z$ 和 $\log z$ 这样的对象天然多值；第二，主值支虽然能把它们改写成单值形式，但代价是必须删去某条射线。接下来的问题就是：这种做法到底该怎样系统地表达？什么时候能成功？什么时候又不可能成功？这一节要解决的正是这些问题。
 \end{wulibj}
 
-\subsection*{教学目标}
-\begin{itemize}
-    \item 让学生理解什么叫一支、什么叫解析支。
-    \item 让学生理解支割不是装饰性的几何线，而是为了让函数在剩余区域上单值解析。
-    \item 让学生把本章和第二章的``单连通区域''重新联系起来。
-\end{itemize}
+\subsection{什么叫一支，什么叫解析支}
 
-\subsection*{建议小节安排}
-\begin{enumerate}
-    \item 从主值对数重新理解``选一支''
-    \item 一般多值函数的一支与解析支
-    \item 支割的作用与选择
-    \item 单连通区域与解析支的关系
-\end{enumerate}
+\begin{dingliyi}{一支}{}
+设某个多值对象在区域 $D$ 内对每个点都可能对应若干个值。若能在 $D$ 中按某一一致规则，为每个点选出其中一个值，从而得到一个单值函数 $f(z)$，则称 $f$ 为该多值对象在 $D$ 上的\textbf{一支}。
+\end{dingliyi}
 
-\subsection*{本节必须讲清的核心点}
-\begin{itemize}
-    \item 所谓一支，就是从多值函数的全部可能值中，在某个区域上按一致规则选出一个单值函数。
-    \item 所谓解析支，不只是选成单值，还要求该单值函数在所讨论区域里解析。
-    \item 支一定依赖于定义域。离开具体区域，空谈``这个函数的支''是不完整的。
-    \item 支割的作用，是把原来会因为绕行而变值的区域切开，使剩余区域尽量成为可以选取解析支的区域。
-    \item 第二章中的``单连通''在这里重新变得重要，因为很多多值问题的困难，本质上正来自于区域中允许绕支点转一圈。
-\end{itemize}
+\begin{dingliyi}{解析支}{}
+若上述一支 $f(z)$ 不仅单值，而且在区域 $D$ 内解析，则称 $f$ 为该多值对象在 $D$ 上的一个\textbf{解析支}。
+\end{dingliyi}
 
-\subsection*{建议例题}
-\begin{lizi}{不同支割对应不同支}{}
-分别在去掉负实轴与去掉正实轴的区域上，为 $\log z$ 写出一个解析支，并比较它们的差异。
-\end{lizi}
+\begin{zhu}{}{}
+``支''一定是\textbf{相对于某个区域}来说的。离开了定义域，空谈``这个函数的支''，往往是不完整的。因为同一个多值对象，在不同区域上可以有不同的解析支。
+\end{zhu}
 
-\begin{lizi}{为什么必须说明区域}{}
-说明为什么不能说``$\log z$ 有一个全局解析支''，而只能说``在某个去掉射线的区域上可以选出解析支''。
-\end{lizi}
+\begin{dingliyi}{支割}{}
+为了在某个区域上选取解析支，而从原来的区域中删去的一条或若干条曲线，称为\textbf{支割}。
+\end{dingliyi}
 
-\subsection*{建议图示}
-\begin{itemize}
-    \item 负实轴支割、正实轴支割与一般射线支割的对比图。
-    \item 切开前后区域拓扑结构变化的示意图。
-\end{itemize}
+\begin{tishi}[支割的作用到底是什么]
+支割不是装饰性的几何线，也不是为了让图画好看。它真正的作用，是把原来允许``绕支点转一圈''的区域切开，使剩下的区域不再出现这类绕行，从而给单值解析支腾出空间。
+\end{tishi}
 
-\begin{jinshi}[本节易错点]
-\begin{enumerate}
-    \item 不要把``支''理解成函数自己天然带着的一部分。
-    \item 不要把支割理解成唯一标准答案；它通常有多种合理选择。
-    \item 不要忽略``解析支''里的``解析''二字，它比单纯单值更强。
-\end{enumerate}
-\end{jinshi}
+\subsection{单连通区域上可以怎样得到对数解析支}
 
-\section{典型多值函数：幂函数与根式函数}
+下面这个结论，是整章最重要的结构性结论之一。它把第二章的``单连通区域''和第三章的``原函数''重新接了回来。
 
-\begin{wulibj}[本节要解决的问题]
-学生学到这里，最需要建立的是统一观点：很多看起来各不相同的多值函数，其实都源于复对数。本节就要把 $\log z$、$z^\alpha$ 和 $\sqrt[n]{z}$ 这几类最重要的例子串起来。
+\begin{dingli}{单连通区域上的对数解析支}{}
+设 $D$ 是一个单连通区域，且 $0\notin D$。则在 $D$ 上存在解析函数 $L(z)$，使得
+\[
+    \mathrm{e}^{L(z)}=z,\qquad z\in D.
+\]
+这样的 $L(z)$ 就是 $\log z$ 在 $D$ 上的一个解析支，并且满足
+\[
+    L'(z)=\frac{1}{z}.
+\]
+\end{dingli}
+
+\begin{proof}
+因为 $0\notin D$，函数
+\[
+    \frac{1}{z}
+\]
+在区域 $D$ 内解析。又因为 $D$ 是单连通区域，根据第三章关于原函数的结论，$\dfrac{1}{z}$ 在 $D$ 内存在原函数。于是存在解析函数 $F(z)$，使得
+\[
+    F'(z)=\frac{1}{z}.
+\]
+
+任取一点 $z_0\in D$，并从 $\log z_0$ 的全部值中任取一个值，记作 $L_0$。定义
+\[
+    L(z)=F(z)-F(z_0)+L_0.
+\]
+显然 $L(z)$ 在 $D$ 内解析，而且
+\[
+    L'(z)=F'(z)=\frac{1}{z}.
+\]
+
+现在考虑函数
+\[
+    G(z)=z\,\mathrm{e}^{-L(z)}.
+\]
+由于 $L$ 解析，$G$ 也解析。对它求导：
+\[
+    G'(z)=\mathrm{e}^{-L(z)}+z\bigl(-L'(z)\bigr)\mathrm{e}^{-L(z)}
+    =\mathrm{e}^{-L(z)}\left(1-zL'(z)\right).
+\]
+代入 $L'(z)=1/z$，得
+\[
+    G'(z)=\mathrm{e}^{-L(z)}(1-1)=0.
+\]
+因此 $G(z)$ 在连通区域 $D$ 内是常数。
+
+再看 $z=z_0$ 时，
+\[
+    G(z_0)=z_0\,\mathrm{e}^{-L(z_0)}
+    =z_0\,\mathrm{e}^{-L_0}=1,
+\]
+因为 $L_0$ 是 $z_0$ 的一个对数值，满足 $\mathrm{e}^{L_0}=z_0$。
+
+所以
+\[
+    G(z)\equiv 1.
+\]
+这就得到
+\[
+    z\,\mathrm{e}^{-L(z)}=1,
+\]
+也就是
+\[
+    \mathrm{e}^{L(z)}=z.
+\]
+因此 $L(z)$ 正是 $\log z$ 在 $D$ 上的一个解析支。
+\end{proof}
+
+\begin{tuilun}{主值对数在裂平面上解析}{}
+在区域
+\[
+    \mathbb{C}\setminus(-\infty,0]
+\]
+上，主值对数 $\operatorname{Log} z$ 是 $\log z$ 的一个解析支，且
+\[
+    \frac{\mathrm{d}}{\mathrm{d}z}\operatorname{Log} z=\frac{1}{z}.
+\]
+\end{tuilun}
+
+\begin{zhu}{}{}
+这条推论非常值得回味。它说明：主值对数之所以能解析，不是因为公式
+\[
+    \operatorname{Log} z=\ln|z|+\mathrm{i}\operatorname{Arg} z
+\]
+写起来好看，而是因为负实轴被删掉以后，剩下的区域已经足够``干净''，可以允许 $\dfrac{1}{z}$ 拥有原函数。
+\end{zhu}
+
+\subsection{为什么去心平面上不可能有全局对数支}
+
+既然在很多裂平面上都能选出对数解析支，那么学生很自然会继续问：能不能在整个去心平面
+\[
+    \mathbb{C}\setminus\{0\}
+\]
+上也选出一个全局解析支？
+
+答案是否定的，而且这个否定结论恰好把本章和第三章的闭路积分重新连了起来。
+
+\begin{dingli}{去心平面上不存在全局对数解析支}{}
+在区域
+\[
+    \mathbb{C}\setminus\{0\}
+\]
+上，不存在解析函数 $L(z)$ 使得
+\[
+    \mathrm{e}^{L(z)}=z.
+\]
+\end{dingli}
+
+\begin{proof}
+反设存在这样的解析函数 $L(z)$。对等式
+\[
+    \mathrm{e}^{L(z)}=z
+\]
+两边求导，得到
+\[
+    \mathrm{e}^{L(z)}L'(z)=1.
+\]
+而 $\mathrm{e}^{L(z)}=z$，所以
+\[
+    zL'(z)=1,
+\qquad
+    L'(z)=\frac{1}{z}.
+\]
+
+于是 $\dfrac{1}{z}$ 在去心平面上有原函数 $L(z)$。但如果一个函数有原函数，那么它沿任意闭曲线的积分都应为零。特别地，对单位圆 $|z|=1$ 应有
+\[
+    \oint_{|z|=1}\frac{1}{z}\,\mathrm{d}z=0.
+\]
+然而第三章已经算过
+\[
+    \oint_{|z|=1}\frac{1}{z}\,\mathrm{d}z=2\pi\mathrm{i}\neq 0.
+\]
+矛盾。
+
+所以去心平面上不可能存在全局对数解析支。
+\end{proof}
+
+\begin{tishi}[这一结论真正想说明什么]
+这里最重要的，不是记住``不存在''这句话，而是理解它背后的原因：\textbf{问题不在局部，而在绕原点的闭路。} 在小范围里，对数当然可以写得像普通解析函数；可一旦整个区域允许你围着原点转一圈，多值性就会暴露出来。
+\end{tishi}
+
+\section{幂函数与根式函数：它们其实都来自对数}
+
+\begin{wulibj}[为什么这一节要紧接对数]
+很多教材会把 $z^\alpha$、$\sqrt{z}$、$\sqrt[n]{z}$ 分散在不同地方讲，学生学完以后往往会觉得它们是各自独立的对象。其实更好的眼光是：它们几乎都可以看成对数函数的``衍生品''。一旦这一点想清楚，后面很多现象就都顺理成章了。
 \end{wulibj}
 
-\subsection*{教学目标}
-\begin{itemize}
-    \item 让学生理解 $z^\alpha$ 的定义为什么离不开 $\log z$。
-    \item 让学生理解整数幂、分数幂和无理幂在多值性上的区别。
-    \item 让学生掌握 $\sqrt[n]{z}$ 的常见分支与几何意义。
-\end{itemize}
+\subsection{复幂函数必须先选对数支}
 
-\subsection*{建议小节安排}
-\begin{enumerate}
-    \item 复幂函数 $z^\alpha = \mathrm{e}^{\alpha \log z}$
-    \item $\alpha$ 取不同类型值时的多值差异
-    \item 根式函数 $\sqrt[n]{z}$ 的分支
-    \item 主值根式与几何直观
-\end{enumerate}
+在实数范围里，我们习惯写
+\[
+    x^\alpha=\mathrm{e}^{\alpha\ln x}.
+\]
+到了复数范围，这个思路仍然成立，但必须把 $\ln x$ 换成某个选定的对数支。
 
-\subsection*{本节必须讲清的核心点}
-\begin{itemize}
-    \item 复幂函数定义为
-    \[
-        z^\alpha = \mathrm{e}^{\alpha \log z},
-    \]
-    因此它的多值性直接继承自 $\log z$。
-    \item 当 $\alpha$ 为整数时，$z^\alpha$ 退化成熟悉的单值函数；当 $\alpha$ 为非整数时，多值性一般无法避免。
-    \item 根式函数
-    \[
-        \sqrt[n]{z}=z^{1/n}
-    \]
-    是最适合帮助学生建立直观的一类对象，应重点讲清楚。
-    \item 主值根式的选法，本质上也是先选定对数的一支，再把它代入幂函数定义。
-\end{itemize}
+\begin{dingliyi}{选定分支后的幂函数}{}
+设 $L(z)$ 是 $\log z$ 在区域 $D$ 上的一个解析支，$\alpha\in\mathbb{C}$。则定义
+\[
+    z^\alpha=\mathrm{e}^{\alpha L(z)},\qquad z\in D.
+\]
+这称为由分支 $L(z)$ 诱导出的幂函数分支。
+\end{dingliyi}
 
-\subsection*{建议例题}
-\begin{lizi}{平方根的主值支}{}
-在去掉负实轴的区域上写出 $\sqrt{z}$ 的主值支，并说明它为什么在该区域上解析。
+\begin{zhu}{}{}
+这里最关键的话是：\textbf{$z^\alpha$ 的定义依赖于所选对数支。} 换一支对数，往往就会得到另一支幂函数。
+\end{zhu}
+
+\begin{dingli}{选定分支后的导数公式}{}
+若 $L(z)$ 是 $\log z$ 在区域 $D$ 上的解析支，定义
+\[
+    f(z)=\mathrm{e}^{\alpha L(z)},
+\]
+则 $f(z)$ 在 $D$ 上解析，并满足
+\[
+    f'(z)=\alpha z^{\alpha-1},
+\]
+其中右端的 $z^{\alpha-1}$ 取的是由同一对数支诱导出来的那一支。
+\end{dingli}
+
+\begin{proof}
+由定义
+\[
+    f(z)=\mathrm{e}^{\alpha L(z)},
+\]
+而 $L(z)$ 在 $D$ 上解析，因此 $f(z)$ 也解析。由链式法则，
+\[
+    f'(z)=\alpha \mathrm{e}^{\alpha L(z)}L'(z).
+\]
+又因为 $L'(z)=1/z$，所以
+\[
+    f'(z)=\alpha \mathrm{e}^{\alpha L(z)}\frac{1}{z}
+    =\alpha \mathrm{e}^{(\alpha-1)L(z)}
+    =\alpha z^{\alpha-1}.
+\]
+证毕。
+\end{proof}
+
+\begin{zhu}{}{}
+当 $\alpha$ 是整数时，这个定义退化成熟悉的整数幂，分支依赖性会消失；可只要 $\alpha$ 不是整数，多值性一般就会出现。
+\end{zhu}
+
+\subsection{平方根与 n 次根是最重要的例子}
+
+根式函数是复分析里最值得反复体会的多值对象之一。它既足够简单，便于建立直观；又足够典型，几乎把多值函数的所有关键现象都浓缩进来了。
+
+对非零复数
+\[
+    z=r\mathrm{e}^{\mathrm{i}\theta},
+\]
+若选择某一连续辐角 $\theta$，则
+\[
+    \sqrt[n]{z}=r^{1/n}\mathrm{e}^{\mathrm{i}\theta/n}.
+\]
+但因为 $\theta$ 本身可以加上 $2k\pi$，所以一般会得到多个不同的值：
+\[
+    \sqrt[n]{z}
+    =
+    r^{1/n}\mathrm{e}^{\mathrm{i}(\theta+2k\pi)/n},
+    \qquad k=0,1,\dots,n-1.
+\]
+
+因此，$n$ 次根通常有 $n$ 个不同的值。
+
+\begin{dingliyi}{主值平方根}{}
+在裂平面
+\[
+    \mathbb{C}\setminus(-\infty,0]
+\]
+上，若
+\[
+    z=r\mathrm{e}^{\mathrm{i}\theta},\qquad -\pi<\theta<\pi,
+\]
+则定义
+\[
+    \sqrt{z}=\sqrt{r}\,\mathrm{e}^{\mathrm{i}\theta/2}.
+\]
+这称为平方根的主值支。
+\end{dingliyi}
+
+\begin{lizi}{计算主值平方根}{}
+求主值支下的 $\sqrt{-\mathrm{i}}$。
+
+\begin{jie}
+先把 $-\mathrm{i}$ 写成极形式。它位于负虚轴上，因此在主值辐角范围内可写成
+\[
+    -\mathrm{i}=\mathrm{e}^{-\mathrm{i}\pi/2}.
+\]
+于是
+\[
+    \sqrt{-\mathrm{i}}
+    =\mathrm{e}^{-\mathrm{i}\pi/4}
+    =\frac{1-\mathrm{i}}{\sqrt{2}}.
+\]
+
+这里要特别注意：我们求的是\textbf{主值支}下的平方根，所以必须把辐角取成 $-\pi/2$，而不是再额外加上 $2\pi$。
+\end{jie}
 \end{lizi}
 
-\begin{lizi}{幂函数的全部值}{}
-求 $(-1)^{1/2}$、$(-1)^{1/3}$ 与 $\mathrm{i}^{1/2}$ 的全部值，并比较它们的分支结构。
+\begin{lizi}{立方根为什么有三个值}{}
+求 $(-1)^{1/3}$ 的全部值。
+
+\begin{jie}
+因为
+\[
+    -1=\mathrm{e}^{\mathrm{i}(\pi+2k\pi)},
+\]
+所以它的立方根为
+\[
+    (-1)^{1/3}
+    =
+    \mathrm{e}^{\mathrm{i}(\pi+2k\pi)/3}.
+\]
+当 $k=0,1,2$ 时，分别得到三个不同的值：
+\[
+    \mathrm{e}^{\mathrm{i}\pi/3},\qquad
+    \mathrm{e}^{\mathrm{i}\pi},\qquad
+    \mathrm{e}^{\mathrm{i}5\pi/3}.
+\]
+再继续增大 $k$，得到的值会周期性重复，所以全部不同的值就只有这三个。
+\end{jie}
 \end{lizi}
 
-\begin{lizi}{不同指数导致不同多值性}{}
-比较 $z^2$、$z^{1/2}$ 与 $z^{\sqrt{2}}$ 的多值行为，说明它们为什么性质差异很大。
-\end{lizi}
+\subsection{几何直观：根式会把角度压缩}
 
-\subsection*{建议图示}
-\begin{itemize}
-    \item $z^{1/2}$ 将辐角减半的示意图。
-    \item $\sqrt{z}$ 的两叶直观图。
-    \item $\sqrt[n]{z}$ 与 $z^n$ 在角度映射上的对比图。
-\end{itemize}
+从几何上看，根式函数最直观的作用之一，就是把辐角缩小。例如在平方根主值支下，
+\[
+    z=r\mathrm{e}^{\mathrm{i}\theta}
+    \quad\longmapsto\quad
+    \sqrt{z}=\sqrt{r}\,\mathrm{e}^{\mathrm{i}\theta/2}.
+\]
+也就是说，模长开平方，而角度减半。
 
-\begin{jinshi}[本节易错点]
-\begin{enumerate}
-    \item 不要把 $z^\alpha$ 机械地照搬实数范围内的经验。
-    \item 不要忘记根式函数的定义其实依赖于所选对数支。
-    \item 不要把整数幂和非整数幂混在同一层面讨论。
-\end{enumerate}
-\end{jinshi}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    \begin{scope}
+        \draw[->, gray] (-0.5,0) -- (3.3,0) node[right] {$\operatorname{Re}z$};
+        \draw[->, gray] (0,-0.5) -- (0,2.9) node[above] {$\operatorname{Im}z$};
+        \draw[blue, line width=1.1pt] (0,0) -- (2.45,1.55);
+        \draw[orange!90!black, ->] (1.0,0) arc[start angle=0,end angle=32,radius=1.0];
+        \node[orange!90!black] at (1.15,0.38) {$\theta$};
+        \node at (1.4,-0.7) {$z$ 平面};
+    \end{scope}
 
-\section{绕行现象、支点与多叶直观}
+    \draw[->, very thick] (4.0,1.1) -- (5.3,1.1) node[midway, above] {$w=\sqrt{z}$};
 
-\begin{wulibj}[本节要解决的问题]
-前面已经从公式上知道：多值性和绕原点有关。本节则要把这种现象真正讲成画面。学生如果只停留在公式层面，很容易会背定义却没有直观；而这一节正是帮助他们把``绕一圈为什么会换值''想清楚的关键。
+    \begin{scope}[xshift=6.6cm]
+        \draw[->, gray] (-0.5,0) -- (3.3,0) node[right] {$\operatorname{Re}w$};
+        \draw[->, gray] (0,-0.5) -- (0,2.9) node[above] {$\operatorname{Im}w$};
+        \draw[blue, line width=1.1pt] (0,0) -- (2.55,0.77);
+        \draw[orange!90!black, ->] (1.0,0) arc[start angle=0,end angle=16,radius=1.0];
+        \node[orange!90!black] at (1.22,0.24) {$\theta/2$};
+        \node at (1.4,-0.7) {$w$ 平面};
+    \end{scope}
+\end{tikzpicture}
+\caption{平方根主值支会把辐角减半：这也是它会发生换支现象的几何原因}
+\label{fig:ch06-sqrt-angle-halving}
+\end{figure}
+
+图 \ref{fig:ch06-sqrt-angle-halving} 很值得多看几眼。因为它直接解释了后面一个看似奇怪的事实：如果原来的辐角多加了 $2\pi$，那么平方根的辐角就会多加 $\pi$，这恰好会把函数值变成原来的相反数。
+
+\section{支点与多叶直观}
+
+\begin{wulibj}[为什么这一节不能省]
+学到这里，很多同学已经能算出若干多值函数的值了，但脑子里仍然容易停留在公式层面。真正要把这一章学透，还需要建立起更强的几何直观：到底什么叫支点？为什么绕支点一圈会换支？为什么对数函数像是一层层往上爬，而平方根像是在两层之间来回切换？这一节就是专门来解决这些问题的。
 \end{wulibj}
 
-\subsection*{教学目标}
-\begin{itemize}
-    \item 让学生理解什么叫支点。
-    \item 让学生理解为什么绕支点一圈会跳到另一支。
-    \item 让学生通过多叶直观建立对对数函数和根式函数的几何感觉。
-\end{itemize}
+\subsection{什么叫支点}
 
-\subsection*{建议小节安排}
-\begin{enumerate}
-    \item 支点的概念与最典型例子
-    \item 对数函数绕原点一圈后的变化
-    \item 根式函数绕原点一圈后的变化
-    \item 多叶图像的直观解释
-\end{enumerate}
+\begin{dingliyi}{支点}{}
+若某个多值对象在点 $z_0$ 的任意去心邻域内，都存在绕 $z_0$ 一周后会改变函数值的现象，则称 $z_0$ 为该多值对象的一个\textbf{支点}。
+\end{dingliyi}
 
-\subsection*{本节必须讲清的核心点}
-\begin{itemize}
-    \item 支点并不是普通意义下的孤立奇点，它更像是``一绕就会变值''的拓扑敏感点。
-    \item 对 $\log z$ 来说，绕原点一圈会多出 $2\pi\mathrm{i}$。
-    \item 对 $\sqrt{z}$ 来说，绕原点一圈会跳到另一叶，再绕一圈才回到原支。
-    \item 多叶图像的引入，只是帮助建立直观，不必在本讲义里正式展开黎曼面理论。
-\end{itemize}
+\begin{zhu}{}{}
+这一定义在严格的现代复分析里还可以表述得更精细，但对本课程来说，抓住``绕一圈会换值''这个核心直观已经足够了。
+\end{zhu}
 
-\subsection*{建议例题}
-\begin{lizi}{对数函数的绕行效应}{}
-设 $z$ 沿包围原点的闭路逆时针转一周，说明 $\log z$ 为什么会整体增加 $2\pi \mathrm{i}$。
+例如，$\log z$ 在 $z=0$ 处有支点，因为围绕原点逆时针转一周后，辐角增加 $2\pi$，从而
+\[
+    \log z
+    \longmapsto
+    \log z+2\pi\mathrm{i}.
+\]
+
+平方根 $\sqrt{z}$ 在 $z=0$ 处也有支点，因为围绕原点转一周后，辐角增加 $2\pi$，而平方根的辐角只增加 $\pi$，于是
+\[
+    \sqrt{z}
+    \longmapsto
+    -\sqrt{z}.
+\]
+
+\begin{lizi}{为什么 $\sqrt{z}$ 绕原点一圈后会变号}{}
+说明：在主值支中，若
+\[
+    z=r\mathrm{e}^{\mathrm{i}\theta}
+\]
+沿着绕原点的闭路连续绕一圈，那么平方根会从 $\sqrt{r}\,\mathrm{e}^{\mathrm{i}\theta/2}$ 变成它的相反数。
+
+\begin{jie}
+沿闭路连续绕行一圈时，辐角从 $\theta$ 变成 $\theta+2\pi$。于是平方根随之变成
+\[
+    \sqrt{r}\,\mathrm{e}^{\mathrm{i}(\theta+2\pi)/2}
+    =
+    \sqrt{r}\,\mathrm{e}^{\mathrm{i}\theta/2}\mathrm{e}^{\mathrm{i}\pi}
+    =
+    -\sqrt{r}\,\mathrm{e}^{\mathrm{i}\theta/2}.
+\]
+因此它确实变成了原来的相反数。
+
+这说明：\textbf{平方根并不是绕一圈就回到原支，而是要绕两圈才回到原支。}
+\end{jie}
 \end{lizi}
 
-\begin{lizi}{平方根的换支现象}{}
-说明 $\sqrt{z}$ 绕原点一周后为什么会变号，并解释这意味着什么。
-\end{lizi}
+\subsection{多叶直观：为什么说函数像是有很多层}
 
-\subsection*{建议图示}
+多值函数最容易让人困惑的地方，就是``同一点怎么会对应不同值''。一种很有帮助的直观想法，是把不同的取值看成函数活在不同的``叶''上。
+
+例如：
 \begin{itemize}
-    \item 绕原点闭路及辐角连续增长示意图。
-    \item $\sqrt{z}$ 两叶结构示意图。
-    \item $\log z$ 多层结构的直观图。
+    \item 对 $\log z$ 来说，每绕原点一圈，函数值就多加一个 $2\pi\mathrm{i}$，所以它像是沿着一层层竖直平移的叶面不断向上或向下跳转。
+    \item 对 $\sqrt{z}$ 来说，只有两层：第一层取一个值，第二层取它的相反数；绕一圈就跳到另一层，再绕一圈才回到原层。
 \end{itemize}
 
-\begin{jinshi}[本节易错点]
-\begin{enumerate}
-    \item 不要把支点和极点、可去奇点简单混为一谈。
-    \item 不要误以为绕一圈以后``函数写法没变，所以函数值也应不变''。
-    \item 多叶图只是直观工具，不必把它误读成正式证明。
-\end{enumerate}
-\end{jinshi}
+\begin{tishi}[这里为什么只讲直观，不正式讲黎曼面]
+因为本讲义的重点是帮助学生处理具体函数与具体积分，而不是把抽象几何理论提前铺得太重。你现在只需要先把``多叶''理解成帮助自己看清换支现象的一种想象工具，这已经足够支撑后面的积分应用了。
+\end{tishi}
 
 \section{支割路径与复积分方法}
 
-\begin{wulibj}[本节要解决的问题]
-前几节主要在搭建多值函数的概念世界。本节则要回答学生最关心的应用问题：既然函数本身会多值，那第五章里的围道积分方法还怎么用？答案是：留数定理本身并没有失效，但做题时必须先选支，再选路径，尤其要认真处理支割两侧的函数值差异。
+\begin{wulibj}[为什么这一节必须回到积分]
+本章前面几节主要都在讲概念：多值性、分支、支点、支割。学到这里，很多同学最想知道的其实是：这些概念在做题时到底怎么用？尤其是，当题目里真的出现 $\log z$、$z^\alpha$、$\sqrt{z}$ 这样的对象时，第五章的围道积分方法是不是还能继续用？
+
+答案是：当然能用，但顺序必须改成
+\[
+    \text{先选支} \Longrightarrow \text{再选路径} \Longrightarrow \text{最后算留数}.
+\]
+这一节就是专门讲这条顺序为什么不能颠倒。
 \end{wulibj}
 
-\subsection*{教学目标}
-\begin{itemize}
-    \item 让学生理解带多值函数的积分为什么必须先说明分支。
-    \item 让学生掌握钥匙孔围道这类典型路径的构造思想。
-    \item 让学生知道支割上下两岸函数值的关系，往往正是积分成功的关键。
-\end{itemize}
+\subsection{带多值函数做积分时的基本步骤}
 
-\subsection*{建议小节安排}
+\begin{tishi}[做题时的判断顺序]
+遇到带多值函数的积分，建议按下面的顺序思考：
 \begin{enumerate}
-    \item 多值函数积分中的基本步骤：先选支，再选路径
-    \item 支割两侧函数值的比较
-    \item 钥匙孔围道与典型应用
-    \item 含 $\log x$、$x^\alpha$、$\sqrt{x}$ 的积分示例
+    \item 先找支点在哪里；
+    \item 再决定沿哪条射线作支割；
+    \item 在支割后的区域里固定一个解析支；
+    \item 看支割两侧函数值如何变化；
+    \item 最后才决定围道形状，并使用留数定理。
 \end{enumerate}
+\end{tishi}
 
-\subsection*{本节必须讲清的核心点}
+这条顺序非常重要。因为如果支都没选好，你写下来的函数就还不是一个单值解析对象，这时谈围道、谈留数，其实都没有站稳脚跟。
+
+\subsection{钥匙孔围道为什么会出现}
+
+处理含 $\log z$、$z^\alpha$、$\sqrt{z}$ 的积分时，最典型的路径就是\textbf{钥匙孔围道}。它特别适合下面这类情形：
 \begin{itemize}
-    \item 留数定理本身并没有改变；变化的是：函数必须先在所选围道内成为单值解析对象。
-    \item 支割不能随便画，它必须和积分路径设计、奇点位置以及题目目标配合起来。
-    \item 钥匙孔围道特别适合处理支点在原点和无穷远点、支割沿正实轴或负实轴延伸的积分问题。
-    \item 做这类题时，最关键的往往不是残数本身，而是先看清支割上下两侧函数值如何对应。
+    \item 支点在 $0$；
+    \item 还可能在 $\infty$ 处出现多值效应；
+    \item 支割沿着正实轴或负实轴伸向无穷远。
 \end{itemize}
 
-\subsection*{建议例题}
-\begin{lizi}{含幂函数的典型积分}{}
-用钥匙孔围道讨论
+钥匙孔围道的思想并不神秘。它只是顺着支割的上下两岸各走一遍，同时再用一个大圆弧和一个小圆弧把路径闭合起来。这样做的好处是：\textbf{我们既能用闭路积分的工具，又能精确比较支割两侧的函数值差别。}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.02]
+    \draw[->, gray] (-4.2,0) -- (4.4,0) node[right] {$\operatorname{Re}z$};
+    \draw[->, gray] (0,-3.4) -- (0,3.6) node[above] {$\operatorname{Im}z$};
+
+    \draw[red, line width=1.6pt] (0,0) -- (3.8,0);
+    \node[red, below] at (2.2,0) {支割};
+
+    \draw[blue, line width=1.0pt, ->] (3.4,0.08) arc[start angle=0,end angle=350,radius=3.4];
+    \draw[blue, line width=1.0pt, ->] (0.35,-0.02) arc[start angle=0,end angle=-350,radius=0.35];
+    \draw[blue, line width=1.0pt, ->] (0.42,0.08) -- (3.0,0.08);
+    \draw[blue, line width=1.0pt, ->] (3.0,-0.08) -- (0.42,-0.08);
+
+    \node[blue] at (2.35,2.65) {$C_R$};
+    \node[blue] at (0.78,-0.55) {$C_\varepsilon$};
+    \node[above, blue] at (2.15,0.12) {上岸};
+    \node[below, blue] at (2.15,-0.12) {下岸};
+    \fill[black] (0,0) circle (1.7pt);
+    \node[below left] at (0,0) {$0$};
+\end{tikzpicture}
+\caption{钥匙孔围道：顺着支割两侧各走一遍，再用内外圆弧闭合}
+\label{fig:ch06-keyhole-contour}
+\end{figure}
+
+\subsection{典型例题：一个 Beta 型积分}
+
+\begin{lizi}{钥匙孔围道的标准用法}{}
+设
 \[
-    \int_0^{\infty} \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x
+    0<\alpha<1,
 \]
-这一类积分，并说明为什么必须先固定 $x^{\alpha-1}$ 的支。
+计算积分
+\[
+    I(\alpha)=\int_0^\infty \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x.
+\]
+
+\begin{jie}
+这一题最关键的，不是先写残数，而是先决定
+\[
+    z^{\alpha-1}
+\]
+到底取哪一支。因为原积分沿正实轴进行，所以最自然的做法，是把正实轴本身作为支割，并取
+\[
+    0<\arg z<2\pi.
+\]
+于是定义
+\[
+    z^{\alpha-1}=\exp\bigl((\alpha-1)\operatorname{Log}_+(z)\bigr),
+\]
+其中 $\operatorname{Log}_+(z)$ 表示辐角取在 $(0,2\pi)$ 内的那一支对数。
+
+考虑函数
+\[
+    f(z)=\frac{z^{\alpha-1}}{1+z}
+\]
+及图 \ref{fig:ch06-keyhole-contour} 所示的钥匙孔围道。
+
+\textbf{第一步：看围道内的奇点。}
+
+除支点 $0$ 外，函数在围道内部只有一个简单极点
+\[
+    z=-1.
+\]
+此时 $-1$ 的辐角是 $\pi$，所以
+\[
+    (-1)^{\alpha-1}=\mathrm{e}^{(\alpha-1)\pi\mathrm{i}}.
+\]
+故残数为
+\[
+    \operatorname{Res}[f(z),-1]
+    =\lim_{z\to -1}(z+1)\frac{z^{\alpha-1}}{1+z}
+    =\mathrm{e}^{(\alpha-1)\pi\mathrm{i}}.
+\]
+由留数定理，
+\[
+    \oint f(z)\,\mathrm{d}z
+    =
+    2\pi\mathrm{i}\,\mathrm{e}^{(\alpha-1)\pi\mathrm{i}}.
+\]
+
+\textbf{第二步：把闭路积分拆成各段。}
+
+上岸取值为
+\[
+    z=x,\qquad \arg z=0,
+\]
+所以
+\[
+    \int_{\text{上岸}} f(z)\,\mathrm{d}z
+    =
+    \int_\varepsilon^R \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x.
+\]
+
+下岸从 $R$ 走到 $\varepsilon$，且
+\[
+    \arg z=2\pi,
+\]
+于是
+\[
+    z^{\alpha-1}=x^{\alpha-1}\mathrm{e}^{2\pi\mathrm{i}(\alpha-1)}.
+\]
+因此
+\[
+    \int_{\text{下岸}} f(z)\,\mathrm{d}z
+    =
+    \int_R^\varepsilon
+    \frac{x^{\alpha-1}\mathrm{e}^{2\pi\mathrm{i}(\alpha-1)}}{1+x}\,\mathrm{d}x
+    =
+    -\mathrm{e}^{2\pi\mathrm{i}\alpha}
+    \int_\varepsilon^R \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x.
+\]
+这里最后一步用到
+\[
+    \mathrm{e}^{2\pi\mathrm{i}(\alpha-1)}=\mathrm{e}^{2\pi\mathrm{i}\alpha}.
+\]
+
+\textbf{第三步：说明两段圆弧贡献趋于零。}
+
+对外大圆弧 $C_R$，由于 $0<\alpha<1$，在 $|z|=R$ 上有
+\[
+    |f(z)|
+    =
+    \left|\frac{z^{\alpha-1}}{1+z}\right|
+    \le
+    \frac{R^{\alpha-1}}{R-1}.
+\]
+弧长约为 $2\pi R$，所以
+\[
+    \left|\int_{C_R} f(z)\,\mathrm{d}z\right|
+    \le
+    2\pi R\cdot \frac{R^{\alpha-1}}{R-1}
+    \to 0
+    \qquad (R\to\infty),
+\]
+因为 $\alpha-1<0$。
+
+对内小圆弧 $C_\varepsilon$，在 $|z|=\varepsilon$ 上有
+\[
+    |f(z)|
+    \le
+    \frac{\varepsilon^{\alpha-1}}{1-\varepsilon},
+\]
+弧长约为 $2\pi\varepsilon$，故
+\[
+    \left|\int_{C_\varepsilon} f(z)\,\mathrm{d}z\right|
+    \le
+    2\pi\varepsilon \cdot \frac{\varepsilon^{\alpha-1}}{1-\varepsilon}
+    =
+    \frac{2\pi\varepsilon^\alpha}{1-\varepsilon}
+    \to 0
+    \qquad (\varepsilon\to 0),
+\]
+因为 $\alpha>0$。
+
+\textbf{第四步：令 $R\to\infty,\ \varepsilon\to 0$。}
+
+于是闭路积分只剩上下两岸之和：
+\[
+    \left(1-\mathrm{e}^{2\pi\mathrm{i}\alpha}\right)I(\alpha)
+    =
+    2\pi\mathrm{i}\,\mathrm{e}^{(\alpha-1)\pi\mathrm{i}}.
+\]
+因此
+\[
+    I(\alpha)
+    =
+    \frac{2\pi\mathrm{i}\,\mathrm{e}^{(\alpha-1)\pi\mathrm{i}}}
+    {1-\mathrm{e}^{2\pi\mathrm{i}\alpha}}.
+\]
+
+下面把它化简。注意
+\[
+    1-\mathrm{e}^{2\pi\mathrm{i}\alpha}
+    =
+    -2\mathrm{i}\,\mathrm{e}^{\pi\mathrm{i}\alpha}\sin(\pi\alpha),
+\]
+而
+\[
+    \mathrm{e}^{(\alpha-1)\pi\mathrm{i}}
+    =
+    -\mathrm{e}^{\pi\mathrm{i}\alpha}.
+\]
+代入得
+\[
+    I(\alpha)=\frac{\pi}{\sin(\pi\alpha)}.
+\]
+
+所以最终结果是
+\[
+    \boxed{
+        \int_0^\infty \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x
+        =
+        \frac{\pi}{\sin(\pi\alpha)},
+        \qquad 0<\alpha<1.
+    }
+\]
+\end{jie}
 \end{lizi}
 
-\begin{lizi}{含对数函数的典型积分}{}
-选择合适的对数支，说明如何处理一类含 $\log x$ 的无穷积分，并指出围道各段的作用分工。
-\end{lizi}
-
-\subsection*{建议图示}
-\begin{itemize}
-    \item 钥匙孔围道示意图。
-    \item 支割上下两岸函数值不同的示意图。
-    \item 小圆弧、外大圆弧与实轴两侧积分对应关系图。
-\end{itemize}
-
-\begin{jinshi}[本节易错点]
+\begin{jinshi}[这一题最容易错在哪]
 \begin{enumerate}
-    \item 不要在未说明分支的情况下直接写留数或路径积分。
-    \item 不要把支割上下两岸的函数值错当成相同。
-    \item 不要只顾套用现成围道，而不先判断题目中的支点结构。
+    \item 没有先说明 $z^{\alpha-1}$ 取哪一支，就直接写残数；
+    \item 把下岸的函数值错写成和上岸相同；
+    \item 忘了下岸积分方向与上岸相反；
+    \item 忽略 $0<\alpha<1$ 这个条件，于是外圆弧或内圆弧的估计写不通。
 \end{enumerate}
 \end{jinshi}
+
+\begin{tishi}[为什么这道题是本章最典型的代表题]
+因为它把本章最核心的四个动作都串起来了：
+\[
+    \text{找支点} \Longrightarrow \text{选支割} \Longrightarrow \text{比较上下两岸} \Longrightarrow \text{再用留数定理}.
+\]
+以后遇到含 $\log x$、$x^\alpha$、$\sqrt{x}$ 的积分，思路往往都是这一套，只是具体分支和围道细节会有所变化。
+\end{tishi}
 
 \section{本章小结}
 
 \begin{tishi}[一句话回看本章]
-本章的核心思想可以压缩成一句话：\textbf{多值函数的问题，关键不在于强行把它变成全局单值，而在于学会在合适区域上选出解析支，再据此设计路径和方法。}
+\textbf{多值函数的问题，不在于强行把它们看成全局单值，而在于学会在合适区域上选出解析支，然后据此组织后续分析与积分计算。}
 \end{tishi}
 
-\subsection*{建议在正式写作时重点回顾的主线}
-\begin{itemize}
-    \item 多值现象从辐角开始，而不是从技巧性积分开始。
-    \item 复对数是最基本的多值函数，幂函数和根式函数都和它直接相关。
-    \item 支、解析支和支割的引入，是为了把多值问题转化为某个区域上的单值解析问题。
-    \item 一旦进入积分应用，思路顺序应当是：判断支点 $\rightarrow$ 选支割 $\rightarrow$ 选路径 $\rightarrow$ 再做计算。
-\end{itemize}
+如果把本章内容压缩成一条主线，可以写成
+\[
+    \arg z
+    \Longrightarrow
+    \log z
+    \Longrightarrow
+    \text{分支与支割}
+    \Longrightarrow
+    z^\alpha,\ \sqrt[n]{z}
+    \Longrightarrow
+    \text{带支割的围道积分}.
+\]
 
-\subsection*{建议正式小结中安排的功能块}
-\begin{itemize}
-    \item 用一幅流程图回顾``辐角 $\rightarrow$ 对数 $\rightarrow$ 分支 $\rightarrow$ 幂函数 $\rightarrow$ 支割积分''这条主线。
-    \item 用一个 `jinshi` 框集中提醒本章最容易混淆的概念：$\arg z$ 与 $\operatorname{Arg} z$、$\log z$ 与 $\operatorname{Log} z$、支点与极点、单值与解析支。
-    \item 用一个 `tishi` 框总结带多值函数积分时的判断顺序和常见路径模板。
-\end{itemize}
+\begin{tishi}[做题时的判断思路]
+\begin{enumerate}
+    \item 先问：这个对象为什么会多值？支点在哪里？
+    \item 再问：我想保住哪一条积分路径，或者想避开哪条射线？
+    \item 然后选择支割，并固定一支解析函数。
+    \item 最后才进入留数、估值和极限的计算。
+\end{enumerate}
+\end{tishi}
 
-\section{习题安排建议}
+\begin{jinshi}[本章最容易混淆的几组概念]
+\begin{enumerate}
+    \item $\arg z$ 和 $\operatorname{Arg} z$ 不同：前者是全体辐角，后者是主辐角。
+    \item $\log z$ 和 $\operatorname{Log} z$ 不同：前者是全部对数值，后者是主值支。
+    \item 支点和极点不同：极点绕一圈函数值不会换支，支点则会暴露多值性。
+    \item 支割不是唯一的；它取决于你希望在哪个区域上建立解析支、又希望怎样设计路径。
+\end{enumerate}
+\end{jinshi}
+
+\section{习题}
 
 \subsection*{基础题}
-\begin{itemize}
-    \item 写出若干给定复数的全部辐角与主辐角。
-    \item 求 $\log z$、$z^{1/2}$、$z^{1/3}$ 在指定点的全部值与主值。
-    \item 判断某个给定区域上能否为 $\log z$ 或 $\sqrt{z}$ 选出解析支。
-\end{itemize}
+
+\begin{enumerate}[label=\arabic*.]
+    \item 写出下列各数的全部辐角与主辐角：
+    \[
+        -\mathrm{i},\qquad 1+\mathrm{i},\qquad -1-\mathrm{i}.
+    \]
+    \item 求 $\log(-\mathrm{i})$ 与 $\log(1+\mathrm{i})$ 的全部值。
+    \item 在主值支下，求 $\sqrt{\mathrm{i}}$ 与 $\sqrt{-1+\mathrm{i}0^+}$。
+    \item 说明为什么主值对数 $\operatorname{Log} z$ 不能在负实轴上连续延拓。
+\end{enumerate}
 
 \subsection*{综合题}
-\begin{itemize}
-    \item 比较不同支割下 $\operatorname{Log} z$ 的表达式及适用区域。
-    \item 说明 $\sqrt{z}$ 绕原点一周后为何变号，并推广到 $\sqrt[n]{z}$。
-    \item 在指定区域上构造 $z^\alpha$ 的一个解析支，并写出明确表达式。
-\end{itemize}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{4}
+    \item 在区域 $\mathbb{C}\setminus[0,+\infty)$ 上构造 $\log z$ 的一个解析支，并写出其辐角范围。
+    \item 说明为什么去心平面 $\mathbb{C}\setminus\{0\}$ 上不存在全局对数解析支。
+    \item 求 $(-1)^{2/3}$ 与 $(-1)^{\sqrt{2}}$ 的全部值，并比较它们的多值性有何不同。
+    \item 说明 $\sqrt{z}$ 绕原点一周后为什么变号，并解释为什么绕两周后又回到原值。
+\end{enumerate}
 
 \subsection*{挑战题}
-\begin{itemize}
-    \item 设计一条适合某个多值函数的支割，并说明为什么这样选有利于积分处理。
-    \item 用钥匙孔围道完成一类含 $x^\alpha$ 或 $\log x$ 的典型实积分。
-    \item 说明为什么某些区域上不可能为 $\log z$ 选出全局解析支。
-\end{itemize}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{8}
+    \item 设 $0<\alpha<1$，重新用本章方法计算
+    \[
+        \int_0^\infty \frac{x^{\alpha-1}}{1+x}\,\mathrm{d}x,
+    \]
+    并把每一步所对应的分支选择写清楚。
+    \item 选取适当的对数分支，尝试讨论
+    \[
+        \int_0^\infty \frac{\ln x}{1+x^2}\,\mathrm{d}x
+    \]
+    可否通过围道积分处理；若可以，说明应如何选支与路径。
+    \item 对函数 $z^{1/3}$ 设计一种不同于主值支的支割方式，并说明这种选择会怎样改变各支的表达式。
+\end{enumerate}
