@@ -1372,7 +1372,7 @@ z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \end{equation}
 的复数 $w$。这就是求 $z$ 的 $n$ 次方根（$n$-th roots）。
 
-这里要特别注意：复数开方之所以会出现多个值，并不是因为我们``故意多取几个答案''，而是因为同一个复数的辐角本来就不是唯一的。若
+这里要特别注意：复数开方之所以会出现多个值，并不是因为我们``故意多取几个答案''，而是因为同一个复数的辐角本来就不是唯一的。设 $\theta$ 是 $z$ 的一个辐角，若
 \[
 z=re^{\mathrm{i}\theta},
 \]
@@ -1387,11 +1387,11 @@ w^n=z
 时，就要把这一整族可能的辐角都考虑进去。也正因为后面要把辐角除以 $n$，原来相差 $2\pi$ 的那些角，除以 $n$ 以后通常不再对应同一个方向，于是就产生了多个不同的方根。
 
 \begin{dingli}{复数的 $n$ 次方根（$n$-th roots）}{}
-设
+设 $z\neq 0$，并把它写成极形式
 \[
-z=re^{\mathrm{i}\theta}\neq 0,\qquad r>0.
+z=re^{\mathrm{i}\theta},\qquad r>0,
 \]
-则方程
+其中 $\theta$ 是 $z$ 的一个辐角。则方程
 \begin{equation}
     w^n=z
 \end{equation}
@@ -1415,7 +1415,7 @@ w=\rho e^{\mathrm{i}\varphi}.
 \begin{equation}
     \rho^n=r,\qquad n\varphi=\theta+2k\pi,\quad k\in\mathbb{Z}.
 \end{equation}
-这里的 $2k\pi$ 正是由 $\arg z$ 的多值性带来的：同一个复数 $z$ 的辐角不是只有 $\theta$ 一个，而是 $\theta+2k\pi$ 的全体。于是解方程时，$\varphi$ 也必须同时吸收这一整族可能性。
+这里的 $2k\pi$ 就是由 $\arg z$ 的多值性带来的。
 
 于是
 \[
@@ -1437,7 +1437,7 @@ k=0,1,\dots,n-1
 故它们在圆周上均匀分布。
 \end{proof}
 
-\begin{jinshi}[复数开方为什么容易出错]
+\begin{jinshi}[复数求方根为什么容易出错]
 在实数范围内，大家很容易形成一种习惯：说``平方根''时，总想着取那个非负的主值。但在复数范围内，$n$ 次方根通常有 $n$ 个不同的值，不能只盯着其中一个。以后学多值函数时，这个观念会变得更加重要。
 \end{jinshi}
 
