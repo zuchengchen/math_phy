@@ -1456,6 +1456,48 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
 
 这说明，复数除法的几何意义就是：先把长度除以 $r_2$，再把方向减去 $\theta_2$，也就是撤销一次旋转与伸缩。
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, gray!70] (-0.7,0) -- (4.9,0) node[right, black] {$\operatorname{Re}z$};
+    \draw[->, gray!70] (0,-0.7) -- (0,4.4) node[above, black] {$\operatorname{Im}z$};
+
+    \coordinate (Q) at (30:2.1);
+    \coordinate (Z2) at (42:1.55);
+    \coordinate (Z1) at (72:3.1);
+
+    \draw[->, thick, purple!85!black, shorten >=2.5pt] (0,0) -- (Q);
+    \draw[->, thick, orange!85!black, shorten >=2.5pt] (0,0) -- (Z2);
+    \draw[->, very thick, blue!80!black, shorten >=2.5pt] (0,0) -- (Z1);
+
+    \fill[purple!85!black] (Q) circle (2pt);
+    \fill[orange!85!black] (Z2) circle (2pt);
+    \fill[blue!80!black] (Z1) circle (2pt);
+
+    \draw[thick, purple!85!black] (0.65,0) arc[start angle=0,end angle=30,radius=0.65];
+    \node[purple!85!black] at (0.95,0.23) {$\theta_1-\theta_2$};
+
+    \draw[thick, orange!85!black] (1.0,0) arc[start angle=0,end angle=42,radius=1.0];
+    \node[orange!85!black] at (1.34,0.55) {$\theta_2$};
+
+    \draw[thick, blue!80!black] (1.35,0) arc[start angle=0,end angle=72,radius=1.35];
+    \node[blue!80!black] at (1.1,1.18) {$\theta_1$};
+
+    \node[right, purple!85!black] at (Q) {$\dfrac{z_1}{z_2}$};
+    \node[right, orange!85!black] at (Z2) {$z_2$};
+    \node[above left, blue!80!black] at (Z1) {$z_1$};
+
+    \node[purple!85!black] at (145:1.55) {$\left|\dfrac{z_1}{z_2}\right|=\dfrac{r_1}{r_2}$};
+    \node[orange!85!black] at (20:1.1) {$|z_2|=r_2$};
+    \node[blue!80!black] at (104:2.9) {$|z_1|=r_1$};
+    \node[above left] at (0,0) {$O$};
+\end{tikzpicture}
+\caption{复数除法对应``长度除下来、方向减回去''}
+\label{fig:complex-division}
+\end{figure}
+
+图 \ref{fig:complex-division} 可以和前面的乘法图对照着看：乘法是``把长度乘上去、把方向转过去''；除法则正好反过来，是``把长度除回来、把方向减回去''。也正因为如此，除以一个非零复数，本质上就是撤销它带来的那次伸缩和旋转。
+
 在代数形式下，常用共轭把分母化成实数：
 \begin{equation}
     \frac{z_1}{z_2}
@@ -1582,6 +1624,53 @@ z=x+\mathrm{i}y,\qquad \alpha=a+\mathrm{i}b.
         y
     \end{pmatrix}.
 \end{equation}
+
+把
+\[
+e_1=
+\begin{pmatrix}
+    1\\
+    0
+\end{pmatrix},
+\qquad
+e_2=
+\begin{pmatrix}
+    0\\
+    1
+\end{pmatrix}
+\]
+看成平面上的两个基向量时，这个矩阵的含义会更直观。它的第一列给出 $e_1$ 在乘以 $\alpha$ 之后的像，第二列给出 $e_2$ 在乘以 $\alpha$ 之后的像。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.15]
+    \draw[->, gray!70] (-1.0,0) -- (3.8,0) node[right, black] {$x$};
+    \draw[->, gray!70] (0,-0.8) -- (0,3.8) node[above, black] {$y$};
+
+    \draw[->, thick, gray!85!black, shorten >=2.5pt] (0,0) -- (1,0);
+    \draw[->, thick, gray!85!black, shorten >=2.5pt] (0,0) -- (0,1);
+    \node[below] at (1,0) {$e_1$};
+    \node[left] at (0,1) {$e_2$};
+
+    \coordinate (AeOne) at (2.1,1.2);
+    \coordinate (AeTwo) at (-1.2,2.1);
+
+    \draw[->, thick, blue!80!black, shorten >=2.5pt] (0,0) -- (AeOne);
+    \draw[->, thick, red!75!black, shorten >=2.5pt] (0,0) -- (AeTwo);
+    \fill[blue!80!black] (AeOne) circle (2pt);
+    \fill[red!75!black] (AeTwo) circle (2pt);
+
+    \node[below right, text=blue!80!black] at (AeOne) {$\alpha e_1=(a,b)$};
+    \node[above left, text=red!75!black] at (AeTwo) {$\alpha e_2=(-b,a)$};
+
+    \draw[dashed, gray] (AeOne) -- (2.1,0);
+    \draw[dashed, gray] (AeOne) -- (0,1.2);
+    \draw[dashed, gray] (AeTwo) -- (-1.2,0);
+    \draw[dashed, gray] (AeTwo) -- (0,2.1);
+\end{tikzpicture}
+\caption{乘以复数 $\alpha=a+\mathrm{i}b$ 时，基向量 $e_1,e_2$ 的像正好给出矩阵的两列}
+\label{fig:complex-multiplication-basis}
+\end{figure}
 
 也就是说，复数乘法在坐标上对应的，是形如
 \[
@@ -1992,53 +2081,8 @@ x\to +\infty,\qquad x\to -\infty.
 \end{dingliyi}
 
 \begin{zhu}{}{}
-这里的 $\infty$ 不是普通复数，而是为了统一讨论``无穷远行为''而补上的一个新点。第一章里我们主要掌握它的几何意义和邻域概念，不急着做过多形式运算。
+这里的 $\infty$ 不是普通复数，而是为了统一讨论``无穷远行为''而补上的一个新点。第一章里我们主要先抓住它的几何意义，以及它和``远离原点''这件事之间的联系；至于怎样用邻域语言精确描述它，我们放到第二章讨论点集与区域时再统一说明。
 \end{zhu}
-
-\subsection{无穷远点的邻域}
-
-对有限点 $z_0$ 来说，邻域（neighborhood）是小圆盘
-\[
-\{z:|z-z_0|<\varepsilon\}.
-\]
-而对无穷远点来说，``离它近''意味着``离原点足够远''。
-
-\begin{dingliyi}{无穷远点的邻域（neighborhood of infinity）}{}
-形如
-\begin{equation}
-    \{z\in\mathbb{C}:|z|>R\},\qquad R>0,
-\end{equation}
-的点集称为无穷远点 $\infty$ 的一个\textbf{邻域}。
-\end{dingliyi}
-
-这个定义非常值得体会：越远离原点，就越接近无穷远点。
-
-\begin{lizi}{判断无穷远点的邻域}{}
-下列集合中，哪些是无穷远点的邻域？
-\[
-E_1=\{z:|z|>3\},\qquad E_2=\{z:\operatorname{Re}z>3\},\qquad E_3=\{z:|z-1|>5\}.
-\]
-
-\begin{jie}
-$E_1$ 显然是无穷远点的邻域，因为它正是标准形式
-\[
-\{z:|z|>R\}
-\]
-的集合。
-
-$E_2$ 不是无穷远点的邻域。虽然里面有很多模很大的点，但也漏掉了大量远离原点的点，例如负实轴方向的大点。
-
-$E_3$ 虽然不是标准形式，但它包含一个足够远离原点的外部区域，因此也可作为无穷远点的邻域。事实上，当 $|z|>6$ 时，由三角不等式有
-\[
-|z-1|\ge |z|-1>5,
-\]
-故
-\[
-\{z:|z|>6\}\subset E_3.
-\]
-所以 $E_3$ 确实包含无穷远点附近的所有足够远的点。
-\end{jie}
-\end{lizi}
 
 \subsection{用 \texorpdfstring{$w=1/z$}{w=1/z} 理解无穷远点附近}
 
@@ -2276,15 +2320,18 @@ F(w)=f\!\left(\frac{1}{w}\right),
 \section{复数的物理应用初步}
 
 \begin{wulibj}[为什么复数会反复出现在物理里]
-学到这里，一个很自然的问题是：为什么复数不只出现在方程求根里，还会反复出现在物理中？
-
-一个核心原因是，很多物理量不仅有``大小''，还有``相位''。若只用实数，这两部分信息往往要分开写；而复数可以把它们统一在同一个式子里。再进一步，像
-\[
-    e^{\mathrm{i}(kx-\omega t)}
-\]
-这样的复指数在微分时形式几乎不变，这会让振动、波动和叠加的计算简洁得多。
-
-因此，在物理里使用复数，往往不是为了把问题``写得花哨''，而是为了把振幅、相位和运算规律放到同一种语言里。下面我们就看两个最基本的例子：简谐振动和量子力学中的波函数。
+前面已经提过，复数并不是只在代数方程里偶尔露面。到了这一节，我们可以把那条线索说得更具体一些：
+\begin{itemize}
+    \item 在简谐振动和波动问题中，物理量不仅有大小，还有相位；复数恰好能把这两部分信息写在同一个对象里。
+    \item 在波动问题中，复指数形式
+    \[
+        e^{\mathrm{i}(kx-\omega t)}
+    \]
+    比单独写正弦和余弦更简洁，而且更容易做微分运算。
+    \item 在二维势场问题中，复平面上的几何结构能和解析函数紧密结合。这能帮助你体会到：复数的几何语言并不只服务于代数运算，也会在后面的复变函数应用中继续出现。
+    \item 在傅里叶分析、拉普拉斯变换和留数法里，复数不再只是``辅助记号''，而是整个方法的语言基础。
+\end{itemize}
+因此，这里我们不打算把振动学或量子力学完整搬进来，而是只做一件事：让大家真正体验到，前面学的模、辐角和指数形式不是抽象游戏，而是会立刻让物理计算变得更清楚、更统一。
 \end{wulibj}
 
 \subsection{简谐振动的复表示}
@@ -2303,6 +2350,53 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \frac{\mathrm{d}}{\mathrm{d}t}e^{\mathrm{i}\omega t}=\mathrm{i}\omega e^{\mathrm{i}\omega t}.
 \end{equation}
 这说明，求导对应的只是乘上一个常数 $\mathrm{i}\omega$。对于振动和波动问题，这种简化非常重要。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \begin{scope}
+        \draw[->, gray!70] (-2.6,0) -- (2.8,0) node[right, black] {$\operatorname{Re}$};
+        \draw[->, gray!70] (0,-2.4) -- (0,2.6) node[above, black] {$\operatorname{Im}$};
+        \draw[blue, thick] (0,0) circle (2);
+        \coordinate (P) at ({2*cos(45)},{2*sin(45)});
+        \coordinate (X) at ({2*cos(45)},0);
+        \draw[->, very thick, red!75!black, shorten >=2.5pt] (0,0) -- (P);
+        \draw[dashed, gray] (P) -- (X);
+        \fill[red!75!black] (P) circle (2pt);
+        \fill[blue!80!black] (X) circle (2pt);
+        \draw[thick, green!60!black] (0.55,0) arc[start angle=0,end angle=45,radius=0.55];
+        \node[green!50!black] at (0.78,0.28) {$\omega t+\varphi$};
+        \node[above right, text=red!75!black] at (P) {$Ae^{\mathrm{i}(\omega t+\varphi)}$};
+        \node[below, text=blue!80!black] at (X) {$x(t)$};
+        \node[blue] at (1.12,-0.45) {投影到实轴};
+        \node[below left] at (0,0) {$O$};
+    \end{scope}
+
+    \draw[->, thick, gray!70] (3.4,0.45) -- (5.1,0.45);
+    \node[gray!70] at (4.25,0.72) {随时间转动};
+
+    \begin{scope}[xshift=6.1cm]
+        \draw[->, gray!70] (0,0) -- (4.9,0) node[right, black] {$t$};
+        \draw[->, gray!70] (0,-2.3) -- (0,2.3) node[above, black] {$x$};
+        \draw[blue!80!black, thick, domain=0:4.4, smooth, variable=\t] plot ({\t},{2*cos(45-55*\t)});
+        \fill[red!75!black] (1.4,{2*cos(45-55*1.4)}) circle (2pt);
+        \draw[dashed, gray] (1.4,0) -- (1.4,{2*cos(45-55*1.4)});
+        \node[above right, text=blue!80!black] at (2.6,1.45) {$x(t)=A\cos(\omega t+\varphi)$};
+    \end{scope}
+\end{tikzpicture}
+\caption{旋转相量在实轴上的投影给出简谐振动}
+\label{fig:phasor-shm}
+\end{figure}
+
+图 \ref{fig:phasor-shm} 很值得反复体会：左边的复指数
+\[
+Ae^{\mathrm{i}(\omega t+\varphi)}
+\]
+随着时间匀速转动，而它在实轴上的投影正好就是右边看到的余弦振动
+\[
+x(t)=A\cos(\omega t+\varphi).
+\]
+这就是``取实部''在几何上的真正含义。
 
 \subsection{同频振动的叠加与相量法（phasor method）}
 
@@ -2392,92 +2486,7 @@ x(t)=\operatorname{Re}\left(5e^{-\mathrm{i}\arctan(4/3)}e^{\mathrm{i}\omega t}\r
 
 \subsection{量子力学中的波函数}
 
-在经典力学里，一个粒子的位置、速度都是实数；但在量子力学里，系统状态通常用波函数 $\psi(x,t)$ 描写，它一般是复值函数。
-
-这里最先要分清的一点是：波函数本身并不是直接测得的物理量，真正和概率联系起来的是它的模平方
-\[
-|\psi(x,t)|^2.
-\]
-它表示粒子在位置 $x$ 附近出现的概率密度。也就是说，复数先出现在波函数里，但最后能和实验结果联系起来的，是它的模平方。
-
-一个最简单的波函数形式是
-\[
-\psi(x,t)=Ae^{\mathrm{i}(kx-\omega t)},
-\]
-其中 $A$ 表示振幅，$kx-\omega t$ 表示相位。这样写的好处与前面的振动问题完全类似：对 $x$ 求导时会带下一个因子 $\mathrm{i}k$，对 $t$ 求导时会带下一个因子 $-\mathrm{i}\omega$，所以波动规律的数学表达会非常紧凑。
-
-不过，复数在量子力学里的作用并不只是``方便计算''。更重要的是，复数中的相位会直接影响叠加结果。设两个波函数为
-\[
-\psi_1=Ae^{\mathrm{i}\phi_1},\qquad \psi_2=Ae^{\mathrm{i}\phi_2},
-\]
-则总波函数为
-\[
-\psi=\psi_1+\psi_2.
-\]
-这时，对应的概率密度不是简单的 $|\psi_1|^2+|\psi_2|^2$，而是
-\[
-\begin{aligned}
-|\psi|^2
-&=(\psi_1+\psi_2)(\overline{\psi_1}+\overline{\psi_2})\\
-&=|\psi_1|^2+|\psi_2|^2+\psi_1\overline{\psi_2}+\overline{\psi_1}\psi_2.
-\end{aligned}
-\]
-最后两项叫作干涉项，它们正是由相位差带来的。把 $\psi_1,\psi_2$ 代入后可以得到
-\[
-|\psi|^2=2A^2\bigl[1+\cos(\phi_1-\phi_2)\bigr].
-\]
-这说明，实验上看到的概率分布会随着相位差 $\phi_1-\phi_2$ 改变：相位差为 $0$ 时增强，相位差为 $\pi$ 时减弱，甚至可以完全相消。
-
-所以，在量子力学里，复数的作用并不只是``把式子写得更紧凑''。它还能把振幅和相位统一起来，而相对相位又会真实地影响干涉结果。这正是复数在现代物理中如此重要的一个原因。
-
-\begin{lizi}{两个波函数叠加时，相位差如何影响概率密度}{}
-设
-\[
-\psi_1=A,\qquad \psi_2=Ae^{\mathrm{i}\phi},
-\]
-其中 $A$ 为实常数，$\phi$ 为相位差。求总波函数
-\[
-\psi=\psi_1+\psi_2
-\]
-对应的概率密度 $|\psi|^2$，并讨论 $\phi=0$ 与 $\phi=\pi$ 两种情形。
-
-\begin{jie}
-由题意，
-\[
-\psi=A+Ae^{\mathrm{i}\phi}=A(1+e^{\mathrm{i}\phi}).
-\]
-因此
-\[
-|\psi|^2=A^2|1+e^{\mathrm{i}\phi}|^2.
-\]
-
-下面把模平方展开：
-\[
-\begin{aligned}
-|1+e^{\mathrm{i}\phi}|^2
-&=(1+e^{\mathrm{i}\phi})(1+e^{-\mathrm{i}\phi})\\
-&=2+e^{\mathrm{i}\phi}+e^{-\mathrm{i}\phi}\\
-&=2+2\cos\phi.
-\end{aligned}
-\]
-于是
-\[
-|\psi|^2=A^2(2+2\cos\phi)=2A^2(1+\cos\phi).
-\]
-
-现在讨论两种特殊情形：
-\[
-\phi=0 \quad \Longrightarrow \quad |\psi|^2=4A^2,
-\]
-这时两个波同相叠加，概率密度达到最大；
-\[
-\phi=\pi \quad \Longrightarrow \quad |\psi|^2=0,
-\]
-这时两个波反相叠加，概率密度完全相消。
-
-这说明，在量子力学里，相位差虽然不会直接单独测到，但它会通过干涉现象真实地影响可观测结果。
-\end{jie}
-\end{lizi}
+在量子力学（quantum mechanics）里，波函数（wave function）一般写成复值函数。它的模平方与概率有关，而相位本身也携带重要信息。这再次说明：复数并不是数学家为了好看而引入的对象，它已经深深嵌入现代物理的表达方式中。
 
 \section{本章小结}
 
