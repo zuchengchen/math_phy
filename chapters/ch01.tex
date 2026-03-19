@@ -720,6 +720,30 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \arg z=\operatorname{Arg}z+2k\pi,\qquad k\in\mathbb{Z}.
 \end{equation}
 
+\begin{tishi}[辐角的多值性为什么会带来函数的多值]
+这一点现在先轻轻记住，后面会越来越重要。把非零复数写成极形式时，我们常写成
+\[
+z=re^{\mathrm{i}\theta}.
+\]
+这里看起来像是选了一个角 $\theta$，但实际上 $\theta$ 可以换成 $\theta+2k\pi$。也就是说，同一个复数 $z$ 往往对应一整族角，而不是唯一一个角。
+
+如果后面定义的量里只出现 $e^{\mathrm{i}\theta}$，那么把 $\theta$ 换成 $\theta+2k\pi$ 不会有影响，因为
+\[
+e^{\mathrm{i}(\theta+2k\pi)}=e^{\mathrm{i}\theta}.
+\]
+这时结果还是单值的。
+
+但如果后面出现的是
+\[
+e^{\mathrm{i}\theta/n},
+\]
+那么把 $\theta$ 换成 $\theta+2k\pi$ 后，就会变成
+\[
+e^{\mathrm{i}(\theta+2k\pi)/n}=e^{\mathrm{i}\theta/n}e^{2k\pi \mathrm{i}/n},
+\]
+一般不再是同一个值。于是，同一个 $z$ 就可能对应多个函数值，这就是我们以后会反复遇到的多值现象（multivaluedness）。复对数（complex logarithm）、复幂（complex power）和复数开方都会和这个现象直接相关。
+\end{tishi}
+
 \begin{jinshi}[辐角最容易出错的地方]
 \begin{itemize}
     \item 不要把 $\arg z$ 和 $\operatorname{Arg}z$ 混为一谈。前者表示全体辐角，后者表示主辐角。
@@ -932,28 +956,22 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \begin{proof}
 这里调用高等数学中已经学过的幂级数展开：
 \begin{align*}
-    e^t&=\sum_{n=0}^{\infty}\frac{t^n}{n!},\\
-    \cos t&=\sum_{k=0}^{\infty}(-1)^k\frac{t^{2k}}{(2k)!},\\
-    \sin t&=\sum_{k=0}^{\infty}(-1)^k\frac{t^{2k+1}}{(2k+1)!}.
+    e^t&=1+t+\frac{t^2}{2!}+\frac{t^3}{3!}+\frac{t^4}{4!}+\cdots,\\
+    \cos t&=1-\frac{t^2}{2!}+\frac{t^4}{4!}-\frac{t^6}{6!}+\cdots,\\
+    \sin t&=t-\frac{t^3}{3!}+\frac{t^5}{5!}-\frac{t^7}{7!}+\cdots.
 \end{align*}
 把 $t$ 换成 $\mathrm{i}\theta$，得
 \begin{align*}
     e^{\mathrm{i}\theta}
-    &=\sum_{n=0}^{\infty}\frac{(\mathrm{i}\theta)^n}{n!} \\
     &=1+\mathrm{i}\theta+\frac{(\mathrm{i}\theta)^2}{2!}+\frac{(\mathrm{i}\theta)^3}{3!}+\frac{(\mathrm{i}\theta)^4}{4!}+\cdots \\
     &=1+\mathrm{i}\theta-\frac{\theta^2}{2!}-\mathrm{i}\frac{\theta^3}{3!}+\frac{\theta^4}{4!}+\mathrm{i}\frac{\theta^5}{5!}-\cdots \\
     &=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)
       +\mathrm{i}\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right).
 \end{align*}
-也就是说，把各项真正写开以后，实部恰好收集了所有偶次幂项，虚部恰好收集了所有奇次幂项。若再改写回求和符号，就是
-\begin{align*}
-    e^{\mathrm{i}\theta}
-    &=\sum_{k=0}^{\infty}\frac{(\mathrm{i}\theta)^{2k}}{(2k)!}
-      +\sum_{k=0}^{\infty}\frac{(\mathrm{i}\theta)^{2k+1}}{(2k+1)!} \\
-    &=\sum_{k=0}^{\infty}(-1)^k\frac{\theta^{2k}}{(2k)!}
-      +\mathrm{i}\sum_{k=0}^{\infty}(-1)^k\frac{\theta^{2k+1}}{(2k+1)!} \\
-    &=\cos\theta+\mathrm{i}\sin\theta.
-\end{align*}
+也就是说，把各项真正写开以后，实部恰好就是 $\cos\theta$ 的展开式，虚部恰好就是 $\sin\theta$ 的展开式，因此
+\[
+e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta.
+\]
 这就证明了欧拉公式。
 \end{proof}
 
@@ -1354,6 +1372,20 @@ z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \end{equation}
 的复数 $w$。这就是求 $z$ 的 $n$ 次方根（$n$-th roots）。
 
+这里要特别注意：复数开方之所以会出现多个值，并不是因为我们``故意多取几个答案''，而是因为同一个复数的辐角本来就不是唯一的。若
+\[
+z=re^{\mathrm{i}\theta},
+\]
+则同一个 $z$ 也可以写成
+\[
+z=re^{\mathrm{i}(\theta+2k\pi)},\qquad k\in\mathbb{Z}.
+\]
+当我们去解
+\[
+w^n=z
+\]
+时，就要把这一整族可能的辐角都考虑进去。也正因为后面要把辐角除以 $n$，原来相差 $2\pi$ 的那些角，除以 $n$ 以后通常不再对应同一个方向，于是就产生了多个不同的方根。
+
 \begin{dingli}{复数的 $n$ 次方根（$n$-th roots）}{}
 设
 \[
@@ -1383,6 +1415,8 @@ w=\rho e^{\mathrm{i}\varphi}.
 \begin{equation}
     \rho^n=r,\qquad n\varphi=\theta+2k\pi,\quad k\in\mathbb{Z}.
 \end{equation}
+这里的 $2k\pi$ 正是由 $\arg z$ 的多值性带来的：同一个复数 $z$ 的辐角不是只有 $\theta$ 一个，而是 $\theta+2k\pi$ 的全体。于是解方程时，$\varphi$ 也必须同时吸收这一整族可能性。
+
 于是
 \[
 \rho=\sqrt[n]{r},\qquad \varphi=\frac{\theta+2k\pi}{n}.
