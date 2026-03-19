@@ -1057,6 +1057,27 @@ r=|z|,\qquad \theta\in \arg z,
     \cos\theta=\frac{e^{\mathrm{i}\theta}+e^{-\mathrm{i}\theta}}{2},\qquad
     \sin\theta=\frac{e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}}{2\mathrm{i}}.
 \end{equation}
+为什么会有这两个式子呢？做法其实很简单：先把欧拉公式中的 $\theta$ 换成 $-\theta$。由于
+\[
+\cos(-\theta)=\cos\theta,\qquad \sin(-\theta)=-\sin\theta,
+\]
+所以
+\[
+e^{-\mathrm{i}\theta}=\cos\theta-\mathrm{i}\sin\theta.
+\]
+现在把它和
+\[
+e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta
+\]
+放在一起看。两式相加，虚部正好消掉，就得到
+\[
+e^{\mathrm{i}\theta}+e^{-\mathrm{i}\theta}=2\cos\theta;
+\]
+两式相减，实部正好消掉，就得到
+\[
+e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}=2\mathrm{i}\sin\theta.
+\]
+于是两边分别除以 $2$ 和 $2\mathrm{i}$，就得到上面的两个公式。
 这两个公式以后在傅里叶分析中会频繁出现。
 
 \begin{lizi}{代数形式与指数形式互化}{}
