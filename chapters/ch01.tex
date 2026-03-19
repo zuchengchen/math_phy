@@ -1,6 +1,6 @@
 % 第一章：复数、复平面与扩充复平面基础
 
-\chapter{复数与复平面基础}
+\chapter{复数、复平面与扩充复平面基础}
 
 \begin{wulibj}[本章导读]
 很多同学一开始学复变函数时，最容易产生一种错觉：好像课程真正的重点都在后面的复积分和留数定理，而复数本身只是一个很短的预备章节。其实恰恰相反。后面那些看起来十分强大的方法，几乎都建立在对复数几何结构的深刻理解之上。
@@ -17,7 +17,7 @@
 这三件事不是彼此分开的。第二章讨论解析函数的极限、连续与导数时，会直接用到这里建立的复平面语言；后面研究洛朗展开和留数时，又会不断回到本章关于无穷远点与扩充复平面的视角；而本章反复强调的``乘法对应旋转与伸缩''，也会在解析函数导数的局部几何意义里再次出现。
 \end{wulibj}
 
-\section{复数的引入与基本概念}
+\section{复数的引入与代数基础}
 
 \begin{wulibj}[为什么要引入复数]
 复数不是凭空加进来的新符号，而是数系扩张的自然结果：像 $x^2+1=0$ 这样的方程在实数范围内没有解，我们就需要把数的范围再向外扩一步。
@@ -432,7 +432,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
 从现在开始，只要表达式里只涉及复数的加法、乘法以及由它们派生出来的减法、除法，你就可以像在实数里那样放心地展开括号、合并同类项、提取公因式。当然，前提仍然是每一步运算都要合法，例如做除法时分母不能为零。
 \end{tishi}
 
-\subsection{为什么物理问题中也会出现复数}
+\subsection{复数为什么会进入物理：一个预告}
 
 前面我们是从代数方程出发引入复数的，但复数之所以在数学物理中占据重要地位，并不只是因为它能让某些方程有解。更深一层的原因在于：它能把振幅与相位、微分与旋转、代数运算与几何结构统一到同一种语言里。
 
@@ -960,10 +960,10 @@ e^{\mathrm{i}(\theta+2k\pi)/n}=e^{\mathrm{i}\theta/n}e^{2k\pi \mathrm{i}/n},
     \draw[mp thin axis] (-4.1,0) -- (4.1,0) node[mp label, right] {$\operatorname{Re}z$};
     \draw[mp thin axis] (0,-2.7) -- (0,2.7) node[mp label, above] {$\operatorname{Im}z$};
 
-    \node[mp small, text=black!42] at (3,1.7) {第一象限};
-    \node[mp small, text=black!42] at (-3,1.7) {第二象限};
-    \node[mp small, text=black!42] at (-3,-1.8) {第三象限};
-    \node[mp small, text=black!42] at (3,-1.8) {第四象限};
+    \node[mp small, text=black!56] at (3,1.7) {第一象限};
+    \node[mp small, text=black!56] at (-3,1.7) {第二象限};
+    \node[mp small, text=black!56] at (-3,-1.8) {第三象限};
+    \node[mp small, text=black!56] at (3,-1.8) {第四象限};
 
     \coordinate (Z1) at (1,1.732);
     \coordinate (Z2) at (-1,1);
@@ -2282,41 +2282,45 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.98]
-    \coordinate (A) at (-4.5,-1.7);
-    \coordinate (B) at (3.6,-1.7);
-    \coordinate (C) at (5.15,-0.02);
-    \coordinate (D) at (-2.95,-0.02);
-    \fill[black!2] (A) -- (B) -- (C) -- (D) -- cycle;
-    \draw[black!26, line width=0.6pt] (A) -- (B) -- (C) -- (D) -- cycle;
-    \node[mp label, text=black!45] at (4.05,-0.12) {复平面};
+\begin{tikzpicture}[scale=1.02]
+    \coordinate (O) at (0.25,1.12);
+    \coordinate (A) at (-4.8,-1.92);
+    \coordinate (B) at (4.05,-1.92);
+    \coordinate (C) at (5.72,-0.10);
+    \coordinate (D) at (-3.13,-0.10);
 
-    \coordinate (O) at (0.35,0.92);
-    \fill[black!3] (O) circle (1.58);
-    \draw[black!42, line width=0.8pt] (O) circle (1.58);
-    \draw[black!32, line width=0.65pt] ($(O)+(-1.58,0)$)
-        arc[start angle=180,end angle=360,x radius=1.58,y radius=0.5];
-    \draw[black!24, dash pattern=on 2.3pt off 1.7pt, line width=0.6pt] ($(O)+(1.58,0)$)
-        arc[start angle=0,end angle=180,x radius=1.58,y radius=0.5];
-    \draw[black!34, line width=0.65pt] ($(O)+(0,1.58)$)
-        arc[start angle=90,end angle=270,x radius=0.84,y radius=1.58];
-    \draw[black!24, dash pattern=on 2.3pt off 1.7pt, line width=0.6pt] ($(O)+(0,-1.58)$)
-        arc[start angle=270,end angle=450,x radius=0.84,y radius=1.58];
+    \fill[black!5] (A) -- (B) -- (C) -- (D) -- cycle;
+    \draw[black!32, line width=0.72pt] (A) -- (B) -- (C) -- (D) -- cycle;
+    \node[mp small, text=black!58] at (4.55,-0.28) {复平面};
 
-    \coordinate (N) at ($(O)+(0,1.58)$);
-    \coordinate (S) at ($(O)+(0,-1.58)$);
-    \coordinate (P) at (1.2,1.52);
-    \coordinate (Z) at (3.82,-1.16);
+    \fill[black!12, opacity=0.24] ($(O)+(0,-1.86)$) ellipse (1.30 and 0.32);
 
-    \draw[figgold, line width=1pt, dash pattern=on 2.2pt off 1.7pt] (N) -- (P);
-    \draw[figgold, line width=1.15pt] (P) -- (Z);
+    \fill[figblue!4] (O) circle (1.68);
+    \fill[white, opacity=0.50] ($(O)+(-0.48,0.52)$) ellipse (0.70 and 0.46);
+    \draw[black!46, line width=0.92pt] (O) circle (1.68);
+    \draw[black!38, line width=0.70pt] ($(O)+(-1.68,0)$)
+        arc[start angle=180,end angle=360,x radius=1.68,y radius=0.56];
+    \draw[black!18, dash pattern=on 2.5pt off 1.9pt, line width=0.62pt] ($(O)+(1.68,0)$)
+        arc[start angle=0,end angle=180,x radius=1.68,y radius=0.56];
+    \draw[black!36, line width=0.68pt] ($(O)+(0,1.68)$)
+        arc[start angle=90,end angle=270,x radius=0.88,y radius=1.68];
+    \draw[black!18, dash pattern=on 2.5pt off 1.9pt, line width=0.62pt] ($(O)+(0,-1.68)$)
+        arc[start angle=270,end angle=450,x radius=0.88,y radius=1.68];
 
-    \fill[black!55] (N) circle (2pt) node[mp label, above] {$N$};
-    \fill[black!55] (S) circle (2pt) node[mp label, below] {$S$};
-    \fill[figpurple] (P) circle (2pt) node[mp label, above right, text=figpurple] {$P$};
-    \fill[figgold] (Z) circle (2pt) node[mp label, below right, text=figgold] {$z$};
+    \coordinate (N) at ($(O)+(0,1.68)$);
+    \coordinate (S) at ($(O)+(0,-1.68)$);
+    \coordinate (P) at (1.25,1.86);
+    \coordinate (Z) at (4.02,-1.09);
 
-    \node[mp label, text=black!52] at ($(N)+(0.72,0.18)$) {$N\leftrightarrow \infty$};
+    \draw[figgold!78!black, line width=0.90pt, dash pattern=on 2.4pt off 1.8pt] (N) -- (P);
+    \draw[figgold!92!black, line width=1.22pt] (P) -- (Z);
+
+    \fill[black!58] (N) circle (2pt) node[mp label, above] {$N$};
+    \fill[black!58] (S) circle (2pt) node[mp label, below] {$S$};
+    \fill[figpurple] (P) circle (2.1pt) node[mp label, above right, text=figpurple] {$P$};
+    \fill[figgold!92!black] (Z) circle (2.1pt) node[mp label, below right, text=figgold!92!black] {$z$};
+
+    \node[mp small, text=black!60, fill=white, inner sep=1.1pt] at ($(N)+(1.02,0.24)$) {$N\leftrightarrow \infty$};
 \end{tikzpicture}
 \caption{球极投影的立体示意：球面点 $P$ 沿过北极 $N$ 的直线投到复平面上的点 $z$}
 \label{fig:stereographic-projection}
@@ -2499,7 +2503,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \end{jie}
 \end{lizi}
 
-\subsection{量子力学中的波函数}
+\subsection{量子力学中的波函数与相位干涉}
 
 在经典力学里，一个粒子的位置、速度都是实数；但在量子力学里，系统状态通常用波函数 $\psi(x,t)$ 描写，它一般是复值函数。
 
@@ -2539,13 +2543,13 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.0]
+\begin{tikzpicture}[scale=0.98]
     \begin{scope}
         \draw[mp axis] (-0.6,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}$};
         \draw[mp axis] (0,-0.5) -- (0,3.3) node[mp label, above] {$\operatorname{Im}$};
 
-        \coordinate (A) at (2.2,0);
-        \coordinate (B) at ({2.2*cos(58)},{2.2*sin(58)});
+        \coordinate (A) at (2.28,0);
+        \coordinate (B) at ({2.28*cos(58)},{2.28*sin(58)});
         \coordinate (C) at ($(A)+(B)$);
 
         \draw[mp vector] (0,0) -- (A);
@@ -2565,24 +2569,31 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
         \node[mp label, left, text=figred] at ($(0,0)!0.52!(B)$) {$\psi_2$};
         \node[mp label, above, text=figpurple] at ($(0,0)!0.52!(C)+(0.08,0.12)$) {$\psi=\psi_1+\psi_2$};
         \node[mp label, below left] at (0,0) {$O$};
-        \node[mp small, text=black!46] at (2.1,-0.8) {相位差改变合成振幅};
+        \node[mp small, text=black!60] at (2.05,3.02) {(a) 相量图};
+        \node[mp small, text=black!60, fill=white, inner sep=1.2pt] at (2.15,-0.92) {相位差改变合成振幅};
     \end{scope}
 
-    \begin{scope}[xshift=7.1cm]
+    \begin{scope}[xshift=7.35cm]
         \begin{axis}[
-            width=6.5cm,
-            height=4.7cm,
+            width=6.9cm,
+            height=4.95cm,
             axis lines=left,
+            axis line style={draw=black!68},
+            tick style={draw=black!68},
             xmin=0, xmax=360,
             ymin=0, ymax=4.3,
             xtick={0,90,180,270,360},
             xticklabels={$0$,$\pi/2$,$\pi$,$3\pi/2$,$2\pi$},
             ytick={0,2,4},
             xlabel={$\phi$},
-            ylabel={$\dfrac{|\psi|^2}{A^2}$},
+            ylabel={$|\psi|^2/A^2$},
+            ylabel style={font=\small},
+            title={(b) 归一化概率密度},
+            title style={font=\small, text=black!60, yshift=-0.35em},
             every axis/.append style={font=\small},
             tick label style={font=\footnotesize},
             label style={font=\small},
+            every axis plot/.append style={line join=round},
             samples=200,
             domain=0:360,
             smooth,
@@ -2591,8 +2602,8 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
             \addplot[draw=figpurple, line width=1.05pt] {2*(1+cos(x))};
             \addplot[only marks, mark=*, mark size=1.7pt, color=figblue] coordinates {(0,4)};
             \addplot[only marks, mark=*, mark size=1.7pt, color=figred] coordinates {(180,0)};
-            \node[font=\footnotesize, text=figblue] at (axis cs:28,4.05) {同相增强};
-            \node[font=\footnotesize, text=figred] at (axis cs:180,0.35) {反相相消};
+            \node[font=\footnotesize, text=figblue, fill=white, inner sep=1pt] at (axis cs:52,4.02) {同相增强};
+            \node[font=\footnotesize, text=figred, fill=white, inner sep=1pt] at (axis cs:230,0.35) {反相相消};
         \end{axis}
     \end{scope}
 \end{tikzpicture}
@@ -2668,59 +2679,67 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    node distance=1.1cm and 0.95cm,
+    node distance=1.18cm and 1.05cm,
     foundation/.style={
         rectangle,
-        rounded corners=4pt,
-        draw=mainblue!72!black,
-        fill=mainblue!4,
-        text width=3.3cm,
-        minimum height=0.95cm,
+        rounded corners=5pt,
+        draw=mainblue!80!black,
+        top color=mainblue!12,
+        bottom color=white,
+        line width=0.8pt,
+        text width=3.1cm,
+        minimum height=1.02cm,
         align=center,
         font=\small
     },
     pivot/.style={
         rectangle,
-        rounded corners=4pt,
-        draw=defteal!75!black,
-        fill=defteal!6,
-        text width=3.3cm,
-        minimum height=0.95cm,
+        rounded corners=5pt,
+        draw=defteal!82!black,
+        top color=defteal!14,
+        bottom color=white,
+        line width=0.9pt,
+        text width=3.2cm,
+        minimum height=1.10cm,
         align=center,
-        font=\small
+        font=\small\bfseries
     },
     branch/.style={
         rectangle,
-        rounded corners=4pt,
-        draw=notebrown!78!black,
-        fill=notebrown!6,
-        text width=3.3cm,
-        minimum height=0.95cm,
+        rounded corners=5pt,
+        draw=notebrown!82!black,
+        top color=notebrown!11,
+        bottom color=white,
+        line width=0.8pt,
+        text width=3.15cm,
+        minimum height=1.02cm,
         align=center,
         font=\small
     },
     outcome/.style={
         rectangle,
-        rounded corners=4pt,
-        draw=physicsbrown!80!black,
-        fill=physicsbrown!6,
-        text width=3.5cm,
-        minimum height=0.95cm,
+        rounded corners=5pt,
+        draw=physicsbrown!84!black,
+        top color=physicsbrown!12,
+        bottom color=white,
+        line width=0.8pt,
+        text width=3.25cm,
+        minimum height=1.04cm,
         align=center,
         font=\small
     },
-    arrow/.style={-{Stealth[length=2.6mm]}, thick, draw=black!68}
+    arrow/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=0.95pt, draw=black!66, rounded corners=4pt}
 ]
 \node[foundation] (a) {为什么要引入复数};
-\node[foundation, right=of a] (b) {代数形式与四则运算};
-\node[foundation, right=of b] (c) {复平面、模、辐角、共轭};
+\node[foundation, right=of a] (b) {代数形式与\\四则运算};
+\node[foundation, right=of b] (c) {复平面、模、\\辐角、共轭};
 
-\node[pivot, below=1.25cm of b] (d) {三角形式与指数形式};
-\node[branch, below left=1.25cm and 1.0cm of d] (e) {乘法、除法与旋转伸缩};
-\node[branch, below right=1.25cm and 1.0cm of d] (f) {乘方、开方与单位根};
+\node[pivot, below=1.30cm of b] (d) {三角形式与\\指数形式};
+\node[branch, below left=1.35cm and 1.05cm of d] (e) {乘法、除法\\与旋转伸缩};
+\node[branch, below right=1.35cm and 1.05cm of d] (f) {乘方、开方\\与单位根};
 
-\node[outcome, below=2.45cm of d] (g) {扩充复平面与复球面};
-\node[outcome, below=1.20cm of g] (h) {物理中的振动、相位与叠加};
+\node[outcome, below=2.62cm of d] (g) {扩充复平面\\与复球面};
+\node[outcome, below=1.28cm of g] (h) {物理中的振动、\\相位与叠加};
 
 \draw[arrow] (a) -- (b);
 \draw[arrow] (b) -- (c);
