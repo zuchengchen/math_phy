@@ -2878,6 +2878,12 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \begin{enumerate}
     \item 用几何语言解释为什么乘以 $\mathrm{i}$ 对应逆时针旋转 $\pi/2$。
 
+    \item 利用三角不等式与反三角不等式证明：对任意复数 $z$，都有
+    \[
+        \bigl||z|-1\bigr|\le |z-1|\le |z|+1.
+    \]
+    并用复平面上的距离语言解释这两个不等式。
+
     \item 设
     \[
         z_1=2e^{\mathrm{i}\pi/6},\qquad z_2=3e^{-\mathrm{i}\pi/4},
@@ -2899,7 +2905,10 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
     \[
         2\cos\omega t+2\cos\left(\omega t+\frac{\pi}{3}\right)
     \]
-    化成一个单一余弦函数的形式。
+    化成一个单一余弦函数的形式。提示：可先把它写成
+    \[
+        \operatorname{Re}\left[\left(2+2e^{\mathrm{i}\pi/3}\right)e^{\mathrm{i}\omega t}\right].
+    \]
 \end{enumerate}
 
 \subsection{挑战题}
@@ -2917,7 +2926,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
     \]
     说明：研究 $f(z)$ 在无穷远点附近的行为，可以转化为研究 $f(1/w)$ 在原点附近的行为。
 
-    \item 试从扩充复平面的角度解释：为什么直线可以看作经过无穷远点的圆？
+    \item 结合球极投影的示意图，说明为什么北极 $N$ 对应无穷远点 $\infty$，并解释把 $\infty$ 添入以后，复平面为什么可以看成一个封闭球面。
 
     \item 设 $\omega=e^{2\pi\mathrm{i}/n}$，证明
     \[
@@ -2927,5 +2936,5 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
     \[
         z^n-1=(z-1)(z-\omega)\cdots(z-\omega^{n-1})
     \]
-    并在 $z=1$ 处比较两边。
+    先把两边同除以 $z-1$，再令 $z=1$。
 \end{enumerate}
