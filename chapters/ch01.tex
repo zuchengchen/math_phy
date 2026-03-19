@@ -1705,6 +1705,70 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
 \begin{figure}[htbp]
 \centering
+\begin{tikzpicture}[scale=0.95]
+    % plane
+    \coordinate (A) at (-3.5,-1.4);
+    \coordinate (B) at (3.7,-1.4);
+    \coordinate (C) at (5.2,-0.2);
+    \coordinate (D) at (-2.0,-0.2);
+    \fill[gray!6] (A) -- (B) -- (C) -- (D) -- cycle;
+    \draw[gray!70] (A) -- (B) -- (C) -- (D) -- cycle;
+    \node[gray!70] at (4.7,-0.55) {复平面};
+
+    % image line on plane
+    \draw[red!75!black, line width=1.2pt] (-2.7,-0.95) -- (3.6,-0.95);
+    \node[red!75!black, below] at (0.1,-0.95) {$\ell$};
+
+    % sphere
+    \coordinate (O) at (0,1.35);
+    \draw[blue, thick] (O) circle (1.55);
+    \draw[blue!60, thin] ($(O)+(-1.1,0)$) arc[start angle=180,end angle=360,x radius=1.1,y radius=0.38];
+    \draw[blue!60, thin, dashed] ($(O)+(1.1,0)$) arc[start angle=0,end angle=180,x radius=1.1,y radius=0.38];
+    \draw[blue!60, thin] ($(O)+(0,1.55)$) arc[start angle=90,end angle=270,x radius=0.42,y radius=1.55];
+    \draw[blue!60, thin, dashed] ($(O)+(0,-1.55)$) arc[start angle=270,end angle=90,x radius=0.42,y radius=1.55];
+
+    % north/south
+    \coordinate (N) at ($(O)+(0,1.55)$);
+    \coordinate (S) at ($(O)+(0,-1.55)$);
+    \fill[blue] (N) circle (2pt) node[above] {$N$};
+    \fill[blue] (S) circle (2pt) node[below right] {$S$};
+    \node[right] at ($(N)+(1.0,0.1)$) {$N\leftrightarrow \infty$};
+
+    % circle through N on sphere
+    \draw[orange!85!black, thick] ($(O)+(0,1.55)$) .. controls ($(O)+(-1.15,0.7)$) and ($(O)+(-1.05,-0.55)$) .. ($(O)+(-0.15,-1.18)$)
+        .. controls ($(O)+(0.55,-0.6)$) and ($(O)+(0.55,0.65)$) .. ($(O)+(0,1.55)$);
+    \node[orange!85!black] at ($(O)+(-1.35,1.0)$) {$C$};
+
+    % sample points on the circle
+    \coordinate (P1) at ($(O)+(-0.82,0.64)$);
+    \coordinate (P2) at ($(O)+(-1.02,-0.08)$);
+    \coordinate (P3) at ($(O)+(-0.42,-1.0)$);
+    \fill[orange!85!black] (P1) circle (2pt) node[left] {$P_1$};
+    \fill[orange!85!black] (P2) circle (2pt) node[left] {$P_2$};
+    \fill[orange!85!black] (P3) circle (2pt) node[left] {$P_3$};
+
+    % image points on plane line
+    \coordinate (Z1) at (-2.0,-0.95);
+    \coordinate (Z2) at (-0.4,-0.95);
+    \coordinate (Z3) at (1.6,-0.95);
+    \fill[red!75!black] (Z1) circle (2pt);
+    \fill[red!75!black] (Z2) circle (2pt);
+    \fill[red!75!black] (Z3) circle (2pt);
+    \node[below] at (Z1) {$z_1$};
+    \node[below] at (Z2) {$z_2$};
+    \node[below] at (Z3) {$z_3$};
+
+    % projection lines
+    \draw[gray!70, dashed] (N) -- (Z1);
+    \draw[gray!70, dashed] (N) -- (Z2);
+    \draw[gray!70, dashed] (N) -- (Z3);
+\end{tikzpicture}
+\caption{球极投影的立体示意：经过北极的球面圆投成平面上的直线}
+\label{fig:line-from-circle-projection-3d}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
 \begin{tikzpicture}[scale=1.0]
     \draw[thick] (-4.2,0) -- (4.2,0) node[right] {复平面};
     \draw[thick, blue] (0,1.4) circle (1.4);
@@ -1750,11 +1814,11 @@ F(w)=f\!\left(\frac{1}{w}\right),
     \node[right] at (P3) {$P_3$};
     \node[above] at (2.1,2.4) {$N\leftrightarrow \infty$};
 \end{tikzpicture}
-\caption{经过北极的球面圆在球极投影下变成复平面上的直线}
+\caption{经过北极的球面圆在球极投影下变成复平面上的直线：二维剖面图}
 \label{fig:line-from-circle-projection}
 \end{figure}
 
-图 \ref{fig:line-from-circle-projection} 画的是一个二维剖面图。图中虽然只画了三个样本点，但已经可以看出：它们从北极 $N$ 投到复平面后，像点都落在同一直线 $\ell$ 上。
+图 \ref{fig:line-from-circle-projection-3d} 给出空间关系的总览：球面圆 $C$ 经过北极 $N$，而它在复平面上的像是一条直线 $\ell$。图 \ref{fig:line-from-circle-projection} 则把这个过程压成二维剖面，更方便看清投影线是怎样落到同一直线上的。
 
 于是，当点 $P$ 沿着整个圆 $C$ 移动时，它的像点 $z$ 就会沿着一条直线移动。这就是``经过无穷远点的球面圆投影成直线''的更具体的几何图像。
 
