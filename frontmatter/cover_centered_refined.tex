@@ -14,31 +14,34 @@
         \draw[covergold, line width=1.1pt]
             ([yshift=-1.0cm]current page.north west) --
             ([yshift=-1.0cm]current page.north east);
-        \fill[covernavy] (current page.south west) rectangle ([yshift=2.65cm]current page.south east);
+        \fill[covernavy] (current page.south west) rectangle ([yshift=2.95cm]current page.south east);
+        \draw[covergold!72, line width=0.75pt]
+            ([yshift=2.95cm]current page.south west) --
+            ([yshift=2.95cm]current page.south east);
 
         % 统一主视觉：复平面与极坐标向量
-        \begin{scope}[shift={([xshift=-4.9cm, yshift=7.6cm]current page.south east)}]
-            \draw[coverline!82, line width=0.55pt] (-4.8, 0) -- (4.7, 0);
-            \draw[coverline!82, line width=0.55pt] (0, -4.4) -- (0, 4.3);
-            \draw[coverline!60, line width=0.45pt] (0, 0) circle (1.45);
-            \draw[covergold!90, line width=1.05pt] (0, 0) circle (3.1);
+        \begin{scope}[shift={([xshift=-4.45cm, yshift=8.15cm]current page.south east)}]
+            \draw[coverline!84, line width=0.58pt] (-5.1, 0) -- (4.95, 0);
+            \draw[coverline!84, line width=0.58pt] (0, -4.7) -- (0, 4.55);
+            \draw[coverline!60, line width=0.45pt] (0, 0) circle (1.52);
+            \draw[covergold!92, line width=1.15pt] (0, 0) circle (3.35);
             \draw[coverplum!44, line width=0.6pt, dash pattern=on 2.6pt off 2.0pt]
-                (0, 0) circle (4.05);
-            \fill[covergold!15] (0, 0) -- (1.08, 0)
-                arc[start angle=0, end angle=58, radius=1.08] -- cycle;
+                (0, 0) circle (4.35);
+            \fill[covergold!17] (0, 0) -- (1.15, 0)
+                arc[start angle=0, end angle=58, radius=1.15] -- cycle;
             \draw[covergold!88!black, line width=0.85pt]
-                (1.08, 0) arc[start angle=0, end angle=58, radius=1.08];
+                (1.15, 0) arc[start angle=0, end angle=58, radius=1.15];
             \draw[
                 covernavy,
-                line width=1.18pt,
+                line width=1.24pt,
                 -{Stealth[length=2.7mm, width=1.8mm]}
-            ] (0, 0) -- (58:3.1);
+            ] (0, 0) -- (58:3.35);
             \node[text=covernavy, font=\fontsize{10.8pt}{12pt}\selectfont] at (58:3.7)
                 {$re^{\mathrm{i}\theta}$};
-            \node[text=covergold!88!black, font=\small] at (0.95, 0.6) {$\theta$};
-            \node[text=black!42, font=\fontsize{9pt}{10pt}\selectfont] at (4.35, 0.28)
+            \node[text=covergold!88!black, font=\small] at (1.03, 0.62) {$\theta$};
+            \node[text=black!42, font=\fontsize{9pt}{10pt}\selectfont] at (4.58, 0.28)
                 {$\operatorname{Re}$};
-            \node[text=black!42, font=\fontsize{9pt}{10pt}\selectfont] at (0.36, 4.0)
+            \node[text=black!42, font=\fontsize{9pt}{10pt}\selectfont] at (0.38, 4.2)
                 {$\operatorname{Im}$};
         \end{scope}
 
@@ -46,11 +49,11 @@
             anchor=west,
             text=black!42,
             font=\fontsize{10.2pt}{12pt}\selectfont
-        ] at ([xshift=1.65cm, yshift=4.15cm]current page.south west)
+        ] at ([xshift=1.7cm, yshift=4.6cm]current page.south west)
             {$\displaystyle z=re^{\mathrm{i}\theta},\qquad \nabla^2 u + k^2 u = 0$};
     \end{tikzpicture}
 
-    \vspace*{1.75cm}
+    \vspace*{1.55cm}
 
     \begin{center}
         {\fontsize{18pt}{22pt}\selectfont\bfseries\color{covernavy!90}
@@ -75,15 +78,15 @@
             \rule{0.17\textwidth}{0.8pt}
         \par}
 
-        \vspace{0.62cm}
+        \vspace{0.5cm}
 
-        {\fontsize{17.5pt}{22pt}\selectfont\color{covernavy!80}
+        {\fontsize{18pt}{22pt}\selectfont\color{covernavy!86}
             从物理问题出发的课程讲义\par}
-        \vspace{0.28cm}
-        {\fontsize{11pt}{14pt}\selectfont\color{black!48}
+        \vspace{0.2cm}
+        {\fontsize{11.2pt}{14pt}\selectfont\color{black!54}
             复变函数、积分变换、数理方程与特殊函数\par}
 
-        \vspace{0.9cm}
+        \vspace{0.75cm}
 
         \begin{tikzpicture}
             \foreach \x/\col/\txt in {
@@ -104,12 +107,12 @@
             }
         \end{tikzpicture}
 
-        \vspace{0.4cm}
+        \vspace{0.32cm}
 
-        {\fontsize{10.5pt}{12.8pt}\selectfont\color{black!48}
+        {\fontsize{10.5pt}{12.8pt}\selectfont\color{black!52}
             面向物理学、光电信息科学等专业本科生的自学与教学\par}
 
-        \vspace{1.05cm}
+        \vspace{0.92cm}
 
         {\fontsize{17pt}{20pt}\selectfont\bfseries\color{covernavy}
             陈祖成\par}
@@ -123,16 +126,16 @@
             anchor=center,
             text=white,
             font=\fontsize{13pt}{16pt}\selectfont\bfseries
-        ] at ([yshift=1.95cm]current page.south) {物理与电子科学学院};
+        ] at ([yshift=2.15cm]current page.south) {物理与电子科学学院};
         \node[
             anchor=center,
             text=white!75,
             font=\fontsize{9.7pt}{11.2pt}\selectfont
-        ] at ([yshift=1.35cm]current page.south) {School of Physics and Electronics};
+        ] at ([yshift=1.52cm]current page.south) {School of Physics and Electronics};
         \node[
             anchor=center,
             text=covergold!96,
             font=\fontsize{10.4pt}{12pt}\selectfont
-        ] at ([yshift=0.68cm]current page.south) {2026 春};
+        ] at ([yshift=0.8cm]current page.south) {2026 春};
     \end{tikzpicture}
 \end{titlepage}
