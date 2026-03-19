@@ -1,0 +1,138 @@
+\begin{titlepage}
+    \thispagestyle{empty}
+
+    \definecolor{coverpaper}{RGB}{248, 246, 240}
+    \definecolor{covernavy}{RGB}{26, 48, 88}
+    \definecolor{covergold}{RGB}{186, 146, 76}
+    \definecolor{coverline}{RGB}{196, 202, 212}
+    \definecolor{coverbrick}{RGB}{174, 96, 74}
+    \definecolor{coverteal}{RGB}{82, 132, 136}
+    \definecolor{coverplum}{RGB}{104, 97, 142}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[coverpaper] (current page.south west) rectangle (current page.north east);
+        \draw[covergold, line width=1.1pt]
+            ([yshift=-1.0cm]current page.north west) --
+            ([yshift=-1.0cm]current page.north east);
+        \fill[covernavy] (current page.south west) rectangle ([yshift=2.65cm]current page.south east);
+
+        % 统一主视觉：复平面与极坐标向量
+        \begin{scope}[shift={([xshift=-4.9cm, yshift=7.6cm]current page.south east)}]
+            \draw[coverline!82, line width=0.55pt] (-4.8, 0) -- (4.7, 0);
+            \draw[coverline!82, line width=0.55pt] (0, -4.4) -- (0, 4.3);
+            \draw[coverline!60, line width=0.45pt] (0, 0) circle (1.45);
+            \draw[covergold!90, line width=1.05pt] (0, 0) circle (3.1);
+            \draw[coverplum!44, line width=0.6pt, dash pattern=on 2.6pt off 2.0pt]
+                (0, 0) circle (4.05);
+            \fill[covergold!15] (0, 0) -- (1.08, 0)
+                arc[start angle=0, end angle=58, radius=1.08] -- cycle;
+            \draw[covergold!88!black, line width=0.85pt]
+                (1.08, 0) arc[start angle=0, end angle=58, radius=1.08];
+            \draw[
+                covernavy,
+                line width=1.18pt,
+                -{Stealth[length=2.7mm, width=1.8mm]}
+            ] (0, 0) -- (58:3.1);
+            \node[text=covernavy, font=\fontsize{10.8pt}{12pt}\selectfont] at (58:3.7)
+                {$re^{\mathrm{i}\theta}$};
+            \node[text=covergold!88!black, font=\small] at (0.95, 0.6) {$\theta$};
+            \node[text=black!42, font=\fontsize{9pt}{10pt}\selectfont] at (4.35, 0.28)
+                {$\operatorname{Re}$};
+            \node[text=black!42, font=\fontsize{9pt}{10pt}\selectfont] at (0.36, 4.0)
+                {$\operatorname{Im}$};
+        \end{scope}
+
+        \node[
+            anchor=west,
+            text=black!42,
+            font=\fontsize{10.2pt}{12pt}\selectfont
+        ] at ([xshift=1.65cm, yshift=4.15cm]current page.south west)
+            {$\displaystyle z=re^{\mathrm{i}\theta},\qquad \nabla^2 u + k^2 u = 0$};
+    \end{tikzpicture}
+
+    \vspace*{1.75cm}
+
+    \begin{center}
+        {\fontsize{18pt}{22pt}\selectfont\bfseries\color{covernavy!90}
+            湖南师范大学\par}
+        \vspace{0.12cm}
+        {\fontsize{10.6pt}{13pt}\selectfont\color{black!42}
+            Hunan Normal University\par}
+
+        \vspace{1.55cm}
+
+        {\fontsize{43pt}{49pt}\selectfont\bfseries\color{covernavy}
+            数学物理方法\par}
+        \vspace{0.35cm}
+        {\fontsize{12.6pt}{15pt}\selectfont\itshape\color{covergold!88!black}
+            Mathematical Methods for Physics\par}
+
+        \vspace{0.5cm}
+
+        {\color{covergold}
+            \rule{0.17\textwidth}{0.8pt}\hspace{0.9em}
+            {\large\color{covernavy!75}\ding{72}}\hspace{0.9em}
+            \rule{0.17\textwidth}{0.8pt}
+        \par}
+
+        \vspace{0.62cm}
+
+        {\fontsize{17.5pt}{22pt}\selectfont\color{covernavy!80}
+            从物理问题出发的课程讲义\par}
+        \vspace{0.28cm}
+        {\fontsize{11pt}{14pt}\selectfont\color{black!48}
+            复变函数、积分变换、数理方程与特殊函数\par}
+
+        \vspace{0.9cm}
+
+        \begin{tikzpicture}
+            \foreach \x/\col/\txt in {
+                -4.35/coverbrick/复变函数,
+                -1.45/coverteal/积分变换,
+                1.65/covergold/数理方程,
+                4.55/coverplum/特殊函数
+            }{
+                \node[
+                    rounded corners=1.8pt,
+                    draw=\col!68,
+                    fill=\col!10,
+                    minimum width=2.45cm,
+                    minimum height=0.7cm,
+                    text=covernavy!88,
+                    font=\fontsize{10pt}{12pt}\selectfont
+                ] at (\x, 0) {\txt};
+            }
+        \end{tikzpicture}
+
+        \vspace{0.4cm}
+
+        {\fontsize{10.5pt}{12.8pt}\selectfont\color{black!48}
+            面向物理学、光电信息科学等专业本科生的自学与教学\par}
+
+        \vspace{1.05cm}
+
+        {\fontsize{17pt}{20pt}\selectfont\bfseries\color{covernavy}
+            陈祖成\par}
+        \vspace{0.08cm}
+        {\fontsize{10.4pt}{12pt}\selectfont\color{black!48}
+            编著\par}
+    \end{center}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[
+            anchor=center,
+            text=white,
+            font=\fontsize{13pt}{16pt}\selectfont\bfseries
+        ] at ([yshift=1.95cm]current page.south) {物理与电子科学学院};
+        \node[
+            anchor=center,
+            text=white!75,
+            font=\fontsize{9.7pt}{11.2pt}\selectfont
+        ] at ([yshift=1.35cm]current page.south) {School of Physics and Electronics};
+        \node[
+            anchor=center,
+            text=covergold!96,
+            font=\fontsize{10.4pt}{12pt}\selectfont
+        ] at ([yshift=0.68cm]current page.south) {2026 春};
+    \end{tikzpicture}
+\end{titlepage}

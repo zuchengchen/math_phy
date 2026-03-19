@@ -1,0 +1,207 @@
+\begin{titlepage}
+    \thispagestyle{empty}
+
+    \definecolor{coverpaper}{RGB}{247, 244, 238}
+    \definecolor{covernavy}{RGB}{24, 46, 86}
+    \definecolor{covergold}{RGB}{186, 146, 76}
+    \definecolor{coverteal}{RGB}{84, 129, 138}
+    \definecolor{coverbrick}{RGB}{168, 92, 72}
+    \definecolor{coverplum}{RGB}{103, 96, 140}
+    \definecolor{coverline}{RGB}{193, 202, 215}
+
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[coverpaper] (current page.south west) rectangle (current page.north east);
+        \fill[covernavy] (current page.south west) rectangle ([xshift=4.35cm]current page.north west);
+        \fill[covergold] ([xshift=4.35cm, yshift=-1.25cm]current page.north west)
+            rectangle ([yshift=-1.02cm]current page.north east);
+
+        \draw[white!18, line width=0.5pt]
+            ([xshift=2.84cm, yshift=2.2cm]current page.south west) --
+            ([xshift=2.84cm, yshift=-1.45cm]current page.north west);
+        \draw[white!18, line width=0.5pt]
+            ([xshift=3.72cm, yshift=2.2cm]current page.south west) --
+            ([xshift=3.72cm, yshift=-1.45cm]current page.north west);
+
+        \node[
+            anchor=west,
+            rotate=90,
+            text=white!74,
+            font=\fontsize{10.8pt}{13pt}\selectfont\bfseries
+        ] at ([xshift=0.98cm, yshift=3.0cm]current page.south west)
+            {HUNAN NORMAL UNIVERSITY};
+        \node[
+            anchor=west,
+            rotate=90,
+            text=covergold!98,
+            font=\fontsize{13.5pt}{16pt}\selectfont\bfseries
+        ] at ([xshift=2.32cm, yshift=3.0cm]current page.south west)
+            {数学物理方法};
+        \node[
+            anchor=west,
+            rotate=90,
+            text=white!58,
+            font=\fontsize{8.7pt}{10.6pt}\selectfont
+        ] at ([xshift=3.28cm, yshift=3.0cm]current page.south west)
+            {物理问题 $\rightarrow$ 数学模型 $\rightarrow$ 数学求解 $\rightarrow$ 物理解释};
+
+        \node[
+            anchor=south west,
+            text=white,
+            align=left,
+            text width=3.1cm,
+            font=\fontsize{10.4pt}{12.4pt}\selectfont\bfseries
+        ] at ([xshift=0.7cm, yshift=1.0cm]current page.south west)
+            {物理与电子\\科学学院};
+        \node[
+            anchor=south west,
+            text=white!68,
+            align=left,
+            text width=3.1cm,
+            font=\fontsize{8.6pt}{10pt}\selectfont
+        ] at ([xshift=0.7cm, yshift=0.16cm]current page.south west)
+            {School of Physics\\and Electronics};
+
+        \begin{scope}[shift={([xshift=-1.55cm, yshift=-2.55cm]current page.north east)}]
+            \draw[covergold!54, line width=0.95pt] (0, 0) circle (1.85cm);
+            \draw[covergold!18, line width=0.45pt] (0, 0) circle (1.02cm);
+            \draw[coverline!72, line width=0.45pt] (-2.28, 0) -- (2.42, 0);
+            \draw[coverline!72, line width=0.45pt] (0, -2.12) -- (0, 2.32);
+            \node[text=coverline!74!black, font=\fontsize{8.7pt}{10pt}\selectfont] at (2.0, 0.24)
+                {$\operatorname{Re}$};
+            \node[text=coverline!74!black, font=\fontsize{8.7pt}{10pt}\selectfont] at (0.34, 2.0)
+                {$\operatorname{Im}$};
+        \end{scope}
+
+        \node[
+            anchor=west,
+            text=covernavy!82,
+            font=\fontsize{12.2pt}{15pt}\selectfont
+        ] at ([xshift=5.08cm, yshift=-2.95cm]current page.north west)
+            {湖南师范大学物理与电子科学学院};
+        \node[
+            anchor=west,
+            text=black!44,
+            align=left,
+            text width=8.65cm,
+            font=\fontsize{10.6pt}{13.2pt}\selectfont
+        ] at ([xshift=5.08cm, yshift=-3.74cm]current page.north west)
+            {面向本科生自学与课程教学，强调来龙去脉、边界条件与物理解释的数学物理方法讲义};
+
+        \node[
+            anchor=west,
+            text=covernavy,
+            font=\fontsize{35pt}{42pt}\selectfont\bfseries
+        ] at ([xshift=5.0cm, yshift=-5.62cm]current page.north west)
+            {数学物理方法};
+        \node[
+            anchor=west,
+            text=covergold!92!black,
+            font=\fontsize{12.4pt}{16pt}\selectfont\itshape
+        ] at ([xshift=5.1cm, yshift=-6.9cm]current page.north west)
+            {Mathematical Methods for Physics};
+
+        \draw[covergold, line width=0.9pt]
+            ([xshift=5.1cm, yshift=-7.66cm]current page.north west) --
+            ([xshift=12.2cm, yshift=-7.66cm]current page.north west);
+
+        \node[
+            anchor=west,
+            rounded corners=2pt,
+            draw=covergold,
+            fill=covergold!10,
+            inner xsep=10pt,
+            inner ysep=6pt,
+            text=covergold!88!black,
+            font=\fontsize{12pt}{14pt}\selectfont\bfseries
+        ] at ([xshift=5.1cm, yshift=-8.72cm]current page.north west)
+            {从物理问题出发的课程讲义};
+
+        \begin{scope}[shift={([xshift=5.1cm, yshift=-10.22cm]current page.north west)}]
+            \foreach \x/\col/\txt in {
+                0.0/coverbrick/复变函数,
+                2.8/coverteal/积分变换,
+                5.95/covergold/数理方程,
+                8.95/coverplum/特殊函数
+            }{
+                \node[
+                    anchor=west,
+                    rounded corners=2pt,
+                    draw=\col!65,
+                    fill=\col!9,
+                    inner xsep=8pt,
+                    inner ysep=4pt,
+                    text=covernavy!88,
+                    font=\fontsize{10pt}{12pt}\selectfont
+                ] at (\x, 0.18) {\txt};
+            }
+        \end{scope}
+
+        \node[
+            anchor=west,
+            text=black!56,
+            font=\fontsize{10.5pt}{13pt}\selectfont
+        ] at ([xshift=5.1cm, yshift=-11.48cm]current page.north west)
+            {物理学、光电信息科学等专业本科生适用};
+
+        \node[
+            anchor=west,
+            text=covernavy,
+            font=\fontsize{17pt}{20pt}\selectfont\bfseries
+        ] at ([xshift=5.1cm, yshift=-12.88cm]current page.north west)
+            {陈祖成};
+        \node[
+            anchor=west,
+            text=black!50,
+            font=\fontsize{10.5pt}{12pt}\selectfont
+        ] at ([xshift=7.72cm, yshift=-12.9cm]current page.north west)
+            {编著};
+
+        % 下半部分主视觉：坐标、极坐标与模态线条
+        \begin{scope}[shift={([xshift=-5.15cm, yshift=8.62cm]current page.south east)}]
+            \draw[coverline, line width=0.55pt] (-4.9, 0) -- (4.9, 0);
+            \draw[coverline, line width=0.55pt] (0, -4.3) -- (0, 4.3);
+
+            \draw[coverplum!38, line width=0.55pt, dash pattern=on 2.5pt off 2.2pt]
+                (0, 0) circle (4.15);
+            \draw[covergold!80, line width=1.15pt] (0, 0) circle (3.15);
+            \draw[covergold!36, line width=0.55pt] (0, 0) circle (1.55);
+
+            \fill[covergold!14] (0, 0) -- (1.05, 0)
+                arc[start angle=0, end angle=57, radius=1.05] -- cycle;
+            \draw[covergold!90!black, line width=0.9pt]
+                (1.05, 0) arc[start angle=0, end angle=57, radius=1.05];
+
+            \draw[
+                covernavy,
+                line width=1.2pt,
+                -{Stealth[length=2.9mm, width=1.9mm]}
+            ] (0, 0) -- (57:3.15);
+            \node[text=covernavy, font=\fontsize{10.5pt}{12pt}\selectfont] at (57:3.7)
+                {$re^{\mathrm{i}\theta}$};
+            \node[text=covergold!85!black, font=\small] at (1.0, 0.55) {$\theta$};
+
+            \foreach \y/\col/\lw in {
+                -2.65/coverbrick!78/0.95,
+                -1.35/coverteal!92/1.0,
+                1.35/coverteal!92/1.0,
+                2.65/coverbrick!78/0.95
+            }{
+                \draw[\col, line width=\lw pt, samples=240, domain=-4.9:4.9]
+                    plot (\x, {\y + 0.17*sin(58*\x) + 0.1*sin(150*\x)});
+            }
+
+            \node[
+                text=black!42,
+                align=left,
+                font=\fontsize{10pt}{12pt}\selectfont
+            ] at (-2.15, -3.55)
+                {$\displaystyle \frac{\partial^2 u}{\partial t^2}=c^2\nabla^2u$};
+        \end{scope}
+
+        \node[
+            anchor=east,
+            text=covergold!92!black,
+            font=\fontsize{10.3pt}{12pt}\selectfont
+        ] at ([xshift=-1.35cm, yshift=0.92cm]current page.south east) {2026 春};
+    \end{tikzpicture}
+\end{titlepage}
