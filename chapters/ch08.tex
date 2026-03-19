@@ -1,579 +1,1493 @@
-% 第七章：傅里叶变换\index{傅里叶变换}
+% 第八章：傅里叶变换\index{傅里叶变换}
 
 \chapter{傅里叶变换\index{傅里叶变换}}
 
 \begin{wulibj}[本章导读]
-傅里叶变换\index{傅里叶变换}是分析周期和非周期信号的有力工具。它将时域问题转化为频域问题，使我们能够从新的角度理解和处理物理问题。本章我们将学习傅里叶级数、傅里叶变换\index{傅里叶变换}及其性质，以及在求解微分方程中的应用。
+前面学习傅里叶级数时，我们讨论的对象主要是周期函数：一根固定两端的弦可以振动出一系列离散模态，一个周期电信号可以分解成若干离散频率成分。这时学生往往会形成一个很自然的印象：``频率分解''好像总是和``周期''绑在一起。
+
+但真正的物理问题里，很多过程并不周期。例如，一根无限长细杆上的初始温度分布、一次性的脉冲扰动、空间中局域化的波包，都更像是``只出现一次''的信号，而不是不断重复的周期信号。于是问题来了：\textbf{如果函数不周期，我们还能不能谈频率分解？}
+
+傅里叶变换\index{傅里叶变换}正是对这个问题的回答。它告诉我们：即使函数不周期，也仍然可以把它看成许多频率成分的叠加；只不过这时的频率不再是离散的，而是连续分布的。更重要的是，一旦进入频域，很多原来在时域或空间域里很麻烦的运算，会出现明显简化：
+\begin{itemize}
+    \item 微分会变成乘法；
+    \item 平移会变成相位因子；
+    \item 卷积会变成普通乘法。
+\end{itemize}
+
+这也就是为什么傅里叶变换\index{傅里叶变换}在数学物理方法中地位非常重要：它不仅能帮助我们理解信号的频谱，还能成为求解整条实轴上数学物理方程的有力工具。
+
+本章的主线可以概括为：
+\begin{equation}
+    \begin{aligned}
+        &\text{周期函数的离散频谱}
+        \Longrightarrow
+        \text{非周期函数的连续频谱} \\
+        &\Longrightarrow
+        \text{傅里叶变换与反演}
+        \Longrightarrow
+        \text{频域中的基本运算规律} \\
+        &\Longrightarrow
+        \text{整轴热方程的标准应用}
+    \end{aligned}
+\end{equation}
+
+和后面的章节分工上，也请先建立一个清楚的认识：
+\begin{itemize}
+    \item 本章重点是\textbf{把傅里叶变换讲清楚}；
+    \item 第九章的拉普拉斯变换更适合半轴初值问题；
+    \item 第十三章再系统讨论积分变换法怎样进入数理方程求解。
+\end{itemize}
 \end{wulibj}
 
 % ========== 第一节 ==========
-\section{傅里叶级数回顾}
+\section{从傅里叶级数到傅里叶积分}
 
-\subsection{周期函数的傅里叶展开}
+\subsection{为什么傅里叶级数还不够}
 
-\begin{dingliyi}{傅里叶级数}{}
-设 $f(x)$ 是周期为 $2\pi$ 的函数，在一定条件下可以展开为
-\begin{equation}
-    f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}(a_n\cos nx + b_n\sin nx)
-\end{equation}
-其中
-\begin{align}
-    a_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos nx\,\mathrm{d}x, \quad n = 0, 1, 2, \ldots \\
-    b_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin nx\,\mathrm{d}x, \quad n = 1, 2, 3, \ldots
-\end{align}
-\end{dingliyi}
+傅里叶级数适合处理周期函数，这一点我们已经很熟悉了。但在数学物理问题里，我们经常遇到的却是下面这类对象：
+\begin{itemize}
+    \item 一根无限长细杆在 $t=0$ 时的温度分布；
+    \item 空间中一个局域化脉冲；
+    \item 某个只在有限时间内出现一次的外力扰动。
+\end{itemize}
 
-\subsection{复数\index{复数}形式的傅里叶级数}
+这些函数通常不是周期的。若硬要把它们周期延拓，虽然形式上也能套用傅里叶级数，但会引入很多本来不存在的重复结构，反而掩盖原问题的本质。
 
-利用欧拉公式，傅里叶级数可以写成更简洁的复数\index{复数}形式：
-
-\begin{dingli}{复数形式傅里叶级数}{}
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}nx}
-\end{equation}
-其中
-\begin{equation}
-    c_n = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)\mathrm{e}^{-\mathrm{i}nx}\,\mathrm{d}x
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-由欧拉公式：
-\begin{align}
-    \cos nx &= \frac{\mathrm{e}^{\mathrm{i}nx} + \mathrm{e}^{-\mathrm{i}nx}}{2} \\
-    \sin nx &= \frac{\mathrm{e}^{\mathrm{i}nx} - \mathrm{e}^{-\mathrm{i}nx}}{2\mathrm{i}}
-\end{align}
-
-代入傅里叶级数：
-\begin{equation}
-    f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty}\left[a_n\frac{\mathrm{e}^{\mathrm{i}nx} + \mathrm{e}^{-\mathrm{i}nx}}{2} + b_n\frac{\mathrm{e}^{\mathrm{i}nx} - \mathrm{e}^{-\mathrm{i}nx}}{2\mathrm{i}}\right]
-\end{equation}
-
-整理得
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}nx}
-\end{equation}
-其中 $c_0 = a_0/2$，$c_n = (a_n - \mathrm{i}b_n)/2$（$n > 0$），$c_{-n} = (a_n + \mathrm{i}b_n)/2$。
-\end{proof}
-
-\subsection{一般周期的傅里叶级数}
-
-对于周期为 $2L$ 的函数：
-
-\begin{dingli}{周期 $2L$ 的傅里叶级数}{}
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}n\pi x/L}
-\end{equation}
-其中
-\begin{equation}
-    c_n = \frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-作变量替换 $x = Lt/\pi$，则 $t \in [-\pi, \pi]$。设 $g(t) = f(Lt/\pi)$，则 $g(t)$ 是周期 $2\pi$ 的函数。由傅里叶级数公式：
-\begin{equation}
-    g(t) = \sum_{n=-\infty}^{\infty} c_n' \mathrm{e}^{\mathrm{i}nt}, \quad c_n' = \frac{1}{2\pi}\int_{-\pi}^{\pi} g(t)\mathrm{e}^{-\mathrm{i}nt}\,\mathrm{d}t
-\end{equation}
-代回 $x = Lt/\pi$，得 $\mathrm{d}t = \pi\,\mathrm{d}x/L$，$t = \pi x/L$：
-\begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L}, \quad c_n = \frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x
-\end{equation}
-\end{proof}
-% ========== 第二节 ==========
-\section{傅里叶变换\index{傅里叶变换}}
-
-\subsection{从傅里叶级数到傅里叶变换\index{傅里叶变换}}
-
-当周期 $2L \to \infty$ 时，周期函数变成非周期函数，离散谱变成连续谱。
-
-这个极限过程有非常直观的物理意义，让我们先理解一下：
-
-\begin{tishi}[物理直观：从离散谱到连续谱]
-设想一个周期信号，比如一个不断重复的脉冲。当我们用傅里叶级数展开它时，得到的是一系列离散的频率成分：$\omega = \frac{\pi}{L}, \frac{2\pi}{L}, \frac{3\pi}{L}, \ldots$。相邻频率的间隔是 $\Delta\omega = \frac{\pi}{L}$。
-
-现在，让周期 $L$ 变大。信号还是重复，但两次重复之间的间隔变长了。结果是什么？频率谱变密了！因为 $\Delta\omega = \frac{\pi}{L}$ 变小了。
-
-当 $L \to \infty$ 时，信号变成了真正的非周期信号（只出现一次）。频率间隔趋于零，离散的谱线变成了一条连续的曲线。原来每个整数 $n$ 对应的系数 $c_n$，现在变成了连续变量 $\omega$ 对应的函数 $\hat{f}(\omega)$。
-
-这就是傅里叶变换的物理本质：\textbf{非周期信号具有连续的频率谱}。
+\begin{tishi}[本节最重要的观念]
+傅里叶变换\index{傅里叶变换}不是用来取代傅里叶级数，而是把``频率分解''从周期函数推广到非周期函数。周期函数对应的是\textbf{离散频谱}，非周期函数对应的是\textbf{连续频谱}。
 \end{tishi}
 
-令 $\omega_n = n\pi/L$，$\Delta\omega = \pi/L$，则
+这一点如果只靠一句话来记，往往记不牢。下面我们就从周期为 $2L$ 的傅里叶级数出发，一步一步看见这个过渡过程。
+
+\subsection{周期为 2L 的复指数形式}
+
+设 $f(x)$ 的周期为 $2L$。把三角形式写成复指数形式以后，傅里叶级数可以写成
 \begin{equation}
-    f(x) = \sum_{n=-\infty}^{\infty} c_n\mathrm{e}^{\mathrm{i}\omega_n x} = \frac{1}{2\pi}\sum_{n=-\infty}^{\infty} \hat{f}(\omega_n)\mathrm{e}^{\mathrm{i}\omega_n x}\Delta\omega
+    f(x)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L},
+\end{equation}
+其中
+\begin{equation}
+    c_n=\frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x.
 \end{equation}
 
-当 $L \to \infty$，求和变成积分：
-
-\begin{dingliyi}{傅里叶变换}{}
-设 $f(x)$ 在 $(-\infty, +\infty)$ 上绝对可积。定义
+\begin{dingli}{周期为 $2L$ 的复指数形式傅里叶级数}{}
+若 $f(x)$ 在 $[-L,L]$ 上分段光滑，并以 $2L$ 为周期延拓，则在适当意义下有
 \begin{equation}
-    \hat{f}(\omega) = \mathcal{F}[f(x)] = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+    f(x)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L},
 \end{equation}
-为 $f(x)$ 的\textbf{傅里叶变换\index{傅里叶变换}}（或频谱）。
+其中系数满足
+\begin{equation}
+    c_n=\frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+把变量换成
+\[
+    t=\frac{\pi x}{L},
+\]
+则 $t \in [-\pi,\pi]$。若记
+\[
+    g(t)=f\left(\frac{Lt}{\pi}\right),
+\]
+那么 $g(t)$ 是周期 $2\pi$ 的函数。由熟悉的复指数形式傅里叶级数，
+\begin{equation}
+    g(t)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}nt},
+    \qquad
+    c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi} g(t)\mathrm{e}^{-\mathrm{i}nt}\,\mathrm{d}t.
+\end{equation}
+
+再把 $t=\pi x/L$ 代回，就得到
+\begin{equation}
+    f(x)=\sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}n\pi x/L},
+\end{equation}
+而且因为 $\mathrm{d}t=\dfrac{\pi}{L}\mathrm{d}x$，所以
+\begin{equation}
+    c_n=\frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}n\pi x/L}\,\mathrm{d}x.
+\end{equation}
+证毕。
+\end{proof}
+
+这里最关键的一点是：频率并不是任意取值，而是只能取
+\begin{equation}
+    \omega_n=\frac{n\pi}{L}, \qquad n=0,\pm 1,\pm 2,\ldots
+\end{equation}
+这些离散点。
+
+换句话说，周期函数的频谱是一根一根的``谱线''，而不是一整条连续曲线。
+
+\subsection{离散谱如何走向连续谱}
+
+现在我们想象 $L$ 越来越大。直观上看，周期越来越长，函数重复得越来越慢；当 $L\to\infty$ 时，周期性逐渐消失，我们得到的就是一个定义在整个实轴上的非周期函数。
+
+这时离散频率点
+\begin{equation}
+    \omega_n=\frac{n\pi}{L}
+\end{equation}
+之间的间隔变成
+\begin{equation}
+    \Delta\omega=\omega_{n+1}-\omega_n=\frac{\pi}{L}.
+\end{equation}
+
+请特别注意这一点：\textbf{真正发生变化的，不只是下标 $n$，而是频率点之间的间隔 $\Delta\omega$ 也在趋于零。}
+
+把系数公式改写一下：
+\begin{equation}
+    c_n=\frac{1}{2L}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}\omega_n x}\,\mathrm{d}x
+    =
+    \frac{\Delta\omega}{2\pi}\int_{-L}^{L} f(x)\mathrm{e}^{-\mathrm{i}\omega_n x}\,\mathrm{d}x.
+\end{equation}
+
+于是级数展开可以写成
+\begin{align}
+    f(x)
+    &=
+    \sum_{n=-\infty}^{\infty} c_n \mathrm{e}^{\mathrm{i}\omega_n x} \\
+    &=
+    \frac{1}{2\pi}\sum_{n=-\infty}^{\infty}
+    \left(
+        \int_{-L}^{L} f(t)\mathrm{e}^{-\mathrm{i}\omega_n t}\,\mathrm{d}t
+    \right)
+    \mathrm{e}^{\mathrm{i}\omega_n x}\Delta\omega.
+\end{align}
+
+如果 $L$ 很大，我们自然会把
+\begin{equation}
+    \int_{-L}^{L} f(t)\mathrm{e}^{-\mathrm{i}\omega_n t}\,\mathrm{d}t
+\end{equation}
+看成某个关于连续变量 $\omega$ 的函数在 $\omega=\omega_n$ 处的取值。于是就得到下面这个定义。
+
+\begin{dingliyi}{傅里叶变换的自然来源}{}
+当 $L\to\infty$ 时，若上述极限过程成立，就会得到
+\begin{equation}
+    \hat{f}(\omega)=\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+\end{equation}
+以及
+\begin{equation}
+    f(x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
 \end{dingliyi}
 
-\begin{dingliyi}{傅里叶逆变换}{}
-\begin{equation}
-    f(x) = \mathcal{F}^{-1}[\hat{f}(\omega)] = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
-\end{equation}
-\end{dingliyi}
-
-\begin{tishi}[物理意义]
-傅里叶变换\index{傅里叶变换}将信号从\textbf{时域}（$x$ 空间）转换到\textbf{频域}（$\omega$ 空间）。$\hat{f}(\omega)$ 表示信号中频率为 $\omega$ 的成分的强度。
+\begin{tishi}[为什么不能漏掉 $\Delta\omega$]
+很多同学在这个地方容易犯的错误，是把
+\[
+    \sum_{n=-\infty}^{\infty}
+\]
+直接``想当然''地改成
+\[
+    \int_{-\infty}^{+\infty}
+\]
+，却忘了还必须带上频率间隔 $\Delta\omega$。其实从黎曼和到定积分的过渡看，真正对应的是
+\[
+    \sum_{n=-\infty}^{\infty} \Phi(\omega_n)\Delta\omega
+    \Longrightarrow
+    \int_{-\infty}^{+\infty} \Phi(\omega)\,\mathrm{d}\omega.
+\]
+也就是说，连续谱不是简单把整数下标换成连续变量，而是离散求和向积分极限的结果。
 \end{tishi}
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.7]
-    % 时域信号
-    \begin{scope}[shift={(-4,0)}]
-        \draw[->, gray] (-0.3, 0) -- (3.5, 0) node[right] {$x$};
-        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$f(x)$};
-        \draw[blue, thick, domain=0:3.2, samples=100] plot (\x, {0.8*exp(-(\x-1.5)*(\x-1.5)/0.5)*cos(deg(4*\x))});
-        \node at (1.5, -1) {时域信号};
+\begin{tikzpicture}[scale=0.85]
+    % 左图：离散谱
+    \begin{scope}
+        \draw[->, gray] (-3.2,0) -- (3.4,0) node[right] {$\omega$};
+        \draw[->, gray] (0,-0.2) -- (0,2.4);
+        \foreach \x/\h in {-2.4/0.6,-1.6/1.4,-0.8/2.0,0/2.2,0.8/2.0,1.6/1.4,2.4/0.6}{
+            \draw[blue, thick] (\x,0) -- (\x,\h);
+            \fill[blue] (\x,\h) circle (1.2pt);
+        }
+        \node at (0,-0.8) {离散谱线};
     \end{scope}
-    
-    % 箭头
-    \draw[->, very thick, red] (0, 0.7) -- (1.5, 0.7);
-    \node[red, above] at (0.75, 0.7) {$\mathcal{F}$};
-    
-    % 频域信号
-    \begin{scope}[shift={(3,0)}]
-        \draw[->, gray] (-0.3, 0) -- (3.5, 0) node[right] {$\omega$};
-        \draw[->, gray] (0, -0.5) -- (0, 2) node[above] {$\hat{f}(\omega)$};
-        \draw[green!60!black, thick, domain=0:3.2, samples=100] plot (\x, {1.2*exp(-(\x-1.2)*(\x-1.2)/0.3)});
-        \node at (1.5, -1) {频域信号};
+
+    \draw[->, very thick, red] (4.2,1.1) -- (6.0,1.1) node[midway, above] {$L\to\infty$};
+
+    % 右图：连续谱
+    \begin{scope}[xshift=9cm]
+        \draw[->, gray] (-3.2,0) -- (3.4,0) node[right] {$\omega$};
+        \draw[->, gray] (0,-0.2) -- (0,2.4);
+        \draw[green!60!black, thick, domain=-3:3, samples=120]
+            plot (\x,{2.1*exp(-0.45*\x*\x)});
+        \node at (0,-0.8) {连续频谱};
     \end{scope}
-    
-    % 逆变换
-    \draw[->, very thick, blue] (4.5, 0.7) -- (3, 0.7);
-    \node[blue, below] at (3.75, 0.5) {$\mathcal{F}^{-1}$};
 \end{tikzpicture}
-\caption{傅里叶变换的时域-频域转换}
-\label{fig:fourier-transform-domain}
+\caption{从离散谱到连续谱}
+\label{fig:fourier-discrete-to-continuous}
 \end{figure}
 
-\subsection{傅里叶变换\index{傅里叶变换}的存在条件}
+% ========== 第二节 ==========
+\section{傅里叶变换、逆变换与反演公式}
 
-\begin{dingli}{狄利克雷（Dirichlet）条件}{}
-\index{狄利克雷@狄利克雷（Dirichlet）}
-若 $f(x)$ 满足：
-\begin{enumerate}
-    \item 在任意有限区间上至多有有限个第一类间断点
-    \item 在任意有限区间上至多有有限个极值点
-    \item 绝对可积：$\int_{-\infty}^{+\infty} |f(x)|\,\mathrm{d}x < \infty$
-\end{enumerate}
-则 $f(x)$ 的傅里叶变换\index{傅里叶变换}存在。
+\subsection{定义与基本物理意义}
+
+有了上一节的极限图景以后，我们可以正式给出傅里叶变换\index{傅里叶变换}的定义。
+
+\begin{dingliyi}{傅里叶变换}{}
+设 $f(x)$ 在 $(-\infty,+\infty)$ 上绝对可积，即
+\begin{equation}
+    \int_{-\infty}^{+\infty} |f(x)|\,\mathrm{d}x < \infty.
+\end{equation}
+定义
+\begin{equation}
+    \hat{f}(\omega)=\mathcal{F}[f(x)]
+    =
+    \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+\end{equation}
+为 $f(x)$ 的\textbf{傅里叶变换\index{傅里叶变换}}。
+\end{dingliyi}
+
+\begin{dingliyi}{傅里叶逆变换}{}
+若 $\hat{f}(\omega)$ 满足适当条件，则
+\begin{equation}
+    f(x)=\mathcal{F}^{-1}[\hat{f}(\omega)]
+    =
+    \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+\end{dingliyi}
+
+\begin{tishi}[这一对公式在说什么]
+在本讲义中，我们采用的是
+\[
+    \hat{f}(\omega)=\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x,
+    \qquad
+    f(x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
+\]
+这一组规范。不同教材可能会把 $2\pi$ 平分到变换和逆变换里，但只要前后一致，实质内容是一样的。
+\end{tishi}
+
+从物理角度看，$f(x)$ 通常表示时域或空间域中的信号，而 $\hat{f}(\omega)$ 则表示这个信号中各个频率成分的分布。因此，傅里叶变换\index{傅里叶变换}常被理解为``从原变量空间到频率空间的变换''。
+
+\subsection{变换为什么存在}
+
+先问一个最基本的问题：这个积分什么时候真的有意义？
+
+\begin{dingli}{存在定理}{}
+若
+\begin{equation}
+    \int_{-\infty}^{+\infty} |f(x)|\,\mathrm{d}x < \infty,
+\end{equation}
+则对任意实数 $\omega$，傅里叶变换
+\begin{equation}
+    \hat{f}(\omega)=\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+\end{equation}
+都存在。
 \end{dingli}
 
 \begin{proof}
-由黎曼积分理论，条件（1）（2）保证傅里叶系数积分存在。条件（3）保证积分 $\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x$ 绝对收敛，从而傅里叶变换存在。
-
-具体地，由 $|f(x)\mathrm{e}^{-\mathrm{i}\omega x}| = |f(x)|$，得
+因为对任意实数 $\omega$，
 \begin{equation}
-    \left|\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x\right| \leq \int_{-\infty}^{+\infty} |f(x)|\,\mathrm{d}x < \infty
+    \left|\mathrm{e}^{-\mathrm{i}\omega x}\right|=1,
 \end{equation}
-故傅里叶变换积分收敛。
+所以
+\begin{equation}
+    \left|f(x)\mathrm{e}^{-\mathrm{i}\omega x}\right|=|f(x)|.
+\end{equation}
+
+于是有估计
+\begin{equation}
+    \left|
+        \int_{-\infty}^{+\infty}
+        f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+    \right|
+    \le
+    \int_{-\infty}^{+\infty}
+    \left|f(x)\mathrm{e}^{-\mathrm{i}\omega x}\right|\,\mathrm{d}x
+    =
+    \int_{-\infty}^{+\infty}
+    |f(x)|\,\mathrm{d}x.
+\end{equation}
+右边有限，因此该积分绝对收敛，从而傅里叶变换存在。
 \end{proof}
-\subsection{常用函数的傅里叶变换\index{傅里叶变换}}
+
+\begin{zhu}{}{}
+绝对可积是一个很方便的充分条件，但不是唯一条件。以后若继续学习函数空间，会知道傅里叶变换\index{傅里叶变换}还能推广到更广的函数类，甚至可以作用在广义函数上。不过在本章里，我们先把重点放在最常用、最容易把直觉建立起来的情形。
+\end{zhu}
+
+\subsection{反演公式与间断点平均值}
+
+定义了变换以后，学生最自然的追问就是：``我变过去以后，真的能再变回来吗？''这正是反演公式要回答的问题。
+
+\begin{dingli}{傅里叶积分定理}{}
+设 $f(x)$ 在 $(-\infty,+\infty)$ 上绝对可积，并且在任意有限区间上分段光滑。则对任意实数 $x$，
+\begin{equation}
+    \frac{f(x+0)+f(x-0)}{2}
+    =
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+特别地，如果 $f$ 在 $x$ 处连续，那么
+\begin{equation}
+    f(x)
+    =
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+这一定理若完全严格证明，需要用到更细致的积分收敛理论。这里我们把最核心的推导过程完整写出来，让你真正看清楚这个公式是怎样来的。
+
+先考虑截断积分
+\begin{equation}
+    I_A(x)=\frac{1}{2\pi}\int_{-A}^{A}\hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+
+把 $\hat{f}(\omega)$ 的定义代入：
+\begin{align}
+    I_A(x)
+    &=
+    \frac{1}{2\pi}\int_{-A}^{A}
+    \left[
+        \int_{-\infty}^{+\infty}
+        f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,\mathrm{d}t
+    \right]
+    \mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega \\
+    &=
+    \frac{1}{2\pi}\int_{-\infty}^{+\infty}
+    f(t)
+    \left[
+        \int_{-A}^{A}\mathrm{e}^{\mathrm{i}\omega(x-t)}\,\mathrm{d}\omega
+    \right]
+    \mathrm{d}t.
+\end{align}
+
+而内层积分可以直接算出：
+\begin{align}
+    \int_{-A}^{A}\mathrm{e}^{\mathrm{i}\omega(x-t)}\,\mathrm{d}\omega
+    &=
+    \left.
+        \frac{\mathrm{e}^{\mathrm{i}\omega(x-t)}}{\mathrm{i}(x-t)}
+    \right|_{-A}^{A} \\
+    &=
+    \frac{\mathrm{e}^{\mathrm{i}A(x-t)}-\mathrm{e}^{-\mathrm{i}A(x-t)}}{\mathrm{i}(x-t)} \\
+    &=
+    \frac{2\sin A(x-t)}{x-t}.
+\end{align}
+
+所以
+\begin{equation}
+    I_A(x)
+    =
+    \frac{1}{\pi}\int_{-\infty}^{+\infty}
+    f(t)\frac{\sin A(x-t)}{x-t}\,\mathrm{d}t.
+\end{equation}
+
+这说明：反演公式本质上是在用核函数
+\[
+    \frac{\sin A(x-t)}{\pi(x-t)}
+\]
+去逼近一个集中在 $t=x$ 附近的``尖峰''。当 $A\to\infty$ 时，由狄利克雷积分定理，就得到
+\begin{equation}
+    \lim_{A\to\infty} I_A(x)
+    =
+    \frac{f(x+0)+f(x-0)}{2}.
+\end{equation}
+
+也就是说，
+\begin{equation}
+    \frac{f(x+0)+f(x-0)}{2}
+    =
+    \frac{1}{2\pi}\int_{-\infty}^{+\infty}\hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+证毕。
+\end{proof}
+
+\begin{jinshi}[这一节最容易忽略的一点]
+反演公式在间断点处恢复的不是 ``函数在该点硬写的那个值''，而是左右极限的平均值。这和傅里叶级数在间断点处的结论完全一致。也就是说，真正被恢复的是函数的``频率内容''，而不是你后来单独在某个点上补写的孤立数值。
+\end{jinshi}
 
 \begin{lizi}{}{}
-求矩形函数 $f(x) = \begin{cases} 1, & |x| < a \\ 0, & |x| > a \end{cases}$ 的傅里叶变换\index{傅里叶变换}。
+设
+\begin{equation}
+    f(x)=
+    \begin{cases}
+        1, & |x|<a, \\
+        0, & |x|>a.
+    \end{cases}
+\end{equation}
+讨论它在跳跃点 $x=\pm a$ 处由反演公式恢复出的值。
 
 \begin{jie}
-    \begin{equation}
-        \hat{f}(\omega) = \int_{-a}^{a} \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \frac{\mathrm{e}^{-\mathrm{i}\omega a} - \mathrm{e}^{\mathrm{i}\omega a}}{-\mathrm{i}\omega} = \frac{2\sin\omega a}{\omega}
-    \end{equation}
-    
-    这说明矩形函数的频谱是 $\mathrm{sinc}$ 函数。
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求高斯函数 $f(x) = \mathrm{e}^{-ax^2}$（$a > 0$）的傅里叶变换\index{傅里叶变换}。
-
-\begin{jie}
-    \begin{equation}
-        \hat{f}(\omega) = \int_{-\infty}^{+\infty} \mathrm{e}^{-ax^2}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-    \end{equation}
-    
-    配方：$-ax^2 - \mathrm{i}\omega x = -a(x + \frac{\mathrm{i}\omega}{2a})^2 - \frac{\omega^2}{4a}$。
-    
-    \begin{equation}
-        \hat{f}(\omega) = \mathrm{e}^{-\omega^2/4a}\int_{-\infty}^{+\infty} \mathrm{e}^{-a(x + \mathrm{i}\omega/2a)^2}\,\mathrm{d}x
-    \end{equation}
-    
-    利用复变函数的柯西定理，积分路径可以平移：
-    \begin{equation}
-        \hat{f}(\omega) = \mathrm{e}^{-\omega^2/4a}\sqrt{\frac{\pi}{a}}
-    \end{equation}
-    
-    高斯函数的傅里叶变换\index{傅里叶变换}仍是高斯函数！
-\end{jie}
-\end{lizi}
-
-\begin{lizi}{}{}
-求 $\delta$ 函数的傅里叶变换\index{傅里叶变换}。
-
-\begin{jie}
-    \begin{equation}
-        \hat{\delta}(\omega) = \int_{-\infty}^{+\infty} \delta(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \mathrm{e}^{-\mathrm{i}\omega \cdot 0} = 1
-    \end{equation}
-    
-    $\delta$ 函数的傅里叶变换\index{傅里叶变换}是常数 $1$，即所有频率成分强度相同。
+这个函数在 $x=\pm a$ 处有第一类间断。左极限和右极限分别是
+\[
+    f(a-0)=1,\qquad f(a+0)=0,
+\]
+以及
+\[
+    f(-a-0)=0,\qquad f(-a+0)=1.
+\]
+因此由傅里叶积分定理，
+\begin{equation}
+    \frac{f(a+0)+f(a-0)}{2}=\frac{1}{2},
+    \qquad
+    \frac{f(-a+0)+f(-a-0)}{2}=\frac{1}{2}.
+\end{equation}
+所以反演公式在两个端点恢复出的都是 $\dfrac{1}{2}$。这正好说明：傅里叶变换\index{傅里叶变换}恢复的是跳跃两侧的平均值。
 \end{jie}
 \end{lizi}
 
 % ========== 第三节 ==========
-\section{傅里叶变换\index{傅里叶变换}的性质}
+\section{常见变换对与频谱直观}
 
-\subsection{基本性质}
+\subsection{矩形函数与 sinc 型频谱}
+
+矩形函数是建立频谱直观最经典的例子之一。它在时域里很``干脆''：某个区间内取常数，区间外立刻为零。但正因为边界太陡，它在频域里反而不会集中在很窄的一段，而会出现缓慢衰减的振荡尾巴。
+
+\begin{lizi}{}{}
+求矩形函数
+\begin{equation}
+    f(x)=
+    \begin{cases}
+        1, & |x|<a, \\
+        0, & |x|>a
+    \end{cases}
+\end{equation}
+的傅里叶变换。
+
+\begin{jie}
+由定义，
+\begin{align}
+    \hat{f}(\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \int_{-a}^{a}
+    \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \left.
+        \frac{\mathrm{e}^{-\mathrm{i}\omega x}}{-\mathrm{i}\omega}
+    \right|_{-a}^{a} \\
+    &=
+    \frac{\mathrm{e}^{-\mathrm{i}\omega a}-\mathrm{e}^{\mathrm{i}\omega a}}{-\mathrm{i}\omega} \\
+    &=
+    \frac{2\sin(\omega a)}{\omega}.
+\end{align}
+
+因此矩形函数的频谱是一个 $\mathrm{sinc}$ 型函数。特别地，$\omega=0$ 附近的主峰最强，而后面还有一串衰减振荡。
+\end{jie}
+\end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    \begin{scope}
+        \draw[->, gray] (-3.2,0) -- (3.4,0) node[right] {$x$};
+        \draw[->, gray] (0,-0.4) -- (0,2.0);
+        \draw[blue, thick] (-2.4,0) -- (-1.5,0);
+        \draw[blue, thick] (-1.5,0) -- (-1.5,1.4);
+        \draw[blue, thick] (-1.5,1.4) -- (1.5,1.4);
+        \draw[blue, thick] (1.5,1.4) -- (1.5,0);
+        \draw[blue, thick] (1.5,0) -- (2.8,0);
+        \node at (0,-0.8) {矩形函数};
+    \end{scope}
+
+    \draw[->, very thick, red] (4.0,0.9) -- (5.8,0.9) node[midway, above] {$\mathcal{F}$};
+
+    \begin{scope}[xshift=9cm]
+        \draw[->, gray] (-3.4,0) -- (3.5,0) node[right] {$\omega$};
+        \draw[->, gray] (0,-0.9) -- (0,2.0);
+        \draw[green!60!black, thick, domain=-3.1:-0.2, samples=140]
+            plot (\x,{1.55*sin(deg(2.2*\x))/(2.2*\x)});
+        \draw[green!60!black, thick, domain=0.2:3.1, samples=140]
+            plot (\x,{1.55*sin(deg(2.2*\x))/(2.2*\x)});
+        \fill[green!60!black] (0,1.55) circle (1.2pt);
+        \node at (0,-1.25) {$\mathrm{sinc}$ 型频谱};
+    \end{scope}
+\end{tikzpicture}
+\caption{矩形函数与其频谱的典型对应关系}
+\label{fig:rect-sinc}
+\end{figure}
+
+\begin{tishi}[这个例子告诉我们什么]
+矩形函数在时域里越``突然''，它的频谱就越不会只集中在单一频率附近。反过来说，时域里边界越尖锐，往往意味着频域里高频成分越丰富。这正是后面信号处理里``边缘对应高频''的重要直觉来源。
+\end{tishi}
+
+\subsection{高斯函数的傅里叶变换}
+
+高斯函数\index{高斯函数}是另一个极其重要的例子。它之所以重要，不只是因为计算漂亮，更因为它在变换前后都保持高斯形状，这使它在热方程、概率论和量子力学里都扮演核心角色。
+
+\begin{lizi}{}{}
+求
+\begin{equation}
+    f(x)=\mathrm{e}^{-ax^2}, \qquad a>0
+\end{equation}
+的傅里叶变换。
+
+\begin{jie}
+由定义，
+\begin{equation}
+    \hat{f}(\omega)
+    =
+    \int_{-\infty}^{+\infty}
+    \mathrm{e}^{-ax^2}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x.
+\end{equation}
+
+把指数中的二次项配方：
+\begin{align}
+    -ax^2-\mathrm{i}\omega x
+    &=
+    -a\left(x+\frac{\mathrm{i}\omega}{2a}\right)^2-\frac{\omega^2}{4a}.
+\end{align}
+
+于是
+\begin{equation}
+    \hat{f}(\omega)
+    =
+    \mathrm{e}^{-\omega^2/(4a)}
+    \int_{-\infty}^{+\infty}
+    \mathrm{e}^{-a\left(x+\frac{\mathrm{i}\omega}{2a}\right)^2}\,\mathrm{d}x.
+\end{equation}
+
+由于高斯函数在复平面中的衰减足够好，可把积分路径平移，得到
+\begin{equation}
+    \hat{f}(\omega)
+    =
+    \mathrm{e}^{-\omega^2/(4a)}
+    \int_{-\infty}^{+\infty}
+    \mathrm{e}^{-a u^2}\,\mathrm{d}u
+    =
+    \sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/(4a)}.
+\end{equation}
+
+因此
+\begin{equation}
+    \boxed{
+        \mathcal{F}[\mathrm{e}^{-ax^2}]
+        =
+        \sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/(4a)}
+    }.
+\end{equation}
+这说明：高斯函数的傅里叶变换\index{傅里叶变换}仍然是高斯函数。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[为什么这个结果特别值得记]
+高斯函数不仅在变换后仍保持高斯形状，而且还能非常直观地体现``时域展宽 $\leftrightarrow$ 频域变窄''这一关系。若 $a$ 很大，原函数衰减很快，在时域里较窄；而它的频谱里指数因子 $\mathrm{e}^{-\omega^2/(4a)}$ 衰减得更慢，于是频域反而更宽。
+\end{tishi}
+
+\subsection{偶函数、奇函数与实函数的频谱对称性}
+
+很多计算之所以能大大简化，不是因为你做了复杂技巧，而是因为你先看清了函数的对称性。
+
+\begin{dingli}{奇偶性与实值性的频谱结论}{}
+设 $f(x)$ 满足傅里叶变换存在。
+\begin{enumerate}
+    \item 若 $f(x)$ 为偶函数，则
+    \begin{equation}
+        \hat{f}(\omega)=2\int_{0}^{+\infty} f(x)\cos \omega x\,\mathrm{d}x,
+    \end{equation}
+    因而 $\hat{f}(\omega)$ 也是偶函数。
+    \item 若 $f(x)$ 为奇函数，则
+    \begin{equation}
+        \hat{f}(\omega)=-2\mathrm{i}\int_{0}^{+\infty} f(x)\sin \omega x\,\mathrm{d}x,
+    \end{equation}
+    因而 $\hat{f}(\omega)$ 是纯虚奇函数。
+    \item 若 $f(x)$ 为实函数，则
+    \begin{equation}
+        \hat{f}(-\omega)=\overline{\hat{f}(\omega)}.
+    \end{equation}
+\end{enumerate}
+\end{dingli}
+
+\begin{proof}
+\textbf{（1）偶函数情形）}若 $f(-x)=f(x)$，则
+\begin{align}
+    \hat{f}(\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\left(\cos \omega x-\mathrm{i}\sin \omega x\right)\,\mathrm{d}x.
+\end{align}
+其中 $f(x)\cos \omega x$ 是偶函数，$f(x)\sin \omega x$ 是奇函数，所以奇函数在对称区间上的积分为零，于是
+\begin{equation}
+    \hat{f}(\omega)=2\int_{0}^{+\infty} f(x)\cos \omega x\,\mathrm{d}x.
+\end{equation}
+这显然是偶函数。
+
+\textbf{（2）奇函数情形）}若 $f(-x)=-f(x)$，同理有
+\begin{equation}
+    \hat{f}(\omega)
+    =
+    -2\mathrm{i}\int_{0}^{+\infty} f(x)\sin \omega x\,\mathrm{d}x.
+\end{equation}
+因此它是纯虚奇函数。
+
+\textbf{（3）实函数情形）}若 $f(x)$ 为实函数，则
+\begin{align}
+    \overline{\hat{f}(\omega)}
+    &=
+    \overline{
+        \int_{-\infty}^{+\infty}
+        f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+    } \\
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}x
+    =
+    \hat{f}(-\omega).
+\end{align}
+证毕。
+\end{proof}
+
+\begin{lizi}{}{}
+求
+\begin{equation}
+    f(x)=\mathrm{e}^{-a|x|}, \qquad a>0
+\end{equation}
+的傅里叶变换。
+
+\begin{jie}
+这个函数是偶函数，因此不必从 $(-\infty,+\infty)$ 直接积分，而可写成余弦积分：
+\begin{equation}
+    \hat{f}(\omega)
+    =
+    2\int_{0}^{+\infty}\mathrm{e}^{-ax}\cos \omega x\,\mathrm{d}x.
+\end{equation}
+
+利用常见积分公式
+\[
+    \int_0^{+\infty}\mathrm{e}^{-ax}\cos \omega x\,\mathrm{d}x
+    =
+    \frac{a}{a^2+\omega^2},
+    \qquad a>0,
+\]
+得到
+\begin{equation}
+    \boxed{
+        \hat{f}(\omega)=\frac{2a}{a^2+\omega^2}
+    }.
+\end{equation}
+
+这个例子很典型：只要先看见函数是偶的，计算量就会立刻减半，而且结果自动是实偶函数。
+\end{jie}
+\end{lizi}
+
+\begin{zhu}{}{}
+在物理里，Dirac $\delta$ 函数\index{Dirac δ 函数}也常出现在傅里叶变换\index{傅里叶变换}中。例如
+\[
+    \mathcal{F}[\delta(x)]=1.
+\]
+但这里要提醒一句：$\delta(x)$ 不是通常意义下的普通函数，而是广义函数。本章只把它当作一个有用的直观预告，不展开一般理论。
+\end{zhu}
+
+% ========== 第四节 ==========
+\section{傅里叶变换的基本性质}
+
+\subsection{线性、平移与调制}
+
+定义有了，常见变换对也看过了，接下来就该整理工具箱了。傅里叶变换\index{傅里叶变换}最有力量的地方之一，就是许多本来看似不同的操作，在频域中会表现出非常整齐的规律。
 
 \begin{dingli}{线性性质}{}
-若 $\mathcal{F}[f(x)] = \hat{f}(\omega)$，$\mathcal{F}[g(x)] = \hat{g}(\omega)$，则
+若 $\mathcal{F}[f](\omega)=\hat{f}(\omega)$，$\mathcal{F}[g](\omega)=\hat{g}(\omega)$，则
 \begin{equation}
-    \mathcal{F}[\alpha f(x) + \beta g(x)] = \alpha\hat{f}(\omega) + \beta\hat{g}(\omega)
+    \mathcal{F}[\alpha f+\beta g](\omega)
+    =
+    \alpha \hat{f}(\omega)+\beta \hat{g}(\omega).
 \end{equation}
 \end{dingli}
 
 \begin{proof}
-由积分的线性性：
-\begin{equation}
-    \mathcal{F}[\alpha f(x) + \beta g(x)] = \int_{-\infty}^{+\infty} [\alpha f(x) + \beta g(x)]\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \alpha\hat{f}(\omega) + \beta\hat{g}(\omega)
-\end{equation}
-\end{proof}
-\begin{dingli}{平移性质}{}
-\begin{equation}
-    \mathcal{F}[f(x - a)] = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-\begin{equation}
-    \mathcal{F}[f(x-a)] = \int_{-\infty}^{+\infty} f(x-a)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \mathrm{e}^{-\mathrm{i}\omega a}\int_{-\infty}^{+\infty} f(t)\mathrm{e}^{-\mathrm{i}\omega t}\,\mathrm{d}t = \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega)
-\end{equation}
-\end{proof}
-
-\begin{dingli}{频移性质}{}
-\begin{equation}
-    \mathcal{F}[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)] = \hat{f}(\omega - \omega_0)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-\begin{equation}
-    \mathcal{F}[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)] = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{\mathrm{i}\omega_0 x}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}(\omega-\omega_0) x}\,\mathrm{d}x = \hat{f}(\omega - \omega_0)
-\end{equation}
-\end{proof}
-\begin{dingli}{伸缩性质}{}
-\begin{equation}
-    \mathcal{F}[f(ax)] = \frac{1}{|a|}\hat{f}\left(\frac{\omega}{a}\right), \quad a \neq 0
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-设 $a > 0$：
-\begin{equation}
-    \mathcal{F}[f(ax)] = \int_{-\infty}^{+\infty} f(ax)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = \frac{1}{a}\int_{-\infty}^{+\infty} f(t)\mathrm{e}^{-\mathrm{i}\frac{\omega}{a}t}\,\mathrm{d}t = \frac{1}{a}\hat{f}\left(\frac{\omega}{a}\right)
-\end{equation}
-\end{proof}
-
-\subsection{微分性质}
-
-\begin{dingli}{时域微分}{}
-若 $f(x)$ 及其导数满足傅里叶变换\index{傅里叶变换}条件，则
-\begin{equation}
-    \mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-\begin{equation}
-    \mathcal{F}[f'(x)] = \int_{-\infty}^{+\infty} f'(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = f(x)\mathrm{e}^{-\mathrm{i}\omega x}\Big|_{-\infty}^{+\infty} + \mathrm{i}\omega\int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-\end{equation}
-
-由于 $f(x) \to 0$（$|x| \to \infty$），第一项为零，故
-\begin{equation}
-    \mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)
-\end{equation}
-\end{proof}
-
-\begin{dingli}{频域微分}{}
-\begin{equation}
-    \mathcal{F}[xf(x)] = \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-由傅里叶变换的定义：
-\begin{equation}
-    \hat{f}(\omega) = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
-\end{equation}
-对 $\omega$ 求导：
-\begin{equation}
-    \frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega) = \int_{-\infty}^{+\infty} f(x) \cdot (-\mathrm{i}x) \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x = -\mathrm{i}\mathcal{F}[xf(x)]
-\end{equation}
-故 $\mathcal{F}[xf(x)] = \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)$。
-\end{proof}
-\begin{dingli}{高阶导数}{}
-\begin{equation}
-    \mathcal{F}[f^{(n)}(x)] = (\mathrm{i}\omega)^n\hat{f}(\omega)
-\end{equation}
-\end{dingli}
-
-\begin{proof}
-由时域微分性质，用数学归纳法：
-\begin{itemize}
-    \item $n=1$ 时，$\mathcal{F}[f'(x)] = \mathrm{i}\omega\hat{f}(\omega)$，已证。
-    \item 设 $\mathcal{F}[f^{(k)}(x)] = (\mathrm{i}\omega)^k\hat{f}(\omega)$，则
-    \begin{equation}
-        \mathcal{F}[f^{(k+1)}(x)] = \mathcal{F}[(f^{(k)}(x))'] = \mathrm{i}\omega \cdot (\mathrm{i}\omega)^k\hat{f}(\omega) = (\mathrm{i}\omega)^{k+1}\hat{f}(\omega)
-    \end{equation}
-\end{itemize}
-由归纳法，结论对任意正整数 $n$ 成立。
-\end{proof}
-\subsection{卷积定理}
-
-\begin{dingliyi}{卷积}{}
-两个函数 $f(x)$ 和 $g(x)$ 的\textbf{卷积}定义为
-\begin{equation}
-    (f * g)(x) = \int_{-\infty}^{+\infty} f(\tau)g(x - \tau)\,\mathrm{d}\tau
-\end{equation}
-\end{dingliyi}
-
-\begin{zhongyao}[卷积定理]
-\[
-    \mathcal{F}[f * g] = \hat{f}(\omega)\hat{g}(\omega)
-\]
-\[
-    \mathcal{F}[f \cdot g] = \frac{1}{2\pi}\hat{f} * \hat{g}
-\]
-\end{zhongyao}
-
-\begin{proof}
+由积分的线性性直接得到
 \begin{align}
-    \mathcal{F}[f * g] &= \int_{-\infty}^{+\infty}\left[\int_{-\infty}^{+\infty} f(\tau)g(x-\tau)\,\mathrm{d}\tau\right]\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
-    &= \int_{-\infty}^{+\infty} f(\tau)\left[\int_{-\infty}^{+\infty} g(x-\tau)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x\right]\mathrm{d}\tau \\
-    &= \int_{-\infty}^{+\infty} f(\tau)\mathrm{e}^{-\mathrm{i}\omega\tau}\hat{g}(\omega)\,\mathrm{d}\tau \\
-    &= \hat{f}(\omega)\hat{g}(\omega)
+    \mathcal{F}[\alpha f+\beta g](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    [\alpha f(x)+\beta g(x)]\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \alpha \hat{f}(\omega)+\beta \hat{g}(\omega).
 \end{align}
 \end{proof}
 
-\begin{tishi}[卷积定理的意义]
-卷积定理把卷积运算（积分）转化为乘法运算，大大简化了计算。这是傅里叶变换\index{傅里叶变换}在信号处理中的核心应用。
+\begin{dingli}{平移性质}{}
+若 $\mathcal{F}[f](\omega)=\hat{f}(\omega)$，则
+\begin{equation}
+    \mathcal{F}[f(x-a)](\omega)=\mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+令 $t=x-a$，则
+\begin{align}
+    \mathcal{F}[f(x-a)](\omega)
+    &=
+    \int_{-\infty}^{+\infty}f(x-a)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \int_{-\infty}^{+\infty}f(t)\mathrm{e}^{-\mathrm{i}\omega(t+a)}\,\mathrm{d}t \\
+    &=
+    \mathrm{e}^{-\mathrm{i}\omega a}\hat{f}(\omega).
+\end{align}
+\end{proof}
+
+\begin{dingli}{频移（调制）性质}{}
+若 $\mathcal{F}[f](\omega)=\hat{f}(\omega)$，则
+\begin{equation}
+    \mathcal{F}\!\left[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)\right](\omega)
+    =
+    \hat{f}(\omega-\omega_0).
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由定义，
+\begin{align}
+    \mathcal{F}\!\left[\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)\right](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\mathrm{e}^{\mathrm{i}\omega_0 x}\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\mathrm{e}^{-\mathrm{i}(\omega-\omega_0)x}\,\mathrm{d}x \\
+    &=
+    \hat{f}(\omega-\omega_0).
+\end{align}
+\end{proof}
+
+\begin{tishi}[这三条性质的物理直观]
+\begin{itemize}
+    \item 线性性说明：频域分析尊重叠加原理。
+    \item 平移性质说明：时域平移不会改变频谱的包络，只会引入相位因子。
+    \item 频移性质说明：用单一频率去调制信号，会把整个频谱整体平移。
+\end{itemize}
 \end{tishi}
+
+\subsection{伸缩与微分性质}
+
+\begin{dingli}{伸缩性质}{}
+若 $a\neq 0$，则
+\begin{equation}
+    \mathcal{F}[f(ax)](\omega)=\frac{1}{|a|}\hat{f}\!\left(\frac{\omega}{a}\right).
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+先设 $a>0$。令 $t=ax$，则
+\begin{align}
+    \mathcal{F}[f(ax)](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(ax)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \frac{1}{a}\int_{-\infty}^{+\infty}
+    f(t)\mathrm{e}^{-\mathrm{i}\omega t/a}\,\mathrm{d}t \\
+    &=
+    \frac{1}{a}\hat{f}\!\left(\frac{\omega}{a}\right).
+\end{align}
+
+若 $a<0$，变量替换后积分上下限会交换，再多出一个负号；最终恰好合并成 $\dfrac{1}{|a|}$。所以统一写成
+\begin{equation}
+    \mathcal{F}[f(ax)](\omega)=\frac{1}{|a|}\hat{f}\!\left(\frac{\omega}{a}\right).
+\end{equation}
+\end{proof}
+
+\begin{dingli}{时域微分性质}{}
+若 $f(x)$ 及其导数满足适当衰减条件，则
+\begin{equation}
+    \mathcal{F}[f'(x)](\omega)=\mathrm{i}\omega \hat{f}(\omega).
+\end{equation}
+更一般地，
+\begin{equation}
+    \mathcal{F}[f^{(n)}(x)](\omega)=(\mathrm{i}\omega)^n \hat{f}(\omega).
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由分部积分，
+\begin{align}
+    \mathcal{F}[f'(x)](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f'(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \left.f(x)\mathrm{e}^{-\mathrm{i}\omega x}\right|_{-\infty}^{+\infty}
+    +
+    \mathrm{i}\omega
+    \int_{-\infty}^{+\infty}
+    f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x.
+\end{align}
+
+由于边界项在无穷远处为零，所以
+\begin{equation}
+    \mathcal{F}[f'(x)](\omega)=\mathrm{i}\omega \hat{f}(\omega).
+\end{equation}
+
+高阶导数情形可重复使用这一结论或用归纳法得到
+\begin{equation}
+    \mathcal{F}[f^{(n)}(x)](\omega)=(\mathrm{i}\omega)^n \hat{f}(\omega).
+\end{equation}
+\end{proof}
+
+\begin{dingli}{频域微分性质}{}
+若 $xf(x)$ 可积，则
+\begin{equation}
+    \mathcal{F}[xf(x)](\omega)=\mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega).
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由定义，
+\begin{equation}
+    \hat{f}(\omega)
+    =
+    \int_{-\infty}^{+\infty}
+    f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x.
+\end{equation}
+对 $\omega$ 求导：
+\begin{align}
+    \frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\cdot(-\mathrm{i}x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    -\mathrm{i}\mathcal{F}[xf(x)](\omega).
+\end{align}
+故
+\begin{equation}
+    \mathcal{F}[xf(x)](\omega)=\mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}\hat{f}(\omega).
+\end{equation}
+\end{proof}
+
+\begin{lizi}{}{}
+已知
+\begin{equation}
+    \mathcal{F}[\mathrm{e}^{-ax^2}](\omega)=\sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/(4a)},
+    \qquad a>0.
+\end{equation}
+求 $\mathcal{F}[x\mathrm{e}^{-ax^2}](\omega)$。
+
+\begin{jie}
+利用频域微分性质，
+\begin{equation}
+    \mathcal{F}[x\mathrm{e}^{-ax^2}](\omega)
+    =
+    \mathrm{i}\frac{\mathrm{d}}{\mathrm{d}\omega}
+    \left(
+        \sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/(4a)}
+    \right).
+\end{equation}
+
+计算导数得
+\begin{equation}
+    \mathcal{F}[x\mathrm{e}^{-ax^2}](\omega)
+    =
+    -\mathrm{i}\frac{\omega}{2a}\sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/(4a)}.
+\end{equation}
+\end{jie}
+\end{lizi}
+
+\begin{jinshi}[做这类题时最容易错在哪里]
+\begin{enumerate}
+    \item 平移性质里相位因子的符号最容易写反。
+    \item 伸缩性质中的绝对值符号不能漏。
+    \item 微分性质里的 $\mathrm{i}$ 和正负号一定要靠推导确认，不要凭印象硬记。
+\end{enumerate}
+\end{jinshi}
+
+% ========== 第五节 ==========
+\section{卷积定理、帕塞瓦尔等式与物理解释}
+
+\subsection{卷积的定义}
+
+卷积\index{卷积}这个概念，第一次见时往往觉得只是一个新积分公式；但从应用上看，它几乎贯穿了整个数学物理方法。热核与初值的叠加是卷积，线性系统对输入信号的响应是卷积，以后学格林函数时也会再次遇到卷积思想。
+
+\begin{dingliyi}{卷积}{}
+两个函数 $f(x)$ 和 $g(x)$ 的卷积定义为
+\begin{equation}
+    (f*g)(x)=\int_{-\infty}^{+\infty} f(\tau)g(x-\tau)\,\mathrm{d}\tau.
+\end{equation}
+\end{dingliyi}
+
+\begin{tishi}[怎样直观理解卷积]
+把 $g(x)$ 先翻转成 $g(-x)$，再向右平移成 $g(x-\tau)$，然后和 $f(\tau)$ 在每个位置上做``重叠面积''的积分，这个随平移量 $x$ 变化的结果，就是卷积。
+\end{tishi}
+
+\subsection{卷积定理}
+
+\begin{dingli}{卷积定理}{}
+若 $f$ 与 $g$ 满足适当的可积条件，则
+\begin{equation}
+    \mathcal{F}[f*g](\omega)=\hat{f}(\omega)\hat{g}(\omega).
+\end{equation}
+并且
+\begin{equation}
+    \mathcal{F}[f(x)g(x)](\omega)=\frac{1}{2\pi}(\hat{f}*\hat{g})(\omega).
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+只证明第一条。由定义，
+\begin{align}
+    \mathcal{F}[f*g](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    \left[
+        \int_{-\infty}^{+\infty}
+        f(\tau)g(x-\tau)\,\mathrm{d}\tau
+    \right]
+    \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x.
+\end{align}
+
+交换积分次序后，
+\begin{align}
+    \mathcal{F}[f*g](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(\tau)
+    \left[
+        \int_{-\infty}^{+\infty}
+        g(x-\tau)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+    \right]
+    \mathrm{d}\tau.
+\end{align}
+
+令 $u=x-\tau$，则
+\begin{align}
+    \int_{-\infty}^{+\infty}
+    g(x-\tau)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x
+    &=
+    \int_{-\infty}^{+\infty}
+    g(u)\mathrm{e}^{-\mathrm{i}\omega(u+\tau)}\,\mathrm{d}u \\
+    &=
+    \mathrm{e}^{-\mathrm{i}\omega\tau}\hat{g}(\omega).
+\end{align}
+
+于是
+\begin{align}
+    \mathcal{F}[f*g](\omega)
+    &=
+    \hat{g}(\omega)
+    \int_{-\infty}^{+\infty}
+    f(\tau)\mathrm{e}^{-\mathrm{i}\omega\tau}\,\mathrm{d}\tau \\
+    &=
+    \hat{f}(\omega)\hat{g}(\omega).
+\end{align}
+证毕。
+\end{proof}
+
+\begin{lizi}{}{}
+设
+\begin{equation}
+    f(x)=
+    \begin{cases}
+        1, & |x|<1, \\
+        0, & |x|>1.
+    \end{cases}
+\end{equation}
+求 $f*f$ 的形状。
+
+\begin{jie}
+这里 $(f*f)(x)$ 表示两个长度为 $2$ 的矩形窗口在相对位移为 $x$ 时的重叠长度。
+
+\begin{itemize}
+    \item 当 $|x|\ge 2$ 时，两段区间没有重叠，所以 $(f*f)(x)=0$。
+    \item 当 $|x|<2$ 时，重叠长度为 $2-|x|$。
+\end{itemize}
+
+因此
+\begin{equation}
+    (f*f)(x)=
+    \begin{cases}
+        2-|x|, & |x|<2, \\
+        0, & |x|\ge 2.
+    \end{cases}
+\end{equation}
+
+也就是说，两个矩形函数卷积后会得到一个三角形轮廓。这是卷积几何意义最经典的例子之一。
+\end{jie}
+\end{lizi}
 
 \subsection{帕塞瓦尔等式}
 
 \begin{dingli}{帕塞瓦尔等式}{}
+若 $f$ 满足适当条件，则
 \begin{equation}
-    \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x = \frac{1}{2\pi}\int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega
+    \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x
+    =
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega.
 \end{equation}
 \end{dingli}
 
 \begin{proof}
-由傅里叶逆变换：
+由逆变换，
 \begin{equation}
-    f(x) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
+    f(x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}\hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
 \end{equation}
-
-两边乘以 $\overline{f(x)}$ 并积分：
+于是
 \begin{align}
-    \int_{-\infty}^{+\infty} |f(x)|^2\,\mathrm{d}x &= \frac{1}{2\pi}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \hat{f}(\omega)\overline{f(x)}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega\,\mathrm{d}x \\
-    &= \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\overline{\hat{f}(\omega)}\,\mathrm{d}\omega \\
-    &= \frac{1}{2\pi}\int_{-\infty}^{+\infty} |\hat{f}(\omega)|^2\,\mathrm{d}\omega
+    \int_{-\infty}^{+\infty}|f(x)|^2\,\mathrm{d}x
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)\overline{f(x)}\,\mathrm{d}x \\
+    &=
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \overline{f(x)}
+    \left[
+        \int_{-\infty}^{+\infty}
+        \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega
+    \right]
+    \mathrm{d}x.
 \end{align}
+
+交换积分次序：
+\begin{align}
+    \int_{-\infty}^{+\infty}|f(x)|^2\,\mathrm{d}x
+    &=
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \hat{f}(\omega)
+    \left[
+        \int_{-\infty}^{+\infty}
+        \overline{f(x)}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}x
+    \right]
+    \mathrm{d}\omega.
+\end{align}
+
+括号里的积分正是 $\overline{\hat{f}(\omega)}$，因此
+\begin{equation}
+    \int_{-\infty}^{+\infty}|f(x)|^2\,\mathrm{d}x
+    =
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \hat{f}(\omega)\overline{\hat{f}(\omega)}\,\mathrm{d}\omega
+    =
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}|\hat{f}(\omega)|^2\,\mathrm{d}\omega.
+\end{equation}
 \end{proof}
 
 \begin{wulibj}[物理意义]
-帕塞瓦尔等式说明：信号在时域的总能量等于频域的总能量（差常数因子）。这体现了能量守恒。
+帕塞瓦尔等式\index{帕塞瓦尔等式}告诉我们：信号在时域中的总能量，与它在频域中的总能量本质上是同一件事，只是表达方式不同。这也是为什么频谱分析不是单纯的``换个变量''，而是保留了系统核心信息的一种观察角度。
 \end{wulibj}
 
-% ========== 第四节 ==========
-\section{傅里叶变换\index{傅里叶变换}的应用}
+\subsection{滤波为什么会变得简单}
 
-\subsection{求解微分方程}
-
-傅里叶变换\index{傅里叶变换}可以将微分方程转化为代数方程，大大简化求解过程。
-
-\begin{lizi}{}{}
-求解热传导方程的初值问题：
+设输入信号为 $f(t)$，某个线性时不变系统的冲激响应为 $h(t)$。那么输出信号满足
 \begin{equation}
+    y(t)=(f*h)(t).
+\end{equation}
+
+利用卷积定理，立刻得到
+\begin{equation}
+    \hat{y}(\omega)=\hat{f}(\omega)\hat{h}(\omega).
+\end{equation}
+
+这说明什么？说明系统的作用在频域里只是``乘上一个频率响应函数''。因此：
+\begin{itemize}
+    \item 如果 $\hat{h}(\omega)$ 只保留低频，就得到低通滤波；
+    \item 如果 $\hat{h}(\omega)$ 只保留高频，就得到高通滤波；
+    \item 如果 $\hat{h}(\omega)$ 只保留某一段频率，就得到带通滤波。
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{scope}
+        \draw[->, gray] (-0.5, 0) -- (4.0, 0) node[right] {$t$};
+        \draw[->, gray] (0, -1.4) -- (0, 1.6);
+        \draw[blue, thick, domain=0:3.5, samples=120]
+            plot (\x, {sin(5*\x r)*exp(-0.35*\x)+0.28*sin(26*\x r)});
+        \node at (1.8,-1.8) {时域：信号加噪声};
+    \end{scope}
+
+    \draw[->, very thick, red] (4.7,0.2) -- (6.0,0.2) node[midway, above] {$\mathcal{F}$};
+
+    \begin{scope}[xshift=7.4cm]
+        \draw[->, gray] (-0.5, 0) -- (4.0, 0) node[right] {$\omega$};
+        \draw[->, gray] (0, -0.4) -- (0, 1.8);
+        \draw[red, thick, domain=0:3.4, samples=100]
+            plot (\x, {0.95*exp(-(\x-0.9)^2/0.25)+0.35*exp(-(\x-2.8)^2/0.08)});
+        \draw[green!60!black, thick, dashed] (0,1.1) -- (2.0,1.1) -- (2.0,0) -- (3.5,0);
+        \node[green!60!black] at (2.75,1.35) {低通滤波器};
+        \node at (1.8,-0.8) {频域：乘上频率响应};
+    \end{scope}
+\end{tikzpicture}
+\caption{卷积定理与滤波的频域解释}
+\label{fig:fourier-filter}
+\end{figure}
+
+% ========== 第六节 ==========
+\section{正弦变换、余弦变换与半无界区间预告}
+
+\subsection{为什么会出现正弦变换和余弦变换}
+
+到目前为止，我们讨论的都是定义在整个实轴上的傅里叶变换\index{傅里叶变换}。但在数理方程里，还经常会碰到只定义在半轴 $x\ge 0$ 上的问题，例如半无限长细杆、半空间扩散、具有边界的振动问题。
+
+这时如果仍然机械地把函数当作整轴函数来处理，往往会忽略边界条件的作用。更自然的做法是：先把半轴函数延拓到整轴，再根据延拓方式的不同，引出两类特别有用的积分变换。
+
+\subsection{偶延拓与余弦变换}
+
+设 $f(x)$ 只在 $x\ge 0$ 上有定义。把它做偶延拓：
+\begin{equation}
+    f_e(x)=
     \begin{cases}
-        u_t = a^2 u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
-        u(x, 0) = \varphi(x), & x \in \mathbb{R}
+        f(x), & x\ge 0, \\
+        f(-x), & x<0.
     \end{cases}
 \end{equation}
 
-\begin{jie}
-    对 $x$ 进行傅里叶变换\index{傅里叶变换}，设 $\hat{u}(\omega, t) = \mathcal{F}[u(x, t)]$。
-    
-    方程变为：
-    \begin{equation}
-        \frac{\partial\hat{u}}{\partial t} = a^2(\mathrm{i}\omega)^2\hat{u} = -a^2\omega^2\hat{u}
-    \end{equation}
-    
-    这是关于 $t$ 的常微分方程，解为
-    \begin{equation}
-        \hat{u}(\omega, t) = \hat{u}(\omega, 0)\mathrm{e}^{-a^2\omega^2 t} = \hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}
-    \end{equation}
-    
-    由逆变换和卷积定理：
-    \begin{equation}
-        u(x, t) = \varphi(x) * \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}]
-    \end{equation}
-    
-    计算逆变换：
-    \begin{equation}
-        \mathcal{F}^{-1}[\mathrm{e}^{-a^2\omega^2 t}] = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \mathrm{e}^{-a^2\omega^2 t}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega = \frac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/4a^2 t}
-    \end{equation}
-    
-    因此
-    \begin{equation}
-        \boxed{u(x, t) = \frac{1}{2a\sqrt{\pi t}}\int_{-\infty}^{+\infty} \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/4a^2 t}\,\mathrm{d}\xi}
-    \end{equation}
-\end{jie}
-\end{lizi}
+由于 $f_e(x)$ 是偶函数，因此它的傅里叶变换只含余弦部分：
+\begin{equation}
+    \hat{f}_e(\omega)
+    =
+    2\int_0^{+\infty} f(x)\cos \omega x\,\mathrm{d}x.
+\end{equation}
 
-\subsection{信号处理}
+这就自然引出下面的定义。
 
-\begin{wulibj}[滤波器设计]
-信号处理中，傅里叶变换\index{傅里叶变换}用于：
+\begin{dingliyi}{傅里叶余弦变换}{}
+对定义在 $[0,+\infty)$ 上的函数 $f(x)$，定义
+\begin{equation}
+    F_c(\omega)=\int_0^{+\infty} f(x)\cos \omega x\,\mathrm{d}x.
+\end{equation}
+在适当条件下，对应的逆公式为
+\begin{equation}
+    f(x)=\frac{2}{\pi}\int_0^{+\infty} F_c(\omega)\cos \omega x\,\mathrm{d}\omega.
+\end{equation}
+\end{dingliyi}
+
+\subsection{奇延拓与正弦变换}
+
+若把半轴函数做奇延拓：
+\begin{equation}
+    f_o(x)=
+    \begin{cases}
+        f(x), & x\ge 0, \\
+        -f(-x), & x<0,
+    \end{cases}
+\end{equation}
+那么 $f_o(x)$ 是奇函数，其傅里叶变换只含正弦部分。
+
+\begin{dingliyi}{傅里叶正弦变换}{}
+对定义在 $[0,+\infty)$ 上的函数 $f(x)$，定义
+\begin{equation}
+    F_s(\omega)=\int_0^{+\infty} f(x)\sin \omega x\,\mathrm{d}x.
+\end{equation}
+在适当条件下，对应的逆公式为
+\begin{equation}
+    f(x)=\frac{2}{\pi}\int_0^{+\infty} F_s(\omega)\sin \omega x\,\mathrm{d}\omega.
+\end{equation}
+\end{dingliyi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{scope}
+        \draw[->, gray] (-3.4,0) -- (3.4,0) node[right] {$x$};
+        \draw[->, gray] (0,-0.3) -- (0,2.1);
+        \draw[blue, thick] (0,0.8) -- (1.1,1.4) -- (2.5,0.7);
+        \draw[blue, thick] (-2.5,0.7) -- (-1.1,1.4) -- (0,0.8);
+        \node at (0,-0.8) {偶延拓};
+    \end{scope}
+
+    \begin{scope}[xshift=9cm]
+        \draw[->, gray] (-3.4,0) -- (3.4,0) node[right] {$x$};
+        \draw[->, gray] (0,-2.0) -- (0,2.1);
+        \draw[red, thick] (0,0.8) -- (1.1,1.4) -- (2.5,0.7);
+        \draw[red, thick] (-2.5,-0.7) -- (-1.1,-1.4) -- (0,-0.8);
+        \node at (0,-2.5) {奇延拓};
+    \end{scope}
+\end{tikzpicture}
+\caption{半轴函数的偶延拓与奇延拓}
+\label{fig:even-odd-extension}
+\end{figure}
+
+\begin{tishi}[边界条件为什么会影响变换选择]
+这不是形式上的巧合，而是问题结构决定的。通常来说：
 \begin{itemize}
-    \item \textbf{低通滤波}：去除高频噪声
-    \item \textbf{高通滤波}：提取边缘和细节
-    \item \textbf{带通滤波}：选择特定频率范围
+    \item 若边界条件是 $u(0,t)=0$ 这类函数值为零的条件，奇延拓往往更自然，于是会想到正弦变换；
+    \item 若边界条件是 $u_x(0,t)=0$ 这类导数为零的条件，偶延拓往往更自然，于是会想到余弦变换。
 \end{itemize}
 
-设输入信号 $f(t)$，滤波器冲激响应为 $h(t)$，则输出为卷积 $f * h$。在频域，输出频谱为 $\hat{f}(\omega)\hat{h}(\omega)$。
+所以，正弦变换和余弦变换并不是两个凭空冒出来的新工具，而是全轴傅里叶变换在半轴问题中的自然适配。
+\end{tishi}
+
+\begin{zhu}{}{}
+本章先把这两类变换作为预告介绍。等到后面真正处理带边界的热传导和波动问题时，你会更清楚地体会到：``选什么变换''并不是单纯的计算偏好，而是由定义域和边界条件共同决定的。
+\end{zhu}
+
+% ========== 第七节 ==========
+\section{一个标准应用：整轴热方程}
+
+\subsection{为什么整轴问题适合傅里叶变换}
+
+傅里叶变换\index{傅里叶变换}之所以特别适合整轴问题，原因其实很朴素：它天生就是在整个实轴上定义的，不需要额外边界条件。对于
+\[
+    x\in \mathbb{R}
+\]
+这样的空间区间，直接对空间变量做傅里叶变换，往往是最自然的选择。
+
+热传导方程就是最标准的例子。考虑初值问题
+\begin{equation}
+    \begin{cases}
+        u_t=a^2u_{xx}, & x\in\mathbb{R},\ t>0, \\
+        u(x,0)=\varphi(x), & x\in\mathbb{R}.
+    \end{cases}
+\end{equation}
+
+这里 $\varphi(x)$ 表示初始温度分布。我们的目标是求出任意时刻 $t>0$ 的温度 $u(x,t)$。
+
+\subsection{对空间变量作傅里叶变换}
+
+对方程两边关于 $x$ 作傅里叶变换，记
+\begin{equation}
+    \hat{u}(\omega,t)=\mathcal{F}[u(x,t)].
+\end{equation}
+
+由于傅里叶变换\index{傅里叶变换}对时间参数 $t$ 来说只是一个旁观者，我们有
+\begin{equation}
+    \mathcal{F}[u_t]=\frac{\partial \hat{u}}{\partial t}.
+\end{equation}
+另一方面，由二阶微分性质，
+\begin{equation}
+    \mathcal{F}[u_{xx}]
+    =
+    (\mathrm{i}\omega)^2\hat{u}
+    =
+    -\omega^2 \hat{u}.
+\end{equation}
+
+因此原方程变成
+\begin{equation}
+    \frac{\partial \hat{u}}{\partial t}
+    =
+    -a^2\omega^2 \hat{u}.
+\end{equation}
+
+请注意这一刻发生了什么：原来关于 $x,t$ 的偏微分方程，已经变成了对每一个固定频率 $\omega$ 的常微分方程。
+
+\subsection{频域中的求解}
+
+对于每一个固定的 $\omega$，这是一个一阶常微分方程，其解为
+\begin{equation}
+    \hat{u}(\omega,t)=C(\omega)\mathrm{e}^{-a^2\omega^2 t}.
+\end{equation}
+
+由初始条件
+\begin{equation}
+    u(x,0)=\varphi(x)
+\end{equation}
+可知
+\begin{equation}
+    \hat{u}(\omega,0)=\hat{\varphi}(\omega),
+\end{equation}
+所以
+\begin{equation}
+    \hat{u}(\omega,t)=\hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}.
+\end{equation}
+
+\subsection{逆变换与热核}
+
+现在再做逆变换：
+\begin{equation}
+    u(x,t)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}
+    \hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+
+把它看成两个频域函数的乘积：
+\begin{equation}
+    \hat{u}(\omega,t)=\hat{\varphi}(\omega)\cdot \mathrm{e}^{-a^2\omega^2 t}.
+\end{equation}
+
+由卷积定理，
+\begin{equation}
+    u(x,t)=\varphi(x)*\mathcal{F}^{-1}\!\left[\mathrm{e}^{-a^2\omega^2 t}\right].
+\end{equation}
+
+而根据高斯函数的傅里叶变换结果，
+\begin{equation}
+    \mathcal{F}^{-1}\!\left[\mathrm{e}^{-a^2\omega^2 t}\right]
+    =
+    \frac{1}{2a\sqrt{\pi t}}
+    \mathrm{e}^{-x^2/(4a^2 t)}.
+\end{equation}
+
+于是得到最后的解：
+\begin{equation}
+    \boxed{
+        u(x,t)
+        =
+        \frac{1}{2a\sqrt{\pi t}}
+        \int_{-\infty}^{+\infty}
+        \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi
+    }.
+\end{equation}
+
+\begin{dingli}{整轴热方程的热核表示}{}
+在适当条件下，整轴热方程初值问题
+\begin{equation}
+    \begin{cases}
+        u_t=a^2u_{xx}, & x\in\mathbb{R},\ t>0, \\
+        u(x,0)=\varphi(x), & x\in\mathbb{R}
+    \end{cases}
+\end{equation}
+的解为
+\begin{equation}
+    u(x,t)
+    =
+    \frac{1}{2a\sqrt{\pi t}}
+    \int_{-\infty}^{+\infty}
+    \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi.
+\end{equation}
+\end{dingli}
+
+\begin{wulibj}[这个结果的物理解释]
+核函数
+\begin{equation}
+    G(x,t)=\frac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/(4a^2 t)}
+\end{equation}
+就是热方程的\textbf{热核}。它告诉我们：任一点的温度，是把初始温度分布按一个高斯权重做平均得到的。随着时间推移，这个高斯核会越来越宽、越来越平，说明热量会逐渐向外扩散，尖锐的初始分布会被慢慢抹平。
 \end{wulibj}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=0.8]
-    % 时域
-    \begin{scope}
-        \draw[->, gray] (-0.5, 0) -- (4, 0) node[right] {$t$};
-        \draw[->, gray] (0, -1.5) -- (0, 1.5) node[above] {$f(t)$};
-        
-        % 信号
-        \draw[blue, thick, domain=0:3.5, samples=100] plot (\x, {sin(5*\x r)*exp(-0.3*\x) + 0.3*sin(30*\x r)});
-        
-        \node at (1.8, -2) {时域：信号+噪声};
-    \end{scope}
-    
-    % 箭头
-    \draw[->, very thick] (4.5, 0) -- (5.5, 0) node[midway, above] {$\mathcal{F}$};
-    
-    % 频域
-    \begin{scope}[xshift=6.5cm]
-        \draw[->, gray] (-0.5, 0) -- (4, 0) node[right] {$\omega$};
-        \draw[->, gray] (0, -0.5) -- (0, 1.5) node[above] {$\hat{f}(\omega)$};
-        
-        % 频谱（低频+高频）
-        \draw[red, thick, domain=0:3.5, samples=100] plot (\x, {0.8*exp(-(\x-1)^2/0.3) + 0.3*exp(-(\x-3)^2/0.1)});
-        
-        % 滤波器
-        \draw[green!60!black, thick, dashed, domain=0:2.5, samples=50] plot (\x, {1});
-        \draw[green!60!black, thick, dashed, domain=2.5:3.5, samples=50] plot (\x, {0});
-        
-        \node at (1.8, -2) {频域：低频信号+高频噪声};
-        \node[green!60!black] at (3, 1.2) {滤波器};
-    \end{scope}
+    \draw[->, gray] (-4.8,0) -- (4.8,0) node[right] {$x$};
+    \draw[->, gray] (0,0) -- (0,3.8) node[above] {$G(x,t)$};
+
+    \draw[blue, thick, domain=-2.0:2.0, samples=120]
+        plot (\x,{3.1*exp(-1.9*\x*\x)});
+    \node[blue] at (2.8,2.8) {$t$ 小};
+
+    \draw[red, thick, domain=-3.0:3.0, samples=120]
+        plot (\x,{1.9*exp(-0.9*\x*\x)});
+    \node[red] at (3.1,1.7) {$t$ 中};
+
+    \draw[green!60!black, thick, domain=-4.0:4.0, samples=120]
+        plot (\x,{1.2*exp(-0.35*\x*\x)});
+    \node[green!60!black] at (3.4,0.9) {$t$ 大};
 \end{tikzpicture}
-\caption{傅里叶变换\index{傅里叶变换}在信号滤波中的应用}
-\label{fig:fft-filter}
+\caption{热核随时间增大而变宽、变矮}
+\label{fig:heat-kernel}
 \end{figure}
 
-% ========== 第五节 ==========
-\section{多维傅里叶变换\index{傅里叶变换}}
-
-\subsection{二维傅里叶变换\index{傅里叶变换}}
-
-\begin{dingliyi}{二维傅里叶变换}{}
+\begin{lizi}{}{}
+求解初值问题
 \begin{equation}
-    \hat{f}(\omega_1, \omega_2) = \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f(x_1, x_2)\mathrm{e}^{-\mathrm{i}(\omega_1 x_1 + \omega_2 x_2)}\,\mathrm{d}x_1\mathrm{d}x_2
+    \begin{cases}
+        u_t=u_{xx}, & x\in\mathbb{R},\ t>0, \\
+        u(x,0)=\mathrm{e}^{-x^2}, & x\in\mathbb{R}.
+    \end{cases}
 \end{equation}
-\end{dingliyi}
 
-\begin{dingliyi}{二维傅里叶逆变换}{}
+\begin{jie}
+这里 $a=1$，初值的傅里叶变换为
 \begin{equation}
-    f(x_1, x_2) = \frac{1}{(2\pi)^2}\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} \hat{f}(\omega_1, \omega_2)\mathrm{e}^{\mathrm{i}(\omega_1 x_1 + \omega_2 x_2)}\,\mathrm{d}\omega_1\mathrm{d}\omega_2
+    \hat{\varphi}(\omega)=\sqrt{\pi}\mathrm{e}^{-\omega^2/4}.
 \end{equation}
-\end{dingliyi}
 
-\begin{wulibj}[应用：图像处理]
-二维傅里叶变换\index{傅里叶变换}在图像处理中有广泛应用：
-\begin{itemize}
-    \item 图像压缩（JPEG 等）
-    \item 图像去噪
-    \item 边缘检测
-    \item 图像配准
-\end{itemize}
-\end{wulibj}
+于是频域解为
+\begin{equation}
+    \hat{u}(\omega,t)=\sqrt{\pi}\mathrm{e}^{-\omega^2/4}\mathrm{e}^{-\omega^2 t}
+    =
+    \sqrt{\pi}\mathrm{e}^{-(t+\frac14)\omega^2}.
+\end{equation}
+
+再做逆变换，利用高斯函数的变换对，
+\begin{equation}
+    u(x,t)
+    =
+    \frac{1}{\sqrt{4t+1}}\mathrm{e}^{-x^2/(4t+1)}.
+\end{equation}
+
+这个结果很有物理意味：随着 $t$ 增大，分母 $\sqrt{4t+1}$ 变大，峰值降低；指数里的分母 $4t+1$ 变大，曲线变宽。这正体现了扩散过程的``摊平''作用。
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[本章和后续章节怎样分工]
+本节只保留了一个最标准的整轴热方程例子，目的不是把积分变换法全部讲完，而是让你先看清楚傅里叶变换\index{傅里叶变换}为什么有用。等到第十三章真正系统讨论积分变换法时，我们会把这种思路更完整地用于多类数学物理方程。
+\end{tishi}
 
 % ========== 本章小结 ==========
 \section{本章小结}
 
-\subsection{核心公式}
+\begin{wulibj}[一句话回看本章]
+本章真正建立起来的，是这样一种眼光：非周期函数也可以分解成连续频率成分，而一旦进入频域，许多原来复杂的运算会变得非常整齐，因此傅里叶变换\index{傅里叶变换}天然适合整条实轴上的数学物理问题。
+\end{wulibj}
 
-\begin{table}[htbp]
-\centering
-\begin{tabular}{ll}
-\toprule
-\textbf{变换} & \textbf{公式} \\
-\midrule
-傅里叶变换\index{傅里叶变换} & $\hat{f}(\omega) = \int_{-\infty}^{+\infty} f(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x$ \\
-逆变换 & $f(x) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} \hat{f}(\omega)\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega$ \\
-微分性质 & $\mathcal{F}[f'] = \mathrm{i}\omega\hat{f}$ \\
-卷积定理 & $\mathcal{F}[f*g] = \hat{f}\hat{g}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{tishi}[知识主线]
+\begin{enumerate}
+    \item 先从周期函数的傅里叶级数看到离散频谱；
+    \item 再让周期趋于无穷，得到非周期函数的连续频谱；
+    \item 然后建立傅里叶变换与逆变换；
+    \item 接着整理平移、伸缩、微分、卷积等基本性质；
+    \item 最后用整轴热方程说明傅里叶变换怎样真正进入数学物理方程求解。
+\end{enumerate}
+\end{tishi}
 
-\subsection{关键性质}
+\begin{zhongyao}[本章主要结论]
+\raggedright
+\begin{enumerate}
+    \item \textbf{傅里叶变换来自离散谱向连续谱的极限过渡：}它不是凭空定义，而是傅里叶级数理论的自然延伸。
+    \item \textbf{反演公式说明时域与频域可相互恢复：}在连续点处恢复原函数，在跳跃点处恢复左右极限的平均值。
+    \item \textbf{奇偶性和实值性能大大简化计算：}偶函数对应余弦积分，奇函数对应正弦积分，实函数频谱满足共轭对称。
+    \item \textbf{微分在频域里会变成乘法：}这正是傅里叶变换能够求解微分方程的根本原因。
+    \item \textbf{卷积定理把积分运算化成乘法：}这是滤波、热核、格林函数等后续内容的重要桥梁。
+    \item \textbf{整轴问题特别适合傅里叶变换：}热方程的热核解是最标准的代表例子。
+\end{enumerate}
+\end{zhongyao}
 
-\begin{itemize}
-    \item 线性、平移、伸缩、微分
-    \item 卷积定理：时域卷积 $\leftrightarrow$ 频域乘积
-    \item 帕塞瓦尔等式：能量守恒
-\end{itemize}
+\begin{tishi}[做题时的判断思路]
+\begin{enumerate}
+    \item 看到非周期函数时，先问自己：它是否更适合在频域中理解？
+    \item 看到整条实轴上的微分方程时，优先考虑对空间变量作傅里叶变换。
+    \item 看到平移、调制、导数或乘以 $x$ 这类结构时，先想能否用性质直接推出结果，而不是重新硬算积分。
+    \item 看到卷积时，优先想到频域乘法；看到频域乘积，也要能反过来想到时域卷积。
+    \item 若问题只定义在半轴上，则还要进一步判断是否该用正弦变换、余弦变换或拉普拉斯变换。
+\end{enumerate}
+\end{tishi}
+
+\begin{jinshi}[本章最容易混淆的地方]
+\begin{enumerate}
+    \item 不要把连续谱理解成``把下标换成连续变量''这么简单，真正关键的是离散求和向积分的极限过渡。
+    \item 不要把反演公式在间断点处的恢复值写错；那里取的是平均值。
+    \item 不要在平移、伸缩、微分性质里频繁写错相位因子、绝对值和 $\mathrm{i}$ 的符号。
+    \item 不要把整轴傅里叶变换和半轴问题的处理完全混在一起。
+    \item 不要只记公式，不理解它们为什么对求解方程特别有效。
+\end{enumerate}
+\end{jinshi}
+
+\begin{tishi}[和后续内容的联系]
+从课程主线看，本章是积分变换部分的起点。第九章会进一步介绍拉普拉斯变换\index{拉普拉斯变换}，它在半轴初值问题中更方便；第十三章则会把傅里叶变换和拉普拉斯变换系统用于数学物理方程求解。也就是说，本章是后续积分变换法的思想准备和工具准备。
+\end{tishi}
 
 % ========== 习题 ==========
 \section{习题}
 
-\textbf{基础题}
-
+\subsection*{基础题}
 \begin{enumerate}
-    \item 计算下列函数的傅里叶变换\index{傅里叶变换}：
+    \item 设 $f(x)$ 的周期为 $2L$，写出它的复指数形式傅里叶级数，并说明频率间隔 $\Delta\omega$ 与 $L$ 的关系。
+    \item 求下列函数的傅里叶变换：
     \begin{enumerate}
-        \item $f(x) = \mathrm{e}^{-a|x|}$（$a > 0$）
-        \item $f(x) = \mathrm{e}^{-ax}\sin\omega_0 x$（$x > 0$），$f(x) = 0$（$x < 0$）
+        \item $f(x)=\mathrm{e}^{-a|x|}$（$a>0$）；
+        \item $f(x)=\chi_{[-a,a]}(x)$，即 $|x|<a$ 时取 $1$，其余取 $0$；
+        \item $f(x)=x\mathrm{e}^{-ax^2}$（$a>0$）。
     \end{enumerate}
-    
-    \item 利用傅里叶变换\index{傅里叶变换}的性质，由 $\mathcal{F}[\mathrm{e}^{-ax^2}] = \sqrt{\frac{\pi}{a}}\mathrm{e}^{-\omega^2/4a}$ 推导 $\mathcal{F}[x^2\mathrm{e}^{-ax^2}]$。
+    \item 设 $f(x)$ 为实偶函数，说明为什么它的傅里叶变换一定也是实偶函数。
 \end{enumerate}
 
-\textbf{综合题}
-
-\begin{enumerate}[resume]
-    \item 利用傅里叶变换\index{傅里叶变换}求解：
+\subsection*{综合题}
+\begin{enumerate}
+    \item 已知
+    \begin{equation}
+        \mathcal{F}[f](\omega)=\hat{f}(\omega),
+    \end{equation}
+    分别求 $f(x-a)$、$\mathrm{e}^{\mathrm{i}\omega_0 x}f(x)$、$f'(x)$、$xf(x)$ 的傅里叶变换。
+    \item 计算两个矩形函数的卷积，并画出结果的大致图像。
+    \item 利用傅里叶变换求解
     \begin{equation}
         \begin{cases}
-            u_t = u_{xx}, & x \in \mathbb{R}, \; t > 0 \\
-            u(x, 0) = \mathrm{e}^{-x^2}, & x \in \mathbb{R}
+            u_t=u_{xx}, & x\in\mathbb{R},\ t>0, \\
+            u(x,0)=\mathrm{e}^{-x^2}, & x\in\mathbb{R}.
         \end{cases}
     \end{equation}
-    
-    \item 证明：若 $f(x)$ 是实函数，则 $|\hat{f}(\omega)|$ 是偶函数，$\arg\hat{f}(\omega)$ 是奇函数。
 \end{enumerate}
 
-\textbf{挑战题}
-
-\begin{enumerate}[resume]
-    \item 设 $f(x)$ 满足 $f(x) = f(x-1)$（周期为1）。证明 $f(x)$ 的傅里叶变换\index{傅里叶变换}是离散的，即 $\hat{f}(\omega) = \sum_{n=-\infty}^{\infty} c_n\delta(\omega - 2\pi n)$。
-    
-    \item 利用傅里叶变换\index{傅里叶变换}计算积分 $\int_0^{+\infty} \frac{\sin ax}{x}\,\mathrm{d}x$（$a > 0$）。
+\subsection*{挑战题}
+\begin{enumerate}
+    \item 结合傅里叶积分定理，说明矩形函数在端点处为什么恢复为 $\dfrac{1}{2}$。
+    \item 设 $f(x)$ 定义在 $x\ge 0$ 上，分别写出它的偶延拓和奇延拓，并说明它们如何导向余弦变换与正弦变换。
+    \item 比较傅里叶变换和拉普拉斯变换各自更适合处理什么类型的问题，并给出理由。
 \end{enumerate}
