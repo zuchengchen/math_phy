@@ -483,6 +483,47 @@ $\operatorname{Log} z$ 只是一个最常用的分支。它方便，但并不神
 \]
 \end{tuilun}
 
+\begin{proof}
+记
+\[
+    D=\mathbb{C}\setminus(-\infty,0].
+\]
+这个区域是单连通的，而且 $0\notin D$。因此由上一定理，$\log z$ 在 $D$ 上存在一个解析支 $L(z)$，并满足
+\[
+    \mathrm{e}^{L(z)}=z,
+    \qquad
+    L'(z)=\frac{1}{z}.
+\]
+
+现在把这个解析支取成满足
+\[
+    L(1)=0
+\]
+的那一个。由于
+\[
+    \mathrm{e}^{L(z)}=z,
+\]
+所以对每个 $z\in D$，$L(z)$ 的实部只能是 $\ln|z|$，而它的虚部必须是 $z$ 的一个连续辐角。又因为在点 $z=1$ 处有
+\[
+    \operatorname{Im}L(1)=0,
+\]
+所以这条连续辐角分支恰好就是取值范围在 $(-\pi,\pi)$ 内、并在 $1$ 点取值为 $0$ 的那一支，也就是主辐角 $\operatorname{Arg} z$。
+
+因此
+\[
+    L(z)=\ln|z|+\mathrm{i}\operatorname{Arg} z=\operatorname{Log} z.
+\]
+于是主值对数 $\operatorname{Log} z$ 本身就是 $D$ 上的一个解析支，并且
+\[
+    \frac{\mathrm{d}}{\mathrm{d}z}\operatorname{Log} z
+    =
+    L'(z)
+    =
+    \frac{1}{z}.
+\]
+证毕。
+\end{proof}
+
 \begin{zhu}{}{}
 这条推论非常值得回味。它说明：主值对数之所以能解析，不是因为公式
 \[
