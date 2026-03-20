@@ -1255,9 +1255,12 @@ x+\mathrm{i}y
     乘除、乘幂、开方\\
     与相位问题};
 
+\coordinate (Aup) at ($(A.north)+(0,0.95cm)$);
+\coordinate (Eup) at ($(E.north)+(0,0.95cm)$);
+
 \draw[link] (A) -- (T) node[midway, above=2pt, note] {$x=r\cos\theta,\ y=r\sin\theta$};
 \draw[link] (T) -- (E) node[midway, above=2pt, note] {欧拉公式};
-\draw[link, bend left=25] (E.north) to node[midway, above=3pt, note] {必要时再拆回实部与虚部} (A.north);
+\draw[link] (E.north) -- (Eup) -- node[midway, above=3pt, note] {必要时再拆回实部与虚部} (Aup) -- (A.north);
 \end{tikzpicture}%
 }
 \caption{复数的三种常用表示}
