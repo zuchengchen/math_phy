@@ -1,0 +1,777 @@
+% 第九章：拉普拉斯变换（详细提纲）
+
+\chapter{拉普拉斯变换\index{拉普拉斯变换}}
+
+\begin{wulibj}[本章定位]
+第九章是积分变换部分的第二章。它承接第八章的傅里叶变换\index{傅里叶变换}，但任务并不是把上一章的公式简单换一个字母重写，而是要帮助学生真正理解：\textbf{当物理过程从某一时刻开始、带有明确初始状态、并且定义在半轴上时，拉普拉斯变换往往比傅里叶变换更自然，也更有力。}
+
+从全书主线看，本章最好承担下面几层任务：
+\begin{enumerate}
+    \item 说明为什么在学过傅里叶变换以后，还需要继续学习拉普拉斯变换；
+    \item 让学生掌握一侧拉普拉斯变换的定义、存在条件与收敛域；
+    \item 让学生理解拉普拉斯变换处理导数时为什么会自动带出初始条件；
+    \item 让学生能够用拉普拉斯变换求解常微分方程初值问题；
+    \item 为后面的半轴热传导问题、积分变换法和控制方程应用做好工具准备。
+\end{enumerate}
+
+因此，本章不宜写成一份孤立的公式表，也不宜过早把主要篇幅消耗在复杂的偏微分方程计算上。更合适的节奏应当是：
+\[
+    \begin{aligned}
+        &\text{物理过程从 } t=0 \text{ 开始}
+        \Longrightarrow
+        \text{半轴上的积分变换}
+        \Longrightarrow
+        \text{收敛域与复变量 } s \\
+        &\Longrightarrow
+        \text{导数变换与初值自动进入}
+        \Longrightarrow
+        \text{初值问题的系统求解}.
+    \end{aligned}
+\]
+
+与前后章节的分工上，应主动提醒学生：
+\begin{itemize}
+    \item 第八章的傅里叶变换更适合\textbf{整轴问题、频谱分析和连续频率分解}；
+    \item 第九章的拉普拉斯变换更适合\textbf{半轴问题、因果过程和初值问题}；
+    \item 第十三章再系统讨论\textbf{积分变换法怎样进入数理方程求解}。
+\end{itemize}
+\end{wulibj}
+
+\begin{tishi}[写作总原则]
+\begin{enumerate}
+    \item 开头必须先回答``为什么还需要拉普拉斯变换''，不能直接空降定义。
+    \item 收敛域一定要当成本章重点来讲，不能只写出代数式而不说明 $\mathrm{Re}(s)$ 的范围。
+    \item 微分性质必须讲透，因为这正是拉普拉斯变换适合初值问题的根本原因。
+    \item 单位阶跃函数应在本章中正式登场，因为延迟输入、分段外力和开关过程都离不开它。
+    \item 逆变换要分清``理论上的反演公式''与``做题时的实际求法''，不要把复杂的反演积分证明写成全章重点。
+    \item 常微分方程初值问题应作为本章主应用；偏微分方程只做预告性示例，不宜与第十三章过度重复。
+    \item 要反复强调本章与物理问题的联系：开关、受迫振动、突然加热、因果系统等，都应进入叙述。
+\end{enumerate}
+\end{tishi}
+
+\section{第一节：为什么还需要拉普拉斯变换}
+
+\begin{wulibj}[本节要解决的问题]
+学生学完傅里叶变换以后，最自然的疑问是：既然已经有了一个把函数变到频域的工具，为什么还要再学拉普拉斯变换？如果这个问题不先回答清楚，后面所有定义和性质都会显得像``又多了一套公式''。因此，本节的任务是从物理问题出发，把拉普拉斯变换出现的必要性讲出来。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生理解傅里叶变换与拉普拉斯变换处理对象的差别。
+    \item 让学生建立``因果过程''和``半轴问题''的基本直觉。
+    \item 让学生初步意识到：拉普拉斯变换的优势，不只是积分收敛性更宽松，更重要的是它会自然带入初始条件。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 从几个典型物理过程引入：接通电路、突然受迫振动、边界开始加热
+    \item 整轴与半轴：为什么很多实际过程只关心 $t\ge 0$
+    \item 从傅里叶变换到带衰减因子的积分
+    \item 拉普拉斯变换与傅里叶变换的角色分工
+\end{enumerate}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 很多物理过程并不是从 $t=-\infty$ 就存在，而是从某个时刻开始，这类过程天然定义在半轴上。
+    \item 即使 $f(t)$ 本身不绝对可积，只要乘上指数衰减因子 $\mathrm{e}^{-\sigma t}$ 后变得可积，就仍然可以考虑其变换。
+    \item 拉普拉斯变换不是为了替代傅里叶变换，而是为了处理另一类更适合它的问题。
+    \item 在初值问题里，时间导数经过拉普拉斯变换后会产生初值项，这是本章后面最重要的工具来源。
+\end{itemize}
+
+\subsection*{建议配图}
+\begin{itemize}
+    \item 一张``整轴问题与半轴问题''对比图：左边是整轴上的波形，右边是从 $t=0$ 开始的因果信号。
+    \item 一张``开关在 $t=a$ 时闭合''的示意图，为后面单位阶跃函数埋伏笔。
+    \item 一张流程图：物理过程 $\to$ 初始状态 $\to$ 微分方程 $\to$ 拉普拉斯变换。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{为什么 $\mathrm{e}^{at}$ 不适合直接做傅里叶变换}{}
+讨论
+\[
+    f(t)=\mathrm{e}^{at}, \qquad t\ge 0
+\]
+为什么通常不能直接在整个实轴上做傅里叶变换，但可以在适当的 $\mathrm{Re}(s)$ 条件下做拉普拉斯变换。
+\end{lizi}
+
+\begin{lizi}{因果过程的数学表达}{}
+设外力从 $t=0$ 才开始作用，说明为什么把函数看成定义在 $[0,+\infty)$ 上比机械地延拓到整轴更符合物理背景。
+\end{lizi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把拉普拉斯变换理解成``傅里叶变换写法上的小修改''。
+    \item 不要只讲收敛性放宽，而忽略它在初值问题中的真正优势。
+    \item 不要让学生误以为所有问题都应优先用拉普拉斯变换；整轴问题和频谱分析仍然更适合傅里叶变换。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：判断几个简单函数是否适合直接做傅里叶变换、是否适合做拉普拉斯变换。
+    \item 综合题：结合物理背景，判断一个过程是整轴问题还是半轴问题。
+    \item 挑战题：比较傅里叶变换与拉普拉斯变换在信号起始时刻处理上的差异。
+\end{itemize}
+
+\section{第二节：拉普拉斯变换的定义、存在条件与收敛域}
+
+\begin{wulibj}[本节要解决的问题]
+一旦学生接受了``半轴上的积分变换''这一动机，接下来就必须把定义讲严谨。但本节真正的难点，不只是写出一个积分公式，而是让学生明白：拉普拉斯变换的结果不是单独一个代数式，而是``代数式 + 收敛域''的整体。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握一侧拉普拉斯变换的定义。
+    \item 让学生理解指数增长条件和分段连续条件的作用。
+    \item 让学生能够在简单例子中判断收敛域，并在复平面中解释它的几何意义。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 复变量 $s=\sigma+\mathrm{i}\omega$ 的引入
+    \item 一侧拉普拉斯变换的定义
+    \item 分段连续与指数增长
+    \item 存在定理
+    \item 收敛域与右半平面
+\end{enumerate}
+
+\subsection*{建议使用的定义与定理}
+\begin{dingliyi}{一侧拉普拉斯变换}{}
+设 $f(t)$ 在 $t\ge 0$ 上有定义。若积分
+\[
+    F(s)=\mathcal{L}[f(t)]
+    =
+    \int_0^{+\infty} f(t)\mathrm{e}^{-st}\,\mathrm{d}t
+\]
+在某个复平面区域内收敛，则称 $F(s)$ 为 $f(t)$ 的\textbf{拉普拉斯变换\index{拉普拉斯变换}}。
+\end{dingliyi}
+
+\begin{dingliyi}{指数增长}{}
+若存在常数 $M>0$、$\sigma_0\in\mathbb{R}$ 和 $T\ge 0$，使得当 $t>T$ 时有
+\[
+    |f(t)|\le M\mathrm{e}^{\sigma_0 t},
+\]
+则称 $f(t)$ 至多按指数阶 $\sigma_0$ 增长。
+\end{dingliyi}
+
+\begin{dingli}{存在定理}{}
+若 $f(t)$ 在每个有限区间上分段连续，并且至多按指数阶 $\sigma_0$ 增长，则
+\[
+    \mathcal{L}[f(t)]
+\]
+在半平面 $\mathrm{Re}(s)>\sigma_0$ 内存在。
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item $s$ 不是普通实变量，而是复变量
+    \[
+        s=\sigma+\mathrm{i}\omega.
+    \]
+    其中 $\sigma$ 负责衰减，$\omega$ 负责振荡。
+    \item 对拉普拉斯变换来说，收敛域是结论的一部分，不能省略。
+    \item 同样写成 $\dfrac{1}{s-a}$ 的表达式，若收敛域不同，其对应的原函数理解也可能不同；这一点应至少做提醒。
+    \item 存在定理给的是常用的充分条件，不必把它误说成唯一条件。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{常数函数的拉普拉斯变换}{}
+求
+\[
+    \mathcal{L}[1]
+\]
+并说明其收敛域为什么是 $\mathrm{Re}(s)>0$。
+\end{lizi}
+
+\begin{lizi}{指数函数的拉普拉斯变换}{}
+求
+\[
+    \mathcal{L}[\mathrm{e}^{at}]
+\]
+并明确写出其收敛域。
+\end{lizi}
+
+\begin{lizi}{多项式的拉普拉斯变换存在性}{}
+说明为什么 $t^n$ 虽然不在 $[0,+\infty)$ 上绝对可积，但仍然有拉普拉斯变换。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一张 $s$ 平面图，标出直线 $\mathrm{Re}(s)=\sigma_0$ 以及其右侧收敛半平面。
+    \item 一张图解释 $s=\sigma+\mathrm{i}\omega$ 中衰减与振荡各自扮演的角色。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要只写 $F(s)=\dfrac{1}{s-a}$ 而不写 $\mathrm{Re}(s)>\mathrm{Re}(a)$。
+    \item 不要把分段连续与指数增长写成可有可无的附带说明。
+    \item 不要把 $s$ 误当作纯实变量，这会导致后面逆变换和极点分析都讲不通。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求若干简单函数的拉普拉斯变换并写出收敛域。
+    \item 综合题：判断给定函数是否满足指数增长条件。
+    \item 挑战题：比较若干函数的拉普拉斯变换收敛域，并在 $s$ 平面上画出区域。
+\end{itemize}
+
+\section{第三节：常用函数的拉普拉斯变换与单位阶跃函数}
+
+\begin{wulibj}[本节要解决的问题]
+定义讲完以后，学生需要一批真正常用的变换对，作为后面应用的工具箱。但这节不能写成纯粹查表；更合适的写法是：先推导几类最重要的函数，再把结果整理成表，并顺势引入单位阶跃函数，为延迟性质和分段输入做准备。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握最常见的基本变换对。
+    \item 让学生理解单位阶跃函数的物理意义和数学用法。
+    \item 让学生学会把分段函数改写成阶跃函数形式。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 常数函数、幂函数、指数函数
+    \item 正弦函数、余弦函数与双曲函数
+    \item 单位阶跃函数的定义和图像
+    \item 分段函数的阶跃表示
+    \item 常用变换表整理
+\end{enumerate}
+
+\subsection*{建议必须推导的对象}
+\begin{itemize}
+    \item
+    \[
+        \mathcal{L}[1]=\frac{1}{s}
+    \]
+    \item
+    \[
+        \mathcal{L}[t^n]=\frac{n!}{s^{n+1}}
+    \]
+    \item
+    \[
+        \mathcal{L}[\mathrm{e}^{at}]=\frac{1}{s-a}
+    \]
+    \item
+    \[
+        \mathcal{L}[\sin\omega t]=\frac{\omega}{s^2+\omega^2},
+        \qquad
+        \mathcal{L}[\cos\omega t]=\frac{s}{s^2+\omega^2}
+    \]
+\end{itemize}
+
+\subsection*{建议正式引入的定义}
+\begin{dingliyi}{单位阶跃函数}{}
+定义
+\[
+    u(t-a)=
+    \begin{cases}
+        0, & t<a,\\
+        1, & t\ge a.
+    \end{cases}
+\]
+它表示某个过程从 $t=a$ 开始被接通。
+\end{dingliyi}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 单位阶跃函数不是为了增加记号负担，而是为了把``某时刻才开始作用''这类物理过程写得简洁。
+    \item 分段输入写成阶跃函数以后，拉普拉斯变换的延迟性质就能直接发挥作用。
+    \item 常用变换表必须和收敛域一起给出，不能把收敛域从表里删掉。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{求若干基本函数的拉普拉斯变换}{}
+分别求
+\[
+    1,\qquad t,\qquad t^2,\qquad \sin\omega t,\qquad \cos\omega t
+\]
+的拉普拉斯变换，并写明收敛域。
+\end{lizi}
+
+\begin{lizi}{把分段函数改写为阶跃函数}{}
+把
+\[
+    f(t)=
+    \begin{cases}
+        0, & 0\le t<a,\\
+        1, & t\ge a
+    \end{cases}
+\]
+写成单位阶跃函数形式，并求其拉普拉斯变换。
+\end{lizi}
+
+\begin{lizi}{受迫振动中的开关输入}{}
+把在 $t=a$ 时开始施加的常值外力写成阶跃函数形式，说明它的物理含义。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 单位阶跃函数 $u(t-a)$ 的图像。
+    \item 一个分段常值函数及其阶跃函数表示示意图。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把 $u(t-a)$ 和 $u(a-t)$ 混淆。
+    \item 不要把分段函数写成阶跃函数后忘记平移对应的自变量。
+    \item 不要把变换表当成背诵目标，而应看出极点结构和物理类型之间的联系。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求若干基本函数的拉普拉斯变换。
+    \item 综合题：把分段函数改写成阶跃函数形式并求其变换。
+    \item 挑战题：设计一个``延迟接通''的物理输入，并写出其数学表达式。
+\end{itemize}
+
+\section{第四节：拉普拉斯变换的基本性质}
+
+\begin{wulibj}[本节要解决的问题]
+如果说上一节是积累``常用砖块''，那么这一节就是讲清``这些砖块怎样组合成工具''。本节最重要的内容并不在于公式数量，而在于让学生理解：为什么某些在时域里麻烦的运算，经过拉普拉斯变换以后会变简单；尤其是导数为什么会变成代数式加上初值项。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握最常用的拉普拉斯变换性质。
+    \item 让学生真正理解导数性质与初始条件之间的联系。
+    \item 让学生学会利用延迟性质和卷积定理处理较复杂输入。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 线性性质
+    \item 频移性质
+    \item 延迟性质
+    \item 伸缩性质
+    \item 时域微分性质与高阶导数
+    \item 时域积分性质
+    \item 卷积定理
+    \item 初值定理与终值定理（可作为补充）
+\end{enumerate}
+
+\subsection*{建议必须讲透的定理}
+\begin{dingli}{时域微分性质}{}
+若 $f(t)$ 连续，$f'(t)$ 分段连续，并满足适当增长条件，则
+\[
+    \mathcal{L}[f'(t)] = sF(s)-f(0).
+\]
+\end{dingli}
+
+\begin{dingli}{高阶导数公式}{}
+\[
+    \mathcal{L}[f^{(n)}(t)]
+    =
+    s^nF(s)-s^{n-1}f(0)-s^{n-2}f'(0)-\cdots-f^{(n-1)}(0).
+\]
+\end{dingli}
+
+\begin{dingli}{延迟性质}{}
+\[
+    \mathcal{L}[f(t-a)u(t-a)]
+    =
+    \mathrm{e}^{-as}F(s),
+    \qquad a>0.
+\]
+\end{dingli}
+
+\begin{dingli}{卷积定理}{}
+若
+\[
+    (f*g)(t)=\int_0^t f(\tau)g(t-\tau)\,\mathrm{d}\tau,
+\]
+则
+\[
+    \mathcal{L}[f*g]=F(s)G(s).
+\]
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 微分性质之所以重要，不是因为公式好记，而是因为它把初值问题中的初始条件直接带了进来。
+    \item 延迟性质本质上是在处理``系统从某时刻才开始响应''。
+    \item 卷积定理可以从系统响应的角度去解释：输入与冲激响应的卷积给出输出。
+    \item 初值定理和终值定理适合作为做题中的快速检查工具，但使用时必须检查条件。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{利用微分性质求变换}{}
+已知
+\[
+    \mathcal{L}[f(t)]=F(s),
+\]
+求
+\[
+    \mathcal{L}[f'(t)],\qquad \mathcal{L}[f''(t)]
+\]
+并解释初值项的来源。
+\end{lizi}
+
+\begin{lizi}{利用延迟性质处理开关信号}{}
+求
+\[
+    \mathcal{L}[(t-a)u(t-a)]
+\]
+并解释为什么先把函数看成 $f(t-a)u(t-a)$ 的形式更方便。
+\end{lizi}
+
+\begin{lizi}{卷积定理的一个简单应用}{}
+利用卷积定理求
+\[
+    \mathcal{L}^{-1}\left[\frac{1}{s(s+1)}\right].
+\]
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一个``时域导数 $\to$ 频域代数式 $+$ 初值''的流程图。
+    \item 一个卷积几何图，显示积分区间 $0\le \tau \le t$ 的结构。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要把时移性质和延迟性质混成一种东西。
+    \item 不要忘记延迟性质里的单位阶跃函数。
+    \item 不要机械套用初值定理和终值定理；若极限不存在或条件不满足，结论会出错。
+    \item 卷积积分的上限是 $t$，不是 $+\infty$。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：直接利用性质求变换。
+    \item 综合题：把分段函数改写成适合套用延迟性质的形式。
+    \item 挑战题：用卷积定理求逆变换，并给出物理解释。
+\end{itemize}
+
+\section{第五节：拉普拉斯逆变换}
+
+\begin{wulibj}[本节要解决的问题]
+学生在前面几节已经学会``正向变换''，但真正做题时往往会卡在最后一步：怎样从 $F(s)$ 回到 $f(t)$？本节的重点，不应放在反演积分的形式复杂性上，而应放在学生做题最需要的几种逆变换方法上。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生知道逆变换在理论上是怎样定义的。
+    \item 让学生掌握部分分式法、海维赛德展开和留数法的基本思路。
+    \item 让学生理解前面复变函数部分在这里怎样再次发挥作用。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 逆变换的概念与反演公式
+    \item 部分分式法
+    \item 海维赛德展开
+    \item 留数法求逆变换
+    \item 不同方法的适用场景比较
+\end{enumerate}
+
+\subsection*{建议使用的定理}
+\begin{dingli}{拉普拉斯逆变换的反演公式}{}
+若 $F(s)$ 满足适当条件，则
+\[
+    f(t)=\mathcal{L}^{-1}[F(s)]
+    =
+    \frac{1}{2\pi\mathrm{i}}
+    \int_{\sigma-\mathrm{i}\infty}^{\sigma+\mathrm{i}\infty}
+    F(s)\mathrm{e}^{st}\,\mathrm{d}s.
+\]
+\end{dingli}
+
+\begin{dingli}{海维赛德展开定理}{}
+对适当的有理函数 $F(s)$，若其极点结构足够简单，则
+\[
+    \mathcal{L}^{-1}[F(s)]
+\]
+可由各极点对应的留数之和给出。
+\end{dingli}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 反演公式可以讲，但不宜把整节重心放在 Bromwich 路径证明上。
+    \item 对本科生最重要的实际方法通常是：先看是否能查表，再看能否做部分分式，再看是否适合用留数。
+    \item 有理函数的逆变换与极点的类型密切相关：单极点、重极点、共轭复极点对应的时域形式都不同。
+    \item 这一节应主动呼应前面复变函数和留数理论，帮助学生建立全书联系。
+\end{itemize}
+
+\subsection*{建议例题}
+\begin{lizi}{部分分式法求逆变换}{}
+求
+\[
+    \mathcal{L}^{-1}\left[\frac{s+3}{s(s+1)(s+2)}\right].
+\]
+\end{lizi}
+
+\begin{lizi}{共轭复极点对应的三角函数}{}
+求
+\[
+    \mathcal{L}^{-1}\left[\frac{s}{s^2+\omega^2}\right]
+\]
+并指出它为什么对应余弦函数。
+\end{lizi}
+
+\begin{lizi}{重极点的情形}{}
+求
+\[
+    \mathcal{L}^{-1}\left[\frac{1}{(s+1)^2}\right]
+\]
+说明重极点为什么会对应 $t\mathrm{e}^{-t}$。
+\end{lizi}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 一张 $s$ 平面上的 Bromwich 积分路径图。
+    \item 一张极点位置与时域形式对应关系的整理图：实极点、重极点、共轭复极点。
+\end{itemize}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要在部分分式展开时漏掉重根项。
+    \item 不要把留数公式机械套用到不合适的对象上。
+    \item 不要只写出逆变换结果而不说明为什么选择这种方法。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：对简单有理函数做部分分式并求逆变换。
+    \item 综合题：分类讨论不同极点结构下的逆变换。
+    \item 挑战题：尝试用留数法重新计算一个已经能查表的例子，比较两种方法。
+\end{itemize}
+
+\section{第六节：拉普拉斯变换解常微分方程初值问题}
+
+\begin{wulibj}[本节要解决的问题]
+这一节是整章最重要的应用部分。学生在这里应第一次真切体会到：拉普拉斯变换不是一套形式公式，而是一种把微分方程变成代数方程的方法。尤其在已知初始条件、右端又比较复杂时，它的优势会非常明显。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生掌握用拉普拉斯变换求解常系数线性微分方程初值问题的标准流程。
+    \item 让学生体会阶跃输入、分段输入时拉普拉斯变换的优势。
+    \item 让学生学会把``列方程 $\to$ 变换 $\to$ 解代数式 $\to$ 逆变换''看成一整套方法。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 解题总流程总结
+    \item 齐次方程初值问题
+    \item 非齐次方程初值问题
+    \item 分段外力或阶跃输入
+    \item 方法小结：什么时候优先想到拉普拉斯变换
+\end{enumerate}
+
+\subsection*{本节必须讲清的标准流程}
+\begin{enumerate}
+    \item 对方程两边作拉普拉斯变换；
+    \item 利用导数性质把初始条件带入；
+    \item 解关于 $Y(s)$ 的代数方程；
+    \item 化简为适合逆变换的形式；
+    \item 通过查表、部分分式或留数求出原函数。
+\end{enumerate}
+
+\subsection*{建议例题}
+\begin{lizi}{二阶齐次方程初值问题}{}
+求解
+\[
+    \begin{cases}
+        y''+4y=0,\\
+        y(0)=1,\quad y'(0)=0.
+    \end{cases}
+\]
+要求完整展开每一步，并特别指出初始条件在哪一步进入。
+\end{lizi}
+
+\begin{lizi}{二阶非齐次方程初值问题}{}
+求解
+\[
+    \begin{cases}
+        y''+3y'+2y=\mathrm{e}^{-t},\\
+        y(0)=0,\quad y'(0)=0.
+    \end{cases}
+\]
+\end{lizi}
+
+\begin{lizi}{带阶跃输入的初值问题}{}
+求解
+\[
+    \begin{cases}
+        y''+\omega_0^2y=F_0u(t-a),\\
+        y(0)=0,\quad y'(0)=0.
+    \end{cases}
+\]
+这一题的价值不在计算量，而在于帮助学生看到``开关型外力''如何被自然处理。
+\end{lizi}
+
+\subsection*{建议配图}
+\begin{itemize}
+    \item 一个受迫振动示意图，标出外力从 $t=a$ 开始。
+    \item 一个解题流程框图：微分方程 $\to$ 拉普拉斯域 $\to$ 代数求解 $\to$ 逆变换。
+\end{itemize}
+
+\begin{tishi}[本节应强化的判断思路]
+当题目同时具有下面几类特征时，学生应优先想到拉普拉斯变换：
+\begin{itemize}
+    \item 给出了初始条件；
+    \item 方程是线性的；
+    \item 右端是指数函数、三角函数、阶跃函数或分段函数；
+    \item 若直接用待定系数法或常规积分法会显得比较繁琐。
+\end{itemize}
+\end{tishi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要在变换导数时漏掉初始条件项。
+    \item 不要在得到 $Y(s)$ 后急着逆变换，往往先做部分分式会更清楚。
+    \item 不要在含有阶跃输入时忘记延迟性质。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：求解几个简单的二阶初值问题。
+    \item 综合题：含非齐次项的常系数方程初值问题。
+    \item 挑战题：含阶跃外力或分段输入的受迫振动问题。
+\end{itemize}
+
+\section{第七节：半轴问题与后续章节预告}
+
+\begin{wulibj}[本节要解决的问题]
+前面几节已经把拉普拉斯变换作为``常微分方程初值问题工具''讲清楚了，但本章还需要稍微向后看一步：它在数理方程里最自然的舞台之一，是半轴上的时间演化问题。本节的任务不是系统展开积分变换法，而是给学生一个清楚预告。
+\end{wulibj}
+
+\subsection*{教学目标}
+\begin{itemize}
+    \item 让学生知道拉普拉斯变换在偏微分方程中的典型使用场景。
+    \item 让学生建立``对时间作拉普拉斯变换''这一基本想法。
+    \item 为第十三章积分变换法做好过渡。
+\end{itemize}
+
+\subsection*{建议小节安排}
+\begin{enumerate}
+    \item 半无界热传导问题的物理背景
+    \item 对时间变量作拉普拉斯变换
+    \item 偏微分方程如何变成关于空间变量的常微分方程
+    \item 为什么本章只做预告而不全面展开
+\end{enumerate}
+
+\subsection*{建议例题}
+\begin{lizi}{半无界热传导问题的预告性示例}{}
+考虑
+\[
+    \begin{cases}
+        u_t=a^2u_{xx}, & x>0,\ t>0,\\
+        u(x,0)=0, & x>0,\\
+        u(0,t)=u_0, & t>0,
+    \end{cases}
+\]
+对 $t$ 作拉普拉斯变换，说明方程怎样变成
+\[
+    a^2U_{xx}-sU=0.
+\]
+这里重点是方法结构，而不是把整道题的每一步都在本章写到底。
+\end{lizi}
+
+\subsection*{本节必须讲清的核心点}
+\begin{itemize}
+    \item 当时间方向存在初值条件时，对时间作拉普拉斯变换尤其自然。
+    \item 变换以后，时间导数被代数化，原偏微分方程常会降成常微分方程。
+    \item 本节只是方法预告，系统性的 PDE 应用应留到第十三章，以免重复。
+\end{itemize}
+
+\subsection*{建议图示}
+\begin{itemize}
+    \item 半无界细杆示意图，标出 $x=0$ 边界突然升温、热量向右扩散。
+    \item 一个简洁流程图：PDE $\to$ 对时间作拉普拉斯变换 $\to$ ODE。
+\end{itemize}
+
+\begin{tishi}[与后续章节的衔接]
+这一节写完后，应主动告诉学生：
+\begin{itemize}
+    \item 第十章开始，我们会系统讨论数学物理方程本身；
+    \item 第十三章则会重新回到积分变换法，把傅里叶变换和拉普拉斯变换真正用于 PDE 的求解。
+\end{itemize}
+\end{tishi}
+
+\begin{jinshi}[本节易错点]
+\begin{enumerate}
+    \item 不要在本章把 PDE 的系统应用讲得过重，否则会和第十三章重复。
+    \item 不要让学生以为任何 PDE 都该优先对时间作拉普拉斯变换；方法选择还要看区域与边界条件。
+\end{enumerate}
+\end{jinshi}
+
+\subsection*{本节习题建议}
+\begin{itemize}
+    \item 基础题：对给定的半轴热方程写出拉普拉斯变换后的方程。
+    \item 综合题：说明为什么整轴热方程更常用傅里叶变换，而半轴热方程更常出现拉普拉斯变换。
+    \item 挑战题：尝试把一个简单边界激励问题写成适合变换的形式。
+\end{itemize}
+
+\section{第八节：本章小结的写法建议}
+
+\begin{wulibj}[本节角色]
+这一节不是正文内容，而是提醒后续写作时，本章小结应当怎样写才真正帮助学生复盘。小结的任务，不是把公式再抄一遍，而是帮助学生判断：什么时候想到拉普拉斯变换，为什么它能处理初值问题，它和傅里叶变换各自更适合什么场景。
+\end{wulibj}
+
+\subsection*{建议包含的内容}
+\begin{enumerate}
+    \item 一句话回看本章：拉普拉斯变换是处理因果过程和初值问题的重要工具。
+    \item 本章主线图：
+    \[
+        \begin{aligned}
+            &\text{半轴上的物理过程}
+            \Longrightarrow
+            \text{拉普拉斯变换}
+            \Longrightarrow
+            \text{导数代数化并带入初值} \\
+            &\Longrightarrow
+            \text{求解代数方程}
+            \Longrightarrow
+            \text{逆变换回到时域}
+        \end{aligned}
+    \]
+    \item 本章主要结论：定义、存在条件、导数性质、延迟性质、卷积定理、逆变换方法。
+    \item 做题判断思路：看到初值、看到半轴、看到阶跃输入时，优先想到拉普拉斯变换。
+    \item 易错点提醒：收敛域不能漏、阶跃函数不能忘、逆变换前先看极点结构。
+    \item 与前后内容的联系：与傅里叶变换的分工、与第十三章的关系。
+\end{enumerate}
+
+\begin{tishi}[建议突出的一句话]
+第八章帮助我们理解``连续频谱''，第九章帮助我们处理``初值问题''；前者更偏向整轴与频域分析，后者更偏向半轴与因果演化。
+\end{tishi}
+
+\section{第九节：习题配置建议}
+
+\begin{wulibj}[习题的角色]
+本章习题应体现从``会算''到``会判断''再到``会应用''的递进，而不是全部变成机械查表练习。更理想的结构是：基础题训练基本变换和收敛域，综合题训练性质和逆变换，提高题训练初值问题和延迟输入。
+\end{wulibj}
+
+\subsection*{基础题建议}
+\begin{itemize}
+    \item 求若干常见函数的拉普拉斯变换并写出收敛域。
+    \item 求若干简单有理函数的逆变换。
+    \item 把分段函数改写成单位阶跃函数形式。
+\end{itemize}
+
+\subsection*{综合题建议}
+\begin{itemize}
+    \item 利用微分性质或积分性质求变换。
+    \item 利用延迟性质处理延迟输入。
+    \item 利用部分分式或卷积定理求逆变换。
+\end{itemize}
+
+\subsection*{挑战题建议}
+\begin{itemize}
+    \item 求解含阶跃外力的常微分方程初值问题。
+    \item 比较同一问题用常规方法和拉普拉斯变换法的优劣。
+    \item 写出一个半轴热传导问题的变换后方程，并说明下一步如何处理。
+\end{itemize}
+
+\begin{jinshi}[习题配置上的提醒]
+\begin{enumerate}
+    \item 不要让习题全部退化成查表训练。
+    \item 不要缺少带物理背景的题，否则学生会感觉本章只是纯技巧。
+    \item 不要把 PDE 的重应用过多塞进本章习题，以免与第十三章争抢重点。
+\end{enumerate}
+\end{jinshi}
