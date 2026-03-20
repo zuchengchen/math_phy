@@ -1223,29 +1223,20 @@ x+\mathrm{i}y
 \centering
 \resizebox{0.97\textwidth}{!}{%
 \begin{tikzpicture}[
-    node distance=1.05cm and 1.30cm,
+    node distance=1.05cm and 1.55cm,
     rep/.style={
         rectangle,
         rounded corners=5pt,
         line width=0.85pt,
         minimum height=2.2cm,
-        text width=3.35cm,
+        text width=3.25cm,
         align=center,
         font=\small
     },
     algebra/.style={rep, draw=mainblue!82!black, top color=mainblue!10, bottom color=white},
     trig/.style={rep, draw=defteal!82!black, top color=defteal!11, bottom color=white},
     expo/.style={rep, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
-    link/.style={{Stealth[length=2.5mm,width=1.7mm]}-{Stealth[length=2.5mm,width=1.7mm]}, line width=0.9pt, draw=black!62},
-    note/.style={
-        rounded corners=3pt,
-        fill=white,
-        inner xsep=2.4pt,
-        inner ysep=1.4pt,
-        font=\scriptsize,
-        text=black!58,
-        align=center
-    }
+    link/.style={{Stealth[length=2.5mm,width=1.7mm]}-{Stealth[length=2.5mm,width=1.7mm]}, line width=0.9pt, draw=black!62}
 ]
 \node[algebra] (A) {\textbf{代数形式}\\[0.35em]
     $z=x+\mathrm{i}y$\\[0.45em]
@@ -1263,16 +1254,17 @@ x+\mathrm{i}y
     乘除、乘幂、开方\\
     与相位问题};
 
-\coordinate (ATmid) at ($(A.east)!0.5!(T.west)$);
-\coordinate (TEmid) at ($(T.east)!0.5!(E.west)$);
-
-\node[note] (ATnote) at ($(ATmid)+(0,0.92cm)$) {$x=r\cos\theta$\\$y=r\sin\theta$};
-\node[note, text width=3.85cm] (TEnote) at ($(TEmid)+(0,0.95cm)$) {欧拉公式\\$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$};
-
 \draw[link] (A.east) -- (T.west);
 \draw[link] (T.east) -- (E.west);
 \end{tikzpicture}%
 }
+\par\medskip
+\begin{minipage}{0.90\textwidth}
+\centering
+\footnotesize
+代数形式 $\leftrightarrow$ 三角形式：$x=r\cos\theta,\ y=r\sin\theta$\\[0.3em]
+三角形式 $\leftrightarrow$ 指数形式：$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$
+\end{minipage}
 \caption{复数的三种常用表示}
 \label{fig:three-representations}
 \end{figure}
