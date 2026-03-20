@@ -916,7 +916,7 @@
 \end{dingli}
 
 \begin{proof}
-只证明第一条。由定义，
+先证明第一条。由定义，
 \begin{align}
     \mathcal{F}[f*g](\omega)
     &=
@@ -962,7 +962,50 @@
     &=
     \hat{f}(\omega)\hat{g}(\omega).
 \end{align}
-证毕。
+
+再证明第二条。设
+\begin{equation}
+    h(x)=f(x)g(x).
+\end{equation}
+利用逆变换把 $g(x)$ 写成
+\begin{equation}
+    g(x)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}\hat{g}(\eta)\mathrm{e}^{\mathrm{i}\eta x}\,\mathrm{d}\eta.
+\end{equation}
+
+于是
+\begin{align}
+    \mathcal{F}[f(x)g(x)](\omega)
+    &=
+    \int_{-\infty}^{+\infty}
+    f(x)g(x)\mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    f(x)
+    \left[
+        \int_{-\infty}^{+\infty}
+        \hat{g}(\eta)\mathrm{e}^{\mathrm{i}\eta x}\,\mathrm{d}\eta
+    \right]
+    \mathrm{e}^{-\mathrm{i}\omega x}\,\mathrm{d}x \\
+    &=
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \hat{g}(\eta)
+    \left[
+        \int_{-\infty}^{+\infty}
+        f(x)\mathrm{e}^{-\mathrm{i}(\omega-\eta)x}\,\mathrm{d}x
+    \right]
+    \mathrm{d}\eta \\
+    &=
+    \frac{1}{2\pi}
+    \int_{-\infty}^{+\infty}
+    \hat{g}(\eta)\hat{f}(\omega-\eta)\,\mathrm{d}\eta.
+\end{align}
+
+把卷积变量改写成标准形式，就得到
+\begin{equation}
+    \mathcal{F}[f(x)g(x)](\omega)=\frac{1}{2\pi}(\hat{f}*\hat{g})(\omega).
+\end{equation}
 \end{proof}
 
 \begin{lizi}{}{}
@@ -1332,6 +1375,66 @@
     \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi.
 \end{equation}
 \end{dingli}
+
+\begin{proof}
+对方程
+\begin{equation}
+    u_t=a^2u_{xx}
+\end{equation}
+关于空间变量 $x$ 作傅里叶变换，记
+\begin{equation}
+    \hat{u}(\omega,t)=\mathcal{F}[u(x,t)].
+\end{equation}
+由微分性质，
+\begin{equation}
+    \mathcal{F}[u_t]=\frac{\partial \hat{u}}{\partial t},
+    \qquad
+    \mathcal{F}[u_{xx}]=-\omega^2\hat{u}.
+\end{equation}
+因此原方程化为
+\begin{equation}
+    \frac{\partial \hat{u}}{\partial t}=-a^2\omega^2\hat{u}.
+\end{equation}
+
+这是关于 $t$ 的一阶常微分方程，其解为
+\begin{equation}
+    \hat{u}(\omega,t)=C(\omega)\mathrm{e}^{-a^2\omega^2 t}.
+\end{equation}
+由初始条件 $u(x,0)=\varphi(x)$ 得
+\begin{equation}
+    \hat{u}(\omega,0)=\hat{\varphi}(\omega),
+\end{equation}
+故
+\begin{equation}
+    \hat{u}(\omega,t)=\hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}.
+\end{equation}
+
+再作逆变换：
+\begin{equation}
+    u(x,t)=\frac{1}{2\pi}\int_{-\infty}^{+\infty}
+    \hat{\varphi}(\omega)\mathrm{e}^{-a^2\omega^2 t}\mathrm{e}^{\mathrm{i}\omega x}\,\mathrm{d}\omega.
+\end{equation}
+由卷积定理，
+\begin{equation}
+    u(x,t)=\varphi(x)*\mathcal{F}^{-1}\!\left[\mathrm{e}^{-a^2\omega^2 t}\right].
+\end{equation}
+
+而根据高斯函数的傅里叶变换结果，
+\begin{equation}
+    \mathcal{F}^{-1}\!\left[\mathrm{e}^{-a^2\omega^2 t}\right]
+    =
+    \frac{1}{2a\sqrt{\pi t}}\mathrm{e}^{-x^2/(4a^2 t)}.
+\end{equation}
+因此
+\begin{equation}
+    u(x,t)
+    =
+    \frac{1}{2a\sqrt{\pi t}}
+    \int_{-\infty}^{+\infty}
+    \varphi(\xi)\mathrm{e}^{-(x-\xi)^2/(4a^2t)}\,\mathrm{d}\xi.
+\end{equation}
+证毕。
+\end{proof}
 
 \begin{wulibj}[这个结果的物理解释]
 核函数
