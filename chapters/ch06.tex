@@ -401,6 +401,82 @@ $\operatorname{Log} z$ 只是一个最常用的分支。它方便，但并不神
 支割不是装饰性的几何线，也不是为了让图画好看。它真正的作用，是把原来允许``绕支点转一圈''的区域切开，使剩下的区域不再出现这类绕行，从而给单值解析支腾出空间。
 \end{tishi}
 
+\begin{lizi}{同一个对数函数在两个区域上的不同解析支}{}
+设
+\[
+    D_1=\mathbb{C}\setminus(-\infty,0],
+    \qquad
+    D_2=\mathbb{C}\setminus[0,+\infty).
+\]
+分别在这两个区域上为 $\log z$ 写出一个解析支，并比较它们在公共点 $z=-\mathrm{i}$ 处的取值。
+
+\begin{jie}
+在区域
+\[
+    D_1=\mathbb{C}\setminus(-\infty,0]
+\]
+上，可以取主值支
+\[
+    L_1(z)=\ln|z|+\mathrm{i}\operatorname{Arg} z,
+    \qquad -\pi<\operatorname{Arg} z<\pi.
+\]
+这是沿负实轴作支割得到的解析支。
+
+在区域
+\[
+    D_2=\mathbb{C}\setminus[0,+\infty)
+\]
+上，更自然的做法是沿正实轴作支割，并把辐角取在
+\[
+    0<\arg_+ z<2\pi
+\]
+内。于是可取另一条解析支
+\[
+    L_2(z)=\ln|z|+\mathrm{i}\arg_+ z.
+\]
+
+现在比较它们在公共点 $z=-\mathrm{i}$ 处的值。因为
+\[
+    |-\mathrm{i}|=1,
+\]
+所以两条支的实部都等于
+\[
+    \ln 1=0.
+\]
+
+但在 $D_1$ 中，$-\mathrm{i}$ 的辐角取为
+\[
+    -\frac{\pi}{2},
+\]
+因此
+\[
+    L_1(-\mathrm{i})=-\frac{\pi}{2}\mathrm{i}.
+\]
+
+而在 $D_2$ 中，为了避开正实轴，连续辐角要取在 $(0,2\pi)$ 内，所以
+\[
+    \arg_+(-\mathrm{i})=\frac{3\pi}{2}.
+\]
+于是
+\[
+    L_2(-\mathrm{i})=\frac{3\pi}{2}\mathrm{i}.
+\]
+
+所以同一个点在不同解析支下的函数值分别是
+\[
+    L_1(-\mathrm{i})=-\frac{\pi}{2}\mathrm{i},
+    \qquad
+    L_2(-\mathrm{i})=\frac{3\pi}{2}\mathrm{i}.
+\]
+
+它们相差
+\[
+    2\pi\mathrm{i}.
+\]
+这个例子说明：\textbf{所谓``选支''，并不是给原来已经单值的函数换一种写法，而是在不同区域上真正得到不同的单值解析函数。}
+\end{jie}
+\end{lizi}
+
 \subsection{单连通区域上可以怎样得到对数解析支}
 
 下面这个结论，是整章最重要的结构性结论之一。它把第二章的``单连通区域''和第三章的``原函数''重新接了回来。
@@ -796,6 +872,52 @@ $\operatorname{Log} z$ 只是一个最常用的分支。它方便，但并不神
     -\sqrt{z}.
 \]
 
+\begin{lizi}{支点和极点为什么不是一回事}{}
+比较
+\[
+    \frac{1}{z}
+\]
+与
+\[
+    \sqrt{z}
+\]
+在 $z=0$ 附近的表现，说明为什么前者在 $0$ 是极点而不是支点，后者在 $0$ 是支点而不是极点。
+
+\begin{jie}
+先看
+\[
+    \frac{1}{z}.
+\]
+当 $z$ 沿着绕原点的闭路转一周后，虽然点本身回到了原处，但函数值只是随路径连续变化后又回到原值，并不会跳到另一支。更具体地说，若
+\[
+    z=\mathrm{e}^{\mathrm{i}t},\qquad 0\le t\le 2\pi,
+\]
+则
+\[
+    \frac{1}{z}=\mathrm{e}^{-\mathrm{i}t}.
+\]
+当 $t$ 从 $0$ 变到 $2\pi$ 时，函数值也回到
+\[
+    1.
+\]
+所以它虽然在 $0$ 发散，但没有``绕一圈换值''的现象，因此 $0$ 是极点，不是支点。
+
+再看
+\[
+    \sqrt{z}.
+\]
+若沿同样的闭路绕原点一圈，辐角会增加 $2\pi$，于是平方根的辐角增加 $\pi$，函数值变成原来的相反数。也就是说，绕一圈以后它不会回到原来的那一个值，而是跳到另一支上去。因此 $0$ 是支点，而不是普通的极点。
+
+所以两者最本质的差别在于：
+\begin{itemize}
+    \item 极点关心的是函数值在某点附近会不会发散；
+    \item 支点关心的是沿闭路绕行以后会不会换支。
+\end{itemize}
+
+这两个概念都和点 $z=0$ 有关，但它们描述的是完全不同的现象。
+\end{jie}
+\end{lizi}
+
 \begin{lizi}{为什么 $\sqrt{z}$ 绕原点一圈后会变号}{}
 说明：在主值支中，若
 \[
@@ -827,6 +949,32 @@ $\operatorname{Log} z$ 只是一个最常用的分支。它方便，但并不神
     \item 对 $\log z$ 来说，每绕原点一圈，函数值就多加一个 $2\pi\mathrm{i}$，所以它像是沿着一层层竖直平移的叶面不断向上或向下跳转。
     \item 对 $\sqrt{z}$ 来说，只有两层：第一层取一个值，第二层取它的相反数；绕一圈就跳到另一层，再绕一圈才回到原层。
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \begin{scope}
+        \node[draw=figblue, rounded corners=4pt, fill=figblue!8, minimum width=2.4cm, minimum height=0.75cm] (L1) at (0,2.2) {$\log z$ 的一层};
+        \node[draw=figblue, rounded corners=4pt, fill=figblue!8, minimum width=2.4cm, minimum height=0.75cm] (L2) at (0,0.9) {$\log z+2\pi\mathrm{i}$};
+        \node[draw=figblue, rounded corners=4pt, fill=figblue!8, minimum width=2.4cm, minimum height=0.75cm] (L3) at (0,-0.4) {$\log z-2\pi\mathrm{i}$};
+        \draw[->, orange!90!black, line width=0.9pt] (1.45,1.85) .. controls (2.1,1.55) and (2.1,1.25) .. (1.45,0.95);
+        \draw[->, orange!90!black, line width=0.9pt] (1.45,0.55) .. controls (2.1,0.25) and (2.1,-0.05) .. (1.45,-0.35);
+        \node[align=center] at (0,-1.45) {绕原点一圈\\多出 $2\pi\mathrm{i}$};
+    \end{scope}
+
+    \begin{scope}[xshift=7.2cm]
+        \node[draw=figteal, rounded corners=4pt, fill=figteal!10, minimum width=2.4cm, minimum height=0.8cm] (S1) at (0,1.5) {$\sqrt{z}$};
+        \node[draw=figteal, rounded corners=4pt, fill=figteal!10, minimum width=2.4cm, minimum height=0.8cm] (S2) at (0,-0.1) {$-\sqrt{z}$};
+        \draw[->, orange!90!black, line width=0.9pt] (1.45,1.15) .. controls (2.2,0.8) and (2.2,0.55) .. (1.45,0.25);
+        \draw[->, orange!90!black, line width=0.9pt] (-1.45,0.25) .. controls (-2.2,0.55) and (-2.2,0.8) .. (-1.45,1.15);
+        \node[align=center] at (0,-1.2) {绕一圈换支\\再绕一圈回原支};
+    \end{scope}
+\end{tikzpicture}
+\caption{多叶直观：对数函数像是层层上移，平方根则在两层之间来回切换}
+\label{fig:ch06-multisheet-intuition}
+\end{figure}
+
+图 \ref{fig:ch06-multisheet-intuition} 不必当成严格的几何对象去背，但它很适合帮助我们形成稳定印象：对 $\log z$ 来说，绕一圈就会爬到另一层；对 $\sqrt{z}$ 来说，绕一圈只是从一层跳到另一层。
 
 \begin{tishi}[这里为什么只讲直观，不正式讲黎曼面]
 因为本讲义的重点是帮助学生处理具体函数与具体积分，而不是把抽象几何理论提前铺得太重。你现在只需要先把``多叶''理解成帮助自己看清换支现象的一种想象工具，这已经足够支撑后面的积分应用了。
@@ -896,6 +1044,20 @@ $\operatorname{Log} z$ 只是一个最常用的分支。它方便，但并不神
 \end{figure}
 
 \subsection{典型例题：一个 Beta 型积分}
+
+\begin{tishi}[为什么这里故意不用主值支]
+这一类积分的积分区间就是正实轴。如果还继续沿用主值支
+\[
+    -\pi<\operatorname{Arg} z<\pi,
+\]
+那支割会落在负实轴上，围道经过正实轴上下两岸时，函数值反而不会显出最有用的差别。对本题来说，更自然的做法是把\textbf{正实轴本身}作为支割，并取
+\[
+    0<\arg z<2\pi.
+\]
+这样围道沿着正实轴上下两岸走时，恰好能把两侧函数值的差别直接读出来。
+
+这也是本章最想让你建立的习惯：\textbf{选支不是固定套路，而是要为路径设计服务。}
+\end{tishi}
 
 \begin{lizi}{钥匙孔围道的标准用法}{}
 设
