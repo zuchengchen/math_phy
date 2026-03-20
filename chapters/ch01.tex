@@ -1223,7 +1223,7 @@ x+\mathrm{i}y
 \centering
 \resizebox{0.97\textwidth}{!}{%
 \begin{tikzpicture}[
-    node distance=1.05cm and 1.25cm,
+    node distance=1.05cm and 1.65cm,
     rep/.style={
         rectangle,
         rounded corners=5pt,
@@ -1237,7 +1237,7 @@ x+\mathrm{i}y
     trig/.style={rep, draw=defteal!82!black, top color=defteal!11, bottom color=white},
     expo/.style={rep, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
     link/.style={-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!62},
-    note/.style={font=\footnotesize, text=black!58, align=center}
+    note/.style={font=\scriptsize, text=black!58, align=center, fill=white, inner sep=1.4pt}
 ]
 \node[algebra] (A) {\textbf{代数形式}\\[0.35em]
     $z=x+\mathrm{i}y$\\[0.45em]
@@ -1255,11 +1255,19 @@ x+\mathrm{i}y
     乘除、乘幂、开方\\
     与相位问题};
 
-\coordinate (Aup) at ($(A.north)+(0,0.95cm)$);
-\coordinate (Eup) at ($(E.north)+(0,0.95cm)$);
+\coordinate (ATleft) at ($(A.north east)+(0,0.34cm)$);
+\coordinate (ATright) at ($(T.north west)+(0,0.34cm)$);
+\coordinate (TEleft) at ($(T.north east)+(0,0.34cm)$);
+\coordinate (TEright) at ($(E.north west)+(0,0.34cm)$);
+\coordinate (Aup) at ($(A.north)+(0,1.15cm)$);
+\coordinate (Eup) at ($(E.north)+(0,1.15cm)$);
 
-\draw[link] (A) -- (T) node[midway, above=2pt, note] {$x=r\cos\theta,\ y=r\sin\theta$};
-\draw[link] (T) -- (E) node[midway, above=2pt, note] {欧拉公式};
+\draw[link] (A.north east) -- (ATleft)
+    -- node[midway, above=2pt, note] {$x=r\cos\theta$\\$y=r\sin\theta$} (ATright)
+    -- (T.north west);
+\draw[link] (T.north east) -- (TEleft)
+    -- node[midway, above=2pt, note] {欧拉公式\\$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$} (TEright)
+    -- (E.north west);
 \draw[link] (E.north) -- (Eup) -- node[midway, above=3pt, note] {必要时再拆回实部与虚部} (Aup) -- (A.north);
 \end{tikzpicture}%
 }
