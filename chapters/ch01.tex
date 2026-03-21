@@ -1177,7 +1177,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
             -{Stealth[length=2.0mm,width=1.4mm]}, domain=0:395, samples=120, smooth,
             variable=\t]
             plot ({(0.36+0.0010*\t)*cos(\t)},{(0.36+0.0010*\t)*sin(\t)});
-        \node[mp label, text=figred] at (-0.66,0.92) {$\theta+2\pi$};
+        \node[mp label, text=figred] at (1.5,0.22) {$\theta+2\pi$};
     \end{scope}
 
     \begin{scope}[xshift=8.3cm]
@@ -1189,16 +1189,13 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
         \node[mp label, above right] at (Z3) {$z$};
         \node[mp label, below left] at (0,0) {$O$};
         \draw[figred, line width=0.88pt,
-            -{Stealth[length=2.0mm,width=1.4mm]}] (0.74,0)
-            arc[start angle=0,end angle=-325,radius=0.74];
-        \node[mp label, text=figred] at (0.84,-0.64) {$\theta-2\pi$};
+            -{Stealth[length=2.0mm,width=1.4mm]}] (0.6,0)
+            arc[start angle=0,end angle=-325,radius=0.6];
+        \node[mp label, text=figred] at (1.2,+0.24) {$\theta-2\pi$};
     \end{scope}
-
-    \node[mp small, text=black!52] at (5.0,-2.05)
-        {三幅图的终点相同，只是绕行圈数不同};
 \end{tikzpicture}%
 }
-\caption{同一复数的多值辐角}
+\caption{同一复数的多值辐角。三幅图的终点相同，只是绕行圈数不同。}
 \label{fig:arg-multivalued}
 \end{figure}
 
