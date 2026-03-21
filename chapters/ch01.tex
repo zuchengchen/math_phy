@@ -595,7 +595,7 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
         {{\bfseries 19 世纪}\\高斯、柯西、黎曼\\推动理论成熟与应用};
 \end{tikzpicture}%
 }
-\caption{复数发展的历史线索}
+\caption{复数发展的历史线索（示意，不按时间比例）}
 \label{fig:complex-history-timeline}
 \end{figure}
 
@@ -2039,12 +2039,12 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
     \draw[mp axis] (-0.7,0) -- (4.9,0) node[mp label, right] {$\operatorname{Re}z$};
     \draw[mp axis] (0,-0.7) -- (0,4.4) node[mp label, above] {$\operatorname{Im}z$};
 
-    \coordinate (Q) at (30:2.1);
-    \coordinate (Z2) at (42:1.55);
-    \coordinate (Z1) at (72:3.1);
+    \coordinate (Q) at (24:2.0);
+    \coordinate (Z2) at (50:1.6);
+    \coordinate (Z1) at (74:3.2);
 
-    \draw[figpurple!45, line width=0.72pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (2.1);
-    \draw[figblue!45, line width=0.76pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (3.1);
+    \draw[figpurple!45, line width=0.72pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (2.0);
+    \draw[figblue!45, line width=0.76pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (3.2);
     \draw[mp vector c] (0,0) -- (Q);
     \draw[mp vector b dashed] (0,0) -- (Z2);
     \draw[mp vector] (0,0) -- (Z1);
@@ -2053,24 +2053,24 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
     \node[mp point b] at (Z2) {};
     \node[mp point] at (Z1) {};
 
-    \fill[figbrownfill] (0,0) -- (0.65,0) arc[start angle=0,end angle=30,radius=0.65] -- cycle;
-    \draw[mp angle] (0.65,0) arc[start angle=0,end angle=30,radius=0.65];
-    \node[mp label, text=figbrown] at (0.98,0.22) {$\theta_1-\theta_2$};
+    \fill[figbrownfill] (0,0) -- (0.62,0) arc[start angle=0,end angle=24,radius=0.62] -- cycle;
+    \draw[mp angle] (0.62,0) arc[start angle=0,end angle=24,radius=0.62];
+    \node[mp label, text=figbrown, fill=white, inner sep=1pt] at (1.02,0.2) {$\theta_1-\theta_2$};
 
-    \fill[figgold!16] (0,0) -- (1.0,0) arc[start angle=0,end angle=42,radius=1.0] -- cycle;
-    \draw[mp angle] (1.0,0) arc[start angle=0,end angle=42,radius=1.0];
-    \node[mp label, text=figbrown] at (1.36,0.56) {$\theta_2$};
+    \fill[figgold!16] (0,0) -- (1.02,0) arc[start angle=0,end angle=50,radius=1.02] -- cycle;
+    \draw[mp angle] (1.02,0) arc[start angle=0,end angle=50,radius=1.02];
+    \node[mp label, text=figbrown, fill=white, inner sep=1pt] at (1.42,0.74) {$\theta_2$};
 
-    \draw[mp angle] (1.35,0) arc[start angle=0,end angle=72,radius=1.35];
-    \node[mp label, text=figbrown] at (1.08,1.18) {$\theta_1$};
+    \draw[mp angle] (1.42,0) arc[start angle=0,end angle=74,radius=1.42];
+    \node[mp label, text=figbrown, fill=white, inner sep=1pt] at (1.02,1.32) {$\theta_1$};
 
-    \node[mp label, right, text=figpurple] at (Q) {$\dfrac{z_1}{z_2}$};
-    \node[mp label, right, text=figteal] at (Z2) {$z_2$};
+    \node[mp label, below right, text=figpurple, fill=white, inner sep=1pt] at (Q) {$\dfrac{z_1}{z_2}$};
+    \node[mp label, above right, text=figteal, fill=white, inner sep=1pt] at (Z2) {$z_2$};
     \node[mp label, above left, text=figblue] at (Z1) {$z_1$};
 
-    \node[mp label, text=figpurple] at (145:1.55) {$\left|\dfrac{z_1}{z_2}\right|=\dfrac{r_1}{r_2}$};
-    \node[mp label, text=figteal] at (20:1.1) {$|z_2|=r_2$};
-    \node[mp label, text=figblue] at (104:2.9) {$|z_1|=r_1$};
+    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at (152:1.42) {$\left|\dfrac{z_1}{z_2}\right|=\dfrac{r_1}{r_2}$};
+    \node[mp label, text=figteal, fill=white, inner sep=1pt] at (32:1.18) {$|z_2|=r_2$};
+    \node[mp label, text=figblue, fill=white, inner sep=1pt] at (104:3.0) {$|z_1|=r_1$};
     \node[mp label, above left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数除法的几何意义}
@@ -3035,10 +3035,10 @@ F(w)=f\!\left(\frac{1}{w}\right),
         \draw[mp axis] (0,0) -- (4.95,0) node[mp label, right] {$t$};
         \draw[mp axis] (0,-2.35) -- (0,2.35) node[mp label, above] {$x$};
         \draw[figblue, line width=1.05pt, domain=0:4.4, smooth, variable=\t]
-            plot ({\t},{2*cos(45-55*\t)});
-        \node[mp point d] at (1.4,{2*cos(45-55*1.4)}) {};
-        \draw[mp helper] (1.4,0) -- (1.4,{2*cos(45-55*1.4)});
-        \node[mp label, above right, text=figblue] at (2.62,1.48) {$x(t)=A\cos(\omega t+\varphi)$};
+            plot ({\t},{2*cos(45+55*\t)});
+        \node[mp point d] at (1.4,{2*cos(45+55*1.4)}) {};
+        \draw[mp helper] (1.4,0) -- (1.4,{2*cos(45+55*1.4)});
+        \node[mp label, above right, text=figblue] at (2.35,-1.68) {$x(t)=A\cos(\omega t+\varphi)$};
     \end{scope}
 \end{tikzpicture}%
 }
@@ -3279,7 +3279,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
             xlabel={$\phi$},
             ylabel={$|\psi|^2/A^2$},
             ylabel style={font=\small},
-            title={(b) 归一化概率密度},
+            title={(b) 相对干涉强度},
             title style={font=\small, text=black!60, yshift=-0.35em},
             every axis/.append style={font=\small},
             tick label style={font=\footnotesize},
@@ -3432,17 +3432,17 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \node[branch, below left=1.35cm and 1.05cm of d] (e) {乘法、除法\\与旋转伸缩};
 \node[branch, below right=1.35cm and 1.05cm of d] (f) {乘方、开方\\与单位根};
 
-\node[outcome, below=2.62cm of d] (g) {扩充复平面\\与复球面};
-\node[outcome, below=1.28cm of g] (h) {物理中的振动、\\相位与叠加};
+    \node[outcome, below left=2.62cm and 1.95cm of d] (h) {物理中的振动、\\相位与叠加};
+    \node[outcome, below right=2.62cm and 1.95cm of d] (g) {扩充复平面\\与复球面};
 
-\draw[arrow] (a) -- (b);
-\draw[arrow] (b) -- (c);
-\draw[arrow] (c.south) |- (d.east);
-\draw[arrow] (d) -- (e);
-\draw[arrow] (d) -- (f);
-\draw[arrow] (e.south) |- (g.west);
-\draw[arrow] (f.south) |- (g.east);
-\draw[arrow] (g) -- (h);
+    \draw[arrow] (a) -- (b);
+    \draw[arrow] (b) -- (c);
+    \draw[arrow] (c.south) |- (d.east);
+    \draw[arrow] (d) -- (e);
+    \draw[arrow] (d) -- (f);
+    \draw[arrow] (d.south west) |- (h.north);
+    \draw[arrow] (e.south) |- (g.west);
+    \draw[arrow] (f.south) |- (g.east);
 \end{tikzpicture}%
 }
 \caption{第一章知识主线}
