@@ -56,7 +56,6 @@
 \centering
 \resizebox{0.94\textwidth}{!}{%
 \begin{tikzpicture}[
-    node distance=0.96cm and 2.05cm,
     stage/.style={
         rectangle,
         rounded corners=4pt,
@@ -64,7 +63,7 @@
         top color=mainblue!11,
         bottom color=white,
         line width=0.8pt,
-        text width=1.35cm,
+        text width=1.55cm,
         minimum height=1.1cm,
         align=center,
         font=\small
@@ -76,24 +75,24 @@
         top color=physicsbrown!11,
         bottom color=white,
         line width=0.9pt,
-        text width=1.45cm,
+        text width=1.68cm,
         minimum height=1.1cm,
         align=center,
         font=\small\bfseries
     },
     arrow/.style={-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.98pt, draw=black!66},
-    why/.style={font=\scriptsize, text=figbrown, align=center, fill=white, inner sep=1pt}
+    why/.style={font=\footnotesize, text=figbrown, align=center, fill=white, inner sep=1pt}
 ]
-\node[stage] (N) {$\mathbb{N}$\\自然数};
-\node[stage, right=of N] (Z) {$\mathbb{Z}$\\整数};
-\node[stage, right=of Z] (Q) {$\mathbb{Q}$\\有理数};
-\node[stage, right=of Q] (R) {$\mathbb{R}$\\实数};
-\node[stage c, right=of R] (C) {$\mathbb{C}$\\复数};
+\node[stage] (N) at (0,0) {$\mathbb{N}$\\自然数};
+\node[stage] (Z) at (2.4,0) {$\mathbb{Z}$\\整数};
+\node[stage] (Q) at (4.8,0) {$\mathbb{Q}$\\有理数};
+\node[stage] (R) at (8.1,0) {$\mathbb{R}$\\实数};
+\node[stage c] (C) at (11.8,0) {$\mathbb{C}$\\复数};
 
-\draw[arrow] (N) -- (Z) node[midway, above=5pt, why] {减法};
-\draw[arrow] (Z) -- (Q) node[midway, above=5pt, why] {除法};
-\draw[arrow] (Q) -- (R) node[midway, above=5pt, why] {极限与\\无理量};
-\draw[arrow] (R) -- (C) node[midway, above=5pt, why] {方程求解、\\旋转与相位};
+\draw[arrow] (N) -- (Z) node[midway, above=4pt, why] {减法};
+\draw[arrow] (Z) -- (Q) node[midway, above=4pt, why] {除法};
+\draw[arrow] (Q) -- (R) node[midway, above=4pt, why] {极限与\\无理量};
+\draw[arrow] (R) -- (C) node[midway, above=4pt, why] {方程求解、\\旋转与相位};
 \end{tikzpicture}%
 }
 \caption{数系扩张的主线}
