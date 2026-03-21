@@ -1167,12 +1167,16 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \node[mp label, text=figbrown] at (1.08,0.34) {$\theta$};
 
     \draw[figred, line width=0.9pt, dash pattern=on 2.2pt off 1.8pt,
-        -{Stealth[length=2.2mm,width=1.5mm]}] (1.22,0)
-        arc[start angle=0,end angle=395,radius=1.22];
-    \node[mp label, text=figred] at (-0.98,1.28) {$\theta+2\pi$};
+        -{Stealth[length=2.2mm,width=1.5mm]}] (1.18,0)
+        arc[start angle=0,end angle=355,radius=1.18];
+    \draw[figred, line width=0.9pt, dash pattern=on 2.2pt off 1.8pt,
+        -{Stealth[length=2.2mm,width=1.5mm]}] (1.42,0)
+        arc[start angle=0,end angle=35,radius=1.42];
+    \node[mp label, text=figred] at (-1.0,1.22) {$2\pi$};
+    \node[mp label, text=figred] at (1.18,0.78) {$+\theta$};
 
     \node[mp small, text=black!46, align=center] at (2.1,-1.35)
-        {终点没有变，\\只是中间多转了一整圈};
+        {终点没有变，\\只是先多转一整圈，\\再转过同样的 $\theta$};
 \end{tikzpicture}
 \caption{同一复数的多值辐角}
 \label{fig:arg-multivalued}
