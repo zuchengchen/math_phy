@@ -1455,14 +1455,12 @@ r=|z|,\qquad \theta\in \arg z.
     \coordinate (X) at (3,0);
     \coordinate (Z) at (3,2);
 
-    \fill[mp area blue] (O) -- (X) -- (Z) -- cycle;
     \draw[mp vector] (O) -- (Z);
     \node[mp point] at (Z) {};
 
     \draw[mp helper] (Z) -- (X);
     \draw[mp helper] (X) -- (O);
 
-    \fill[figbrownfill] (O) -- (0.82,0) arc[start angle=0,end angle=33.69,radius=0.82] -- cycle;
     \draw[mp angle] (0.82,0) arc[start angle=0,end angle=33.69,radius=0.82];
     \node[mp label, text=figbrown] at (1.05,0.35) {$\theta$};
 
