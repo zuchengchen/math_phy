@@ -1167,16 +1167,13 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \node[mp label, text=figbrown] at (1.08,0.34) {$\theta$};
 
     \draw[figred, line width=0.9pt, dash pattern=on 2.2pt off 1.8pt,
-        -{Stealth[length=2.2mm,width=1.5mm]}] (1.18,0)
-        arc[start angle=0,end angle=355,radius=1.18];
-    \draw[figred, line width=0.9pt, dash pattern=on 2.2pt off 1.8pt,
-        -{Stealth[length=2.2mm,width=1.5mm]}] (1.42,0)
-        arc[start angle=0,end angle=35,radius=1.42];
-    \node[mp label, text=figred] at (-1.0,1.22) {$2\pi$};
-    \node[mp label, text=figred] at (1.18,0.78) {$+\theta$};
+        -{Stealth[length=2.2mm,width=1.5mm]}, domain=0:395, samples=120, smooth,
+        variable=\t]
+        plot ({(0.82+0.00215*\t)*cos(\t)},{(0.82+0.00215*\t)*sin(\t)});
+    \node[mp label, text=figred] at (-0.98,1.22) {$\theta+2\pi$};
 
     \node[mp small, text=black!46, align=center] at (2.1,-1.35)
-        {终点没有变，\\只是先多转一整圈，\\再转过同样的 $\theta$};
+        {红色螺旋线只表示\\角度不断增加，\\不表示模发生变化};
 \end{tikzpicture}
 \caption{同一复数的多值辐角}
 \label{fig:arg-multivalued}
