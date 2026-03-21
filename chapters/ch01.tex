@@ -710,6 +710,12 @@ z_1-z_2=(1+2\mathrm{i})-(4+\mathrm{i})=-3+\mathrm{i},
 
 \subsection{共轭复数及其几何意义}
 
+前面我们已经知道，复数写成
+\[
+z=x+\mathrm{i}y
+\]
+时，实部和虚部总是成对出现。很多时候，我们希望找到一个和 $z$ ``配对'' 的复数：它保留同样的实部，却把虚部反向。这样一来，实部、虚部、模平方以及后面会遇到的相位问题，都能写得更整齐。这个和 $z$ 配对的对象，就是共轭复数。
+
 \begin{dingliyi}{共轭复数}{}
 设
 \[
@@ -722,7 +728,7 @@ z=x+\mathrm{i}y,
 为 $z$ 的\textbf{共轭复数}（complex conjugate）。
 \end{dingliyi}
 
-几何上，共轭操作就是把复平面上的点关于实轴作对称。
+从代数上看，共轭做的事情很简单：\textbf{实部不变，虚部变号。} 几何上，它对应把复平面上的点关于实轴作对称。
 
 \begin{figure}[htbp]
 \centering
@@ -752,6 +758,11 @@ z=x+\mathrm{i}y,
     z\bar z=|z|^2,\qquad \overline{\bar z}=z,\qquad |\bar z|=|z|.
 \end{equation}
 此外，
+\begin{equation}
+    z+\bar z=2\operatorname{Re}z,\qquad
+    z-\bar z=2\mathrm{i}\operatorname{Im}z,
+\end{equation}
+从而
 \begin{equation}
     \operatorname{Re}z=\frac{z+\bar z}{2},\qquad
     \operatorname{Im}z=\frac{z-\bar z}{2\mathrm{i}}.
@@ -800,8 +811,133 @@ z-\bar z=(x+\mathrm{i}y)-(x-\mathrm{i}y)=2\mathrm{i}y,
 \]
 \end{proof}
 
+\begin{dingli}{共轭的基本运算规律}{}
+对任意复数 $z_1,z_2$，都有
+\begin{equation}
+    \overline{z_1+z_2}=\bar z_1+\bar z_2,\qquad
+    \overline{z_1-z_2}=\bar z_1-\bar z_2,
+\end{equation}
+\begin{equation}
+    \overline{z_1z_2}=\bar z_1\,\bar z_2.
+\end{equation}
+若 $z_2\neq 0$，则还有
+\begin{equation}
+    \overline{\left(\frac{z_1}{z_2}\right)}=\frac{\bar z_1}{\bar z_2}.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+设
+\[
+z_1=a+\mathrm{i}b,\qquad z_2=c+\mathrm{i}d.
+\]
+则
+\[
+\bar z_1=a-\mathrm{i}b,\qquad \bar z_2=c-\mathrm{i}d.
+\]
+
+加法和减法由定义直接可得。下面重点看乘法：
+\begin{align*}
+    \overline{z_1z_2}
+    &=\overline{(a+\mathrm{i}b)(c+\mathrm{i}d)} \\
+    &=\overline{(ac-bd)+\mathrm{i}(ad+bc)} \\
+    &=(ac-bd)-\mathrm{i}(ad+bc).
+\end{align*}
+另一方面，
+\begin{align*}
+    \bar z_1\,\bar z_2
+    &=(a-\mathrm{i}b)(c-\mathrm{i}d) \\
+    &=(ac-bd)-\mathrm{i}(ad+bc).
+\end{align*}
+因此
+\[
+\overline{z_1z_2}=\bar z_1\,\bar z_2.
+\]
+
+再看商。由前面复数除法的公式，
+\[
+\frac{z_1}{z_2}=\frac{z_1\bar z_2}{|z_2|^2}.
+\]
+因为 $|z_2|^2$ 是实数，所以
+\[
+\overline{\left(\frac{z_1}{z_2}\right)}
+=\frac{\overline{z_1\bar z_2}}{|z_2|^2}
+=\frac{\bar z_1 z_2}{|z_2|^2}
+=\frac{\bar z_1}{\bar z_2}.
+\]
+这就证明了商的共轭公式。
+\end{proof}
+
+\begin{lizi}{用共轭提取信息}{}
+设
+\[
+z_1=1+2\mathrm{i},\qquad z_2=3-\mathrm{i}.
+\]
+求
+\[
+\overline{z_1z_2},\qquad z_1\bar z_1,\qquad \operatorname{Re}z_2,\qquad \operatorname{Im}z_2.
+\]
+
+\begin{jie}
+先写出各自的共轭：
+\[
+\bar z_1=1-2\mathrm{i},\qquad \bar z_2=3+\mathrm{i}.
+\]
+
+由乘法的共轭公式，
+\[
+\overline{z_1z_2}=\bar z_1\,\bar z_2=(1-2\mathrm{i})(3+\mathrm{i})=5-5\mathrm{i}.
+\]
+
+再由
+\[
+z_1\bar z_1=|z_1|^2
+\]
+可得
+\[
+z_1\bar z_1=1^2+2^2=5.
+\]
+
+对于实部和虚部，直接用前面的公式：
+\[
+\operatorname{Re}z_2=\frac{z_2+\bar z_2}{2}
+=\frac{(3-\mathrm{i})+(3+\mathrm{i})}{2}=3,
+\]
+\[
+\operatorname{Im}z_2=\frac{z_2-\bar z_2}{2\mathrm{i}}
+=\frac{(3-\mathrm{i})-(3+\mathrm{i})}{2\mathrm{i}}=-1.
+\]
+
+因此
+\[
+\overline{z_1z_2}=5-5\mathrm{i},\qquad
+z_1\bar z_1=5,\qquad
+\operatorname{Re}z_2=3,\qquad
+\operatorname{Im}z_2=-1.
+\]
+\end{jie}
+\end{lizi}
+
+\begin{tishi}[怎样记住共轭]
+对于只由实数和 $\mathrm{i}$ 组成的表达式，共轭常可理解为：\textbf{把其中的 $\mathrm{i}$ 换成 $-\mathrm{i}$。} 这条记忆法很好用，但要留意它的适用范围。
+
+如果式子里还含有别的复数符号，那么这些符号本身也要一并取共轭。例如
+\[
+\overline{(1+\mathrm{i})w}=(1-\mathrm{i})\bar w,
+\]
+而不是
+\[
+(1-\mathrm{i})w.
+\]
+所以，``把 $\mathrm{i}$ 变号''更适合当作记忆法；真正起作用的，仍然是整个表达式的共轭运算。
+\end{tishi}
+
 \begin{tishi}[为什么共轭经常出现]
-以后做复数除法、求模、处理实部与虚部，以及后面做复积分估值时，共轭都是非常常用的工具。很多看起来复杂的式子，一旦乘上共轭，结构就会立刻清楚起来。
+以后做复数除法、求模平方、提取实部与虚部、证明某个量是实数时，共轭都会反复出现。再往后在振动、傅里叶分析和量子力学里，像
+\[
+\psi\bar\psi
+\]
+这样的式子也会不断出现，因为它们能把带相位的复数表达式重新拉回到实数可观测量上。
 \end{tishi}
 
 \subsection{三角不等式与反三角不等式}
@@ -1564,6 +1700,77 @@ e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}=2\mathrm{i}\sin\theta.
 \]
 于是两边分别除以 $2$ 和 $2\mathrm{i}$，就得到上面的两个公式。
 这说明指数形式并没有丢掉原来三角形式中的信息，它只是把这些信息换成了一种更紧凑的写法。这两个公式以后在傅里叶分析中会频繁出现。
+
+\begin{zhu}{}{}
+到这里我们主要在使用
+\[
+e^{\mathrm{i}\theta}.
+\]
+若把实指数和欧拉公式合在一起，那么对一般复数
+\[
+z=x+\mathrm{i}y
+\]
+也自然可以定义
+\begin{equation}
+    e^z:=e^x(\cos y+\mathrm{i}\sin y).
+\end{equation}
+当 $x=0$ 时，它就退化成前面的 $e^{\mathrm{i}y}$；当 $y=0$ 时，它又回到熟悉的实指数 $e^x$。
+\end{zhu}
+
+\begin{dingli}{复指数与共轭}{}
+若
+\[
+z=x+\mathrm{i}y,
+\]
+则
+\begin{equation}
+    \overline{e^z}=e^{\bar z}.
+\end{equation}
+特别地，对任意实数 $\theta$，都有
+\begin{equation}
+    \overline{e^{\mathrm{i}\theta}}=e^{-\mathrm{i}\theta},\qquad |e^{\mathrm{i}\theta}|=1.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+由定义，
+\[
+e^z=e^x(\cos y+\mathrm{i}\sin y).
+\]
+其中 $e^x,\cos y,\sin y$ 都是实数，因此取共轭可得
+\[
+\overline{e^z}=e^x(\cos y-\mathrm{i}\sin y).
+\]
+另一方面，
+\[
+\bar z=x-\mathrm{i}y,
+\]
+所以
+\[
+e^{\bar z}=e^x\bigl(\cos(-y)+\mathrm{i}\sin(-y)\bigr)
+=e^x(\cos y-\mathrm{i}\sin y).
+\]
+因此
+\[
+\overline{e^z}=e^{\bar z}.
+\]
+
+特别地，当 $z=\mathrm{i}\theta$ 时，就得到
+\[
+\overline{e^{\mathrm{i}\theta}}=e^{-\mathrm{i}\theta}.
+\]
+再由共轭与模的关系，
+\[
+|e^{\mathrm{i}\theta}|^2
+=e^{\mathrm{i}\theta}\,\overline{e^{\mathrm{i}\theta}}
+=e^{\mathrm{i}\theta}e^{-\mathrm{i}\theta}
+=(\cos\theta+\mathrm{i}\sin\theta)(\cos\theta-\mathrm{i}\sin\theta)=1.
+\]
+因此
+\[
+|e^{\mathrm{i}\theta}|=1.
+\]
+\end{proof}
 
 \begin{tishi}[什么时候该换一种表示法]
 学到这里，同一个复数已经有代数形式、三角形式和指数形式三种常用写法。做题时最容易卡住的地方，往往不是不会算，而是不知道该先写成哪一种形式。
@@ -2954,6 +3161,16 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \]
 它表示粒子在位置 $x$ 附近出现的概率密度。也就是说，复数先出现在波函数里，但最后能和实验结果联系起来的，是它的模平方。
 
+在数学记号里，这里常写成
+\[
+\psi\bar\psi;
+\]
+而在很多量子力学教材里，也常记作
+\[
+\psi^*\psi.
+\]
+两种写法说的是同一件事：都要先对波函数取复共轭，再和它本身相乘。
+
 如果你暂时还没有量子力学背景，也可以先把这里想成经典波干涉的复数版：不是直接比较``两个数相加''，而是比较``两个带相位的振幅相加''，因此相位差会真实地影响最后的强弱分布。
 
 一个最简单的波函数形式是
@@ -2978,11 +3195,25 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 &=|\psi_1|^2+|\psi_2|^2+\psi_1\overline{\psi_2}+\overline{\psi_1}\psi_2.
 \end{aligned}
 \]
-最后两项叫作干涉项，它们正是由相位差带来的。把 $\psi_1,\psi_2$ 代入后可以得到
+由于这里 $A$ 是实数，并且前面已经得到
 \[
-|\psi|^2=2A^2\bigl[1+\cos(\phi_1-\phi_2)\bigr].
+\overline{e^{\mathrm{i}\phi}}=e^{-\mathrm{i}\phi},
 \]
-这说明，实验上看到的概率分布会随着相位差 $\phi_1-\phi_2$ 改变：相位差为 $0$ 时增强，相位差为 $\pi$ 时减弱，甚至可以完全相消。
+所以
+\[
+\overline{\psi_1}=Ae^{-\mathrm{i}\phi_1},\qquad
+\overline{\psi_2}=Ae^{-\mathrm{i}\phi_2}.
+\]
+于是
+\[
+\begin{aligned}
+|\psi|^2
+&=A^2+A^2+A^2e^{\mathrm{i}(\phi_1-\phi_2)}+A^2e^{-\mathrm{i}(\phi_1-\phi_2)} \\
+&=2A^2+A^2\left(e^{\mathrm{i}(\phi_1-\phi_2)}+e^{-\mathrm{i}(\phi_1-\phi_2)}\right) \\
+&=2A^2\bigl[1+\cos(\phi_1-\phi_2)\bigr].
+\end{aligned}
+\]
+最后两项叫作干涉项，它们正是由相位差带来的。这说明，实验上看到的概率分布会随着相位差 $\phi_1-\phi_2$ 改变：相位差为 $0$ 时增强，相位差为 $\pi$ 时减弱，甚至可以完全相消。
 
 \begin{zhu}{}{}
 这里还可以顺手看出一个很重要的细节：若把整个波函数同时乘上一个模为 $1$ 的因子 $e^{\mathrm{i}\alpha}$，则模平方 $|\psi|^2$ 不会改变。也就是说，在量子力学里，更直接影响可观测结果的往往不是``绝对相位''，而是不同波之间的\textbf{相对相位}。上面的干涉项里出现的正是 $\phi_1-\phi_2$，而不是由 $\phi_1$ 或 $\phi_2$ 单独决定。
@@ -3095,6 +3326,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \[
 \begin{aligned}
 |1+e^{\mathrm{i}\phi}|^2
+&=(1+e^{\mathrm{i}\phi})\overline{(1+e^{\mathrm{i}\phi})}\\
 &=(1+e^{\mathrm{i}\phi})(1+e^{-\mathrm{i}\phi})\\
 &=2+e^{\mathrm{i}\phi}+e^{-\mathrm{i}\phi}\\
 &=2+2\cos\phi.
@@ -3230,9 +3462,10 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
     \]
     的几何意义是关于实轴对称，而关系
     \[
-        z\bar z=|z|^2
+        z\bar z=|z|^2,\qquad
+        \overline{z_1z_2}=\bar z_1\bar z_2
     \]
-    又把代数运算和几何长度联系了起来。这是以后很多化简和估计的基础。
+    又把代数运算和几何长度联系了起来。后面处理模平方、相位和复指数时，这些关系都会不断出现。
 
     \item \textbf{形式切换：}当问题和角度、旋转、乘法、除法有关时，三角形式和指数形式更自然：
     \[
@@ -3267,6 +3500,11 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
     然后分别比较实部和虚部。
 
     \item \textbf{轨迹与对称：}若题目涉及点、距离、轨迹、对称性，优先把复数放回复平面上理解；这时模、共轭和差的模往往比直接硬算更清楚。
+
+    \item \textbf{模平方与实值量：}若题目要求求模平方、证明某个量是实数，或者出现波函数、相位因子这类表达式，要优先想到共轭。常用入口是
+    \[
+        z+\bar z,\qquad z\bar z,\qquad \overline{e^{\mathrm{i}\theta}}=e^{-\mathrm{i}\theta}.
+    \]
 
     \item \textbf{乘除、乘方、开方：}若题目涉及乘法、除法、乘方、开方，尤其是出现角度、旋转或周期分布时，应优先把复数化成三角形式或指数形式；若还问乘以某个固定复数后的几何效果，就要同时想到``旋转与伸缩''，而不只是做代数展开。
 
