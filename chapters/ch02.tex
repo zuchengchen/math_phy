@@ -179,23 +179,32 @@
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.88]
+\begin{tikzpicture}[scale=0.82]
     \begin{scope}
-        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.45);
-        \draw[figblue, thick, fill=figblue!12] (2.5,0) circle (0.95);
-        \fill[figblue!12] (0,0.22) rectangle (2.5,-0.22);
-        \draw[figblue, thick] (0,0.22) -- (2.5,0.22);
-        \draw[figblue, thick] (0,-0.22) -- (2.5,-0.22);
-        \node[mp label] at (1.25,-2.35) {(a) 连通开集，是区域};
+        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.18);
+        \draw[figblue, thick, fill=figblue!12] (2.05,0) circle (0.78);
+        \fill[figblue!12] (0,0.18) rectangle (2.05,-0.18);
+        \draw[figblue, thick] (0,0.18) -- (2.05,0.18);
+        \draw[figblue, thick] (0,-0.18) -- (2.05,-0.18);
+        \node[mp label, align=center] at (1.02,-2.05) {(a) 开且连通\\是区域};
     \end{scope}
 
-    \begin{scope}[xshift=7cm]
-        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.45);
-        \draw[figblue, thick, fill=figblue!12] (3,0) circle (0.95);
-        \node[mp label] at (1.5,-2.35) {(b) 不连通，不是区域};
+    \begin{scope}[xshift=5.35cm]
+        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.18);
+        \draw[figblue, thick, fill=figblue!12] (2.45,0) circle (0.78);
+        \node[mp label, align=center] at (1.2,-2.05) {(b) 开但不连通\\不是区域};
+    \end{scope}
+
+    \begin{scope}[xshift=10.85cm]
+        \draw[figblue, thick, fill=figblue!12] (0,0) circle (1.15);
+        \coordinate (B) at (1.15,0);
+        \draw[figred, thick] (B) circle (0.34);
+        \node[mp point d] at (B) {};
+        \node[mp label, figred, above right] at (B) {$z_0$};
+        \node[mp label, align=center] at (0,-2.05) {(c) 连通但含边界点\\不是开集，也不是区域};
     \end{scope}
 \end{tikzpicture}
-\caption{区域与非区域的区别}
+\caption{区域与非区域的区别：开且连通缺一不可}
 \label{fig:ch02-region}
 \end{figure}
 
@@ -2178,15 +2187,22 @@ $\bar z$ 看上去非常光滑，几何上也只是一个镜像反射，但它�
     \draw[mp axis] (-0.2,0) -- (4.7,0) node[mp label, right] {$x$};
     \draw[mp axis] (0,-0.2) -- (0,4.5) node[mp label, above] {$y$};
 
-    \draw[figblue, thick, domain=0.55:3.7, samples=120] plot (\x,{0.55+0.55/(\x)});
-    \draw[figblue, thick, domain=0.8:3.9, samples=120] plot (\x,{1.2+1.4/(\x)});
-    \draw[figred, thick, domain=0.55:3.9, samples=120] plot (\x,{2.9-0.9/(\x)});
-    \draw[figred, thick, domain=0.7:4.0, samples=120] plot (\x,{3.65-1.7/(\x)});
+    \draw[figblue, thick, domain=1.05:4.0, samples=150] plot (\x,{sqrt(\x*\x-1.1)});
+    \draw[figblue, thick, domain=0.35:4.0, samples=150] plot (\x,{sqrt(\x*\x+1.0)});
 
-    \node[mp label, figblue] at (4.15,1.05) {$u=C_1$};
-    \node[mp label, figred] at (3.95,3.25) {$v=C_2$};
+    \draw[figred, thick, domain=0.6:4.05, samples=150] plot (\x,{0.84/(\x)});
+    \draw[figred, thick, domain=0.6:4.05, samples=150] plot (\x,{1.55/(\x)});
+
+    \coordinate (P) at (1.4,0.6);
+    \node[mp point c] at (P) {};
+    \draw[figteal, thick] (P) -- ++(0.22,0.52);
+    \draw[figteal, thick] (P) -- ++(0.52,-0.22);
+    \draw[figteal, thick] ($(P)+(0.07,0.16)$) -- ++(0.16,-0.07) -- ++(-0.07,-0.16);
+
+    \node[mp label, figblue] at (3.55,3.55) {$u=x^2-y^2=C_1$};
+    \node[mp label, figred] at (3.65,1.15) {$v=2xy=C_2$};
 \end{tikzpicture}
-\caption{共轭调和函数的两族等值线在正则点附近彼此正交}
+\caption{以 $W(z)=z^2$ 为例，共轭调和函数的两族等值线在正则点附近彼此正交}
 \label{fig:ch02-orthogonal-level-curves}
 \end{figure}
 
@@ -2534,34 +2550,41 @@ $\bar z$ 看上去非常光滑，几何上也只是一个镜像反射，但它�
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=0.82]
+\begin{tikzpicture}[scale=0.88]
     \begin{scope}
         \draw[mp axis] (-0.5,0) -- (3.1,0) node[mp label, right] {$x$};
         \draw[mp axis] (0,-0.5) -- (0,3.1) node[mp label, above] {$y$};
 
-        \draw[figblue, thick] (0.55,0.7) -- (2.35,2.1);
-        \draw[figred, thick] (2.1,0.6) -- (0.7,2.25);
+        \draw[figblue, thick] (0.68,0.88) -- (2.3,2.05);
+        \draw[figred, thick] (2.18,0.72) -- (0.82,2.3);
         \node[mp point c] at (1.45,1.4) {};
-        \draw[figteal, thick] (1.45,1.4) ++(38:0.5) arc (38:128:0.5);
-        \node[mp label, figteal] at (1.52,2.05) {$\alpha$};
+        \draw[figteal, thick] (1.45,1.4) ++(36:0.48) arc (36:126:0.48);
+        \node[mp label, figteal] at (1.52,2.0) {$\alpha$};
         \node[mp label] at (1.35,-0.85) {映射前};
     \end{scope}
 
     \draw[figteal, very thick, ->] (3.9,1.35) -- (5.05,1.35);
+    \node[mp label, figteal] at (4.48,1.72) {$\rho e^{\mathrm{i}\theta}$};
 
     \begin{scope}[xshift=6.8cm]
         \draw[mp axis] (-0.5,0) -- (3.1,0) node[mp label, right] {$u$};
         \draw[mp axis] (0,-0.5) -- (0,3.1) node[mp label, above] {$v$};
 
-        \draw[figblue, thick] (0.45,0.95) -- (2.15,2.4);
-        \draw[figred, thick] (2.18,1.05) -- (0.85,2.45);
+        \draw[black!25, dashed] (0.88,1.25) -- (2.36,2.32);
+        \draw[black!25, dashed] (2.25,1.12) -- (1.0,2.58);
+        \draw[figblue, thick] (0.66,1.12) -- (2.47,2.58);
+        \draw[figred, thick] (2.54,1.26) -- (1.0,2.98);
         \node[mp point c] at (1.42,1.72) {};
-        \draw[figteal, thick] (1.42,1.72) ++(42:0.5) arc (42:132:0.5);
-        \node[mp label, figteal] at (1.52,2.38) {$\alpha$};
+        \draw[figteal, thick] (1.42,1.72) ++(48:0.54) arc (48:138:0.54);
+        \node[mp label, figteal] at (1.55,2.45) {$\alpha$};
+        \draw[figpurple, thick, ->] (1.98,2.1) arc (36:48:0.62);
+        \node[mp label, figpurple] at (2.4,2.48) {$\theta$};
+        \node[mp label, black!55] at (2.28,0.92) {统一旋转};
+        \node[mp label, black!55] at (2.3,0.58) {统一伸缩};
         \node[mp label] at (1.35,-0.85) {映射后};
     \end{scope}
 \end{tikzpicture}
-\caption{解析函数在导数非零的点附近局部保持角度}
+\caption{解析函数在导数非零的点附近局部保持角度，并表现为统一的旋转与伸缩}
 \label{fig:ch02-local-conformal}
 \end{figure}
 
