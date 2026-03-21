@@ -1120,13 +1120,11 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \draw[mp axis] (-0.8,0) -- (4.2,0) node[mp label, right] {$\operatorname{Re}z$};
     \draw[mp axis] (0,-0.8) -- (0,3.3) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (Z) at (3,2);
-    \fill[mp area blue] (0,0) -- (3,0) -- (Z) -- cycle;
     \draw[mp vector] (0,0) -- node[midway, above, sloped, text=figblue, fill=white, inner sep=1pt] {$r=|z|$} (Z);
     \node[mp point] at (Z) {};
     \node[mp label, above right] at (Z) {$z$};
-    \fill[figbrownfill] (0,0) -- (0.95,0) arc[start angle=0,end angle=33.69,radius=0.95] -- cycle;
     \draw[mp angle] (0.95,0) arc[start angle=0,end angle=33.69,radius=0.95];
-    \node[mp label, text=figbrown] at (1.35,0.42) {$\theta$};
+    \node[mp label, text=figbrown] at (1.1,0.32) {$\theta$};
     \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数的模与辐角}
