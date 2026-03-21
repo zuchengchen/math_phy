@@ -1153,45 +1153,45 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[scale=1.0]
     \begin{scope}
-        \draw[mp axis] (-0.55,0) -- (2.95,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-1.7) -- (0,2.65) node[mp label, above] {$\operatorname{Im}z$};
-        \coordinate (Z1) at (35:2.12);
+        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\operatorname{Im}z$};
+        \coordinate (Z1) at (35:1.72);
         \draw[mp vector] (0,0) -- (Z1);
         \node[mp point] at (Z1) {};
         \node[mp label, above right] at (Z1) {$z$};
         \node[mp label, below left] at (0,0) {$O$};
-        \draw[mp angle, -{Stealth[length=2.0mm,width=1.4mm]}] (0.62,0)
-            arc[start angle=0,end angle=35,radius=0.62];
-        \node[mp label, text=figbrown] at (0.92,0.28) {$\theta$};
+        \draw[mp angle, -{Stealth[length=2.0mm,width=1.4mm]}] (0.54,0)
+            arc[start angle=0,end angle=35,radius=0.54];
+        \node[mp label, text=figbrown] at (0.8,0.24) {$\theta$};
     \end{scope}
 
     \begin{scope}[xshift=4.15cm]
-        \draw[mp axis] (-0.55,0) -- (2.95,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-1.7) -- (0,2.65) node[mp label, above] {$\operatorname{Im}z$};
-        \coordinate (Z2) at (35:2.12);
+        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\operatorname{Im}z$};
+        \coordinate (Z2) at (35:1.72);
         \draw[mp vector] (0,0) -- (Z2);
         \node[mp point] at (Z2) {};
         \node[mp label, above right] at (Z2) {$z$};
         \node[mp label, below left] at (0,0) {$O$};
-        \draw[figred, line width=0.88pt, dash pattern=on 2.2pt off 1.8pt,
+        \draw[figred, line width=0.88pt,
             -{Stealth[length=2.0mm,width=1.4mm]}, domain=0:395, samples=120, smooth,
             variable=\t]
-            plot ({(0.45+0.0012*\t)*cos(\t)},{(0.45+0.0012*\t)*sin(\t)});
-        \node[mp label, text=figred] at (-0.78,1.02) {$\theta+2\pi$};
+            plot ({(0.36+0.0010*\t)*cos(\t)},{(0.36+0.0010*\t)*sin(\t)});
+        \node[mp label, text=figred] at (-0.66,0.92) {$\theta+2\pi$};
     \end{scope}
 
     \begin{scope}[xshift=8.3cm]
-        \draw[mp axis] (-0.55,0) -- (2.95,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-1.7) -- (0,2.65) node[mp label, above] {$\operatorname{Im}z$};
-        \coordinate (Z3) at (35:2.12);
+        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\operatorname{Im}z$};
+        \coordinate (Z3) at (35:1.72);
         \draw[mp vector] (0,0) -- (Z3);
         \node[mp point] at (Z3) {};
         \node[mp label, above right] at (Z3) {$z$};
         \node[mp label, below left] at (0,0) {$O$};
-        \draw[figred, line width=0.88pt, dash pattern=on 2.2pt off 1.8pt,
-            -{Stealth[length=2.0mm,width=1.4mm]}] (0.9,0)
-            arc[start angle=0,end angle=-325,radius=0.9];
-        \node[mp label, text=figred] at (0.98,-0.82) {$\theta-2\pi$};
+        \draw[figred, line width=0.88pt,
+            -{Stealth[length=2.0mm,width=1.4mm]}] (0.74,0)
+            arc[start angle=0,end angle=-325,radius=0.74];
+        \node[mp label, text=figred] at (0.84,-0.64) {$\theta-2\pi$};
     \end{scope}
 
     \node[mp small, text=black!52] at (5.0,-2.05)
