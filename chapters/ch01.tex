@@ -451,6 +451,8 @@ z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
 \end{align*}
 
 \noindent\textbf{4. 乘法结合律}
+这里式子会比较长，但不要被展开吓住。我们的目标其实只有一个：分别按两种不同的顺序相乘，最后都化成标准形式 $x+\mathrm{i}y$，再比较实部和虚部是否一致。
+
 先算 $z_1z_2$：
 \[
 z_1z_2=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1).
@@ -902,6 +904,14 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
     &= (x_1y_2-x_2y_1)^2\ge 0.
 \end{align*}
 因此
+\[
+(x_1x_2+y_1y_2)^2\le (|z_1||z_2|)^2.
+\]
+两边都非负，因此
+\[
+|x_1x_2+y_1y_2|\le |z_1||z_2|.
+\]
+特别地，
 \[
 x_1x_2+y_1y_2\le |z_1||z_2|.
 \]
@@ -1404,6 +1414,8 @@ e^{\mathrm{i}\pi}=-1.
     \cos\theta&=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\frac{\theta^6}{6!}+\cdots,\\
     \sin\theta&=\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\frac{\theta^7}{7!}+\cdots.
 \end{align*}
+这些展开式在高等数学里原本是对实变量写出的；这里把自变量换成 $\mathrm{i}\theta$，本质上就是把同一个幂级数代入复数点 $\mathrm{i}\theta$，再把结果按实部和虚部重新分组。
+
 再把 $e^t$ 中的 $t$ 换成 $\mathrm{i}\theta$，得
 \begin{align*}
     e^{\mathrm{i}\theta}
@@ -2153,7 +2165,7 @@ a=r\cos\theta,\qquad b=r\sin\theta.
 \begin{equation}\label{eq:de-moivre}
     \bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n=\cos(n\theta)+\mathrm{i}\sin(n\theta).
 \end{equation}
-更一般地，若 $z=re^{\mathrm{i}\theta}$，则
+更一般地，若非零复数 $z=re^{\mathrm{i}\theta}$，则
 \begin{equation}
     z^n=r^n e^{\mathrm{i}n\theta}.
 \end{equation}
@@ -2164,7 +2176,7 @@ a=r\cos\theta,\qquad b=r\sin\theta.
 \[
 \cos\theta+\mathrm{i}\sin\theta=e^{\mathrm{i}\theta}.
 \]
-因此
+先看 $n\ge 0$ 的情形。此时
 \[
 \bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n=(e^{\mathrm{i}\theta})^n=e^{\mathrm{i}n\theta}.
 \]
@@ -2172,7 +2184,23 @@ a=r\cos\theta,\qquad b=r\sin\theta.
 \[
 e^{\mathrm{i}n\theta}=\cos(n\theta)+\mathrm{i}\sin(n\theta).
 \]
-从而得到棣莫弗公式。若再乘上模 $r$ 的 $n$ 次幂，便有
+这就证明了棣莫弗公式在 $n\ge 0$ 时成立。
+
+若 $n<0$，记 $n=-m$，其中 $m>0$。由于 $e^{\mathrm{i}\theta}\neq 0$，于是
+\[
+\bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n
+=\bigl(e^{\mathrm{i}\theta}\bigr)^{-m}
+=\frac{1}{(e^{\mathrm{i}\theta})^m}
+=e^{-\mathrm{i}m\theta}
+=e^{\mathrm{i}n\theta}.
+\]
+再用一次欧拉公式，就有
+\[
+e^{\mathrm{i}n\theta}=\cos(n\theta)+\mathrm{i}\sin(n\theta).
+\]
+因此结论对任意整数 $n$ 都成立。
+
+对于一般的非零复数 $z=re^{\mathrm{i}\theta}$，便有
 \[
 z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \]
@@ -2299,7 +2327,27 @@ w_k=\sqrt[n]{r}\,e^{\mathrm{i}(\theta+2k\pi)/n}.
 \[
 k=0,1,\dots,n-1
 \]
-就得到全部不同的根，共 $n$ 个。这些根具有相同的模 $\sqrt[n]{r}$，相邻辐角相差
+就够了。下面再说明这 $n$ 个根彼此确实不同。
+
+若对某两个 $k_1,k_2\in\{0,1,\dots,n-1\}$ 有
+\[
+w_{k_1}=w_{k_2},
+\]
+那么它们的辐角之差必须是 $2\pi$ 的整数倍，即存在 $m\in\mathbb{Z}$，使得
+\[
+\frac{\theta+2k_1\pi}{n}-\frac{\theta+2k_2\pi}{n}=2m\pi.
+\]
+化简得
+\[
+k_1-k_2=mn.
+\]
+但由于 $k_1,k_2$ 都在 $0,1,\dots,n-1$ 中，故
+\[
+-(n-1)\le k_1-k_2\le n-1.
+\]
+在这个范围内，只有 $k_1-k_2=0$ 才可能是 $n$ 的整数倍，所以 $k_1=k_2$。这说明 $w_0,w_1,\dots,w_{n-1}$ 两两不同，因此恰好有 $n$ 个根。
+
+这些根具有相同的模 $\sqrt[n]{r}$，相邻辐角相差
 \[
 \frac{2\pi}{n},
 \]
