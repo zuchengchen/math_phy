@@ -63,7 +63,7 @@
         top color=mainblue!11,
         bottom color=white,
         line width=0.8pt,
-        text width=1.44cm,
+        text width=1.4cm,
         minimum height=1.1cm,
         align=center,
         font=\small
@@ -75,7 +75,7 @@
         top color=physicsbrown!11,
         bottom color=white,
         line width=0.9pt,
-        text width=1.56cm,
+        text width=1.4cm,
         minimum height=1.1cm,
         align=center,
         font=\small\bfseries
@@ -84,9 +84,9 @@
     why/.style={font=\footnotesize, text=figbrown, align=center, fill=white, inner sep=1pt}
 ]
 \node[stage] (N) at (0,0) {$\mathbb{N}$\\自然数};
-\node[stage] (Z) at (2.4,0) {$\mathbb{Z}$\\整数};
-\node[stage] (Q) at (4.8,0) {$\mathbb{Q}$\\有理数};
-\node[stage] (R) at (8.1,0) {$\mathbb{R}$\\实数};
+\node[stage] (Z) at (2.7,0) {$\mathbb{Z}$\\整数};
+\node[stage] (Q) at (5.4,0) {$\mathbb{Q}$\\有理数};
+\node[stage] (R) at (8.5,0) {$\mathbb{R}$\\实数};
 \node[stage c] (C) at (12.35,0) {$\mathbb{C}$\\复数};
 
 \draw[arrow] (N) -- (Z) node[midway, above=4pt, why] {减法};
@@ -984,10 +984,10 @@ z_1\bar z_1=5,\qquad
         \coordinate (O2) at (0,0);
         \coordinate (P) at (3.1,1.0);
         \coordinate (Q) at (1.35,2.45);
-        \fill[mp area teal] (O2) -- (P) -- (Q) -- cycle;
+        \fill[mp area purple] (O2) -- (P) -- (Q) -- cycle;
         \draw[mp helper] (O2) -- (P) -- (Q) -- cycle;
         \draw[mp vector] (O2) -- (P);
-        \draw[mp vector b dashed] (O2) -- (Q);
+        \draw[mp vector b] (O2) -- (Q);
         \draw[mp vector d dashed] (Q) -- (P);
         \node[mp point] at (P) {};
         \node[mp point b] at (Q) {};
