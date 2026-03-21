@@ -1385,20 +1385,19 @@ x+\mathrm{i}y
 
 \begin{figure}[htbp]
 \centering
-\resizebox{0.97\textwidth}{!}{%
+\resizebox{0.99\textwidth}{!}{%
 \begin{tikzpicture}[
     rep/.style={
         rectangle,
         rounded corners=5pt,
         line width=0.85pt,
         minimum height=2.2cm,
-        text width=2.28cm,
         align=center,
         font=\small
     },
-    algebra/.style={rep, draw=mainblue!82!black, top color=mainblue!10, bottom color=white},
-    trig/.style={rep, draw=defteal!82!black, top color=defteal!11, bottom color=white},
-    expo/.style={rep, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
+    algebra/.style={rep, text width=2.35cm, draw=mainblue!82!black, top color=mainblue!10, bottom color=white},
+    trig/.style={rep, text width=4.15cm, draw=defteal!82!black, top color=defteal!11, bottom color=white},
+    expo/.style={rep, text width=2.45cm, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
     link/.style={{Stealth[length=2.5mm,width=1.7mm]}-{Stealth[length=2.5mm,width=1.7mm]}, line width=0.9pt, draw=black!62}
 ]
 \node[algebra] (A) at (0,0) {\textbf{代数形式}\\[0.35em]
@@ -1406,23 +1405,23 @@ x+\mathrm{i}y
     擅长处理\\
     实部、虚部、参数比较\\
     与直接代数运算};
-\node[trig] (T) at (6.35,0) {\textbf{三角形式}\\[0.35em]
+\node[trig] (T) at (6.3,0) {\textbf{三角形式}\\[0.35em]
     $z=r(\cos\theta+\mathrm{i}\sin\theta)$\\[0.45em]
     擅长描述\\
     长度、方向\\
     和几何位置};
-\node[expo] (E) at (12.7,0) {\textbf{指数形式}\\[0.35em]
+\node[expo] (E) at (12.6,0) {\textbf{指数形式}\\[0.35em]
     $z=re^{\mathrm{i}\theta}$\\[0.45em]
     擅长处理\\
     乘除、乘幂、开方\\
     与相位问题};
 
 \draw[link] (A.east) -- (T.west)
-    node[midway, above=8pt, font=\scriptsize, text=black!68, fill=white, inner sep=1pt] {代数形式 $\leftrightarrow$ 三角形式}
-    node[midway, below=8pt, font=\scriptsize, text=black!68, fill=white, inner sep=1pt] {$x=r\cos\theta,\ y=r\sin\theta$};
+    node[midway, above=8pt] {$x=r\cos\theta$}
+    node[midway, below=8pt] {$ y=r\sin\theta$};
 \draw[link] (T.east) -- (E.west)
-    node[midway, above=8pt, font=\scriptsize, text=black!68, fill=white, inner sep=1pt] {三角形式 $\leftrightarrow$ 指数形式}
-    node[midway, below=8pt, font=\scriptsize, text=black!68, fill=white, inner sep=1pt] {$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$};
+    node[midway, above=8pt] {欧拉公式}
+    node[midway, below=8pt] {$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$};
 \end{tikzpicture}%
 }
 \caption{复数的三种常用表示}
