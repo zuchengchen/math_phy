@@ -2691,8 +2691,6 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.7]
-    \draw[mp axis] (-1.45,0) -- (1.45,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-1.4) -- (0,1.4) node[mp label, above] {$\operatorname{Im}z$};
     \fill[mp area blue] (0,0) circle (1);
     \draw[mp circle] (0,0) circle (1);
     \foreach \k in {0,1,2,3,4,5} {
@@ -2700,13 +2698,15 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
         \node[mp point d] at (P\k) {};
     }
     \draw[figred!46, line width=0.8pt] (P0) -- (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- cycle;
-    \node[mp label, right] at (1,0) {$1$};
+    \node[mp label, above right] at (1,0) {$1$};
     \node[mp label, above right] at ({cos(60)},{sin(60)}) {$\omega$};
     \node[mp label, above left] at ({cos(120)},{sin(120)}) {$\omega^2$};
-    \node[mp label, left] at (-1,0) {$\omega^3$};
+    \node[mp label, above left] at (-1,0) {$\omega^3$};
     \node[mp label, below left] at ({cos(240)},{sin(240)}) {$\omega^4$};
     \node[mp label, below right] at ({cos(300)},{sin(300)}) {$\omega^5$};
     \node[mp label, below left] at (0,0) {$O$};
+    \draw[mp axis] (-1.45,0) -- (1.45,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-1.4) -- (0,1.4) node[mp label, above] {$\operatorname{Im}z$};
 \end{tikzpicture}
 \caption{六次单位根的分布}
 \label{fig:roots-of-unity}
