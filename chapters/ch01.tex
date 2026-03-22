@@ -1950,22 +1950,22 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
         \coordinate (Z2) at (58:2.15);
 
         \draw[mp vector] (0,0) -- (Z1);
-        \draw[mp vector b] (0,0) -- (Z2);
+        \draw[mp vector b, draw=figred] (0,0) -- (Z2);
         \node[mp point] at (Z1) {};
-        \node[mp point b] at (Z2) {};
+        \node[mp point b, draw=figred] at (Z2) {};
 
         \draw[mp angle, draw=figblue, -{Stealth[length=1.9mm,width=1.4mm]}]
             (0.56,0) arc[start angle=0,end angle=28,radius=0.56];
         \node[mp label, text=figblue] at (0.8,0.18) {$\theta_1$};
 
-        \draw[mp angle, draw=figteal, -{Stealth[length=1.9mm,width=1.4mm]}]
-            (0.98,0) arc[start angle=0,end angle=58,radius=0.98];
-        \node[mp label, text=figteal] at (0.96,0.78) {$\theta_2$};
+        \draw[mp angle, draw=figred, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (1,0) arc[start angle=0,end angle=58,radius=1];
+        \node[mp label, text=figred] at (0.9,0.9) {$\theta_2$};
 
         \node[mp label, right, text=figblue] at (Z1) {$z_1$};
-        \node[mp label, above left, text=figteal] at (Z2) {$z_2$};
-        \node[mp label, text=figblue] at ($(0,0)!0.55!(Z1)+(-0.02,0.16)$) {$r_1$};
-        \node[mp label, text=figteal] at ($(0,0)!0.56!(Z2)+(0.18,0.12)$) {$r_2$};
+        \node[mp label, right, text=figred] at (Z2) {$z_2$};
+        \node[mp label, text=figblue] at ($(0,0)!0.55!(Z1)+(0.4,-0.05)$) {$r_1$};
+        \node[mp label, text=figred] at ($(0,0)!0.56!(Z2)+(-0.2,0.12)$) {$r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 
@@ -1981,8 +1981,8 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
             (0.9,0) arc[start angle=0,end angle=86,radius=0.9];
         \node[mp label, text=figpurple] at (0.88,0.98) {$\theta_1+\theta_2$};
 
-        \node[mp label, above right, text=figpurple] at (P) {$z_1z_2$};
-        \node[mp label, text=figpurple] at ($(0,0)!0.55!(P)+(-0.42,0.02)$) {$r_1r_2$};
+        \node[mp label, right, text=figpurple] at (P) {$z_1z_2$};
+        \node[mp label, text=figpurple] at ($(0,0)!0.55!(P)+(0.42,0.02)$) {$r_1r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 \end{tikzpicture}
