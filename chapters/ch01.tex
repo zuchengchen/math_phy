@@ -1655,13 +1655,13 @@ z=re^{\mathrm{i}\theta}
 \centering
 \begin{tikzpicture}[scale=1.25]
     \fill[mp area blue] (0,0) circle (1);
+    \fill[figbrownfill] (0,0) -- (0.36,0) arc[start angle=0,end angle=50,radius=0.36] -- cycle;
     \draw[mp axis] (-1.55,0) -- (1.75,0) node[mp label, right] {$\operatorname{Re}z$};
     \draw[mp axis] (0,-1.45) -- (0,1.55) node[mp label, above] {$\operatorname{Im}z$};
     \draw[mp circle] (0,0) circle (1);
     \coordinate (Z) at ({cos(50)},{sin(50)});
     \draw[mp vector d] (0,0) -- (Z);
     \node[mp point d] at (Z) {};
-    \fill[figbrownfill] (0,0) -- (0.36,0) arc[start angle=0,end angle=50,radius=0.36] -- cycle;
     \draw[mp angle] (0.36,0) arc[start angle=0,end angle=50,radius=0.36];
     \node[mp label, text=figbrown] at (0.57,0.24) {$\theta$};
     \node[mp label, above right] at (Z) {$e^{\mathrm{i}\theta}$};
