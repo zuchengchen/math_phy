@@ -2098,7 +2098,7 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
         \node[mp label, text=figpurple] at (1.5,0.2) {$\theta_1-\theta_2$};
 
         \node[mp label, right, text=figpurple] at (Q) {$\dfrac{z_1}{z_2}$};
-        \node[mp label, text=figpurple] at ($(0,0)!0.56!(Q)+(0.1,0.2)$) {$r_1/r_2$};
+        \node[mp label, text=figpurple, rotate=40] at ($(0,0)!0.56!(Q)+(0.1,0.2)$) {$r_1/r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 \end{tikzpicture}
@@ -2641,8 +2641,6 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.2]
-    \draw[mp axis] (-2.8,0) -- (3.0,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.7) -- (0,2.9) node[mp label, above] {$\operatorname{Im}z$};
     \fill[mp area blue] (0,0) circle (2);
     \draw[mp circle] (0,0) circle (2);
 
@@ -2664,8 +2662,12 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 
     \draw[mp angle, -{Stealth[length=1.9mm,width=1.4mm]}] (0.82,0) arc[start angle=0,end angle=45,radius=0.82];
     \node[mp label, text=figbrown] at (1.05,0.35) {$\pi/4$};
-    \node[mp label, text=figblue] at (1.45,-0.5) {$|z|=2$};
+    \node[mp label, text=figblue] at (0.7,-0.5) {$|z|=2$};
     \node[mp label, below left] at (0,0) {$O$};
+    
+    
+    \draw[mp axis] (-2.8,0) -- (3.0,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.7) -- (0,2.9) node[mp label, above] {$\operatorname{Im}z$};
 \end{tikzpicture}
 \caption{方程 $z^4=-16$ 的四个根}
 \label{fig:fourth-roots-minus16}
