@@ -1943,11 +1943,11 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[scale=1.05]
     \begin{scope}
-        \draw[mp axis] (-0.6,0) -- (3.3,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.6) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.6,0) -- (3.4,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\operatorname{Im}z$};
 
-        \coordinate (Z1) at (20:1.5);
-        \coordinate (Z2) at (50:1.9);
+        \coordinate (Z1) at (28:1.7);
+        \coordinate (Z2) at (58:2.15);
 
         \draw[mp vector] (0,0) -- (Z1);
         \draw[mp vector b] (0,0) -- (Z2);
@@ -1955,34 +1955,34 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
         \node[mp point b] at (Z2) {};
 
         \draw[mp angle, draw=figblue, -{Stealth[length=1.9mm,width=1.4mm]}]
-            (0.5,0) arc[start angle=0,end angle=20,radius=0.5];
-        \node[mp label, text=figblue] at (0.7,0.12) {$\theta_1$};
+            (0.56,0) arc[start angle=0,end angle=28,radius=0.56];
+        \node[mp label, text=figblue] at (0.8,0.18) {$\theta_1$};
 
         \draw[mp angle, draw=figteal, -{Stealth[length=1.9mm,width=1.4mm]}]
-            (0.88,0) arc[start angle=0,end angle=50,radius=0.88];
-        \node[mp label, text=figteal] at (0.92,0.62) {$\theta_2$};
+            (0.98,0) arc[start angle=0,end angle=58,radius=0.98];
+        \node[mp label, text=figteal] at (0.96,0.78) {$\theta_2$};
 
         \node[mp label, right, text=figblue] at (Z1) {$z_1$};
         \node[mp label, above left, text=figteal] at (Z2) {$z_2$};
-        \node[mp label, text=figblue] at ($(0,0)!0.55!(Z1)+(-0.06,0.14)$) {$r_1$};
-        \node[mp label, text=figteal] at ($(0,0)!0.56!(Z2)+(0.18,0.02)$) {$r_2$};
+        \node[mp label, text=figblue] at ($(0,0)!0.55!(Z1)+(-0.02,0.16)$) {$r_1$};
+        \node[mp label, text=figteal] at ($(0,0)!0.56!(Z2)+(0.18,0.12)$) {$r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 
     \begin{scope}[xshift=6.2cm]
         \draw[mp axis] (-0.6,0) -- (3.6,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.6) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (0,-0.6) -- (0,4.0) node[mp label, above] {$\operatorname{Im}z$};
 
-        \coordinate (P) at (70:2.85);
+        \coordinate (P) at (86:3.66);
         \draw[mp vector c] (0,0) -- (P);
         \node[mp point c] at (P) {};
 
         \draw[mp angle, draw=figpurple, -{Stealth[length=1.9mm,width=1.4mm]}]
-            (0.82,0) arc[start angle=0,end angle=70,radius=0.82];
-        \node[mp label, text=figpurple] at (1.18,0.66) {$\theta_1+\theta_2$};
+            (0.9,0) arc[start angle=0,end angle=86,radius=0.9];
+        \node[mp label, text=figpurple] at (0.88,0.98) {$\theta_1+\theta_2$};
 
-        \node[mp label, above left, text=figpurple] at (P) {$z_1z_2$};
-        \node[mp label, text=figpurple] at ($(0,0)!0.56!(P)+(-0.34,0.06)$) {$r_1r_2$};
+        \node[mp label, above right, text=figpurple] at (P) {$z_1z_2$};
+        \node[mp label, text=figpurple] at ($(0,0)!0.55!(P)+(-0.42,0.02)$) {$r_1r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 \end{tikzpicture}
