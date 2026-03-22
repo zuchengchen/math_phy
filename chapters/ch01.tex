@@ -2283,16 +2283,16 @@ e_2=
     \draw[mp axis] (0,-0.85) -- (0,3.95) node[mp label, above] {$y$};
     
     
-    \draw[mp thin axis] (0,0) -- (1,0);
-    \draw[mp thin axis] (0,0) -- (0,1);
+    \draw[mp thin axis, draw=figblue] (0,0) -- (1,0);
+    \draw[mp thin axis, draw=figred] (0,0) -- (0,1);
     \draw[mp vector] (0,0) -- (AeOne);
     \draw[mp vector d] (0,0) -- (AeTwo);
     \node[mp point] at (AeOne) {};
     \node[mp point d] at (AeTwo) {};
-    \node[mp point, black] at (1, 0) {};
-    \node[mp point, black] at (0, 1) {};
-    \node[mp label, below] at (1,0) {$e_1=1$};
-    \node[mp label, right] at (0,1) {$e_2=i$};
+    \node[mp point] at (1,0) {};
+    \node[mp point d] at (0,1) {};
+    \node[mp label, below, text=figblue] at (1,0) {$e_1=1$};
+    \node[mp label, right, text=figred] at (0,1) {$e_2=i$};
 \end{tikzpicture}
 \caption{复数乘法与矩阵的对应}
 \label{fig:complex-multiplication-basis}
@@ -2828,8 +2828,6 @@ z\to\infty.
 \resizebox{0.97\textwidth}{!}{%
 \begin{tikzpicture}[scale=0.98]
     \begin{scope}
-        \draw[mp axis] (-2.9,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
         \fill[mp area blue] (0,0) circle (2.05);
         \draw[mp circle] (0,0) circle (2.05);
         \coordinate (Z) at ({2.05*cos(38)},{2.05*sin(38)});
@@ -2841,6 +2839,8 @@ z\to\infty.
         \node[mp label, text=figbrown] at (1.02,0.32) {$\theta$};
         \node[mp small, text=figblue] at (1.45,-1.35) {$|z|=r$，离原点较远};
         \node[mp small, text=black!46] at (0,-2.15) {$z$ 平面};
+        \draw[mp axis] (-2.9,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
     \end{scope}
 
     \draw[-{Stealth[length=2.8mm,width=1.8mm]}, line width=0.9pt, draw=black!58]
@@ -2848,8 +2848,6 @@ z\to\infty.
     \node[mp label] at (4.32,0.52) {$w=\dfrac{1}{z}$};
 
     \begin{scope}[xshift=7.3cm]
-        \draw[mp axis] (-2.9,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}w$};
-        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}w$};
         \fill[mp area teal] (0,0) circle (0.5);
         \draw[mp circle, draw=figteal] (0,0) circle (0.5);
         \coordinate (W) at ({0.5*cos(-38)},{0.5*sin(-38)});
@@ -2861,6 +2859,8 @@ z\to\infty.
         \node[mp label, text=figbrown] at (1.0,-0.34) {$-\theta$};
         \node[mp small, text=figteal] at (1.35,1.35) {$|w|=\dfrac{1}{r}$，靠近原点};
         \node[mp small, text=black!46] at (0,-2.15) {$w$ 平面};
+        \draw[mp axis] (-2.9,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}w$};
+        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}w$};
     \end{scope}
 \end{tikzpicture}%
 }
