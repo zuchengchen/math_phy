@@ -2056,44 +2056,57 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    \draw[mp axis] (-0.7,0) -- (4.9,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.7) -- (0,4.4) node[mp label, above] {$\operatorname{Im}z$};
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[scale=1.05]
+    \begin{scope}
+        \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-0.6) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
 
-    \coordinate (Q) at (24:2.0);
-    \coordinate (Z2) at (50:1.6);
-    \coordinate (Z1) at (74:3.2);
+        \coordinate (Z1) at (68:2.55);
+        \coordinate (Z2) at (28:1.65);
 
-    \draw[figpurple!45, line width=0.72pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (2.0);
-    \draw[figblue!45, line width=0.76pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (3.2);
-    \draw[mp vector c] (0,0) -- (Q);
-    \draw[mp vector b dashed] (0,0) -- (Z2);
-    \draw[mp vector] (0,0) -- (Z1);
+        \draw[mp vector] (0,0) -- (Z1);
+        \draw[mp vector d] (0,0) -- (Z2);
+        \node[mp point] at (Z1) {};
+        \node[mp point d] at (Z2) {};
 
-    \node[mp point c] at (Q) {};
-    \node[mp point b] at (Z2) {};
-    \node[mp point] at (Z1) {};
+        \draw[mp angle, draw=figblue, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (0.7,0) arc[start angle=0,end angle=68,radius=0.7];
+        \node[mp label, text=figblue] at (0.7,0.7) {$\theta_1$};
 
-    \fill[figbrownfill] (0,0) -- (0.62,0) arc[start angle=0,end angle=24,radius=0.62] -- cycle;
-    \draw[mp angle] (0.62,0) arc[start angle=0,end angle=24,radius=0.62];
-    \node[mp label, text=figbrown, fill=white, inner sep=1pt] at (1.02,0.2) {$\theta_1-\theta_2$};
+        \draw[mp angle, draw=figred, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (0.98,0) arc[start angle=0,end angle=28,radius=0.98];
+        \node[mp label, text=figred] at (1.2,0.32) {$\theta_2$};
 
-    \fill[figgold!16] (0,0) -- (1.02,0) arc[start angle=0,end angle=50,radius=1.02] -- cycle;
-    \draw[mp angle] (1.02,0) arc[start angle=0,end angle=50,radius=1.02];
-    \node[mp label, text=figbrown, fill=white, inner sep=1pt] at (1.42,0.74) {$\theta_2$};
+        \node[mp label, above left, text=figblue] at (Z1) {$z_1$};
+        \node[mp label, right, text=figred] at (Z2) {$z_2$};
+        \node[mp label, text=figblue] at ($(0,0)!0.56!(Z1)+(-0.24,0.08)$) {$r_1$};
+        \node[mp label, text=figred] at ($(0,0)!0.56!(Z2)+(0.16,-0.14)$) {$r_2$};
+        \node[mp label, below left] at (0,0) {$O$};
+    \end{scope}
 
-    \draw[mp angle] (1.42,0) arc[start angle=0,end angle=74,radius=1.42];
-    \node[mp label, text=figbrown, fill=white, inner sep=1pt] at (1.02,1.32) {$\theta_1$};
+    \draw[-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!58]
+        (4.0,1.25) -- (5.55,1.25);
+    \node[mp label] at (4.78,1.55) {除以 $z_2$};
 
-    \node[mp label, below right, text=figpurple, fill=white, inner sep=1pt] at (Q) {$\dfrac{z_1}{z_2}$};
-    \node[mp label, above right, text=figteal, fill=white, inner sep=1pt] at (Z2) {$z_2$};
-    \node[mp label, above left, text=figblue] at (Z1) {$z_1$};
+    \begin{scope}[xshift=6.35cm]
+        \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\operatorname{Im}z$};
 
-    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at (152:1.42) {$\left|\dfrac{z_1}{z_2}\right|=\dfrac{r_1}{r_2}$};
-    \node[mp label, text=figteal, fill=white, inner sep=1pt] at (32:1.18) {$|z_2|=r_2$};
-    \node[mp label, text=figblue, fill=white, inner sep=1pt] at (104:3.0) {$|z_1|=r_1$};
-    \node[mp label, above left] at (0,0) {$O$};
+        \coordinate (Q) at (40:1.55);
+        \draw[mp vector c] (0,0) -- (Q);
+        \node[mp point c] at (Q) {};
+
+        \draw[mp angle, draw=figpurple, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (0.8,0) arc[start angle=0,end angle=40,radius=0.8];
+        \node[mp label, text=figpurple] at (1.08,0.48) {$\theta_1-\theta_2$};
+
+        \node[mp label, above right, text=figpurple] at (Q) {$\dfrac{z_1}{z_2}$};
+        \node[mp label, text=figpurple] at ($(0,0)!0.56!(Q)+(0.32,-0.02)$) {$\dfrac{r_1}{r_2}$};
+        \node[mp label, below left] at (0,0) {$O$};
+    \end{scope}
 \end{tikzpicture}
+}
 \caption{复数除法的几何意义}
 \label{fig:complex-division}
 \end{figure}
@@ -2280,6 +2293,8 @@ e_2=
     \draw[mp vector d] (0,0) -- (AeTwo);
     \node[mp point] at (AeOne) {};
     \node[mp point d] at (AeTwo) {};
+    \node[mp point, black] at (1, 0) {};
+    \node[mp point, black] at (0, 1) {};
     \node[mp label, below] at (1,0) {$e_1$};
     \node[mp label, left] at (0,1) {$e_2$};
 \end{tikzpicture}
