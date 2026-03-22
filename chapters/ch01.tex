@@ -1940,41 +1940,59 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
 
 \begin{figure}[htbp]
 \centering
-\begin{tikzpicture}[scale=1.2]
-    \draw[mp axis] (-0.7,0) -- (4.9,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.7) -- (0,4.2) node[mp label, above] {$\operatorname{Im}z$};
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[scale=1.05]
+    \begin{scope}
+        \draw[mp axis] (-0.6,0) -- (3.3,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-0.6) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
 
-    \coordinate (Z1) at (30:2);
-    \coordinate (Z2) at (40:1.6);
-    \coordinate (P) at (70:3.2);
+        \coordinate (Z1) at (25:1.8);
+        \coordinate (Z2) at (35:1.4);
 
-    \draw[figblue!45, line width=0.72pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (2);
-    \draw[figpurple!45, line width=0.76pt, dash pattern=on 2.4pt off 1.8pt] (0,0) circle (3.2);
-    \draw[mp vector] (0,0) -- (Z1);
-    \draw[mp vector b dashed] (0,0) -- (Z2);
-    \draw[mp vector c] (0,0) -- (P);
+        \draw[mp vector] (0,0) -- (Z1);
+        \draw[mp vector b] (0,0) -- (Z2);
+        \node[mp point] at (Z1) {};
+        \node[mp point b] at (Z2) {};
 
-    \node[mp point] at (Z1) {};
-    \node[mp point b] at (Z2) {};
-    \node[mp point c] at (P) {};
+        \draw[mp angle, draw=figblue, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (0.52,0) arc[start angle=0,end angle=25,radius=0.52];
+        \node[mp label, text=figblue] at (0.78,0.17) {$\theta_1$};
 
-    \fill[figbrownfill] (0,0) -- (0.55,0) arc[start angle=0,end angle=30,radius=0.55] -- cycle;
-    \draw[mp angle] (0.55,0) arc[start angle=0,end angle=30,radius=0.55];
-    \node[mp label, text=figbrown] at (0.83,0.23) {$\theta_1$};
+        \draw[mp angle, draw=figteal, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (0.88,0) arc[start angle=0,end angle=35,radius=0.88];
+        \node[mp label, text=figteal] at (1.08,0.42) {$\theta_2$};
 
-    \fill[figgold!18] (0,0) -- (30:0.95) arc[start angle=30,end angle=70,radius=0.95] -- cycle;
-    \draw[mp angle] (30:0.95) arc[start angle=30,end angle=70,radius=0.95];
-    \node[mp label, text=figbrown] at (1.06,0.8) {$\theta_2$};
+        \node[mp label, right, text=figblue] at (Z1) {$z_1$};
+        \node[mp label, above right, text=figteal] at (Z2) {$z_2$};
+        \node[mp label, text=figblue] at ($(0,0)!0.54!(Z1)+(-0.1,0.14)$) {$|z_1|=r_1$};
+        \node[mp label, text=figteal] at ($(0,0)!0.55!(Z2)+(0.18,-0.08)$) {$|z_2|=r_2$};
+        \node[mp small, text=black!58] at (1.3,2.5) {(a) 输入：$z_1,\ z_2$};
+        \node[mp label, below left] at (0,0) {$O$};
+    \end{scope}
 
-    \node[mp label, below right, text=figblue] at (Z1) {$z_1$};
-    \node[mp label, right, text=figteal] at (Z2) {$z_2$};
-    \node[mp label, above left, text=figpurple] at (P) {$z_1z_2$};
+    \draw[-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!58]
+        (4.0,1.2) -- (5.45,1.2);
+    \node[mp label] at (4.72,1.5) {乘以 $z_2$};
 
-    \node[mp label, text=figblue] at (145:1.95) {$|z_1|=r_1$};
-    \node[mp label, text=figteal] at (28:1.25) {$|z_2|=r_2$};
-    \node[mp label, text=figpurple] at (112:3.15) {$|z_1z_2|=r_1r_2$};
-    \node[mp label, above left] at (0,0) {$O$};
+    \begin{scope}[xshift=6.2cm]
+        \draw[mp axis] (-0.6,0) -- (3.6,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-0.6) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
+
+        \coordinate (P) at (60:2.52);
+        \draw[mp vector c] (0,0) -- (P);
+        \node[mp point c] at (P) {};
+
+        \draw[mp angle, draw=figpurple, -{Stealth[length=1.9mm,width=1.4mm]}]
+            (0.78,0) arc[start angle=0,end angle=60,radius=0.78];
+        \node[mp label, text=figpurple] at (0.95,0.63) {$\theta_1+\theta_2$};
+
+        \node[mp label, above right, text=figpurple] at (P) {$z_1z_2$};
+        \node[mp label, text=figpurple] at ($(0,0)!0.55!(P)+(-0.38,0.1)$) {$|z_1z_2|=r_1r_2$};
+        \node[mp small, text=black!58] at (1.45,2.78) {(b) 输出：$z_1z_2$};
+        \node[mp label, below left] at (0,0) {$O$};
+    \end{scope}
 \end{tikzpicture}
+}
 \caption{复数乘法的几何意义}
 \label{fig:complex-multiplication}
 \end{figure}
@@ -2243,22 +2261,12 @@ e_2=
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-
-    \draw[mp thin axis] (0,0) -- (1,0);
-    \draw[mp thin axis] (0,0) -- (0,1);
-    \node[mp label, below] at (1,0) {$e_1$};
-    \node[mp label, left] at (0,1) {$e_2$};
-
     \coordinate (AeOne) at (2.1,1.2);
     \coordinate (AeTwo) at (-1.2,2.1);
     \coordinate (Corner) at ($(AeOne)+(AeTwo)$);
 
     \fill[mp area purple] (0,0) -- (AeOne) -- (Corner) -- (AeTwo) -- cycle;
     \draw[figpurple!48, line width=0.7pt, dash pattern=on 2.4pt off 1.8pt] (AeOne) -- (Corner) -- (AeTwo);
-    \draw[mp vector] (0,0) -- (AeOne);
-    \draw[mp vector d] (0,0) -- (AeTwo);
-    \node[mp point] at (AeOne) {};
-    \node[mp point d] at (AeTwo) {};
 
     \node[mp label, below right, text=figblue] at (AeOne) {$\alpha e_1=(a,b)$};
     \node[mp label, above left, text=figred] at (AeTwo) {$\alpha e_2=(-b,a)$};
@@ -2270,6 +2278,16 @@ e_2=
     \node[mp label, below left] at (0,0) {$O$};
     \draw[mp axis] (-2,0) -- (3.95,0) node[mp label, right] {$x$};
     \draw[mp axis] (0,-0.85) -- (0,3.95) node[mp label, above] {$y$};
+    
+    
+    \draw[mp thin axis] (0,0) -- (1,0);
+    \draw[mp thin axis] (0,0) -- (0,1);
+    \draw[mp vector] (0,0) -- (AeOne);
+    \draw[mp vector d] (0,0) -- (AeTwo);
+    \node[mp point] at (AeOne) {};
+    \node[mp point d] at (AeTwo) {};
+    \node[mp label, below] at (1,0) {$e_1$};
+    \node[mp label, left] at (0,1) {$e_2$};
 \end{tikzpicture}
 \caption{复数乘法与矩阵的对应}
 \label{fig:complex-multiplication-basis}
