@@ -1964,15 +1964,10 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
 
         \node[mp label, right, text=figblue] at (Z1) {$z_1$};
         \node[mp label, above right, text=figteal] at (Z2) {$z_2$};
-        \node[mp label, text=figblue] at ($(0,0)!0.54!(Z1)+(-0.1,0.14)$) {$|z_1|=r_1$};
-        \node[mp label, text=figteal] at ($(0,0)!0.55!(Z2)+(0.18,-0.08)$) {$|z_2|=r_2$};
-        \node[mp small, text=black!58] at (1.3,2.5) {(a) 输入：$z_1,\ z_2$};
+        \node[mp label, text=figblue] at ($(0,0)!0.54!(Z1)+(-0.1,0.14)$) {$r_1$};
+        \node[mp label, text=figteal] at ($(0,0)!0.55!(Z2)+(0.18,-0.08)$) {$r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
-
-    \draw[-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!58]
-        (4.0,1.2) -- (5.45,1.2);
-    \node[mp label] at (4.72,1.5) {乘以 $z_2$};
 
     \begin{scope}[xshift=6.2cm]
         \draw[mp axis] (-0.6,0) -- (3.6,0) node[mp label, right] {$\operatorname{Re}z$};
@@ -1984,11 +1979,10 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
 
         \draw[mp angle, draw=figpurple, -{Stealth[length=1.9mm,width=1.4mm]}]
             (0.78,0) arc[start angle=0,end angle=60,radius=0.78];
-        \node[mp label, text=figpurple] at (0.95,0.63) {$\theta_1+\theta_2$};
+        \node[mp label, text=figpurple] at (1.4,0.35) {$\theta_1+\theta_2$};
 
         \node[mp label, above right, text=figpurple] at (P) {$z_1z_2$};
-        \node[mp label, text=figpurple] at ($(0,0)!0.55!(P)+(-0.38,0.1)$) {$|z_1z_2|=r_1r_2$};
-        \node[mp small, text=black!58] at (1.45,2.78) {(b) 输出：$z_1z_2$};
+        \node[mp label, text=figpurple] at ($(0,0)!0.55!(P)+(0.48,0.1)$) {$r_1r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 \end{tikzpicture}
