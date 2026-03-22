@@ -1458,11 +1458,11 @@ r=|z|,\qquad \theta\in \arg z.
     \draw[mp vector] (O) -- (Z);
     \node[mp point] at (Z) {};
 
-    \draw[mp helper, line width=0.78pt] (Z) -- (X);
+    \draw[mp helper, line width=0.8pt] (Z) -- (X);
     \draw[mp angle] (0.82,0) arc[start angle=0,end angle=33.69,radius=0.82];
     \node[mp label, text=figbrown] at (1.05,0.35) {$\theta$};
 
-    \draw[mp soft] (2.78,0) -- (2.78,0.22) -- (3,0.22);
+    \draw[mp soft, line width=0.8pt] (2.78,0) -- (2.78,0.22) -- (3,0.22);
 
     \node[mp label, below] at ($(O)!0.5!(X)$) {$x$};
     \node[mp label, right] at ($(X)!0.5!(Z)$) {$y$};
@@ -1665,7 +1665,7 @@ z=re^{\mathrm{i}\theta}
     \draw[mp angle] (0.36,0) arc[start angle=0,end angle=50,radius=0.36];
     \node[mp label, text=figbrown] at (0.57,0.24) {$\theta$};
     \node[mp label, above right] at (Z) {$e^{\mathrm{i}\theta}$};
-    \node[mp small, text=figblue] at (-0.74,-0.78) {$|z|=1$};
+    \node[mp small, text=figblue] at (-1.2,-0.78) {$|z|=1$};
     \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{单位圆上的 $e^{\mathrm{i}\theta}$}
@@ -1882,9 +1882,9 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
     \node[mp point] at (A) {};
     \node[mp point b] at (B) {};
     \node[mp point c] at (C) {};
-    \node[mp label, text=figblue] at ($(0,0)!0.52!(A)+(0.22,-0.1)$) {$z_1$};
-    \node[mp label, text=figteal] at ($(0,0)!0.5!(B)+(-0.24,0.04)$) {$z_2$};
-    \node[mp label, text=figpurple, fill=white, inner sep=1pt] at ($(0,0)!0.55!(C)+(0.05,0.18)$) {$z_1+z_2$};
+    \node[mp label, text=figblue, right] at (2, 1) {$z_1$};
+    \node[mp label, text=figteal, above] at (1.5,2) {$z_2$};
+    \node[mp label, text=figpurple, right] at (3.5,3) {$z_1+z_2$};
     \node[mp label, below left] at (0,0) {$O$};
 \end{tikzpicture}
 \caption{复数加法的平行四边形法则}
