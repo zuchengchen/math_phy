@@ -3061,9 +3061,9 @@ F(w)=f\!\left(\frac{1}{w}\right),
         \draw[mp vector d] (0,0) -- (P);
     \end{scope}
 
-    \draw[mp thin axis] (3.45,0.45) -- (5.15,0.45);
-    \node[mp small, text=figblue] at (4.3,0.72) {投影到实轴};
-    \node[mp small, text=figblue] at (4.3,0.2) {随时间转动};
+    \draw[mp thin axis] (3.4,0.0) -- (5.55,0.0);
+    \node[mp small, text=figblue] at (4.3,0.3) {投影到实轴};
+    \node[mp small, text=figblue] at (4.3,-0.3) {随时间转动};
 
     \begin{scope}[xshift=6.1cm]
         \draw[mp axis] (0,0) -- (4.95,0) node[mp label, right] {$t$};
@@ -3408,7 +3408,6 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \centering
 \resizebox{0.92\textwidth}{!}{%
 \begin{tikzpicture}[
-    node distance=1.18cm and 1.05cm,
     foundation/.style={
         rectangle,
         rounded corners=5pt,
@@ -3459,25 +3458,25 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
     },
     arrow/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=0.95pt, draw=black!66, rounded corners=4pt}
 ]
-\node[foundation] (a) {为什么要引入复数};
-\node[foundation, right=of a] (b) {代数形式与\\四则运算};
-\node[foundation, right=of b] (c) {复平面、模、\\辐角、共轭};
+\node[foundation] (a) at (0,0) {为什么要引入复数};
+\node[foundation] (b) at (4.35,0) {代数形式与\\四则运算};
+\node[foundation] (c) at (8.70,0) {复平面、模、\\辐角、共轭};
 
-\node[pivot, below=1.30cm of b] (d) {三角形式与\\指数形式};
-\node[branch, below left=1.35cm and 1.05cm of d] (e) {乘法、除法\\与旋转伸缩};
-\node[branch, below right=1.35cm and 1.05cm of d] (f) {乘方、开方\\与单位根};
+\node[pivot] (d) at (4.35,-2.35) {三角形式与\\指数形式};
+\node[branch] (e) at (1.55,-4.85) {乘法、除法\\与旋转伸缩};
+\node[branch] (f) at (7.15,-4.85) {乘方、开方\\与单位根};
 
-    \node[outcome, below left=2.62cm and 1.95cm of d] (h) {物理中的振动、\\相位与叠加};
-    \node[outcome, below right=2.62cm and 1.95cm of d] (g) {扩充复平面\\与复球面};
+\node[outcome] (h) at (0.00,-7.20) {物理中的振动、\\相位与叠加};
+\node[outcome] (g) at (4.35,-7.20) {扩充复平面\\与复球面};
 
-    \draw[arrow] (a) -- (b);
-    \draw[arrow] (b) -- (c);
-    \draw[arrow] (c.south) |- (d.east);
-    \draw[arrow] (d) -- (e);
-    \draw[arrow] (d) -- (f);
-    \draw[arrow] (d.south west) |- (h.north);
-    \draw[arrow] (e.south) |- (g.west);
-    \draw[arrow] (f.south) |- (g.east);
+\draw[arrow] (a.east) -- (b.west);
+\draw[arrow] (b.east) -- (c.west);
+\draw[arrow] (c.south west) -- (d.north east);
+\draw[arrow] (d.south west) -- (e.north east);
+\draw[arrow] (d.south east) -- (f.north west);
+\draw[arrow] (d.south west) -- (h.north east);
+\draw[arrow] (e.south east) -- (g.north west);
+\draw[arrow] (f.south west) -- (g.north east);
 \end{tikzpicture}%
 }
 \caption{第一章知识主线}
