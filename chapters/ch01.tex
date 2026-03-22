@@ -2071,24 +2071,20 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
         \node[mp point d] at (Z2) {};
 
         \draw[mp angle, draw=figblue, -{Stealth[length=1.9mm,width=1.4mm]}]
-            (0.7,0) arc[start angle=0,end angle=68,radius=0.7];
-        \node[mp label, text=figblue] at (0.7,0.7) {$\theta_1$};
+            (0.5,0) arc[start angle=0,end angle=68,radius=0.5];
+        \node[mp label, text=figblue] at (0.5,0.6) {$\theta_1$};
 
         \draw[mp angle, draw=figred, -{Stealth[length=1.9mm,width=1.4mm]}]
             (0.98,0) arc[start angle=0,end angle=28,radius=0.98];
         \node[mp label, text=figred] at (1.2,0.32) {$\theta_2$};
 
-        \node[mp label, above left, text=figblue] at (Z1) {$z_1$};
+        \node[mp label, right, text=figblue] at (Z1) {$z_1$};
         \node[mp label, right, text=figred] at (Z2) {$z_2$};
         \node[mp label, text=figblue] at ($(0,0)!0.56!(Z1)+(-0.24,0.08)$) {$r_1$};
-        \node[mp label, text=figred] at ($(0,0)!0.56!(Z2)+(0.16,-0.14)$) {$r_2$};
+        \node[mp label, text=figred] at ($(0,0)!0.56!(Z2)+(0.1,0.3)$) {$r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
-
-    \draw[-{Stealth[length=2.6mm,width=1.8mm]}, line width=0.9pt, draw=black!58]
-        (4.0,1.25) -- (5.55,1.25);
-    \node[mp label] at (4.78,1.55) {除以 $z_2$};
-
+    
     \begin{scope}[xshift=6.35cm]
         \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
         \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\operatorname{Im}z$};
@@ -2099,10 +2095,10 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
 
         \draw[mp angle, draw=figpurple, -{Stealth[length=1.9mm,width=1.4mm]}]
             (0.8,0) arc[start angle=0,end angle=40,radius=0.8];
-        \node[mp label, text=figpurple] at (1.08,0.48) {$\theta_1-\theta_2$};
+        \node[mp label, text=figpurple] at (1.5,0.2) {$\theta_1-\theta_2$};
 
-        \node[mp label, above right, text=figpurple] at (Q) {$\dfrac{z_1}{z_2}$};
-        \node[mp label, text=figpurple] at ($(0,0)!0.56!(Q)+(0.32,-0.02)$) {$\dfrac{r_1}{r_2}$};
+        \node[mp label, right, text=figpurple] at (Q) {$\dfrac{z_1}{z_2}$};
+        \node[mp label, text=figpurple] at ($(0,0)!0.56!(Q)+(0.1,0.2)$) {$r_1/r_2$};
         \node[mp label, below left] at (0,0) {$O$};
     \end{scope}
 \end{tikzpicture}
@@ -2295,8 +2291,8 @@ e_2=
     \node[mp point d] at (AeTwo) {};
     \node[mp point, black] at (1, 0) {};
     \node[mp point, black] at (0, 1) {};
-    \node[mp label, below] at (1,0) {$e_1$};
-    \node[mp label, left] at (0,1) {$e_2$};
+    \node[mp label, below] at (1,0) {$e_1=1$};
+    \node[mp label, right] at (0,1) {$e_2=i$};
 \end{tikzpicture}
 \caption{复数乘法与矩阵的对应}
 \label{fig:complex-multiplication-basis}
