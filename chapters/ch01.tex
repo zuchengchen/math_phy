@@ -3408,108 +3408,80 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \centering
 \resizebox{0.92\textwidth}{!}{%
 \begin{tikzpicture}[
-    panel a/.style={
+    foundation/.style={
         rectangle,
-        rounded corners=7pt,
+        rounded corners=5pt,
         draw=mainblue!78!black,
-        fill=mainblue!4,
-        line width=0.9pt,
-        minimum width=3.7cm,
-        minimum height=7.5cm
+        top color=mainblue!12,
+        bottom color=white,
+        line width=0.85pt,
+        text width=4.2cm,
+        minimum height=1.02cm,
+        align=center,
+        font=\small
     },
-    panel b/.style={
+    geometry/.style={
         rectangle,
-        rounded corners=7pt,
+        rounded corners=5pt,
         draw=defteal!82!black,
-        fill=defteal!4,
-        line width=0.9pt,
-        minimum width=3.7cm,
-        minimum height=7.5cm
+        top color=defteal!14,
+        bottom color=white,
+        line width=0.85pt,
+        text width=4.2cm,
+        minimum height=1.02cm,
+        align=center,
+        font=\small
     },
-    panel c/.style={
+    pivot/.style={
         rectangle,
-        rounded corners=7pt,
+        rounded corners=5pt,
         draw=notebrown!84!black,
-        fill=notebrown!5,
+        top color=notebrown!12,
+        bottom color=white,
         line width=0.9pt,
-        minimum width=3.7cm,
-        minimum height=7.5cm
-    },
-    head a/.style={
-        rectangle,
-        rounded corners=4pt,
-        draw=mainblue!82!black,
-        fill=mainblue!16,
-        line width=0.85pt,
-        minimum width=2.35cm,
-        minimum height=0.78cm,
+        text width=4.3cm,
+        minimum height=1.05cm,
         align=center,
         font=\small\bfseries
     },
-    head b/.style={
+    outcome/.style={
         rectangle,
-        rounded corners=4pt,
-        draw=defteal!84!black,
-        fill=defteal!17,
+        rounded corners=5pt,
+        draw=physicsbrown!84!black,
+        top color=physicsbrown!12,
+        bottom color=white,
         line width=0.85pt,
-        minimum width=2.35cm,
-        minimum height=0.78cm,
+        text width=3.75cm,
+        minimum height=1.02cm,
         align=center,
-        font=\small\bfseries
+        font=\small
     },
-    head c/.style={
-        rectangle,
-        rounded corners=4pt,
-        draw=notebrown!86!black,
-        fill=notebrown!18,
-        line width=0.85pt,
-        minimum width=2.35cm,
-        minimum height=0.78cm,
-        align=center,
-        font=\small\bfseries
-    },
-    body/.style={
-        text width=3.0cm,
-        align=left,
-        font=\small,
-        text=black!88
-    },
-    guide/.style={font=\footnotesize, text=black!62}
+    arrow/.style={-{Stealth[length=2.7mm,width=1.8mm]}, line width=0.95pt, draw=black!66}
 ]
-\node[panel a] (leftpanel) at (0,0) {};
-\node[panel b] (midpanel) at (4.85,0) {};
-\node[panel c] (rightpanel) at (9.70,0) {};
+\node[foundation] (a) at (0,0) {为什么要引入复数\\方程无解与数系扩张};
+\node[foundation] (b) at (0,-1.65) {代数形式 $z=x+\mathrm{i}y$\\相等、分类与四则运算};
+\node[geometry] (c) at (0,-3.30) {复平面\\模、辐角、共轭与几何直观};
+\node[pivot] (d) at (0,-4.95) {三角形式与指数形式\\欧拉公式把长度和方向写进公式};
+\node[pivot] (e) at (0,-6.65) {乘法与除法的几何意义\\模乘除、角加减、旋转伸缩};
+\node[pivot] (f) at (0,-8.35) {乘方、开方与单位根\\角度倍化与均分};
 
-\node[head a] at ($(leftpanel.north)+(0,-0.55)$) {1. 建立复数};
-\node[head b] at ($(midpanel.north)+(0,-0.55)$) {2. 看懂复数};
-\node[head c] at ($(rightpanel.north)+(0,-0.55)$) {3. 用好复数};
+\node[outcome] (g) at (-2.7,-10.35) {扩充复平面\\无穷远点与复球面};
+\node[outcome] (h) at (2.7,-10.35) {物理中的应用\\振动、相位与叠加};
 
-\node[guide] at ($(midpanel.north)+(0,0.22)$) {从定义，到几何表示，再到运算、拓展与应用};
-
-\node[body, anchor=north west] at ($(leftpanel.north west)+(0.35,-1.20)$) {$\bullet$ 数系扩张：为解 $x^2+1=0$\\[0.40em]
-$\bullet$ 代数形式：$z=x+\mathrm{i}y$\\[0.40em]
-$\bullet$ 相等与分类\\[0.40em]
-$\bullet$ 四则运算\\[0.40em]
-$\bullet$ 做题入口：实部、虚部分别比较};
-
-\node[body, anchor=north west] at ($(midpanel.north west)+(0.35,-1.20)$) {$\bullet$ 复平面：点与向量\\[0.40em]
-$\bullet$ 模与距离\\[0.40em]
-$\bullet$ 共轭与关于实轴的对称\\[0.40em]
-$\bullet$ 辐角、主辐角、多值性\\[0.40em]
-$\bullet$ 三角形式、指数形式、欧拉公式};
-
-\node[body, anchor=north west] at ($(rightpanel.north west)+(0.35,-1.20)$) {$\bullet$ 加减：向量叠加\\[0.40em]
-$\bullet$ 乘除：模乘除、角加减\\[0.40em]
-$\bullet$ 乘方、开方与单位根\\[0.40em]
-$\bullet$ 无穷远点、扩充复平面、复球面\\[0.40em]
-$\bullet$ 振动、相位与干涉};
+\draw[arrow] (a) -- (b);
+\draw[arrow] (b) -- (c);
+\draw[arrow] (c) -- (d);
+\draw[arrow] (d) -- (e);
+\draw[arrow] (e) -- (f);
+\draw[arrow] (f.south west) -- (g.north);
+\draw[arrow] (f.south east) -- (h.north);
 \end{tikzpicture}%
 }
-\caption{第一章内容总览}
+\caption{第一章知识主线}
 \label{fig:ch01-summary-map}
 \end{figure}
 
-复习这张图时，不必把它当成一条很长的流程线，而可以把本章概括成三个连续的问题：左边回答``复数是什么''，中间回答``怎样理解和表示复数''，右边回答``这些语言拿来做什么''。如果你能顺着这三栏说清定义、几何直观、表示切换，以及乘除运算、单位根、无穷远点和物理相位之间的联系，本章的骨架就抓住了。
+读这张图时，建议先顺着中间主线从上往下看：复数先作为一种新的数被引入，然后获得代数形式和复平面上的几何意义，再通过三角形式与指数形式把``大小''和``方向''压缩进统一表达，接着用这套表达理解乘除、乘方和开方。最下面分出的两条线，则对应本章最后给出的两个延伸方向：几何上的扩充复平面与复球面，以及物理中的振动、相位与叠加。
 
 \begin{zhongyao}[本章主要结论]
 \raggedright
