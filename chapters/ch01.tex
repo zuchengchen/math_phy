@@ -22,7 +22,7 @@
 \begin{wulibj}[为什么要引入复数]
 复数不是凭空添上的新符号，而是数系扩张的自然结果：像 $x^2+1=0$ 这样的方程在实数范围内没有解，我们就需要把数的范围再向外扩一步。
 
-这一节先回答``为什么要引入复数''，再建立最基本的语言：复数的定义、实部与虚部、复数相等以及四则运算。把这些基础打稳以后，后面再讨论复数的几何表示时，理解也会自然得多。
+这一节先回答``为什么要引入复数''，再建立最基本的语言：复数的定义、实部与虚部、复数相等以及四则运算。
 \end{wulibj}
 
 \subsection{从方程无解到数系扩张}
@@ -119,6 +119,8 @@
 分别称为复数 $z$ 的\textbf{实部（real part）}和\textbf{虚部（imaginary part）}。
 \end{dingliyi}
 
+\eqref{eq:complex-algebraic} 式称为复数的\textbf{代数形式（algebraic form）}。
+
 \begin{zhu}{}{}
 这里的虚部是实数 $y$，不是 $\mathrm{i}y$。例如，若
 \[
@@ -127,7 +129,6 @@ z=3-2\mathrm{i},
 那么它的实部是 $3$，虚部是 $-2$。
 \end{zhu}
 
-式 \eqref{eq:complex-algebraic} 称为复数的\textbf{代数形式（algebraic form）}。以后若没有特别说明，所讨论的复数均采用这种形式。
 
 \subsection{复数相等与基本分类}
 
@@ -141,8 +142,6 @@ z=3-2\mathrm{i},
     \end{cases}
 \end{equation}
 
-这是解复数方程的基本方法。
-
 \begin{lizi}{由复数相等求参数}{}
 若
 \begin{equation}
@@ -151,20 +150,9 @@ z=3-2\mathrm{i},
 求 $a,b$。
 
 \begin{jie}
-这类题\textbf{稳妥}的做法，不是急着做复杂变形，而是先看两边是否已经写成标准形式 $x+\mathrm{i}y$。本题恰好已经写成了这种形式，因此可以直接比较实部和虚部。
+两个复数相等要求实部和虚部分别相等，即
 \[
 2a-1=3,\qquad a+b=2.
-\]
-由第一式得
-\[
-a=2.
-\]
-再代回第二式，得
-\[
-2+b=2.
-\]
-\[
-b=0.
 \]
 所以
 \[
@@ -176,14 +164,14 @@ a=2,\qquad b=0.
 
 根据实部和虚部是否为零，复数可以作如下分类：
 \begin{itemize}
-	\item 若 $y=0$，则 $z=x$，即为实数；
+	\item 若 $y=0$，则 $z=x$，即为实数（real number）；
 	\item 若 $x=0$，则 $z=\mathrm{i}y$，称为纯虚数（pure imaginary number）；
 	\item 若 $x=y=0$，则得到零复数 $0$；
 	\item 若 $x\neq 0$ 且 $y\neq 0$，则称为一般复数。
 \end{itemize}
 
 \begin{zhu}{}{}
-关于``纯虚数''是否把 $0$ 算进去，不同教材会有不同约定。有的教材规定纯虚数必须 $y\neq 0$，也就是把非零纯虚数单独拿出来；本章\textbf{为与}坐标分类保持一致，暂时把 $x=0$ 的情形都归到纯虚数里。也就是说，在本章的约定下，$0$ 同时属于实数和纯虚数。
+关于``纯虚数''是否把 $0$ 算进去，不同教材会有不同约定。有的教材规定纯虚数必须 $y\neq 0$，也就是把非零纯虚数单独拿出来；本书把 $x=0$ 的情形归到纯虚数里，所以$0$ 同时属于实数和纯虚数。
 \end{zhu}
 
 如果把这些类型放到复平面上看，分类会更清楚：实数落在实轴上，纯虚数落在虚轴上，而一般复数对应那些不在坐标轴上的点；原点 $0$ 则正好是这几种情况相交的特殊位置。
@@ -241,7 +229,7 @@ z_4=0
 
 \subsection{复数的四则运算}
 
-前面我们已经知道，复数可以写成代数形式 $z=x+\mathrm{i}y$。但仅仅会写出表达式还不够。后面无论是讨论复平面上的几何意义，还是把复数用于物理计算，我们都必须先弄清楚两个复数怎样相加、相减、相乘、相除。这里最重要的原则是：\textbf{每次运算结束后，都要把结果整理成标准形式 $x+\mathrm{i}y$}，这样实部和虚部才看得清，后面的讨论也更方便。
+前面我们已经知道，复数可以写成代数形式 $z=x+\mathrm{i}y$。但仅仅会写出表达式还不够。后面无论是讨论复平面上的几何意义，还是把复数用于物理计算，我们都必须先弄清楚两个复数怎样相加、相减、相乘、相除。这里最重要的原则是：\textbf{每次运算结束后，都要把结果整理成标准形式 $x+\mathrm{i}y$}，这样才能看清实部和虚部，便于后面的讨论。
 
 设有两个复数，分别为
 \[
@@ -276,7 +264,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{lizi}
 
 \medskip
-\noindent\textbf{乘法（multiplication）} 要更小心一些。它不能简单地理解为``实部乘实部，虚部乘虚部''，而必须按照普通代数的展开规则来做，并在最后用 $\mathrm{i}^2=-1$ 化简：
+\noindent\textbf{乘法（multiplication）} 要小心一些。它不能简单地理解为``实部乘实部，虚部乘虚部''，而必须按照普通代数的展开规则来做，并在最后用 $\mathrm{i}^2=-1$ 化简：
 \begin{align*}
     z_1z_2
     &=(x_1+\mathrm{i}y_1)(x_2+\mathrm{i}y_2)\\
@@ -298,9 +286,9 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \begin{jie}
 \begin{align*}
     (2+3\mathrm{i})(1-2\mathrm{i})
-    &=2-4\mathrm{i}+3\mathrm{i}-6\mathrm{i}^2\\
-    &=2-\mathrm{i}+6\\
-    &=8-\mathrm{i}.
+    &=2-4\mathrm{i}+3\mathrm{i}-6\mathrm{i}^2
+    =2-\mathrm{i}+6
+    =8-\mathrm{i}.
 \end{align*}
 \end{jie}
 \end{lizi}
@@ -314,23 +302,20 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \[
 x_2-\mathrm{i}y_2.
 \]
-这个量以后会正式称为 $z_2$ 的共轭复数（complex conjugate）。于是
+这个量以后会正式称为 $z_2$ 的共轭复数。于是
 \begin{align*}
     \frac{z_1}{z_2}
-    &=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}\cdot \frac{x_2-\mathrm{i}y_2}{x_2-\mathrm{i}y_2}\\
     &=\frac{(x_1+\mathrm{i}y_1)(x_2-\mathrm{i}y_2)}{(x_2+\mathrm{i}y_2)(x_2-\mathrm{i}y_2)}.
 \end{align*}
 先看分母：
 \begin{align*}
     (x_2+\mathrm{i}y_2)(x_2-\mathrm{i}y_2)
-    &=x_2^2-(\mathrm{i}y_2)^2\\
-    &=x_2^2+y_2^2.
+    &=x_2^2-(\mathrm{i}y_2)^2=x_2^2+y_2^2.
 \end{align*}
 再看分子：
 \begin{align*}
     (x_1+\mathrm{i}y_1)(x_2-\mathrm{i}y_2)
-    &=x_1x_2-\mathrm{i}x_1y_2+\mathrm{i}x_2y_1-\mathrm{i}^2y_1y_2\\
-    &=(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2).
+    =(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2).
 \end{align*}
 所以
 \begin{equation}\label{eq:complex-division-algebraic}
@@ -346,14 +331,13 @@ x_2-\mathrm{i}y_2.
 \]
 
 \begin{jie}
-为了把分母化成实数，我们同乘 $1+2\mathrm{i}$：
+为了把分母化成实数，我们把分子和分母同乘 $1+2\mathrm{i}$：
 \begin{align*}
     \frac{2+3\mathrm{i}}{1-2\mathrm{i}}
-    &=\frac{2+3\mathrm{i}}{1-2\mathrm{i}}\cdot \frac{1+2\mathrm{i}}{1+2\mathrm{i}}\\
     &=\frac{(2+3\mathrm{i})(1+2\mathrm{i})}{(1-2\mathrm{i})(1+2\mathrm{i})}\\
-    &=\frac{2+4\mathrm{i}+3\mathrm{i}+6\mathrm{i}^2}{1+4}\\
-    &=\frac{-4+7\mathrm{i}}{5}\\
-    &=-\frac{4}{5}+\frac{7}{5}\mathrm{i}.
+    &=\frac{2+4\mathrm{i}+3\mathrm{i}+6\mathrm{i}^2}{1+4}
+    =\frac{-4+7\mathrm{i}}{5}
+    =-\frac{4}{5}+\frac{7}{5}\mathrm{i}.
 \end{align*}
 \end{jie}
 \end{lizi}
@@ -374,7 +358,7 @@ x_2-\mathrm{i}y_2.
 
 \subsection{复数运算的基本运算律}
 
-前面我们已经给出了复数加、减、乘、除的计算公式。接下来要问的是，复数的运算是否也满足实数中熟悉的基本运算律。对于\textbf{加法与乘法}，答案是肯定的：复数同样满足交换律、结合律和分配律，因此后面做代数化简时，许多熟悉的操作仍然成立。
+前面我们已经给出了复数加、减、乘、除的计算公式。接下来要问的是，复数的运算是否也满足实数中熟悉的基本运算律？对于\textbf{加法与乘法}，答案是肯定的：复数同样满足交换律、结合律和分配律，因此后面做代数化简时，许多熟悉的操作仍然成立。
 
 \begin{dingli}{复数加法与乘法的基本运算律}{}
 对任意复数 $z_1,z_2,z_3$，都有
@@ -420,7 +404,6 @@ z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
 \]
 
 \noindent\textbf{3. 乘法交换律}
-由复数乘法公式，
 \begin{align*}
     z_1z_2
     &=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1)\\
@@ -429,7 +412,6 @@ z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
 \end{align*}
 
 \noindent\textbf{4. 乘法结合律}
-这里式子会比较长，但不要被展开吓住。我们的目标其实只有一个：分别按两种不同的顺序相乘，最后都化成标准形式 $x+\mathrm{i}y$，再比较实部和虚部是否一致。
 
 先算 $z_1z_2$：
 \[
@@ -459,7 +441,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
     &\quad+\mathrm{i}(x_1x_2y_3+x_1x_3y_2+y_1x_2x_3-y_1y_2y_3).
 \end{align*}
 
-由于实数乘法满足交换律，$x_2y_1y_3=y_1x_2y_3$，$y_1x_3y_2=y_1y_2x_3$，$x_1y_2x_3=x_1x_3y_2$，$x_2y_1x_3=y_1x_2x_3$，所以这两个结果完全相同，从而
+从而
 \[
     (z_1z_2)z_3=z_1(z_2z_3).
 \]
@@ -479,12 +461,10 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
 \[
 \begin{aligned}
     (z_1+z_2)z_3
-    &=z_3(z_1+z_2)\\
-    &=z_3z_1+z_3z_2\\
-    &=z_1z_3+z_2z_3.
+    &=z_3(z_1+z_2)=z_3z_1+z_3z_2=z_1z_3+z_2z_3.
 \end{aligned}
 \]
-这里第一步和第三步用了乘法交换律，第二步用了刚刚证明过的左分配律。
+这里第一步和第三步用了乘法交换律，第二步用了左分配律。
 \end{proof}
 
 \begin{zhu}{}{}
@@ -498,7 +478,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
 \end{zhu}
 
 \begin{tishi}[复数也可以像实数那样化简]
-从现在开始，只要表达式里只涉及复数的加法、乘法以及由它们派生出来的减法、除法，你就可以像在实数里那样放心地展开括号、合并同类项、提取公因式。当然，前提仍然是每一步运算都要合法，例如做除法时分母不能为零。
+以后只要表达式里涉及复数的加法、乘法以及由它们派生出来的减法、除法，就可以像实数那样放心地展开括号、合并同类项、提取公因式。当然，前提仍然是每一步运算都要合法，例如做除法时分母不能为零。
 \end{tishi}
 
 \subsection{复数为什么会进入物理：一个预告}
@@ -510,7 +490,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
 \subsection{复数发展小史（选读）}
 
 \begin{tishi}[阅读定位]
-这一小节属于选读内容。第一遍学习时，不必死记人名和年份，更不必现在就会推导三次方程公式。只要抓住一条主线即可：\textbf{先是问题促使人们引入复数，然后运算规则稳定下来，接着几何意义被澄清，最后它成为更大理论和物理应用的基础。}
+这一小节属于选读内容。第一遍学习时，不必死记人名和年份。只要抓住一条主线即可：\textbf{先是问题促使人们引入复数，然后运算规则稳定下来，接着几何意义被澄清，最后它成为更大理论和物理应用的基础。}
 \end{tishi}
 
 对今天的我们来说，复数已经熟悉到几乎让人觉得理所当然：只要写成
