@@ -1359,53 +1359,6 @@ x+\mathrm{i}y
 这一节就来建立复数的三角形式和指数形式。这样一来，乘法、除法、乘幂和开方都会变得更整齐，也更容易和前面建立的几何图像对应起来。
 \end{wulibj}
 
-在开始推公式之前，不妨先想清楚这一节到底要解决什么。图 \ref{fig:three-representations} 把同一个复数最常用的三种表示法摆在了一起。以后做题时，很多时候真正的关键不是``会不会算''，而是能不能\textbf{快速判断}：眼前这道题更适合用哪一种语言。
-
-\begin{figure}[htbp]
-\centering
-\resizebox{0.99\textwidth}{!}{%
-\begin{tikzpicture}[
-    rep/.style={
-        rectangle,
-        rounded corners=5pt,
-        line width=0.85pt,
-        minimum height=2.2cm,
-        align=center,
-        font=\small
-    },
-    algebra/.style={rep, text width=2.35cm, draw=mainblue!82!black, top color=mainblue!10, bottom color=white},
-    trig/.style={rep, text width=3.65cm, draw=defteal!82!black, top color=defteal!11, bottom color=white},
-    expo/.style={rep, text width=2.35cm, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
-    link/.style={{Stealth[length=2.35mm,width=1.7mm]}-{Stealth[length=2.5mm,width=1.7mm]}, line width=0.9pt, draw=black!62}
-]
-\node[algebra] (A) at (0,0) {\textbf{代数形式}\\[0.35em]
-    $z=x+\mathrm{i}y$\\[0.45em]
-    擅长处理\\
-    实部、虚部、参数比较\\
-    与直接代数运算};
-\node[trig] (T) at (5.8,0) {\textbf{三角形式}\\[0.35em]
-    $z=r(\cos\theta+\mathrm{i}\sin\theta)$\\[0.45em]
-    擅长描述\\
-    长度、方向\\
-    和几何位置};
-\node[expo] (E) at (12.6,0) {\textbf{指数形式}\\[0.35em]
-    $z=re^{\mathrm{i}\theta}$\\[0.45em]
-    擅长处理\\
-    乘除、乘幂、开方\\
-    与相位问题};
-
-\draw[link] (A.east) -- (T.west)
-    node[midway, above=8pt] {$x=r\cos\theta$}
-    node[midway, below=8pt] {$ y=r\sin\theta$};
-\draw[link] (T.east) -- (E.west)
-    node[midway, above=8pt] {欧拉公式}
-    node[midway, below=8pt] {$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$};
-\end{tikzpicture}%
-}
-\caption{复数的三种常用表示}
-\label{fig:three-representations}
-\end{figure}
-
 \subsection{从直角坐标到极坐标}
 
 设 $z=x+\mathrm{i}y\neq 0$。记
@@ -1818,6 +1771,53 @@ w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2
 \]
 \end{jie}
 \end{lizi}
+
+到这里为止，同一个复数最常用的三种表示法都已经出现了。图 \ref{fig:three-representations} 把它们放在一起作一个总览。后面进入复数运算时，很多时候真正的关键不是``会不会算''，而是能不能\textbf{快速判断}：眼前这道题更适合用哪一种语言。
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.99\textwidth}{!}{%
+\begin{tikzpicture}[
+    rep/.style={
+        rectangle,
+        rounded corners=5pt,
+        line width=0.85pt,
+        minimum height=2.2cm,
+        align=center,
+        font=\small
+    },
+    algebra/.style={rep, text width=2.35cm, draw=mainblue!82!black, top color=mainblue!10, bottom color=white},
+    trig/.style={rep, text width=3.65cm, draw=defteal!82!black, top color=defteal!11, bottom color=white},
+    expo/.style={rep, text width=2.35cm, draw=physicsbrown!82!black, top color=physicsbrown!10, bottom color=white},
+    link/.style={{Stealth[length=2.35mm,width=1.7mm]}-{Stealth[length=2.5mm,width=1.7mm]}, line width=0.9pt, draw=black!62}
+]
+\node[algebra] (A) at (0,0) {\textbf{代数形式}\\[0.35em]
+    $z=x+\mathrm{i}y$\\[0.45em]
+    擅长处理\\
+    实部、虚部、参数比较\\
+    与直接代数运算};
+\node[trig] (T) at (5.8,0) {\textbf{三角形式}\\[0.35em]
+    $z=r(\cos\theta+\mathrm{i}\sin\theta)$\\[0.45em]
+    擅长描述\\
+    长度、方向\\
+    和几何位置};
+\node[expo] (E) at (12.6,0) {\textbf{指数形式}\\[0.35em]
+    $z=re^{\mathrm{i}\theta}$\\[0.45em]
+    擅长处理\\
+    乘除、乘幂、开方\\
+    与相位问题};
+
+\draw[link] (A.east) -- (T.west)
+    node[midway, above=8pt] {$x=r\cos\theta$}
+    node[midway, below=8pt] {$ y=r\sin\theta$};
+\draw[link] (T.east) -- (E.west)
+    node[midway, above=8pt] {欧拉公式}
+    node[midway, below=8pt] {$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$};
+\end{tikzpicture}%
+}
+\caption{复数的三种常用表示}
+\label{fig:three-representations}
+\end{figure}
 
 \section{复数的运算及其几何意义}
 
