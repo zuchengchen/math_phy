@@ -20,9 +20,19 @@
             ([yshift=2.95cm]current page.south east);
 
         % 统一主视觉：复平面与极坐标向量
-        \begin{scope}[shift={([xshift=-4.85cm, yshift=8.35cm]current page.south east)}]
-            \draw[coverline!84, line width=0.58pt] (-5.1, 0) -- (4.95, 0);
-            \draw[coverline!84, line width=0.58pt] (0, -4.7) -- (0, 4.55);
+        \begin{scope}[shift={([xshift=-5.05cm, yshift=8.2cm]current page.south east)}, scale=0.92]
+            \draw[coverline!84, line width=0.58pt] (-5.1, 0) -- (0, 0);
+            \draw[
+                coverline!84,
+                line width=0.58pt,
+                -{Stealth[length=2.0mm, width=1.35mm]}
+            ] (0, 0) -- (4.95, 0);
+            \draw[coverline!84, line width=0.58pt] (0, -4.7) -- (0, 0);
+            \draw[
+                coverline!84,
+                line width=0.58pt,
+                -{Stealth[length=2.0mm, width=1.35mm]}
+            ] (0, 0) -- (0, 4.55);
             \draw[coverline!60, line width=0.45pt] (0, 0) circle (1.52);
             \draw[covergold!92, line width=1.15pt] (0, 0) circle (3.35);
             \draw[coverplum!44, line width=0.6pt, dash pattern=on 2.6pt off 2.0pt]
