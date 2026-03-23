@@ -22,7 +22,16 @@
 \input{chapters/preface}
 
 % 目录
+\begingroup
+\renewcommand{\contentsname}{总目录（到章）}
+\setcounter{tocdepth}{0}
 \tableofcontents
+\endgroup
+
+\begingroup
+\renewcommand{\contentsname}{详细目录}
+\tableofcontents
+\endgroup
 
 % 正文
 \mainmatter
