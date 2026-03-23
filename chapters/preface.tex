@@ -84,27 +84,27 @@
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[
-    tool/.style={draw=black!75, rounded corners=8pt, line width=1.0pt, minimum height=1.7cm, align=center, inner sep=8pt, font=\small},
-    core/.style={draw=black!80, rounded corners=8pt, line width=1.0pt, minimum height=1.85cm, align=center, inner sep=8pt, font=\small},
+    tool/.style={draw=black!75, rounded corners=8pt, line width=1.0pt, minimum height=1.45cm, align=center, inner sep=5pt, font=\small},
+    core/.style={draw=black!80, rounded corners=8pt, line width=1.0pt, minimum height=1.6cm, align=center, inner sep=5pt, font=\small},
     arrow/.style={->, >=stealth, line width=1.0pt}
 ]
     % 顶部两个工具
-    \node[tool, fill=blue!6, draw=blue!65!black, text width=3.35cm] (complex) at (-3.0, 2.55)
+    \node[tool, fill=blue!6, draw=blue!65!black, text width=3.05cm] (complex) at (-2.8, 2.3)
     {\textbf{\large 复变函数}\\[4pt]解析函数、级数\\展开、留数};
-    \node[tool, fill=green!6, draw=green!55!black, text width=3.35cm] (transform) at (3.0, 2.55)
+    \node[tool, fill=green!6, draw=green!55!black, text width=3.05cm] (transform) at (2.8, 2.3)
     {\textbf{\large 积分变换}\\[4pt]傅里叶变换\\拉普拉斯变换};
 
     % 中间核心
-    \node[core, fill=orange!12, draw=orange!70!black, text width=5.1cm] (pde) at (0, -0.05)
+    \node[core, fill=orange!12, draw=orange!70!black, text width=4.7cm] (pde) at (0, 0)
     {\textbf{\large 数理方程}\\[4pt]三类方程的建立与求解};
 
     % 底部产物
-    \node[tool, fill=red!6, draw=red!55!black, text width=5.1cm, minimum height=1.7cm] (special) at (0, -2.7)
+    \node[tool, fill=red!6, draw=red!55!black, text width=4.7cm, minimum height=1.45cm] (special) at (0, -2.35)
     {\textbf{\large 特殊函数}\\[4pt]勒让德、贝塞尔};
 
     % 连接箭头
-    \draw[arrow, blue!65!black] ([xshift=0.55cm]complex.south) -- ([xshift=-1.1cm]pde.north);
-    \draw[arrow, green!55!black] ([xshift=-0.55cm]transform.south) -- ([xshift=1.1cm]pde.north);
+    \draw[arrow, blue!65!black] ([xshift=0.45cm]complex.south) -- ([xshift=-0.95cm]pde.north);
+    \draw[arrow, green!55!black] ([xshift=-0.45cm]transform.south) -- ([xshift=0.95cm]pde.north);
     \draw[arrow, red!55!black] (pde.south) -- (special.north);
 \end{tikzpicture}
 \caption{课程四部分的逻辑关系}
