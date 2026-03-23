@@ -3075,8 +3075,8 @@ F(w)=f\!\left(\frac{1}{w}\right),
         \node[mp label, above right, text=figred] at (P) {$Ae^{\mathrm{i}(\omega t+\varphi)}$};
         \node[mp label, below, text=figblue] at (X) {$x(t)$};
         \node[mp label, below left] at (0,0) {$O$};
-        \draw[mp axis] (-2.3,0) -- (2.5,0) node[mp label, right] {$\operatorname{Re}$};
-        \draw[mp axis] (0,-2.45) -- (0,2.7) node[mp label, above] {$\operatorname{Im}$};
+        \draw[mp axis] (-2.3,0) -- (2.5,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-2.45) -- (0,2.7) node[mp label, above] {$\operatorname{Im}z$};
         \draw[mp vector d] (0,0) -- (P);
     \end{scope}
 
@@ -3140,8 +3140,8 @@ x(t)=A\cos(\omega t+\varphi).
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.1]
-    \draw[mp axis] (-0.7,0) -- (3.2,0) node[mp label, right] {Re};
-    \draw[mp axis] (0,-2.5) -- (0,0.8) node[mp label, above] {Im};
+    \draw[mp axis] (-0.7,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.5) -- (0,0.8) node[mp label, above] {$\operatorname{Im}z$};
     \coordinate (A) at (2,0);
     \coordinate (B) at (0,-2);
     \coordinate (C) at (2,-2);
@@ -3320,8 +3320,8 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
         \node[mp small, text=black!60, fill=white, inner sep=1.2pt] at (2.15,-0.92) {相位差改变合成振幅};
         
         
-        \draw[mp axis] (-0.6,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}$};
-        \draw[mp axis] (0,-0.5) -- (0,3.3) node[mp label, above] {$\operatorname{Im}$};
+        \draw[mp axis] (-0.6,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}z$};
+        \draw[mp axis] (0,-0.5) -- (0,3.3) node[mp label, above] {$\operatorname{Im}z$};
         \draw[mp vector] (0,0) -- (A);
         \draw[mp vector d dashed] (0,0) -- (B);
         \draw[mp vector d dashed] (A) -- (C);
