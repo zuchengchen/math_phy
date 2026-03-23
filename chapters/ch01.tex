@@ -2344,34 +2344,75 @@ a=r\cos\theta,\qquad b=r\sin\theta.
 \]
 现在就有了完全一致的矩阵解释：\textbf{乘以复数 $\alpha$，就是先做等比例伸缩，再做旋转；或者反过来说，先旋转再等比例伸缩，效果也是一样的。}
 
-\begin{lizi}{把复数乘法写成旋转矩阵}{}
-考察乘以复数
+\noindent 如果只看到``对应一个矩阵''这句话，还是容易觉得有些悬空。下面把它真正作用到一个具体向量上，看看复数乘法和矩阵乘法为什么会给出同一个结果。
+
+\begin{lizi}{用矩阵求一个向量变换后的像}{}
+设平面向量
+\[
+\begin{pmatrix}
+    1\\
+    -2
+\end{pmatrix}
+\]
+对应复数
+\[
+z=1-2\mathrm{i}.
+\]
+求它在乘以复数
 \[
 1+\mathrm{i}
 \]
-所对应的平面变换。
+后得到的像，并写出对应的矩阵计算。
 
 \begin{jie}
-因为
+先用复数乘法直接算：
 \[
-1+\mathrm{i}=\sqrt{2}\,e^{\mathrm{i}\pi/4},
+(1+\mathrm{i})(1-2\mathrm{i})
+=1-2\mathrm{i}+\mathrm{i}-2\mathrm{i}^2
+=3-\mathrm{i}.
 \]
-所以它的几何意义是：\textbf{把任意向量先逆时针旋转 $\pi/4$，再把长度放大到原来的 $\sqrt{2}$ 倍。}
+这说明，变换后的像对应复数
+\[
+3-\mathrm{i},
+\]
+也就是向量
+\[
+\begin{pmatrix}
+    3\\
+    -1
+\end{pmatrix}.
+\]
 
-若从矩阵形式看，由 $a=1,b=1$ 可得对应矩阵为
+再看矩阵形式。乘以复数 $1+\mathrm{i}$ 对应的矩阵是
 \[
 \begin{pmatrix}
     1 & -1\\
     1 & 1
 \end{pmatrix}
-=
-\sqrt{2}
+\]
+因此
+\[
 \begin{pmatrix}
-    \cos\frac{\pi}{4} & -\sin\frac{\pi}{4}\\
-    \sin\frac{\pi}{4} & \cos\frac{\pi}{4}
+    1 & -1\\
+    1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+    1\\
+    -2
+\end{pmatrix}
+=
+\begin{pmatrix}
+    3\\
+    -1
 \end{pmatrix}.
 \]
-这与前面的极形式解释完全一致。
+两种做法得到同一个结果。
+
+若再从几何上理解，因为
+\[
+1+\mathrm{i}=\sqrt{2}\,e^{\mathrm{i}\pi/4},
+\]
+所以这个变换表示：\textbf{把向量先逆时针旋转 $\pi/4$，再把长度放大到原来的 $\sqrt{2}$ 倍。} 矩阵语言只是把这个几何动作改写成了坐标运算。
 \end{jie}
 \end{lizi}
 
@@ -3129,47 +3170,58 @@ x(t)=A\cos(\omega t+\varphi).
 \label{fig:phasor-addition}
 \end{figure}
 
-\begin{lizi}{两个同频振动的叠加}{}
+\noindent 上面的推导只是用一组最简单的数据说明相量法怎么用。下面把两个振动的振幅改成不相同，再做一次，你会更容易看出这种方法并不依赖于``两个振动一样大''。
+
+\begin{lizi}{振幅不同时，怎样用相量法合成同频振动}{}
 求
 \[
-x(t)=2\cos\omega t+2\cos\left(\omega t-\frac{\pi}{2}\right)
+x(t)=\sqrt{3}\cos\omega t+\cos\left(\omega t-\frac{\pi}{2}\right)
 \]
 的振幅和初相。
 
 \begin{jie}
-这道题如果直接套三角恒等式也能做，但不够整齐。相量法的关键，是先把两个振动共有的时间因子 $e^{\mathrm{i}\omega t}$ 提出来，把问题压缩成一个复振幅的加法。
+思路和前面完全一样：先把共有的时间因子 $e^{\mathrm{i}\omega t}$ 提出来，把问题化成复振幅的加法。
 
-由上面的分析，只需求复振幅
+由
 \[
-2-2\mathrm{i}
+\cos\left(\omega t-\frac{\pi}{2}\right)=\operatorname{Re}\left(e^{-\mathrm{i}\pi/2}e^{\mathrm{i}\omega t}\right),
+\]
+可得
+\[
+x(t)=\operatorname{Re}\left[\left(\sqrt{3}+e^{-\mathrm{i}\pi/2}\right)e^{\mathrm{i}\omega t}\right]
+=\operatorname{Re}\left[(\sqrt{3}-\mathrm{i})e^{\mathrm{i}\omega t}\right].
+\]
+所以只需求复振幅
+\[
+\sqrt{3}-\mathrm{i}
 \]
 的模和辐角。
 
 其模为
 \[
-|2-2\mathrm{i}|=2\sqrt{2},
+|\sqrt{3}-\mathrm{i}|=\sqrt{3+1}=2,
 \]
 主辐角为
 \[
-\operatorname{Arg}(2-2\mathrm{i})=-\frac{\pi}{4}.
+\operatorname{Arg}(\sqrt{3}-\mathrm{i})=-\frac{\pi}{6}.
 \]
 因此
 \[
-2-2\mathrm{i}=2\sqrt{2}\,e^{-\mathrm{i}\pi/4}.
+\sqrt{3}-\mathrm{i}=2e^{-\mathrm{i}\pi/6}.
 \]
 
 于是
 \[
-x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t}\right)
-=2\sqrt{2}\cos\left(\omega t-\frac{\pi}{4}\right).
+x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
+=2\cos\left(\omega t-\frac{\pi}{6}\right).
 \]
 所以总振动的振幅为
 \[
-2\sqrt{2},
+2,
 \]
 初相为
 \[
--\frac{\pi}{4}.
+-\frac{\pi}{6}.
 \]
 \end{jie}
 \end{lizi}
@@ -3333,10 +3385,12 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 
 所以，在量子力学里，复数的作用并不只是``把式子写得更紧凑''。它还能把振幅和相位统一起来，而相对相位又会真实地影响干涉结果。这正是复数在现代物理中如此重要的一个原因。
 
-\begin{lizi}{两个波函数叠加时，相位差如何影响概率密度}{}
+\noindent 上面的讨论先看了两个\textbf{等振幅}波函数。下面把第二个波的振幅改成前者的两倍，看看这时即使相位差变成 $\pi$，为什么也不一定能完全相消。
+
+\begin{lizi}{振幅不等时，相位差如何影响概率密度}{}
 设
 \[
-\psi_1=A,\qquad \psi_2=Ae^{\mathrm{i}\phi},
+\psi_1=A,\qquad \psi_2=2Ae^{\mathrm{i}\phi},
 \]
 其中 $A$ 为实常数，$\phi$ 为相位差。求总波函数
 \[
@@ -3347,39 +3401,39 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \begin{jie}
 由题意，
 \[
-\psi=A+Ae^{\mathrm{i}\phi}=A(1+e^{\mathrm{i}\phi}).
+\psi=A+2Ae^{\mathrm{i}\phi}=A(1+2e^{\mathrm{i}\phi}).
 \]
 因此
 \[
-|\psi|^2=A^2|1+e^{\mathrm{i}\phi}|^2.
+|\psi|^2=A^2|1+2e^{\mathrm{i}\phi}|^2.
 \]
 
 下面把模平方展开：
 \[
 \begin{aligned}
-|1+e^{\mathrm{i}\phi}|^2
-&=(1+e^{\mathrm{i}\phi})\overline{(1+e^{\mathrm{i}\phi})}\\
-&=(1+e^{\mathrm{i}\phi})(1+e^{-\mathrm{i}\phi})\\
-&=2+e^{\mathrm{i}\phi}+e^{-\mathrm{i}\phi}\\
-&=2+2\cos\phi.
+|1+2e^{\mathrm{i}\phi}|^2
+&=(1+2e^{\mathrm{i}\phi})\overline{(1+2e^{\mathrm{i}\phi})}\\
+&=(1+2e^{\mathrm{i}\phi})(1+2e^{-\mathrm{i}\phi})\\
+&=5+2e^{\mathrm{i}\phi}+2e^{-\mathrm{i}\phi}\\
+&=5+4\cos\phi.
 \end{aligned}
 \]
 于是
 \[
-|\psi|^2=A^2(2+2\cos\phi)=2A^2(1+\cos\phi).
+|\psi|^2=A^2(5+4\cos\phi).
 \]
 
 现在讨论两种特殊情形：
 \[
-\phi=0 \quad \Longrightarrow \quad |\psi|^2=4A^2,
+\phi=0 \quad \Longrightarrow \quad |\psi|^2=9A^2,
 \]
 这时两个波同相叠加，概率密度达到最大；
 \[
-\phi=\pi \quad \Longrightarrow \quad |\psi|^2=0,
+\phi=\pi \quad \Longrightarrow \quad |\psi|^2=A^2,
 \]
-这时两个波反相叠加，概率密度完全相消。
+这时虽然出现削弱，但没有完全相消，因为两个波原来的振幅并不相同。
 
-这说明，在量子力学里，相位差虽然不会直接单独测到，但它会通过干涉现象真实地影响可观测结果。
+这说明，在量子力学里，相位差虽然不会单独直接测到，但它会通过干涉项真实地影响可观测结果；而是否能够完全相消，还取决于参与叠加的两个波函数振幅是否相同。
 \end{jie}
 \end{lizi}
 
