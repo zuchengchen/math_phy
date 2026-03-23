@@ -846,51 +846,66 @@ z_1=a+\mathrm{i}b,\qquad z_2=c+\mathrm{i}d.
 \end{proof}
 
 \begin{lizi}{用共轭提取信息}{}
-设
+设复数 $z$ 满足
 \[
-z_1=1+2\mathrm{i},\qquad z_2=3-\mathrm{i}.
+z+\bar z=4,\qquad z\bar z=13,\qquad \operatorname{Im}z>0.
 \]
-求
-\[
-\overline{z_1z_2},\qquad z_1\bar z_1,\qquad \operatorname{Re}z_2,\qquad \operatorname{Im}z_2.
-\]
+求 $z$。
 
 \begin{jie}
-先写出各自的共轭：
+这类条件看起来没有直接写出 $z=x+\mathrm{i}y$，但它们恰好可以借助共轭把实部和虚部的信息提取出来。
+
+设
 \[
-\bar z_1=1-2\mathrm{i},\qquad \bar z_2=3+\mathrm{i}.
+z=x+\mathrm{i}y,
+\]
+则
+\[
+\bar z=x-\mathrm{i}y.
 \]
 
-由乘法的共轭公式，
+由
 \[
-\overline{z_1z_2}=\bar z_1\,\bar z_2=(1-2\mathrm{i})(3+\mathrm{i})=5-5\mathrm{i}.
+z+\bar z=4
+\]
+得
+\[
+2x=4,
+\]
+所以
+\[
+x=2.
 \]
 
 再由
 \[
-z_1\bar z_1=|z_1|^2
+z\bar z=13
 \]
-可得
+得
 \[
-z_1\bar z_1=1^2+2^2=5.
+|z|^2=x^2+y^2=13.
 \]
-
-对于实部和虚部，直接用前面的公式：
+代入 $x=2$，得
 \[
-\operatorname{Re}z_2=\frac{z_2+\bar z_2}{2}
-=\frac{(3-\mathrm{i})+(3+\mathrm{i})}{2}=3,
+4+y^2=13,
 \]
+所以
 \[
-\operatorname{Im}z_2=\frac{z_2-\bar z_2}{2\mathrm{i}}
-=\frac{(3-\mathrm{i})-(3+\mathrm{i})}{2\mathrm{i}}=-1.
+y^2=9.
 \]
-
 因此
 \[
-\overline{z_1z_2}=5-5\mathrm{i},\qquad
-z_1\bar z_1=5,\qquad
-\operatorname{Re}z_2=3,\qquad
-\operatorname{Im}z_2=-1.
+y=\pm 3.
+\]
+
+又因为 $\operatorname{Im}z>0$，所以 $y>0$，从而
+\[
+y=3.
+\]
+
+故
+\[
+z=2+3\mathrm{i}.
 \]
 \end{jie}
 \end{lizi}
@@ -907,14 +922,6 @@ z_1\bar z_1=5,\qquad
 (1-\mathrm{i})w.
 \]
 所以，``把 $\mathrm{i}$ 变号''更适合当作记忆法；真正起作用的，仍然是整个表达式的共轭运算。
-\end{tishi}
-
-\begin{tishi}[为什么共轭经常出现]
-以后做复数除法、求模平方、提取实部与虚部、证明某个量是实数时，共轭都会反复出现。再往后在振动、傅里叶分析和量子力学里，像
-\[
-\psi\bar\psi
-\]
-这样的式子也会不断出现，因为它们能把带相位的复数表达式重新拉回到实数可观测量上。
 \end{tishi}
 
 \subsection{三角不等式与反三角不等式}
