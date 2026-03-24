@@ -1660,7 +1660,38 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 
 \subsection{欧拉公式}
 
-三角形式已经很有用，但借助欧拉公式，它还可以进一步改写成更简洁的指数形式。
+三角形式已经很有用，但如果想把
+\[
+\cos\theta+\mathrm{i}\sin\theta
+\]
+进一步压缩成更紧凑的写法，我们就需要先回答一个更基础的问题：\textbf{像 $e^{\mathrm{i}\theta}$ 这样的式子到底是什么意思？}
+
+在高等数学里，指数函数 $e^x$ 原本只定义在实数上。现在既然要把复数写成指数形式，就必须先把指数函数从实数推广到复数。
+
+\begin{dingliyi}{复指数函数}{}
+设
+\[
+z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R},
+\]
+定义
+\begin{equation}\label{eq:complex-exponential-definition}
+    e^z=e^{x+\mathrm{i}y}:=e^x(\cos y+\mathrm{i}\sin y).
+\end{equation}
+\end{dingliyi}
+
+\begin{zhu}{}{}
+这个定义很值得细看，因为它恰好把复数的两部分信息分开了：
+\begin{itemize}
+    \item $e^x$ 负责长度变化；
+    \item $\cos y+\mathrm{i}\sin y$ 负责方向变化。
+\end{itemize}
+所以复指数天然就带着``伸缩 + 旋转''的结构。
+另外，当 $y=0$ 时，
+\[
+e^{x+\mathrm{i}0}=e^x,
+\]
+它回到熟悉的实指数函数；这说明这个定义和前面的实数情形是相容的，并不是另起炉灶。
+\end{zhu}
 
 \begin{dingli}{欧拉公式（Euler's formula）}{}
 对任意实数 $\theta$，都有
@@ -1670,28 +1701,102 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \end{dingli}
 
 \begin{proof}
-我们先回顾高等数学中已经学过的几个幂级数展开式：
-\begin{align*}
-    e^t&=1+t+\frac{t^2}{2!}+\frac{t^3}{3!}+\frac{t^4}{4!}+\cdots,\\
-    \cos\theta&=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\frac{\theta^6}{6!}+\cdots,\\
-    \sin\theta&=\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\frac{\theta^7}{7!}+\cdots.
-\end{align*}
-这些展开式原本是在实变量情形下写出的。现在把自变量换成 $\mathrm{i}\theta$，本质上就是把同一个幂级数代入复数点 $\mathrm{i}\theta$，再按实部和虚部重新分组。
-
-现在把 $e^t$ 中的 $t$ 换成 $\mathrm{i}\theta$，就得到
-\begin{align*}
-    e^{\mathrm{i}\theta}
-    &=1+\mathrm{i}\theta+\frac{(\mathrm{i}\theta)^2}{2!}+\frac{(\mathrm{i}\theta)^3}{3!}+\frac{(\mathrm{i}\theta)^4}{4!}+\cdots \\
-    &=1+\mathrm{i}\theta-\frac{\theta^2}{2!}-\mathrm{i}\frac{\theta^3}{3!}+\frac{\theta^4}{4!}+\mathrm{i}\frac{\theta^5}{5!}-\cdots \\
-    &=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)
-      +\mathrm{i}\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right).
-\end{align*}
-整理后可以看出，实部恰好是 $\cos\theta$ 的展开式，虚部恰好是 $\sin\theta$ 的展开式，因此
 \[
-e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta.
+\mathrm{i}\theta=0+\mathrm{i}\theta.
+\]
+因此在复指数函数的定义
+\eqref{eq:complex-exponential-definition} 中取 $x=0,\ y=\theta$，立刻得到
+\[
+e^{\mathrm{i}\theta}=e^0(\cos\theta+\mathrm{i}\sin\theta)=\cos\theta+\mathrm{i}\sin\theta.
 \]
 这就证明了欧拉公式。
 \end{proof}
+
+\begin{dingli}{复指数的基本运算律}{}
+对任意复数 $z_1,z_2$，都有
+\begin{equation}\label{eq:complex-exp-addition-law}
+    e^{z_1+z_2}=e^{z_1}e^{z_2}.
+\end{equation}
+从而
+\begin{equation}
+    e^0=1,\qquad e^{-z}=\frac{1}{e^z},
+\end{equation}
+特别地，对任意实数 $\theta_1,\theta_2$，有
+\begin{equation}
+    e^{\mathrm{i}\theta_1}e^{\mathrm{i}\theta_2}=e^{\mathrm{i}(\theta_1+\theta_2)}.
+\end{equation}
+\end{dingli}
+
+\begin{proof}
+设
+\[
+z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
+\]
+由复指数函数的定义，
+\[
+e^{z_1}=e^{x_1}(\cos y_1+\mathrm{i}\sin y_1),\qquad
+e^{z_2}=e^{x_2}(\cos y_2+\mathrm{i}\sin y_2).
+\]
+因此
+\begin{align*}
+e^{z_1}e^{z_2}
+&=e^{x_1+x_2}(\cos y_1+\mathrm{i}\sin y_1)(\cos y_2+\mathrm{i}\sin y_2)\\
+&=e^{x_1+x_2}\Bigl[(\cos y_1\cos y_2-\sin y_1\sin y_2) \\
+&\qquad\qquad\qquad\quad +\mathrm{i}(\sin y_1\cos y_2+\cos y_1\sin y_2)\Bigr].
+\end{align*}
+再由三角函数加法公式，
+\[
+\cos(y_1+y_2)=\cos y_1\cos y_2-\sin y_1\sin y_2,
+\]
+\[
+\sin(y_1+y_2)=\sin y_1\cos y_2+\cos y_1\sin y_2,
+\]
+于是
+\[
+e^{z_1}e^{z_2}=e^{x_1+x_2}\bigl(\cos(y_1+y_2)+\mathrm{i}\sin(y_1+y_2)\bigr).
+\]
+而
+\[
+z_1+z_2=(x_1+x_2)+\mathrm{i}(y_1+y_2),
+\]
+所以根据定义，
+\[
+e^{z_1+z_2}=e^{x_1+x_2}\bigl(\cos(y_1+y_2)+\mathrm{i}\sin(y_1+y_2)\bigr).
+\]
+从而
+\[
+e^{z_1+z_2}=e^{z_1}e^{z_2}.
+\]
+
+令 $z_1=z,\ z_2=-z$，则
+\[
+e^z e^{-z}=e^0=1,
+\]
+因此
+\[
+e^{-z}=\frac{1}{e^z},
+\]
+并且 $e^z\neq 0$。最后在 \eqref{eq:complex-exp-addition-law} 中取
+\[
+z_1=\mathrm{i}\theta_1,\qquad z_2=\mathrm{i}\theta_2
+\]
+就得到
+\[
+e^{\mathrm{i}\theta_1}e^{\mathrm{i}\theta_2}=e^{\mathrm{i}(\theta_1+\theta_2)}.
+\]
+\end{proof}
+
+\begin{tishi}[关于复指数定义的一点说明]
+如果你学过高等数学里的幂级数，可能会自然想到：复指数函数是不是也可以写成
+\[
+e^z=1+z+\frac{z^2}{2!}+\frac{z^3}{3!}+\cdots?
+\]
+答案是可以的；不过那需要更系统的复幂级数知识来支撑。为了让第一章的逻辑尽量自包含，这里我们先把
+\[
+e^{x+\mathrm{i}y}:=e^x(\cos y+\mathrm{i}\sin y)
+\]
+作为复指数函数的定义，再从这个定义推出欧拉公式和后面的运算律。以后学到幂级数时，你会发现这两种写法是彼此一致的。
+\end{tishi}
 
 \begin{zhu}{}{}
 在欧拉公式中令 $\theta=\pi$，立刻得到
@@ -1835,7 +1940,7 @@ z=x+\mathrm{i}y
 \begin{equation}
     e^z = e^{x+\mathrm{i}y} = e^x e^{\mathrm{i}y}=e^x(\cos y+\mathrm{i}\sin y).
 \end{equation}
-当 $x=0$ 时，它退化成欧拉公式： $e^{\mathrm{i}y}=(\cos y+\mathrm{i}\sin y)$；当 $y=0$ 时，它回到我们熟悉的实指数 $e^x$。
+这里第二个等号用到的正是前面刚证明过的复指数运算律。当 $x=0$ 时，它退化成欧拉公式；当 $y=0$ 时，它回到熟悉的实指数 $e^x$。所以一般复指数完全可以看成``实指数的伸缩''和``纯虚指数的旋转''组合起来的结果。
 \end{zhu}
 
 \begin{dingli}{复指数与共轭}{}
@@ -2069,7 +2174,7 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2},
 \end{dingli}
 
 \begin{proof}
-由指数形式直接计算：
+由前面复指数的基本运算律 \eqref{eq:complex-exp-addition-law}，
 \[
 z_1z_2=\bigl(r_1e^{\mathrm{i}\theta_1}\bigr)\bigl(r_2e^{\mathrm{i}\theta_2}\bigr)
 =r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)}.
@@ -2200,6 +2305,18 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
 \begin{equation}\label{eq:complex-division-polar}
     \frac{z_1}{z_2}=\frac{r_1}{r_2}e^{\mathrm{i}(\theta_1-\theta_2)}.
 \end{equation}
+
+这里用到了前面已经证明的关系
+\[
+e^{-\mathrm{i}\theta_2}=\frac{1}{e^{\mathrm{i}\theta_2}},
+\]
+因此
+\[
+\frac{z_1}{z_2}
+=\frac{r_1e^{\mathrm{i}\theta_1}}{r_2e^{\mathrm{i}\theta_2}}
+=\frac{r_1}{r_2}e^{\mathrm{i}\theta_1}e^{-\mathrm{i}\theta_2}
+=\frac{r_1}{r_2}e^{\mathrm{i}(\theta_1-\theta_2)}.
+\]
 
 这说明，复数除法的几何意义就是：先把长度除以 $r_2$，再把方向减去 $\theta_2$，也就是撤销一次旋转与伸缩。
 
@@ -2720,7 +2837,27 @@ z^3=z\cdot z\cdot z=r^3 e^{3\mathrm{i}\theta}.
 \[
 \cos\theta+\mathrm{i}\sin\theta=e^{\mathrm{i}\theta}.
 \]
-由于 $e^{\mathrm{i}\theta}\neq 0$，所以对任意整数 $n$，
+再由前面复指数的基本运算律可知：对正整数 $n$，
+\[
+(e^{\mathrm{i}\theta})^n=e^{\mathrm{i}n\theta}.
+\]
+当 $n=0$ 时，
+\[
+(e^{\mathrm{i}\theta})^0=1=e^0;
+\]
+当 $n<0$ 时，设 $n=-m\ (m\in\mathbb{N})$，则由
+\[
+e^{-z}=\frac{1}{e^z}
+\]
+可得
+\[
+(e^{\mathrm{i}\theta})^n=(e^{\mathrm{i}\theta})^{-m}
+=\frac{1}{(e^{\mathrm{i}\theta})^m}
+=\frac{1}{e^{\mathrm{i}m\theta}}
+=e^{-\mathrm{i}m\theta}
+=e^{\mathrm{i}n\theta}.
+\]
+因此对任意整数 $n$，
 \[
 \bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n=(e^{\mathrm{i}\theta})^n=e^{\mathrm{i}n\theta}.
 \]
@@ -3107,6 +3244,33 @@ $n$ 次单位根的全部解为
 则称 $\omega$ 为\textbf{原始 $n$ 次单位根}（primitive $n$-th root of unity）。
 \end{dingliyi}
 
+\begin{tuilun}{标准原始 \texorpdfstring{$n$}{n} 次单位根}{}
+\[
+\omega=e^{2\pi\mathrm{i}/n}
+\]
+是一个原始 $n$ 次单位根。
+\end{tuilun}
+
+\begin{proof}
+先由欧拉公式得
+\[
+\omega^n=e^{2\pi\mathrm{i}}=\cos 2\pi+\mathrm{i}\sin 2\pi=1.
+\]
+再看比 $n$ 更小的正整数次幂。若 $1\le m<n$，则
+\[
+\omega^m=e^{2m\pi\mathrm{i}/n}.
+\]
+此时
+\[
+0<\frac{2m\pi}{n}<2\pi,
+\]
+因此这个角不是 $2\pi$ 的整数倍，所以
+\[
+e^{2m\pi\mathrm{i}/n}\neq 1.
+\]
+这说明 $\omega$ 满足原始 $n$ 次单位根的定义。
+\end{proof}
+
 \begin{zhu}{}{}
 若 $\omega$ 是原始 $n$ 次单位根，则全部 $n$ 次单位根恰好可以写成
 \[
@@ -3165,7 +3329,11 @@ e^{\pi\mathrm{i}/3},\qquad e^{-\pi\mathrm{i}/3}
 \end{dingli}
 
 \begin{proof}
-因为 $\omega^n=1$ 且 $\omega\neq 1$，所以几何级数求和公式给出
+由上一个推论，$\omega$ 是原始 $n$ 次单位根，因此特别有
+\[
+\omega^n=1,\qquad \omega\neq 1.
+\]
+于是几何级数求和公式给出
 \[
 1+\omega+\omega^2+\cdots+\omega^{n-1}
 =\frac{\omega^n-1}{\omega-1}
