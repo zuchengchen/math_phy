@@ -573,8 +573,8 @@ z=x+\mathrm{i}y.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.16]
-    \draw[mp axis] (-0.7,0) -- (4.4,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.7) -- (0,3.5) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (4.4,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-0.7) -- (0,3.5) node[mp label, above] {$\mathrm{Im}$};
     \coordinate (Z) at (3,2);
     \fill[mp area blue] (0,0) -- (3,0) -- (Z) -- cycle;
     \draw[mp helper] (Z) -- (3,0);
@@ -601,8 +601,8 @@ z=x+\mathrm{i}y.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.12]
-    \draw[mp axis] (-3.6,0) -- (3.9,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-3.2) -- (0,3.4) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-3.6,0) -- (3.9,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-3.2) -- (0,3.4) node[mp label, above] {$\mathrm{Im}$};
 
     \fill[mp area blue] (-3.2,-0.14) rectangle (3.2,0.14);
     \fill[mp area teal] (-0.14,-2.9) rectangle (0.14,2.9);
@@ -706,8 +706,8 @@ z=x+\mathrm{i}y,
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.14]
-    \draw[mp axis] (-0.7,0) -- (4.2,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.8) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (4.2,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-2.8) -- (0,2.8) node[mp label, above] {$\mathrm{Im}$};
     \coordinate (Z) at (2.8,1.8);
     \coordinate (ZB) at (2.8,-1.8);
     \draw[mp helper] (Z) -- (ZB);
@@ -958,8 +958,8 @@ z=2+3\mathrm{i}.
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[scale=1.02]
     \begin{scope}
-        \draw[mp thin axis] (-0.7,0) -- (4.5,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp thin axis] (0,-0.7) -- (0,3.6) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp thin axis] (-0.7,0) -- (4.5,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp thin axis] (0,-0.7) -- (0,3.6) node[mp label, above] {$\mathrm{Im}$};
         \coordinate (O) at (0,0);
         \coordinate (A) at (2.5,0.8);
         \coordinate (B) at (3.2,2.45);
@@ -980,8 +980,8 @@ z=2+3\mathrm{i}.
     \end{scope}
 
     \begin{scope}[xshift=7.2cm]
-        \draw[mp thin axis] (-0.7,0) -- (4.5,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp thin axis] (0,-0.7) -- (0,3.6) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp thin axis] (-0.7,0) -- (4.5,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp thin axis] (0,-0.7) -- (0,3.6) node[mp label, above] {$\mathrm{Im}$};
         \coordinate (O2) at (0,0);
         \coordinate (P) at (3.1,1.0);
         \coordinate (Q) at (1.35,2.45);
@@ -1111,8 +1111,8 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[mp axis] (-0.8,0) -- (4.2,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.8) -- (0,3.3) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.8,0) -- (4.2,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-0.8) -- (0,3.3) node[mp label, above] {$\mathrm{Im}$};
     \coordinate (Z) at (3,2);
     \draw[mp vector] (0,0) -- node[midway, above, sloped, text=figblue, fill=white, inner sep=1pt] {$r=|z|$} (Z);
     \node[mp point] at (Z) {};
@@ -1147,8 +1147,8 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[scale=1.0]
     \begin{scope}
-        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\mathrm{Im}$};
         \coordinate (Z1) at (35:1.72);
         \draw[mp vector] (0,0) -- (Z1);
         \node[mp point] at (Z1) {};
@@ -1160,8 +1160,8 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \end{scope}
 
     \begin{scope}[xshift=4.15cm]
-        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\mathrm{Im}$};
         \coordinate (Z2) at (35:1.72);
         \draw[mp vector] (0,0) -- (Z2);
         \node[mp point] at (Z2) {};
@@ -1175,8 +1175,8 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \end{scope}
 
     \begin{scope}[xshift=8.3cm]
-        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.45,0) -- (2.45,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-1.45) -- (0,2.35) node[mp label, above] {$\mathrm{Im}$};
         \coordinate (Z3) at (35:1.72);
         \draw[mp vector] (0,0) -- (Z3);
         \node[mp point] at (Z3) {};
@@ -1249,8 +1249,8 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[mp thin axis] (-4.1,0) -- (4.1,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp thin axis] (0,-2.7) -- (0,2.7) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp thin axis] (-4.1,0) -- (4.1,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp thin axis] (0,-2.7) -- (0,2.7) node[mp label, above] {$\mathrm{Im}$};
 
     \node[mp small, text=black!56] at (3,1.7) {第一象限};
     \node[mp small, text=black!56] at (-3,1.7) {第二象限};
@@ -1371,8 +1371,8 @@ r=|z|,\qquad \theta\in \arg z.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.15]
-    \draw[mp axis] (-0.8,0) -- (4.5,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.8) -- (0,3.5) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.8,0) -- (4.5,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-0.8) -- (0,3.5) node[mp label, above] {$\mathrm{Im}$};
 
     \coordinate (O) at (0,0);
     \coordinate (X) at (3,0);
@@ -1579,8 +1579,8 @@ z=re^{\mathrm{i}\theta}
 \begin{tikzpicture}[scale=1.25]
     \fill[mp area blue] (0,0) circle (1);
     \fill[figbrownfill] (0,0) -- (0.36,0) arc[start angle=0,end angle=50,radius=0.36] -- cycle;
-    \draw[mp axis] (-1.55,0) -- (1.75,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-1.45) -- (0,1.55) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-1.55,0) -- (1.75,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-1.45) -- (0,1.55) node[mp label, above] {$\mathrm{Im}$};
     \draw[mp circle] (0,0) circle (1);
     \coordinate (Z) at ({cos(50)},{sin(50)});
     \draw[mp vector d] (0,0) -- (Z);
@@ -1842,8 +1842,8 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.12]
-    \draw[mp axis] (-0.7,0) -- (5.6,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.7) -- (0,4.1) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (5.6,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-0.7) -- (0,4.1) node[mp label, above] {$\mathrm{Im}$};
     \coordinate (A) at (2,1);
     \coordinate (B) at (1.5,2);
     \coordinate (C) at (3.5,3);
@@ -1917,8 +1917,8 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[scale=1.05]
     \begin{scope}
-        \draw[mp axis] (-0.6,0) -- (3.4,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.6,0) -- (3.4,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\mathrm{Im}$};
 
         \coordinate (Z1) at (28:1.7);
         \coordinate (Z2) at (58:2.15);
@@ -1944,8 +1944,8 @@ z_1z_2=r_1r_2e^{\mathrm{i}(\theta_1+\theta_2)},
     \end{scope}
 
     \begin{scope}[xshift=6.2cm]
-        \draw[mp axis] (-0.6,0) -- (3.6,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.6) -- (0,4.0) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.6,0) -- (3.6,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-0.6) -- (0,4.0) node[mp label, above] {$\mathrm{Im}$};
 
         \coordinate (P) at (86:3.66);
         \draw[mp vector c] (0,0) -- (P);
@@ -2033,8 +2033,8 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
 \resizebox{0.96\textwidth}{!}{%
 \begin{tikzpicture}[scale=1.05]
     \begin{scope}
-        \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.6) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-0.6) -- (0,3.1) node[mp label, above] {$\mathrm{Im}$};
 
         \coordinate (Z1) at (68:2.55);
         \coordinate (Z2) at (28:1.65);
@@ -2060,8 +2060,8 @@ z_1=r_1e^{\mathrm{i}\theta_1},\qquad z_2=r_2e^{\mathrm{i}\theta_2}\quad (r_2>0),
     \end{scope}
     
     \begin{scope}[xshift=6.35cm]
-        \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.6,0) -- (3.2,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-0.6) -- (0,3.0) node[mp label, above] {$\mathrm{Im}$};
 
         \coordinate (Q) at (40:1.55);
         \draw[mp vector c] (0,0) -- (Q);
@@ -2164,8 +2164,8 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
     \draw[mp angle] (0.55,0.28) arc[start angle=26.565,end angle=116.565,radius=0.62];
     \node[mp label, text=figbrown] at (0.35,0.9) {$\pi/2$};
     \node[mp label, below left] at (0,0) {$O$};
-    \draw[mp axis] (-3.1,0) -- (3.3,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.4) -- (0,3.4) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-3.1,0) -- (3.3,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-2.4) -- (0,3.4) node[mp label, above] {$\mathrm{Im}$};
     \draw[mp vector] (0,0) -- (Z);
     \draw[mp vector d] (0,0) -- (IZ);
 \end{tikzpicture}
@@ -2683,8 +2683,8 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
     \node[mp label, below left] at (0,0) {$O$};
     
     
-    \draw[mp axis] (-2.8,0) -- (3.0,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.7) -- (0,2.9) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-2.8,0) -- (3.0,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-2.7) -- (0,2.9) node[mp label, above] {$\mathrm{Im}$};
 \end{tikzpicture}
 \caption{方程 $z^4=-16$ 的四个根}
 \label{fig:fourth-roots-minus16}
@@ -2722,8 +2722,8 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
     \node[mp label, below left] at ({cos(240)},{sin(240)}) {$\omega^4$};
     \node[mp label, below right] at ({cos(300)},{sin(300)}) {$\omega^5$};
     \node[mp label, below left] at (0,0) {$O$};
-    \draw[mp axis] (-1.45,0) -- (1.45,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-1.4) -- (0,1.4) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-1.45,0) -- (1.45,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-1.4) -- (0,1.4) node[mp label, above] {$\mathrm{Im}$};
 \end{tikzpicture}
 \caption{六次单位根的分布}
 \label{fig:roots-of-unity}
@@ -2856,8 +2856,8 @@ z\to\infty.
         \node[mp label, text=figbrown] at (1.02,0.32) {$\theta$};
         \node[mp small, text=figblue] at (2.5,2) {$|z|=r$，离原点较远};
         \node[mp small, text=black!80] at (0.8,-2.3) {$z$ 平面};
-        \draw[mp axis] (-2.5,0) -- (3,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-2.5,0) -- (3,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\mathrm{Im}$};
         \draw[mp vector] (0,0) -- (Z);
         \node[mp point] at (Z) {};
     \end{scope}
@@ -2878,8 +2878,8 @@ z\to\infty.
         \draw[mp vector b] (0,0) -- (W);
         \node[mp point b] at (W) {};
         \fill[figbrownfill] (0,0) -- (0.2,0) arc[start angle=0,end angle=-38,radius=0.2] -- cycle;
-        \draw[mp axis] (-1,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}w$};
-        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\operatorname{Im}w$};
+        \draw[mp axis] (-1,0) -- (3.1,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-2.5) -- (0,2.8) node[mp label, above] {$\mathrm{Im}$};
     \end{scope}
 \end{tikzpicture}%
 }
@@ -3075,8 +3075,8 @@ F(w)=f\!\left(\frac{1}{w}\right),
         \node[mp label, above right, text=figred] at (P) {$Ae^{\mathrm{i}(\omega t+\varphi)}$};
         \node[mp label, below, text=figblue] at (X) {$x(t)$};
         \node[mp label, below left] at (0,0) {$O$};
-        \draw[mp axis] (-2.3,0) -- (2.5,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-2.45) -- (0,2.7) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-2.3,0) -- (2.5,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-2.45) -- (0,2.7) node[mp label, above] {$\mathrm{Im}$};
         \draw[mp vector d] (0,0) -- (P);
     \end{scope}
 
@@ -3157,8 +3157,8 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.1]
-    \draw[mp axis] (-0.7,0) -- (3.2,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.5) -- (0,0.8) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.7,0) -- (3.2,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-2.5) -- (0,0.8) node[mp label, above] {$\mathrm{Im}$};
     \coordinate (A) at (2,0);
     \coordinate (B) at (0,-2);
     \coordinate (C) at (2,-2);
@@ -3337,8 +3337,8 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
         \node[mp small, text=black!60, fill=white, inner sep=1.2pt] at (2.15,-0.92) {相位差改变合成振幅};
         
         
-        \draw[mp axis] (-0.6,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}z$};
-        \draw[mp axis] (0,-0.5) -- (0,3.3) node[mp label, above] {$\operatorname{Im}z$};
+        \draw[mp axis] (-0.6,0) -- (4.8,0) node[mp label, right] {$\mathrm{Re}$};
+        \draw[mp axis] (0,-0.5) -- (0,3.3) node[mp label, above] {$\mathrm{Im}$};
         \draw[mp vector] (0,0) -- (A);
         \draw[mp vector d dashed] (0,0) -- (B);
         \draw[mp vector d dashed] (A) -- (C);
