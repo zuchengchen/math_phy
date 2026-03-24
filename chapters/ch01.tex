@@ -1694,46 +1694,7 @@ e^{\bar z}=e^x\bigl(\cos(-y)+\mathrm{i}\sin(-y)\bigr)
     \item 若题目关心长度、方向、几何位置，三角形式会更直观；
     \item 若题目涉及乘法、除法、乘幂、开方、振动或相位，指数形式通常更方便。
 \end{itemize}
-不要把``换表示法''理解成额外增加工作量。很多时候，真正让题目变简单的，不是某一步神奇技巧，而是你一开始就选对了语言。
 \end{tishi}
-
-\begin{lizi}{代数形式与指数形式互化}{}
-把
-\[
-z=1-\sqrt{3}\,\mathrm{i}
-\]
-写成指数形式；再把
-\[
-w=2e^{-\mathrm{i}\pi/4}
-\]
-写成代数形式。
-
-\begin{jie}
-这道题正好对应两种常见的转换方向：从代数形式到指数形式时，通常按``先求模，再判辐角''的顺序做；从指数形式回到代数形式时，则直接调用欧拉公式会更方便。
-
-先看 $z$。它的模为
-\[
-|z|=\sqrt{1^2+(\sqrt{3})^2}=2.
-\]
-它位于第四象限，主辐角为
-\[
-\operatorname{Arg}z=-\frac{\pi}{3}.
-\]
-因此
-\[
-z=2e^{-\mathrm{i}\pi/3}.
-\]
-
-再看 $w$。由欧拉公式，
-\[
-w=2\left(\cos\left(-\frac{\pi}{4}\right)+\mathrm{i}\sin\left(-\frac{\pi}{4}\right)\right).
-\]
-于是
-\[
-w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2}\,\mathrm{i}.
-\]
-\end{jie}
-\end{lizi}
 
 到这里为止，同一个复数最常用的三种表示法都已经出现了。图 \ref{fig:three-representations} 把它们放在一起作一个总览。后面进入复数运算时，很多时候真正的关键不是``会不会算''，而是能不能\textbf{快速判断}：眼前这道题更适合用哪一种语言。
 
@@ -1781,6 +1742,44 @@ w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2
 \caption{复数的三种常用表示}
 \label{fig:three-representations}
 \end{figure}
+
+\begin{lizi}{代数形式与指数形式互化}{}
+	把
+	\[
+	z=1-\sqrt{3}\,\mathrm{i}
+	\]
+	写成指数形式；再把
+	\[
+	w=2e^{-\mathrm{i}\pi/4}
+	\]
+	写成代数形式。
+	
+	\begin{jie}
+		这道题正好对应两种常见的转换方向：从代数形式到指数形式时，通常按``先求模，再判辐角''的顺序做；从指数形式回到代数形式时，则直接调用欧拉公式会更方便。
+		
+		先看 $z$。它的模为
+		\[
+		|z|=\sqrt{1^2+(\sqrt{3})^2}=2.
+		\]
+		它位于第四象限，主辐角为
+		\[
+		\operatorname{Arg}z=-\frac{\pi}{3}.
+		\]
+		因此
+		\[
+		z=2e^{-\mathrm{i}\pi/3}.
+		\]
+		
+		再看 $w$。由欧拉公式，
+		\[
+		w=2\left(\cos\left(-\frac{\pi}{4}\right)+\mathrm{i}\sin\left(-\frac{\pi}{4}\right)\right).
+		\]
+		于是
+		\[
+		w=2\left(\frac{\sqrt{2}}{2}-\mathrm{i}\frac{\sqrt{2}}{2}\right)=\sqrt{2}-\sqrt{2}\,\mathrm{i}.
+		\]
+	\end{jie}
+\end{lizi}
 
 \section{复数的运算及其几何意义}
 
