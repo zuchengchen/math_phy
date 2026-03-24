@@ -5,7 +5,7 @@
 \begin{wulibj}[本章导读]
 很多同学刚开始学复变函数时，容易觉得真正重要的内容都在后面的复积分和留数定理，复数本身只是一个简短的预备章节。其实恰好相反：后面的方法几乎都建立在这一章对复数几何结构的理解上。
 
-复数与实数的差别，不只是多引进一个满足 $i^2=-1$ 的符号这么简单。更重要的是，它把代数运算与平面几何紧密地联系在了一起。一个复数既可以看成一个数，也可以视为复平面上的一点，还可以看作一条从原点出发的向量。于是大小、方向、旋转、伸缩都能被放进同一种语言里。正因为这样，复数特别适合描述振动、波动、相位，以及后面复分析中的各种局部变换。
+复数与实数的差别，不只是多引进一个满足 $i^2=-1$ 的符号这么简单。更重要的是，它把代数运算与平面几何紧密地联系在了一起。一个复数既可以看成一个数，也可以视为复平面上的一点，还可以看作一条从原点出发的向量。于是大小、方向、旋转、伸缩都能放到同一幅图景里来理解。正因为这样，复数特别适合描述振动、波动、相位，以及后面复分析中的各种局部变换。
 
 本章我们要完成三件事：
 \begin{enumerate}
@@ -14,7 +14,7 @@
     \item 初步认识扩充复平面、无穷远点与复球面，为后面的级数展开和留数理论作准备。
 \end{enumerate}
 
-读这一章时，最好始终带着一个意识：这里建立的不是几条孤立的公式，而是一套后面会反复调用的基本语言。第二章讨论极限、连续与导数时，会直接用到这里的复平面语言；后面研究洛朗展开和留数时，又会不断回到无穷远点与扩充复平面的视角；而本章反复强调的``乘法对应旋转与伸缩''，也会在解析函数导数的局部几何意义里再次出现。
+读这一章时，最好始终带着一个意识：这里建立的不是几条孤立的公式，而是后面会反复用到的一整套基本工具。第二章讨论极限、连续与导数时，会直接用到这里的复平面观点；后面研究洛朗展开和留数时，又会不断回到无穷远点与扩充复平面的视角；而本章反复强调的``乘法对应旋转与伸缩''，也会在解析函数导数的局部几何意义里再次出现。
 \end{wulibj}
 
 \section{复数的引入与代数基础}
@@ -95,7 +95,7 @@
 \begin{equation}
     \mathrm{i}^2=-1.
 \end{equation}
-这个数称为\textbf{虚数单位}（imaginary unit）。
+这个数称为\textbf{虚数单位}。
 \end{dingliyi}
 
 有了 $\mathrm{i}$ 以后，方程
@@ -112,14 +112,14 @@
 \begin{equation}\label{eq:complex-algebraic}
     z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R},
 \end{equation}
-的数称为\textbf{复数}（complex number）。其中
+的数称为\textbf{复数}。其中
 \begin{equation}
     x=\operatorname{Re}z,\qquad y=\operatorname{Im}z
 \end{equation}
-分别称为复数 $z$ 的\textbf{实部}（real part）和\textbf{虚部}（imaginary part）。
+分别称为复数 $z$ 的\textbf{实部}和\textbf{虚部}。
 \end{dingliyi}
 
-式 \eqref{eq:complex-algebraic} 称为复数的\textbf{代数形式}（algebraic form）。
+式 \eqref{eq:complex-algebraic} 称为复数的\textbf{代数形式}。
 全体复数组成的集合通常记作 $\mathbb{C}$。
 
 \begin{zhu}{}{}
@@ -171,8 +171,8 @@ a=2,\qquad b=0.
 
 根据实部和虚部是否为零，复数可以作如下分类：
 \begin{itemize}
-	\item 若 $y=0$，则 $z=x$，即为实数（real number）；
-	\item 若 $x=0$，则 $z=\mathrm{i}y$，称为纯虚数（pure imaginary number）；
+	\item 若 $y=0$，则 $z=x$，即为实数；
+	\item 若 $x=0$，则 $z=\mathrm{i}y$，称为纯虚数；
 	\item 若 $x=y=0$，则得到零复数 $0$；
 	\item 若 $x\neq 0$ 且 $y\neq 0$，则称为一般复数。
 \end{itemize}
@@ -216,7 +216,7 @@ z_4=0
 z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \]
 
-\noindent\textbf{加法}（addition）与\textbf{减法}（subtraction）的规则很直接：对应的实部相加或相减，对应的虚部相加或相减，因此
+\noindent\textbf{加法}与\textbf{减法}的规则很直接：对应的实部相加或相减，对应的虚部相加或相减，因此
 \begin{align}
     z_1+z_2&=(x_1+x_2)+\mathrm{i}(y_1+y_2),\label{eq:complex-addition-algebraic}\\
     z_1-z_2&=(x_1-x_2)+\mathrm{i}(y_1-y_2).\label{eq:complex-subtraction-algebraic}
@@ -244,7 +244,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{lizi}
 
 \medskip
-\noindent\textbf{乘法}（multiplication）要小心一些。它不能简单地理解为``实部乘实部，虚部乘虚部''，而必须按照多项式乘法的展开规则来做，并在最后用 $\mathrm{i}^2=-1$ 化简：
+\noindent\textbf{乘法}要小心一些。它不能简单地理解为``实部乘实部，虚部乘虚部''，而必须按照多项式乘法的展开规则来做，并在最后用 $\mathrm{i}^2=-1$ 化简：
 \begin{align*}
     z_1z_2
     &=(x_1+\mathrm{i}y_1)(x_2+\mathrm{i}y_2)\\
@@ -274,7 +274,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{lizi}
 
 \medskip
-\noindent\textbf{除法}（division）则需要多一步处理。若 $z_2\neq 0$，我们想把
+\noindent\textbf{除法}则需要多一步处理。若 $z_2\neq 0$，我们想把
 \[
 \frac{z_1}{z_2}=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}
 \]
@@ -482,7 +482,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
 \[
 z=x+\mathrm{i}y
 \]
-就可以继续往下讨论了。但在历史上，复数并不是一开始就被人们广泛认可的。许多数学家曾长期追问：像 $\sqrt{-1}$ 这样的对象，到底算不算``真正的数''？了解这段历史，不只是为了记几个年代，更为了回答一个学习中的真实问题——一个起初看起来如此陌生的对象，为什么最后会成为数学和物理中的核心语言？
+就可以继续往下讨论了。但在历史上，复数并不是一开始就被人们广泛认可的。许多数学家曾长期追问：像 $\sqrt{-1}$ 这样的对象，到底算不算``真正的数''？了解这段历史，不只是为了记几个年代，更为了回答一个学习中的真实问题——一个起初看起来如此陌生的对象，为什么最后会成为数学和物理中的重要工具？
 
 复数最早并不是被人``先设计好再拿来使用''的，而是在求解三次方程的过程中逐步显现出来的。16 世纪，德尔费罗（del Ferro）、塔塔利亚（Tartaglia）和卡尔达诺（Cardano）先后研究三次方程的求法。奇怪的是，有些方程明明最后有实数解，按照求根公式计算时，中间步骤却会出现负数开方。这说明原有的实数系统已经不够用了。
 
@@ -545,7 +545,7 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
 \label{fig:complex-history-timeline}
 \end{figure}
 
-复数真正成为现代数学的核心语言，要到 19 世纪复变函数论建立之后。柯西（Cauchy）把复积分、解析函数等内容系统化，黎曼（Riemann）进一步发展了复函数的几何观点。到了这时，复数已经不再只是``为了让某些方程有解''而引入的辅助工具，而是整个理论的基础语言。也正因为如此，它后来才能自然地进入波动、振动、量子力学等数学物理问题中。
+复数真正成为现代数学中的核心工具，要到 19 世纪复变函数论建立之后。柯西（Cauchy）把复积分、解析函数等内容系统化，黎曼（Riemann）进一步发展了复函数的几何观点。到了这时，复数已经不再只是``为了让某些方程有解''而引入的辅助工具，而是整个理论赖以展开的基础工具。也正因为如此，它后来才能自然地进入波动、振动、量子力学等数学物理问题中。
 
 \section{复数的几何表示：复平面、模、辐角与共轭复数}
 
@@ -560,7 +560,7 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
 z=x+\mathrm{i}y.
 \]
 从几何上看，我们也可以把 $\mathbb{C}$ 看成由这些点构成的平面。
-这个平面称为\textbf{复平面}（complex plane），横轴称为\textbf{实轴}（real axis），纵轴称为\textbf{虚轴}（imaginary axis）。
+这个平面称为\textbf{复平面}，横轴称为\textbf{实轴}，纵轴称为\textbf{虚轴}。
 
 \begin{figure}[htbp]
 \centering
@@ -630,7 +630,7 @@ z=x+\mathrm{i}y.
 \[
 z=x+\mathrm{i}y,
 \]
-则复数 $z$ 的\textbf{模}（modulus）定义为
+则复数 $z$ 的\textbf{模}定义为
 \begin{equation}
     |z|=\sqrt{x^2+y^2}.
 \end{equation}
@@ -694,7 +694,7 @@ z=x+\mathrm{i}y,
 \begin{equation}
     \bar z=x-\mathrm{i}y
 \end{equation}
-为 $z$ 的\textbf{共轭复数}（complex conjugate），有时也记作$z^*$。
+为 $z$ 的\textbf{共轭复数}，有时也记作 $z^*$。
 \end{dingliyi}
 
 从代数上看，共轭做的事情很简单：\textbf{实部不变，虚部变号。} 几何上，它对应把复平面上的点关于实轴作对称。
@@ -940,7 +940,7 @@ z=2+3\mathrm{i}.
 
 前面已经知道，模既表示向量的长度，也表示两点之间的距离。所以关于模的不等式，往往都能从图上直接看出来。本节先看三角不等式，再由它推出反三角不等式。
 
-\begin{dingli}{三角不等式（triangle inequality）}{}
+\begin{dingli}{三角不等式}{}
 对任意复数 $z_1,z_2$，都有
 \begin{equation}\label{eq:triangle-inequality}
     |z_1+z_2|\le |z_1|+|z_2|.
@@ -1050,7 +1050,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \]
 \end{proof}
 
-\begin{tuilun}{反三角不等式（reverse triangle inequality）}{}
+\begin{tuilun}{反三角不等式}{}
 对任意复数 $z_1,z_2$，都有
 \begin{equation}
     \bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|.
@@ -1095,13 +1095,13 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 对于非零复数 $z$，除了长度 $|z|$ 之外，还需要一个量来描述它的方向——辐角。
 
 \begin{dingliyi}{辐角与主辐角}{}
-设 $z\neq 0$。从实轴正方向逆时针转到向量 $\overrightarrow{Oz}$ 所形成的角称为 $z$ 的一个\textbf{辐角}（argument），记作 $\arg z$。
+设 $z\neq 0$。从实轴正方向逆时针转到向量 $\overrightarrow{Oz}$ 所形成的角称为 $z$ 的一个\textbf{辐角}，记作 $\arg z$。
 
 在所有辐角中，落在区间
 \begin{equation}
     -\pi<\theta\le \pi
 \end{equation}
-内的那个值称为 $z$ 的\textbf{主辐角}（principal argument），记作 $\operatorname{Arg}z$。
+内的那个值称为 $z$ 的\textbf{主辐角}，记作 $\operatorname{Arg}z$。
 \end{dingliyi}
 
 \begin{zhu}{}{}
@@ -1206,7 +1206,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \begin{jinshi}[辐角最容易出错的地方]
 \begin{itemize}
     \item 不要把 $\arg z$ 和 $\operatorname{Arg}z$ 混为一谈。前者表示全体辐角，后者表示主辐角。
-    \item 不要只凭 $\theta=\arctan(y/x)$ 决定辐角，因为反正切只能给出主值，且不能自动区分象限（quadrant）。
+    \item 不要只凭 $\theta=\arctan(y/x)$ 决定辐角，因为反正切只能给出主值，且不能自动区分象限。
     \item 零点没有辐角，这一点以后讨论对数和幂函数时尤其重要。
 \end{itemize}
 \end{jinshi}
@@ -1375,7 +1375,7 @@ z_3=-2\mathrm{i},
 \end{dingli}
 
 \begin{proof}
-这三条结论本质上都只是把模与辐角的定义翻译成几何语言。
+这三条结论都只是把模和辐角的定义直接改写成几何说法。
 
 \noindent\textbf{1. 关于 $|z-z_0|=r$}
 
@@ -1620,7 +1620,7 @@ r=|z|,\qquad \theta\in \arg z,
 \begin{equation}\label{eq:trigonometric-form}
     z=r(\cos\theta+\mathrm{i}\sin\theta)
 \end{equation}
-称为复数 $z$ 的\textbf{三角形式}（trigonometric form）。
+称为复数 $z$ 的\textbf{三角形式}。
 \end{dingliyi}
 
 \begin{zhu}{}{}
@@ -1691,7 +1691,7 @@ e^{x+\mathrm{i}0}=e^x,
 它回到熟悉的实指数函数；这说明这个定义和前面的实数情形是相容的，并不是另起炉灶。
 \end{zhu}
 
-\begin{dingli}{欧拉公式（Euler's formula）}{}
+\begin{dingli}{欧拉公式}{}
 对任意实数 $\theta$，都有
 \begin{equation}\label{eq:euler-formula}
     e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta.
@@ -1813,7 +1813,7 @@ e^{\mathrm{i}\pi}=-1
 \end{zhu}
 
 \begin{tishi}[欧拉公式的意义]
-欧拉公式之所以重要，首先因为它把旋转与指数运算统一了起来。
+欧拉公式之所以重要，首先因为它把旋转和指数运算直接联系了起来。
 \end{tishi}
 
 \subsection{指数形式及其优点}
@@ -1835,7 +1835,7 @@ r=|z|,\qquad \theta\in \arg z,
 \begin{equation}\label{eq:exp-form}
     z=re^{\mathrm{i}\theta}
 \end{equation}
-称为复数 $z$ 的\textbf{指数形式}（exponential form）。
+称为复数 $z$ 的\textbf{指数形式}。
 \end{dingliyi}
 
 \begin{zhu}{}{}
@@ -2551,9 +2551,9 @@ z_1^2=(\sqrt{2})^2e^{2\mathrm{i}\cdot 3\pi/4}=2e^{3\pi\mathrm{i}/2}.
 \subsection{复数乘法与旋转矩阵（选学）}
 
 
-前面我们一直说：乘以一个复数，本质上是在做``伸缩 + 旋转''。这句话还可以换一种大家以后会越来越熟悉的语言来表达：\textbf{复数乘法对应着平面上的一个特殊矩阵变换}。
+前面我们一直在说：乘以一个复数，相当于做一次``伸缩 + 旋转''。这一点也可以用矩阵的形式写出来。
 
-这样写的好处是，复数、向量和线性变换这三种视角便\textbf{建立起了联系}。
+这样一来，我们就能把复数、向量和线性变换放在同一张图里看。
 
 设
 \[
@@ -2817,7 +2817,7 @@ z^3=z\cdot z\cdot z=r^3 e^{3\mathrm{i}\theta}.
 
 下面的棣莫弗公式，就是把这个规律严格写出来的基本工具。
 
-\begin{dingli}{棣莫弗公式（De Moivre's formula）}{}
+\begin{dingli}{棣莫弗公式}{}
 对任意整数 $n$，都有
 \begin{equation}\label{eq:de-moivre}
     \bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^n=\cos(n\theta)+\mathrm{i}\sin(n\theta).
@@ -3195,7 +3195,7 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 
 \subsection{单位根及其几何分布}
 
-\begin{dingliyi}{单位根（roots of unity）}{}
+\begin{dingliyi}{单位根}{}
 方程
 \begin{equation}
     z^n=1
@@ -3237,7 +3237,7 @@ $n$ 次单位根的全部解为
 \[
 \omega^m\neq 1,
 \]
-则称 $\omega$ 为\textbf{原始 $n$ 次单位根}（primitive $n$-th root of unity）。
+则称 $\omega$ 为\textbf{原始 $n$ 次单位根}。
 \end{dingliyi}
 
 \begin{tuilun}{标准原始 \texorpdfstring{$n$}{n} 次单位根}{}
@@ -3310,9 +3310,9 @@ e^{\pi\mathrm{i}/3},\qquad e^{-\pi\mathrm{i}/3}
 \label{fig:roots-of-unity}
 \end{figure}
 
-图 \ref{fig:roots-of-unity} 画出了六次单位根的分布。这种高度对称的结构在很多地方都会出现。
+图 \ref{fig:roots-of-unity} 画出了六次单位根均匀分布在单位圆上的情形。
 
-\begin{dingli}{单位根之和（sum of roots of unity）}{}
+\begin{dingli}{单位根之和}{}
 当 $n\ge 2$ 时，全部 $n$ 次单位根之和为
 \begin{equation}
     1+\omega+\omega^2+\cdots+\omega^{n-1}=0,
@@ -3321,7 +3321,7 @@ e^{\pi\mathrm{i}/3},\qquad e^{-\pi\mathrm{i}/3}
 \[
 \omega=e^{2\pi\mathrm{i}/n}
 \]
-是一个原始 $n$ 次单位根（primitive $n$-th root of unity）。
+是一个原始 $n$ 次单位根。
 \end{dingli}
 
 \begin{proof}
@@ -3391,14 +3391,14 @@ z\to\infty.
 \[
 \hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}
 \]
-里，我们又\textbf{把它当作一个新添入的点来处理}。这样一来，只要 $|z|$ 大到任意程度，不管沿哪个方向走远，我们都可以把这种``远离原点''的行为统一说成 $z\to\infty$。后面讨论无穷远点的邻域、极限和奇性时，都是在这个扩充后的视角下说的。第二章讨论邻域时，还会把这个说法再系统整理一遍。
+里，我们把它看成新添的一个点。这样，只要 $|z|$ 大到任意程度，不管沿哪个方向走远，我们都可以统一写成 $z\to\infty$。后面讨论无穷远点的邻域、极限和奇性时，都是在这个扩充后的视角下说的。第二章讨论邻域时，还会把这个说法再系统整理一遍。
 \end{zhu}
 
 引入无穷远点以后，很多说法就会整齐得多。例如：
 \begin{itemize}
     \item 可以统一讨论``函数在无穷远点附近的行为''；
     \item 可以把某些关于有限点的结论自然延伸到无穷远点；
-    \item 在几何上，直线和圆也能在更高一级的视角下统一起来。
+    \item 在几何上，后面会看到：把无穷远点添进去以后，直线也可以看成经过无穷远点的圆。
 \end{itemize}
 
 \subsection{扩充复平面}
@@ -3410,7 +3410,7 @@ z\to\infty.
 \begin{equation}
     \hat{\mathbb{C}}=\mathbb{C}\cup\{\infty\}
 \end{equation}
-称为\textbf{扩充复平面}（extended complex plane）。
+称为\textbf{扩充复平面}。
 \end{dingliyi}
 
 \begin{zhu}{}{}
@@ -3569,7 +3569,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
 至于球极投影更细的几何性质，现在即使没有完全理解，不会影响后面主线内容的继续学习。
 \end{tishi}
 
-无穷远点的引入不仅是为了分析上的方便，背后还有一个非常优美的几何模型：\textbf{复球面}。理解这个模型的关键，是球极投影（stereographic projection）。
+无穷远点的引入不仅是为了分析上的方便，背后还有一个非常优美的几何模型：\textbf{复球面}。理解这个模型的关键，是球极投影。
 
 想象一个单位球与复平面在南极点处相切。取球面北极 $N$，对球面上除北极外任一点 $P$，连结 $N$ 和 $P$ 的直线，它会与复平面相交于一点 $z$。这样就建立了球面与复平面之间的一一对应。北极 $N$ 本身则对应于无穷远点 $\infty$。
 
@@ -3620,7 +3620,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
 \end{figure}
 
 \begin{dingliyi}{复球面}{}
-把扩充复平面 $\hat{\mathbb{C}}$ 通过球极投影与球面建立对应后，这个球面模型称为\textbf{复球面}，也常称为\textbf{黎曼球面}（Riemann sphere）。
+把扩充复平面 $\hat{\mathbb{C}}$ 通过球极投影与球面建立对应后，这个球面模型称为\textbf{复球面}，也常称为\textbf{黎曼球面}。
 \end{dingliyi}
 
 \begin{zhu}{}{}
@@ -3641,7 +3641,7 @@ F(w)=f\!\left(\frac{1}{w}\right),
 
 \subsection{简谐振动的复表示}
 
-一个最基本的简谐振动（simple harmonic motion）通常写成
+一个最基本的简谐振动通常写成
 \begin{equation}
     x(t)=A\cos(\omega t+\varphi).
 \end{equation}
@@ -3718,9 +3718,9 @@ x(t)=A\cos(\omega t+\varphi).
 \begin{equation}
     x_1(t)=2\cos\omega t,\qquad x_2(t)=2\cos\left(\omega t-\frac{\pi}{2}\right).
 \end{equation}
-若直接用三角恒等式相加，会比较繁琐；而用相量法（phasor method）写起来就清楚多了。
+若直接用三角恒等式相加，会比较繁琐；而用相量法写起来就清楚多了。
 
-把它们分别写成复振幅（complex amplitude）形式：
+把它们分别写成复振幅形式：
 \begin{equation}
     x_1(t)=\operatorname{Re}\bigl(2e^{\mathrm{i}\omega t}\bigr),\qquad
     x_2(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/2}e^{\mathrm{i}\omega t}\right).
@@ -3777,7 +3777,7 @@ x(t)=\operatorname{Re}\left(2\sqrt{2}\,e^{-\mathrm{i}\pi/4}e^{\mathrm{i}\omega t
 \label{fig:phasor-addition}
 \end{figure}
 
-\noindent 上面的推导只是用一组最简单的数据说明相量法怎么用。接下来把两个振动的振幅改成不相同，再做一次，你会更容易看出这种方法并不依赖于``两个振动一样大''，真正起作用的是把同频振动统一编码成复振幅以后，再在复平面上做向量加法。
+\noindent 上面的推导只是用一组最简单的数据说明相量法怎么用。上一个例子里，两个振动的振幅刚好相等；下面把振幅改得不一样，再做一次，就更容易看出相量法靠的不是``两个振动一样大''，而是把同频振动的合成转成复平面上的向量加法。
 
 \begin{lizi}{振幅不同时，怎样用相量法合成同频振动}{}
 求
@@ -3990,7 +3990,7 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
 \]
 随相位差 $\phi$ 的变化画了出来：当 $\phi=0$ 时，两者方向一致，合成振幅最大；当 $\phi=\pi$ 时，两者方向相反，干涉项完全抵消，概率密度降到零。
 
-所以，在量子力学里，复数的作用不只是``把式子写得更紧凑''——它把振幅和相位统一起来，相对相位会真实地影响干涉结果。
+所以，在量子力学里，复数不只是让式子写得更紧凑。它把振幅和相位放在一起写，而相对相位会真实地影响干涉结果。
 
 \noindent 上面的讨论先看了两个\textbf{等振幅}波函数。下面把第二个波的振幅改成前者的两倍，看看这时即使相位差变成 $\pi$，为什么也不一定能完全相消。
 
@@ -4047,7 +4047,7 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
 \section{本章小结}
 
 \begin{tishi}[本章一句话回看]
-本章的核心是把复数从``一个新记号''讲成``一种新的语言''：它既能处理实数范围内无解的方程，又能把平面几何中的长度、方向、旋转和物理中的振幅、相位统一到同一套表示里。
+本章的核心，是把复数从``一个为解方程而引入的新记号''讲成``一套真正能用的工具''：它既能处理实数范围内无解的方程，又能把平面几何中的长度、方向、旋转和物理中的振幅、相位放到同一套表示里。
 \end{tishi}
 
 如果你现在暂时合上书，最好已经能顺着下面这条线口头复述一遍：为什么实数还不够用，复数怎样落到复平面上，同一个复数为什么需要几种不同表示法，而这些表示法又怎样把旋转、开方、无穷远点和物理相位自然串起来。本章的知识主线如下图所示：
@@ -4170,7 +4170,7 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
     \[
         z=r(\cos\theta+\mathrm{i}\sin\theta)=re^{\mathrm{i}\theta}.
     \]
-    这里模 $r$ 反映大小，辐角 $\theta$ 反映方向，欧拉公式则把三角函数和指数函数统一了起来。
+    这里模 $r$ 反映大小，辐角 $\theta$ 反映方向，欧拉公式则把三角函数和指数函数联系了起来。
 
     \item \textbf{乘法的几何意义：}复数乘法不是单纯的``按公式展开''。若
     \[
@@ -4184,9 +4184,9 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
 
     \item \textbf{乘方、开方与单位根：}棣莫弗公式、$n$ 次方根和单位根告诉我们：复数的乘方与开方，本质上都和角度的倍化、均分有关。因此单位根总是均匀分布在单位圆上，这种几何分布以后会在傅里叶分析和边值问题里反复出现。
 
-    \item \textbf{扩充复平面：}扩充复平面和复球面的引入，说明无穷远点不是一个随便补上的符号，而是把整个复平面补成一个更完整对象的自然做法。这样一来，直线和圆也能放到同一幅图景里理解，这为后面讨论无穷远点处的奇性、保角映射和留数理论打下基础。
+    \item \textbf{扩充复平面：}扩充复平面和复球面的引入，说明无穷远点不是随便补出来的符号，而是为了把``远离原点''也纳入统一讨论。把它添进去以后，后面既能更自然地讨论无穷远点处的奇性，也能把直线看成经过无穷远点的圆。
 
-    \item \textbf{物理意义：}本章最后的物理例子说明，复数在物理里之所以重要，不只是因为它``算起来方便''，更因为它能把振幅和相位统一表示出来。无论是简谐振动的相量法，还是量子力学中波函数的干涉项，背后都在用复数表达叠加与相位差。
+    \item \textbf{物理意义：}本章最后的物理例子说明，复数在物理里之所以重要，不只是因为它``算起来方便''，更因为它能把振幅和相位一起写出来。无论是简谐振动的相量法，还是量子力学中波函数的干涉项，背后都在用复数表达叠加与相位差。
 \end{enumerate}
 \end{zhongyao}
 
@@ -4226,7 +4226,7 @@ x(t)=\operatorname{Re}\left(2e^{-\mathrm{i}\pi/6}e^{\mathrm{i}\omega t}\right)
         w=\frac{1}{z}.
     \]
 
-    \item \textbf{振动与叠加：}若题目来自振动、波动或量子力学中的叠加问题，应优先思考复数表示是否能把振幅和相位统一起来。很多时候，复数真正简化的不是最后一步计算，而是整个问题的\textbf{处理框架}。
+    \item \textbf{振动与叠加：}若题目来自振动、波动或量子力学中的叠加问题，应优先思考复数表示是否能把振幅和相位统一起来。很多时候，复数真正简化的不是最后一步计算，而是让我们先把振幅和相位合在一起处理，再回到实量或概率密度。
 \end{enumerate}
 \end{tishi}
 
