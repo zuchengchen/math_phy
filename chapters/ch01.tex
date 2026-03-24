@@ -1458,16 +1458,16 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 
 \subsection{欧拉公式}
 
-三角形式已经很有用，但它还可以进一步压缩成更简洁的指数形式。关键就是下面这个著名公式。
+三角形式已经很有用，但借助欧拉公式，它还可以进一步压缩成更简洁的指数形式。关键就在于下面这个著名公式。
 
 \begin{tishi}[欧拉公式的学习重点]
-如果你对高等数学里的幂级数还不熟，不要在这里停住。学到欧拉公式这一节时，\textbf{第一要求是会用，不是先把证明完全理解。} 也就是说，你至少要会做下面两件事：
+如果你对高等数学中的幂级数还不太熟，这里先不要停住。学习欧拉公式时，\textbf{第一要求是先会用，而不是先把证明完全吃透。} 也就是说，至少要先掌握下面两点：
 \begin{enumerate}
     \item 把 $\cos\theta+\mathrm{i}\sin\theta$ 改写成 $e^{\mathrm{i}\theta}$；
     \item 看到 $e^{\mathrm{i}\theta}$ 时，能把它理解成``模为 $1$、辐角为 $\theta$ 的复数''。
 \end{enumerate}
 
-下面的证明是一个基于幂级数的补充证明。若现在读起来有点吃力，可以先记住公式并继续往后学，等高数中的幂级数更熟以后再回头看。
+下面给出一个基于幂级数的证明。若现在读起来还有些吃力，可以先记住公式，继续往后学，等高等数学中的幂级数学得更熟以后，再回头来看这个证明。
 \end{tishi}
 
 \begin{dingli}{欧拉公式（Euler's formula）}{}
@@ -1477,34 +1477,34 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \end{equation}
 \end{dingli}
 
-在看证明之前，可以先拿几个熟悉的特殊角代进去看看。这里熟悉的，不是复指数式本身，而是角度
+在看证明之前，我们先用几个熟悉的特殊角来感受一下这个公式。你现在熟悉的，未必是复指数式本身，而更可能是角
 \[
 0,\qquad \frac{\pi}{2},\qquad \pi
 \]
-以及它们在单位圆上对应的位置。由三角函数的特殊值，
+及其在单位圆上的位置。由三角函数的特殊值可知，
 \[
 \cos 0+\mathrm{i}\sin 0=1,\qquad
 \cos \frac{\pi}{2}+\mathrm{i}\sin \frac{\pi}{2}=\mathrm{i},\qquad
 \cos \pi+\mathrm{i}\sin \pi=-1.
 \]
-因此，如果欧拉公式成立，那么这些点就应当分别写成
+因此，如果欧拉公式成立，那么单位圆上的这几个点就应分别写成
 \[
 e^{0\cdot \mathrm{i}}=1,\qquad
 e^{\mathrm{i}\pi/2}=\mathrm{i},\qquad
 e^{\mathrm{i}\pi}=-1.
 \]
-这三个点都正好落在单位圆上，并且方向分别对应 $0,\pi/2,\pi$。这说明欧拉公式并不是把三角函数和指数函数硬凑在一起，而是在说：\textbf{单位圆上的方向，本来就可以用复指数来编码。}
+它们都落在单位圆上，方向也恰好对应 $0,\pi/2,\pi$。这说明，欧拉公式并不是把三角函数和指数函数硬凑在一起，而是在揭示这样一个事实：\textbf{单位圆上的方向，本来就可以用复指数来编码。}
 
 \begin{proof}
-下面给出一个基于幂级数的补充证明。这里调用高等数学中已经学过的幂级数展开：
+我们先调用高等数学中已经学过的几个幂级数展开式：
 \begin{align*}
     e^t&=1+t+\frac{t^2}{2!}+\frac{t^3}{3!}+\frac{t^4}{4!}+\cdots,\\
     \cos\theta&=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\frac{\theta^6}{6!}+\cdots,\\
     \sin\theta&=\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\frac{\theta^7}{7!}+\cdots.
 \end{align*}
-这些展开式在高等数学里原本是对实变量写出的；这里把自变量换成 $\mathrm{i}\theta$，本质上就是把同一个幂级数代入复数点 $\mathrm{i}\theta$，再把结果按实部和虚部重新分组。
+这些展开式原本是在实变量情形下写出的。现在把自变量换成 $\mathrm{i}\theta$，本质上就是把同一个幂级数代入复数点 $\mathrm{i}\theta$，再按实部和虚部重新分组。
 
-再把 $e^t$ 中的 $t$ 换成 $\mathrm{i}\theta$，得
+现在把 $e^t$ 中的 $t$ 换成 $\mathrm{i}\theta$，就得到
 \begin{align*}
     e^{\mathrm{i}\theta}
     &=1+\mathrm{i}\theta+\frac{(\mathrm{i}\theta)^2}{2!}+\frac{(\mathrm{i}\theta)^3}{3!}+\frac{(\mathrm{i}\theta)^4}{4!}+\cdots \\
@@ -1512,7 +1512,7 @@ e^{\mathrm{i}\pi}=-1.
     &=\left(1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\cdots\right)
       +\mathrm{i}\left(\theta-\frac{\theta^3}{3!}+\frac{\theta^5}{5!}-\cdots\right).
 \end{align*}
-也就是说，把各项逐项展开以后，实部正好是 $\cos\theta$ 的展开式，虚部正好是 $\sin\theta$ 的展开式，因此
+整理后可以看出，实部恰好是 $\cos\theta$ 的展开式，虚部恰好是 $\sin\theta$ 的展开式，因此
 \[
 e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta.
 \]
@@ -1533,15 +1533,15 @@ e^{\mathrm{i}\pi}+1=0.
 e,\qquad \mathrm{i},\qquad \pi,\qquad 1,\qquad 0
 \]
 用一个极其简洁的式子联系在了一起。
-不过它并不是某种神秘巧合。从几何上看，$e^{\mathrm{i}\theta}$ 表示模为 $1$、辐角为 $\theta$ 的复数；当 $\theta=\pi$ 时，它正好对应单位圆最左端的点，也就是 $-1$。所以
+但它并不是什么神秘巧合。从几何上看，$e^{\mathrm{i}\theta}$ 表示一个模为 $1$、辐角为 $\theta$ 的复数；当 $\theta=\pi$ 时，它对应的正是单位圆最左端的点 $-1$。所以
 \[
 e^{\mathrm{i}\pi}=-1
 \]
-这个结果既漂亮，也完全符合复平面上的几何直观。
+这个结果不只是漂亮，也完全符合复平面上的几何直观。
 \end{zhu}
 
 \begin{tishi}[欧拉公式的意义]
-欧拉公式之所以重要，不只是因为它漂亮，而是因为它把\textbf{旋转}和\textbf{指数运算}统一了起来。以后你会发现，很多涉及周期、相位和波动的问题，一旦改写成复指数形式，结构就会清楚得多。
+欧拉公式之所以重要，不只是因为它形式优美，更因为它把\textbf{旋转}和\textbf{指数运算}统一了起来。以后你会发现，很多涉及周期、相位和波动的问题，一旦改写成复指数形式，结构就会清楚得多。
 \end{tishi}
 
 \subsection{指数形式及其优点}
