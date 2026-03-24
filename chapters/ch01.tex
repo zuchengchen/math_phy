@@ -2418,6 +2418,39 @@ z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \]
 \end{proof}
 
+\begin{lizi}{用棣莫弗公式推出三倍角公式}{}
+利用棣莫弗公式推出 $\cos 3\theta$ 和 $\sin 3\theta$ 的表达式。
+
+\begin{jie}
+在棣莫弗公式中取 $n=3$，得
+\[
+\bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^3=\cos 3\theta+\mathrm{i}\sin 3\theta.
+\]
+把左边按立方公式展开：
+\begin{align*}
+    \bigl(\cos\theta+\mathrm{i}\sin\theta\bigr)^3
+    &=\cos^3\theta+3\cos^2\theta(\mathrm{i}\sin\theta)
+      +3\cos\theta(\mathrm{i}\sin\theta)^2+(\mathrm{i}\sin\theta)^3\\
+    &=\bigl(\cos^3\theta-3\cos\theta\sin^2\theta\bigr)
+      +\mathrm{i}\bigl(3\cos^2\theta\sin\theta-\sin^3\theta\bigr).
+\end{align*}
+比较实部和虚部，就得到
+\[
+\cos 3\theta=\cos^3\theta-3\cos\theta\sin^2\theta,
+\qquad
+\sin 3\theta=3\cos^2\theta\sin\theta-\sin^3\theta.
+\]
+若再用
+\[
+\sin^2\theta=1-\cos^2\theta,
+\]
+还可以把余弦三倍角公式写成熟悉的形式
+\[
+\cos 3\theta=4\cos^3\theta-3\cos\theta.
+\]
+\end{jie}
+\end{lizi}
+
 \begin{lizi}{求复数的高次幂}{}
 计算
 \[
