@@ -174,32 +174,7 @@ a=2,\qquad b=0.
 关于``纯虚数''是否包含 $0$，不同教材的约定并不完全相同。有的教材把纯虚数限定为 $y\neq 0$，因而 $0$ 不算纯虚数；本书约定凡 $x=0$ 的复数都称为纯虚数，因此 $0$ 既是实数，也是纯虚数。
 \end{zhu}
 
-如果把这些类型放到复平面上看，分类会更清楚：实数落在实轴上，纯虚数落在虚轴上，而一般复数对应那些不在坐标轴上的点；原点 $0$ 则正好是这几种情况相交的特殊位置。
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=1.12]
-    \draw[mp axis] (-3.6,0) -- (3.9,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-3.2) -- (0,3.4) node[mp label, above] {$\operatorname{Im}z$};
-
-    \fill[mp area blue] (-3.2,-0.14) rectangle (3.2,0.14);
-    \fill[mp area teal] (-0.14,-2.9) rectangle (0.14,2.9);
-    \draw[figblue, line width=1.15pt] (-3.2,0) -- (3.2,0);
-    \draw[figteal, line width=1.15pt, dash pattern=on 3.2pt off 2.0pt] (0,-2.9) -- (0,2.9);
-
-    \coordinate (Z) at (2.1,1.55);
-    \node[mp point c] at (Z) {};
-    \node[mp label, above right, text=figpurple] at (Z) {$x+\mathrm{i}y$};
-
-    \node[mp label, text=figblue] at (2.25,-0.42) {实数：$y=0$};
-    \node[mp label, text=figteal, rotate=90] at (-0.42,2.0) {纯虚数：$x=0$};
-    \node[mp small, text=figpurple, align=center] at (-2.1,1.7) {一般复数\\$x\neq 0,\ y\neq 0$};
-    \node[mp label, below left] at (0,0) {$0$};
-    \node[mp small, text=black!46, align=center] at (-2.25,-1.95) {不在坐标轴上的点\\都对应一般复数};
-\end{tikzpicture}
-\caption{复数的基本分类}
-\label{fig:complex-classification-plane}
-\end{figure}
+等下一节把复数放到平面上看时，这种分类会变得更直观：实数、纯虚数和一般复数会分别对应不同的位置关系。这里先把代数上的判别标准记清楚，后面再回头看它的几何图像。
 
 \begin{lizi}{判断复数的类型}{}
 判断下列各数属于哪一类复数：
@@ -607,6 +582,33 @@ z=x+\mathrm{i}y.
     \item 把它看成点 $(x,y)$；
     \item 把它看成从原点 $O$ 指向该点的向量 $\overrightarrow{Oz}$。
 \end{itemize}
+
+现在回头看前面按实部和虚部是否为零所作的分类，这个图像就很直观了：实数落在实轴上，纯虚数落在虚轴上，而一般复数对应那些不在坐标轴上的点；坐标原点对应复数 $0$，它正好是这些情形相交的特殊位置。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.12]
+    \draw[mp axis] (-3.6,0) -- (3.9,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-3.2) -- (0,3.4) node[mp label, above] {$\operatorname{Im}z$};
+
+    \fill[mp area blue] (-3.2,-0.14) rectangle (3.2,0.14);
+    \fill[mp area teal] (-0.14,-2.9) rectangle (0.14,2.9);
+    \draw[figblue, line width=1.15pt] (-3.2,0) -- (3.2,0);
+    \draw[figteal, line width=1.15pt, dash pattern=on 3.2pt off 2.0pt] (0,-2.9) -- (0,2.9);
+
+    \coordinate (Z) at (2.1,1.55);
+    \node[mp point c] at (Z) {};
+    \node[mp label, above right, text=figpurple] at (Z) {$x+\mathrm{i}y$};
+
+    \node[mp label, text=figblue] at (2.25,-0.42) {实数：$y=0$};
+    \node[mp label, text=figteal, rotate=90] at (-0.42,2.0) {纯虚数：$x=0$};
+    \node[mp small, text=figpurple, align=center] at (-2.1,1.7) {一般复数\\$x\neq 0,\ y\neq 0$};
+    \node[mp label, below left] at (0,0) {$0$};
+    \node[mp small, text=black!46, align=center] at (-2.25,-1.95) {不在坐标轴上的点\\都对应一般复数};
+\end{tikzpicture}
+\caption{复数的基本分类}
+\label{fig:complex-classification-plane}
+\end{figure}
 
 \begin{zhu}{}{}
 以后遇到位置关系时，我们常把复数看成点；遇到加法、减法、旋转和伸缩时，我们常把复数看成向量。这两种看法没有冲突，只是侧重点不同。
