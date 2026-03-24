@@ -1023,8 +1023,11 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{aligned}
 \]
 
-
-注意到
+要证明 $|z_1+z_2|^2\le (|z_1|+|z_2|)^2$，比较展开式可知，关键在于证明
+\[
+x_1x_2+y_1y_2\le |z_1||z_2|.
+\]
+为此，我们考察差式 $(x_1^2+y_1^2)(x_2^2+y_2^2)-(x_1x_2+y_1y_2)^2$：若能证明它非负，结论便成立。注意到
 \begin{align*}
     &(x_1^2+y_1^2)(x_2^2+y_2^2)-(x_1x_2+y_1y_2)^2 \\
     &=x_1^2x_2^2+x_1^2y_2^2+y_1^2x_2^2+y_1^2y_2^2-\left(x_1^2x_2^2+2x_1x_2y_1y_2+y_1^2y_2^2\right) \\
@@ -2833,10 +2836,15 @@ z^3=z\cdot z\cdot z=r^3 e^{3\mathrm{i}\theta}.
 \[
 \cos\theta+\mathrm{i}\sin\theta=e^{\mathrm{i}\theta}.
 \]
-再由前面复指数的基本运算律可知：对正整数 $n$，
+再由前面复指数的基本运算律 $e^{z_1+z_2}=e^{z_1}e^{z_2}$，用数学归纳法容易得到：对正整数 $n$，
 \[
 (e^{\mathrm{i}\theta})^n=e^{\mathrm{i}n\theta}.
 \]
+事实上，$n=1$ 时结论显然成立；若对某个 $n$ 成立，则
+\[
+(e^{\mathrm{i}\theta})^{n+1}=(e^{\mathrm{i}\theta})^n\cdot e^{\mathrm{i}\theta}=e^{\mathrm{i}n\theta}\cdot e^{\mathrm{i}\theta}=e^{\mathrm{i}(n+1)\theta},
+\]
+因此对一切正整数 $n$ 都成立。
 当 $n=0$ 时，
 \[
 (e^{\mathrm{i}\theta})^0=1=e^0;
@@ -3422,11 +3430,7 @@ z\to\infty.
 \[
 \frac{1}{0}=\infty,\qquad \frac{1}{\infty}=0.
 \]
-它们正好反映了前面提到的变换
-\[
-w=\frac{1}{z}
-\]
-会把原点和无穷远点互相对应起来。
+这两个约定是\textbf{基于变换 $w=1/z$ 的对应关系}而设立的：在变换 $w=1/z$ 下，原点 $z=0$ 对应 $w=\infty$，无穷远点 $z=\infty$ 对应 $w=0$。它们不是极限意义上的等式，而是扩充复平面中点的对应关系。换言之，$\frac{1}{0}=\infty$ 并不是说"零的倒数是无穷大"这一极限结论，而是说"在扩充复平面里，$z=0$ 与 $w=\infty$ 通过变换 $w=1/z$ 互相对应"。
 
 还要特别注意：$\infty$ 虽然在扩充复平面里被看成一个点，但它仍然\textbf{不是普通复数}。因此像
 \[
@@ -3654,6 +3658,14 @@ F(w)=f\!\left(\frac{1}{w}\right),
 \begin{equation}
     \frac{\mathrm{d}}{\mathrm{d}t}e^{\mathrm{i}\omega t}=\mathrm{i}\omega e^{\mathrm{i}\omega t}.
 \end{equation}
+这个求导公式可以直接验证：因为
+\[
+e^{\mathrm{i}\omega t}=\cos(\omega t)+\mathrm{i}\sin(\omega t),
+\]
+对 $t$ 求导得
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}e^{\mathrm{i}\omega t}=-\omega\sin(\omega t)+\mathrm{i}\omega\cos(\omega t)=\mathrm{i}\omega\bigl(\cos(\omega t)+\mathrm{i}\sin(\omega t)\bigr)=\mathrm{i}\omega e^{\mathrm{i}\omega t}.
+\]
 这说明，求导只是乘上一个常数 $\mathrm{i}\omega$。对于振动和波动问题，这种改写往往能把原本零散的三角函数运算整理得很紧凑。
 
 \begin{figure}[htbp]
