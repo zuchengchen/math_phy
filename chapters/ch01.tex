@@ -2443,6 +2443,20 @@ z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \]
 \end{proof}
 
+\begin{tishi}[正幂、零次幂和负幂该怎样理解]
+当 $n$ 是正整数时，$z^n$ 就是把 $z$ 连续乘 $n$ 次；当 $z\neq 0$ 时，还规定
+\[
+z^0=1,\qquad z^{-m}=\frac{1}{z^m}\quad (m\in\mathbb{N}).
+\]
+若 $z=re^{\mathrm{i}\theta}$，则
+\[
+z^{-m}=r^{-m}e^{-m\mathrm{i}\theta}.
+\]
+这说明负整数次幂的几何意义，正是把``放大并逆时针旋转''改成``缩小并顺时针旋转''。至于 $z=0$，只有正整数次幂 $0^n=0$ 是自然定义的，$0^0$ 和 $0^{-m}$ 一般不讨论。
+\end{tishi}
+
+下面先看一个符号型例子，说明棣莫弗公式怎样推出熟悉的三角恒等式；再看它怎样用来理解幂次的几何变化和具体计算。
+
 \begin{lizi}{用棣莫弗公式推出三倍角公式}{}
 利用棣莫弗公式推出 $\cos 3\theta$ 和 $\sin 3\theta$ 的表达式。
 
@@ -2483,18 +2497,6 @@ z^n = (re^{\mathrm{i}\theta})^n=r^n e^{\mathrm{i}n\theta}.
 \]
 \end{jie}
 \end{lizi}
-
-\begin{tishi}[正幂、零次幂和负幂该怎样理解]
-当 $n$ 是正整数时，$z^n$ 就是把 $z$ 连续乘 $n$ 次；当 $z\neq 0$ 时，还规定
-\[
-z^0=1,\qquad z^{-m}=\frac{1}{z^m}\quad (m\in\mathbb{N}).
-\]
-若 $z=re^{\mathrm{i}\theta}$，则
-\[
-z^{-m}=r^{-m}e^{-m\mathrm{i}\theta}.
-\]
-这说明负整数次幂的几何意义，正是把``放大并逆时针旋转''改成``缩小并顺时针旋转''。至于 $z=0$，只有正整数次幂 $0^n=0$ 是自然定义的，$0^0$ 和 $0^{-m}$ 一般不讨论。
-\end{tishi}
 
 \begin{lizi}{观察幂次怎样改变模和辐角}{}
 设
