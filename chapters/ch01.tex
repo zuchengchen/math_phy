@@ -1562,11 +1562,7 @@ z=re^{\mathrm{i}\theta}
 \end{figure}
 
 \begin{tishi}[指数形式的理解]
-可以把
-\[
-e^{\mathrm{i}\theta}
-\]
-看成``给出方向''，把前面的 $r$ 看成``给出长度''。因此
+可以把$e^{\mathrm{i}\theta}$看成``给出方向''，而把 $r$ 看成``给出长度''。因此
 \[
 z=re^{\mathrm{i}\theta}
 \]
@@ -1617,21 +1613,15 @@ e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}=2\mathrm{i}\sin\theta.
 这条推论说明，指数形式并没有丢掉原来三角形式中的信息，它只是把这些信息换成了一种更紧凑的写法。这两个公式以后在傅里叶分析中会频繁出现。
 
 \begin{zhu}{}{}
-既然 $e^{\mathrm{i}\theta}$ 已经把纯虚指数的情形说明白了，一个自然的问题就是：若指数里放的是一般复数 $z=x+\mathrm{i}y$，该怎样理解 $e^z$？下面这个定义正好把前面的实指数和复平面上的旋转信息合在一起。
-
-到这里我们主要在使用
-\[
-e^{\mathrm{i}\theta}.
-\]
-若把实指数和欧拉公式合在一起，那么对一般复数
+对一般复数
 \[
 z=x+\mathrm{i}y
 \]
-也自然可以定义
+我们有
 \begin{equation}
-    e^z:=e^x(\cos y+\mathrm{i}\sin y).
+    e^z = e^{x+\mathrm{i}y} = e^x e^{\mathrm{i}y}=e^x(\cos y+\mathrm{i}\sin y).
 \end{equation}
-当 $x=0$ 时，它就退化成前面的 $e^{\mathrm{i}y}$；当 $y=0$ 时，它又回到熟悉的实指数 $e^x$。
+当 $x=0$ 时，它退化成欧拉公式： $e^{\mathrm{i}y}=(\cos y+\mathrm{i}\sin y)$；当 $y=0$ 时，它回到我们熟悉的实指数 $e^x$。
 \end{zhu}
 
 \begin{dingli}{复指数与共轭}{}
