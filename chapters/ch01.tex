@@ -1058,12 +1058,12 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \]
 \end{proof}
 
-\begin{yinli}{反三角不等式（reverse triangle inequality）}{}
+\begin{tuilun}{反三角不等式（reverse triangle inequality）}{}
 对任意复数 $z_1,z_2$，都有
 \begin{equation}
     \bigl||z_1|-|z_2|\bigr|\le |z_1-z_2|.
 \end{equation}
-\end{yinli}
+\end{tuilun}
 
 \begin{proof}
 由三角不等式，
@@ -1633,10 +1633,6 @@ z=x+\mathrm{i}y,
 \begin{equation}
     \overline{e^z}=e^{\bar z}.
 \end{equation}
-特别地，对任意实数 $\theta$，都有
-\begin{equation}
-    \overline{e^{\mathrm{i}\theta}}=e^{-\mathrm{i}\theta},\qquad |e^{\mathrm{i}\theta}|=1.
-\end{equation}
 \end{dingli}
 
 \begin{proof}
@@ -1661,8 +1657,18 @@ e^{\bar z}=e^x\bigl(\cos(-y)+\mathrm{i}\sin(-y)\bigr)
 \[
 \overline{e^z}=e^{\bar z}.
 \]
+\end{proof}
 
-特别地，当 $z=\mathrm{i}\theta$ 时，就得到
+把这个一般结论用到纯虚指数上，就得到单位圆上复指数的两个基本性质。
+\begin{tuilun}{单位圆上复指数的基本性质}{}
+对任意实数 $\theta$，都有
+\begin{equation}
+    \overline{e^{\mathrm{i}\theta}}=e^{-\mathrm{i}\theta},\qquad |e^{\mathrm{i}\theta}|=1.
+\end{equation}
+\end{tuilun}
+
+\begin{proof}
+在上一定理中取 $z=\mathrm{i}\theta$，就得到
 \[
 \overline{e^{\mathrm{i}\theta}}=e^{-\mathrm{i}\theta}.
 \]
@@ -2661,10 +2667,30 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 的全部解称为\textbf{$n$ 次单位根}。
 \end{dingliyi}
 
-由公式 \eqref{eq:nth-roots} 立刻得到，$n$ 次单位根为
+把上一节的 $n$ 次方根公式用于 $z=1$，就立刻得到单位根的具体表达式。
+\begin{tuilun}{单位根的指数表示}{}
+$n$ 次单位根的全部解为
 \begin{equation}
     \omega_k=e^{2k\pi\mathrm{i}/n},\qquad k=0,1,\dots,n-1.
 \end{equation}
+它们全部落在单位圆上，并把圆周平均分成 $n$ 份。
+\end{tuilun}
+
+\begin{proof}
+因为
+\[
+1=e^{\mathrm{i}\cdot 0},
+\]
+所以把定理 \eqref{eq:nth-roots} 中的 $z$ 取为 $1$，即 $r=1,\theta=0$，就得到
+\[
+\omega_k=\sqrt[n]{1}\,e^{\mathrm{i}(0+2k\pi)/n}=e^{2k\pi\mathrm{i}/n},\qquad k=0,1,\dots,n-1.
+\]
+又由于每个单位根的模都等于 $1$，所以它们全都落在单位圆上；相邻两个辐角相差
+\[
+\frac{2\pi}{n},
+\]
+因此它们把圆周平均分成 $n$ 份。
+\end{proof}
 
 \begin{figure}[htbp]
 \centering
@@ -2690,7 +2716,7 @@ z_m=2e^{\mathrm{i}(\pi+2m\pi)/4}=2e^{\mathrm{i}(\pi/4+m\pi/2)},\qquad m=0,1,2,3.
 \label{fig:roots-of-unity}
 \end{figure}
 
-单位根全部落在单位圆上，并且把圆周平均分成 $n$ 份。这种高度对称的结构在很多地方都会出现。
+图 \ref{fig:roots-of-unity} 画出了六次单位根的分布。这种高度对称的结构在很多地方都会出现。
 
 \begin{dingli}{单位根之和（sum of roots of unity）}{}
 当 $n\ge 2$ 时，全部 $n$ 次单位根之和为
