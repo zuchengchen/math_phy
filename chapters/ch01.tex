@@ -1223,7 +1223,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 若 $z=x+\mathrm{i}y\neq 0$，求主辐角时建议固定按下面三步做：
 \begin{enumerate}
     \item 先判断点落在第几象限，还是落在某条坐标轴上；
-    \item 若不在坐标轴上，先取参考角
+    \item 若不在坐标轴上，先取\textbf{参考角}
     \[
     \alpha=\arctan\left|\frac{y}{x}\right|,\qquad 0<\alpha<\frac{\pi}{2};
     \]
@@ -1312,7 +1312,7 @@ z_1=1+\sqrt{3}\,\mathrm{i},
 \[
 \tan\theta=\sqrt{3},
 \]
-所以
+所以主辐角为
 \[
 \operatorname{Arg}z_1=\frac{\pi}{3}.
 \]
@@ -1321,35 +1321,21 @@ z_1=1+\sqrt{3}\,\mathrm{i},
 \[
 z_2=-1+\mathrm{i},
 \]
-它位于第二象限，参考角为 $\pi/4$，因此
+它位于第二象限，参考角为 $\pi/4$，因此主辐角为
 \[
-\operatorname{Arg}z_2=\frac{3\pi}{4}.
+\operatorname{Arg}z_2=\pi - \frac{\pi}{4} = \frac{3\pi}{4}.
 \]
 
 对
 \[
 z_3=-2\mathrm{i},
 \]
-它落在负虚轴上，所以
+它落在负虚轴上，所以主辐角为
 \[
 \operatorname{Arg}z_3=-\frac{\pi}{2}.
 \]
 \end{jie}
 \end{lizi}
-
-\begin{tishi}[复数的两套语言]
-如果把复数写成
-\[
-z=x+\mathrm{i}y,
-\]
-我们看到的是``横坐标与纵坐标''，也就是实部和虚部；如果把它放到复平面上看，我们看到的是``长度与方向''，也就是模和辐角。
-
-这两套语言描述的是同一个对象，只是观察角度不同。下一节要做的，并不是再学一个新对象，而是把这两套语言整理成更适合计算的形式：把
-\[
-x+\mathrm{i}y
-\]
-改写成``长度与方向''的表达。这样一来，乘法、除法、乘幂和开方的结构就会清楚很多。
-\end{tishi}
 
 \section{复数的三角形式与指数形式}
 
@@ -1438,9 +1424,9 @@ z=-1+\sqrt{3}\,\mathrm{i}
 |z|=\sqrt{(-1)^2+(\sqrt{3})^2}=2.
 \]
 
-再求主辐角。由于该点位于第二象限，所以
+再求主辐角。由于该点位于第二象限，参考角为$\pi/3$，所以主辐角为
 \[
-\operatorname{Arg}z=\frac{2\pi}{3}.
+\operatorname{Arg}z=\pi - \frac{\pi}{3} = \frac{2\pi}{3}.
 \]
 
 因此
@@ -1458,16 +1444,6 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 
 三角形式已经很有用，但借助欧拉公式，它还可以进一步压缩成更简洁的指数形式。
 
-\begin{tishi}[欧拉公式的学习重点]
-如果你对高等数学中的幂级数还不太熟，这里先不要停住。学习欧拉公式时，\textbf{第一要求是先会用，而不是先把证明完全吃透。} 也就是说，至少要先掌握下面两点：
-\begin{enumerate}
-    \item 把 $\cos\theta+\mathrm{i}\sin\theta$ 改写成 $e^{\mathrm{i}\theta}$；
-    \item 看到 $e^{\mathrm{i}\theta}$ 时，能把它理解成``模为 $1$、辐角为 $\theta$ 的复数''。
-\end{enumerate}
-
-下面给出一个基于幂级数的证明。若现在读起来还有些吃力，可以先记住公式，继续往后学，等高等数学中的幂级数学得更熟以后，再回头来看这个证明。
-\end{tishi}
-
 \begin{dingli}{欧拉公式（Euler's formula）}{}
 对任意实数 $\theta$，都有
 \begin{equation}\label{eq:euler-formula}
@@ -1475,26 +1451,8 @@ z=2\bigl(\cos(\tfrac{2\pi}{3}+2k\pi)+\mathrm{i}\sin(\tfrac{2\pi}{3}+2k\pi)\bigr)
 \end{equation}
 \end{dingli}
 
-在看证明之前，我们先用几个熟悉的特殊角来感受一下这个公式。你现在熟悉的，未必是复指数式本身，而更可能是角
-\[
-0,\qquad \frac{\pi}{2},\qquad \pi
-\]
-及其在单位圆上的位置。由三角函数的特殊值可知，
-\[
-\cos 0+\mathrm{i}\sin 0=1,\qquad
-\cos \frac{\pi}{2}+\mathrm{i}\sin \frac{\pi}{2}=\mathrm{i},\qquad
-\cos \pi+\mathrm{i}\sin \pi=-1.
-\]
-因此，如果欧拉公式成立，那么单位圆上的这几个点就应分别写成
-\[
-e^{0\cdot \mathrm{i}}=1,\qquad
-e^{\mathrm{i}\pi/2}=\mathrm{i},\qquad
-e^{\mathrm{i}\pi}=-1.
-\]
-它们都落在单位圆上，方向也恰好对应 $0,\pi/2,\pi$。这说明，欧拉公式并不是把三角函数和指数函数硬凑在一起，而是在揭示这样一个事实：\textbf{单位圆上的方向，本来就可以用复指数来编码。}
-
 \begin{proof}
-我们先调用高等数学中已经学过的几个幂级数展开式：
+我们先回顾高等数学中已经学过的几个幂级数展开式：
 \begin{align*}
     e^t&=1+t+\frac{t^2}{2!}+\frac{t^3}{3!}+\frac{t^4}{4!}+\cdots,\\
     \cos\theta&=1-\frac{\theta^2}{2!}+\frac{\theta^4}{4!}-\frac{\theta^6}{6!}+\cdots,\\
