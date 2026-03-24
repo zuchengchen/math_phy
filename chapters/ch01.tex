@@ -334,14 +334,17 @@ x_2-\mathrm{i}y_2.
 前面我们已经给出了复数加、减、乘、除的计算公式。接下来要问的是，复数的运算是否也满足实数中熟悉的基本运算律？对于\textbf{加法与乘法}，答案是肯定的：复数同样满足交换律、结合律和分配律，因此后面做代数化简时，许多熟悉的操作仍然成立。
 
 \begin{dingli}{复数加法与乘法的基本运算律}{}
-对任意复数 $z_1,z_2,z_3$，都有
+对任意复数 $z_1,z_2,z_3$，成立以下三组运算律：
 \begin{align}
-    z_1+z_2&=z_2+z_1, \label{eq:complex-add-commutative}\\
-    (z_1+z_2)+z_3&=z_1+(z_2+z_3), \label{eq:complex-add-associative}\\
-    z_1z_2&=z_2z_1, \label{eq:complex-mul-commutative}\\
-    (z_1z_2)z_3&=z_1(z_2z_3), \label{eq:complex-mul-associative}\\
-    z_1(z_2+z_3)&=z_1z_2+z_1z_3, \label{eq:complex-left-distributive}\\
-    (z_1+z_2)z_3&=z_1z_3+z_2z_3. \label{eq:complex-right-distributive}
+    \text{加法：}\quad
+    & z_1+z_2=z_2+z_1, \label{eq:complex-add-commutative}\\
+    & (z_1+z_2)+z_3=z_1+(z_2+z_3), \label{eq:complex-add-associative}\\[4pt]
+    \text{乘法：}\quad
+    & z_1z_2=z_2z_1, \label{eq:complex-mul-commutative}\\
+    & (z_1z_2)z_3=z_1(z_2z_3), \label{eq:complex-mul-associative}\\[4pt]
+    \text{分配律：}\quad
+    & z_1(z_2+z_3)=z_1z_2+z_1z_3, \label{eq:complex-left-distributive}\\
+    & (z_1+z_2)z_3=z_1z_3+z_2z_3. \label{eq:complex-right-distributive}
 \end{align}
 \end{dingli}
 
@@ -351,7 +354,9 @@ x_2-\mathrm{i}y_2.
 z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
 \]
 
-\noindent\textbf{1. 加法交换律}
+\noindent\textbf{1. 加法的交换律与结合律}
+
+先证交换律：
 \begin{align*}
     z_1+z_2
     &=(x_1+x_2)+\mathrm{i}(y_1+y_2)\\
@@ -359,7 +364,7 @@ z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
     &=z_2+z_1.
 \end{align*}
 
-\noindent\textbf{2. 加法结合律}
+再证结合律：
 \begin{align*}
     (z_1+z_2)+z_3
     &=[(x_1+x_2)+\mathrm{i}(y_1+y_2)]+(x_3+\mathrm{i}y_3)\\
@@ -376,7 +381,9 @@ z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
     (z_1+z_2)+z_3=z_1+(z_2+z_3).
 \]
 
-\noindent\textbf{3. 乘法交换律}
+\noindent\textbf{2. 乘法的交换律与结合律}
+
+先证交换律：
 \begin{align*}
     z_1z_2
     &=(x_1x_2-y_1y_2)+\mathrm{i}(x_1y_2+x_2y_1)\\
@@ -384,7 +391,7 @@ z_k=x_k+\mathrm{i}y_k,\qquad x_k,y_k\in\mathbb{R},\qquad k=1,2,3.
     &=z_2z_1.
 \end{align*}
 
-\noindent\textbf{4. 乘法结合律}
+再证结合律：
 
 先算 $z_1z_2$：
 \[
@@ -419,7 +426,9 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
     (z_1z_2)z_3=z_1(z_2z_3).
 \]
 
-\noindent\textbf{5. 左分配律}
+\noindent\textbf{3. 分配律}
+
+先证左分配律：
 \begin{align*}
     z_1(z_2+z_3)
     &=(x_1+\mathrm{i}y_1)[(x_2+x_3)+\mathrm{i}(y_2+y_3)]\\
@@ -430,7 +439,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
     &=z_1z_2+z_1z_3.
 \end{align*}
 
-\noindent\textbf{6. 右分配律}
+再证右分配律：
 \[
 \begin{aligned}
     (z_1+z_2)z_3
