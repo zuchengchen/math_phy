@@ -588,8 +588,6 @@ z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R}.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.16]
-    \draw[mp axis] (-0.7,0) -- (4.4,0) node[mp label, right] {$\mathrm{Re}$};
-    \draw[mp axis] (0,-0.7) -- (0,3.5) node[mp label, above] {$\mathrm{Im}$};
     \coordinate (Z) at (3,2);
     \fill[mp area blue] (0,0) -- (3,0) -- (Z) -- cycle;
     \draw[mp helper] (Z) -- (3,0);
@@ -600,6 +598,8 @@ z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R}.
     \node[mp label, below] at (3,0) {$x$};
     \node[mp label, left] at (0,2) {$y$};
     \node[mp label, below left] at (0,0) {$O$};
+    \draw[mp axis] (-0.7,0) -- (4.4,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-0.7) -- (0,3.5) node[mp label, above] {$\mathrm{Im}$};
 \end{tikzpicture}
 \caption{复数的点表示与向量表示}
 \label{fig:complex-plane-basic}
@@ -611,7 +611,7 @@ z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R}.
     \item 把它看成从原点 $O$ 指向该点的向量 $\overrightarrow{Oz}$。
 \end{itemize}
 
-再进一步，把复数看成从原点出发的向量以后，复数的加法与减法就分别对应向量的加法与减法。特别地，复数加法满足熟悉的平行四边形法则；后面讨论复数运算的几何意义时，我们会专门把这一点画出来。
+再进一步，把复数看成从原点出发的向量以后，复数的加法与减法就分别对应向量的加法与减法。特别地，复数加法满足熟悉的平行四边形法则。
 
 现在回头看前面按实部和虚部是否为零的分类，几何意义就十分清晰了：实数落在实轴上，纯虚数落在虚轴上，而一般复数对应那些不在坐标轴上的点。复数 $0$ 对应坐标原点，它位于实轴和虚轴的交点；在本书的约定下，$0$ 既是实数，也是纯虚数。
 
@@ -704,7 +704,7 @@ z_1-z_2=(1+2\mathrm{i})-(4+\mathrm{i})=-3+\mathrm{i},
 \[
 z=x+\mathrm{i}y
 \]
-时，实部和虚部总是成对出现。在许多场合，我们希望找到一个与 $z$ 配对的复数：实部不变，虚部反号。这样一来，像 $z\bar z=x^2+y^2$ 这样的式子会直接变成实数，后面求模平方、化简分母和处理相位时都会方便得多。这个与 $z$ 配对的复数，就是共轭复数。
+时，实部和虚部总是成对出现。在许多场合，我们希望找到一个与 $z$ 配对的复数$\bar z$：实部不变，虚部反号。这样一来，像 $z\bar z=x^2+y^2$ 这样的式子会直接变成实数，后面求模平方、化简分母和处理相位时都会方便得多。这个与 $z$ 配对的复数，就是共轭复数。
 
 \begin{dingliyi}{共轭复数}{}
 设
@@ -1030,9 +1030,13 @@ z=2+3\mathrm{i}.
 \begin{proof}
 设
 \[
-z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
+z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2,
 \]
-先把左边平方展开：
+则
+\[
+z_1 + z_2 = (x_1 + x_2) +\mathrm{i} (y_1+y_2).
+\]
+先把式\eqref{eq:triangle-inequality}的左边平方展开：
 \[
 \begin{aligned}
 |z_1+z_2|^2
@@ -1042,7 +1046,7 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \end{aligned}
 \]
 
-要证明 $|z_1+z_2|^2\le (|z_1|+|z_2|)^2$，比较展开式可知，关键在于证明
+要证明 $|z_1+z_2|^2\le (|z_1|+|z_2|)^2 =|z_1|^2+|z_2|^2+2|z_1||z_2|$，比较展开式可知，关键在于证明
 \[
 x_1x_2+y_1y_2\le |z_1||z_2|.
 \]
@@ -1114,16 +1118,16 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 
 \subsection{辐角、主辐角与多值性}
 
-要描述非零复数 $z$ 时，除了长度 $|z|$，还需要一个量来刻画它的方向——辐角。
+描述非零复数 $z$ 时，除了长度 $|z|$，还需要一个量来刻画它的方向——辐角。
 
 \begin{dingliyi}{辐角与主辐角}{}
-设 $z\neq 0$。从实轴正方向逆时针旋转到向量 $\overrightarrow{Oz}$ 的角，称为 $z$ 的一个\textbf{辐角}，记作 $\arg z$。
+设 $z\neq 0$。从实轴正方向逆时针旋转到向量 $\overrightarrow{Oz}$ 的角，称为 $z$ 的一个\textbf{辐角}。$z$ 的全体辐角记作 $\arg z$。
 
 在所有辐角中，落在区间
 \begin{equation}
     -\pi<\theta\le \pi
 \end{equation}
-内的那角称为 $z$ 的\textbf{主辐角}（principal argument），记作 $\operatorname{Arg}z$。
+内的那个角称为 $z$ 的\textbf{主辐角}（principal argument），记作 $\operatorname{Arg}z$。
 \end{dingliyi}
 
 \begin{zhu}{}{}
@@ -1162,7 +1166,7 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \arg z=\operatorname{Arg}z+2k\pi,\qquad k\in\mathbb{Z}.
 \end{equation}
 
-图 \ref{fig:arg-multivalued} 展示了这里最核心的几何事实：终点还是同一个点 $z$，只是从正实轴出发时，中间可以额外多转若干整圈。
+图 \ref{fig:arg-multivalued} 展示了辐角的多值性：同一个终点 $z$，可以从正实轴出发，中间转过不同的圈数得到。
 
 \begin{figure}[htbp]
 \centering
@@ -1211,30 +1215,20 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
     \end{scope}
 \end{tikzpicture}%
 }
-\caption{同一复数的多值辐角。三幅图的终点相同，只是绕行圈数不同。}
+\caption{辐角的多值性：三幅图的终点相同，只是绕行圈数不同。}
 \label{fig:arg-multivalued}
 \end{figure}
-
-\begin{tishi}[辐角多值性和函数的多值性]
-由
-\[
-\arg z=\operatorname{Arg}z+2k\pi,\qquad k\in\mathbb{Z},
-\]
-可见同一个非零复数 $z$ 往往对应一族角，而不是唯一的角。
-
-辐角的这种多值性会进一步导致函数的多值性。后面学习复数开方、对数函数以及相关内容时，我们会更清楚地看到这一点。
-\end{tishi}
 
 \begin{jinshi}[辐角最容易出错的地方]
 \begin{itemize}
     \item 不要把 $\arg z$ 和 $\operatorname{Arg}z$ 混淆。前者表示全体辐角，后者表示主辐角。
     \item 不要只凭 $\theta=\arctan(y/x)$ 决定辐角，因为反正切只能给出主值，且不能自动区分象限（quadrant）。
-    \item 零点没有辐角，这在后面讨论对数和幂函数时尤其重要。
+    \item 复数$0$没有辐角，这在后面讨论对数和幂函数时尤其重要。
 \end{itemize}
 \end{jinshi}
 
 \begin{tishi}[主辐角的求法]
-若 $z=x+\mathrm{i}y\neq 0$，求主辐角时建议固定按下面三步做：
+若 $z=x+\mathrm{i}y\neq 0$，求主辐角时可以按下面三个步骤操作：
 \begin{enumerate}
     \item 先判断点落在第几象限，还是落在某条坐标轴上；
     \item 若不在坐标轴上，先取\textbf{参考角}（即向量与坐标轴的最小夹角）
@@ -1259,14 +1253,9 @@ x_1x_2+y_1y_2\le |z_1||z_2|.
 \text{正虚轴}:\frac{\pi}{2},\qquad
 \text{负虚轴}:-\frac{\pi}{2}.
 \]
-这样做虽然看起来慢一点，但最不容易在象限上出错。
 \end{tishi}
 
-先观察几个典型点在复平面上的位置，就容易明白为什么主辐角不能只靠
-\[
-\arctan\frac{y}{x}
-\]
-来判断：同样的反正切值，点落在不同象限时，方向角可能完全不同。
+下面通过几个典型例子，展示如何根据象限位置确定主辐角。图 \ref{fig:arg-example-quadrants} 给出了三个位于不同象限或坐标轴上的点。
 
 \begin{figure}[htbp]
 \centering
@@ -1316,7 +1305,7 @@ z_1=1+\sqrt{3}\,\mathrm{i},\qquad z_2=-1+\mathrm{i},\qquad z_3=-2\mathrm{i}.
 \]
 
 \begin{jie}
-求主辐角时，最容易出错的地方不是三角函数本身，而是象限判断。所以顺序最好固定成两步：先看点落在哪个象限或坐标轴上，再找参考角。
+求主辐角时，最容易出错的地方不是三角函数本身，而是象限判断。所以按照前面提示中的三步来做：先判断象限，再求参考角，最后写出主辐角。
 
 对
 \[
@@ -1351,6 +1340,19 @@ z_3=-2\mathrm{i},
 \end{jie}
 \end{lizi}
 
+\begin{zhu}{}{}
+本节介绍了辐角与主辐角的概念。要点有三：
+\begin{enumerate}
+    \item 辐角刻画复数的方向，具有多值性：$\arg z = \operatorname{Arg}z + 2k\pi$（$k\in\mathbb{Z}$）；
+    \item 主辐角是落在 $(-\pi,\pi]$ 内的唯一辐角，计算时必须正确判断象限；
+    \item 复数 $0$ 没有辐角。
+\end{enumerate}
+\end{zhu}
+
+\begin{tishi}[辐角多值性与函数的多值性]
+辐角的多值性会进一步导致函数的多值性。后面学习复数开方和对数函数等内容时，我们会更清楚地看到这一点。
+\end{tishi}
+
 \subsection{模与辐角方程的几何轨迹}
 
 现在，模和辐角已成为``把代数式直接翻译成图形''的工具。看到
@@ -1358,15 +1360,8 @@ z_3=-2\mathrm{i},
 |z-z_0|,\qquad \operatorname{Arg}(z-z_0)
 \]
 这类式子，脑中应立刻出现几何图像。
-
-关键的一点是：\textbf{复数 $z-z_0$ 表示从点 $z_0$ 指向点 $z$ 的向量。} 因而
-\[
-|z-z_0|
-\]
-表示点 $z$ 到点 $z_0$ 的距离，而
-\[
-\operatorname{Arg}(z-z_0)
-\]
+因为复数 $z-z_0$ 表示从点 $z_0$ 指向点 $z$ 的向量，所以
+$|z-z_0|$表示点 $z$ 到点 $z_0$ 的距离，而$\operatorname{Arg}(z-z_0)$
 则表示这条向量相对实轴正方向的主辐角。
 
 \begin{dingli}{几类最常见的复数轨迹}{}
@@ -1376,7 +1371,7 @@ z_3=-2\mathrm{i},
     \[
     |z-z_0|=r
     \]
-    表示以 $z_0$ 对应的点为圆心、半径为 $r$ 的圆；不等式
+    表示以 $z_0$ 为圆心、半径为 $r$ 的圆；不等式
     \[
     |z-z_0|<r,\qquad |z-z_0|>r
     \]
@@ -1395,6 +1390,60 @@ z_3=-2\mathrm{i},
     表示从点 $z_0$ 出发、方向角为 $\alpha$ 的一条射线，但不包含起点 $z_0$ 本身。
 \end{enumerate}
 \end{dingli}
+
+\begin{figure}[htbp]
+	\centering
+	\resizebox{0.98\textwidth}{!}{%
+		\begin{tikzpicture}[scale=1.0]
+			\begin{scope}
+%				\draw[mp thin axis] (-0.8,0) -- (3.2,0) node[mp label, right] {$\mathrm{Re}$};
+%				\draw[mp thin axis] (0,-0.8) -- (0,3.5) node[mp label, above] {$\mathrm{Im}$};
+				\coordinate (Z0) at (1.5,1);
+				\draw[figblue, line width=1.0pt, fill=figblue!8] (Z0) circle (1.25);
+				\coordinate (P) at ($(Z0)+(42:1.25)$);
+				\draw[mp helper] (Z0) -- (P);
+				\node[mp point c] at (Z0) {};
+				\node[mp point] at (P) {};
+				\node[mp label, below left, text=figblue] at (Z0) {$z_0$};
+				\node[mp label, above right] at (P) {$z$};
+				\node[mp label, text=figblue] at ($(Z0)!0.5!(P)+(-0.15,0.05)$) {$r$};
+				\node[mp small, align=center] at (1.5,-1.25) {$|z-z_0|=r$\\圆};
+			\end{scope}
+			
+			\begin{scope}[xshift=5.5cm]
+%				\draw[mp thin axis] (-2.3,0) -- (2.8,0) node[mp label, right] {$\mathrm{Re}$};
+%				\draw[mp thin axis] (0,-1.9) -- (0,2.1) node[mp label, above] {$\mathrm{Im}$};
+				\coordinate (A) at (-1.2,0);
+				\coordinate (B) at (1.2,0);
+				\coordinate (M) at (0,0);
+				\draw[figred!72!black, line width=1.0pt] (0,-1.65) -- (0,1.75);
+				\draw[mp helper] (A) -- (B);
+				\draw[mp soft, line width=0.8pt] ($(M)+(-0.18,0)$) -- ++(0,0.18) -- ++(0.18,0);
+				\node[mp point d] at (A) {};
+				\node[mp point d] at (B) {};
+				\node[mp label, above left] at (A) {$z_1$};
+				\node[mp label, above right] at (B) {$z_2$};
+				\node[mp small, text=figred!72!black, rotate=90] at (0.28,1.1) {垂直平分线};
+				\node[mp small, align=center] at (0,-2.35) {$|z-z_1|=|z-z_2|$\\到两点等距};
+			\end{scope}
+			
+			\begin{scope}[xshift=11cm]
+%				\draw[mp thin axis] (-0.4,0) -- (4.4,0) node[mp label, right] {$\mathrm{Re}$};
+%				\draw[mp thin axis] (0,-0.7) -- (0,3.4) node[mp label, above] {$\mathrm{Im}$};
+				\coordinate (C) at (1.5,1);
+				\coordinate (Q) at ($(C)+(35:2.0)$);
+				\draw[figteal, line width=1.1pt, -{Stealth[length=2.2mm,width=1.6mm]}] (C) -- (Q);
+				\draw[mp angle] ($(C)+(0.58,0)$) arc[start angle=0,end angle=35,radius=0.58];
+				\node[mp point b] at (C) {};
+				\node[mp label, above left] at (C) {$z_0$};
+				\node[mp label, text=figbrown] at ($(C)+(0.85,0.22)$) {$\alpha$};
+				\node[mp small, align=center] at (1.8,-1.15) {$\operatorname{Arg}(z-z_0)=\alpha$\\射线};
+			\end{scope}
+		\end{tikzpicture}%
+	}
+	\caption{模方程与辐角方程的常见几何轨迹}
+	\label{fig:complex-basic-loci}
+\end{figure}
 
 \begin{proof}
 这三条结论都只是把模和辐角的定义直接改写成几何说法。
@@ -1445,62 +1494,10 @@ z-z_0
 \[
 z-z_0=0,
 \]
-而零点没有辐角，所以起点本身不包含在内。
+而复数0没有辐角，所以起点本身不包含在内。
 \end{proof}
 
-\begin{figure}[htbp]
-\centering
-\resizebox{0.98\textwidth}{!}{%
-\begin{tikzpicture}[scale=1.0]
-    \begin{scope}
-        \draw[mp thin axis] (-0.8,0) -- (4.2,0) node[mp label, right] {$\mathrm{Re}$};
-        \draw[mp thin axis] (0,-0.8) -- (0,3.5) node[mp label, above] {$\mathrm{Im}$};
-        \coordinate (Z0) at (1.7,1.4);
-        \draw[figblue, line width=1.0pt, fill=figblue!8] (Z0) circle (1.25);
-        \coordinate (P) at ($(Z0)+(42:1.25)$);
-        \draw[mp helper] (Z0) -- (P);
-        \node[mp point c] at (Z0) {};
-        \node[mp point] at (P) {};
-        \node[mp label, above right, text=figblue] at (Z0) {$z_0$};
-        \node[mp label, above right] at (P) {$z$};
-        \node[mp label, text=figblue] at ($(Z0)!0.5!(P)+(0.05,0.18)$) {$r$};
-        \node[mp small, align=center] at (1.7,-1.25) {$|z-z_0|=r$\\圆};
-    \end{scope}
 
-    \begin{scope}[xshift=5.8cm]
-        \draw[mp thin axis] (-2.3,0) -- (2.8,0) node[mp label, right] {$\mathrm{Re}$};
-        \draw[mp thin axis] (0,-1.9) -- (0,2.1) node[mp label, above] {$\mathrm{Im}$};
-        \coordinate (A) at (-1.2,0);
-        \coordinate (B) at (1.6,0);
-        \coordinate (M) at (0.2,0);
-        \draw[figred!72!black, line width=1.0pt] (0.2,-1.65) -- (0.2,1.75);
-        \draw[mp helper] (A) -- (B);
-        \draw[mp soft, line width=0.8pt] ($(M)+(-0.18,0)$) -- ++(0,0.18) -- ++(0.18,0);
-        \node[mp point d] at (A) {};
-        \node[mp point d] at (B) {};
-        \node[mp label, above left] at (A) {$z_1$};
-        \node[mp label, above right] at (B) {$z_2$};
-        \node[mp small, text=figred!72!black, rotate=90] at (0.48,1.1) {垂直平分线};
-        \node[mp small, align=center] at (0.2,-2.35) {$|z-z_1|=|z-z_2|$\\到两点等距};
-    \end{scope}
-
-    \begin{scope}[xshift=11.4cm]
-        \draw[mp thin axis] (-0.4,0) -- (4.4,0) node[mp label, right] {$\mathrm{Re}$};
-        \draw[mp thin axis] (0,-0.7) -- (0,3.4) node[mp label, above] {$\mathrm{Im}$};
-        \coordinate (C) at (1.2,0.9);
-        \coordinate (Q) at ($(C)+(35:2.0)$);
-        \draw[figteal, line width=1.1pt, -{Stealth[length=2.2mm,width=1.6mm]}] (C) -- (Q);
-        \draw[mp angle] ($(C)+(0.58,0)$) arc[start angle=0,end angle=35,radius=0.58];
-        \node[mp point b] at (C) {};
-        \node[mp label, above left] at (C) {$z_0$};
-        \node[mp label, text=figbrown] at ($(C)+(0.85,0.22)$) {$\alpha$};
-        \node[mp small, align=center] at (1.8,-1.15) {$\operatorname{Arg}(z-z_0)=\alpha$\\射线};
-    \end{scope}
-\end{tikzpicture}%
-}
-\caption{模方程与辐角方程的常见几何轨迹}
-\label{fig:complex-basic-loci}
-\end{figure}
 
 \begin{tishi}[看到 $z-z_0$ 时，先把参考点平移到 $z_0$]
 很多学生一看到
