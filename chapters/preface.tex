@@ -4,68 +4,67 @@
 
 \section*{为什么要学这门课？}
 
-翻开这本《数学物理方法》讲义时，不少同学可能会觉得这门课有点``硬''：既有数学，又有物理，还讲``方法''，仿佛注定公式多、推导长、门槛高。
+这门课叫《数学物理方法》。不少同学可能会觉得这门课有点``硬''：既有数学，又有物理，还讲``方法''，仿佛注定公式多、推导长、门槛高。
 
 但不妨先把书名放在一边，从一个具体的问题出发：\textbf{为什么吉他琴弦能发出美妙的声音？}
 一根弦、两端固定、轻轻拨动，这个动作再平常不过，却已经把这门课最关心的几个问题摆在我们面前：为什么会有不同的音高？为什么会出现不同的振动模式？边界条件为什么会决定系统的行为？如果再把真实乐器中的阻尼和能量耗散考虑进去，声音又为什么会逐渐减弱？
 
 认真追问这些问题，其实就已经站在数学物理方法的门口了。
-在普通物理里，你早已接触过波动方程、热传导方程、拉普拉斯方程这些内容。只是多数时候，我们更关心``会不会用''，还来不及系统追问：这些方程从哪里来？为什么写成这个样子？遇到不同的边界条件和初始条件，又该怎样求解、怎样理解？
+在普通物理里，你早已接触过波动方程、热传导方程、拉普拉斯方程这些内容。只是多数时候，我们更关心``会不会用''，还来不及仔细追问：这些方程从哪里来？为什么写成这个样子？遇到不同的边界条件和初始条件，又该怎样求解、怎样理解？
 
 这门课的目的在于把这些零散出现的工具和观念串成一条清晰的线索，让你逐步学会\textbf{从物理问题出发，建立数学模型，把数学问题解开，再回到物理解释}。
+
 \section*{这门课学什么？}
 
-如果把物理专业的学习过程比作一条链条，数学物理方法正好处在关键位置。它上承高等数学和普通物理，下启理论力学、电动力学、量子力学、热力学与统计物理等课程，因此常被视为一门典型的桥梁课程。
-
 \begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[
-    basic/.style={rectangle, draw=black!75, rounded corners=4pt, minimum width=2.15cm, minimum height=0.82cm, text width=2.15cm, align=center, font=\small, line width=0.95pt, fill=blue!6},
-    bridge/.style={rectangle, draw=black!80, rounded corners=4pt, minimum width=3.15cm, minimum height=1.18cm, text width=3.15cm, align=center, font=\small\bfseries, line width=1.0pt, fill=orange!14},
-    related/.style={rectangle, draw=black!75, rounded corners=4pt, minimum width=2.75cm, minimum height=0.82cm, text width=2.75cm, align=center, font=\small, line width=0.95pt, fill=green!7},
-    group/.style={font=\small\bfseries},
-    inarrow/.style={->, >=stealth, line width=1.0pt, draw=blue!65!black},
-    outarrow/.style={->, >=stealth, line width=1.0pt, draw=green!55!black}
-]
-    % 前置课程（左侧）
-    \node[basic] (calc) at (-4.8, 3.0) {高等数学};
-    \node[basic] (mech) at (-4.8, 2.0) {力学};
-    \node[basic] (thermo) at (-4.8, 1.0) {热学};
-    \node[basic] (optics) at (-4.8, 0.0) {光学};
-    \node[basic] (em) at (-4.8, -1.0) {电磁学};
-    \node[group, text=blue!70!black] at (-4.8, 3.82) {基础课程};
-    
-    % 本课程（中间）
-    \node[bridge] (mathphy) at (0, 1.0) {数学物理方法};
-    \node[group, text=orange!75!black] at (0, 2.18) {桥梁课程};
-    
-    % 后置课程（右侧）
-    \node[related] (tmech) at (4.75, 3.0) {理论力学};
-    \node[related] (edyn) at (4.75, 2.0) {电动力学};
-    \node[related] (qm) at (4.75, 1.0) {量子力学};
-    \node[related] (stat) at (4.75, -0.35) {热力学与统计物理};
-    \node[group, text=green!50!black] at (4.75, 3.82) {相关课程};
-    
-    % 箭头：前置 → 本课程
-    \draw[inarrow] (calc.east) -- (mathphy.west);
-    \draw[inarrow] (mech.east) -- (mathphy.west);
-    \draw[inarrow] (thermo.east) -- (mathphy.west);
-    \draw[inarrow] (optics.east) -- (mathphy.west);
-    \draw[inarrow] (em.east) -- (mathphy.west);
-    
-    % 箭头：本课程 → 后置
-    \draw[outarrow] (mathphy.east) -- (tmech.west);
-    \draw[outarrow] (mathphy.east) -- (edyn.west);
-    \draw[outarrow] (mathphy.east) -- (qm.west);
-    \draw[outarrow] (mathphy.east) -- (stat.west);
-\end{tikzpicture}
-\caption{数学物理方法在课程体系中的位置}
-\label{fig:course-position}
+	\centering
+	\begin{tikzpicture}[
+		basic/.style={rectangle, draw=black!75, rounded corners=4pt, minimum width=2.15cm, minimum height=0.82cm, text width=2.15cm, align=center, font=\small, line width=0.95pt, fill=blue!6},
+		bridge/.style={rectangle, draw=black!80, rounded corners=4pt, minimum width=3.15cm, minimum height=1.18cm, text width=3.15cm, align=center, font=\small\bfseries, line width=1.0pt, fill=orange!14},
+		related/.style={rectangle, draw=black!75, rounded corners=4pt, minimum width=2.75cm, minimum height=0.82cm, text width=2.75cm, align=center, font=\small, line width=0.95pt, fill=green!7},
+		group/.style={font=\small\bfseries},
+		inarrow/.style={->, >=stealth, line width=1.0pt, draw=blue!65!black},
+		outarrow/.style={->, >=stealth, line width=1.0pt, draw=green!55!black}
+		]
+		% 前置课程（左侧）
+		\node[basic] (calc) at (-4.8, 3.0) {高等数学};
+		\node[basic] (mech) at (-4.8, 2.0) {力学};
+		\node[basic] (thermo) at (-4.8, 1.0) {热学};
+		\node[basic] (optics) at (-4.8, 0.0) {光学};
+		\node[basic] (em) at (-4.8, -1.0) {电磁学};
+		\node[group, text=blue!70!black] at (-4.8, 3.82) {基础课程};
+		
+		% 本课程（中间）
+		\node[bridge] (mathphy) at (0, 1.0) {数学物理方法};
+		\node[group, text=orange!75!black] at (0, 2.18) {桥梁课程};
+		
+		% 后置课程（右侧）
+		\node[related] (tmech) at (4.75, 3.0) {理论力学};
+		\node[related] (edyn) at (4.75, 2.0) {电动力学};
+		\node[related] (qm) at (4.75, 1.0) {量子力学};
+		\node[related] (stat) at (4.75, -0.35) {热力学与统计物理};
+		\node[group, text=green!50!black] at (4.75, 3.82) {相关课程};
+		
+		% 箭头：前置 → 本课程
+		\draw[inarrow] (calc.east) -- (mathphy.west);
+		\draw[inarrow] (mech.east) -- (mathphy.west);
+		\draw[inarrow] (thermo.east) -- (mathphy.west);
+		\draw[inarrow] (optics.east) -- (mathphy.west);
+		\draw[inarrow] (em.east) -- (mathphy.west);
+		
+		% 箭头：本课程 → 后置
+		\draw[outarrow] (mathphy.east) -- (tmech.west);
+		\draw[outarrow] (mathphy.east) -- (edyn.west);
+		\draw[outarrow] (mathphy.east) -- (qm.west);
+		\draw[outarrow] (mathphy.east) -- (stat.west);
+	\end{tikzpicture}
+	\caption{数学物理方法在课程体系中的位置}
+	\label{fig:course-position}
 \end{figure}
+数学物理方法在课程体系中起着承上启下的作用。它上承高等数学和普通物理，下启理论力学、电动力学、量子力学、热力学与统计物理等课程，因此常被视为一门桥梁课程。
 
-这门课不是一门孤立的工具课，而是一个承前启后的枢纽。
 
-这些\textbf{基础课程}提供了必要的数学基础和物理直觉：
+我们学过的\textbf{基础课程}提供了必要的数学基础和物理直觉：
 \begin{itemize}
     \item \textbf{高等数学}：微积分、级数、常微分方程——这是本课程的数学基础。
     \item \textbf{普通物理}（力学、热学、光学、电磁学）：提供了丰富的应用背景。振动、波动、热传导、电磁场等问题，都会在本课程中得到更系统的讨论。
@@ -75,7 +74,7 @@
 \begin{itemize}
     \item \textbf{理论力学}：拉格朗日方程、哈密顿方程的求解需要微分方程和变分法。
     \item \textbf{电动力学}：麦克斯韦方程组的求解离不开数学物理方程。
-    \item \textbf{量子力学}：薛定谔方程的求解用到分离变量法、特殊函数。
+    \item \textbf{量子力学}：薛定谔方程的求解要用到分离变量法、特殊函数。
     \item \textbf{热力学与统计物理}：不少模型的建立和分析，也需要本课程中的微分方程、积分变换等工具。
 \end{itemize}
 
@@ -112,13 +111,13 @@
 \end{figure}
 
 \begin{enumerate}
-    \item \textbf{复变函数}：它把函数的讨论范围从实轴扩展到复平面。学习这一部分时，你会逐渐理解解析函数、级数展开、复积分和留数方法，也会看到复变观点如何为二维势场问题提供几何直观。
+    \item \textbf{复变函数}：这一部分将讨论对象从实函数扩展到复函数，分析范围从实轴扩展到复平面。学习这一部分时，你会逐渐理解解析函数、级数展开、复积分和留数方法，也会看到复变观点如何为二维势场问题提供几何直观。
     
-    \item \textbf{积分变换}：它并不是让问题凭空消失，而是把函数变换到另一种形式，使原来麻烦的微分运算变成更容易处理的乘法运算，从而把原方程化简。傅里叶变换和拉普拉斯变换，是后面会反复使用的重要工具。
+    \item \textbf{积分变换}：它把函数变换到另一种形式，使原来麻烦的微分运算变成更容易处理的乘法运算，从而把原方程化简。傅里叶变换和拉普拉斯变换，是后面会反复使用的重要工具。
     
     \item \textbf{数理方程}：这是全书的核心部分。你会学习如何从具体物理过程出发建立偏微分方程，并掌握分离变量法、行波法、积分变换法、格林函数法等常用求解方法。前面学到的复变函数和积分变换，会在这里派上用场。
     
-    \item \textbf{特殊函数}：在求解数理方程的过程中，一些特殊函数会自然出现。它们并不是额外要记的东西，而是在具有特定对称性的物理问题中自然出现的。球对称问题常常引出勒让德函数，圆柱对称问题常常引出贝塞尔函数。
+    \item \textbf{特殊函数}：在求解数理方程的过程中，一些特殊函数会自然出现。它们是在具有特定对称性的物理问题中自然出现的。球对称问题常常引出勒让德函数，而圆柱对称问题常常引出贝塞尔函数。
 \end{enumerate}
 
 \medskip
@@ -127,24 +126,24 @@
 
 \section*{怎么学这门课？}
 
-这门课确实不算轻松。难点不只在于公式多、推导长，更在于你需要在同一个问题里同时兼顾物理背景、数学结构和结果的物理意义。初学时，最容易卡住的往往是下面几类地方：
+要学好这门课确实不轻松。难点不只在于公式多、推导长，更在于你需要在同一个问题里同时兼顾物理背景、数学结构和结果的物理意义。初学时，最容易卡住的往往是下面几类地方：
 
 \begin{itemize}
-    \item \textbf{建模与条件处理}：很多同学并不是先卡在计算，而是先卡在题目到底该写成什么方程，初始条件和边界条件又该怎样写、为什么能这样写。尤其要分清哪些条件来自物理约束，哪些条件来自区域形状，哪些条件又会直接影响后面方法的选择。学习时不要急着代公式，先把未知量、求解区域和条件写清楚、画清楚。
+    \item \textbf{建模与条件处理}：很多同学并不是先卡在计算，而是先卡在题目到底该写成什么方程，初始条件和边界条件又该怎样写、为什么能这样写。尤其要分清哪些条件来自物理约束，哪些条件来自区域形状，哪些条件又会直接影响后面方法的选择。学习时不要急着代公式，而应该先把未知量、求解区域和条件写清楚、画清楚。
     
-    \item \textbf{方法选择}：这门课的方法不少，初学时最容易出现的困惑往往不是``不会算''，而是``这道题到底该想到什么方法''。什么时候适合分离变量，什么时候想到傅里叶变换、拉普拉斯变换，什么时候该利用对称性或引入特殊函数，常常比后面的计算更关键。做题时要有意识地总结：什么样的问题，往往该先想到什么方法。
+    \item \textbf{方法选择}：这门课的方法不少，初学时最容易出现的困惑往往不是``不会算''，而是``这道题到底该用什么方法来求解''。什么时候适合分离变量，什么时候要用傅里叶变换、拉普拉斯变换，什么时候该利用对称性或引入特殊函数，常常比后面的计算更关键。做题时要有意识地总结：什么样的问题，往往该先想到什么方法。
     
     \item \textbf{复变函数}：从实数到复数的思维转换需要时间适应。复变函数的``导数''定义，形式上与实函数相似，但条件要苛刻得多。学习时要多画图，尽量在复平面上理解它的几何意义，并把实变函数的直观和复变函数的结论对照起来看。
     
-    \item \textbf{积分变换}：傅里叶变换和拉普拉斯变换的公式多，容易记混，收敛域和逆变换又常常被忽略。学习时不要只背公式，要抓住它的本质：它是在换一种表示，使原来麻烦的微分运算变成更便于处理的形式。核心公式最好自己推导几遍，把变换、逆变换和适用条件之间的关系理顺。
+    \item \textbf{积分变换}：傅里叶变换和拉普拉斯变换的公式多，容易记混，收敛域和逆变换又常常被忽略。学习时不要只背公式，而要抓住它的本质：它是在换一种表示，使原来麻烦的微分运算变成更便于处理的形式。核心公式最好自己推导几遍，把变换、逆变换和适用条件之间的关系理顺。
     
-    \item \textbf{推导过程长}：很多定理证明和例题计算步骤多，初学时很容易一路看下去、算下去，却不知道自己到底在做什么。读长推导时，不妨强迫自己在关键地方停下来，问一句``为什么这一步可以这样做''、``这一步做完以后有什么进展''。把逻辑主线抓住以后，后面的计算就不容易跟丢。
+    \item \textbf{推导过程长}：很多定理证明和例题计算步骤多，初学时很容易一路看下去、算下去，却不知道自己到底在做什么。读长推导时，不妨强迫自己在关键地方停下来，想一想``这一步在做什么？''、``为什么可以这样做？''。把逻辑主线抓住以后，后面的计算就不容易跟丢。
 \end{itemize}
 
-不过也不必被这些难点吓住。这门课还有一个很鲜明的特点：前面的工具会在后面的内容里不断重现。只要把几个核心方法真正弄懂，后面的学习反而会越来越顺。
+不过也不必被这些难点吓住。这门课还有一个很鲜明的特点：前面的工具会在后面的内容里不断重现。只要真正弄懂几个核心方法，后面的学习就会越来越顺。
 
 \begin{itemize}
-    \item \textbf{先问物理问题是什么}：每个数学概念都不是凭空出现的。先弄清楚它究竟想解决什么问题，再去看公式和定理，就会理解得更透彻。
+    \item \textbf{先问物理问题是什么}：每个数学概念都不是凭空出现的。先弄清楚它究竟想解决什么问题，再去看公式和定理，才会理解得更透彻。
     
     \item \textbf{把前修知识随时接上}：积分技巧、级数展开、常微分方程、向量分析这些内容都会反复用到。遇到卡点时，及时回头补，不要硬撑着往后赶。
     
@@ -152,21 +151,17 @@
     
     \item \textbf{格外重视细节}：收敛域、边界条件、奇点位置、展开区间这些地方，往往决定一整道题能不能做对。
     
-    \item \textbf{主动建立联系}：复变函数和二维势场、傅里叶变换和分离变量法、特殊函数和对称性，这些内容不是分开的。把这些联系看清楚，学起来会顺得多。
+    \item \textbf{主动建立联系}：复变函数和二维势场、傅里叶变换和分离变量法、特殊函数和对称性，这些内容不是毫无关联的。学习的时候要多思考和总结它们之间的联系。
 \end{itemize}
 
 \begin{tishi}[动手算，才能真正掌握]
-建议把每一道例题都当成一次自我测验：先独立推到自己真正卡住的地方，再回头对照讲义中的解答。不要只看最后结果，更要弄清楚每一步为什么这样做；同时分清到底是概念不清、公式记混，还是边界条件处理失误。把问题找准，练习才会有效。
+建议把每一道例题都当成一次自我测验：先独立推导和计算。如果遇到卡住的地方，再去琢磨讲义中的解答。不要只看最后结果，而要弄清楚每一步的思路；同时分清到底是概念不清、公式记混，还是边界条件处理失误。把问题找准，练习才会有效。
 \end{tishi}
 
 
 \section*{如何使用这份讲义？}
 
-老师会在课堂上不断提醒：哪里最容易出错，哪里要把前面的知识联系起来，哪里又应该先抓住物理图像。希望这份讲义也能起到这样的作用。
-
-讲义中的\textcolor{red!70!black}{红色警示框}标注易错点，\textcolor{hintteal}{青色提示框}提供学习建议，\textcolor{physicsbrown}{棕色背景框}补充物理背景。它们不是为了好看才放在这里的，而是为了帮你抓住重点、放慢脚步、理清思路。
-
-这份讲义有一个基本的目标：\textbf{真正适合学生自学}。我们希望你在课堂上能跟着老师走，课后独自翻开它时，依然知道这一页在讲什么、为什么这样讲，以及它和前后内容有什么关系。
+这份讲义有一个基本的目标：\textbf{适合学生自学}。我们希望你在课堂上能跟着老师走，课后独自翻开它时，依然知道这一页在讲什么、为什么这样讲，以及它和前后内容有什么关系。
 
 编写时，我们假定读者基础未必特别扎实，但愿意认真学。因此，这份讲义宁可把关键环节讲得慢一点、细一点，也不愿意只把最后的结论摆在你面前。
 
@@ -177,7 +172,7 @@
     
     \item \textbf{把关键推导讲完整}：重要公式、定理和方法会力求把推导过程写完整，把关键环节解释清楚，让你知道每一步为什么成立，而不是只记住最后一个结果。
     
-    \item \textbf{力求用课堂语言讲清楚}：希望读起来像老师在黑板前一步步讲，而不是像一本只给结论的手册。能直说的地方就不绕，能用直观语言说明的地方就不使用过分生硬的表述。
+    \item \textbf{力求用易懂语言讲清楚}：希望读起来像老师在黑板前一步步讲，而不是像一本只给结论的手册。能直说的地方就不绕，能用直观语言说明的地方就不使用过分生硬的表述。
     
     \item \textbf{在需要的地方补前修知识和图像}：遇到与高等数学、普通物理、常微分方程相关的内容，会补充必要的提醒、回顾和解释。复平面、积分路径、边界条件、振动模式等抽象对象，也会配上示意图，帮助你把公式和图像对应起来。
     
@@ -186,7 +181,9 @@
     \item \textbf{帮助你复习和梳理}：每章都安排了例题、小结和分层习题，方便你学完以后及时巩固，也方便考前回头整理思路。
 \end{itemize}
 
-如果你在读这份讲义时，感到自己不是在独自硬啃一堆零散结论，而是像有一位老师始终陪在身旁，把问题慢慢讲开、把难点逐层拆解、把方法前后串起来，那么这份讲义就达到了最初的目的。
+为了帮你抓住重点和理清思路，我们用\textcolor{red!70!black}{红色警示框}标注易错点，\textcolor{hintteal}{青色提示框}提供学习建议，以及\textcolor{physicsbrown}{棕色背景框}补充物理背景。
+
+如果这份讲义能帮助你更好地学习这门课程，那就达到了最初的目的。
 
 这份讲义的 \LaTeX{} 源代码已发布在 GitHub。
 如果你想查看排版实现、了解内容更新，或在阅读中发现疏漏想反馈，可以访问以下仓库：
