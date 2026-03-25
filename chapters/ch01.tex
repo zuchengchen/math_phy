@@ -1688,17 +1688,17 @@ z=x+\mathrm{i}y,\qquad x,y\in\mathbb{R},
 \end{dingliyi}
 
 \begin{zhu}{}{}
-这个定义的关键在于把复数的两部分信息分开来写：
+这个定义把复数的两部分信息分开来写：
 \begin{itemize}
     \item $e^x$ 控制长度变化；
     \item $\cos y+\mathrm{i}\sin y$ 控制方向变化。
 \end{itemize}
-定义本身就体现了``伸缩 + 旋转''的结构。
+这个定义体现了``伸缩 + 旋转''的结构。
 另外，当 $y=0$ 时，
 \[
 e^{x+\mathrm{i}0}=e^x,
 \]
-它回到熟悉的实指数函数；这说明这个定义与实数情形相容，并非另起炉灶。
+它回到熟悉的实指数函数；这说明复指数函数是实指数函数的推广。
 \end{zhu}
 
 \begin{dingli}{欧拉公式（Euler's formula）}{}
@@ -1719,6 +1719,25 @@ e^{\mathrm{i}\theta}=e^0(\cos\theta+\mathrm{i}\sin\theta)=\cos\theta+\mathrm{i}\
 \]
 这就证明了欧拉公式。
 \end{proof}
+\begin{zhu}{}{}
+	在欧拉公式中令 $\theta=\pi$，立刻得到
+	\[
+	e^{\mathrm{i}\pi}=\cos\pi+\mathrm{i}\sin\pi=-1,
+	\]
+	也就是
+	\[
+	e^{\mathrm{i}\pi}+1=0.
+	\]
+	这个式子通常称为\textbf{欧拉恒等式}。它把数学里几个最基本、也最常出现的常数 $e$、$\mathrm{i}$、$\pi$、$1$、$0$ 用一个极其简洁的式子联系在了一起。从几何上看，$e^{\mathrm{i}\theta}$ 表示一个模为 $1$、辐角为 $\theta$ 的复数；当 $\theta=\pi$ 时，它对应的正是单位圆最左端的点 $-1$。所以
+	\[
+	e^{\mathrm{i}\pi}=-1
+	\]
+	这个结果不只是形式优美，也完全符合复平面上的几何直观。
+\end{zhu}
+
+\begin{tishi}[欧拉公式的意义]
+	欧拉公式把旋转和指数运算直接联系起来。借助它，复数乘法以及振动、波动中的许多表达式，都可以改写成复指数形式来处理。
+\end{tishi}
 
 \begin{dingli}{复指数的基本运算律}{}
 对任意复数 $z_1,z_2$，都有
@@ -1778,7 +1797,7 @@ e^{z_1+z_2}=e^{z_1}e^{z_2}.
 
 令 $z_1=z,\ z_2=-z$，则
 \[
-e^z e^{-z}=e^0=1,
+e^z e^{-z}=e^{z-z} =e^0=1,
 \]
 因此
 \[
@@ -1790,7 +1809,7 @@ z_1=\mathrm{i}\theta_1,\qquad z_2=\mathrm{i}\theta_2
 \]
 就得到
 \[
-e^{\mathrm{i}\theta_1}e^{\mathrm{i}\theta_2}=e^{\mathrm{i}(\theta_1+\theta_2)}.
+e^{\mathrm{i}\theta_1}e^{\mathrm{i}\theta_2}=e^{\mathrm{i}\theta_1+\mathrm{i}\theta_2}=e^{\mathrm{i}(\theta_1+\theta_2)}.
 \]
 \end{proof}
 
@@ -1806,25 +1825,7 @@ e^{x+\mathrm{i}y}:=e^x(\cos y+\mathrm{i}\sin y)
 作为复指数函数的定义，再从这个定义推出欧拉公式和后面的运算律。以后学到幂级数时，你会发现这两种写法是彼此一致的。
 \end{tishi}
 
-\begin{zhu}{}{}
-在欧拉公式中令 $\theta=\pi$，立刻得到
-\[
-e^{\mathrm{i}\pi}=\cos\pi+\mathrm{i}\sin\pi=-1,
-\]
-也就是
-\[
-e^{\mathrm{i}\pi}+1=0.
-\]
-这个式子通常称为\textbf{欧拉恒等式}。它把数学里几个最基本、也最常出现的常数 $e$、$\mathrm{i}$、$\pi$、$1$、$0$ 用一个极其简洁的式子联系在了一起。从几何上看，$e^{\mathrm{i}\theta}$ 表示一个模为 $1$、辐角为 $\theta$ 的复数；当 $\theta=\pi$ 时，它对应的正是单位圆最左端的点 $-1$。所以
-\[
-e^{\mathrm{i}\pi}=-1
-\]
-这个结果不只是形式优美，也完全符合复平面上的几何直观。
-\end{zhu}
 
-\begin{tishi}[欧拉公式的意义]
-欧拉公式把旋转和指数运算直接联系起来。借助它，复数乘法以及振动、波动中的许多表达式，都可以改写成复指数形式来处理。
-\end{tishi}
 
 \subsection{指数形式及其优点}
 
