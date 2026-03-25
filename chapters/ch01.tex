@@ -27,7 +27,7 @@
 \end{wulibj}
 
 \subsection{从方程无解到数系扩张}
-先看一个最简单的问题：
+先看一个最简单的方程：
 \begin{equation}
 	x^2 + 1 = 0
 \end{equation}
@@ -80,12 +80,12 @@
 \node[stage] (N) at (0,0) {$\mathbb{N}$\\自然数};
 \node[stage] (Z) at (2.7,0) {$\mathbb{Z}$\\整数};
 \node[stage] (Q) at (5.4,0) {$\mathbb{Q}$\\有理数};
-\node[stage] (R) at (8.5,0) {$\mathbb{R}$\\实数};
-\node[stage c] (C) at (12.35,0) {$\mathbb{C}$\\复数};
+\node[stage] (R) at (9.5,0) {$\mathbb{R}$\\实数};
+\node[stage c] (C) at (13,0) {$\mathbb{C}$\\复数};
 
 \draw[arrow] (N) -- (Z) node[midway, above=4pt, why] {减法};
 \draw[arrow] (Z) -- (Q) node[midway, above=4pt, why] {除法};
-\draw[arrow] (Q) -- (R) node[midway, above=4pt, why] {长度与\\极限};
+\draw[arrow] (Q) -- (R) node[midway, above=4pt, why] {长度与极限};
 \draw[arrow] (R) -- (C) node[midway, above=4pt, why] {方程求解};
 \end{tikzpicture}%
 }
