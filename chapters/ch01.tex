@@ -2420,11 +2420,12 @@ e^{-\mathrm{i}\theta_2}=\frac{1}{e^{\mathrm{i}\theta_2}},
 \begin{jinshi}[辐角公式与主辐角不要混用]
 对全体辐角来说，乘法和除法满足
 \[
-\arg(z_1z_2)=\arg z_1+\arg z_2 \pmod{2\pi},
+\arg(z_1z_2)=\arg z_1+\arg z_2+2k\pi,\qquad k\in\mathbb{Z},
 \]
 \[
-\arg\left(\frac{z_1}{z_2}\right)=\arg z_1-\arg z_2 \pmod{2\pi}.
+\arg\left(\frac{z_1}{z_2}\right)=\arg z_1-\arg z_2+2k\pi,\qquad k\in\mathbb{Z}.
 \]
+也就是说，右边还可以再加上任意整数倍的 $2\pi$；它表示的是同一个方向，而不是某一个固定的角度值。
 但如果题目问的是\textbf{主辐角}，就不能把
 \[
 \operatorname{Arg}z_1+\operatorname{Arg}z_2
@@ -2802,7 +2803,11 @@ z^3=z\cdot z\cdot z=r^3 e^{3\mathrm{i}\theta}.
 
 几何上，这表示每乘一次 $z$，都在复平面上重复同一个动作：先按比例 $r$ 伸缩，再逆时针旋转 $\theta$。因此乘到第 $n$ 次时，总的效果就是把长度变成原来的 $r^n$ 倍，把方向改成原来的 $n\theta$。于是
 \[
-|z^n|=|z|^n,\qquad \arg(z^n)\equiv n\arg z \pmod{2\pi}.
+|z^n|=|z|^n.
+\]
+并且如果 $\theta$ 是 $z$ 的一个辐角，那么 $n\theta$ 就是 $z^n$ 的一个辐角，而 $z^n$ 的其余辐角都可以写成
+\[
+n\theta+2k\pi,\qquad k\in\mathbb{Z}.
 \]
 
 它告诉我们：
