@@ -2033,7 +2033,7 @@ e^{\bar z}=e^x\bigl(\cos(-y)+\mathrm{i}\sin(-y)\bigr)
 \end{itemize}
 \end{tishi}
 
-图 \ref{fig:three-representations} 把代数形式、三角形式和指数形式放在一起作了一个总览。
+图 \ref{fig:three-representations} 把代数形式、三角形式和指数形式之间的联系与转换放在一起作了一个总览。
 
 \begin{figure}[htbp]
 \centering
@@ -2054,19 +2054,16 @@ e^{\bar z}=e^x\bigl(\cos(-y)+\mathrm{i}\sin(-y)\bigr)
 ]
 \node[algebra] (A) at (0,0) {\textbf{代数形式}\\[0.35em]
     $z=x+\mathrm{i}y$\\[0.45em]
-    适合处理\\
-    实部、虚部、参数比较\\
-    与直接代数运算};
+    直角坐标观点\\
+    实部、虚部};
 \node[trig] (T) at (5.8,0) {\textbf{三角形式}\\[0.35em]
     $z=r(\cos\theta+\mathrm{i}\sin\theta)$\\[0.45em]
-    适合描述\\
-    长度、方向\\
-    和几何位置};
+    极坐标观点\\
+    模 $r$，辐角 $\theta$};
 \node[expo] (E) at (12.6,0) {\textbf{指数形式}\\[0.35em]
     $z=re^{\mathrm{i}\theta}$\\[0.45em]
-    适合处理\\
-    乘除、乘幂、开方\\
-    与相位问题};
+    欧拉公式压缩后\\
+    模与辐角合写};
 
 \draw[link] (A.east) -- (T.west)
     node[midway, above=8pt] {$x=r\cos\theta$}
@@ -2076,7 +2073,7 @@ e^{\bar z}=e^x\bigl(\cos(-y)+\mathrm{i}\sin(-y)\bigr)
     node[midway, below=8pt] {$e^{\mathrm{i}\theta}=\cos\theta+\mathrm{i}\sin\theta$};
 \end{tikzpicture}%
 }
-\caption{复数的三种常用表示}
+\caption{复数三种表示及其联系}
 \label{fig:three-representations}
 \end{figure}
 
