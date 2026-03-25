@@ -1948,13 +1948,21 @@ e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}=2\mathrm{i}\sin\theta.
 \begin{zhu}{}{}
 对一般复数
 \[
-z=x+\mathrm{i}y
+z=x+\mathrm{i}y,
 \]
-我们有
-\begin{equation}
-    e^z = e^{x+\mathrm{i}y} = e^x e^{\mathrm{i}y}=e^x(\cos y+\mathrm{i}\sin y).
-\end{equation}
-这里第二个等号用到的正是前面刚证明过的复指数运算律。当 $x=0$ 时，它退化成欧拉公式；当 $y=0$ 时，它回到熟悉的实指数 $e^x$。所以一般复指数完全可以看成``实指数的伸缩''和``纯虚指数的旋转''组合起来的结果。
+由复指数的基本运算律可得
+\[
+e^z=e^{x+\mathrm{i}y}=e^x e^{\mathrm{i}y}.
+\]
+再由欧拉公式，
+\[
+e^{\mathrm{i}y}=\cos y+\mathrm{i}\sin y,
+\]
+所以
+\[
+e^z=e^x(\cos y+\mathrm{i}\sin y).
+\]
+这说明一般复指数可以看成``实指数的伸缩''和``纯虚指数对应的旋转''组合起来的结果。
 \end{zhu}
 
 \begin{dingli}{复指数与共轭}{}
