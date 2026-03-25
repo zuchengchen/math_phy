@@ -2813,7 +2813,68 @@ n\theta+2k\pi,\qquad k\in\mathbb{Z}.
     \item 若 $|z|=1$，乘方只改变方向，不改变长度。
 \end{itemize}
 
-下面的棣莫弗公式，就是把这个规律严格写出来的基本工具。
+先看一个具体例子，把这个规律真正看清。
+
+\begin{lizi}{观察幂次怎样改变模和辐角}{}
+设
+\[
+z=1+\mathrm{i}.
+\]
+求 $z^2,z^3,z^4$，并说明这些幂在复平面上的变化规律。
+
+\begin{jie}
+先把 $z$ 写成指数形式：
+\[
+z=\sqrt{2}\,e^{\mathrm{i}\pi/4}.
+\]
+由前一节已经知道，复数相乘时模相乘、辐角相加，因此连续相乘可得
+\[
+z^2=2e^{\mathrm{i}\pi/2}=2\mathrm{i},\qquad
+z^3=2\sqrt{2}\,e^{3\mathrm{i}\pi/4}=-2+2\mathrm{i},\qquad
+z^4=4e^{\mathrm{i}\pi}=-4.
+\]
+
+每乘一次 $z$，模就乘以 $\sqrt{2}$，辐角就增加 $\pi/4$。所以这些幂并不是杂乱分布的，而是沿着``一边旋转、一边伸缩''的规律依次分布，如图~\ref{fig:powers-of-one-plus-i} 所示。
+\end{jie}
+\end{lizi}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.95]
+    \draw[mp axis] (-4.8,0) -- (2.5,0) node[mp label, right] {$\mathrm{Re}$};
+    \draw[mp axis] (0,-0.8) -- (0,2.8) node[mp label, above] {$\mathrm{Im}$};
+
+    \coordinate (P1) at (1,1);
+    \coordinate (P2) at (0,2);
+    \coordinate (P3) at (-2,2);
+    \coordinate (P4) at (-4,0);
+
+    \draw[mp helper] (0,0) -- (P1);
+    \draw[mp helper] (0,0) -- (P2);
+    \draw[mp helper] (0,0) -- (P3);
+    \draw[mp helper] (0,0) -- (P4);
+
+    \draw[figblue!65, line width=0.9pt] (P1) -- (P2) -- (P3) -- (P4);
+
+    \node[mp point] at (P1) {};
+    \node[mp point] at (P2) {};
+    \node[mp point] at (P3) {};
+    \node[mp point] at (P4) {};
+
+    \node[mp label, right] at (P1) {$z$};
+    \node[mp label, above right] at (P2) {$z^2$};
+    \node[mp label, above] at (P3) {$z^3$};
+    \node[mp label, below] at (P4) {$z^4$};
+    \node[mp label, below left] at (0,0) {$O$};
+
+    \draw[mp angle, -{Stealth[length=1.8mm,width=1.4mm]}] (0.82,0) arc[start angle=0,end angle=45,radius=0.82];
+    \node[mp label, text=figbrown] at (1.2,0.33) {$\pi/4$};
+\end{tikzpicture}
+\caption{复数 $1+\mathrm{i}$ 的前几次幂}
+\label{fig:powers-of-one-plus-i}
+\end{figure}
+
+这个例子显示的并不是巧合。下面的棣莫弗公式，就是把这种``模变成幂次、辐角变成倍数''的规律写成一般结论。
 
 \begin{dingli}{棣莫弗公式（De Moivre's formula）}{}
 对任意整数 $n$，都有
@@ -2884,68 +2945,7 @@ z^{-m}=r^{-m}e^{-m\mathrm{i}\theta}.
 这说明负整数次幂的几何意义，正是把``放大并逆时针旋转''改成``缩小并顺时针旋转''。至于 $z=0$，只有正整数次幂 $0^n=0$ 是自然定义的，$0^0$ 和 $0^{-m}$ 一般不讨论。
 \end{tishi}
 
-下面先看一个最能体现``模变成幂次、辐角变成倍数''的例子，把乘方时的几何变化真正看清。
-
-\begin{lizi}{观察幂次怎样改变模和辐角}{}
-设
-\[
-z=1+\mathrm{i}.
-\]
-求 $z^2,z^3,z^4$，并说明这些幂在复平面上的变化规律。
-
-\begin{jie}
-先把 $z$ 写成指数形式：
-\[
-z=\sqrt{2}\,e^{\mathrm{i}\pi/4}.
-\]
-因此
-\[
-z^2=2e^{\mathrm{i}\pi/2}=2\mathrm{i},\qquad
-z^3=2\sqrt{2}\,e^{3\mathrm{i}\pi/4}=-2+2\mathrm{i},\qquad
-z^4=4e^{\mathrm{i}\pi}=-4.
-\]
-
-每乘一次 $z$，模就乘以 $\sqrt{2}$，辐角就增加 $\pi/4$。所以这些幂并不是杂乱分布的，而是沿着``一边旋转、一边伸缩''的规律依次分布，如图~\ref{fig:powers-of-one-plus-i} 所示。
-\end{jie}
-\end{lizi}
-
-\begin{figure}[htbp]
-\centering
-\begin{tikzpicture}[scale=0.95]
-    \draw[mp axis] (-4.8,0) -- (2.5,0) node[mp label, right] {$\mathrm{Re}$};
-    \draw[mp axis] (0,-0.8) -- (0,2.8) node[mp label, above] {$\mathrm{Im}$};
-
-    \coordinate (P1) at (1,1);
-    \coordinate (P2) at (0,2);
-    \coordinate (P3) at (-2,2);
-    \coordinate (P4) at (-4,0);
-
-    \draw[mp helper] (0,0) -- (P1);
-    \draw[mp helper] (0,0) -- (P2);
-    \draw[mp helper] (0,0) -- (P3);
-    \draw[mp helper] (0,0) -- (P4);
-
-    \draw[figblue!65, line width=0.9pt] (P1) -- (P2) -- (P3) -- (P4);
-
-    \node[mp point] at (P1) {};
-    \node[mp point] at (P2) {};
-    \node[mp point] at (P3) {};
-    \node[mp point] at (P4) {};
-
-    \node[mp label, right] at (P1) {$z$};
-    \node[mp label, above right] at (P2) {$z^2$};
-    \node[mp label, above] at (P3) {$z^3$};
-    \node[mp label, below] at (P4) {$z^4$};
-    \node[mp label, below left] at (0,0) {$O$};
-
-    \draw[mp angle, -{Stealth[length=1.8mm,width=1.4mm]}] (0.82,0) arc[start angle=0,end angle=45,radius=0.82];
-    \node[mp label, text=figbrown] at (1.2,0.33) {$\pi/4$};
-\end{tikzpicture}
-\caption{复数 $1+\mathrm{i}$ 的前几次幂}
-\label{fig:powers-of-one-plus-i}
-\end{figure}
-
-看清这个规律以后，再做一个直接计算高次幂的例子，就能更明显地体会到指数形式的省力之处。
+有了这个一般公式以后，再做一个直接计算高次幂的例子，就能更明显地体会到指数形式的省力之处。
 
 \begin{lizi}{求复数的高次幂}{}
 计算
