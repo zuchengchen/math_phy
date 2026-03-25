@@ -250,7 +250,7 @@
   coltitle=white,
   fonttitle=\bfseries,
   separator sign none,
-  boxrule=0pt,
+  boxrule=1pt,
   arc=2pt,
   left=8pt, right=8pt, top=6pt, bottom=6pt,
   attach boxed title to top left={yshift=-2mm, xshift=5mm},
@@ -368,14 +368,13 @@
 \makeatletter
 \newenvironment{jie}[1][解]{%
   \par
-  \pushQED{\qed}%
   \normalfont
   \topsep=0.35em\partopsep=0pt\relax
   \trivlist
   \item[\hskip\labelsep\textcolor{examplepurple}{\bfseries #1：}]%
   \ignorespaces
 }{%
-  \popQED\endtrivlist\@endpefalse
+  \endtrivlist\@endpefalse
 }
 \makeatother
 
