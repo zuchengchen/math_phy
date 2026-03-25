@@ -368,13 +368,14 @@
 \makeatletter
 \newenvironment{jie}[1][解]{%
   \par
+  \pushQED{\qed}%
   \normalfont
   \topsep=0.35em\partopsep=0pt\relax
   \trivlist
   \item[\hskip\labelsep\textcolor{examplepurple}{\bfseries #1：}]%
   \ignorespaces
 }{%
-  \endtrivlist\@endpefalse
+  \popQED\endtrivlist\@endpefalse
 }
 \makeatother
 

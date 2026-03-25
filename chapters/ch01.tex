@@ -32,7 +32,6 @@
 	x^2 + 1 = 0.
 \end{equation}
 由于任何实数的平方都不可能等于 $-1$，所以这个方程在实数范围内没有解。
-
 这就提出了一个自然的问题：如果我们希望这个方程也有解，是否需要把原来的数系再向外扩充一步？
 
 数学的发展往往有这样一条线索：当旧的数系无法容纳某类运算或某类方程的解时，人们就需要把数的范围扩充到更大的体系中，使这些原本无解的问题在新体系里得到解决。例如：
@@ -285,11 +284,11 @@ z_1=x_1+\mathrm{i}y_1,\qquad z_2=x_2+\mathrm{i}y_2.
 \[
 \frac{z_1}{z_2}=\frac{x_1+\mathrm{i}y_1}{x_2+\mathrm{i}y_2}
 \]
-整理成标准形式，但分母里有 $\mathrm{i}$，难以直接看出实部和虚部。要把分母变成实数，就把分子、分母同乘
+整理成标准形式，但分母里有 $\mathrm{i}$，难以直接看出实部和虚部。为了把分母变成实数，我们可以把分子、分母同乘
 \[
 x_2-\mathrm{i}y_2.
 \]
-这个量以后会正式称为 $z_2$ 的共轭复数。于是
+这个量以后会称为 $z_2$ 的共轭复数。于是
 \begin{align*}
     \frac{z_1}{z_2}
     &=\frac{(x_1+\mathrm{i}y_1)(x_2-\mathrm{i}y_2)}{(x_2+\mathrm{i}y_2)(x_2-\mathrm{i}y_2)}.
@@ -307,10 +306,9 @@ x_2-\mathrm{i}y_2.
 所以
 \begin{equation}\label{eq:complex-division-algebraic}
     \frac{z_1}{z_2}
-    =\frac{(x_1x_2+y_1y_2)+\mathrm{i}(x_2y_1-x_1y_2)}{x_2^2+y_2^2}.
+    =\frac{x_1x_2+y_1y_2}{x_2^2+y_2^2} + \mathrm{i}\frac{x_2y_1-x_1y_2}{x_2^2+y_2^2}.
 \end{equation}
 
-\Needspace{11\baselineskip}
 \begin{lizi}{复数的除法}{}
 计算
 \[
@@ -330,7 +328,7 @@ x_2-\mathrm{i}y_2.
 \end{lizi}
 
 \Needspace{12\baselineskip}
-\begin{jinshi}[乘法与除法最容易错的地方]
+\begin{jinshi}[乘法与除法容易错的地方]
 \begin{itemize}
     \item 不要把乘法误写成``实部乘实部，虚部乘虚部''，因为展开后一定会出现交叉项。
     \item 不要把除法误写成
@@ -479,11 +477,7 @@ z_2z_3=(x_2x_3-y_2y_3)+\mathrm{i}(x_2y_3+x_3y_2).
 
 \subsection{复数发展小史（选读）}
 
-\begin{tishi}[阅读定位]
-这一小节是选读内容，不必死记人名和年份。
-\end{tishi}
-
-前面已经介绍了复数的代数运算；现在回头看历史，是为了回答另一个同样重要的问题：复数这样一个今天看来很自然的概念，当初究竟是怎样一步步被人接受的？
+前面已经介绍了复数的代数运算；现在回头看历史，是为了回答另一个同样重要的问题：复数这样一个今天看来很自然的概念，当初究竟是怎样一步步被人们所接受的？
 
 对今天的我们来说，复数已经熟悉得让人觉得理所当然：只要写成
 \[
@@ -515,40 +509,60 @@ x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}}.
 \centering
 \resizebox{0.95\textwidth}{!}{%
 \begin{tikzpicture}[x=0.84cm,y=1cm]
-    \draw[mp axis] (0.2,0) -- (15.6,0) node[mp label, right] {时间};
+    % 加粗时间轴主线（带箭头）
+    \draw[figblue, line width=1.6pt, -{Stealth[length=3.5mm, width=2.5mm]}] (0.2,0) -- (15.8,0);
+    \node[mp label, right, text=figblue] at (16.0,0) {时间};
 
-    \fill[figblue] (0.9,0) circle (2.3pt);
-    \draw[mp helper] (0.9,0) -- (0.9,1.35);
-    \node[mp card, mp small, text width=2.45cm, anchor=south] at (0.9,1.48)
-        {{\bfseries 1545}\\卡尔达诺发表\\三次方程公式};
+    % 节点1：1545 卡尔达诺
+    \fill[figblue!25] (0.9,0) circle (5pt);
+    \fill[figblue] (0.9,0) circle (3pt);
+    \draw[figblue, line width=1.1pt] (0.9,0) -- (0.9,1.35);
+    \node[rounded corners=3pt, draw=figblue, line width=0.9pt, fill=figblue!10, 
+          inner sep=5pt, align=center, font=\footnotesize, text width=2.45cm, anchor=south] at (0.9,1.48)
+        {{\bfseries\color{figblue} 1545}\\卡尔达诺发表\\三次方程公式};
 
-    \fill[figblue] (3.7,0) circle (2.3pt);
-    \draw[mp helper] (3.7,0) -- (3.7,-1.45);
-    \node[mp card, mp small, text width=2.75cm, anchor=north] at (3.7,-1.58)
-        {{\bfseries 1572}\\邦贝利系统整理\\复数运算规则};
+    % 节点2：1572 邦贝利
+    \fill[figblue!25] (3.7,0) circle (5pt);
+    \fill[figblue] (3.7,0) circle (3pt);
+    \draw[figblue, line width=1.1pt] (3.7,0) -- (3.7,-1.45);
+    \node[rounded corners=3pt, draw=figblue, line width=0.9pt, fill=figblue!10, 
+          inner sep=5pt, align=center, font=\footnotesize, text width=2.75cm, anchor=north] at (3.7,-1.58)
+        {{\bfseries\color{figblue} 1572}\\邦贝利系统整理\\复数运算规则};
 
-    \fill[figblue] (6.6,0) circle (2.3pt);
-    \draw[mp helper] (6.6,0) -- (6.6,1.35);
-    \node[mp card, mp small, text width=2.45cm, anchor=south] at (6.6,1.48)
-        {{\bfseries 1637}\\笛卡尔提出\\``虚数''名称};
+    % 节点3：1637 笛卡尔
+    \fill[figblue!25] (6.6,0) circle (5pt);
+    \fill[figblue] (6.6,0) circle (3pt);
+    \draw[figblue, line width=1.1pt] (6.6,0) -- (6.6,1.35);
+    \node[rounded corners=3pt, draw=figblue, line width=0.9pt, fill=figblue!10, 
+          inner sep=5pt, align=center, font=\footnotesize, text width=2.45cm, anchor=south] at (6.6,1.48)
+        {{\bfseries\color{figblue} 1637}\\笛卡尔提出\\``虚数''名称};
 
-    \fill[figblue] (9.5,0) circle (2.3pt);
-    \draw[mp helper] (9.5,0) -- (9.5,-1.45);
-    \node[mp card, mp small, text width=2.65cm, anchor=north] at (9.5,-1.58)
-        {{\bfseries 18 世纪}\\欧拉推广\\$\mathrm{i}$ 的记号};
+    % 节点4：18世纪 欧拉
+    \fill[figblue!25] (9.5,0) circle (5pt);
+    \fill[figblue] (9.5,0) circle (3pt);
+    \draw[figblue, line width=1.1pt] (9.5,0) -- (9.5,-1.45);
+    \node[rounded corners=3pt, draw=figblue, line width=0.9pt, fill=figblue!10, 
+          inner sep=5pt, align=center, font=\footnotesize, text width=2.65cm, anchor=north] at (9.5,-1.58)
+        {{\bfseries\color{figblue} 18 世纪}\\欧拉推广\\$\mathrm{i}$ 的记号};
 
-    \fill[figblue] (12.4,0) circle (2.3pt);
-    \draw[mp helper] (12.4,0) -- (12.4,1.35);
-    \node[mp card, mp small, text width=2.85cm, anchor=south] at (12.4,1.48)
-        {{\bfseries 1799--1806}\\韦塞尔、阿甘德\\推进几何表示};
+    % 节点5：1799--1806 韦塞尔、阿甘德
+    \fill[figblue!25] (12.4,0) circle (5pt);
+    \fill[figblue] (12.4,0) circle (3pt);
+    \draw[figblue, line width=1.1pt] (12.4,0) -- (12.4,1.35);
+    \node[rounded corners=3pt, draw=figblue, line width=0.9pt, fill=figblue!10, 
+          inner sep=5pt, align=center, font=\footnotesize, text width=2.85cm, anchor=south] at (12.4,1.48)
+        {{\bfseries\color{figblue} 1799--1806}\\韦塞尔、阿甘德\\推进几何表示};
 
-    \fill[figblue] (14.6,0) circle (2.3pt);
-    \draw[mp helper] (14.6,0) -- (14.6,-1.45);
-    \node[mp card, mp small, text width=3.05cm, anchor=north] at (14.6,-1.58)
-        {{\bfseries 19 世纪}\\高斯、柯西、黎曼\\推动理论成熟与应用};
+    % 节点6：19世纪 高斯、柯西、黎曼
+    \fill[figblue!25] (14.6,0) circle (5pt);
+    \fill[figblue] (14.6,0) circle (3pt);
+    \draw[figblue, line width=1.1pt] (14.6,0) -- (14.6,-1.45);
+    \node[rounded corners=3pt, draw=figblue, line width=0.9pt, fill=figblue!10, 
+          inner sep=5pt, align=center, font=\footnotesize, text width=3.05cm, anchor=north] at (14.6,-1.58)
+        {{\bfseries\color{figblue} 19 世纪}\\高斯、柯西、黎曼\\推动理论成熟与应用};
 \end{tikzpicture}%
 }
-\caption{复数发展的历史线索（示意，不按时间比例）}
+\caption{复数发展的历史线索}
 \label{fig:complex-history-timeline}
 \end{figure}
 
