@@ -1829,6 +1829,26 @@ e^{x+\mathrm{i}y}:=e^x(\cos y+\mathrm{i}\sin y)
 作为复指数函数的定义，再从这个定义推出欧拉公式和后面的运算律。以后学到幂级数时，你会发现这两种写法是彼此一致的。
 \end{tishi}
 
+\begin{zhu}{}{}
+对一般复数
+\[
+z=x+\mathrm{i}y,
+\]
+由复指数的基本运算律可得
+\[
+e^z=e^{x+\mathrm{i}y}=e^x e^{\mathrm{i}y}.
+\]
+再由欧拉公式，
+\[
+e^{\mathrm{i}y}=\cos y+\mathrm{i}\sin y,
+\]
+所以
+\[
+e^z=e^x(\cos y+\mathrm{i}\sin y).
+\]
+这说明一般复指数可以看成``实指数的伸缩''和``纯虚指数对应的旋转''组合起来的结果。
+\end{zhu}
+
 
 
 \subsection{指数形式及其优点}
@@ -1944,26 +1964,6 @@ e^{\mathrm{i}\theta}-e^{-\mathrm{i}\theta}=2\mathrm{i}\sin\theta.
 \end{proof}
 
 这说明三角函数和复指数是可以相互转换的，因此指数形式并没有丢掉三角形式中的信息，只是把它写得更紧凑了。这两个公式以后在傅里叶分析中会经常出现。
-
-\begin{zhu}{}{}
-对一般复数
-\[
-z=x+\mathrm{i}y,
-\]
-由复指数的基本运算律可得
-\[
-e^z=e^{x+\mathrm{i}y}=e^x e^{\mathrm{i}y}.
-\]
-再由欧拉公式，
-\[
-e^{\mathrm{i}y}=\cos y+\mathrm{i}\sin y,
-\]
-所以
-\[
-e^z=e^x(\cos y+\mathrm{i}\sin y).
-\]
-这说明一般复指数可以看成``实指数的伸缩''和``纯虚指数对应的旋转''组合起来的结果。
-\end{zhu}
 
 \begin{dingli}{复指数与共轭}{}
 若
