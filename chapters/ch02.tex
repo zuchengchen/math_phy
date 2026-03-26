@@ -166,8 +166,40 @@
 \[
     z_1=0,\qquad z_2=1,\qquad z_3=2.
 \]
+它们在复平面中的位置如图~\ref{fig:ch02-unit-disk-point-types} 所示。
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+    \draw[mp axis] (-1.8,0) -- (3.1,0) node[mp label, right] {$\operatorname{Re}$};
+    \draw[mp axis] (0,-1.8) -- (0,1.8) node[mp label, above] {$\operatorname{Im}$};
+
+    \filldraw[figblue, thick, fill=figblue!10] (0,0) circle (1);
+    \node[mp label, figblue] at (-1.15,1.25) {$E=\{z:|z|<1\}$};
+
+    \coordinate (A) at (0,0);
+    \draw[figteal, thick] (A) circle (0.38);
+    \node[mp point b] at (A) {};
+    \node[mp label, below left, figteal] at (A) {$z_1=0$};
+
+    \coordinate (B) at (1,0);
+    \draw[figred, thick] (B) circle (0.38);
+    \node[mp point d] at (B) {};
+    \node[mp label, below right, figred] at (B) {$z_2=1$};
+
+    \coordinate (C) at (2,0);
+    \draw[figpurple, thick] (C) circle (0.32);
+    \node[mp point c] at (C) {};
+    \node[mp label, above, figpurple] at (C) {$z_3=2$};
+\end{tikzpicture}
+\captionsetup{hypcap=false}
+\captionof{figure}{单位开圆盘中内点、边界点与外点的具体示意}
+\label{fig:ch02-unit-disk-point-types}
+\captionsetup{hypcap=true}
+\end{center}
 
 \begin{jie}
+先看图~\ref{fig:ch02-unit-disk-point-types}：$z_1$ 在圆盘内部，$z_2$ 正好落在圆周上，$z_3$ 在圆盘外部。不过这里不能只凭图形下结论，真正的判断标准仍然是邻域与集合 $E$ 的关系。
+
 点 $z_1=0$ 是内点，因为只要取半径足够小的邻域，例如 $U(0,1/2)$，它就完全包含在 $E$ 内。
 
 点 $z_2=1$ 是边界点。因为无论邻域取多小，它都会同时碰到圆盘内部的点和圆盘外部的点。
