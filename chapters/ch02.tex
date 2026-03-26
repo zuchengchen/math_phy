@@ -1059,29 +1059,29 @@ z=x+\mathrm{i}y
 \centering
 \begin{tikzpicture}[scale=0.78]
     \begin{scope}
-        \draw[mp axis] (-2.6,0) -- (2.8,0) node[mp label, right] {$x$};
-        \draw[mp axis] (0,-2.6) -- (0,2.8) node[mp label, above] {$y$};
+        \draw[mp axis] (-2,0) -- (2.5,0) node[mp label, right] {$x$};
+        \draw[mp axis] (0,-2) -- (0,2) node[mp label, above] {$y$};
         \draw[figblue, thick] (0,0) circle (1.2);
         \node[mp label] at (0,-3.1) {$z$ 平面};
         \node[mp label, figblue] at (1.95,1.15) {$|z|=1$};
-        \node[mp point c] at (1.2,0) {};
-        \node[mp point c] at (0,1.2) {};
-        \node[mp label, below right] at (1.2,0) {$1$};
-        \node[mp label, above right] at (0,1.2) {$\mathrm{i}$};
+        \node[mp point c, figred] at (1.2,0) {};
+        \node[mp point c, figpurple] at (0,1.2) {};
+        \node[mp label, below right, figred] at (1.2,0) {$1$};
+        \node[mp label, above right, figpurple] at (0,1.2) {$\mathrm{i}$};
     \end{scope}
 
-    \draw[figteal, very thick, ->] (3.25,0) -- (4.55,0) node[midway, above] {$w=z^2$};
+    \draw[figteal, very thick, ->] (3.25,0) -- (5.55,0) node[midway, above] {$w=z^2$};
 
     \begin{scope}[xshift=8cm]
-        \draw[mp axis] (-2.6,0) -- (2.8,0) node[mp label, right] {$u$};
-        \draw[mp axis] (0,-2.6) -- (0,2.8) node[mp label, above] {$v$};
+        \draw[mp axis] (-2,0) -- (2.5,0) node[mp label, right] {$u$};
+        \draw[mp axis] (0,-2) -- (0,2) node[mp label, above] {$v$};
         \draw[figblue, thick] (0,0) circle (1.2);
         \node[mp label] at (0,-3.1) {$w$ 平面};
         \node[mp label, figblue] at (1.95,1.0) {$|w|=1$};
-        \node[mp point c] at (1.2,0) {};
-        \node[mp point c] at (-1.2,0) {};
-        \node[mp label, below right] at (1.2,0) {$1$};
-        \node[mp label, below left] at (-1.2,0) {$-1$};
+        \node[mp point c, figred] at (1.2,0) {};
+        \node[mp point c, figpurple] at (-1.2,0) {};
+        \node[mp label, below right, figred] at (1.2,0) {$1$};
+        \node[mp label, below left, figpurple] at (-1.2,0) {$-1$};
     \end{scope}
 \end{tikzpicture}
 \caption{映射 $w=z^2$ 将单位圆仍映为单位圆，但点的位置发生了变化}
