@@ -273,7 +273,39 @@
 \]
 判断它们分别是不是开集、闭集，并指出它们的边界。
 
+\begin{center}
+\begin{tikzpicture}[scale=1.02]
+    \begin{scope}
+        \draw[mp axis] (-1.8,0) -- (2.3,0) node[mp label, right] {$\operatorname{Re}$};
+        \draw[mp axis] (0,-1.8) -- (0,2.0) node[mp label, above] {$\operatorname{Im}$};
+        \fill[figblue!12] (0,0) circle (1);
+        \draw[figred, thick, dashed] (0,0) circle (1);
+        \draw[figred, thick, fill=white] (1,0) circle (0.06);
+        \node[mp label, figblue] at (-1.15,1.25) {$E_1=\{z:|z|<1\}$};
+        \node[mp label, figred] at (0,-2.15) {边界不属于 $E_1$};
+        \node[mp label] at (0,-2.65) {(a) 单位开圆盘};
+    \end{scope}
+
+    \begin{scope}[xshift=6.4cm]
+        \draw[mp axis] (-1.8,0) -- (2.3,0) node[mp label, right] {$\operatorname{Re}$};
+        \draw[mp axis] (0,-1.8) -- (0,2.0) node[mp label, above] {$\operatorname{Im}$};
+        \fill[figblue!12] (0,0) circle (1);
+        \draw[figred, thick] (0,0) circle (1);
+        \fill[figred] (1,0) circle (0.06);
+        \node[mp label, figblue] at (-1.15,1.25) {$E_2=\{z:|z|\le 1\}$};
+        \node[mp label, figred] at (0,-2.15) {边界属于 $E_2$};
+        \node[mp label] at (0,-2.65) {(b) 单位闭圆盘};
+    \end{scope}
+\end{tikzpicture}
+\captionsetup{hypcap=false}
+\captionof{figure}{开圆盘与闭圆盘：差别在于边界点是否被包含}
+\label{fig:ch02-open-closed-disk}
+\captionsetup{hypcap=true}
+\end{center}
+
 \begin{jie}
+如图~\ref{fig:ch02-open-closed-disk} 所示，这两个集合的边界其实是同一条圆周；真正的区别只是圆周上的点是否被算进集合本身。
+
 $E_1$ 是单位开圆盘。对其中任一点 $z$，都能找到一个足够小的邻域完全落在 $E_1$ 内，所以 $E_1$ 是开集。它不是闭集，因为
 \[
     \partial E_1=\{z:|z|=1\},
