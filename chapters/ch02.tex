@@ -1583,11 +1583,25 @@ z=x+\mathrm{i}y
 \end{dingli}
 
 \begin{proof}
-这只是定理 \ref{thm:ch02-limit-real-imag} 的直接应用。因为 $f$ 在 $z_0$ 处连续，等价于
+由连续的定义，
 \[
-    \lim_{z\to z_0}f(z)=f(z_0)=u(x_0,y_0)+\mathrm{i}v(x_0,y_0),
+    f \text{ 在 } z_0 \text{ 处连续}
+    \iff \lim_{z\to z_0}f(z)=f(z_0).
 \]
-再把极限拆成实部和虚部即可。
+又因为
+\[
+    f(z_0)=u(x_0,y_0)+\mathrm{i}v(x_0,y_0),
+\]
+所以由定理 \ref{thm:ch02-limit-real-imag}，
+\[
+    \lim_{z\to z_0}f(z)=f(z_0)
+\]
+当且仅当
+\[
+    \lim_{(x,y)\to(x_0,y_0)}u(x,y)=u(x_0,y_0),\qquad
+    \lim_{(x,y)\to(x_0,y_0)}v(x,y)=v(x_0,y_0).
+\]
+这恰好就是说 $u(x,y)$ 与 $v(x,y)$ 在 $(x_0,y_0)$ 处连续。
 \end{proof}
 
 \begin{tishi}[这条判据怎么用]
