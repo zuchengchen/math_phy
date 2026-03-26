@@ -499,6 +499,25 @@
 \]
 \end{dingli}
 
+\begin{dingliyi}{对 $z$ 与 $\bar z$ 的偏导}{}
+定义
+\[
+    \frac{\partial f}{\partial z}
+    :=\frac12\left(\frac{\partial f}{\partial x}
+    -\mathrm{i}\frac{\partial f}{\partial y}\right),\qquad
+    \frac{\partial f}{\partial \bar z}
+    :=\frac12\left(\frac{\partial f}{\partial x}
+    +\mathrm{i}\frac{\partial f}{\partial y}\right).
+\]
+\end{dingliyi}
+
+\begin{dingli}{解析函数的 $\bar z$ 偏导为零}{}
+若 $f$ 在某区域内解析，则
+\[
+    \frac{\partial f}{\partial \bar z}=0.
+\]
+\end{dingli}
+
 \subsection*{建议例题}
 \begin{lizi}{验证解析并求导}{}
 验证 $f(z)=z^2=(x^2-y^2)+\mathrm{i}(2xy)$ 满足 C-R 条件，并求其导数。
@@ -510,6 +529,18 @@
 
 \begin{lizi}{提醒学生不要死套公式的反例}{}
 安排一个在某点形式上满足 C-R 条件、但并不可导的经典反例，用来说明``必要''和``充分''之间仍有距离。
+\end{lizi}
+
+\begin{lizi}{用 $\bar z$ 偏导快速排除解析性}{}
+计算
+\[
+    \bar z,\qquad z\bar z,\qquad \operatorname{Re}z
+\]
+的
+\[
+    \frac{\partial f}{\partial \bar z},
+\]
+并说明它们为什么不可能在任何区域内解析。
 \end{lizi}
 
 \subsection*{建议图示}
