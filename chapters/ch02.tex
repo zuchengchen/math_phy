@@ -1454,6 +1454,54 @@ z=x+\mathrm{i}y
 \]
 \end{proof}
 
+\begin{lizi}{用四则运算直接求极限}{}
+求
+\[
+    \lim_{z\to 1+\mathrm{i}}\frac{z^2+1}{z-\mathrm{i}}.
+\]
+
+\begin{jie}
+这道题的重点，不是再回到极限定义逐步估计，而是学会把一个较复杂的式子拆成几块，直接调用复变极限的四则运算。
+
+先看分子。因为
+\[
+    \lim_{z\to 1+\mathrm{i}} z=1+\mathrm{i},
+\]
+所以由乘法与加法法则，
+\[
+    \lim_{z\to 1+\mathrm{i}}(z^2+1)
+    =
+    \left(\lim_{z\to 1+\mathrm{i}} z\right)^2+1
+    =
+    (1+\mathrm{i})^2+1
+    =
+    1+2\mathrm{i}.
+\]
+
+再看分母，
+\[
+    \lim_{z\to 1+\mathrm{i}}(z-\mathrm{i})
+    =
+    (1+\mathrm{i})-\mathrm{i}
+    =
+    1\neq 0.
+\]
+既然分母的极限不为零，就可以继续应用商法则，于是
+\[
+    \lim_{z\to 1+\mathrm{i}}\frac{z^2+1}{z-\mathrm{i}}
+    =
+    \frac{\lim\limits_{z\to 1+\mathrm{i}}(z^2+1)}
+         {\lim\limits_{z\to 1+\mathrm{i}}(z-\mathrm{i})}
+    =
+    \frac{1+2\mathrm{i}}{1}
+    =
+    1+2\mathrm{i}.
+\]
+
+这个例子说明：只要已经知道各部分极限存在，并且分母的极限不为零，就可以像高等数学里那样，把复杂表达式拆开后逐层求极限，不必每一步都回到 $\varepsilon$--$\delta$ 定义。
+\end{jie}
+\end{lizi}
+
 \subsection{连续性}
 
 连续在这里并没有引入新花样，它仍然是``极限等于函数值''。但要特别注意：前面既然已经把复变极限说清楚了，那么复变函数的连续性也自动带上了``对任意路径都稳定''这一层含义。
