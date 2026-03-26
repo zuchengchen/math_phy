@@ -115,38 +115,43 @@
 \begin{tikzpicture}[scale=1.05]
 
     \filldraw[figblue, thick, fill=figblue!10]
-        plot[smooth cycle, tension=0.9] coordinates {
-            (-1.75,0.05)
-            (-1.25,1.15)
-            (-0.15,1.55)
-            (0.95,1.15)
-            (1.52,0.18)
-            (1.18,-0.92)
-            (0.10,-1.38)
-            (-1.08,-1.02)
+        plot[smooth cycle, tension=0.95] coordinates {
+            (0.55,-0.35)
+            (0.82,0.95)
+            (1.38,1.72)
+            (1.95,1.28)
+            (2.38,1.95)
+            (3.02,1.42)
+            (3.25,0.55)
+            (2.90,-0.10)
+            (3.25,-0.98)
+            (2.58,-1.58)
+            (1.92,-1.08)
+            (1.32,-1.72)
+            (0.86,-1.08)
         };
-    \node[mp label, figblue] at (1.9,1.55) {$E$};
+    \node[mp label, figblue] at (2.1,0.95) {$E$};
 
-    \coordinate (A) at (-0.45,0.25);
+    \coordinate (A) at (1.72,0.18);
     \draw[figteal, thick] (A) circle (0.42);
     \node[mp point b] at (A) {};
     \node[mp label, above left, figteal] at (A) {$z_1$};
 
-    \coordinate (B) at (1.52,0.18);
+    \coordinate (B) at (2.90,-0.10);
     \draw[figred, thick] (B) circle (0.42);
     \node[mp point d] at (B) {};
-    \node[mp label, below, figred] at (B) {$z_2$};
+    \node[mp label, below right, figred] at (B) {$z_2$};
 
-    \coordinate (C) at (3.15,0.55);
+    \coordinate (C) at (-1.55,0.95);
     \draw[figpurple, thick] (C) circle (0.42);
     \node[mp point c] at (C) {};
-    \node[mp label, above right, figpurple] at (C) {$z_3$};
+    \node[mp label, above left, figpurple] at (C) {$z_3$};
 
-    \node[mp label, figteal] at (-1.7,-1.55) {内点：邻域全在 $E$ 内};
-    \node[mp label, figred] at (1.95,-1.55) {边界点：邻域横跨边界};
-    \node[mp label, figpurple] at (3.35,1.55) {外点：邻域与 $E$ 不交};
-    \draw[mp axis] (-2.8,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.4) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
+    \node[mp label, figteal] at (1.15,-2.0) {内点：邻域全在 $E$ 内};
+    \node[mp label, figred] at (3.15,-1.75) {边界点：邻域横跨边界};
+    \node[mp label, figpurple] at (-1.45,1.82) {外点：邻域与 $E$ 不交};
+    \draw[mp axis] (-2.8,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}$};
+    \draw[mp axis] (0,-2.4) -- (0,3.1) node[mp label, above] {$\operatorname{Im}$};
 \end{tikzpicture}
 \caption{内点、边界点与外点的几何直观}
 \label{fig:ch02-interior-boundary-exterior}
