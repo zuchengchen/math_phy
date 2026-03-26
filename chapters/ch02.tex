@@ -63,37 +63,40 @@
 称为点 $z_0$ 的\textbf{$\varepsilon$ 邻域}，也就是以 $z_0$ 为圆心、$\varepsilon$ 为半径的开圆盘。
 \end{dingliyi}
 
-\begin{dingliyi}{去心邻域}{}
-集合
-\begin{equation}
-    \{z\in\mathbb{C}:0<|z-z_0|<\varepsilon\}
-\end{equation}
-称为点 $z_0$ 的一个\textbf{去心邻域}。
-\end{dingliyi}
-
-\begin{zhu}{}{}
-``去心''这两个字的意思很直白：就是把中心点 $z_0$ 本身拿掉。以后讨论极限时，我们关心的是 $z$ 靠近 $z_0$ 的过程，而不是 $z$ 恰好等于 $z_0$，所以去心邻域会频繁出现。
-\end{zhu}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.18]
-    \draw[mp axis] (-0.8,0) -- (4.7,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-0.8) -- (0,3.6) node[mp label, above] {$\operatorname{Im}z$};
+    \draw[mp axis] (-0.5,0) -- (4,0) node[mp label, right] {$\operatorname{Re}$};
+    \draw[mp axis] (0,-0.5) -- (0,3) node[mp label, above] {$\operatorname{Im}$};
 
-    \coordinate (O) at (2.2,1.4);
+    \coordinate (O) at (1.5,1.4);
     \draw[figblue, thick, fill=figblue!8] (O) circle (1.15);
     \node[mp point c] at (O) {};
-    \node[mp label, above right] at (O) {$z_0$};
-    \draw[figteal, thick] (O) -- ++(0:1.15) node[midway, above] {$\varepsilon$};
+    \node[mp label, left] at (O) {$z_0$};
+    \draw[figteal, thick] (O) -- ++(0:1.15) node[midway, below] {$\varepsilon$};
 
-    \coordinate (P) at (2.85,2.05);
+    \coordinate (P) at (2,1.8);
     \node[mp point b] at (P) {};
-    \node[mp label, right] at (P) {$z$};
+    \node[mp label, left] at (P) {$z$};
 \end{tikzpicture}
 \caption{点 $z_0$ 的 $\varepsilon$ 邻域}
 \label{fig:ch02-neighborhood}
 \end{figure}
+
+
+
+\begin{dingliyi}{去心邻域}{}
+	集合
+	\begin{equation}
+		\{z\in\mathbb{C}:0<|z-z_0|<\varepsilon\}
+	\end{equation}
+	称为点 $z_0$ 的一个\textbf{去心邻域}。
+\end{dingliyi}
+
+\begin{zhu}{}{}
+	``去心''这两个字的意思很直白：就是把中心点 $z_0$ 本身拿掉。以后讨论极限时，我们关心的是 $z$ 靠近 $z_0$ 的过程，而不是 $z$ 恰好等于 $z_0$，所以去心邻域会频繁出现。
+\end{zhu}
 
 \subsection{内点、外点与边界点}
 
@@ -115,7 +118,7 @@
 \begin{tikzpicture}[scale=1.05]
 
     \filldraw[figblue, thick, fill=figblue!10]
-        plot[smooth cycle, tension=0.95] coordinates {
+        plot[smooth cycle, tension=0.7] coordinates {
             (0.55,-0.35)
             (0.82,0.95)
             (1.38,1.72)
@@ -132,26 +135,26 @@
         };
     \node[mp label, figblue] at (2.1,0.95) {$E$};
 
-    \coordinate (A) at (1.72,0.18);
-    \draw[figteal, thick] (A) circle (0.42);
+    \coordinate (A) at (1.6,0.18);
+    \draw[figteal, thick] (A) circle (0.5);
     \node[mp point b] at (A) {};
-    \node[mp label, above left, figteal] at (A) {$z_1$};
+    \node[mp label, right, figteal] at (A) {$z_1$};
 
     \coordinate (B) at (2.90,-0.10);
-    \draw[figred, thick] (B) circle (0.42);
+    \draw[figred, thick] (B) circle (0.5);
     \node[mp point d] at (B) {};
-    \node[mp label, below right, figred] at (B) {$z_2$};
+    \node[mp label, right, figred] at (B) {$z_2$};
 
-    \coordinate (C) at (-1.55,0.95);
-    \draw[figpurple, thick] (C) circle (0.42);
+    \coordinate (C) at (4.2,0.95);
+    \draw[figpurple, thick] (C) circle (0.5);
     \node[mp point c] at (C) {};
-    \node[mp label, above left, figpurple] at (C) {$z_3$};
+    \node[mp label, right, figpurple] at (C) {$z_3$};
 
-    \node[mp label, figteal] at (1.15,-2.0) {内点：邻域全在 $E$ 内};
-    \node[mp label, figred] at (3.15,-1.75) {边界点：邻域横跨边界};
-    \node[mp label, figpurple] at (-1.45,1.82) {外点：邻域与 $E$ 不交};
-    \draw[mp axis] (-2.8,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}$};
-    \draw[mp axis] (0,-2.4) -- (0,3.1) node[mp label, above] {$\operatorname{Im}$};
+    \node[mp label, figteal] at (8,1.5) {$z_1$为内点：邻域全在 $E$ 内};
+    \node[mp label, figred] at (8,0.5) {$z_2$为边界点：邻域横跨边界};
+    \node[mp label, figpurple] at (8,-0.5) {$z_3$为外点：邻域与 $E$ 不交};
+    \draw[mp axis] (-0.8,-2) -- (4.8,-2) node[mp label, right] {$\operatorname{Re}$};
+    \draw[mp axis] (0,-2.4) -- (0,2.5) node[mp label, above] {$\operatorname{Im}$};
 \end{tikzpicture}
 \caption{内点、边界点与外点的几何直观}
 \label{fig:ch02-interior-boundary-exterior}
