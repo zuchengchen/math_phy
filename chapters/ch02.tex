@@ -113,13 +113,27 @@
 为什么要费力做这种分类？因为以后很多判断都不只和``点在不在集合里''有关，还和``它附近有没有活动空间''有关。比如讨论函数能不能在某点可导时，我们真正需要的是这个点附近有一整小块区域可供比较；而边界点之所以麻烦，也正是因为它附近一半像在集合里，一半像在集合外。
 
 \begin{dingliyi}{内点、外点与边界点}{}
-设 $E\subset\mathbb{C}$，$z_0\in\mathbb{C}$。
+设 $E\subset\mathbb{C}$ 是一个点集，$z_0\in\mathbb{C}$。
 \begin{itemize}
     \item 若存在 $\varepsilon>0$，使得 $U(z_0,\varepsilon)\subset E$，则称 $z_0$ 是 $E$ 的\textbf{内点}；
     \item 若存在 $\varepsilon>0$，使得 $U(z_0,\varepsilon)\cap E=\emptyset$，则称 $z_0$ 是 $E$ 的\textbf{外点}；
     \item 若 $z_0$ 的任意邻域内既有 $E$ 中的点，也有不属于 $E$ 的点，则称 $z_0$ 是 $E$ 的\textbf{边界点}。
 \end{itemize}
 \end{dingliyi}
+
+\begin{zhu}{}{}
+要特别注意：若 $z_0$ 是 $E$ 的边界点，$z_0$ \textbf{可以属于} $E$，也\textbf{可以不属于} $E$。边界点的关键不在于这个点本身是否落在集合里，而在于它附近任意小的邻域都会同时碰到集合内部和集合外部。
+
+例如，对开圆盘
+\[
+    E=\{z:|z|<1\},
+\]
+点 $z_0=1$ 是边界点，但 $1\notin E$；而对闭圆盘
+\[
+    E=\{z:|z|\le 1\},
+\]
+点 $z_0=1$ 仍是边界点，但这时 $1\in E$。
+\end{zhu}
 
 \begin{figure}[htbp]
 \centering
