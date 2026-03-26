@@ -113,19 +113,26 @@
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.05]
-    \draw[mp axis] (-2.8,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}z$};
-    \draw[mp axis] (0,-2.4) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
 
-    \coordinate (O) at (0,0);
-    \draw[figblue, thick, fill=figblue!10] (O) circle (1.55);
-    \node[mp label, figblue] at (1.95,1.45) {$E=\{z:|z|<1\}$};
+    \filldraw[figblue, thick, fill=figblue!10]
+        plot[smooth cycle, tension=0.9] coordinates {
+            (-1.75,0.05)
+            (-1.25,1.15)
+            (-0.15,1.55)
+            (0.95,1.15)
+            (1.52,0.18)
+            (1.18,-0.92)
+            (0.10,-1.38)
+            (-1.08,-1.02)
+        };
+    \node[mp label, figblue] at (1.9,1.55) {$E$};
 
-    \coordinate (A) at (-0.45,0.35);
+    \coordinate (A) at (-0.45,0.25);
     \draw[figteal, thick] (A) circle (0.42);
     \node[mp point b] at (A) {};
     \node[mp label, above left, figteal] at (A) {$z_1$};
 
-    \coordinate (B) at (1.55,0);
+    \coordinate (B) at (1.52,0.18);
     \draw[figred, thick] (B) circle (0.42);
     \node[mp point d] at (B) {};
     \node[mp label, below, figred] at (B) {$z_2$};
@@ -138,6 +145,8 @@
     \node[mp label, figteal] at (-1.7,-1.55) {内点：邻域全在 $E$ 内};
     \node[mp label, figred] at (1.95,-1.55) {边界点：邻域横跨边界};
     \node[mp label, figpurple] at (3.35,1.55) {外点：邻域与 $E$ 不交};
+    \draw[mp axis] (-2.8,0) -- (4.8,0) node[mp label, right] {$\operatorname{Re}z$};
+    \draw[mp axis] (0,-2.4) -- (0,3.1) node[mp label, above] {$\operatorname{Im}z$};
 \end{tikzpicture}
 \caption{内点、边界点与外点的几何直观}
 \label{fig:ch02-interior-boundary-exterior}
